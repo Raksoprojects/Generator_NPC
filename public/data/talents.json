@@ -1920,5 +1920,44 @@
     "tests": null,
     "description": "",
     "source": "Do uzupełnienia"
+  },
+  "Kantor": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "Występy (Śpiewanie)",
+    "description": "Szkolono cię na kantora Kolegiów Magii. Możesz używać Występów (Śpiewanie) zamiast Splatania Magii; wszyscy magowie w promieniu tylu metrów, ile wynosi twoja Ogłada, mogą co rundę podebrać po 1 PS z twojego Rozszerzonego testu Splatania Magii. Możesz wspierać Splatanie Magii innego czarodzieja, nawet bez zdolności magicznych.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Zdjęcie Klątwy": {
+    "max": {
+      "type": "special"
+    },
+    "max_raw": "Bieżący poziom profesji magicznej lub kapłańskiej (1–4)",
+    "tests": "Język (Magiczny) lub Modlitwa przy rozpraszaniu klątwy",
+    "description": "Dostępny dla postaci z talentem Magia Tajemna, Magia Chaosu, Czarownica! lub Inwokacja. Przy nieudanym teście Rozproszenia klątwy możesz odwrócić wynik rzutu, jeśli pozwoli to zdać test (także w testach Rozszerzonych). Naraz można zdjąć tylko jedną klątwę.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Przesycenie Magią": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": null,
+    "description": "Wszystkie zaklęcia rzucane w promieniu tylu metrów, ile wynosi twój Bonus z Siły Woli, zyskują +1 PS przy rzucaniu (premia tylko raz na zaklęcie).",
+    "source": "Bestiariusz 2.0"
+  },
+  "Przesycenie Ulgu": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "Testy, w których Splatanie Magii (Ulgu) zastępuje Skradanie",
+    "description": "Możesz używać Splatania Magii (Ulgu) zamiast Skradania we wszystkich stosownych testach. Każde udane rzucenie zaklęcia z Tradycji Cienia w promieniu 8 metrów od ciebie zyskuje +1 PS (premia tylko raz).",
+    "source": "Bestiariusz 2.0"
   }
 }

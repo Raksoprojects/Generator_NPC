@@ -1,0 +1,106 @@
+{
+  "Duży": {
+    "modifiers": { "S": 10, "Wt": 10, "Zw": -5 },
+    "randomPool": true,
+    "description": "+10 Siły, +10 Wytrzymałości, −5 Zwinności.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Brutalny": {
+    "modifiers": { "S": 10, "Wt": 10, "Zw": -10 },
+    "movement": -1,
+    "randomPool": true,
+    "description": "+10 Siły, +10 Wytrzymałości, −10 Zwinności, −1 Szybkości.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Bystry": {
+    "modifiers": { "I": 10, "Int": 20 },
+    "randomPool": true,
+    "description": "+10 Inicjatywy, +20 Inteligencji.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Przebiegły": {
+    "modifiers": { "I": 10, "Int": 10, "Ogd": 10 },
+    "randomPool": true,
+    "description": "+10 Inicjatywy, +10 Inteligencji, +10 Ogłady.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Elitarny": {
+    "modifiers": { "WW": 20, "US": 20, "SW": 20 },
+    "randomPool": true,
+    "description": "+20 Walki Wręcz, +20 Umiejętności Strzeleckich, +20 Siły Woli.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Szybki": {
+    "modifiers": { "Zw": 10 },
+    "movement": 1,
+    "randomPool": true,
+    "description": "+10 Zwinności, +1 Szybkości.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Przywódca": {
+    "modifiers": { "SW": 10, "Ogd": 10 },
+    "randomPool": true,
+    "description": "+10 Siły Woli, +10 Ogłady.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Twardy": {
+    "modifiers": { "Wt": 10, "SW": 10 },
+    "randomPool": true,
+    "description": "+10 Wytrzymałości, +10 Siły Woli.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Czujny": {
+    "modifiers": { "WW": 10 },
+    "skills": { "Percepcja": 30 },
+    "randomPool": true,
+    "description": "Stworzenie nieustannie wypatruje zdobyczy albo zagrożenia. +10 Walki Wręcz i +30 do umiejętności Percepcja.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Zabijaka": {
+    "modifiers": { "WW": 10, "S": 10, "I": 10 },
+    "randomPool": true,
+    "description": "Z natury silny i agresywny albo wyszkolony do walki. +10 Walki Wręcz, +10 Siły, +10 Inicjatywy.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Uczony": {
+    "modifiers": { "Int": 20, "SW": 20 },
+    "randomPool": true,
+    "description": "Rozległa wiedza i wyjątkowa siła umysłu. +20 Inteligencji, +20 Siły Woli.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Czarujący": {
+    "randomPool": false,
+    "description": "Bez wysiłku oczarowuje i uwodzi. Dodaje Bonus z Ogłady do PS testów Charyzmy związanych z przyciąganiem uwagi lub uwodzeniem.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Treser Zwierząt (Poziom)": {
+    "randomPool": false,
+    "description": "Kieruje stworzeniami z cechą Wyszkolenie. Poziom używany w testach kontroli takiego stworzenia; zwykle (Int + Zw) / 2.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Mag (Poziom)": {
+    "randomPool": false,
+    "description": "Dar manipulowania Wiatrami Magii. Poziom jako PS do wszystkich testów Splatania Magii i Języka (Magicznego); maksymalnie Bonus z Siły Woli.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Niedomaganie (Poziom)": {
+    "randomPool": false,
+    "description": "Stare, chore lub ranne. Poziom = liczba stanów Zmęczenie, których nie można usunąć, dopóki źródło niedomagania nie zostanie wyleczone.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Nosiciel Zarazy (Typ)": {
+    "randomPool": false,
+    "description": "Nosi wskazaną chorobę i przekazuje ją dotykiem. Test na zarażenie o 2 stopnie trudniejszy, Inkubacja „Natychmiastowa”.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Sobowtór": {
+    "randomPool": false,
+    "description": "Może przybrać postać człekokształtnej istoty Przeciętnego Rozmiaru (+5 PS w Rozszerzonym teście Percepcji, potem 2 rundy). Znajomi ofiary: Ciężki (−20) test Intuicji.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Zmiennokształtny (Stworzenie)": {
+    "randomPool": false,
+    "description": "Zmienia się między zwykłą postacią a wskazanym Stworzeniem (1 pełna runda). Zachowuje Int, SW i Ogd, reszta profilu jak u Stworzenia.",
+    "source": "Bestiariusz 2.0"
+  }
+}
