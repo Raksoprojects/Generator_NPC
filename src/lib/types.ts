@@ -155,6 +155,8 @@ export interface GeneratorSettings {
   advanceJitter: number;
   /** "max": profil bohatera zastepuje rozwiniecia, gdy jest wyzszy; "add": sumuje. */
   heroProfileMode: "max" | "add";
+  /** "archetype": wartosci profilu przydzielane wg kolejnosci cech archetypu; "bestiary": doslownie. */
+  heroProfileShape: "archetype" | "bestiary";
   /** Progi k100 dla liczby cech opcjonalnych. */
   traitRoll: { upTo: number; count: number }[];
   defaultTraitWeight: number;

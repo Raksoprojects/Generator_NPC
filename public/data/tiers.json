@@ -4,6 +4,7 @@
     "advancePerLevel": 5,
     "advanceJitter": 2,
     "heroProfileMode": "max",
+    "heroProfileShape": "archetype",
     "traitRoll": [
       { "upTo": 1, "count": 3 },
       { "upTo": 5, "count": 2 },
