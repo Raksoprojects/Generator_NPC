@@ -1,0 +1,18 @@
+# --- Lokalne srodowisko (Python venv + Node z nodeenv) ---
+.venv/
+__pycache__/
+*.py[cod]
+
+# --- Node / Vite ---
+node_modules/
+dist/
+dev-dist/
+.vite/
+.cache/
+*.local
+
+# --- Edytor / system ---
+.DS_Store
+Thumbs.db
+.idea/
+*.log
