@@ -1,0 +1,253 @@
+{
+  "Wojownik": {
+    "description": "Zawodowy żołnierz lub najemnik nastawiony na walkę wręcz.",
+    "characteristics": ["WW", "S", "I", "Zw", "SW", "Wt"],
+    "professions": {
+      "Żołnierz": 4, "Ochroniarz": 2, "Halabardnik": 2, "Gwardzista Elektorski": 1, "Pikinier": 1,
+      "Gladiator": 1, "Rycerz Najemny": 1, "Rycerz": 1, "Kawalerzysta": 1, "Zabójca": 1
+    },
+    "keySkills": ["Broń Biała", "Odporność", "Opanowanie", "Unik", "Mocna Głowa", "Zastraszanie", "Atletyka"],
+    "talents": {
+      "Urodzony Wojownik": 5, "Silny Cios": 4, "Bitewny Refleks": 3, "Tarczownik": 3, "Musztra": 3,
+      "Groźny": 2, "Zmysł Bitewny": 2, "Twardziel": 2, "Mistrz Walki": 3, "Odwrócenie Szans": 2,
+      "Niewzruszony": 2, "Wściekły Atak": 2, "Krzepki": 2
+    },
+    "traits": {
+      "Zabijaka": 4, "Elitarny": 3, "Twardy": 3, "Duży": 2, "Brutalny": 2, "Czujny": 2,
+      "Szybki": 1, "Przywódca": 1, "Bystry": 0.3, "Przebiegły": 0.3, "Uczony": 0.2
+    },
+    "specializations": {
+      "Broń Biała": { "Podstawowa": 5, "Dwuręczna": 2, "Drzewcowa": 2, "Bijatyka": 1, "Parująca": 1 }
+    }
+  },
+  "Strzelec": {
+    "description": "Łucznik, kusznik lub muszkieter walczący na dystans.",
+    "characteristics": ["US", "S", "Zr", "I", "Zw", "SW"],
+    "professions": {
+      "Łucznicza": 3, "Strzelec": 3, "Specjalista Oblężniczy": 2, "Łowczyni": 1, "Banita": 1,
+      "Strażniczka Dróg": 1, "Artylerzysta": 0.5, "Żołnierz": 1
+    },
+    "keySkills": ["Broń Zasięgowa", "Opanowanie", "Percepcja", "Intuicja", "Skradanie"],
+    "talents": {
+      "Strzelec Wyborowy": 5, "Celny Strzał": 4, "Błyskawiczny Strzał": 3, "Szybkie Przeładowanie": 4,
+      "Snajper": 3, "Strzał Przebijający": 2, "Strzał w Dziesiątkę": 2, "Prosto Między Oczy": 2, "Musztra": 1
+    },
+    "traits": {
+      "Czujny": 4, "Elitarny": 3, "Szybki": 2, "Twardy": 1, "Zabijaka": 1, "Bystry": 1,
+      "Przywódca": 0.5, "Duży": 0.5, "Brutalny": 0.2, "Przebiegły": 0.5, "Uczony": 0.2
+    },
+    "specializations": {
+      "Broń Zasięgowa": { "Łuk": 4, "Kusza": 4, "Prochowa": 2, "Proca": 1, "Miotana": 1 }
+    }
+  },
+  "Kupiec": {
+    "description": "Handlarz, kramarz lub domokrążca żyjący z targu.",
+    "characteristics": ["Ogd", "SW", "Int", "Zr", "I", "Zw"],
+    "professions": { "Kupiec": 4, "Mieszczka": 2, "Domokrążca": 2, "Rzemieślniczka": 1, "Paser": 1 },
+    "keySkills": ["Targowanie", "Wycena", "Charyzma", "Plotkowanie", "Intuicja", "Broń Biała"],
+    "talents": {
+      "Żyłka Handlowa": 5, "Charyzmatyczny": 3, "Numizmatyka": 3, "Gadanina": 2, "Łapówkarz": 2,
+      "Gładkie Słówka": 2, "Czytanie/Pisanie": 2, "Błyskotliwość": 1
+    },
+    "traits": {
+      "Przebiegły": 4, "Bystry": 3, "Przywódca": 2, "Uczony": 1, "Szybki": 0.5, "Czujny": 1,
+      "Twardy": 0.5, "Duży": 0.3, "Brutalny": 0.1, "Zabijaka": 0.2, "Elitarny": 0.2
+    },
+    "specializations": {
+      "Broń Biała": { "Podstawowa": 5, "Bijatyka": 2 }
+    }
+  },
+  "Złodziej": {
+    "description": "Włamywacz, kieszonkowiec lub szabrownik.",
+    "characteristics": ["Zw", "I", "Zr", "WW", "SW", "Ogd"],
+    "professions": {
+      "Złodziej": 5, "Paser": 1, "Hiena Cmentarna": 1, "Szarlatan": 1, "Żebrak": 1,
+      "Rajfur": 0.5, "Przemytniczka": 1
+    },
+    "keySkills": ["Skradanie", "Otwieranie Zamków", "Zwinne Palce", "Wspinaczka", "Unik", "Percepcja", "Atletyka"],
+    "talents": {
+      "Cień": 4, "Ulicznik": 3, "Chodu!": 3, "Wtargnięcie z Włamaniem": 4, "Ruchliwe Dłonie": 3,
+      "Szybki Refleks": 2, "Przestępca": 2, "Na Cztery Łapy": 2, "Wyborny Wspinacz": 2, "Zejście z Linii": 1
+    },
+    "traits": {
+      "Szybki": 4, "Przebiegły": 3, "Czujny": 2, "Bystry": 1, "Zabijaka": 0.5, "Twardy": 0.5,
+      "Elitarny": 0.5, "Przywódca": 0.3, "Duży": 0.2, "Brutalny": 0.2, "Uczony": 0.2
+    },
+    "specializations": {
+      "Skradanie": { "Miasto": 5, "Wieś": 1, "Podziemia": 1 },
+      "Broń Biała": { "Podstawowa": 3, "Bijatyka": 2 }
+    }
+  },
+  "Strażnik": {
+    "description": "Strażnik miejski, rzeczny lub drogowy — pilnuje porządku i ma oko na kłopoty.",
+    "characteristics": ["WW", "Wt", "I", "SW", "S", "Ogd"],
+    "professions": {
+      "Strażnik": 5, "Strażnik Rzeczny": 2, "Strażniczka Dróg": 2, "Ochroniarz": 1, "Halabardnik": 1, "Bedel": 0.5
+    },
+    "keySkills": ["Broń Biała", "Percepcja", "Intuicja", "Zastraszanie", "Odporność", "Unik"],
+    "talents": {
+      "Ogłuszenie": 4, "Musztra": 3, "Nos do Kłopotów": 3, "Twardziel": 2, "Rozbrojenie": 2,
+      "Wytrwały": 2, "Silny Cios": 2, "Czujny": 2
+    },
+    "traits": {
+      "Czujny": 4, "Twardy": 3, "Zabijaka": 2, "Przywódca": 1, "Elitarny": 1, "Duży": 1,
+      "Szybki": 0.5, "Bystry": 0.5, "Przebiegły": 0.5, "Brutalny": 0.3, "Uczony": 0.2
+    },
+    "specializations": {
+      "Broń Biała": { "Podstawowa": 4, "Drzewcowa": 3, "Bijatyka": 1 }
+    }
+  },
+  "Oprych": {
+    "description": "Rzezimieszek, zbir lub rozbójnik nastawiony na przemoc.",
+    "characteristics": ["WW", "S", "Wt", "I", "Zw", "SW"],
+    "professions": { "Oprych": 3, "Rekietierka": 2, "Banita": 3, "Pirat Rzeczny": 1, "Gladiator": 0.5 },
+    "keySkills": ["Broń Biała", "Zastraszanie", "Unik", "Odporność", "Mocna Głowa", "Atletyka"],
+    "talents": {
+      "Cios Poniżej Pasa": 4, "Groźny": 3, "Silny Cios": 3, "Ogłuszenie": 2, "Urodzony Wojownik": 3,
+      "Skrócenie Dystansu": 2, "Przestępca": 2, "Wściekły Atak": 2, "Chodu!": 1
+    },
+    "traits": {
+      "Brutalny": 4, "Zabijaka": 4, "Duży": 2, "Twardy": 2, "Szybki": 1, "Czujny": 1,
+      "Przebiegły": 0.5, "Przywódca": 0.5, "Elitarny": 0.5, "Bystry": 0.2, "Uczony": 0.1
+    },
+    "specializations": {
+      "Broń Biała": { "Podstawowa": 4, "Bijatyka": 3, "Dwuręczna": 1 }
+    }
+  },
+  "Uczony": {
+    "description": "Uczony, medyk, prawnik lub alchemik — człowiek wiedzy.",
+    "characteristics": ["Int", "SW", "Zr", "Ogd", "I", "Wt"],
+    "professions": {
+      "Uczony": 3, "Prawniczka": 2, "Medyczka": 2, "Aptekarka": 2, "Inżynier": 1,
+      "Świecki Alchemik": 1, "Kartografka": 1
+    },
+    "keySkills": ["Badania Naukowe", "Wiedza", "Język", "Intuicja", "Leczenie"],
+    "talents": {
+      "Czytanie/Pisanie": 5, "Mól Książkowy": 4, "Błyskotliwość": 3, "Szybkie Czytanie": 3,
+      "Geniusz Arytmetyczny": 2, "Wieża Pamięci": 2, "Poliglota": 2, "Znawca": 2
+    },
+    "traits": {
+      "Uczony": 5, "Bystry": 4, "Przebiegły": 2, "Przywódca": 0.5, "Czujny": 0.5, "Twardy": 0.3,
+      "Szybki": 0.2, "Duży": 0.1, "Brutalny": 0.05, "Zabijaka": 0.1, "Elitarny": 0.1
+    }
+  },
+  "Czarodziej": {
+    "description": "Licencjonowany mag Kolegiów Magii. Szkoła wynika z profesji albo jest losowana.",
+    "characteristics": ["SW", "Int", "WW", "Zw", "I", "Ogd"],
+    "professions": {
+      "Czarodziej": 3, "Piromanta": 1, "Hierofant": 1, "Alchemik": 1, "Druidka": 1, "Astromanta": 1,
+      "Iluzjonista": 1, "Spirytysta": 1, "Szamanka": 1, "Magister Rewizor": 0.5
+    },
+    "keySkills": ["Splatanie Magii", "Język (Magiczny)", "Wiedza (Magia)", "Intuicja", "Opanowanie", "Percepcja"],
+    "talents": {
+      "Magia Prosta": 5, "Magia Tajemna": 5, "Percepcja Magiczna": 3, "Zmysł Magii": 3,
+      "Precyzyjne Inkantowanie": 3, "Mag Bitewny": 2, "Żelazna Wola": 2, "Szósty Zmysł": 2, "Wykrywanie Magii": 2
+    },
+    "traits": {
+      "Uczony": 4, "Bystry": 3, "Przebiegły": 1, "Przywódca": 1, "Czujny": 0.5, "Twardy": 0.5,
+      "Elitarny": 0.5, "Szybki": 0.3, "Zabijaka": 0.2, "Duży": 0.1, "Brutalny": 0.05
+    },
+    "specializations": {
+      "Broń Biała": { "Drzewcowa": 4, "Podstawowa": 2 }
+    }
+  },
+  "Czarownik": {
+    "description": "Nielegalnie czarujący: wiedźma, guślarz, czarownik. Na razie bez Magii Chaosu.",
+    "characteristics": ["SW", "Wt", "Int", "Ogd", "I", "Zw"],
+    "professions": { "Czarownica": 4, "Guślarz": 3, "Mistyczka": 1, "Jasnowidząca": 1 },
+    "keySkills": ["Splatanie Magii", "Język (Magiczny)", "Skradanie", "Opanowanie", "Zastraszanie", "Intuicja"],
+    "talents": {
+      "Magia Prosta": 5, "Czarownica!": 4, "Magia Tajemna": 4, "Groźny": 2, "Precyzyjne Inkantowanie": 2,
+      "Szósty Zmysł": 2, "Zmysł Magii": 2, "Straszny": 1, "Percepcja Magiczna": 2
+    },
+    "traits": {
+      "Przebiegły": 3, "Bystry": 2, "Uczony": 2, "Twardy": 1, "Czujny": 1, "Szybki": 1,
+      "Przywódca": 0.5, "Zabijaka": 0.3, "Duży": 0.2, "Brutalny": 0.2, "Elitarny": 0.3
+    },
+    "specializations": {
+      "Skradanie": { "Wieś": 4, "Miasto": 1 }
+    }
+  },
+  "Zwiadowca": {
+    "description": "Mobilny i spostrzegawczy przewodnik, tropiciel i strzelec.",
+    "characteristics": ["I", "Zw", "US", "Wt", "Int", "Zr"],
+    "professions": { "Zwiadowca": 4, "Łowczyni": 3, "Posłaniec": 1, "Lekki Kawalerzysta": 1, "Banita": 0.5 },
+    "keySkills": ["Percepcja", "Skradanie", "Broń Zasięgowa", "Sztuka Przetrwania", "Tropienie", "Atletyka", "Wspinaczka", "Nawigacja"],
+    "talents": {
+      "Czujny": 3, "Włóczykij": 3, "Wyczucie Kierunku": 3, "Doświadczony Wędrowiec": 3, "Nos do Kłopotów": 2,
+      "Szybkobiegacz": 2, "Strzelec Wyborowy": 3, "Szósty Zmysł": 2, "Widzenie w Ciemności": 1, "Oko Łowcy": 2
+    },
+    "traits": {
+      "Szybki": 4, "Czujny": 4, "Bystry": 1, "Elitarny": 1, "Twardy": 1, "Przebiegły": 1,
+      "Zabijaka": 0.5, "Przywódca": 0.3, "Duży": 0.2, "Brutalny": 0.1, "Uczony": 0.2
+    },
+    "specializations": {
+      "Skradanie": { "Wieś": 5, "Miasto": 1 },
+      "Broń Zasięgowa": { "Łuk": 5, "Kusza": 2, "Proca": 1 }
+    }
+  },
+  "Kapłan": {
+    "description": "Duchowny, mnich lub zakonnica jednego z bogów Imperium.",
+    "characteristics": ["SW", "Ogd", "Int", "Wt", "I", "WW"],
+    "professions": { "Kapłan": 4, "Mniszka": 2, "Kapłan Bitewny": 1, "Biczownik": 1, "Kapłanka Bitewna Myrmidii": 0.5 },
+    "keySkills": ["Modlitwa", "Wiedza (Teologia)", "Charyzma", "Opanowanie", "Leczenie", "Intuicja"],
+    "talents": {
+      "Błogosławieństwo": 5, "Inwokacja": 4, "Święte Wizje": 2, "Czysta Dusza": 2, "Odporność Psychiczna": 2,
+      "Porywająca Gorliwość": 2, "Czytanie/Pisanie": 2, "Mówca": 1
+    },
+    "traits": {
+      "Przywódca": 3, "Uczony": 2, "Twardy": 2, "Bystry": 1, "Przebiegły": 1, "Czujny": 0.5,
+      "Zabijaka": 0.3, "Elitarny": 0.3, "Szybki": 0.2, "Duży": 0.2, "Brutalny": 0.1
+    }
+  },
+  "Chłop": {
+    "description": "Prosty lud wsi i przedmieść: chłop, parobek, wyrobnik.",
+    "characteristics": ["S", "Wt", "Zw", "WW", "SW", "I"],
+    "professions": {
+      "Chłopka": 5, "Górnik": 1, "Żebrak": 1, "Doker": 1, "Flisak": 1, "Rzemieślniczka": 1, "Służąca": 1, "Zielarka": 0.5
+    },
+    "keySkills": ["Atletyka", "Odporność", "Mocna Głowa", "Sztuka Przetrwania", "Wiedza (Lokalna)", "Plotkowanie"],
+    "talents": {
+      "Mocne Plecy": 4, "Wytrwały": 3, "Bardzo Silny": 2, "Twardziel": 2, "Posłuch u Zwierząt": 2, "Włóczykij": 1
+    },
+    "traits": {
+      "Duży": 2, "Twardy": 2, "Brutalny": 1, "Czujny": 1, "Szybki": 1, "Przebiegły": 0.5,
+      "Zabijaka": 0.5, "Bystry": 0.3, "Przywódca": 0.3, "Elitarny": 0.1, "Uczony": 0.1
+    },
+    "specializations": {
+      "Broń Biała": { "Bijatyka": 3, "Podstawowa": 2, "Dwuręczna": 1 }
+    }
+  },
+  "Szlachcic": {
+    "description": "Arystokrata, dworzanin lub dyplomata.",
+    "characteristics": ["Ogd", "WW", "I", "SW", "Int", "Zr"],
+    "professions": { "Szlachcic": 4, "Doradca": 1, "Poseł": 1, "Zwadźca": 1, "Namiestnik": 1 },
+    "keySkills": ["Broń Biała", "Dowodzenie", "Charyzma", "Wiedza (Heraldyka)", "Intuicja", "Jeździectwo"],
+    "talents": {
+      "Błękitna Krew": 4, "Etykieta": 3, "Charyzmatyczny": 3, "Szczęście": 2, "Władcza Postura": 2,
+      "Intrygant": 2, "Łapówkarz": 1, "Czytanie/Pisanie": 2
+    },
+    "traits": {
+      "Przywódca": 4, "Przebiegły": 3, "Bystry": 2, "Uczony": 1, "Elitarny": 1, "Czujny": 0.5,
+      "Szybki": 0.5, "Twardy": 0.3, "Zabijaka": 0.3, "Duży": 0.1, "Brutalny": 0.05
+    },
+    "specializations": {
+      "Broń Biała": { "Szermiercza": 5, "Podstawowa": 2, "Parująca": 1 }
+    }
+  },
+  "Wodniak": {
+    "description": "Żeglarz, przewoźnik, flisak lub rzeczny pirat.",
+    "characteristics": ["Zw", "S", "Wt", "Zr", "I", "WW"],
+    "professions": {
+      "Żeglarz": 3, "Przewoźnik": 2, "Flisak": 2, "Doker": 1, "Pirat Rzeczny": 1, "Pilotka Rzeczna": 1, "Strażnik Rzeczny": 1
+    },
+    "keySkills": ["Pływanie", "Wioślarstwo", "Żeglarstwo", "Atletyka", "Wspinaczka", "Mocna Głowa"],
+    "talents": {
+      "Świetny Pływak": 3, "Wodniak": 3, "Urodzony Żeglarz": 3, "Rybak": 2, "Mocne Plecy": 2, "Bardzo Silny": 1
+    },
+    "traits": {
+      "Twardy": 2, "Szybki": 2, "Duży": 1, "Zabijaka": 1, "Czujny": 1, "Brutalny": 0.5,
+      "Przebiegły": 0.5, "Przywódca": 0.3, "Elitarny": 0.3, "Bystry": 0.3, "Uczony": 0.1
+    }
+  }
+}

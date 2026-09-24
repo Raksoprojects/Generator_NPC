@@ -1,0 +1,58 @@
+{
+  "Banda rozbójników": {
+    "description": "Kilku oprychów i łucznik pod wodzą herszta.",
+    "rows": [
+      { "count": 4, "archetype": "Oprych", "tier": "slaby" },
+      { "count": 1, "archetype": "Strzelec", "tier": "slaby" },
+      { "count": 1, "archetype": "Oprych", "tier": "sredni", "commander": true, "label": "Herszt" }
+    ]
+  },
+  "Mała wioska": {
+    "description": "Chłopi, kupiec, kapłan, strażnik i sołtys.",
+    "rows": [
+      { "count": 4, "archetype": "Chłop", "tier": "slaby" },
+      { "count": 1, "archetype": "Kupiec", "tier": "slaby" },
+      { "count": 1, "archetype": "Kapłan", "tier": "slaby" },
+      { "count": 1, "archetype": "Strażnik", "tier": "sredni" },
+      { "count": 1, "archetype": "Chłop", "tier": "sredni", "label": "Sołtys" }
+    ]
+  },
+  "Patrol straży": {
+    "description": "Trzech strażników i sierżant.",
+    "rows": [
+      { "count": 3, "archetype": "Strażnik", "tier": "slaby" },
+      { "count": 1, "archetype": "Strażnik", "tier": "sredni", "commander": true, "label": "Sierżant" }
+    ]
+  },
+  "Oddział żołnierzy": {
+    "description": "Piechota, strzelcy i dowódca.",
+    "rows": [
+      { "count": 4, "archetype": "Wojownik", "tier": "slaby" },
+      { "count": 2, "archetype": "Strzelec", "tier": "slaby" },
+      { "count": 1, "archetype": "Wojownik", "tier": "zaawansowany", "commander": true, "label": "Dowódca" }
+    ]
+  },
+  "Złodziejska szajka": {
+    "description": "Złodzieje, oprych do mokrej roboty i szef szajki.",
+    "rows": [
+      { "count": 3, "archetype": "Złodziej", "tier": "slaby" },
+      { "count": 1, "archetype": "Oprych", "tier": "slaby" },
+      { "count": 1, "archetype": "Złodziej", "tier": "sredni", "commander": true, "label": "Szef szajki" }
+    ]
+  },
+  "Karawana kupiecka": {
+    "description": "Kupiec z ochroną i przewodnikiem.",
+    "rows": [
+      { "count": 1, "archetype": "Kupiec", "tier": "sredni" },
+      { "count": 3, "archetype": "Strażnik", "tier": "slaby" },
+      { "count": 1, "archetype": "Zwiadowca", "tier": "slaby" }
+    ]
+  },
+  "Wiedźmi krąg": {
+    "description": "Czarownik i jego poplecznicy.",
+    "rows": [
+      { "count": 3, "archetype": "Oprych", "tier": "slaby" },
+      { "count": 1, "archetype": "Czarownik", "tier": "zaawansowany", "label": "Przywódca kręgu" }
+    ]
+  }
+}

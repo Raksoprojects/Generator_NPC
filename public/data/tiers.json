@@ -1,0 +1,89 @@
+{
+  "settings": {
+    "minKeyRoll": 9,
+    "advancePerLevel": 5,
+    "advanceJitter": 2,
+    "heroProfileMode": "max",
+    "traitRoll": [
+      { "upTo": 1, "count": 3 },
+      { "upTo": 5, "count": 2 },
+      { "upTo": 20, "count": 1 }
+    ],
+    "defaultTraitWeight": 1,
+    "unlimitedTalentCap": 3
+  },
+  "tiers": {
+    "slaby": {
+      "label": "Słaby",
+      "description": "Pierwszy (czasem drugi) poziom profesji, około +5 w cechach i umiejętnościach profesji, jeden pasujący talent.",
+      "randomWeight": 4,
+      "totalLevels": { "1": 3, "2": 1 },
+      "maxCareerLevel": 2,
+      "maxCareers": 1,
+      "keySkillBonus": 5,
+      "keyCharBonus": 3,
+      "talentsPerLevel": 1,
+      "extraTalentChance": 0,
+      "talentLevelUpChance": 0,
+      "heroProfile": null
+    },
+    "sredni": {
+      "label": "Średni",
+      "description": "Typowy przedstawiciel: drugi poziom profesji, około +10, kilka talentów najbardziej pasujących do archetypu.",
+      "randomWeight": 4,
+      "totalLevels": { "2": 1 },
+      "maxCareerLevel": 2,
+      "maxCareers": 1,
+      "keySkillBonus": 5,
+      "keyCharBonus": 5,
+      "talentsPerLevel": 1,
+      "extraTalentChance": 0.5,
+      "talentLevelUpChance": 0.3,
+      "heroProfile": null
+    },
+    "zaawansowany": {
+      "label": "Zaawansowany",
+      "description": "3–4 poziomy profesji (np. 2 poziomy Żołnierza i 2 Rycerza), około +15, więcej talentów i ich poziomów.",
+      "randomWeight": 2,
+      "totalLevels": { "3": 1, "4": 1 },
+      "maxCareerLevel": 3,
+      "maxCareers": 2,
+      "keySkillBonus": 10,
+      "keyCharBonus": 5,
+      "talentsPerLevel": 1,
+      "extraTalentChance": 0.5,
+      "talentLevelUpChance": 0.5,
+      "heroProfile": null
+    },
+    "doswiadczony": {
+      "label": "Doświadczony",
+      "description": "Czwarty poziom profesji, dodatkowe rozwinięcia kluczowych umiejętności i talentów, profil Pomniejszego Bohatera.",
+      "randomWeight": 1,
+      "totalLevels": { "4": 2, "5": 1 },
+      "maxCareerLevel": 4,
+      "requireLevel4": true,
+      "maxCareers": 2,
+      "keySkillBonus": 15,
+      "keyCharBonus": 10,
+      "talentsPerLevel": 1,
+      "extraTalentChance": 0.7,
+      "talentLevelUpChance": 0.6,
+      "heroProfile": "Pomniejszy Bohater"
+    },
+    "heroiczny": {
+      "label": "Heroiczny",
+      "description": "Zaawansowany++: czwarty poziom profesji i poprzednia profesja w tle, profil Wielkiego Bohatera.",
+      "randomWeight": 0.3,
+      "totalLevels": { "5": 1, "6": 1 },
+      "maxCareerLevel": 4,
+      "requireLevel4": true,
+      "maxCareers": 2,
+      "keySkillBonus": 15,
+      "keyCharBonus": 10,
+      "talentsPerLevel": 1,
+      "extraTalentChance": 0.8,
+      "talentLevelUpChance": 0.7,
+      "heroProfile": "Wielki Bohater"
+    }
+  }
+}
