@@ -250,6 +250,8 @@ export interface Npc {
   tier: TierId;
   /** Etykieta w grupie (np. "Herszt"). */
   label?: string;
+  /** Nazwa grupy/spotkania w bibliotece (np. "Banda z traktu"). */
+  group?: string;
   careerPath: CareerStep[];
   /** Wyniki 2k10 na cechy. */
   rolls: Record<Attribute, number>;
