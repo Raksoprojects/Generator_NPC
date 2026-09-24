@@ -1,0 +1,41 @@
+{
+  "options": {
+    "Broń Biała": ["Podstawowa", "Dwuręczna", "Drzewcowa", "Szermiercza", "Bijatyka", "Kawaleryjska", "Korbacz", "Parująca"],
+    "Broń Zasięgowa": ["Łuk", "Kusza", "Prochowa", "Miotana", "Proca", "Oplątująca"],
+    "Język": ["Bretoński", "Estalijski", "Tileański", "Kislevski", "Khazalid", "Eltharin", "Klasyczny", "Grypsera"],
+    "Wiedza": ["Lokalna", "Historia", "Prawo", "Teologia", "Heraldyka", "Imperium", "Geografia", "Nauka", "Medycyna", "Rośliny"],
+    "Rzemiosło": ["Kowalstwo", "Cieśla", "Piwowar", "Kucharz", "Garncarz", "Szewc", "Krawiec", "Stolarz"],
+    "Występy": ["Gawędziarstwo", "Śpiewanie", "Aktorstwo", "Taniec", "Akrobatyka"],
+    "Muzyka": ["Lutnia", "Skrzypce", "Bęben", "Flet", "Dudy"],
+    "Sekretne Znaki": ["Złodziei", "Włóczykijów", "Łowców", "Gildii"],
+    "Skradanie": ["Miasto", "Wieś", "Podziemia"],
+    "Tresura": ["Psy", "Konie", "Ptaki"],
+    "Jeździectwo": ["Konie"],
+    "Kuglarstwo": ["Żonglerka", "Akrobatyka", "Walka Pokazowa"],
+    "Sztuka": ["Malarstwo", "Rzeźbiarstwo", "Pisarstwo", "Kaligrafia"],
+    "Etykieta": ["Przestępcy", "Szlachta", "Uczeni", "Żołnierze", "Słudzy", "Członkowie Gildii", "Kultyści"],
+    "Wyczulony Zmysł": ["Wzrok", "Słuch", "Węch", "Smak", "Dotyk"],
+    "Nieustraszony": ["Zwierzoludzie", "Orki", "Nieumarli", "Mutanci", "Banici", "Skaveny"],
+    "Nienawiść": ["Zwierzoludzie", "Orki", "Nieumarli", "Mutanci", "Heretycy", "Banici"],
+    "Odporny na": ["Choroby", "Trucizny", "Chaos", "Mutacje", "Magię"],
+    "Błogosławieństwo": ["Sigmar", "Ulryk", "Morr", "Shallya", "Myrmidia", "Taal i Rhya", "Manann", "Verena", "Ranald"],
+    "Inwokacja": ["Sigmar", "Ulryk", "Morr", "Shallya", "Myrmidia", "Taal i Rhya", "Manann", "Verena", "Ranald"],
+    "Doświadczony Wędrowiec": ["Lasy", "Bagna", "Góry", "Wybrzeża", "Teren Skalisty"],
+    "Wytwórca": ["Kowalstwo", "Cieśla", "Piwowar", "Zielarz", "Aptekarz"],
+    "Mistrz Rzemiosła": ["Kowalstwo", "Cieśla", "Piwowar", "Zielarz", "Aptekarz"],
+    "Znawca": ["Wiedza Lokalna", "Teologia", "Prawo", "Medycyna", "Historia"]
+  },
+  "linked": [
+    ["Błogosławieństwo", "Inwokacja"]
+  ],
+  "lores": [
+    { "lore": "Ognia", "wind": "Aqshy" },
+    { "lore": "Metalu", "wind": "Chamon" },
+    { "lore": "Życia", "wind": "Ghyran" },
+    { "lore": "Niebios", "wind": "Azyr" },
+    { "lore": "Cienia", "wind": "Ulgu" },
+    { "lore": "Śmierci", "wind": "Shyish" },
+    { "lore": "Światła", "wind": "Hysh" },
+    { "lore": "Zwierząt", "wind": "Ghur" }
+  ]
+}

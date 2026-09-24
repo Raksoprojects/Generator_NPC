@@ -1,0 +1,20 @@
+{
+  "Dowódca Oddziału": {
+    "modifiers": { "WW": 15, "US": 10, "S": 5, "Wt": 5, "I": 10, "Zw": 5, "Int": 5, "SW": 10, "Ogd": 10 },
+    "traits": [],
+    "description": "Stworzenie, które nieco wybija się ponad swój rodzaj — sierżant, herszt bandy, przodownik.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Pomniejszy Bohater": {
+    "modifiers": { "WW": 30, "US": 20, "S": 10, "Wt": 10, "I": 20, "Zw": 10, "Zr": 5, "Int": 10, "SW": 20, "Ogd": 20 },
+    "traits": ["+1 do Pancerza", "Mistrz", "+1 do Broni"],
+    "description": "Zaprawione w boju stworzenie, które ma stanowić wyzwanie dla graczy.",
+    "source": "Bestiariusz 2.0"
+  },
+  "Wielki Bohater": {
+    "modifiers": { "WW": 45, "US": 30, "S": 20, "Wt": 20, "I": 30, "Zw": 20, "Zr": 10, "Int": 20, "SW": 30, "Ogd": 30 },
+    "traits": ["+2 do Pancerza", "Mistrz", "Twardziel", "Tropiciel", "+2 do Broni"],
+    "description": "Niezwykle potężny wódz lub boss — oś przygody albo jej ważny kamień milowy.",
+    "source": "Bestiariusz 2.0"
+  }
+}
