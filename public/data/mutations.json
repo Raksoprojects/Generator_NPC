@@ -1,0 +1,59 @@
+{
+  "settings": {
+    "chance": 0.01,
+    "mentalShare": 0.3,
+    "note": "Szansa na mutację u każdego wygenerowanego BN (1%). mentalShare = udział mutacji psychicznych."
+  },
+  "physical": [
+    { "min": 1, "max": 5, "name": "Zwierzęce nogi", "effect": "Szybkość +1", "movement": 1 },
+    { "min": 6, "max": 10, "name": "Otyłość", "effect": "Szybkość −1, Siła +5, Wytrzymałość +5", "movement": -1, "modifiers": { "S": 5, "Wt": 5 } },
+    { "min": 11, "max": 15, "name": "Wydłużone palce", "effect": "Zręczność +10", "modifiers": { "Zr": 10 } },
+    { "min": 16, "max": 20, "name": "Wychudzone ciało", "effect": "Siła −10, Zwinność +5", "modifiers": { "S": -10, "Zw": 5 } },
+    { "min": 21, "max": 25, "name": "Ogromne oko", "effect": "+10 do wszystkich związanych ze wzrokiem Testów Percepcji" },
+    { "min": 26, "max": 30, "name": "Dodatkowe stawy w nogach", "effect": "Zwinność +5", "modifiers": { "Zw": 5 } },
+    { "min": 31, "max": 35, "name": "Dodatkowe usta", "effect": "Rzuć kośćmi, by ustalić Miejsce Trafienia, w którym się pojawią", "rollLocation": true },
+    { "min": 36, "max": 40, "name": "Mięsista macka", "effect": "Postać zyskuje Cechę Stworzenia Macki", "trait": "Macki (1) +BS" },
+    { "min": 41, "max": 45, "name": "Świecąca skóra", "effect": "Blask porównywalny z płomieniem świecy" },
+    { "min": 46, "max": 50, "name": "Nieludzka uroda", "effect": "Ogłada +10, rany zawsze goją się bez blizn", "modifiers": { "Ogd": 10 } },
+    { "min": 51, "max": 55, "name": "Odwrócona twarz", "effect": "−20 do testów Ogłady" },
+    { "min": 56, "max": 60, "name": "Stalowa skóra", "effect": "+2 Punkty Pancerza na wszystkich Miejscach Trafienia, Zwinność −10", "modifiers": { "Zw": -10 }, "armour": 2 },
+    { "min": 61, "max": 65, "name": "Zwisający jęzor", "effect": "−10 do wszystkich Testów Języka wymagających mówienia" },
+    { "min": 66, "max": 70, "name": "Niejednolite opierzenie", "effect": "Rzuć dwukrotnie, by ustalić Miejsce Trafienia porosłe pierzem", "rollLocation": true },
+    { "min": 71, "max": 75, "name": "Krótkie nogi", "effect": "Szybkość −1", "movement": -1 },
+    { "min": 76, "max": 80, "name": "Kolczaste łuski", "effect": "+1 Punkt Pancerza na wszystkich Miejscach Trafienia", "armour": 1 },
+    { "min": 81, "max": 85, "name": "Nierówne rogi", "effect": "+1 Punkt Pancerza na głowie; postać liczy się, jakby posiadała Cechę Stworzenia Broń o współczynniku obrażeń +BS", "headArmour": 1 },
+    { "min": 86, "max": 90, "name": "Sącząca się ropa", "effect": "Rzuć k100, by ustalić Miejsce Trafienia, z którego się sączy", "rollLocation": true },
+    { "min": 91, "max": 95, "name": "Wibrysy", "effect": "+10 do Tropienia" },
+    { "min": 96, "max": 100, "name": "Decyzja MG", "effect": "MG wybiera mutację albo Cechę Stworzenia potwora" }
+  ],
+  "mental": [
+    { "min": 1, "max": 5, "name": "Odrażające zachcianki", "effect": "Ogłada −5, Siła Woli −5", "modifiers": { "Ogd": -5, "SW": -5 } },
+    { "min": 6, "max": 10, "name": "Wewnętrzna bestia", "effect": "Siła Woli +10, Ogłada −5, Inteligencja −5", "modifiers": { "SW": 10, "Ogd": -5, "Int": -5 } },
+    { "min": 11, "max": 15, "name": "Chaotyczne sny", "effect": "Przez pierwsze 2 godziny po śnie postać uznawana jest za Zmęczoną" },
+    { "min": 16, "max": 20, "name": "Nieustanne dreszcze", "effect": "Inicjatywa −5, Zręczność −5", "modifiers": { "I": -5, "Zr": -5 } },
+    { "min": 21, "max": 25, "name": "Mitomania", "effect": "Inicjatywa −5, Siła Woli −5", "modifiers": { "I": -5, "SW": -5 } },
+    { "min": 26, "max": 30, "name": "Straszny niepokój", "effect": "Siła Woli −10", "modifiers": { "SW": -10 } },
+    { "min": 31, "max": 35, "name": "Nienawistne popędy", "effect": "Wrogość wobec wszystkich istot poza rasą postaci" },
+    { "min": 36, "max": 40, "name": "Bezduszność", "effect": "Siła Woli +10, Ogłada −10", "modifiers": { "SW": 10, "Ogd": -10 } },
+    { "min": 41, "max": 45, "name": "Zazdrosne myśli", "effect": "Ogłada −10", "modifiers": { "Ogd": -10 } },
+    { "min": 46, "max": 50, "name": "Strach przed samotnością", "effect": "−10 do wszelkich Testów wykonywanych w samotności" },
+    { "min": 51, "max": 55, "name": "Blokada psychiczna", "effect": "Inteligencja −10", "modifiers": { "Int": -10 } },
+    { "min": 56, "max": 60, "name": "Bluźniercze popędy", "effect": "Siła Woli −10, Zwinność +10", "modifiers": { "SW": -10, "Zw": 10 } },
+    { "min": 61, "max": 65, "name": "Chwiejne morale", "effect": "Za każdym razem, gdy postaci nie powiedzie się Test Siły Woli, otrzymuje 1 poziom Paniki" },
+    { "min": 66, "max": 70, "name": "Paranoja", "effect": "Inicjatywa −5, Inteligencja −5", "modifiers": { "I": -5, "Int": -5 } },
+    { "min": 71, "max": 75, "name": "Uzależnienie od adrenaliny", "effect": "Siła Woli +10, Inicjatywa −10", "modifiers": { "SW": 10, "I": -10 } },
+    { "min": 76, "max": 80, "name": "Dręczące wizje", "effect": "Inicjatywa −10", "modifiers": { "I": -10 } },
+    { "min": 81, "max": 85, "name": "Kompletny świr", "effect": "Ogłada −20, Siła Woli +10", "modifiers": { "Ogd": -20, "SW": 10 } },
+    { "min": 86, "max": 90, "name": "Złe zamiary", "effect": "−10 do Testów, które nie mają na celu krzywdzenia innych; +10, jeśli zamiarem jest wyrządzenie krzywdy" },
+    { "min": 91, "max": 95, "name": "Bezbożny szał", "effect": "Szał Bojowy, Walka Wręcz +10", "modifiers": { "WW": 10 }, "trait": "Szał Bojowy" },
+    { "min": 96, "max": 100, "name": "Drżączka", "effect": "Zwinność +5, Ogłada −5", "modifiers": { "Zw": 5, "Ogd": -5 } }
+  ],
+  "locations": [
+    { "min": 1, "max": 9, "name": "głowa" },
+    { "min": 10, "max": 24, "name": "lewa ręka" },
+    { "min": 25, "max": 44, "name": "prawa ręka" },
+    { "min": 45, "max": 79, "name": "korpus" },
+    { "min": 80, "max": 89, "name": "lewa noga" },
+    { "min": 90, "max": 100, "name": "prawa noga" }
+  ]
+}
