@@ -16,3 +16,6 @@ dev-dist/
 Thumbs.db
 .idea/
 *.log
+
+# --- Podreczniki zrodlowe (prawa autorskie - tylko lokalnie, NIE do repo) ---
+Sources/
