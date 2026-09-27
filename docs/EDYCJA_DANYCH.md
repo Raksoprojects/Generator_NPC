@@ -172,8 +172,10 @@ zasady specjalne. `family` wskazuje rodzinę z `creature_families.json`, `group`
 ## Zaklęcia (`spells.json`) i mutacje (`mutations.json`)
 
 Zaklęcie: `name`, `lore` (klucz tradycji z `lores`), `cn` (PZ), zasięg, cel, czas,
-opis. `Prosta` = Magia Prosta, `Tajemna` = wspólne zaklęcia tajemne. Opisy pochodzą
-z OCR skanów — mogą zawierać pojedyncze literówki (np. „VV” zamiast „W”).
+opis. `Prosta` = Magia Prosta, `Tajemna` = wspólne zaklęcia tajemne. *Wiatry Magii*
+to skan bez warstwy tekstowej, więc opisy pochodzą z OCR — typowe błędy („VV”,
+„"konać”, „Ik10”, „Zywotność”) są poprawione automatycznie, ale pojedyncze literówki
+mogą zostać. Poprawiaj je śmiało w tym pliku.
 
 `mutations.json`:
 
