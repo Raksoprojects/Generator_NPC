@@ -18,7 +18,12 @@ przy talentach, ale polskie znaki tak).
 | `hero_profiles.json` | Profile Bohaterów (Dowódca Oddziału, Pomniejszy, Wielki) |
 | `specializations.json` | Listy specjalizacji dla „Dowolnych” (broń, język, bóstwo, szkoła magii) |
 | `names.json` | Imiona i nazwiska wg ras |
-| `group_presets.json` | Gotowe grupy (banda, wioska, patrol…) |
+| `group_presets.json` | Gotowe grupy (banda, wioska, patrol, banda orków…) |
+| `creatures.json` | Stworzenia z Bestiariusza podręcznika i *Imperialnego Zwierzyńca* |
+| `creature_families.json` | Rozwój bestii: umiejętności i Cechy Stworzeń rodzin |
+| `weapons.json` | Broń (karty *Pod Bronią*), pancerze, zestawy pancerza, dobór broni, opisy Zalet i Wad |
+| `spells.json` | Zaklęcia (podręcznik + *Wiatry Magii*) |
+| `mutations.json` | Tabele mutacji i szansa na mutację |
 | `talents.json`, `skills.json`, `professions.json`, `classes.json`, `races.json` | Dane gry przeniesione z karty postaci |
 
 ---
@@ -47,6 +52,8 @@ przy talentach, ale polskie znaki tak).
 | `talents` | Preferowane talenty z wagami (nazwa bazowa lub pełna). Talent spoza listy ma wagę 1. |
 | `traits` | Wagi Cech Stworzeń przy losowaniu cech opcjonalnych. Brak cechy = waga domyślna (`defaultTraitWeight`). Waga 0 wyklucza cechę. |
 | `specializations` | Preferowane specjalizacje przy „Dowolnych”, np. jaką bronią walczy archetyp. |
+| `requiredTalents` | Talenty brane zawsze, gdy są na poziomie profesji (magia czarodziejów, kapłanów). |
+| `armour` | Zestaw pancerza (z `weapons.json` → `armourSets`) dla każdego poziomu BN. |
 
 Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 
@@ -59,9 +66,11 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | Pole | Znaczenie |
 |---|---|
 | `minKeyRoll` | Minimalny wynik 2k10 w kluczowych cechach (domyślnie 9). |
-| `advancePerLevel`, `advanceJitter` | Rozwinięcia za poziom profesji (5) i losowe odchylenie (±2). |
-| `heroProfileMode` | `"max"` — profil bohatera liczy się tylko ponad rozwinięcia; `"add"` — sumuje się z nimi. |
-| `heroProfileShape` | `"archetype"` — wartości profilu rozkładane wg kolejności cech archetypu; `"bestiary"` — dosłownie jak w Bestiariuszu. |
+| `advancePerLevel` | Rozwinięcia za każdy ukończony poziom profesji (5). |
+| `currentLevelMin` | Najmniej rozwinięć za obecny, nieukończony poziom (2). |
+| `keySkillCount`, `keySkillBonus` | Ile najważniejszych umiejętności archetypu dostaje premię i jaką najwyżej (4, +5). |
+| `keyCharCount`, `keyCharBonus` | Ile najważniejszych cech archetypu dostaje premię i jaką najwyżej (2, +3). |
+| `heroProfileShape` | `"archetype"` — S i Wt jak w Bestiariuszu, reszta rozkładana wg kolejności cech archetypu; `"bestiary"` — dosłownie. Profil zawsze dodaje stałe wartości. |
 | `traitRoll` | Progi k100 dla liczby cech opcjonalnych (`upTo` = do jakiego wyniku, `count` = ile cech). |
 | `unlimitedTalentCap` | Ile poziomów może mieć talent bez maksimum. |
 
@@ -74,9 +83,9 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `maxCareerLevel` | Najwyższy poziom w jednej profesji. |
 | `requireLevel4` | Główna profesja zawsze na 4. poziomie. |
 | `maxCareers` | Ile profesji może mieć ścieżka (1 lub 2). |
-| `keySkillBonus`, `keyCharBonus` | Maks. dodatkowe rozwinięcia kluczowych umiejętności i cech. |
 | `talentsPerLevel`, `extraTalentChance`, `talentLevelUpChance` | Talenty za poziom, szansa na dodatkowy talent, szansa na kolejny poziom talentu. |
 | `heroProfile` | Profil nakładany automatycznie (`null` = brak). |
+| `spells.maxCn`, `spells.arcane` | Najwyższy PZ zaklęć tradycji i odchylenie ich liczby od Bonusu z Inteligencji, np. `[-1, 3]`. |
 
 ---
 
@@ -126,6 +135,45 @@ Grupa:
 
 Poziomy: `slaby`, `sredni`, `zaawansowany`, `doswiadczony`, `heroiczny`.
 Opcjonalnie `"race": "Krasnolud"`.
+
+---
+
+## Stworzenia (`creatures.json`)
+
+Wartości cech wpisuj **dokładnie jak w książce** (`null` = „–”). Generator sam
+odejmie 10 i dorzuci 2k10 (albo 1k10 dla cech do 5). `traits` to cechy z książki
+(są już wliczone w statystyki), `optional` — cechy „Opcjonalne”, `abilities` —
+zasady specjalne. `family` wskazuje rodzinę z `creature_families.json`, `group`
+— grupę w listach (Zwierzęta, Potwory, Zielonoskórzy…).
+
+## Rozwój bestii (`creature_families.json`)
+
+- `settings.tierFactor` — jaka część „pasowania” trafia do umiejętności na danym poziomie.
+- `settings.traitCount` — ile Cech Stworzeń z rodziny dostaje bestia na poziomie.
+- `settings.optionalChance` — szansa na jedną cechę „Opcjonalną” z książki.
+- `families.<rodzina>.skills` — umiejętność → pasowanie (premia na najwyższym poziomie, 10–40).
+- `families.<rodzina>.traits` — wagi Cech Stworzeń rodziny.
+- `civilized: true` — rodzina może dostać archetyp i profesje (`notCivilized` wyklucza pojedyncze stworzenia).
+
+## Broń i pancerz (`weapons.json`)
+
+- `melee`, `ranged`, `armour` — przepisane z Twoich kart (*Pod Bronią*). Obrażenia:
+  `damage` + BS, gdy `sb: true`. Zalety „A albo B” zapisane jako jedna pozycja.
+- `qualities` — opisy Zalet i Wad (ze ściągi „Zalety i Wady”).
+- `handWeapon`, `twoHandedWeapon` — wagi wyboru konkretnej broni za „broń ręczną”
+  i „broń dwuręczną”. Wagi `default` mnożone są przez wagi rasy, archetypu albo
+  grupy stworzenia, np. krasnolud: Topór 6, Młot jednoręczny 4, Miecz 0.5.
+- `armourSets` — zestawy pancerza używane przez archetypy.
+- `legacy` — stare nazwy broni z zapisanych BN (np. „Broń Ręczna” → „Miecz”).
+
+## Zaklęcia (`spells.json`) i mutacje (`mutations.json`)
+
+Zaklęcie: `name`, `lore` (klucz tradycji z `lores`), `cn` (PZ), zasięg, cel, czas,
+opis. `Prosta` = Magia Prosta, `Tajemna` = wspólne zaklęcia tajemne. Opisy pochodzą
+z OCR skanów — mogą zawierać pojedyncze literówki (np. „VV” zamiast „W”).
+
+`mutations.json`: `settings.chance` (0.01 = 1%), `settings.mentalShare` (udział
+mutacji psychicznych), tabele `physical` / `mental` z modyfikatorami cech.
 
 ---
 

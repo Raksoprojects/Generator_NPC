@@ -11,31 +11,38 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
 
 ## Co potrafi
 
+- **Ludzie i rasy albo stworzenia** — BN z profesji (5 ras, 14 archetypów) albo
+  jedno ze 111 stworzeń z Bestiariusza podręcznika i *Imperialnego Zwierzyńca*.
 - **Trzy metody generowania**
   - **Losowa** — jedno kliknięcie, wszystko losowe.
   - **Pół-losowa** — ustawiasz dowolne pola (archetyp, poziom, rasa, płeć, imię,
-    profesja, Cechy Stworzeń, dowódca), resztę losuje program.
+    profesja, stworzenie, Cechy Stworzeń, dowódca), resztę losuje program.
   - **Własna** — wybierasz wszystko sam; rzuty są średnie (11), rozwinięcia bez
     losowych odchyleń, bez losowych cech opcjonalnych.
+- **Walka na pierwszy rzut oka** — pod cechami broń w formacie
+  `Topór (+9/116)` (obrażenia / wartość testu) z Zaletami i Wadami z kart
+  *Pod Bronią* oraz redukcja obrażeń na lokacjach (Bonus z Wytrzymałości + PP).
+- **Zaklęcia** dla czarujących (Magia Prosta + tradycje tajemne, guślarstwo,
+  czarownictwo, nekromancja, Chaos) z opisami po kliknięciu.
+- **Mutacje** z tabel Spaczenia Fizycznego i Zepsucia Psychicznego.
 - **Edycja wyniku** — każdy element BN można zmienić: rzuty i rozwinięcia cech,
-  umiejętności, talenty, Cechy Stworzeń, profile bohaterów, wyposażenie,
-  pieniądze, notatki, a także przebudować rozwój po zmianie rasy, archetypu,
-  poziomu lub profesji.
+  umiejętności, talenty, broń, pancerz, zaklęcia, Cechy Stworzeń, profile
+  bohaterów, mutacje, wyposażenie, pieniądze, notatki; można też przebudować
+  rozwój po zmianie rasy, archetypu, poziomu lub profesji.
 - **Blokady i ponowne losowanie** — zablokuj *Imię*, *Rzuty*, *Rozwój* lub
-  *Cechy stworzeń* i wylosuj ponownie tylko resztę.
-- **Grupy** — kilka rodzajów BN naraz (banda rozbójników, mała wioska, patrol
-  straży…), z gotowych zestawów albo własnych wierszy.
+  *Cechy i mutacje* i wylosuj ponownie tylko resztę.
+- **Grupy** — kilka rodzajów BN i stworzeń naraz (banda rozbójników, mała wioska,
+  banda orków, wataha wilków, nieumarli z kurhanu…).
 - **Zapisane BN** — biblioteka w przeglądarce z wyszukiwaniem i filtrami oraz
-  eksport/import JSON (kopia zapasowa, przenoszenie na inne urządzenie, własna
-  baza gotowych BN).
+  eksport/import JSON.
 - **Kopiuj** — zwarty blok statystyk jako tekst, gotowy do notatek sesyjnych.
 - **Warianty zasad** — *Pod Bronią* (baza) i *Pełne Domowe*.
 
-## Jak generator buduje BN
+## Jak generator buduje BN (ludzie i rasy)
 
 1. **Archetyp i poziom.** Archetyp (np. Wojownik, Złodziej, Czarodziej) określa
-   kluczowe cechy, pasujące profesje, kluczowe umiejętności, preferowane talenty
-   i wagi Cech Stworzeń.
+   kluczowe cechy, pasujące profesje, kluczowe umiejętności, preferowane talenty,
+   wagi Cech Stworzeń i zestaw pancerza.
 2. **Rasa, płeć, imię.** Rasa losowana wg tabeli k100 (Człowiek 90%), ale
    tylko spośród ras, które mogą wykonywać profesje archetypu.
 3. **Rzuty.** Baza rasowa + 2k10. W kluczowych cechach archetypu wynik
@@ -52,30 +59,59 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
 
    Tylko Doświadczeni i Heroiczni dochodzą do 4. poziomu. Pozostali, gdy mają
    więcej poziomów, przechodzą do innej, powiązanej profesji.
-5. **Rozwój.** Za każdy przebyty poziom profesji: ok. **+5** (±2) do cech i
-   umiejętności dostępnych na tym poziomie (narastająco, jak w Bestiariuszu) oraz
-   talent z tego poziomu, dobierany wg preferencji archetypu. Wyżsi BN mają
-   szansę na dodatkowe talenty i kolejne poziomy talentów.
-   Profesja bez rozpisanych cech (część profesji z *Pod Bronią*) bierze 3
-   pierwsze cechy archetypu na 1. poziomie i jedną kolejną na każdy następny.
-6. **Premie archetypu.** Dwie pierwsze kluczowe umiejętności dostają dodatkowo
-   do +5 (Słaby, Średni), +10 (Zaawansowany) albo +15 (Doświadczony, Heroiczny);
-   pozostałe kluczowe — do połowy tej wartości. Dwie pierwsze kluczowe cechy
-   dostają do +3 / +5 / +10.
+5. **Rozwój.** Każdy ukończony poziom profesji daje pełne **+5** do cech i
+   umiejętności dostępnych na tym poziomie (narastająco). Obecny, nieukończony
+   poziom daje od +2 do +5. Talent z każdego poziomu dobierany wg preferencji
+   archetypu; czarujący zawsze biorą swoje talenty magiczne.
+6. **Premie archetypu.** 4 najważniejsze umiejętności dostają dodatkowo do +5,
+   2 najważniejsze cechy do +3 — BN jest lepszy w tym, co robi, ale bez przesady.
 7. **Cechy opcjonalne.** Jeden rzut k100: **1** = trzy Cechy Stworzeń,
-   **2–5** = dwie, **6–20** = jedna. Losowane z wagami archetypu (Oprych częściej
-   dostaje Brutalnego lub Zabijakę, ale uczony zabijaka też się zdarza).
-8. **Profile bohaterów.** Profil wynikający z poziomu BN jest **rozkładany wg
-   priorytetów cech archetypu** (złodziej dostaje +45 do Zwinności, a nie do
-   Walki Wręcz; łączna siła profilu jest ta sama) i **nie sumuje się** z
-   rozwinięciami — liczy się tylko nadwyżka ponad nie. *Dowódcę Oddziału* i
-   pozostałe profile można dodać do każdego BN ręcznie.
-9. **Wyposażenie i pieniądze.** Wyposażenie z obecnej profesji; pieniądze wg
-   Statusu (Brąz: 2k10 × poziom pensów, Srebro: 1k10 × poziom szylingów,
-   Złoto: poziom koron).
+   **2–5** = dwie, **6–20** = jedna. Losowane z wagami archetypu.
+8. **Profile bohaterów** dają **stałe** premie, niezależne od rozwinięć. Siła i
+   Wytrzymałość zawsze jak w Bestiariuszu; pozostałe wartości są rozkładane wg
+   priorytetów archetypu (złodziej dostaje +45 do Zwinności, a nie do WW).
+   *Dowódcę Oddziału* i inne profile można dodać ręcznie.
+9. **Broń i pancerz.** Broń i pancerz z wyposażenia profesji; ogólne „broń ręczna”
+   czy „broń (dowolna)” zamieniane są na konkretną broń pasującą do postaci
+   (krasnolud — topór albo młot, elf — miecz, chłop — pałka albo topór). Brak
+   broni? Dobierana jest wg najlepiej rozwiniętej umiejętności. Zestaw: do 2 broni
+   białych, tarcza i 1 zasięgowa.
+10. **Zaklęcia.** Magia Prosta: około Bonusu z Siły Woli zaklęć. Tradycja: Bonus z
+    Inteligencji + odchylenie zależne od poziomu, zawsze z jednym zaklęciem z
+    górnej półki. Słabi czarujący znają tylko Magię Prostą.
 
-Wszystkie liczby z tej listy są w plikach danych i można je zmieniać — patrz
-[docs/EDYCJA_DANYCH.md](docs/EDYCJA_DANYCH.md).
+    | Poziom | Najwyższy PZ | Zaklęć tradycji |
+    |---|---|---|
+    | Słaby | 0 (tylko Magia Prosta) | — |
+    | Średni | 6 | BInt −2…+1 |
+    | Zaawansowany | 9 | BInt −1…+3 |
+    | Doświadczony | 12 | BInt +0…+4 |
+    | Heroiczny | bez limitu | BInt +1…+5 |
+11. **Mutacje.** 1% szans na mutację u każdego BN (70% fizyczne, 30% psychiczne).
+12. **Wyposażenie i pieniądze.** Rzuty w wyposażeniu (np. „3k10 szylingów”)
+    wykonywane są od razu; pieniądze wg Statusu.
+
+## Stworzenia
+
+- **Cechy:** wartość z książki − 10 to baza, do której rzuca się 2k10 (jak dla
+  ras). Cecha o wartości 5 lub mniej to po prostu 1k10; brak cechy zostaje „–”.
+- **Żywotność** liczona wzorem Rozmiaru z podręcznika (Twardziel, Rój) —
+  zgadza się z książką dla 110 ze 111 stworzeń (Hipogryf ma w książce błąd).
+- **Stworzenia cywilizowane** (orkowie, gobliny, skaveny, zwierzoludzie, kultyści,
+  ogry…) mogą dostać archetyp i rozwijać się przez profesje jak ludzie.
+- **Bestie** rozwijają się bez profesji — system do przeglądu
+  (`creature_families.json`):
+
+  | Poziom | Umiejętności rodziny | Cechy Stworzeń z rodziny | Cechy „Opcjonalne” z książki |
+  |---|---|---|---|
+  | Słaby — młody osobnik | 25% pasowania | 0 | — |
+  | Średni — typowy osobnik | 50% | 0 | 25% szans |
+  | Zaawansowany — rosły | 75% | 1 | 50% |
+  | Doświadczony — przewodnik stada | 100% | 2 | 75% |
+  | Heroiczny — legendarna bestia | 100% | 3 | 100% |
+
+  Pasowanie to premia 10–40 do umiejętności rodziny (np. koty: Skradanie +40,
+  Broń Biała (Bijatyka) +20). Jeśli książka daje więcej, zostaje wartość z książki.
 
 ## Uruchomienie lokalne
 
