@@ -1,10 +1,26 @@
 <script lang="ts">
   import NpcCard from "./NpcCard.svelte";
+  import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec } from "../lib/generator";
   import { TIER_IDS, type Npc, type Sex, type TierId } from "../lib/types";
 
   type Mode = "losowy" | "polLosowy" | "wlasny";
+  type Kind = "rasy" | "stworzenia";
+
+  let kind = $state<Kind>("rasy");
+  let creature = $state("");
+
+  /** Stworzenia pogrupowane (Zwierzęta, Potwory, Zielonoskórzy...). */
+  const creatureGroups = (() => {
+    const out: Record<string, string[]> = {};
+    for (const c of gd.getCreatures()) (out[c.group] ??= []).push(c.name);
+    for (const g of Object.values(out)) g.sort((a, b) => a.localeCompare(b, "pl"));
+    return out;
+  })();
+  const typicalCreatures = gd.getCreatures().filter((c) => !c.unique).map((c) => c.name);
+
+  let civilized = $derived(!!creature && gd.isCivilized(creature));
 
   const MODES: { id: Mode; label: string; hint: string }[] = [
     { id: "losowy", label: "Losowy", hint: "Wszystko losowe — jedno kliknięcie." },
@@ -41,6 +57,12 @@
   // W trybie własnym każde pole ma wartość (brak opcji "losowo").
   $effect(() => {
     if (mode !== "wlasny") return;
+    if (kind === "stworzenia") {
+      if (!creature) creature = typicalCreatures[0];
+      if (!tier) tier = "sredni";
+      randomTraits = false;
+      return;
+    }
     if (!archetype) archetype = archetypes[0];
     if (!tier) tier = "slaby";
     if (!sex) sex = "M";
@@ -67,6 +89,20 @@
   }
 
   function buildSpec(): GenSpec {
+    if (kind === "stworzenia") {
+      if (mode === "losowy") return { creature: pick(typicalCreatures) };
+      return {
+        creature: creature || pick(typicalCreatures),
+        archetype: civilized && archetype ? archetype : undefined,
+        tier: (tier || undefined) as TierId | undefined,
+        name: name.trim() || undefined,
+        traits: chosenTraits,
+        randomTraits,
+        commander,
+        autoHeroProfile: autoHero,
+        deterministic: mode === "wlasny"
+      };
+    }
     if (mode === "losowy") return {};
     const professions = [prevProfession, mainProfession].filter(Boolean);
     return {
@@ -96,7 +132,7 @@
   }
 
   function resetForm() {
-    archetype = tier = race = sex = "";
+    archetype = tier = race = sex = creature = "";
     name = mainProfession = prevProfession = "";
     chosenTraits = [];
     randomTraits = true;
@@ -108,6 +144,12 @@
 <section class="tab">
   <div class="panel controls">
     <div class="mode-row">
+      <div class="seg" role="group" aria-label="Rodzaj BN">
+        <button class="seg-opt" class:active={kind === "rasy"} aria-pressed={kind === "rasy"} onclick={() => (kind = "rasy")}>Ludzie i rasy</button>
+        <button class="seg-opt" class:active={kind === "stworzenia"} aria-pressed={kind === "stworzenia"} onclick={() => { kind = "stworzenia"; archetype = ""; }}>Stworzenia</button>
+      </div>
+    </div>
+    <div class="mode-row">
       <div class="seg" role="group" aria-label="Metoda generowania">
         {#each MODES as m (m.id)}
           <button class="seg-opt" class:active={mode === m.id} aria-pressed={mode === m.id} onclick={() => (mode = m.id)}>{m.label}</button>
@@ -116,7 +158,47 @@
       <span class="text-dim hint">{MODES.find((m) => m.id === mode)?.hint}</span>
     </div>
 
-    {#if mode !== "losowy"}
+    {#if mode !== "losowy" && kind === "stworzenia"}
+      <div class="form">
+        <label>Stworzenie
+          <select bind:value={creature}>
+            {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
+            {#each Object.entries(creatureGroups) as [group, names] (group)}
+              <optgroup label={group}>
+                {#each names as c (c)}<option value={c}>{c}</option>{/each}
+              </optgroup>
+            {/each}
+          </select>
+        </label>
+        {#if civilized}
+          <label>Archetyp (profesje)
+            <select bind:value={archetype}>
+              <option value="">— bez profesji (jak bestia) —</option>
+              {#each archetypes as a (a)}<option value={a}>{a}</option>{/each}
+            </select>
+          </label>
+        {/if}
+        <label>Poziom
+          <select bind:value={tier}>
+            {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
+            {#each TIER_IDS as t (t)}
+              <option value={t}>{gd.getTier(t).label}{!civilized || !archetype ? ` — ${gd.getCreatureFamilies().settings.tierLabels[t]}` : ""}</option>
+            {/each}
+          </select>
+        </label>
+        <label>Imię
+          <input type="text" placeholder="nazwa stworzenia" bind:value={name} />
+        </label>
+      </div>
+      {#if creature}
+        <p class="text-dim hint">
+          {gd.getCreature(creature)?.source}, s. {gd.getCreature(creature)?.page} · rodzina: {gd.getCreature(creature)?.family}
+          {civilized ? " · może rozwijać się przez profesje" : " · rozwój przez umiejętności i Cechy Stworzeń"}
+        </p>
+      {/if}
+    {/if}
+
+    {#if mode !== "losowy" && kind === "rasy"}
       <div class="form">
         <label>Archetyp
           <select bind:value={archetype}>
@@ -166,7 +248,9 @@
           </label>
         {/if}
       </div>
+    {/if}
 
+    {#if mode !== "losowy"}
       <div class="traits">
         <span class="lbl">Cechy Stworzeń:</span>
         {#each randomPool as t (t)}
@@ -203,7 +287,7 @@
     <div class="history">
       <span class="text-dim">Poprzednie:</span>
       {#each history as h, i (h.id)}
-        <button class="btn-sm ghost" onclick={() => restore(i)}>{h.name} <span class="text-dim">({h.archetype})</span></button>
+        <button class="btn-sm ghost" onclick={() => restore(i)}>{h.name} <span class="text-dim">({h.archetype || h.creature})</span></button>
       {/each}
     </div>
   {/if}
