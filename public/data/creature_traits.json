@@ -1,69 +1,114 @@
 {
   "Duży": {
-    "modifiers": { "S": 10, "Wt": 10, "Zw": -5 },
+    "modifiers": {
+      "S": 10,
+      "Wt": 10,
+      "Zw": -5
+    },
     "randomPool": true,
     "description": "+10 Siły, +10 Wytrzymałości, −5 Zwinności.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie jest dużym okazem swojego gatunku. Dostaje +10 do Siły i Wytrzymałości oraz -5 do Zwinności."
   },
   "Brutalny": {
-    "modifiers": { "S": 10, "Wt": 10, "Zw": -10 },
+    "modifiers": {
+      "S": 10,
+      "Wt": 10,
+      "Zw": -10
+    },
     "movement": -1,
     "randomPool": true,
     "description": "+10 Siły, +10 Wytrzymałości, −10 Zwinności, −1 Szybkości.",
     "source": "Podręcznik podstawowy"
   },
   "Bystry": {
-    "modifiers": { "I": 10, "Int": 20 },
+    "modifiers": {
+      "I": 10,
+      "Int": 20
+    },
     "randomPool": true,
     "description": "+10 Inicjatywy, +20 Inteligencji.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie jest wyjątkowo bystre. Dostaje +20 do Inteligencji i +10 do Inicjatywy."
   },
   "Przebiegły": {
-    "modifiers": { "I": 10, "Int": 10, "Ogd": 10 },
+    "modifiers": {
+      "I": 10,
+      "Int": 10,
+      "Ogd": 10
+    },
     "randomPool": true,
     "description": "+10 Inicjatywy, +10 Inteligencji, +10 Ogłady.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie jest wyjątkowo przebiegłe. Dostaje +10 do Ogłady, Inteligencji i Inicjatywy."
   },
   "Elitarny": {
-    "modifiers": { "WW": 20, "US": 20, "SW": 20 },
+    "modifiers": {
+      "WW": 20,
+      "US": 20,
+      "SW": 20
+    },
     "randomPool": true,
     "description": "+20 Walki Wręcz, +20 Umiejętności Strzeleckich, +20 Siły Woli.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie jest doświadczonym weteranem. Dostaje +20 do Walki Wręcz, Umiejętności Strzeleckich i Siły Woli."
   },
   "Szybki": {
-    "modifiers": { "Zw": 10 },
+    "modifiers": {
+      "Zw": 10
+    },
     "movement": 1,
     "randomPool": true,
     "description": "+10 Zwinności, +1 Szybkości.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie porusza się niespodziewanie szybko. Dostaje +1 do Szybkości i +10 do Zwinności."
   },
   "Przywódca": {
-    "modifiers": { "SW": 10, "Ogd": 10 },
+    "modifiers": {
+      "SW": 10,
+      "Ogd": 10
+    },
     "randomPool": true,
     "description": "+10 Siły Woli, +10 Ogłady.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie jest doświadczonym przywódcą. Dostaje premię +10 do Ogłady i Siły Woli. Uwaga: tej cechy nie mogą wybierać stworzenia posiadające cechę Zwierzęcy."
   },
   "Twardy": {
-    "modifiers": { "Wt": 10, "SW": 10 },
+    "modifiers": {
+      "Wt": 10,
+      "SW": 10
+    },
     "randomPool": true,
     "description": "+10 Wytrzymałości, +10 Siły Woli.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "rules": "Stworzenie jest odporniejsze na obrażenia niż normalnie i nie odpuszcza. Dostaje +10 do Wytrzymałości i Siły Woli."
   },
   "Czujny": {
-    "modifiers": { "WW": 10 },
-    "skills": { "Percepcja": 30 },
+    "modifiers": {
+      "WW": 10
+    },
+    "skills": {
+      "Percepcja": 30
+    },
     "randomPool": true,
     "description": "Stworzenie nieustannie wypatruje zdobyczy albo zagrożenia. +10 Walki Wręcz i +30 do umiejętności Percepcja.",
     "source": "Bestiariusz 2.0"
   },
   "Zabijaka": {
-    "modifiers": { "WW": 10, "S": 10, "I": 10 },
+    "modifiers": {
+      "WW": 10,
+      "S": 10,
+      "I": 10
+    },
     "randomPool": true,
     "description": "Z natury silny i agresywny albo wyszkolony do walki. +10 Walki Wręcz, +10 Siły, +10 Inicjatywy.",
     "source": "Bestiariusz 2.0"
   },
   "Uczony": {
-    "modifiers": { "Int": 20, "SW": 20 },
+    "modifiers": {
+      "Int": 20,
+      "SW": 20
+    },
     "randomPool": true,
     "description": "Rozległa wiedza i wyjątkowa siła umysłu. +20 Inteligencji, +20 Siły Woli.",
     "source": "Bestiariusz 2.0"
@@ -102,5 +147,360 @@
     "randomPool": false,
     "description": "Zmienia się między zwykłą postacią a wskazanym Stworzeniem (1 pełna runda). Zachowuje Int, SW i Ogd, reszta profilu jak u Stworzenia.",
     "source": "Bestiariusz 2.0"
+  },
+  "Atak Językiem +Obrażenia (Zasięg)": {
+    "randomPool": false,
+    "description": "Chwytny język stworzenia może owijać się wokół ofiary, wciągając ją aż do makabrycznego końca. W swojej Turze stworzenie może wykonać Darmowy Atak, wydając 1 Przewagę. To atak dystansowy, który zadaje tyle Obrażeń, ile wynosi podana wartość (zasięg podany w nawiasie). Jeśli atak trafi, cel dostaje 1 Stan Pochwycenie, a jeśli ma mniejszy Rozmiar, zostaje przyciągnięty do stworzenia i Związany Walką Stworzenie może następnie zdecydować, czy wypuści cel, wykonując Darmowy Atak z użyciem swojej cechy Broń, czy będzie trzymać cel owinięty językiem, zapoczątkowując Chwyt (patrz strona 163).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Atak Ogonem +Obrażenia": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi zwalać z nóg przeciwników machnięciem ogona. W swojej Turze może wykonać Darmowy Atak, wydając 1 Przewagę. Ogon zadaje tyle Obrażeń, ile wynosi podana wartość, która już zawiera Bonus z Siły stworzenia. Przeciwnicy o Rozmiarze mniejszym niż stworzenie, którzy odniosą jakiekolwiek Rany na skutek tego ataku, dostają także Stan Powalony.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Bagnołaz": {
+    "randomPool": false,
+    "description": "Stworzenie na bagnie jest w swoim żywiole. Nie dostaje kar do ruchu za przemieszczanie się po bagnistym podłożu.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Błogosławiony (różne)": {
+    "randomPool": false,
+    "description": "Stworzenie jest błogosławione i może udzielać Błogosławieństw, odpowiednie bóstwo podano w nawiasie.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Broń +Obrażenia": {
+    "randomPool": false,
+    "description": "Stworzenie nosi broń do walki wręcz lub używa w walce zębów, pazurów albo tym podobnych. Broń zadaje tyle Obrażeń, ile wynosi podana wartość, która już zawiera Bonus z Siły stworzenia. Zazwyczaj będzie to wynosiło 4 + Bonus z Siły (co reprezentuje broń ręczną).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Choroba (typ)": {
+    "randomPool": false,
+    "description": "Stworzenie przenosi wymienioną chorobę. Inne postacie muszą wykonać odpowiedni Test, aby uniknąć zakażenia. Patrz: strona 186.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Cuda (różne)": {
+    "randomPool": false,
+    "description": "Stworzenie może czynić Cuda; odpowiednie bóstwo podano w nawiasie.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Czempion": {
+    "randomPool": false,
+    "description": "Stworzenie wyjątkowo dobrze walczy. Jeśli wygra Test Przeciwstawny, gdy broni się w walce w zwarciu, może zadać Obrażenia, tak jakby to ono atakowało.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Dekoncentrujący": {
+    "randomPool": false,
+    "description": "Stworzenie rozprasza lub dezorientuje wrogów, być może wydzielając usypiający zapach lub powalający smród, a może ze względu na przerażająco dziwaczny wygląd. Wszystkie żywe cele w promieniu tylu metrów, ile wynosi jego Bonus z Wytrzymałości, dostają karę -20 do wszystkich Testów. Cel może dostać tę karę tylko raz — bez względu na to, jak wielu jest dekoncentrujących wrogów.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Demoniczny (Próg)": {
+    "randomPool": false,
+    "description": "Esencję stworzenia stanowi surowa magia, a w tym, co uchodzi za jej żyły, płynie paskudna posoka. Demoniczne stwory nie muszą zaspokajać normalnych potrzeb życiowych. Nie potrzebują jedzenia, wody ani powietrza. Wszystkie ataki stworzenia są Magiczne. Kiedy stworzenie zostanie trafione, rzuć 1k10.Jeśli wyrzuci tyle, ile wynosi próg, lub więcej, cios zostaje zignorowany, nawet jeśli jest to Trafienie Krytyczne. Za to jeśli Żywotność stworzenia zostanie zredukowana do 0, jego dusza natychmiast powraca do Królestw Chaosu. Stworzenie zostaje usunięte z rozgrywki.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Długi Krok": {
+    "randomPool": false,
+    "description": "Stworzenie porusza się wielkimi krokami, być może dlatego, że jest czworonożne lub ma szczególnie długie nogi. Gdy biegnie, pomnóż Szybkość Biegu przez 1,5.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Dusiciel": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi ściskać i miażdżyć ofiary. Każdy udany rzut na trafienie daje celowi Stan Pochwycenie. eżeli do tego dojdzie, stworzenie może wejść w Chwyt. Patrz: strona 163.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Eteryczny": {
+    "randomPool": false,
+    "description": "Stworzenie ma niematerialną postać, co pozwala mu przenikać przez obiekty materialne. Może być ranione tylko na skutek ataków magicznych.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Furia": {
+    "randomPool": false,
+    "description": "Stworzenie ulega czasami wszechogarniającej wściekłości. Może ydać wszystkie Przewagi (minimalnie 1), by wzbudzić w sobie Niena— uiść wobec przeciwników w walce wręcz. Jeżeli stworzenie zebrało przynajmniej 3 Przewagi, może \"dać wszystkie Przewagi, by wpaść w Szal Bojo•uy. Patrz: strona 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Głupi": {
+    "randomPool": false,
+    "description": "stworzenie nie jest całkiem pozbawione samoświadomości (a zatem nie ma cechy Zwierzęcy), jest głupie.Jeśli znajduje się w pobliżu dowolnych sojuszników, którzy nie mają cechy Giupi, stwór prowadzony jest przez sojuszników i nic się nie dzieje. W innym przypadku stwór musi zdać Łatwy (+40) Test na początku każdej Rundy, inaczxj staje się bardzo zdewrientowany.Jeśli coś takiego nastąpi, stwór zacznie się ślinić, może usiądzie w miejscu albo będzie dłubał w nosie. Niewiele z niego pożytku i w tej Turze ff•aci Ruch oraz Akcję.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Groza (wartość)": {
+    "randomPool": false,
+    "description": "Stworzenie w sposób nadnaturalny wzbudza mrożącą krew w żyłach Grozę w innych istotach. Poziom Grozy równy jest podanej wartości. Patrz: strona 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Konstrukt": {
+    "randomPool": false,
+    "description": "Stworzenie jest konstruktem z magii, całkiem bezrozumnym i spajanym przez magiczne więzy. Nie ma Cech Inteligencja, Siła Woli ani Ogłada i nigdy nie musi ich testować. Jeśli brakuje czarodzieja, który by je kontrolował, albo stworzenie nie posiada cechy Terytorialny, wałęsa się bezmyślnie, podążając za nurtami przenikającej otoczenie magii. Gdy trzeba obliczyć Żywotność stwora i wmagane jest określenie Bonusu z Siły Woli, użyj jego Bonusu z Siły. Wszystkie ataki stworzenia są Magiczne. Kwasowa Krew Krew stworzenia jest żrąca. Za każdym razem, gdy zostanie ono ranione, tryska z niego krew i wszystkie związane z nim walką cele dostają 1k10 Ran. Są one normalnie obniżane przez Bonus z Wytrzymałości i Punkty Pancerza, ale wynoszą minimum l.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Jad (poziom Trudności)": {
+    "randomPool": false,
+    "description": "Ataki stworzenia są zatrute lub jadowite. Przeciwnicy, którym zadało ono Rany, otrzymują Stan Zatrucie. Jeśli nie jest podany poziom Trudności uniknięcia efektów jadu, domyślnie jest on Wymagający. Patrz: strona 169.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Latanie (wartość)": {
+    "randomPool": false,
+    "description": "Gdy stworzenie wykonuje Ruch, może przelecieć tyle metrów, ile wynosi podana wartość. Lecąc, ignoruje wszelkie przeszkody terenowe i inne oraz postaci. Pod koniec ruchu musi zdecydować, czy wyląduje, czy będzie kontynuować lot. Może w ramach tego ruchu wykonać Szarżę. Jeśli na początku swojej Tury leci, musi \"brać jako Ruch Latanie. Jeśli nie jest w stanie tego zrobić, MG decyduje, jak daleko stworzenie upadnie (patrz strona 166). Biorąc stworzenie na cel, zmierz odległość horyzontalną jak normalnie, a następnie zwiększ dystans 0 1 poziom. Zatem strzał na Dalekim zasięgu stanie się strzałem na Bardzo dalekim zasięgu. Natomiast jeśli był to Bardzo daleki zasięg, stworzenia nie można dosięgnąć strzałem. Lecąc, stworzenie dostaje karę -20 do wszystkich prób walki dystansowej, ponieważ nurkuje w powietrzu i zatacza kręgi.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Lęk (Obiekt)": {
+    "randomPool": false,
+    "description": "Stworzenie odczuwa Strach (O) przy spotkaniu z Obiektem. Patrz: zasady Strachu na stronie 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Lodowaty Uścisk": {
+    "randomPool": false,
+    "description": "Dotyk stworzenia mrozi dusze wrogów. Kosztem 2 Przewag i swojej Akcji stworzenie może podjąć Test Przeciwstawny Walka Wręcz/ Broń Biała albo Unik. Jeśli wygra, jego cel traci punktów Zywotności, których nie zmniejszają Bonus z Wytrzymałości ani Punkty Pancerza. Ten atak jest Magiczny.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Macki (wartość)": {
+    "randomPool": false,
+    "description": "Stworzenie ma macki w liczbie Dostaje jeden Darmowy Atak na mackę. Atak kanej macki zadaje tyle Obrażxń, ile wynosi podana war toŚĆ — zawiera już ona Bonus z Siły stworzenia. Jeśli atak zada Obrażenia, może ponadto dać przeciwnikowi Stan Pochwycenie, co zapoczątkowuje Chwyt celu przez daną mackę. Jeśli macka wykonuje Chwyt, aby rozstrzygnąć jego wynik, użyj Darmowego Ataku macki zamiast wykorzystywania Akcji stwora (patrz strona 338).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Magiczny": {
+    "randomPool": false,
+    "description": "Stworzenie spowite jest magią. Wszystkie jego ataki liczą się jako Magiczne, co oznacza, że może ranić istoty wrażliwe tylko na ataki magiczne.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Mieszkaniec Lasu": {
+    "randomPool": false,
+    "description": "Stworzenie jest w swoim żywiole w lesie. W zalesionym terenie dodaje Bonus ze Zwinności do PS wszystkich Testów Wspinaczki i Skradania.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Mutacja": {
+    "randomPool": false,
+    "description": "Stworzenie zostało „pobłogosławione” mutacją. Wykonaj dla niego rzut w Tabeli Spaczenia Fizycznego na stronie 184.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Nie Czuje Bólu": {
+    "randomPool": false,
+    "description": "Stworzenie nie odczuwa bólu i może nie zwracać na niego uwagi. Wszelkie kary z Ran Krytycznych są ignorowane, o ile nie są Amputacjami. Stworzenie wciąż dostaje odpowiednie Stany jak normalnie. Nie do Zdarcia Bez względu na to, jak mocno obrywa stworzenie, wciąż się podnosi. Wszystkie Rany Krytyczne, których wnikiem nie jest śmierć, mogą zostać \"leczone; \"starczy połączyć potrzebne części ciała w odpowiednich miejscach, może unieruchamiając je klamrami lub dużymi kołkami, a stwór zaraz będzie gotowy funkcjonować dalej. Nawet „śmierć\" można „wyleczyć\", jeśli do ciała zostaną przymocowane odpowiednie części takie jak stracona głowa. Jeśli nastąpi zgon, a wszystkie części ciała będą na swoim miejscu, stworzenie może uykonywać po swojej śmierci Wymagający (+0) Test Odporności z PS wynoszącym 6 na początku każdej Rundy (przez tyle Rund, ile wynosi jego Bonus z Wytrzymałości). Jeśli Test jest udany, stworzenie z charkotem budzi się do życia z 1 punktem Zywotności.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Nienawiść (Obiekt)": {
+    "randomPool": false,
+    "description": "Stworzenie naprawdę nienawidzi Obiektu. Patrz: zasady Nienawiści na stronie 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Niestabilny": {
+    "randomPool": false,
+    "description": "Ciało stworzenia spaja plugawa magia, która staje się niestabilna w świecie materialnym. Gdy stworzenie kończy Rundę związane walką z przeciwnikiem o wyższej Przewadze, zostaje odepchnięte, a wiążąca go magia słabnie. Otrzymuje tyle Ran, ile wynosi różnica Przewag. Zatem jeśli stworzenie miało 1 Przewagę, a jego przeciwnik 3, stworzenie otrzyma 2 Rany. Jeśli stworzenie kiedykolwiek osiągnie O Ran, spajająca je magia rozprasza się i stwór „umiera\".",
+    "source": "Podręcznik podstawowy"
+  },
+  "Niewrażliwość (rodzaj)": {
+    "randomPool": false,
+    "description": "Stworzenie jest całkowicie niewrażliwe na określonego rodzaju Obrażenia, takie jak od trucizny, magii lub elektryczności. Wszelkie Obrażenia tego rodzaju, włącznie z Ranami Krytycznymi, są ignorowane.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Niewrażliwość na Psychologię": {
+    "randomPool": false,
+    "description": "Stworzenie jest odważne, nadzwyczajnie głupie albo po prostu dało się ponieść chwili. Dzięki temu zupełnie się nie boi. Ignoruje zasady Psychologii. Patrz: strona 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Ochrona (wartość)": {
+    "randomPool": false,
+    "description": "Stworzenie jest magiczne, nosi specjalny talizman albo ma szczęście — niektóre ciosy po prostu go nie trafiają. Rzuć 1k10 po każdym otrzymanym ciosie. Jeśli stworzenie wyrzuci tyle, ile \"nosi podana wartość, lub więcej, cios zostaje zignorowany, nawet jeśli jest to Trafienie Krytyczne.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Odporność na Magię (wartość)": {
+    "randomPool": false,
+    "description": "Efekt wywierany przez magię na stworzenie jest ograniczony. PS dowolnego wpływającego na stworzenie czaru zmniejszany jest o podaną wartość. Zatem Odporność na Magię 2 zmniejsza PS 0 2.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Ożywieniec": {
+    "randomPool": false,
+    "description": "Ożywieńcy nie są ani Żywi, ani martwi, co oznacza, że nie potrzebują powietrza, jedzenia, wody... Ta cecha używana jest najcqściej wtedy, gdy czary, cuda i inne zdolności obejmują tylko Ożywiencow",
+    "source": "Podręcznik podstawowy"
+  },
+  "Pancerz (wartość)": {
+    "randomPool": false,
+    "description": "Stworzenie chronione jest przez pancerz lub grubą skórę. Ma tyle Punktów Pancerza, ile wynosi wartość, na wszystkich Miejscach Trafień.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Petryfikujące Spojrzenie": {
+    "randomPool": false,
+    "description": "Spojrzenie stworzenia potrafi zamienić ciało w kamień. W ramach swojej Akcji stworzenie może wydać wszystkie Przewagi, by użyć spojrzxnia (minimalnie l). Stworanie \"konuje Test Przeciwstawny Umiejętności Strzeleckie/lnicjatywa, dodając 1 PS za każdą wydaną Przxwagę. Przeciwnik dostaje 1 Stan Oszołomienie za kane 2 PS, o które wygrało stworzenie. Jeśli stworzenie wygra co najmniej 0 6 PS, jego cel zostaje nieodwracalnie zamieniony w kamień. Jeśli cel potrafi rzucać czary, można wykonać Test Przeciwstawny z Umiejętnością Język (Magiczny) zamiast Inicjatywy, co reprezentuje rzucanie przez cel kontr zaklęcia.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Płochliwy": {
+    "randomPool": false,
+    "description": "Stworzenie łatwo płoszy się z powodu magii lub donośnych odgłosów — dostaje wtedy +3 Stany Panika.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Regeneracja": {
+    "randomPool": false,
+    "description": "Stworzenie leczy się w niezwykłym tempie. Nawet jego odcięte części ciała mogą odrastać. Na początku każdej Rundy, o ile pozostało mu ponad O Zywotności, stworzenie automatycznie regeneruje 1k10 punktów Zywotności. Jeśli pozostało mu O Zywotności, regeneruje jedną Ranę po wyrzuceniu 8+ na 1k10. Jeśli kiedykolwiek podczas regeneracji wyrzuci 10, może w pełni zregenerować także Ranę Krytyczną, anulując w ten sposób wszelkie powiązane z nią kary i Stany. Poza tym wszelkie Rany Krytyczne lub Rany spowodowane przez ogień nie mogą być regenerowane i powinny być zapisywane oddzielnie.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Rogi +Obrażenia (typ)": {
+    "randomPool": false,
+    "description": "Stworzenie ma rogi lub inne ostre wyrostki (jeśli jego Cecha Stworzenia Rogi reprezentuje coś innego, będzie to określone w nawiasie). Gdy stworzenie zyskuje Przewagę na skutek Szarżowania, może wykonać Darmowy Atak swoimi Rogami. Taki atak przeprowadzany jest jak normalnie: wykorzystaj podaną wartość Obrażeń (Bonus z Siły stworzenia jest już wliczony).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Rozmiar (różne)": {
+    "randomPool": false,
+    "description": "Ta cecha reprezentuje stworzenia, których rozmiar różni się od standardowego w grze (czyli mniej więcej wielkości człowieka). Jest siedem poziomów Rozmiaru — od drobnego po monstrualny. Przykłady Drobny gołąb, motyl, mysz Niewielki jastrząb, kot, ludzkie niemowlę ludzkie dziecko, olbrzymi szczur, niziołek Mały Średni człowiek, elf, krasnolud Duży koń, 0gr, troll gryf, mantikora, wywerna Wielki Monstrualny olbrzym, smok, większy demon Modyfikatory Rozmiaru w walce Jeśli stwór jest większy: Broń stwora dostaje Zaletę Przebijająca, jeśli stwór jest o jeden poziom większy oraz Zaletę Druzgocząca, jeśli jest większy o dwa lub więcej poziomów. Stwór mnoży wszelkie zadawane Obrażenia tyle razy, ile poziomów jest większy (zatem 2 poziomy =x2, 3 poziomy =x3 i tak dalej); to mnożenie \"konywane jest po zastosowaniu wszystkich modyfikatorów. Wszystkie udane ataki przeciwko mniejszym celom aktywują zasadę Śmiertelny cios — nie tylko ciosy, które zadały srnłerc (patrz strona 160). Jeśli stwór jest mniejszy: Stwór dostaje premię +10 do trafienia. Obrona przed dużymi stworzeniami Dostajesz karę -2 do PS za każdy poziom, o który przerasta cię przeciwnik, gdy używasz Umiejętności Broń Biała do obrony podczas Testu Przeciwstawnego. Zalecamy wykonywanie uników przed olbrzymem wymachującym drzewem zamiast parowania jego ciosów! Przeciwstawna Siła Jeśli jedno stworzenie jest 0 2 lub więcej poziomów większe, wygrywa automatycznie Testy Przeciwstawne Siły (i podobne). Jeśli jedno stworzenie jest 0 1 poziom większe, mniejszy stwór, aby wygrać Test Przeciwstawny, musi uzyskać Fuksa. Gdy tak się stanie, PS porównywane są jak normalnie. Wszystkie pozostałe wyniki oznaczają zwycięstwo większego stworzenia. Korzystanie z rozmiaru: Jeśli chcesz wykorzystać Rozmiar, by powiększyć stwora — na przykład przekształcając olbrzymiego pająka w gigantycznego pająka — zwiększ Siłę i Wytrzymałość 0 10 oraz zmniejsz Zwinność o —5 za każdy poziom Rozmiaru, o który powiększasz stworzenie. Wykonaj tę procedurę odwrotnie, jeśli chcesz zmniejszyć stwora. Ruch w walce: Stworzenie, które jest większe, ignoruje konieczność \"konania Odwrotu, jeśli zamierza opuścić walkę w zwarciu; zamiast tego spycha z drogi mniejszych walczących, przemieszczając się tam, gdzie chce. Strach i Groza Jeśli stworzenie jest postrzegane jako agresywne, wywołuje Strach w dowolnej istocie mniejszej od niego oraz Grozę w dowolnej istocie mniejszej o dwa lub więcej poziomów. Siła Strachu lub Grozy równa się różnicy poziomów Rozmiarów. Zatem jeśli stwór jest duży, a jego przeciwnik mały, może wywoływać Grozę 2. Patrz: strona 190. Tupnięcie: Stworzenia, które są większe od przeciwników, mogą wykonać jeden Darmowy Atak w postaci Tupnięcia, wydając 1 Przewagę. Uderzają stopą lub kopniakiem zmiatają mniejszych przeciwników z drogi. Ten atak zadaje Obrażenia równe Bonusowi z Siły stworzenia +0 i \"korzystuje Umiejętność Broń Biała (Bijatyka). Żywotność Większe stworzenia mają więcej Zywotności. Rozmiar Żywotność Drobny 1 Niewielki Bonus z Wytrzymałości (2x Bonus z Wytrzymałości) + Bonus z Siły Mały Woli Bonus z Siły + (2x Bonus z Wytrzymałości) Średni + Bonus z Siły Woli (Bonus z Siły + (2x Bonus z Wytrzymałości) Duży + Bonus z Siły woli) x2 (Bonus z Siły + (2x Bonus z Wytrzymałości) Wielki + Bonus z Siły woli) x4 (Bonus z Siły + (2x Bonus z Wytrzymałości) Monstrualny + Bonus z Siły woli) x8",
+    "source": "Podręcznik podstawowy"
+  },
+  "Rój": {
+    "randomPool": false,
+    "description": "Roje to wielkie ilości tych samych stworów działających jak jeden. Rój liczy się jako jeden stwór, który ignoruje zasady efektów psychologicznych (patrz strona 190) i może ignorować zasady Związania walką, gdy \"konuje Ruch. Jeśli rój trafi przeciwnika, aktywuje zasadę Śmiertelny cios (nawet jeśli nie zabił przeciwnika — patrz strona 160). Wszyscy przeciwnicy Związani walką z rojem automatycznie otrzymują 1 Ranę pod koniec każdej Rundy, gdy rój opada na wszystko w pobliżu. Rój ma pięć razy więcej Zywotności niż normalny okaz danego stworzenia i dostaje +10 do Walki Wręcz. Wszelkie próby strzelania do roju mają premię +40 do trafienia. Rój ignoruje wszelkie zasady Rozmiaru stworzeń.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Rzucanie Czarów (różne)": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi rzucać wszystkie zaklęcia Tradycji Magii podanej w nawiasie.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Sieć (wartość)": {
+    "randomPool": false,
+    "description": "Stworzenie może tworzyć sieci służące do łapania niebacznych wrogów. Za każdym razem, gdy stwór trafia przeciwników, dostają oni 1 Stan Pochwycenie o Sile równej podanej wartości. Patrz: strona 168.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Siłacz": {
+    "randomPool": false,
+    "description": "Stworzenie jest ciężkie i brutalne. Dostaje -1 do Szybkości, -10 do Zwinności oraz +10 do Siły i Wytrzymałości.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Skoczny": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi wysoko podskakiwać dzięki silnym kończynom, magii albo szczątkowym skrzydłom. Gdy Szarżuje lub Biegnie, podwaja swoją Szybkość i może ignorować wszelkie przeszkody terenowe oraz postacie, przeskakując nad nimi.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Skryty": {
+    "randomPool": false,
+    "description": "Stworzenie jest wyjątkowo skryte. Dodaje wartość swojego Bonusu ze Zwinności do PS wszystkich Testów Skradania.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Spaczenie Umysłu": {
+    "randomPool": false,
+    "description": "Umysł stworzenia przepełnia Chaos. Wykonaj dla niego rzut w Tabeli Zepsucia Psychicznego na stronie 185.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Spaczenie (siła)": {
+    "randomPool": false,
+    "description": "Stworzenie jest napiętnowane przez Chaos lub przepełnione mroczną magią. Siła spaczenia podana w nawiasie. Patrz: str. 182.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Staje Dęba": {
+    "randomPool": false,
+    "description": "W ramach swojego Ruchu stworzenie może wykonać atak Tupnięciem, jeśli jest większe od przeciwnika (patrz Rozmiar).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Strach (wartość)": {
+    "randomPool": false,
+    "description": "Stworzenie wywołuje nienaturalny Strach w innych istotach. Poziom Strachu równy jest podanej wartości. Patrz: strona 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Strzelanie +Obrażenia (Zasięg)": {
+    "randomPool": false,
+    "description": "Stworzenie dysponuje bronią dystansową. Broń zadaje podane Obrażenia, a jej zasięg w metrach podany jest w nawiasie.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Szał Bojowy": {
+    "randomPool": false,
+    "description": "Stworzenie może wpadać w Szal Bojowy. Patrz: strona 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Terytorialny": {
+    "randomPool": false,
+    "description": "To stworzenie strzeże określonego obszaru lub miejsca. Będzie walczyło do Śmierci w jego obronie i normalnie nie będzie Ścigało wrogów, jeśli uciekną z tego obszaru.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Tropiciel": {
+    "randomPool": false,
+    "description": "Tropiciele skutecznie śledzą swoje ofiary, zazwyczaj za pomocą węchu lub słuchu. Do wszystkich Testów Tropienia dodają PS równe swojemu Bonusowi z Inicjatywy.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Twardziel": {
+    "randomPool": false,
+    "description": "Stworzenie jest w stanie przyjąć więcej obrażeń niż większość innych istot. Zwiększ Żywotność stworzenia o wartość równą jego Bonusowi z Wytrzymałości (zastosuj to przed wszelkimi modyfikatorami Rozmiaru).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Ugryzienie +Obrażenia": {
+    "randomPool": false,
+    "description": "W swojej Turze stworzenie może wykonać Darmowy Atak, wydając I Przewagę, z Obrażeniami o podanej wartości (zawierają już one Bonus z Siły).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Upiorne Wycie": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi \"dawać mrożące krew w żyłach \"Cie, zabójcze dla tych, którzy je usłyszą. W swojej Turze stworzenie może zużyć wszystkie Przewagi (minimalnie 2), aby wydać z siebie koszmarny wrzask. Jest to Darmowy Atak. Dawid Daóo•wskl (Orde Wszystkie żywe cele w promieniu tylu metrów, ile wynosi Inicjatywa stwora, natychmiast dostają 3 Stany Ogłuszenie i odnoszą Ikl() Ran ignorujących Bonus z Wytrzymałości i Punkty Pancerza. Ponadto objęte tym efektem postacie muszą zdać Przeciętny (+20) Test Odporności, inaczej dostają Stan Panika.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Uprzedzenie (Obiekt)": {
+    "randomPool": false,
+    "description": "Stworzenie po prostu nie lubi Obiektu. Patrz: zasady Uprzedzenia na stronie 190.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Wampiryczny": {
+    "randomPool": false,
+    "description": "Stworzenie żywi się krwią i czerpie z tego wielką siłę fizyczną. Za każdym razem, gdy wykona udane Ugryzienie odpowiedniego przeciwnika, leczy tyle Zywotności, ile traci jego przeciwnik. Takie picie krwi to jedyny sposób, w jaki może się leczyć.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Widzenie w Ciemności": {
+    "randomPool": false,
+    "description": "Stworzenie ma Talent Widzenie w Ciemności. Patrz: strona 145.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Widzenie w Mroku": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi widzieć w ciemności jak w świetle dziennym. ojowniczy Stworzenie uwielbia zwyciężać w walce. Dopóki ma więcej Przewag niż przeciwnik, jest niewrażliwe na efekty psychologiczne.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Wrogość (Obiekt)": {
+    "randomPool": false,
+    "description": "Stworzenie naprawdę nie lubi Obiektu. Patrz: zasady Wrogości na stronie 191.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Wspinacz": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi bez wysiłku wspinać się po pionowych powierzchniach, a nawet poruszać się po suficie, gotowe opaść na niczego niespodziewającą się ofiarę. Porusza się z pełną Szybkością po dowolnej odpowiedniej powierzchni i automatycznie przechodzi wszystkie Testy Wspinaczki.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Wymiot": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi wyrzucać z siebie strumień żrących wymiocin, pokrywając przeciwników cuchnącym, na wpół strawionym Śluzem. W swojej Turze, wydając 3 Przewagi, stworzenie może wykonać Wymiot jako Darmowy Atak. Stworzenie \"biera 1 cel, który widzi w promieniu tylu metrów, ile wynosi jego Bonus z Wytrzymałości, i wmiotuje. Trafione zostają także wszystkie cele w promieniu dwóch metrów od tego celu. Stworzenie przeprowadza Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym celom). Test jest zazwyczaj Łatwy (+40) dla wymiotującego stwora ze względu na bliski dystans oraz Wymagający (+0) dla przeciwników. Wszystkie cele, które przegrały, otrzymują trafienie z Obrażeniami równymi tyle, ile I.vynosi Bonus z Wytrzymałości +4 stwora, oraz dostają Stan Oszołomiony. Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń od kwasowych wymiocin.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Wyszkolony (wyuczone umiejętności)": {
+    "randomPool": false,
+    "description": "Ta cecha reprezentuje zwierzęta, które zostały wyszkolone z użyciem Umiejętności Tresura. Umiejętności znane zwierzęciu podane są w nawiasie. Możesz tworzyć własne wyszkolone umiejętności. Aportujący: Zwierzę zostało nauczone aportowania. Normalnie jest to zarezerwowane dla psów i podobnych stworzeń. Bojowy: Zwierzę zostało przyuczone do udziału w walce i dostaje +10 do Walki Wręcz. Ponadto może ignorować Cechę Stworzenia Płochliwy w odniesieniu do głośnych dźwięków. Maskotka: Zwierzę zostało nauczone zabawiania innych. Dostaje premię +10 do odpowiednich Testów Muzyki, Sztuki lub Występów. Magiczny: Zwierzę zostało nauczone ignorowania cechy Płochliwy w odniesieniu do magii. To cecha wymagana przez czarodziejów, którzy chcą kupić konia. Pociągowy: Zwierzę zostało nauczone ciągnąć karetę, wóz, pług i tym podobne. Powracający: Zwierzę zostało nauczone powracania do domu, gdy zostanie wypuszczone lub zgubione. Stróżujący: Zwierzę zostało nauczone pozostawania w miejscu lub patrolowania okolicy jako strażnik. Uzyskuje Cechę Stworzenia Te— rytorialny. Ujarzmiony: Zwierzę zostało nauczone ignorowania swojej cechy Zwierzęcy. Dostaje 2k1() Ogłady. Wierzchowiec: Zwierzę pozwala się dosiadać. Niektóre stworzenia są wyjątkowo wojownicze i nie zaakceptują jeźdźca, który nie posiada odpowiedniej Umiejętności. Zatem jeśli chcesz dosiadać gryfa, musisz mieć Umiejętność Jeździectwo (Gryfy).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Zakażony": {
+    "randomPool": false,
+    "description": "Skóra stworzenia jest pełna gryzących pcheł lub czegoś podobnego. Wszyscy przeciwnicy dostają karę -10 do trafienia w walce w zwarciu, ponieważ pasożyty rozpraszają ich i irytują.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Zaraza": {
+    "randomPool": false,
+    "description": "Stworzenie (albo jego broń) przenosi paskudną infekcję. Jeśli spowoduje utratę Zywotności żyjącego przeciwnika, musi on zdać Łatwy (+40) Test Odporności, inaczej nabawi się Ropiejącej Rany (patrz strona 187).",
+    "source": "Podręcznik podstawowy"
+  },
+  "Ziemnowodny": {
+    "randomPool": false,
+    "description": "Stworzenie jest w swoim żywiole w wodzie. Może dodać swój Bonus ze Zwinności do PS wszystkich testów Pływania i poruszać się w wodzie z pełną Szybkością.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Zimnokrwisty": {
+    "randomPool": false,
+    "description": "Stworzenie jest zimnokrwiste i nie działa pochopnie. Może odwrócić wszystkie nieudane Testy Siły Woli.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Zionięcie +Obrażenia (typ)": {
+    "randomPool": false,
+    "description": "Stworzenie posługuje się zionięciem jako potężną bronią. W swojej Turze, kosztem 2 Przewag, może aktywować Zionięcie jako Darmowy Atak. Wybierz 1 cel, który stworzenie widzi w promieniu 20 + Bonus z Wytrzymałości metrów. Trafione zostają wszystkie postacie wokół tego celu w promieniu tylu metrów, ile wynosi Bonus z Siły, podobnie jak wszystkie postacie znajdujące się między stworzeniem a celem. Przeprowadź Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym cełom). Każdy cel, który przegrał Test, otrzymuje trafienie zadające wskazaną wartość Obrażeń. Co więcej, jeśli przy Cesze Stworzenia wmieniony jest jeden z opisanych niżej typów zionięcia, zastosuj wskazane zasady. • Dym: Obszar wypełnia się dymem, który zasłania pole widzenia na tyle Rund, ile wynosi Bonus z Wytrzymałości. • Elektryczność: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Oszołomienie. • Kwas: Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń. • Ogień: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Podpalenie. • Trucizna: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Zatrucie. • Zimno: Cele dostają jeden Stan Oszołomiony za każde pełne 5 odniesionych Ran (minimalnie l). Stworzenie jest odporne na własne Zionięcie. Ten atak jest Magiczny.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Zwierzęcy": {
+    "randomPool": false,
+    "description": "Stworzenie jest nierozumne albo nie potrafi posługiwać się mową. Unika ognia i dostaje Stan Panika, jeśli zetknie się z ogniem. W obronie używa wyłącznie Umiejętności Unik. Jeśli straci ponad połowę Zywotności, spróbuje uciec, o ile nie chroni swoich młodych, nie jest osaczone lub nie ma Cechy Stworzenia Terytorial— ny. W takim przypadku wpada w Szał Bojowy (patrz strona 190). Zwierzęce stworzenia nie mają Cechy Ogłada.",
+    "source": "Podręcznik podstawowy"
+  },
+  "Żarłoczny": {
+    "randomPool": false,
+    "description": "Stworzenie nieustannie łaknie Świeżego mięsa. Jeśli zabije lub unieruchomi żywego przeciwnika (albo natknie się na świeże ciało), musi zdać Przeciętny (+20) Test Siły Woli, inaczej zaczyna ucztować, tracąc następną Akcję i Ruch.",
+    "source": "Podręcznik podstawowy"
   }
 }

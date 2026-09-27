@@ -1,0 +1,5308 @@
+{
+ "creatures": [
+  {
+   "name": "Wielki jeleń",
+   "source": "Imperialny Zwierzyniec",
+   "page": 10,
+   "stats": {
+    "Sz": 7,
+    "WW": 45,
+    "US": null,
+    "S": 45,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 20,
+    "SW": 40,
+    "Ogd": null,
+    "Żyw": 32
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Poroże)",
+     "value": 55
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Poroże) +8",
+    "Długi Krok",
+    "Rogi (Poroże) +8",
+    "Rozmiar (Duży)",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Błogosławiony (Taal)",
+    "Niewrażliwość (Trucizna)",
+    "Regeneracja",
+    "Wrogość (Węże)"
+   ],
+   "abilities": [
+    {
+     "name": "Ostrza Taala",
+     "description": "Wielki jeleń walczy porożem tak, jakby miało ono Zalety Nadziewające i Przekłuwające."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne"
+  },
+  {
+   "name": "Cień Rzeki",
+   "source": "Imperialny Zwierzyniec",
+   "page": 10,
+   "stats": {
+    "Sz": 9,
+    "WW": 55,
+    "US": null,
+    "S": 55,
+    "Wt": 50,
+    "I": 40,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 40,
+    "SW": 55,
+    "Ogd": 60,
+    "Żyw": 40
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Poroże)",
+     "value": 75
+    }
+   ],
+   "talents": [
+    "Posłuch u Zwierząt"
+   ],
+   "traits": [
+    "Błogosławiony (Kurnous [Taal])",
+    "Broń (Poroże) +10",
+    "Cuda (Kurnous [Taal])",
+    "Długi Krok",
+    "Magiczny",
+    "Niewrażliwość na Psychologię",
+    "Ochrona 7+",
+    "Rogi (Poroże) +10",
+    "Rozmiar (Duży)",
+    "Skryty",
+    "Srogi (2)",
+    "Widzenie w Mroku"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Ostrza Kurnousa",
+     "description": "Cień Rzeki walczy porożem tak, jakby miało ono Zalety Nadziewające, Przekłuwające i Szybkie."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne",
+   "unique": true
+  },
+  {
+   "name": "Pająk arachnarok",
+   "source": "Imperialny Zwierzyniec",
+   "page": 13,
+   "stats": {
+    "Sz": 5,
+    "WW": 50,
+    "US": 35,
+    "S": 55,
+    "Wt": 45,
+    "I": 20,
+    "Zw": 40,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 45,
+    "Ogd": 10,
+    "Żyw": 136
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Kły) +9",
+    "Jad",
+    "Mieszkaniec Lasu",
+    "Pancerz 3",
+    "Rozmiar (Monstrualny)",
+    "Sieć (50)",
+    "Ugryzienie +9",
+    "Widzenie w Mroku",
+    "Wspinacz"
+   ],
+   "optional": [
+    "Kwasowa Krew",
+    "Niewrażliwość na Psychologię",
+    "Skryty"
+   ],
+   "abilities": [
+    {
+     "name": "Zatruta Sieć",
+     "description": "Kiedy wróg zostaje Pochwycony przez sieci arachnaroka, otrzymuje również Stan Zatrucie."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Pająk"
+  },
+  {
+   "name": "Drakwaldzki człekołap (olbrzymi pająk)",
+   "source": "Imperialny Zwierzyniec",
+   "page": 13,
+   "stats": {
+    "Sz": 5,
+    "WW": 40,
+    "US": 30,
+    "S": 25,
+    "Wt": 35,
+    "I": 20,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 20,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 22
+   },
+   "skills": [
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 60
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Kły) +6",
+    "Jad (Przeciętny)",
+    "Mieszkaniec Lasu",
+    "Pancerz 1",
+    "Rozmiar (Duży)",
+    "Sieć (40)",
+    "Ugryzienie +6",
+    "Widzenie w Ciemności",
+    "Wspinacz",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Wielki)",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Mściwy",
+     "description": "Drakwaldzkie człekołapy czują Nienawiść (Poprzedni wrogowie)."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Pająk"
+  },
+  {
+   "name": "Leśny goblin",
+   "source": "Imperialny Zwierzyniec",
+   "page": 15,
+   "stats": {
+    "Sz": 4,
+    "WW": 25,
+    "US": 35,
+    "S": 30,
+    "Wt": 30,
+    "I": 20,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 20,
+    "Ogd": 20,
+    "Żyw": 11
+   },
+   "skills": [],
+   "talents": [
+    "Woltyżerka"
+   ],
+   "traits": [
+    "Broń (Prymitywna włócznia) +7",
+    "Jad (Przeciętny)",
+    "Lęk (Elfy)",
+    "Mieszkaniec Lasu",
+    "Pancerz 1",
+    "Strzelanie (Krótki łuk) +5 (20)",
+    "Widzenie w Ciemności",
+    "Wrogość (Zielonoskórzy)"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Pożyczona Odwaga",
+     "description": "Leśne gobliny napotkane z dala od swoich plemion zawsze będą jechać na olbrzymich pająkach, najpewniej robiąc zwiad lub wypad grabieżczy w grupie liczącej od 3 do 10 jeźdźców. Leśne gobliny znajdujące się na grzbietach pająków nie odczuwają efektów Lęku (Elfy)."
+    }
+   ],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Zielonoskóry"
+  },
+  {
+   "name": "Leśny goblin szaman",
+   "source": "Imperialny Zwierzyniec",
+   "page": 15,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": 45,
+    "S": 30,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 40,
+    "SW": 30,
+    "Ogd": 30,
+    "Żyw": 14
+   },
+   "skills": [
+    {
+     "name": "Modlitwa",
+     "value": 60
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Błogosławiony (Pajęczy Bóg)",
+    "Broń (Kij Pajęczego Boga) +8",
+    "Cuda (Pajęczy Bóg)",
+    "Jad (Przeciętny)",
+    "Mieszkaniec Lasu",
+    "Nie Czuje Bólu",
+    "Niewrażliwość (Trucizna)",
+    "Strach (1)",
+    "Widzenie w Ciemności",
+    "Wrogość (Zielonoskórzy)"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Nie Do Końca Obecny",
+     "description": "Szaman postrzega świat przez toksyczną mgłę wywołaną ukąszeniami pająków i halucynogenami. Zaatakowany nie ma problemu z koncentracją; w innych sytuacjach musi zdać Łatwy (+40) Test Siły Woli na początku Rundy albo traci swój Ruch i Akcję w tej Turze."
+    },
+    {
+     "name": "Błogosławieństwa Pajęczego Boga",
+     "description": "Bitwy, Dzikości, Łowów, Odwagi, Szczęścia, Wdzięku"
+    }
+   ],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Zielonoskóry"
+  },
+  {
+   "name": "Stegadon",
+   "source": "Imperialny Zwierzyniec",
+   "page": 79,
+   "stats": {
+    "Sz": 6,
+    "WW": 55,
+    "US": null,
+    "S": 63,
+    "Wt": 82,
+    "I": 15,
+    "Zw": 15,
+    "Zr": null,
+    "Int": 28,
+    "SW": 65,
+    "Ogd": 10,
+    "Żyw": 112
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +11",
+    "Bagnołaz",
+    "Broń (Wielka masa) +12",
+    "Nie Czuje Bólu",
+    "Niewrażliwość na Psychologię",
+    "Pancerz (6)",
+    "Rogi +12",
+    "Rozmiar (Wielki)",
+    "Srogi (2)",
+    "Staje Dęba",
+    "Ugryzienie +10",
+    "Widzenie w Ciemności",
+    "Zimnokrwisty"
+   ],
+   "optional": [
+    "Rozmiar (Monstrualny)",
+    "Terytorialny",
+    "Twardziel",
+    "Wyszkolony (Bojowy, Stróżujący, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Niepowstrzymana Szarża",
+     "description": "Stegadon zyskuje +3 Przewagi, kiedy wykonuje Szarżę."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Gad olbrzymi"
+  },
+  {
+   "name": "Rogaty",
+   "source": "Imperialny Zwierzyniec",
+   "page": 80,
+   "stats": {
+    "Sz": 7,
+    "WW": 42,
+    "US": null,
+    "S": 42,
+    "Wt": 45,
+    "I": 25,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 15,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Ugryzienie) +8",
+    "Długi Krok",
+    "Pancerz (2)",
+    "Rogi +9",
+    "Rozmiar (Duży)",
+    "Terytorialny",
+    "Zimnokrwisty",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Bagnołaz",
+    "Głupi",
+    "Mieszkaniec Lasu",
+    "Skryty",
+    "Wojowniczy",
+    "Wyszkolony (Bojowy, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Gad olbrzymi"
+  },
+  {
+   "name": "Karnozaur",
+   "source": "Imperialny Zwierzyniec",
+   "page": 81,
+   "stats": {
+    "Sz": 7,
+    "WW": 65,
+    "US": null,
+    "S": 75,
+    "Wt": 55,
+    "I": 20,
+    "Zw": 20,
+    "Zr": null,
+    "Int": 25,
+    "SW": 55,
+    "Ogd": null,
+    "Żyw": 88
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +11",
+    "Broń (Zęby) +13",
+    "Długi Krok",
+    "Pancerz (4)",
+    "Rozmiar (Wielki)",
+    "Srogi (2)",
+    "Ugryzienie +13",
+    "Widzenie w Ciemności",
+    "Wojowniczy",
+    "Zimnokrwisty",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Czempion",
+    "Mieszkaniec Lasu",
+    "Nie Czuje Bólu",
+    "Rozmiar (Monstrualny)",
+    "Tropiciel",
+    "Twardziel",
+    "Wyszkolony (Bojowy, Stróżujący, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Krwawy Szał",
+     "description": "Kiedy karnozaur zada Ranę w walce, natychmiast wpada w Szał Bojowy do czasu, aż wszyscy wrogowie w zasięgu jego zmysłów zostaną zabici."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Gad olbrzymi"
+  },
+  {
+   "name": "Dziki kot",
+   "source": "Imperialny Zwierzyniec",
+   "page": 82,
+   "stats": {
+    "Sz": 6,
+    "WW": 41,
+    "US": null,
+    "S": 43,
+    "Wt": 32,
+    "I": 45,
+    "Zw": 55,
+    "Zr": null,
+    "Int": 10,
+    "SW": 44,
+    "Ogd": null,
+    "Żyw": 14
+   },
+   "skills": [
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 75
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Pazury) +7",
+    "Długi Krok",
+    "Mieszkaniec Lasu",
+    "Płochliwy",
+    "Tropiciel",
+    "Ugryzienie +6",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Magiczny",
+    "Mutacja",
+    "Ochrona (9+)",
+    "Wyszkolony (Ujarzmiony)",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [
+    {
+     "name": "Zakłócenie",
+     "description": "W obecności stworzenia z Cechą Zakłócenie, istoty z Cechą Niestabilny porównują na koniec Rundy ilość swoich Przewag względem przeciwnika, jakby miały ich o 2 mniej. Ta Cecha nie powoduje faktycznej utraty Przewag."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Kot"
+  },
+  {
+   "name": "Lew bojowy z Chrace",
+   "source": "Imperialny Zwierzyniec",
+   "page": 82,
+   "stats": {
+    "Sz": 8,
+    "WW": 55,
+    "US": null,
+    "S": 52,
+    "Wt": 48,
+    "I": 38,
+    "Zw": 42,
+    "Zr": null,
+    "Int": 35,
+    "SW": 50,
+    "Ogd": 30,
+    "Żyw": 36
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Pazury)",
+     "value": 65
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 62
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Pazury) +10",
+    "Długi Krok",
+    "Furia",
+    "Pancerz (2)",
+    "Rozmiar (Duży)",
+    "Skryty",
+    "Srogi (2)",
+    "Tropiciel",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Czempion",
+    "Magiczny",
+    "Nie Czuje Bólu",
+    "Twardziel"
+   ],
+   "abilities": [
+    {
+     "name": "Dar Rahagry",
+     "description": "Naturalne bronie lwa bojowego posiadają Zalety Szybka i Przekłuwająca."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Kot"
+  },
+  {
+   "name": "Lewiatan",
+   "source": "Imperialny Zwierzyniec",
+   "page": 85,
+   "stats": {
+    "Sz": 4,
+    "WW": 65,
+    "US": null,
+    "S": 60,
+    "Wt": 68,
+    "I": 30,
+    "Zw": 14,
+    "Zr": 10,
+    "Int": 10,
+    "SW": 44,
+    "Ogd": 1,
+    "Żyw": 176
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Kleszcze) +12",
+    "Długi Krok",
+    "Furia",
+    "Pancerz (6)",
+    "Rozmiar (Monstrualny)",
+    "Srogi (2)",
+    "Ugryzienie +11",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Nie Czuje Bólu",
+    "Odporność na Magię"
+   ],
+   "abilities": [
+    {
+     "name": "Okrutne Kleszcze",
+     "description": "Wszystkie ataki kleszczami lewiatana mają Zaletę Przekłuwające."
+    },
+    {
+     "name": "Skorupiak",
+     "description": "Lewiatan potrafi oddychać pod wodą i porusza się w niej z Szybkością 8."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny"
+  },
+  {
+   "name": "Il Potente Granchio",
+   "source": "Imperialny Zwierzyniec",
+   "page": 85,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": null,
+    "S": 70,
+    "Wt": 73,
+    "I": 30,
+    "Zw": 14,
+    "Zr": 15,
+    "Int": 20,
+    "SW": 54,
+    "Ogd": 1,
+    "Żyw": 208
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Kleszcze)",
+     "value": 80
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Kleszcze) +13",
+    "Długi Krok",
+    "Nie Czuje Bólu",
+    "Niewrażliwość na Psychologię",
+    "Pancerz (8)",
+    "Rozmiar (Monstrualny)",
+    "Srogi (2)",
+    "Ugryzienie +12",
+    "Widzenie w Mroku",
+    "Żarłoczny"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Najokrutniejsze Kleszcze",
+     "description": "Ataki kleszczami Il Potente Granchio posiadają Zalety Rąbiące i Przekłuwające."
+    },
+    {
+     "name": "Skorupiak",
+     "description": "Potrafi oddychać pod wodą i porusza się w niej z Szybkością 8."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny",
+   "unique": true
+  },
+  {
+   "name": "Syrena",
+   "source": "Imperialny Zwierzyniec",
+   "page": 86,
+   "stats": {
+    "Sz": 2,
+    "WW": 35,
+    "US": null,
+    "S": 49,
+    "Wt": 33,
+    "I": 42,
+    "Zw": 49,
+    "Zr": 35,
+    "Int": 30,
+    "SW": 52,
+    "Ogd": 35,
+    "Żyw": 15
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Pazury) +7",
+    "Widzenie w Mroku",
+    "Ziemnowodny"
+   ],
+   "optional": [
+    "Dekoncentrujący",
+    "Furia",
+    "2× Macki +5",
+    "Nie Czuje Bólu",
+    "Pancerz (1-3)",
+    "Strach (1-2)",
+    "Ugryzienie"
+   ],
+   "abilities": [
+    {
+     "name": "Syrenia Pieśń",
+     "description": "Ci, którzy słyszą śpiew syreny, muszą wykonać Problematyczny (–10) Test Opanowania albo zostaną oczarowani i nie będą w stanie podjąć innego działania oprócz poruszania się w kierunku źródła pieśni – zyskują Stan Utrata Przytomności (choć są przytomni). Ci, którzy zatkają uszy, wykonują jedynie Łatwy (+40) Test Opanowania. Oczarowana ofiara może natychmiast ponowić Test, jeśli zostanie zaatakowana."
+    },
+    {
+     "name": "Zrodzona w Wodzie",
+     "description": "Syreny potrafią oddychać pod wodą i poruszają się w niej z Szybkością 8."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny"
+  },
+  {
+   "name": "Wężożmij",
+   "source": "Imperialny Zwierzyniec",
+   "page": 88,
+   "stats": {
+    "Sz": 6,
+    "WW": 62,
+    "US": null,
+    "S": 65,
+    "Wt": 60,
+    "I": 45,
+    "Zw": 26,
+    "Zr": null,
+    "Int": 15,
+    "SW": 38,
+    "Ogd": 10,
+    "Żyw": 84
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +13",
+    "Broń (Najeżona kłami paszcza) +11",
+    "Nie Czuje Bólu",
+    "Niewrażliwość na Psychologię",
+    "Pancerz (3)",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Srogi (2)",
+    "Ugryzienie (Najeżona kłami paszcza) +11",
+    "Widzenie w Mroku",
+    "Ziemnowodny",
+    "Żarłoczny"
+   ],
+   "optional": [
+    "Rozmiar (Monstrualny)",
+    "Zaraza"
+   ],
+   "abilities": [
+    {
+     "name": "Zguba Wielorybów",
+     "description": "Wszystkie ataki najeżoną kłami paszczą wężożmija posiadają Cechę Jad (Problematyczny)."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny"
+  },
+  {
+   "name": "Ostrokolcy smok",
+   "source": "Imperialny Zwierzyniec",
+   "page": 90,
+   "stats": {
+    "Sz": 5,
+    "WW": 48,
+    "US": 38,
+    "S": 62,
+    "Wt": 76,
+    "I": 34,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 10,
+    "SW": 44,
+    "Ogd": 5,
+    "Żyw": 96
+   },
+   "skills": [],
+   "talents": [
+    "Walka w Ciasnocie"
+   ],
+   "traits": [
+    "Broń (Sierpowate pazury) +11",
+    "Pancerz (5)",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Srogi (1)",
+    "Ugryzienie +11",
+    "Widzenie w Mroku",
+    "Wspinacz"
+   ],
+   "optional": [
+    "Ochrona (8+)",
+    "Spaczenie (Pomniejsze)",
+    "Zaraza"
+   ],
+   "abilities": [
+    {
+     "name": "Ostre Łuski",
+     "description": "Za każdym razem, kiedy ostrokolcy smok jest atakowany przez przeciwnika Związanego Walką, ten przeciwnik otrzymuje 1k10 Obrażeń w losowe Miejsce Trafienia, pomniejszonych o Bonus z Wytrzymałości oraz Punkty Pancerza, minimum 1 Ranę."
+    },
+    {
+     "name": "Topiący Skały",
+     "description": "Ugryzienie ostrokolcego smoka posiada Zaletę Przekłuwające oraz Cechę Jad."
+    },
+    {
+     "name": "Wściekła Furia",
+     "description": "Kiedy ostrokolcy smok zostaje ranny w walce, natychmiast wpada w Szał Bojowy do końca starcia; w każdej Rundzie otrzymuje dwie Akcje Darmowe w postaci dodatkowego ataku wręcz."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Fantasma",
+   "source": "Imperialny Zwierzyniec",
+   "page": 91,
+   "stats": {
+    "Sz": 5,
+    "WW": 58,
+    "US": 48,
+    "S": 62,
+    "Wt": 76,
+    "I": 44,
+    "Zw": 63,
+    "Zr": null,
+    "Int": 35,
+    "SW": 44,
+    "Ogd": 5,
+    "Żyw": 96
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Sierpowate Pazury)",
+     "value": 73
+    },
+    {
+     "name": "Skradanie (Podziemia)",
+     "value": 68
+    }
+   ],
+   "talents": [
+    "Atak Wyprzedzający",
+    "Cień 2",
+    "Walka w Ciasnocie"
+   ],
+   "traits": [
+    "Broń (Sierpowate pazury) +11",
+    "Ochrona (8+)",
+    "Pancerz (5)",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Srogi (2)",
+    "Ugryzienie +11",
+    "Widzenie w Mroku",
+    "Wspinacz",
+    "Zionięcie (Koszmary) +12"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Ostre Łuski",
+     "description": "Zobacz Ostrokolcy smok."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Nieumarły rycerz (upiór)",
+   "source": "Imperialny Zwierzyniec",
+   "page": 93,
+   "stats": {
+    "Sz": 4,
+    "WW": 50,
+    "US": 35,
+    "S": 45,
+    "Wt": 45,
+    "I": 38,
+    "Zw": 30,
+    "Zr": 20,
+    "Int": 35,
+    "SW": 50,
+    "Ogd": 30,
+    "Żyw": 17
+   },
+   "skills": [],
+   "talents": [
+    "Mistrz Walki 2",
+    "Morderczy Atak"
+   ],
+   "traits": [
+    "Broń (Ostrze upiora) +9",
+    "Magiczny",
+    "Nie Czuje Bólu",
+    "Niewrażliwość na Psychologię",
+    "Ożywieniec",
+    "Pancerz (4)",
+    "Strach (2)",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Czempion",
+    "Furia",
+    "Lodowaty Uścisk",
+    "Niestabilny",
+    "Skryty",
+    "Terytorialny",
+    "Twardziel"
+   ],
+   "abilities": [
+    {
+     "name": "Ostrze Upiora",
+     "description": "Broń upiora posiada Zaletę Nadziewająca. Gdy upiór zada nią Trafienie Krytyczne, wykonuje dwa rzuty na Tabelę Ran Krytycznych i wybiera wyższy wynik. Ostrze zabrane upiorowi jest Magiczną Bronią Ręczną zadającą +BS+5 Obrażeń."
+    }
+   ],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Inżynier spaczenia klanu Skryre",
+   "source": "Imperialny Zwierzyniec",
+   "page": 95,
+   "stats": {
+    "Sz": 5,
+    "WW": 30,
+    "US": 45,
+    "S": 30,
+    "Wt": 30,
+    "I": 45,
+    "Zw": 35,
+    "Zr": 45,
+    "Int": 40,
+    "SW": 30,
+    "Ogd": 20,
+    "Żyw": 12
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 35
+    },
+    {
+     "name": "Broń Zasięgowa (Prochowa)",
+     "value": 50
+    },
+    {
+     "name": "Rzemiosło (Inżynier)",
+     "value": 60
+    },
+    {
+     "name": "Skradanie (Podziemia)",
+     "value": 45
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Spaczeniowe ostrze) +8",
+    "Pancerz (3)",
+    "Strzelanie (Pistolet spaczeniowy) +8 (30)",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Szczurza Gorączka)",
+    "Mutacja"
+   ],
+   "abilities": [
+    {
+     "name": "Zrobiłem-Stworzyłem Samemu",
+     "description": "Pistolet spaczeniowy inżyniera spaczenia nie posiada Wady Niebezpieczny."
+    }
+   ],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Wielki wilk",
+   "source": "Imperialny Zwierzyniec",
+   "page": 17,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": null,
+    "S": 45,
+    "Wt": 40,
+    "I": 35,
+    "Zw": 25,
+    "Zr": null,
+    "Int": 15,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 13
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Kły) +7",
+    "Długi Krok",
+    "Pancerz (1)",
+    "Terytorialny",
+    "Tropiciel",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Duży)",
+    "usuń Zwierzęcy i Terytorialny – dodaj 15 Ogd",
+    "Wyszkolony (Bojowy, Magiczny, Pociągowy, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Siła Watahy",
+     "description": "Wielkie wilki mające przewagę liczebną nad wrogiem otrzymują dodatkową premię +10 do Testów walki, np. atakując z przewagą 2 do 1 otrzymują całkowity modyfikator +30."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Psowate"
+  },
+  {
+   "name": "Raukos",
+   "source": "Imperialny Zwierzyniec",
+   "page": 17,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": null,
+    "S": 45,
+    "Wt": 40,
+    "I": 35,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 25,
+    "SW": 35,
+    "Ogd": 20,
+    "Żyw": 30
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Kły)",
+     "value": 75
+    }
+   ],
+   "talents": [
+    "Atak Wyprzedzający 2"
+   ],
+   "traits": [
+    "Broń (Kły) +8",
+    "Długi Krok",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Tropiciel",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Sam Jest Watahą",
+     "description": "Raukos otrzymuje dodatkowy Darmowy Atak w każdej Rundzie i liczy się jako 2 przeciwników, tj. potrzeba 4 przeciwników, aby mieli nad nim przewagę 2 do 1, a on ma przewagę 2 do 1 nad pojedynczym wrogiem."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Psowate",
+   "unique": true
+  },
+  {
+   "name": "Brzytwogor",
+   "source": "Imperialny Zwierzyniec",
+   "page": 19,
+   "stats": {
+    "Sz": 7,
+    "WW": 45,
+    "US": null,
+    "S": 55,
+    "Wt": 45,
+    "I": 33,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 5,
+    "SW": 30,
+    "Ogd": null,
+    "Żyw": 32
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Szable) +10",
+    "Dekoncentrujący",
+    "Długi Krok",
+    "Pancerz (1)",
+    "Rogi (Szable) +10",
+    "Rozmiar (Duży)",
+    "Szał Bojowy",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Atak Ogonem +9",
+    "Mutacja",
+    "Rozmiar (Wielki)",
+    "Spaczenie (Pomniejsze)",
+    "Terytorialny",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek"
+  },
+  {
+   "name": "Stary Kościogrzbiet",
+   "source": "Imperialny Zwierzyniec",
+   "page": 19,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": null,
+    "S": 65,
+    "Wt": 55,
+    "I": 13,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 20,
+    "SW": 40,
+    "Ogd": 10,
+    "Żyw": 100
+   },
+   "skills": [],
+   "talents": [
+    "Mistrz Walki 3"
+   ],
+   "traits": [
+    "Broń (Szable) +11",
+    "Dekoncentrujący",
+    "Mutacja (Kościany grzbiet)",
+    "Ochrona 8+",
+    "Pancerz (3)",
+    "Rogi (Szable) +11",
+    "Rozmiar (Wielki)",
+    "Szał Bojowy",
+    "Twardziel",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Kościany grzbiet",
+     "description": "Z garba Starego Kościogrzbieta yrastają giętkie, lecz twarde jak żelazo kości przypominające zewnętrzną klatkę piersiową, obejmujące cały tułów. Uczyniło to go trochę wolniejszym, ale za to niesamowicie twardym. 19 ławny w Starym Świecie z powodu majestatycznego yglądu oraz legendarnej dzikości. Niewiele stworzxrî wzbudza taki podziw — lub strach — jak gryf: wielkie drapieżne zwierzę z przodem i skrzydłami mięsożernego ptaka oraz tyłem wielkiego kota. Gryf jest uważany za święte stworzxnie przez mieszkańców Imperium, a sztandar z gryfem prowadzi nasze armie od tysięcy lat. Niewielka liczba bogatych i potężnych szlachciców \"korzystuje gryfy jako wierzchowce. Wielu płaci za"
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "unique": true
+  },
+  {
+   "name": "Gryf",
+   "source": "Imperialny Zwierzyniec",
+   "page": 21,
+   "stats": {
+    "Sz": 6,
+    "WW": 50,
+    "US": null,
+    "S": 50,
+    "Wt": 50,
+    "I": 45,
+    "Zw": 60,
+    "Zr": null,
+    "Int": 20,
+    "SW": 50,
+    "Ogd": null,
+    "Żyw": 80
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Szpony) +9",
+    "Latanie (80)",
+    "Pancerz (1)",
+    "Rozmiar (Wielki)",
+    "Srogi (2)",
+    "Ugryzienie (Zakrzywiony dziób) +9",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Niewrażliwość na Psychologię",
+    "usuń Zwierzęcy – dodaj +2k10 Ogd",
+    "Terytorialny",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Przeszywający Krzyk",
+     "description": "Wydawany podczas ataku skrzek gryfa jest absolutnie niszczycielski. Szarżujący gryf może wydać 2 Przewagi, aby wrzasnąć na swoich wrogów w ramach Darmowego Ataku. Wszyscy przeciwnicy w promieniu tylu metrów, ile wynosi Bonus z Wytrzymałości gryfa, muszą wykonać Trudny (–20) Test Siły Woli albo otrzymają jeden Poziom Stanu Oszołomienie."
+    },
+    {
+     "name": "Chyżość i Intuicja",
+     "description": "Szpony gryfa mają Zaletę Szybkie."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Straszna paszcza",
+   "source": "Imperialny Zwierzyniec",
+   "page": 23,
+   "stats": {
+    "Sz": 3,
+    "WW": 45,
+    "US": 30,
+    "S": 55,
+    "Wt": 55,
+    "I": 15,
+    "Zw": 20,
+    "Zr": null,
+    "Int": 15,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 36
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Pojemna paszcza) +10",
+    "Mutacja",
+    "Pancerz (3)",
+    "Rozmiar (Duży)",
+    "Ryjący (30)",
+    "Spaczenie (Pomniejsze)",
+    "Terytorialny",
+    "Ugryzienie (Pojemna paszcza) +10",
+    "Widzenie w Mroku",
+    "Wojowniczy",
+    "Zionięcie (Śluz) +5",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Kwasowa Krew",
+    "Rogi (Zakrzywione kolce) +9",
+    "Rozmiar (Wielki, Monstrualny)",
+    "Zaraza"
+   ],
+   "abilities": [
+    {
+     "name": "Połknięcie w Całości",
+     "description": "Kiedy straszna paszcza zada pojedynczym atakiem swojej pojemnej paszczy Obrażenia równe dwukrotności Bonusu z Wytrzymałości celu lub uzyska Trafienie Krytyczne przeciwko celowi o Rozmiarze równym jej lub mniejszym, to spróbuje połknąć ofiarę w całości. Straszna paszcza \"konuje Test Przeciwstawny Siły przeciwko swojemu celowi. Jeśli się jej powiedzie, cel natychmiast otrzymuje 1 poziom Stanu Pochwycenie, plus dodatkowy poziom za każde +2 PS, o jakie straszna paszcza pokona cel w Teście. Podczas następnej Tury celu może on jedynie wykonać Test Przeciwstawny Siły, aby uciec strasznej paszczy. Jeśli nie powiedzie mu się usunięcie wszystkich poziomów Stanu Pochwycenie, otrzymuje 1() punktów Obrażeń (które są zmniejszane o Bonus z Wytrzymałości i Punkty Pance-"
+    },
+    {
+     "name": "Śluz",
+     "description": "Zadane przez paszczę Obrażenia ignorują Punkty Pancerza. Cele muszą wykonać Przeciętny (+20) Test Zwinności za każdym razem, kiedy chcą podjąć wysiłek fizyczny, przez liczbę Rund równą Bonusowi z Wytrzymałości strasznej paszczy. Niepowodzenie oznacza, że natychmiast otrzymują Stan Powalenie, ponieważ tracą równowagę przez śliski, pokrywający je śluz."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Nosorożnik",
+   "source": "Imperialny Zwierzyniec",
+   "page": 25,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": null,
+    "S": 55,
+    "Wt": 50,
+    "I": 23,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 10,
+    "SW": 10,
+    "Ogd": null,
+    "Żyw": 32
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Zakrzywione Rogi) +10",
+    "Długi Krok",
+    "Pancerz (2)",
+    "Rogi +10",
+    "Rozmiar (Duży)",
+    "Wojowniczy",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Szał Bojowy",
+    "Terytorialny",
+    "Wyszkolony (Bojowy, Pociągowy, Ujarzmiony, Wierzchowiec)",
+    "Zakażony"
+   ],
+   "abilities": [
+    {
+     "name": "Za Głupi Aby Umrzeć",
+     "description": "Nosorożniki całkowicie ignorują efekty pierwszego Trafienia Krytycznego, jakie otrzymają w danym starciu."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne"
+  },
+  {
+   "name": "Łamacz Skał",
+   "source": "Imperialny Zwierzyniec",
+   "page": 25,
+   "stats": {
+    "Sz": 7,
+    "WW": 55,
+    "US": null,
+    "S": 65,
+    "Wt": 73,
+    "I": 30,
+    "Zw": 25,
+    "Zr": null,
+    "Int": 15,
+    "SW": 20,
+    "Ogd": null,
+    "Żyw": 88
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Zakrzywione Rogi)",
+     "value": 70
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 3",
+    "Silny Cios 2"
+   ],
+   "traits": [
+    "Broń (Zakrzywione rogi) +13",
+    "Długi Krok",
+    "Nie Czuje Bólu",
+    "Pancerz (5)",
+    "Rogi +13",
+    "Rozmiar (Wielki)",
+    "Srogi (2)",
+    "Wojowniczy",
+    "Zwierzęcy"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Twardszy Niż Kamień",
+     "description": "Pancerz Łamacza Skał posiada Zaletę Nieprzebijalny."
+    },
+    {
+     "name": "Za Głupi Aby Umrzeć",
+     "description": "Łamacz Skał całkowicie ignoruje efekty pierwszego Trafienia Krytycznego, jakie otrzyma w danym starciu."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne"
+  },
+  {
+   "name": "Nocny goblin",
+   "source": "Imperialny Zwierzyniec",
+   "page": 28,
+   "stats": {
+    "Sz": 4,
+    "WW": 30,
+    "US": 35,
+    "S": 30,
+    "Wt": 35,
+    "I": 20,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 20,
+    "Ogd": 20,
+    "Żyw": 11
+   },
+   "skills": [
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 45
+    },
+    {
+     "name": "Broń Zasięgowa (Oplątująca)",
+     "value": 45
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Zardzewiałe miecze) +7",
+    "Lęk (Elfy)",
+    "Nienawiść (Krasnoludy)",
+    "Strzelanie (Krótki Łuk) +5 (20)",
+    "Widzenie w Mroku",
+    "Wrogość (Zielonoskórzy)",
+    "Zaraza"
+   ],
+   "optional": [
+    "Skryty"
+   ],
+   "abilities": [
+    {
+     "name": "Zębaczowe skakuny",
+     "description": "Niektóre nocne gobliny jeżdżą na zębaczach; mają Jeździectwo (Zębacze) 40 i muszą wykonać Trudny (–20) Test Jeździectwa (Zębacze), by kierować wierzchowcem. Przy niepowodzeniu jedynie trzymają się zębacza, przy Pechu spadają."
+    },
+    {
+     "name": "Sieci",
+     "description": "Niektóre nocne gobliny używają sieci do chwytania wrogów: Strzelanie (Sieć 3) (6)."
+    }
+   ],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Zielonoskóry"
+  },
+  {
+   "name": "Leśny smok",
+   "source": "Imperialny Zwierzyniec",
+   "page": 30,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": 60,
+    "S": 65,
+    "Wt": 65,
+    "I": 60,
+    "Zw": 35,
+    "Zr": 15,
+    "Int": 65,
+    "SW": 85,
+    "Ogd": 45,
+    "Żyw": 104
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Pazury Jak Pnie)",
+     "value": 75
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 65
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +9",
+    "Broń (Pazury jak pnie) +11",
+    "Latanie (50)",
+    "Mieszkaniec Lasu",
+    "Niewrażliwość (Trucizna)",
+    "Pancerz (5)",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Srogi (2)",
+    "Ugryzienie +12",
+    "Widzenie w Ciemności",
+    "Zionięcie (Usypiające) +10"
+   ],
+   "optional": [
+    "Jad",
+    "Magiczny",
+    "Rzucanie Czarów (Jadeitu)",
+    "Wyszkolony (Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Koniec Głupców",
+     "description": "Usypiające Zionięcie ignoruje Punkty Pancerza. Każdy cel, który otrzyma Obrażenia z tego źródła, musi \"konać Trudny (—20) Test Siły Woli. W przypadku porażki otrzymuje Cechę Stworzenia Głupi na liczbę Rund równą Bonusowi z Wytrzymałości smoka. Las Jest Moją Tarczą — W lasach, pośród drzew, przeciwnicy leśnego smoka nigdy nie mają przewagi liczebnej. Wszystkie ataki dystansowe wymierzone w smoka otrzymują karę —20, gdyż podobne do skóry kameleona smocze łuski co chwilę zmieniają ygląd, raz yglądając jak kora, a innym razem jak liście. Jeśli ta kara sprawi, że przeciwnik nie zda Testu, który w normalnych warunkach zakończyłby się powodzeniem, pocisk uderza w jedno z drzew w pobliżu smoka lub w jednego ze Związanych Walką z nim prze-"
+    },
+    {
+     "name": "Kameleonowe łuski",
+     "description": "Wszystkie ataki dystansowe wymierzone w smoka otrzymują karę –20; nietrafiony pocisk może trafić w drzewo lub kogoś Związanego Walką ze smokiem (cel losuje MG)."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Caledair, Kosa Ognia",
+   "source": "Imperialny Zwierzyniec",
+   "page": 31,
+   "stats": {
+    "Sz": 6,
+    "WW": 90,
+    "US": 75,
+    "S": 75,
+    "Wt": 95,
+    "I": 60,
+    "Zw": 30,
+    "Zr": 15,
+    "Int": 75,
+    "SW": 90,
+    "Ogd": 45,
+    "Żyw": 344
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Zakończone Gromrilem Pazury)",
+     "value": 110
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 105
+    },
+    {
+     "name": "Wycena",
+     "value": 95
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 95
+    }
+   ],
+   "talents": [
+    "Groźny 3",
+    "Precyzyjne Inkantowanie"
+   ],
+   "traits": [
+    "Atak Ogonem +11",
+    "Broń (Pokryte gromrilem pazury) +12",
+    "Latanie (90)",
+    "Magiczny",
+    "Niewrażliwość (Ogień)",
+    "Niewrażliwość na Psychologię",
+    "Pancerz (6)",
+    "Rozmiar (Monstrualny)",
+    "Rzucanie Czarów (Ognia)",
+    "Srogi (3)",
+    "Twardziel",
+    "Ugryzienie +13",
+    "Widzenie w Ciemności",
+    "Zionięcie (Ogień) +20"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór",
+   "unique": true
+  },
+  {
+   "name": "Wywerna",
+   "source": "Imperialny Zwierzyniec",
+   "page": 32,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": null,
+    "S": 60,
+    "Wt": 55,
+    "I": 15,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 10,
+    "SW": 50,
+    "Ogd": null,
+    "Żyw": 84
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +12 (Jad)",
+    "Broń (Zęby) +10 (Zaraza)",
+    "Latanie (90)",
+    "Pancerz (2)",
+    "Rozmiar (Wielki)",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rogi",
+    "Srogi",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)",
+    "Zionięcie (Trucizna) +10",
+    "Usuń Zwierzęcy, zwiększ Rozmiar do Dużego, dodaj +20 do I, Int oraz Ogd – zmień Żyw na 42 oraz dodaj Skradanie (Wieś) 65"
+   ],
+   "abilities": [
+    {
+     "name": "Złośliwość Wywerny",
+     "description": "Wróg, który otrzyma Stan Zaskoczenie z powodu wywerny, musi wykonać Test Siły Woli. W przypadku niepowodzenia pada ofiarą klątwy: otrzymuje karę –10 do wszystkich Testów i nie może używać Punktów Szczęścia do czasu, aż utraci 5 lub więcej punktów Żywotności lub też wywerna, która go przeklęła, padnie martwa."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Halagrundsor „Straszliwy”, olbrzym szpieg",
+   "source": "Imperialny Zwierzyniec",
+   "page": 35,
+   "stats": {
+    "Sz": 6,
+    "WW": 42,
+    "US": 30,
+    "S": 65,
+    "Wt": 65,
+    "I": 30,
+    "Zw": 34,
+    "Zr": 17,
+    "Int": 26,
+    "SW": 45,
+    "Ogd": 39,
+    "Żyw": 88
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 57
+    },
+    {
+     "name": "Charyzma",
+     "value": 49
+    },
+    {
+     "name": "Hazard",
+     "value": 36
+    },
+    {
+     "name": "Intuicja",
+     "value": 45
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 90
+    },
+    {
+     "name": "Opanowanie",
+     "value": 55
+    },
+    {
+     "name": "Percepcja",
+     "value": 45
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 49
+    },
+    {
+     "name": "Przekupstwo",
+     "value": 49
+    },
+    {
+     "name": "Sekretne Znaki (Łowców)",
+     "value": 31
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 44
+    },
+    {
+     "name": "Targowanie",
+     "value": 49
+    },
+    {
+     "name": "Wiedza (Góry Krańca Świata)",
+     "value": 46
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 70
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 49
+    },
+    {
+     "name": "Zwinne Palce",
+     "value": 22
+    }
+   ],
+   "talents": [
+    "Etykieta (Krasnoludy)",
+    "Hulaka",
+    "Nos do Kłopotów",
+    "Towarzyski",
+    "Wyczulony Zmysł (Słuch)"
+   ],
+   "traits": [
+    "Broń (Wielki kufel) +10",
+    "Długi Krok",
+    "Nie Czuje Bólu",
+    "Rozmiar (Wielki)",
+    "Widzenie w Ciemności",
+    "Wrogość (Zielonoskórzy)"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [
+    "wzmacniany wielki kufel (Broń Ręczna)",
+    "zbiór różnych monet wartych łącznie 6k10 szylingów",
+    "niezrównana kolekcja alkoholi"
+   ],
+   "group": "Ludy",
+   "family": "Humanoid",
+   "unique": true
+  },
+  {
+   "name": "Stirski szczupak",
+   "source": "Imperialny Zwierzyniec",
+   "page": 36,
+   "stats": {
+    "Sz": 8,
+    "WW": 45,
+    "US": null,
+    "S": 52,
+    "Wt": 50,
+    "I": 32,
+    "Zw": 38,
+    "Zr": null,
+    "Int": 14,
+    "SW": 50,
+    "Ogd": null,
+    "Żyw": 40
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +9",
+    "Broń (Zabójczy ogon) +9",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Ugryzienie +8",
+    "Widzenie w Ciemności",
+    "Ziemnowodny",
+    "Zimnokrwisty",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Ochrona 9+",
+    "Rozmiar (Wielki)",
+    "Terytorialny",
+    "Wojowniczy",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Cholerna, Fartowna Ryba",
+     "description": "Stirski szczupak, który urósł do wielkich rozmiarów i zdobył przezwisko, ma do dyspozycji 3 Punkty Szczęścia."
+    },
+    {
+     "name": "Zwinny Ogon",
+     "description": "Stirski szczupak może wykonać Atak Ogonem w każdej Rundzie bez wydawania Przewagi."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny"
+  },
+  {
+   "name": "Coś z Martwego Lasu",
+   "source": "Imperialny Zwierzyniec",
+   "page": 37,
+   "stats": {
+    "Sz": 5,
+    "WW": 50,
+    "US": 30,
+    "S": 45,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 50,
+    "Zr": 20,
+    "Int": 10,
+    "SW": 40,
+    "Ogd": 10,
+    "Żyw": 23
+   },
+   "skills": [
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 60
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Zardzewiała broń lub Pazury) +8",
+    "Furia",
+    "Mutacja (3 rzuty w tabeli)",
+    "Skryty",
+    "Spaczenie (Umiarkowane)",
+    "Spaczenie Umysłu (Kompletny świr, + 2 dodatkowe)",
+    "Srogi (1)",
+    "Strach (2)",
+    "Twardziel",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Atak Językiem",
+    "Kwasowa Krew",
+    "Macki",
+    "Nie Czuje Bólu",
+    "Rogi",
+    "Rozmiar (Duży)",
+    "Tropiciel",
+    "Ugryzienie",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Szokujące Poznanie",
+     "description": "Gdy dana osoba pierwszy raz rozpozna, kim „coś” było kiedyś, musi wykonać Trudny (–10) Test Siły Woli albo otrzyma Stan Oszołomienie."
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "unique": true
+  },
+  {
+   "name": "Poganiacz klanu Moulder",
+   "source": "Imperialny Zwierzyniec",
+   "page": 41,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": 45,
+    "S": 40,
+    "Wt": 40,
+    "I": 50,
+    "Zw": 50,
+    "Zr": 30,
+    "Int": 40,
+    "SW": 40,
+    "Ogd": 30,
+    "Żyw": 16
+   },
+   "skills": [
+    {
+     "name": "Broń Zasięgowa (Oplątująca)",
+     "value": 65
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Karbowane ostrze) +8",
+    "Pancerz (1)",
+    "Strzelanie (Bicz) +6 (6)",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Szczurza Gorączka)",
+    "Mutacja",
+    "Skryty"
+   ],
+   "abilities": [
+    {
+     "name": "Mistrz Chłosty",
+     "description": "Poganiacze są bezlitosnymi treserami bestii. Szczurogry i szczurogry łamignaty dowodzone przez poganiaczy nie są podatne na Cechę Stworzenia Głupi, a szczurowilki i olbrzymie szczury nie są podatne na Cechę Stworzenia Płochliwy. Poganiacze mogą atakować Bronią Zasięgową (Oplątującą) istoty związane walką wręcz bez szansy trafienia sojuszników, chyba że mają Pecha w rzucie na atak."
+    }
+   ],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Szczurogr łamignat",
+   "source": "Imperialny Zwierzyniec",
+   "page": 41,
+   "stats": {
+    "Sz": 5,
+    "WW": 40,
+    "US": 10,
+    "S": 75,
+    "Wt": 55,
+    "I": 35,
+    "Zw": 40,
+    "Zr": 20,
+    "Int": 10,
+    "SW": 20,
+    "Ogd": 10,
+    "Żyw": 76
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Metalowe pazury) +11",
+    "Długi Krok",
+    "Głupi",
+    "Nie Czuje Bólu",
+    "Pancerz (2)",
+    "Rozmiar (Wielki)",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Szczurza Gorączka)",
+    "Furia",
+    "Mutacja",
+    "Spaczenie (Pomniejsze)",
+    "Srogi",
+    "Widzenie w Mroku",
+    "Zakażony"
+   ],
+   "abilities": [
+    {
+     "name": "Jestem niepowstrzymany!",
+     "description": "Skaven jadący na łamignacie zyskuje Cechę Stworzenia Niewrażliwość na Psychologię. Jeśli szczurogr łamignat zginie, jego jeździec natychmiast otrzymuje 5 poziomów Stanu Panika oraz wszystkie pozostałe skaveny w zasięgu 10 metrów natychmiast otrzymują 1 poziom Stanu Panika."
+    }
+   ],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Szczurowilk",
+   "source": "Imperialny Zwierzyniec",
+   "page": 41,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": null,
+    "S": 35,
+    "Wt": 32,
+    "I": 35,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 15,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 10
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Okrutne kły) +6",
+    "Długi Krok",
+    "Płochliwy",
+    "Tropiciel",
+    "Widzenie w Ciemności",
+    "Zaraza",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Choroba (Czarna Dżuma, Szczurza Gorączka albo wybór MG)",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Szał Bojowy",
+    "Terytorialny",
+    "Wyszkolony (Bojowy, Stróżujący, Ujarzmiony)",
+    "Zakażony",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Paszcza Pełna Ostrzy",
+     "description": "Okrutne kły wilkoszczura posiadają Zaletę Przekłuwające."
+    }
+   ],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Psowate"
+  },
+  {
+   "name": "Unikatowy eksperyment klanu Moulder",
+   "source": "Imperialny Zwierzyniec",
+   "page": 41,
+   "stats": {
+    "Sz": 5,
+    "WW": 45,
+    "US": null,
+    "S": 60,
+    "Wt": 55,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 15,
+    "Int": 20,
+    "SW": 45,
+    "Ogd": null,
+    "Żyw": 80
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Pazury jak kosy) +13",
+    "Choroba (Szczurza Gorączka)",
+    "Groza (2)",
+    "Nie Czuje Bólu",
+    "Niewrażliwość na Psychologię",
+    "Pancerz (3)",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Spaczenie (Umiarkowane)",
+    "Srogi (2)",
+    "Staje Dęba",
+    "Ugryzienie (Wiele paszcz) +10",
+    "Widzenie w Mroku",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Różne)",
+    "Długi Krok",
+    "Dusiciel",
+    "Furia",
+    "Kwasowa Krew",
+    "Magiczny",
+    "Mutacja",
+    "Nie Do Zdarcia",
+    "Ochrona (7-9+)",
+    "Odporność na Magię (1-3)",
+    "Rozmiar (Monstrualny)",
+    "Ugryzienie",
+    "Zakażony",
+    "Zimnokrwisty",
+    "Zionięcie (Trucizna) +9",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Na Sigmara, Co TO Jest?",
+     "description": "Testy Opanowania w celu odparcia Grozy lub Strachu wywołanych przez te wyjątkowe straszydła są Problematyczne (–10)."
+    }
+   ],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Ameba",
+   "source": "Imperialny Zwierzyniec",
+   "page": 45,
+   "stats": {
+    "Sz": 3,
+    "WW": 30,
+    "US": null,
+    "S": 35,
+    "Wt": 50,
+    "I": 3,
+    "Zw": 22,
+    "Zr": 5,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 16
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Smagnięcie nibynóżką) +6",
+    "2× Macki +6",
+    "Nie Czuje Bólu",
+    "Pochłonięcie",
+    "Regeneracja",
+    "Ziemnowodny"
+   ],
+   "optional": [
+    "Rozmiar (Mały, Duży-Wielki)"
+   ],
+   "abilities": [
+    {
+     "name": "Pochłonięcie",
+     "description": "Ameba może pochłonąć stworzenie o tym samym Rozmiarze co ona lub mniejszym. Jeśli z powodzeniem zaatakuje cel, niezależnie od tego, czy zadała Rany, może „wybrać\" pochłonięcie celu. Pochłonięte ofiary są duszone w masie ciała ameby i otrzymują tyle poziomów Stanu Pochwycenie, ile wynosi Bonus z Siły ameby. Na początku każdej Rundy pochłonięta istota otrzymuje Obrażenia równe Bonusowi z Siły ameby, ponieważ potężny kwas zaczyna ją trawić. Te Obrażenia ignorują Bonus z Wytrzymałości oraz Punkty Pancerza. Ameba nie może wykonywać kolejnych ataków przeciwko pochłoniętej ofierze, ale wciąż może atakować innych, jeżeli znajdują się wystarczająco blisko, choć może pochłonąć tylko jeden cel na raz. Każdy atak, który trafi w amebę, zadaje tyle samo"
+    },
+    {
+     "name": "Galareta z Piekieł",
+     "description": "Ameby działają zgodnie z ograniczonym instynktem i efektywnie posiadają Cechę Stworzenia Niewrażliwość na Psychologię, jednak reagują na otwarty ogień tak, jakby miały Cechę Stworzenia Lęk (Ogień). Tam, gdzie jest to wymagane, użyj Bonusu z Siły ameby zamiast Bonusu z Siły Woli."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Balast, sprytna galareta",
+   "source": "Imperialny Zwierzyniec",
+   "page": 45,
+   "stats": {
+    "Sz": 3,
+    "WW": 40,
+    "US": null,
+    "S": 35,
+    "Wt": 50,
+    "I": 23,
+    "Zw": 22,
+    "Zr": 10,
+    "Int": 30,
+    "SW": 40,
+    "Ogd": 20,
+    "Żyw": 34
+   },
+   "skills": [
+    {
+     "name": "Hazard",
+     "value": 35
+    },
+    {
+     "name": "Intuicja",
+     "value": 33
+    },
+    {
+     "name": "Opanowanie",
+     "value": 50
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 35
+    },
+    {
+     "name": "Sekretne Znaki (Złodziei)",
+     "value": 45
+    },
+    {
+     "name": "Skradanie (Miasto)",
+     "value": 37
+    },
+    {
+     "name": "Wycena",
+     "value": 40
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Czytanie/Pisanie",
+    "Etykieta (Przestępcy)",
+    "Numizmatyka 2",
+    "Towarzyski"
+   ],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Smagnięcie nibynóżką) +7",
+    "Lęk (Ogień)",
+    "2× Macki +7",
+    "Nie Czuje Bólu",
+    "Pochłonięcie",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Skryty",
+    "Ziemnowodny"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Galareta z Piekieł",
+     "description": "Zobacz Ameba."
+    },
+    {
+     "name": "Pochłonięcie",
+     "description": "Zobacz Ameba, z tą różnicą, że Balast jest na tyle mądry, że wydala cel, którego nie chce zjeść."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór",
+   "unique": true
+  },
+  {
+   "name": "Troll rzeczny",
+   "source": "Imperialny Zwierzyniec",
+   "page": 49,
+   "stats": {
+    "Sz": 6,
+    "WW": 30,
+    "US": 15,
+    "S": 55,
+    "Wt": 45,
+    "I": 10,
+    "Zw": 15,
+    "Zr": 15,
+    "Int": 10,
+    "SW": 20,
+    "Ogd": 5,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Prymitywna maczuga) +9",
+    "Dekoncentrujący (Zapach)",
+    "Głupi",
+    "Nie Do Zdarcia",
+    "Pancerz (2)",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Twardy",
+    "Ugryzienie +8",
+    "Widzenie w Ciemności",
+    "Wymiot +9",
+    "Zaraza",
+    "Ziemnowodny"
+   ],
+   "optional": [
+    "Duży",
+    "Mutacja",
+    "Nie Czuje Bólu",
+    "Odporność na Magię",
+    "Rozmiar (Wielki)",
+    "Siłacz",
+    "Skryty",
+    "Szał Bojowy",
+    "Terytorialny",
+    "Wojowniczy",
+    "Zakażony",
+    "Zwierzęcy",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Pełny Ryb i Jeszcze Gorszych Rzeczy",
+     "description": "Troll rzeczny może wykonać swój pierwszy w walce atak Wymiotem bez wydawania Przewagi."
+    },
+    {
+     "name": "Zgniły Smród",
+     "description": "Wszystkie żywe cele w promieniu tylu metrów, ile wynosi Bonus z Wytrzymałości trolla rzecznego, otrzymują karę –10 do wszystkich Testów. Kara nie kumuluje się w obecności wielu Zgniłych Smrodów."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Trollowa wiedźma rzeczna",
+   "source": "Imperialny Zwierzyniec",
+   "page": 49,
+   "stats": {
+    "Sz": 5,
+    "WW": 50,
+    "US": 35,
+    "S": 65,
+    "Wt": 65,
+    "I": 20,
+    "Zw": 15,
+    "Zr": 15,
+    "Int": 45,
+    "SW": 50,
+    "Ogd": 10,
+    "Żyw": 92
+   },
+   "skills": [
+    {
+     "name": "Język (Magiczny)",
+     "value": 75
+    },
+    {
+     "name": "Splatanie Magii (Shyish)",
+     "value": 80
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Kij z martwego drewna) +10",
+    "Nie Czuje Bólu",
+    "Nie Do Zdarcia",
+    "Niewrażliwość na Psychologię",
+    "Pancerz (3)",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Rzucanie Czarów (Czarownictwa)",
+    "Ugryzienie +9",
+    "Srogi (2)",
+    "Widzenie w Mroku",
+    "Wymiot +14",
+    "Zaraza",
+    "Ziemnowodny"
+   ],
+   "optional": [
+    "Rzucanie Czarów (Śmierci)",
+    "Twardziel",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Obezwładniający Smród",
+     "description": "Oprócz tego działa dokładnie tak, jak Zgniły Smród trolla rzecznego."
+    },
+    {
+     "name": "Rzęsisty Wymiot",
+     "description": "Trollowa wiedźma rzeczna może wykonać swój pierwszy w walce atak Wymiotem bez wydawania Przewagi, a jej żółć zadaje dodatkowe Obrażenia (uwzględnione w rozpisce)."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Kameleopij",
+   "source": "Imperialny Zwierzyniec",
+   "page": 50,
+   "stats": {
+    "Sz": 3,
+    "WW": 28,
+    "US": null,
+    "S": 25,
+    "Wt": 30,
+    "I": 30,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 5,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 8
+   },
+   "skills": [
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 60
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Ugryzienie ostrymi zębami) +5",
+    "Niewrażliwość na Psychologię",
+    "Rozmiar (Mały)",
+    "Ziemnowodny",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Zaraza",
+    "Inteligencja +20 i Rzucanie Czarów (jedynie zaklęcie Iluzja. Rzuca automatycznie z +5 PS, jeśli wymaga tego sytuacja)"
+   ],
+   "abilities": [
+    {
+     "name": "Bezbolesne Ugryzienie",
+     "description": "Po udanym trafieniu kameleopij przyczepia się do celu i wysysa 1 Żywotności w postaci krwi co Rundę (ignorując Bonus z Wytrzymałości i Punkty Pancerza). Będzie chciał wyssać 1k10 Żywotności, po czym się nasyci, odczepi i wycofa. Można go usunąć po Teście Przeciwstawnym Siły, ale automatycznie skutkuje to jedną dodatkową Raną oraz Stanem Krwawienie. Wtarcie w kameleopija soli sprawia, że natychmiast się odczepi i ucieknie."
+    },
+    {
+     "name": "Halucynogenna Chmura",
+     "description": "Kameleopij wydziela chmurę wpływającą na wszystkie ssaki w promieniu tylu metrów, ile wynosi jego Bonus z Wytrzymałości. Wszyscy na obszarze muszą wykonać Trudny (–20) Test Wytrzymałości albo doznają potężnych wizji tego, co kochali, pragnęli lub utracili; przez 3 Rundy plus tyle Rund, ile PS zabrakło, mają Stan Utrata Przytomności. Ci, którzy zdadzą Test, są odporni na chmurę tego samego kameleopija przez dzień."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Gad"
+  },
+  {
+   "name": "Czerw bagienny",
+   "source": "Imperialny Zwierzyniec",
+   "page": 52,
+   "stats": {
+    "Sz": 3,
+    "WW": 50,
+    "US": null,
+    "S": 60,
+    "Wt": 55,
+    "I": 10,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 30,
+    "SW": 45,
+    "Ogd": null,
+    "Żyw": 80
+   },
+   "skills": [
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 50
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Miażdżące sploty) +10",
+    "Dusiciel",
+    "Pancerz (2)",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Widzenie w Mroku",
+    "Zimnokrwisty",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Groza (1)",
+    "4× Macki +10",
+    "Nie Czuje Bólu",
+    "Rozmiar (Monstrualny)"
+   ],
+   "abilities": [
+    {
+     "name": "Nieskończone Sploty",
+     "description": "Czerw bagienny jest bardzo długi i może walczyć w Zapasach z jednocześnie do pięcioma celami, o ile będą mniejszego Rozmiaru niż on."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny"
+  },
+  {
+   "name": "Rozdzieracz Ciał",
+   "source": "Imperialny Zwierzyniec",
+   "page": 54,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": null,
+    "S": 60,
+    "Wt": 65,
+    "I": 15,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 20,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 84
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Zęby)",
+     "value": 75
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 3"
+   ],
+   "traits": [
+    "Bagnołaz",
+    "Broń (Zęby) +10",
+    "Dekoncentrujący (Łuski zmieniające kolory)",
+    "Dusiciel",
+    "Pancerz (3)",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Srogi (3)",
+    "Terytorialny",
+    "Ugryzienie (Ukryta paszcza) +12",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Siedem Przenikliwych Spojrzeń",
+     "description": "Rozdzieracza Ciał nie da się Zaskoczyć ani mieć nad nim przewagi liczebnej."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Mroczny pegaz",
+   "source": "Imperialny Zwierzyniec",
+   "page": 57,
+   "stats": {
+    "Sz": 8,
+    "WW": 45,
+    "US": null,
+    "S": 45,
+    "Wt": 40,
+    "I": 25,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 15,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 28
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Ząbkowane rogi) +8",
+    "Latanie (120)",
+    "Rogi +8",
+    "Rozmiar (Duży)",
+    "Widzenie w Mroku",
+    "Wojowniczy",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Mutacja",
+    "Wyszkolony (Bojowy, Magiczny, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Bezlitosny Atak",
+     "description": "W Rundzie, w której mroczny pegaz wykonuje Szarżę, wszystkie jego ataki otrzymują Zalety Nadziewający i Przekłuwający."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Stado nocnych kruków",
+   "source": "Imperialny Zwierzyniec",
+   "page": 59,
+   "stats": {
+    "Sz": 2,
+    "WW": 55,
+    "US": 20,
+    "S": 42,
+    "Wt": 45,
+    "I": 60,
+    "Zw": 24,
+    "Zr": null,
+    "Int": 14,
+    "SW": 38,
+    "Ogd": 10,
+    "Żyw": 75
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Szpony) +8",
+    "Latanie (100)",
+    "Lęk (Światło)",
+    "Rój",
+    "Strach (2)",
+    "Ugryzienie (Okrutne Dzioby) +6",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Magiczny",
+    "Niestabilny",
+    "Zaraza"
+   ],
+   "abilities": [
+    {
+     "name": "Skrzydlata Chmara",
+     "description": "Wszystkie ataki stada nocnych kruków posiadają Zalety Nadziewający i Przekłuwający."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Ptak"
+  },
+  {
+   "name": "Peryt",
+   "source": "Imperialny Zwierzyniec",
+   "page": 61,
+   "stats": {
+    "Sz": 6,
+    "WW": 50,
+    "US": null,
+    "S": 55,
+    "Wt": 50,
+    "I": 40,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 15,
+    "SW": 45,
+    "Ogd": null,
+    "Żyw": 38
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Ząbkowane kły) +9",
+    "Latanie (50)",
+    "Mieszkaniec Lasu",
+    "Nie Czuje Bólu",
+    "Pancerz (2)",
+    "Rogi (Poroże) +10",
+    "Rozmiar (Duży)",
+    "Spaczenie (Pomniejsze)",
+    "Srogi (2)",
+    "Szał Bojowy",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Mutacja",
+    "Zakażony"
+   ],
+   "abilities": [
+    {
+     "name": "Nieskończona Złośliwość",
+     "description": "Jeśli peryt zabije lub pozbawi możliwości walki żywego przeciwnika, musi zdać Wymagający (+0) Test Siły Woli, w przeciwnym razie zacznie masakrować powalonego, tracąc następną Akcję i Ruch. Nieprzytomny przeciwnik otrzymuje automatyczną Ranę Krytyczną w losowo wybrane Miejsce Trafienia. Świadkowie odczuwają efekty Strachu (2)."
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu"
+  },
+  {
+   "name": "Wielki orzeł",
+   "source": "Imperialny Zwierzyniec",
+   "page": 63,
+   "stats": {
+    "Sz": 2,
+    "WW": 65,
+    "US": null,
+    "S": 55,
+    "Wt": 43,
+    "I": 35,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 45,
+    "SW": 45,
+    "Ogd": 25,
+    "Żyw": 68
+   },
+   "skills": [
+    {
+     "name": "Percepcja",
+     "value": 85
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Szpony) +10",
+    "Latanie (120)",
+    "Pancerz (1)",
+    "Ugryzienie (Dziób) +9",
+    "Rozmiar (Wielki)",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Furia",
+    "Regeneracja",
+    "Język (Dowolny) 50"
+   ],
+   "abilities": [
+    {
+     "name": "Grom z Jasnego Nieba",
+     "description": "Wszystkie ataki wielkich orłów mają Zalety Szybki i Przekłuwający."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Ptak"
+  },
+  {
+   "name": "Szary jastrząb górski",
+   "source": "Imperialny Zwierzyniec",
+   "page": 63,
+   "stats": {
+    "Sz": 2,
+    "WW": 35,
+    "US": null,
+    "S": 35,
+    "Wt": 40,
+    "I": 45,
+    "Zw": 50,
+    "Zr": null,
+    "Int": 20,
+    "SW": 55,
+    "Ogd": null,
+    "Żyw": 32
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Szpony) +7",
+    "Latanie (100)",
+    "Rozmiar (Duży)",
+    "Terytorialny",
+    "Ugryzienie (Dziób) +6",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Szał Bojowy",
+    "Wyszkolony (Bojowy, Magiczny, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Ptak"
+  },
+  {
+   "name": "Heomreth",
+   "source": "Imperialny Zwierzyniec",
+   "page": 63,
+   "stats": {
+    "Sz": 2,
+    "WW": 55,
+    "US": null,
+    "S": 40,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 50,
+    "SW": 45,
+    "Ogd": 20,
+    "Żyw": 64
+   },
+   "skills": [
+    {
+     "name": "Język (Eltharin)",
+     "value": 60
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Dowolna)",
+     "value": 80
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Szpony) +9",
+    "Latanie (80)",
+    "Mieszkaniec Lasu",
+    "Pancerz (1)",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Błogosławiony (Verena)",
+    "Cuda (Verena)",
+    "Ochrona 8+",
+    "Strach"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Ptak"
+  },
+  {
+   "name": "Kuroliszek",
+   "source": "Imperialny Zwierzyniec",
+   "page": 65,
+   "stats": {
+    "Sz": 5,
+    "WW": 40,
+    "US": 52,
+    "S": 35,
+    "Wt": 45,
+    "I": 55,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 20,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 34
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Ogonem +7",
+    "Broń (Szpony) +7",
+    "Latanie (60)",
+    "Pancerz (2)",
+    "Petryfikujące Spojrzenie",
+    "Rozmiar (Duży)",
+    "Srogi (2)",
+    "Terytorialny",
+    "Twardziel",
+    "Ugryzienie (Dziób z kłami) +7",
+    "Widzenie w Mroku",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Lęk (Łasice)",
+    "Zaraza",
+    "Zionięcie (Kwas) +9"
+   ],
+   "abilities": [
+    {
+     "name": "Nikczemne Szpony",
+     "description": "Szpony kuroliszka posiadają Cechę Jad (Trudny)."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Chimera",
+   "source": "Imperialny Zwierzyniec",
+   "page": 67,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": 55,
+    "S": 63,
+    "Wt": 52,
+    "I": 50,
+    "Zw": 54,
+    "Zr": null,
+    "Int": 24,
+    "SW": 40,
+    "Ogd": null,
+    "Żyw": 80
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Pazury) +10",
+    "Furia",
+    "Groza (1)",
+    "Latanie (80)",
+    "Magiczny",
+    "Pancerz (2)",
+    "Rozmiar (Wielki)",
+    "Spaczenie (Pomniejsze)",
+    "Srogi (2)",
+    "Terytorialny",
+    "Ugryzienie +10",
+    "Widzenie w Ciemności",
+    "Zionięcie (Ogień) +12",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Atak Językiem +10",
+    "Atak Ogonem +10",
+    "Jad",
+    "Kwasowa Krew",
+    "Mutacja",
+    "Rogi +10",
+    "Skryty",
+    "Wyszkolony (Magiczny, Wierzchowiec)",
+    "Zaraza"
+   ],
+   "abilities": [
+    {
+     "name": "Widzimy Was",
+     "description": "Chimery nie da się Zaskoczyć ani mieć nad nią przewagi liczebnej w walce."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Bestia ze Strany",
+   "source": "Imperialny Zwierzyniec",
+   "page": 67,
+   "stats": {
+    "Sz": 6,
+    "WW": 75,
+    "US": 63,
+    "S": 71,
+    "Wt": 65,
+    "I": 42,
+    "Zw": 38,
+    "Zr": null,
+    "Int": 32,
+    "SW": 40,
+    "Ogd": null,
+    "Żyw": 92
+   },
+   "skills": [
+    {
+     "name": "Broń Biała (Zakrzywione Pazury)",
+     "value": 95
+    },
+    {
+     "name": "Tropienie",
+     "value": 62
+    }
+   ],
+   "talents": [
+    "Nieubłagany 2",
+    "Nieustępliwy 2"
+   ],
+   "traits": [
+    "Broń (Zakrzywione pazury) +12",
+    "Furia",
+    "Groza (1)",
+    "Latanie (80)",
+    "Magiczny",
+    "Pancerz (3)",
+    "Rozmiar (Wielki)",
+    "Spaczenie (Pomniejsze)",
+    "Srogi (2)",
+    "Terytorialny",
+    "Tropiciel",
+    "Ugryzienie +12",
+    "Widzenie w Ciemności",
+    "Zionięcie (Zimno) +14",
+    "Zwierzęcy"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Masakrujące Szczęki",
+     "description": "Atak ugryzieniem Bestii ze Strany posiada Zalety Przekłuwający i Rąbiący."
+    },
+    {
+     "name": "Widzimy Was",
+     "description": "Bestii ze Strany nie da się Zaskoczyć ani mieć nad nią przewagi liczebnej w walce."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór",
+   "unique": true
+  },
+  {
+   "name": "Kultysta Zwodniczego Księżyca",
+   "source": "Imperialny Zwierzyniec",
+   "page": 70,
+   "stats": {
+    "Sz": 4,
+    "WW": 30,
+    "US": 40,
+    "S": 40,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 40,
+    "Int": 35,
+    "SW": 40,
+    "Ogd": 30,
+    "Żyw": 20
+   },
+   "skills": [
+    {
+     "name": "Badania Naukowe",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 40
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 50
+    },
+    {
+     "name": "Intuicja",
+     "value": 40
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 55
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Opanowanie",
+     "value": 50
+    },
+    {
+     "name": "Oswajanie",
+     "value": 50
+    },
+    {
+     "name": "Percepcja",
+     "value": 40
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 40
+    },
+    {
+     "name": "Sekretne Znaki (Łowców)",
+     "value": 45
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 40
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Zwierzęta)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Wilkoskórzy)",
+     "value": 45
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 45
+    },
+    {
+     "name": "Zastawianie Pułapek",
+     "value": 50
+    }
+   ],
+   "talents": [
+    "Celny Strzał 2",
+    "Twardziel"
+   ],
+   "traits": [
+    "Broń (Sztylet) +6",
+    "Pancerz (1)",
+    "Spaczenie Umysłu (Wewnętrzna bestia)",
+    "Strzelanie (Łuk długi) +10 (100)"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [
+    "dzikie usposobienie",
+    "łuk długi z paskudnie wyglądającymi strzałami",
+    "tatuaż Morrslieba"
+   ],
+   "group": "Chaos",
+   "family": "Sługa Chaosu"
+  },
+  {
+   "name": "Wilkoskóry",
+   "source": "Imperialny Zwierzyniec",
+   "page": 70,
+   "stats": {
+    "Sz": 7,
+    "WW": 60,
+    "US": null,
+    "S": 54,
+    "Wt": 58,
+    "I": 55,
+    "Zw": 48,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 50,
+    "Ogd": 30,
+    "Żyw": 25
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Pazury) +10",
+    "Długi Krok",
+    "Magiczny",
+    "Nie Do Zdarcia",
+    "Pancerz (1)",
+    "Regeneracja",
+    "Srogi (2)",
+    "Strach (2)",
+    "Szał Bojowy",
+    "Tropiciel",
+    "Twardziel",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Mutacja",
+    "Zaraza",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Nieskończony Szał",
+     "description": "Wilkoskóry zawsze znajduje się w Szale Bojowym."
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu"
+  },
+  {
+   "name": "Wielki taurus",
+   "source": "Imperialny Zwierzyniec",
+   "page": 75,
+   "stats": {
+    "Sz": 6,
+    "WW": 55,
+    "US": 40,
+    "S": 63,
+    "Wt": 52,
+    "I": 32,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 30,
+    "SW": 48,
+    "Ogd": null,
+    "Żyw": 80
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Płonące kopyta) +11",
+    "Długi Krok",
+    "Latanie (80)",
+    "Magiczny",
+    "Niewrażliwość (Magia Tradycji Ognia)",
+    "Niewrażliwość (Ogień)",
+    "Rogi +11",
+    "Rozmiar (Wielki)",
+    "Srogi (2)",
+    "Terytorialny",
+    "Widzenie w Mroku",
+    "Zionięcie (Ogień) +10",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Pancerz (3)",
+    "Wyszkolony (Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Krwawy Szał",
+     "description": "Wielki taurus jest zawsze pod wpływem Szału Bojowego oraz Nienawiści względem wszystkiego."
+    },
+    {
+     "name": "Płonące Ciało",
+     "description": "Na końcu każdej Rundy walki wszystkie cele Związane Walką z wielkim taurusem otrzymują 1k10 Obrażeń modyfikowanych przez Bonus z Wytrzymałości i Punkty Pancerza na losowym Miejscu Trafienia, minimum 1 Ranę. Bonus z Wytrzymałości wielkiego taurusa liczy się podwójnie (wynosi 10) przeciwko nie-magicznym broniom i atakom."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Tregara",
+   "source": "Imperialny Zwierzyniec",
+   "page": 76,
+   "stats": {
+    "Sz": 6,
+    "WW": 38,
+    "US": null,
+    "S": 45,
+    "Wt": 42,
+    "I": 47,
+    "Zw": 38,
+    "Zr": 15,
+    "Int": 18,
+    "SW": 32,
+    "Ogd": 10,
+    "Żyw": 30
+   },
+   "skills": [
+    {
+     "name": "Skradanie (Podziemia)",
+     "value": 68
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Broń (Haczykowate przednie odnóża) +8",
+    "Pancerz (3)",
+    "Rozmiar (Duży)",
+    "Skryty",
+    "Terytorialny",
+    "Ugryzienie (Okrutna żuwaczka) +9",
+    "Wspinacz"
+   ],
+   "optional": [
+    "Kwasowa Krew",
+    "Nie Czuje Bólu"
+   ],
+   "abilities": [
+    {
+     "name": "Haczykowate Przednie Odnóża",
+     "description": "Cel skutecznie trafiony przez odnóża tregary automatycznie otrzymuje Stan Pochwycenie. Tregara może następnie automatycznie rozpocząć Zapasy. Może trzymać do dwóch Pochwyconych przeciwników naraz."
+    },
+    {
+     "name": "Okrutna Żuwaczka",
+     "description": "Ugryzienie tregary posiada Zalety Nadziewające i Przekłuwające."
+    },
+    {
+     "name": "Wyczucie Wibracji",
+     "description": "Tregara automatycznie wykrywa wszystkie materialne stworzenia w promieniu czterokrotnego Bonusu z Inicjatywy w metrach i nie da się jej Zaskoczyć."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Pająk"
+  },
+  {
+   "name": "Brzytwodziób",
+   "source": "Imperialny Zwierzyniec",
+   "page": 77,
+   "stats": {
+    "Sz": 2,
+    "WW": 38,
+    "US": null,
+    "S": 22,
+    "Wt": 34,
+    "I": 30,
+    "Zw": 24,
+    "Zr": null,
+    "Int": 10,
+    "SW": 24,
+    "Ogd": null,
+    "Żyw": 11
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Zakrzywiony dziób) +7",
+    "Latanie (90)",
+    "Płochliwy",
+    "Rozmiar (Mały)",
+    "Twardziel",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rój (Rój Brzytw)",
+    "Zaraza",
+    "Żarłoczny"
+   ],
+   "abilities": [
+    {
+     "name": "Rój Brzytw",
+     "description": "Stado brzytwodziobów posiada Cechę Stworzenia Rój (Niewrażliwość na Psychologię, WW 48, Żyw 55). Przeciwnicy Związani Walką ze stadem tracą 1 Żyw na koniec każdej Rundy (ignorując BWt i PP). Każdy, kto otrzyma Rany od brzytwodzioba, musi zdać Przeciętny (+20) Test Odporności albo otrzyma Stan Krwawienie."
+    }
+   ],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Ptak"
+  },
+  {
+   "name": "Ogr",
+   "source": "Podręcznik podstawowy",
+   "page": 312,
+   "stats": {
+    "Sz": 6,
+    "WW": 30,
+    "US": 20,
+    "S": 45,
+    "Wt": 45,
+    "I": 10,
+    "Zw": 25,
+    "Zr": 20,
+    "Int": 20,
+    "SW": 30,
+    "Ogd": 20,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +8",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Uprzedzenie (Szczupłe Osoby)",
+    "Widzenie w Ciemności",
+    "Żarłoczny"
+   ],
+   "optional": [
+    "Tropiciel",
+    "Wojowniczy",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Ludy",
+   "family": "Humanoid"
+  },
+  {
+   "name": "Niedźwiedź",
+   "source": "Podręcznik podstawowy",
+   "page": 314,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": null,
+    "S": 55,
+    "Wt": 45,
+    "I": 20,
+    "Zw": 25,
+    "Zr": 15,
+    "Int": 10,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 28
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +8",
+    "Długi Krok",
+    "Pancerz (1, Skóra)",
+    "Płochliwy",
+    "Rozmiar (Duży)",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Wielki)",
+    "Terytorialny",
+    "Wyszkolony (Bojowy, Maskotka, Ujarzmiony)",
+    "Zakażony",
+    "Zaraza",
+    "Żarłoczny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Drapieżnik"
+  },
+  {
+   "name": "Dzik",
+   "source": "Podręcznik podstawowy",
+   "page": 314,
+   "stats": {
+    "Sz": 7,
+    "WW": 35,
+    "US": null,
+    "S": 33,
+    "Wt": 35,
+    "I": 33,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 10,
+    "SW": 10,
+    "Ogd": null,
+    "Żyw": 10
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6",
+    "Długi Krok",
+    "Pancerz (1, Skóra)",
+    "Płochliwy",
+    "Rogi (Kły)",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Duży)",
+    "Szał Bojowy",
+    "Terytorialny",
+    "Wojowniczy",
+    "Wyszkolony (Bojowy, Magiczny, Ujarzmiony, Wierzchowiec)",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne"
+  },
+  {
+   "name": "Smukłoudy Jęzobicz (książę demonów Slaanesha)",
+   "source": "Podręcznik podstawowy",
+   "page": 336,
+   "stats": {
+    "Sz": 6,
+    "WW": 95,
+    "US": 110,
+    "S": 115,
+    "Wt": 120,
+    "I": 100,
+    "Zw": 95,
+    "Zr": 40,
+    "Int": 70,
+    "SW": 85,
+    "Ogd": 85,
+    "Żyw": 86
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +16",
+    "Czempion",
+    "Dekoncentrujący",
+    "Demoniczny 8+",
+    "Groza (3)",
+    "Niestabilny",
+    "Pancerz (1)",
+    "Rogi +15",
+    "Rozmiar (Duży)",
+    "Rzucanie Czarów (Slaanesh)",
+    "Spaczenie (Większe)",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon",
+   "unique": true
+  },
+  {
+   "name": "Fr'hough Żałobny Oddech (książę demonów Nurgla)",
+   "source": "Podręcznik podstawowy",
+   "page": 336,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 35,
+    "S": 120,
+    "Wt": 150,
+    "I": 50,
+    "Zw": 20,
+    "Zr": 30,
+    "Int": 85,
+    "SW": 120,
+    "Ogd": 50,
+    "Żyw": 108
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +15",
+    "Choroba (Ospa Swędząca)",
+    "Demoniczny 7+",
+    "Groza (3)",
+    "Niestabilny",
+    "Pancerz (4)",
+    "Rogi +14",
+    "Rozmiar (Duży)",
+    "Rzucanie Czarów (Nurgle)",
+    "Spaczenie (Większe)",
+    "Widzenie w Mroku",
+    "Zakażony",
+    "Zaraza",
+    "Zionięcie +12 (Kwas)"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon",
+   "unique": true
+  },
+  {
+   "name": "Klanbrat",
+   "source": "Podręcznik podstawowy",
+   "page": 337,
+   "stats": {
+    "Sz": 5,
+    "WW": 30,
+    "US": 30,
+    "S": 30,
+    "Wt": 30,
+    "I": 40,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 20,
+    "Ogd": 20,
+    "Żyw": 11
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Pancerz (2)",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Szczurza Gorączka)",
+    "Mutacja",
+    "Płochliwy",
+    "Skryty",
+    "Tropiciel"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Szturmoszczur",
+   "source": "Podręcznik podstawowy",
+   "page": 337,
+   "stats": {
+    "Sz": 5,
+    "WW": 45,
+    "US": 35,
+    "S": 35,
+    "Wt": 35,
+    "I": 55,
+    "Zw": 50,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 25,
+    "Ogd": 20,
+    "Żyw": 11
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +8",
+    "Pancerz (4)",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Szczurza Gorączka)",
+    "Mutacja",
+    "Tropiciel"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Szczurogr",
+   "source": "Podręcznik podstawowy",
+   "page": 337,
+   "stats": {
+    "Sz": 5,
+    "WW": 35,
+    "US": 10,
+    "S": 55,
+    "Wt": 45,
+    "I": 35,
+    "Zw": 45,
+    "Zr": 25,
+    "Int": 10,
+    "SW": 25,
+    "Ogd": 15,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Głupi",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Choroba (Szczurza Gorączka)",
+    "Mutacja",
+    "Ogon +8",
+    "Spaczenie (Pomniejsze)",
+    "Tropiciel",
+    "Widzenie w Mroku",
+    "Wyszkolony (Bojowy, Stróżujący, Ujarzmiony, Wierzchowiec)",
+    "Zakażony"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven"
+  },
+  {
+   "name": "Pies",
+   "source": "Podręcznik podstawowy",
+   "page": 315,
+   "stats": {
+    "Sz": 4,
+    "WW": 25,
+    "US": null,
+    "S": 20,
+    "Wt": 20,
+    "I": 35,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 15,
+    "SW": 10,
+    "Ogd": 15,
+    "Żyw": 5
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +5",
+    "Długi Krok",
+    "Płochliwy",
+    "Rozmiar (Mały)",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Pancerz (1)",
+    "Rozmiar (Niewielki do Średniego)",
+    "Szał Bojowy",
+    "Terytorialny",
+    "Tropiciel",
+    "Wyszkolony (Aportujący, Bojowy, Maskotka, Magiczny, Stróżujący, Ujarzmiony)",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Psowate"
+  },
+  {
+   "name": "Olbrzymi szczur",
+   "source": "Podręcznik podstawowy",
+   "page": 315,
+   "stats": {
+    "Sz": 4,
+    "WW": 25,
+    "US": null,
+    "S": 30,
+    "Wt": 25,
+    "I": 25,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 15,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 5
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +4",
+    "Długi Krok",
+    "Płochliwy",
+    "Rozmiar (Mały)",
+    "Widzenie w Ciemności",
+    "Zaraza",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Choroba (Czarna Zaraza lub Szczurza Gorączka)",
+    "Pancerz (1)",
+    "Rozmiar (Niewielki do Średniego)",
+    "Rój",
+    "Wyszkolony (Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Gryzoń"
+  },
+  {
+   "name": "Olbrzymi pająk",
+   "source": "Podręcznik podstawowy",
+   "page": 315,
+   "stats": {
+    "Sz": 5,
+    "WW": 35,
+    "US": 25,
+    "S": 15,
+    "Wt": 25,
+    "I": 10,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 5,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 2
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +3",
+    "Rozmiar (Niewielki)",
+    "Sieć (40)",
+    "Widzenie w Ciemności",
+    "Wspinacz",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Jad (Przeciętny)",
+    "Mieszkaniec Lasu",
+    "Pancerz (1)",
+    "Rozmiar (Niewielki do Wielkiego)",
+    "Rój",
+    "Ugryzienie",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Pająk"
+  },
+  {
+   "name": "Koń",
+   "source": "Podręcznik podstawowy",
+   "page": 316,
+   "stats": {
+    "Sz": 7,
+    "WW": 25,
+    "US": null,
+    "S": 45,
+    "Wt": 35,
+    "I": 15,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 10,
+    "SW": 10,
+    "Ogd": 10,
+    "Żyw": 22
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Długi Krok",
+    "Płochliwy",
+    "Rozmiar (Duży)",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Pancerz",
+    "Wyszkolony (Bojowy, Magiczny, Maskotka, Pociągowy, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne"
+  },
+  {
+   "name": "Gołąb",
+   "source": "Podręcznik podstawowy",
+   "page": 316,
+   "stats": {
+    "Sz": 2,
+    "WW": 15,
+    "US": null,
+    "S": 5,
+    "Wt": 15,
+    "I": 25,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 10,
+    "SW": 20,
+    "Ogd": 10,
+    "Żyw": 1
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +0",
+    "Latanie (100)",
+    "Płochliwy",
+    "Rozmiar (Drobny)",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Mały)",
+    "Wyszkolony (Powracający, Ujarzmiony)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Ptak"
+  },
+  {
+   "name": "Wąż",
+   "source": "Podręcznik podstawowy",
+   "page": 316,
+   "stats": {
+    "Sz": 3,
+    "WW": 40,
+    "US": null,
+    "S": 30,
+    "Wt": 25,
+    "I": 25,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 5,
+    "SW": 45,
+    "Ogd": null,
+    "Żyw": 8
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +5",
+    "Pancerz (1)",
+    "Rozmiar (Mały)",
+    "Szybki",
+    "Zwierzęcy",
+    "Zimnokrwisty"
+   ],
+   "optional": [
+    "Bagnołaz",
+    "Dusiciel",
+    "Jad (Bardzo Łatwy do Bardzo Trudnego)",
+    "Rozmiar (Drobny do Wielkiego)",
+    "Rój"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Gad"
+  },
+  {
+   "name": "Wilk",
+   "source": "Podręcznik podstawowy",
+   "page": 317,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": null,
+    "S": 35,
+    "Wt": 30,
+    "I": 35,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 15,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 10
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6",
+    "Długi Krok",
+    "Pancerz (1)",
+    "Płochliwy",
+    "Tropiciel",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Duży)",
+    "Szał Bojowy",
+    "Terytorialny",
+    "Wyszkolony (Aportujący, Bojowy, Magiczny, Pociągowy, Stróżujący, Ujarzmiony, Wierzchowiec)",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Psowate"
+  },
+  {
+   "name": "Bazyliszek",
+   "source": "Podręcznik podstawowy",
+   "page": 317,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 35,
+    "S": 55,
+    "Wt": 55,
+    "I": 25,
+    "Zw": 15,
+    "Zr": null,
+    "Int": 15,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 64
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Długi Krok",
+    "Jad",
+    "Niewrażliwość (Trucizna)",
+    "Ogon +8",
+    "Pancerz (2)",
+    "Petryfikujące Spojrzenie",
+    "Rozmiar (Wielki)",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności",
+    "Zimnokrwisty",
+    "Zaraza",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Mutacja",
+    "Terytorialny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Bagienna ośmiornica",
+   "source": "Podręcznik podstawowy",
+   "page": 318,
+   "stats": {
+    "Sz": 3,
+    "WW": 35,
+    "US": null,
+    "S": 80,
+    "Wt": 75,
+    "I": 15,
+    "Zw": 55,
+    "Zr": null,
+    "Int": 5,
+    "SW": 65,
+    "Ogd": 0,
+    "Żyw": 56
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Dusiciel",
+    "8× Macki +9",
+    "Rozmiar (Duży)",
+    "Skryty",
+    "Ziemnowodny",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Rozmiar (Wielki do Monstrualnego)",
+    "Terytorialny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Wodny"
+  },
+  {
+   "name": "Zębacz jaskiniowy",
+   "source": "Podręcznik podstawowy",
+   "page": 318,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": null,
+    "S": 50,
+    "Wt": 30,
+    "I": 10,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 5,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 12
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Skoczny",
+    "Widzenie w Ciemności",
+    "Zaraza",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Furia",
+    "Rogi",
+    "Rozmiar (Drobny do Wielkiego)",
+    "Szał Bojowy",
+    "Widzenie w Mroku",
+    "Ziemnowodny",
+    "Zionięcie (Gaz albo Kwas)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Drapieżnik"
+  },
+  {
+   "name": "Półgryf",
+   "source": "Podręcznik podstawowy",
+   "page": 318,
+   "stats": {
+    "Sz": 7,
+    "WW": 35,
+    "US": null,
+    "S": 55,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 15,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Długi Krok",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Wyszkolony (Bojowy, Pociągowy, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Smok",
+   "source": "Podręcznik podstawowy",
+   "page": 319,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": 60,
+    "S": 65,
+    "Wt": 65,
+    "I": 60,
+    "Zw": 25,
+    "Zr": 15,
+    "Int": 45,
+    "SW": 85,
+    "Ogd": 25,
+    "Żyw": 104
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +10",
+    "Latanie (80)",
+    "Pancerz (5)",
+    "Ogon +9",
+    "Rozmiar (Wielki)",
+    "Ugryzienie +10",
+    "Widzenie w Ciemności",
+    "Zionięcie +15 (różne)"
+   ],
+   "optional": [
+    "Bagnołaz",
+    "Jad",
+    "Magiczny",
+    "Mieszkaniec Lasu",
+    "Mutacja",
+    "Niewrażliwość (wybierz jedną)",
+    "Ożywieniec",
+    "Rozmiar (Monstrualny)",
+    "Rzucanie Czarów (różne)",
+    "Spaczenie Umysłu",
+    "Wyszkolony (Wierzchowiec)",
+    "Zakażony"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Bestia bagienna",
+   "source": "Podręcznik podstawowy",
+   "page": 319,
+   "stats": {
+    "Sz": 5,
+    "WW": 35,
+    "US": null,
+    "S": 50,
+    "Wt": 55,
+    "I": 10,
+    "Zw": 15,
+    "Zr": 10,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 40
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń +8",
+    "Głupi",
+    "Konstrukt",
+    "Nie do Zdarcia",
+    "Niestabilny",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Widzenie w Mroku",
+    "Zaraza"
+   ],
+   "optional": [
+    "Szał Bojowy",
+    "Terytorialny",
+    "Zakażony",
+    "Żarłoczny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Fimir",
+   "source": "Podręcznik podstawowy",
+   "page": 320,
+   "stats": {
+    "Sz": 6,
+    "WW": 35,
+    "US": 20,
+    "S": 45,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 20,
+    "Int": 30,
+    "SW": 30,
+    "Ogd": 15,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Bagnołaz",
+    "Broń +8",
+    "Pancerz (2)",
+    "Rozmiar (Duży)",
+    "Widzenie w Ciemności",
+    "Zimnokrwisty"
+   ],
+   "optional": [
+    "Ogon +7",
+    "Rzucanie Czarów (Demonologia)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Olbrzym",
+   "source": "Podręcznik podstawowy",
+   "page": 320,
+   "stats": {
+    "Sz": 6,
+    "WW": 30,
+    "US": 30,
+    "S": 65,
+    "Wt": 55,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 15,
+    "Int": 25,
+    "SW": 25,
+    "Ogd": 20,
+    "Żyw": 72
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +10",
+    "Długi Krok",
+    "Pancerz (1)",
+    "Rozmiar (Wielki)",
+    "Twardy",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Głupi",
+    "Rozmiar (Monstrualny)",
+    "Zaraza",
+    "Zakażony",
+    "Zionięcie (Pijackie Rzygnięcie)",
+    "Zwierzęcy",
+    "Żarłoczny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Gryf (podręcznik)",
+   "source": "Podręcznik podstawowy",
+   "page": 321,
+   "stats": {
+    "Sz": 6,
+    "WW": 50,
+    "US": null,
+    "S": 50,
+    "Wt": 50,
+    "I": 45,
+    "Zw": 60,
+    "Zr": null,
+    "Int": 20,
+    "SW": 40,
+    "Ogd": null,
+    "Żyw": 76
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Latanie (80)",
+    "Pancerz (1)",
+    "Rozmiar (Wielki)",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Hipogryf",
+   "source": "Podręcznik podstawowy",
+   "page": 321,
+   "stats": {
+    "Sz": 7,
+    "WW": 45,
+    "US": null,
+    "S": 55,
+    "Wt": 50,
+    "I": 20,
+    "Zw": 55,
+    "Zr": null,
+    "Int": 5,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 72
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Długi Krok",
+    "Latanie (120)",
+    "Rozmiar (Duży)",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności",
+    "Wojowniczy",
+    "Wrogość (Wszystko)",
+    "Terytorialny",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Furia",
+    "Nienawiść (Wszystko)",
+    "Szał Bojowy",
+    "Ujarzmiony",
+    "Wyszkolony (Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Hydra",
+   "source": "Podręcznik podstawowy",
+   "page": 322,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": null,
+    "S": 50,
+    "Wt": 55,
+    "I": 15,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 15,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 68
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Długi Krok",
+    "Dusiciel",
+    "Pancerz (3)",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Tropiciel",
+    "Widzenie w Ciemności",
+    "Zionięcie +10 (Ogień)",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Jad",
+    "Terytorialny",
+    "Wojowniczy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Dżabersmok",
+   "source": "Podręcznik podstawowy",
+   "page": 322,
+   "stats": {
+    "Sz": 7,
+    "WW": 45,
+    "US": 40,
+    "S": 55,
+    "Wt": 50,
+    "I": 20,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 10,
+    "SW": 20,
+    "Ogd": null,
+    "Żyw": 68
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Atak Językiem +5 (12)",
+    "Broń +9",
+    "Dekoncentrujący",
+    "Jad (+0)",
+    "Kwasowa Krew",
+    "Ogon +8",
+    "Pancerz (3)",
+    "Rozmiar (Wielki)",
+    "Skoczny",
+    "Ugryzienie +9",
+    "Widzenie w Ciemności",
+    "Zaraza",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Mutacja",
+    "Terytorialny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Mantikora",
+   "source": "Podręcznik podstawowy",
+   "page": 323,
+   "stats": {
+    "Sz": 6,
+    "WW": 55,
+    "US": null,
+    "S": 55,
+    "Wt": 55,
+    "I": 50,
+    "Zw": 65,
+    "Zr": null,
+    "Int": 10,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 72
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Jad",
+    "Latanie (80)",
+    "Ogon +8",
+    "Pancerz (2)",
+    "Rozmiar (Wielki)",
+    "Terytorialny",
+    "Ugryzienie +9",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Mutant",
+    "Nienawiść (Drapieżniki)",
+    "Wyszkolony (Magiczny, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Pegaz",
+   "source": "Podręcznik podstawowy",
+   "page": 323,
+   "stats": {
+    "Sz": 8,
+    "WW": 35,
+    "US": null,
+    "S": 45,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 20,
+    "SW": 25,
+    "Ogd": null,
+    "Żyw": 28
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Długi Krok",
+    "Latanie (100)",
+    "Rozmiar (Duży)"
+   ],
+   "optional": [
+    "Wyszkolony (Bojowy, Magiczny, Pociągowy, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór latający"
+  },
+  {
+   "name": "Troll",
+   "source": "Podręcznik podstawowy",
+   "page": 324,
+   "stats": {
+    "Sz": 6,
+    "WW": 30,
+    "US": 15,
+    "S": 55,
+    "Wt": 45,
+    "I": 10,
+    "Zw": 15,
+    "Zr": 15,
+    "Int": 10,
+    "SW": 20,
+    "Ogd": 5,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Głupi",
+    "Nie do Zdarcia",
+    "Pancerz (2)",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Twardy",
+    "Ugryzienie +8",
+    "Wymiot",
+    "Zaraza"
+   ],
+   "optional": [
+    "Bagnołaz",
+    "Mutacja",
+    "Nie Czuje Bólu",
+    "Odporność na Magię",
+    "Skryty",
+    "Szał Bojowy",
+    "Widzenie w Ciemności",
+    "Zakażony",
+    "Ziemnowodny",
+    "Zwierzęcy",
+    "Żarłoczny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Wywerna (podręcznik)",
+   "source": "Podręcznik podstawowy",
+   "page": 325,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": null,
+    "S": 60,
+    "Wt": 55,
+    "I": 15,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 10,
+    "SW": 50,
+    "Ogd": null,
+    "Żyw": 84
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +10",
+    "Jad",
+    "Latanie (90)",
+    "Pancerz (2)",
+    "Rozmiar (Wielki)",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Ogon +9",
+    "Rogi",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)",
+    "Zionięcie (Jad)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór"
+  },
+  {
+   "name": "Ork",
+   "source": "Podręcznik podstawowy",
+   "page": 325,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": 30,
+    "S": 35,
+    "Wt": 45,
+    "I": 20,
+    "Zw": 25,
+    "Zr": 20,
+    "Int": 25,
+    "SW": 35,
+    "Ogd": 20,
+    "Żyw": 14
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +8",
+    "Nie do Zdarcia",
+    "Pancerz (3)",
+    "Widzenie w Ciemności",
+    "Wojowniczy",
+    "Wrogość (Zielonoskórzy)",
+    "Zaraza"
+   ],
+   "optional": [
+    "Nie Czuje Bólu",
+    "Rozmiar (Duży)",
+    "Strzelanie +8 (50)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Zielonoskóry"
+  },
+  {
+   "name": "Goblin",
+   "source": "Podręcznik podstawowy",
+   "page": 326,
+   "stats": {
+    "Sz": 4,
+    "WW": 25,
+    "US": 30,
+    "S": 30,
+    "Wt": 30,
+    "I": 20,
+    "Zw": 35,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 20,
+    "Ogd": 20,
+    "Żyw": 11
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Lęk (Elfy)",
+    "Pancerz (1)",
+    "Widzenie w Ciemności",
+    "Wrogość (Zielonoskórzy)",
+    "Zaraza"
+   ],
+   "optional": [
+    "Jad",
+    "Mieszkaniec Lasu",
+    "Nienawiść (Krasnoludy)",
+    "Strzelanie +7 (25)",
+    "Widzenie w Mroku"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Zielonoskóry"
+  },
+  {
+   "name": "Snotling",
+   "source": "Podręcznik podstawowy",
+   "page": 326,
+   "stats": {
+    "Sz": 4,
+    "WW": 25,
+    "US": 15,
+    "S": 25,
+    "Wt": 20,
+    "I": 20,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 15,
+    "SW": 30,
+    "Ogd": null,
+    "Żyw": 7
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +4",
+    "Rozmiar (Mały)",
+    "Widzenie w Mroku",
+    "Zaraza",
+    "Zwierzęcy"
+   ],
+   "optional": [
+    "Jad",
+    "Rój",
+    "Wyszkolony (Aportujący, Stróżujący, Ujarzmiony)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Zielonoskóry"
+  },
+  {
+   "name": "Szkielet",
+   "source": "Podręcznik podstawowy",
+   "page": 327,
+   "stats": {
+    "Sz": 4,
+    "WW": 25,
+    "US": 25,
+    "S": 30,
+    "Wt": 30,
+    "I": 20,
+    "Zw": 20,
+    "Zr": 25,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 12
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Konstrukt",
+    "Nie Czuje Bólu",
+    "Niestabilny",
+    "Ożywieniec",
+    "Pancerz (2)",
+    "Strach (2)",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Terytorialny",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Zombi",
+   "source": "Podręcznik podstawowy",
+   "page": 328,
+   "stats": {
+    "Sz": 4,
+    "WW": 15,
+    "US": null,
+    "S": 30,
+    "Wt": 30,
+    "I": 5,
+    "Zw": 10,
+    "Zr": 15,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 12
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Konstrukt",
+    "Nie Czuje Bólu",
+    "Niestabilny",
+    "Ożywieniec",
+    "Strach (2)",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Choroba",
+    "Dekoncentrujący",
+    "Pancerz",
+    "Spaczenie (Pomniejsze)",
+    "Terytorialny",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Upiorny wilk",
+   "source": "Podręcznik podstawowy",
+   "page": 328,
+   "stats": {
+    "Sz": 9,
+    "WW": 30,
+    "US": null,
+    "S": 35,
+    "Wt": 35,
+    "I": 30,
+    "Zw": 30,
+    "Zr": null,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 24
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6",
+    "Długi Krok",
+    "Konstrukt",
+    "Niestabilny",
+    "Ożywieniec",
+    "Pancerz (1)",
+    "Rozmiar (Duży)",
+    "Strach (2)",
+    "Tropiciel",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Dekoncentrujący",
+    "Nie Czuje Bólu",
+    "Spaczenie (Pomniejsze)",
+    "Terytorialny",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Ghul z krypt",
+   "source": "Podręcznik podstawowy",
+   "page": 329,
+   "stats": {
+    "Sz": 4,
+    "WW": 30,
+    "US": null,
+    "S": 35,
+    "Wt": 30,
+    "I": 30,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 20,
+    "SW": 20,
+    "Ogd": 5,
+    "Żyw": 11
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6",
+    "Ugryzienie +5",
+    "Widzenie w Ciemności",
+    "Zaraza"
+   ],
+   "optional": [
+    "Jad",
+    "Nie Czuje Bólu",
+    "Zwierzęcy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Varghulf",
+   "source": "Podręcznik podstawowy",
+   "page": 329,
+   "stats": {
+    "Sz": 8,
+    "WW": 55,
+    "US": null,
+    "S": 55,
+    "Wt": 55,
+    "I": 30,
+    "Zw": 50,
+    "Zr": 20,
+    "Int": 10,
+    "SW": 60,
+    "Ogd": null,
+    "Żyw": 42
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Groza (3)",
+    "Nienawiść (Żywe Istoty)",
+    "Ożywieniec",
+    "Pancerz (1)",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Strach (4)",
+    "Ugryzienie +8",
+    "Wampiryczny",
+    "Widzenie w Mroku",
+    "Zwierzęcy",
+    "Żarłoczny"
+   ],
+   "optional": [
+    "Furia",
+    "Latanie",
+    "Spaczenie (Pomniejsze)",
+    "Szał Bojowy",
+    "Terytorialny",
+    "Tropiciel"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Widmo z kurhanu",
+   "source": "Podręcznik podstawowy",
+   "page": 329,
+   "stats": {
+    "Sz": 6,
+    "WW": 35,
+    "US": null,
+    "S": 35,
+    "Wt": 30,
+    "I": 15,
+    "Zw": 30,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 50,
+    "Ogd": 15,
+    "Żyw": 14
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Eteryczny",
+    "Groza (3)",
+    "Lodowaty Uścisk",
+    "Niestabilny",
+    "Ożywieniec",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Nie Czuje Bólu",
+    "Terytorialny",
+    "Czempion",
+    "Zwierzęcy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Upiorna płaczka",
+   "source": "Podręcznik podstawowy",
+   "page": 330,
+   "stats": {
+    "Sz": 6,
+    "WW": 30,
+    "US": null,
+    "S": 30,
+    "Wt": 30,
+    "I": 20,
+    "Zw": 30,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 40,
+    "Ogd": 20,
+    "Żyw": 13
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Eteryczny",
+    "Groza (3)",
+    "Niestabilny",
+    "Ożywieniec",
+    "Upiorne Wycie",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Furia",
+    "Latanie",
+    "Nie Czuje Bólu",
+    "Terytorialny",
+    "Zwierzęcy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Wampir",
+   "source": "Podręcznik podstawowy",
+   "page": 330,
+   "stats": {
+    "Sz": 6,
+    "WW": 60,
+    "US": 40,
+    "S": 50,
+    "Wt": 40,
+    "I": 50,
+    "Zw": 70,
+    "Zr": 40,
+    "Int": 40,
+    "SW": 60,
+    "Ogd": 40,
+    "Żyw": 19
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Ożywieniec",
+    "Ugryzienie +8",
+    "Wampiryczny",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Czempion",
+    "Dekoncentrujący",
+    "Furia",
+    "Latanie",
+    "Nie Czuje Bólu",
+    "Nie Do Zdarcia",
+    "Petryfikujące Spojrzenie",
+    "Regeneracja",
+    "Rzucanie Czarów (Nekromancja lub Śmierć)",
+    "Spaczenie (Pomniejsze)",
+    "Spaczenie Umysłu",
+    "Strach",
+    "Szał Bojowy",
+    "Tropiciel",
+    "Widzenie w Mroku",
+    "Wspinacz",
+    "Zwierzęcy",
+    "Żarłoczny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Duch",
+   "source": "Podręcznik podstawowy",
+   "page": 331,
+   "stats": {
+    "Sz": 6,
+    "WW": 30,
+    "US": null,
+    "S": 30,
+    "Wt": 30,
+    "I": 10,
+    "Zw": 30,
+    "Zr": 20,
+    "Int": 15,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 10
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6",
+    "Eteryczny",
+    "Niestabilny",
+    "Ożywieniec",
+    "Strach (2)",
+    "Widzenie w Mroku"
+   ],
+   "optional": [
+    "Furia",
+    "Nienawiść",
+    "Rój",
+    "Terytorialny",
+    "Zwierzęcy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Nieumarli",
+   "family": "Nieumarły"
+  },
+  {
+   "name": "Gor",
+   "source": "Podręcznik podstawowy",
+   "page": 331,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 30,
+    "S": 35,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 14
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Furia",
+    "Mieszkaniec Lasu",
+    "Pancerz (1)",
+    "Rogi +6",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Choroba (Ospa Zwierzęca)",
+    "Mutacja",
+    "Pancerz (2)",
+    "Rozmiar (Duży)",
+    "Rzucanie Czarów (Zwierząt)",
+    "Spaczenie (Pomniejsze)",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek"
+  },
+  {
+   "name": "Ungor",
+   "source": "Podręcznik podstawowy",
+   "page": 332,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": 30,
+    "S": 30,
+    "Wt": 35,
+    "I": 30,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 35,
+    "Ogd": 25,
+    "Żyw": 12
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6",
+    "Mieszkaniec Lasu",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Choroba (Ospa Zwierzęca)",
+    "Mutacja",
+    "Pancerz (1)",
+    "Rozmiar (Mały)",
+    "Spaczenie (Pomniejsze)",
+    "Strzelanie +7 (25)",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek"
+  },
+  {
+   "name": "Minotaur",
+   "source": "Podręcznik podstawowy",
+   "page": 332,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": 25,
+    "S": 44,
+    "Wt": 45,
+    "I": 20,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 20,
+    "SW": 30,
+    "Ogd": 15,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Rogi +9",
+    "Rozmiar (Duży)",
+    "Widzenie w Ciemności",
+    "Żarłoczny"
+   ],
+   "optional": [
+    "Choroba (Ospa Zwierzęca)",
+    "Furia",
+    "Mieszkaniec Lasu",
+    "Mutacja",
+    "Spaczenie (Pomniejsze)",
+    "Wojowniczy",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek"
+  },
+  {
+   "name": "Szaman rykowców",
+   "source": "Podręcznik podstawowy",
+   "page": 332,
+   "stats": {
+    "Sz": 4,
+    "WW": 40,
+    "US": 30,
+    "S": 30,
+    "Wt": 45,
+    "I": 40,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 30,
+    "SW": 50,
+    "Ogd": 30,
+    "Żyw": 16
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Mieszkaniec Lasu",
+    "Spaczenie (Pomniejsze)",
+    "Furia",
+    "Rogi +6",
+    "Widzenie w Ciemności",
+    "Rzucanie Czarów (Cienia, Śmierci lub Zwierząt albo dowolna Tradycja Chaosu)"
+   ],
+   "optional": [
+    "Choroba (Ospa Zwierzęca)",
+    "Mutacja",
+    "Rozmiar (Duży)",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek"
+  },
+  {
+   "name": "Mutant",
+   "source": "Podręcznik podstawowy",
+   "page": 333,
+   "stats": {
+    "Sz": 4,
+    "WW": 30,
+    "US": 30,
+    "S": 30,
+    "Wt": 30,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 30,
+    "Ogd": 30,
+    "Żyw": 12
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Mutacja",
+    "Spaczenie (Pomniejsze)"
+   ],
+   "optional": [
+    "Wszystkie Cechy Stworzeń"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu"
+  },
+  {
+   "name": "Kultysta",
+   "source": "Podręcznik podstawowy",
+   "page": 333,
+   "stats": {
+    "Sz": 4,
+    "WW": 30,
+    "US": 30,
+    "S": 30,
+    "Wt": 30,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 30,
+    "Ogd": 30,
+    "Żyw": 12
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +6"
+   ],
+   "optional": [
+    "Mutacja",
+    "Pancerz (1)",
+    "Rzucanie Czarów (Chaos)",
+    "Spaczenie (Pomniejsze)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu"
+  },
+  {
+   "name": "Wojownik Chaosu",
+   "source": "Podręcznik podstawowy",
+   "page": 334,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 45,
+    "Zw": 55,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 55,
+    "Ogd": 25,
+    "Żyw": 17
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Czempion",
+    "Broń +8",
+    "Pancerz (5)",
+    "Spaczenie (Pomniejsze)"
+   ],
+   "optional": [
+    "Choroba",
+    "Dekoncentrujący",
+    "Mutacja",
+    "Rzucanie Czarów (Chaos)",
+    "Spaczenie Umysłu",
+    "Szał Bojowy",
+    "Wojowniczy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu"
+  },
+  {
+   "name": "Krwiopuszcz Khorna",
+   "source": "Podręcznik podstawowy",
+   "page": 335,
+   "stats": {
+    "Sz": 5,
+    "WW": 55,
+    "US": 35,
+    "S": 45,
+    "Wt": 35,
+    "I": 60,
+    "Zw": 40,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 70,
+    "Ogd": 15,
+    "Żyw": 17
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Czempion",
+    "Demoniczny 8+",
+    "Nie Czuje Bólu",
+    "Niestabilny",
+    "Pancerz (5)",
+    "Pazury",
+    "Rogi +8",
+    "Spaczenie (Średnie)",
+    "Strach (3)",
+    "Szał Bojowy"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon"
+  },
+  {
+   "name": "Demonetka Slaanesha",
+   "source": "Podręcznik podstawowy",
+   "page": 335,
+   "stats": {
+    "Sz": 4,
+    "WW": 60,
+    "US": 50,
+    "S": 40,
+    "Wt": 30,
+    "I": 65,
+    "Zw": 60,
+    "Zr": 35,
+    "Int": 30,
+    "SW": 70,
+    "Ogd": 45,
+    "Żyw": 17
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Czempion",
+    "Dekoncentrujący",
+    "Demoniczny 8+",
+    "Niestabilny",
+    "Spaczenie (Średnie)",
+    "Strach (2)",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon"
+  }
+ ]
+}
