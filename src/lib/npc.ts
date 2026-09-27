@@ -53,6 +53,8 @@ export interface WeaponView {
   skill: number;
   skillName: string;
   qualities: string[];
+  flaws: string[];
+  reach?: string;
   ranged: boolean;
   range?: string;
   note?: string;
@@ -104,16 +106,9 @@ export function shapedHeroModifiers(profile: string, archetype: string): Record<
   return out;
 }
 
-/** Suma lub maksimum modyfikatorow profili bohaterow dla cechy. */
+/** Premia profili bohaterow dla cechy - stala, niezalezna od rozwiniec. */
 function heroModifier(npc: Npc, code: Attribute): number {
-  let best = 0;
-  let sum = 0;
-  for (const name of npc.heroProfiles) {
-    const v = shapedHeroModifiers(name, npc.archetype)[code];
-    best = Math.max(best, v);
-    sum += v;
-  }
-  return gd.getSettings().heroProfileMode === "add" ? sum : best;
+  return npc.heroProfiles.reduce((sum, name) => sum + shapedHeroModifiers(name, npc.archetype)[code], 0);
 }
 
 /** Tytul i status poziomu profesji. */
@@ -206,8 +201,7 @@ export function computeNpc(input: Npc): NpcView {
     const base = cb ? cb.base : (race?.characteristics[code] ?? 20);
     const roll = absent ? 0 : (npc.rolls[code] ?? 0);
     const adv = npc.charAdvances[code] ?? 0;
-    const heroRaw = heroModifier(npc, code);
-    const hero = gd.getSettings().heroProfileMode === "max" ? Math.max(0, heroRaw - adv) : heroRaw;
+    const hero = heroModifier(npc, code);
     const talent = talentBonus[code] ?? 0;
     const trait = traitBonus[code] ?? 0;
     const total = absent ? 0 : Math.max(0, base + roll + adv + hero + talent + trait);
@@ -242,13 +236,25 @@ export function computeNpc(input: Npc): NpcView {
   for (const name of npc.weapons) {
     const w = getWeaponDef(name);
     if (!w) {
-      weapons.push({ name, damage: null, skill: totals.WW, skillName: "WW", qualities: [], ranged: false, natural: false });
+      weapons.push({ name, damage: null, skill: totals.WW, skillName: "WW", qualities: [], flaws: [], ranged: false, natural: false });
       continue;
     }
     const { def, ranged } = w;
     const dmg = def.damage == null ? null : def.damage + (def.sb ? sb : 0) + heroWeapon;
     const skill = weaponSkill(skills, chars, ranged, def.group);
-    weapons.push({ name, damage: dmg, skill: skill.value, skillName: skill.name, qualities: def.qualities, ranged, range: def.range, note: def.note, natural: false });
+    weapons.push({
+      name: w.name,
+      damage: dmg,
+      skill: skill.value,
+      skillName: skill.name,
+      qualities: def.qualities,
+      flaws: def.flaws ?? [],
+      reach: def.reach,
+      ranged,
+      range: ranged ? def.range : undefined,
+      note: def.note,
+      natural: false
+    });
   }
   if (creature) {
     const hasCareerWeapon = npc.weapons.length > 0;
@@ -268,6 +274,7 @@ export function computeNpc(input: Npc): NpcView {
         skill: skill.value,
         skillName: skill.name,
         qualities: [],
+        flaws: [],
         ranged,
         range: a.range,
         natural: true
@@ -348,8 +355,12 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   }
   const stat = (c: Attribute) => (view.chars[c].absent ? "–" : String(view.chars[c].total));
   lines.push(ATTRIBUTES.map((c) => `${c} ${stat(c)}`).join(" | ") + ` | Żyw ${view.wounds} | Sz ${view.movement}`);
-  if (view.weapons.length) {
-    lines.push("Broń: " + view.weapons.map((w) => weaponLabel(w) + (w.qualities.length ? ` — ${w.qualities.join(", ")}` : "")).join("; "));
+  for (const w of view.weapons) {
+    const extra = [
+      w.qualities.length ? `Zalety: ${w.qualities.join(", ")}` : "",
+      w.flaws.length ? `Wady: ${w.flaws.join(", ")}` : ""
+    ].filter(Boolean);
+    lines.push(`Broń: ${weaponLabel(w)}${extra.length ? " — " + extra.join("; ") : ""}`);
   }
   lines.push(`Redukcja obrażeń (BWt+PP): ${armourLine(view)}`);
   if (npc.armour.length) lines.push("Pancerz: " + npc.armour.join(", "));

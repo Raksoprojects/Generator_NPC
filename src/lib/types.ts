@@ -160,8 +160,6 @@ export interface GeneratorSettings {
   /** Ile najwazniejszych cech archetypu dostaje premie i jaka maksymalnie. */
   keyCharCount: number;
   keyCharBonus: number;
-  /** "add": profil bohatera dodaje stale wartosci; "max": liczy sie tylko nadwyzka ponad rozwiniecia. */
-  heroProfileMode: "max" | "add";
   /** "archetype": S i Wt stale, reszta wg kolejnosci cech archetypu; "bestiary": doslownie. */
   heroProfileShape: "archetype" | "bestiary";
   /** Progi k100 dla liczby cech opcjonalnych. */
@@ -222,6 +220,8 @@ export interface SpellsData {
 
 export interface WeaponDef {
   group: string;
+  /** "jednoręczna", "dwuręczna", "druga ręka", "z siodła"... */
+  hands?: string;
   twoHanded?: boolean;
   reach?: string;
   range?: string;
@@ -229,9 +229,22 @@ export interface WeaponDef {
   damage: number | null;
   /** Czy do obrazen dodaje sie Bonus z Sily. */
   sb: boolean;
+  /** Zalety ("A albo B" = wybor przed rzutem). */
   qualities: string[];
+  /** Wady. */
+  flaws?: string[];
   shield?: number;
   note?: string;
+  enc?: string;
+  availability?: string;
+}
+
+/** Wagi wyboru broni dla wyposazenia "broń ręczna" / "broń dwuręczna". */
+export interface WeaponChoice {
+  default: Record<string, number>;
+  race?: Record<string, Record<string, number>>;
+  archetype?: Record<string, Record<string, number>>;
+  creatureGroup?: Record<string, Record<string, number>>;
 }
 
 export interface ArmourDef {
@@ -247,7 +260,10 @@ export interface WeaponsData {
   ranged: Record<string, WeaponDef>;
   armour: Record<string, ArmourDef>;
   armourSets: Record<string, string[]>;
-  aliases: Record<string, string>;
+  /** Stare nazwy broni (zapisane BN) -> nazwy z kart. */
+  legacy: Record<string, string>;
+  handWeapon: WeaponChoice;
+  twoHandedWeapon: WeaponChoice;
   qualities: Record<string, string>;
 }
 

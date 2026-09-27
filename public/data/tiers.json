@@ -7,7 +7,6 @@
     "keySkillBonus": 5,
     "keyCharCount": 2,
     "keyCharBonus": 3,
-    "heroProfileMode": "add",
     "heroProfileShape": "archetype",
     "traitRoll": [
       {

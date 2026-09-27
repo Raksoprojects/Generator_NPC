@@ -214,6 +214,15 @@ describe("wartosci koncowe", () => {
     expect(sum(thief)).toBe(sum(wizard));
   });
 
+  it("zmiana rozwiniec zawsze zmienia ceche, takze z profilem bohatera", () => {
+    const npc = generateNpc({ archetype: "Wojownik", tier: "doswiadczony" }, seedRng(8));
+    const before = computeNpc(npc);
+    for (const code of ATTRIBUTES) {
+      const changed = computeNpc({ ...npc, charAdvances: { ...npc.charAdvances, [code]: npc.charAdvances[code] + 1 } });
+      expect(changed.chars[code].total, code).toBe(before.chars[code].total + 1);
+    }
+  });
+
   it("profil bohatera daje stala premie niezaleznie od rozwiniec", () => {
     const npc = generateNpc({ archetype: "Złodziej", tier: "slaby" }, seedRng(21));
     const with1 = computeNpc({ ...npc, heroProfiles: ["Pomniejszy Bohater"] });
