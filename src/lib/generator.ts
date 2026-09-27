@@ -5,22 +5,32 @@
  *   2. rasa, plec, imie                        (sekcja "tozsamosc"),
  *   3. rzuty 2k10 na cechy                     (sekcja "rzuty"),
  *   4. sciezka profesji i rozwoj przez poziomy (sekcja "rozwoj"),
- *   5. cechy opcjonalne (Cechy Stworzen)       (sekcja "cechyStworzen"),
- *   6. profile bohaterow (poziom BN + dowodca).
+ *   5. cechy opcjonalne i mutacje              (sekcja "cechyStworzen"),
+ *   6. profile bohaterow (poziom BN + dowodca), bron, pancerz, zaklecia.
+ *
+ * Stworzenia z bestiariusza (GenSpec.creature) maja baze cech z ksiazki;
+ * bestie rozwijaja sie przez umiejetnosci i Cechy Stworzen (creatures.ts),
+ * stworzenia cywilizowane z archetypem - przez profesje jak ludzie.
  *
  * Kazdy parametr GenSpec moze byc ustawiony recznie (tryb pol-losowy) albo
  * pominiety - wtedy jest losowany. rerollNpc() losuje ponownie tylko
  * niezablokowane sekcje istniejacego BN.
  */
 
+import { beastSkills, beastTraits, bookSkillsAndTalents, familyTraitWeights, rollCreature } from "./creatures";
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
+import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
+import { pickSpells } from "./magic";
+import { rollNpcMutations } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
-import type { Archetype, CareerStep, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
+import type { Archetype, CareerStep, CreatureDef, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
 
 /** Parametry generowania. Brak pola = wartosc losowa. */
 export interface GenSpec {
+  /** Stworzenie z bestiariusza zamiast rasy (archetyp tylko dla cywilizowanych). */
+  creature?: string;
   race?: string;
   sex?: Sex;
   name?: string;
@@ -83,7 +93,9 @@ export function pickRace(spec: GenSpec, archetype: string, rng: Rng): string {
 }
 
 export function pickName(race: string, sex: Sex, rng: Rng): string {
-  const table = gd.getNames(race) ?? gd.getNames("Człowiek");
+  const creature = gd.getCreature(race);
+  const table = creature ? gd.getNames(creature.group) : (gd.getNames(race) ?? gd.getNames("Człowiek"));
+  if (creature && !table) return creature.name;
   if (!table) return "Bezimienny";
   const first = pick(sex === "K" ? table.female : table.male, rng) ?? "Bezimienny";
   const last = pick(table.surnames, rng);
@@ -118,10 +130,15 @@ export function rollCharacteristics(archetype: Archetype | undefined, rng: Rng, 
 // Etap 4: sciezka profesji
 // ---------------------------------------------------------------------------
 
+/** Czy rasa moze wykonywac profesje; stworzenia cywilizowane - te dostepne dla ludzi. */
+function raceOk(profession: string, race: string): boolean {
+  return gd.professionAllowsRace(profession, gd.getCreature(race) ? "Człowiek" : race);
+}
+
 function professionCandidates(arch: Archetype, race: string): Record<string, number> {
   const out: Record<string, number> = {};
   for (const [name, w] of Object.entries(arch.professions)) {
-    if (gd.getProfession(name) && gd.professionAllowsRace(name, race)) out[name] = w;
+    if (gd.getProfession(name) && raceOk(name, race)) out[name] = w;
   }
   if (Object.keys(out).length) return out;
   // Zadna profesja archetypu nie pasuje do rasy - bierzemy dowolna istniejaca.
@@ -136,13 +153,13 @@ function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rn
   delete cands[main];
   const weights: Record<string, number> = {};
   for (const [name, w] of Object.entries(cands)) {
-    if (!gd.professionAllowsRace(name, race)) continue;
+    if (!raceOk(name, race)) continue;
     weights[name] = w * (gd.getProfession(name)?.class === mainClass ? 2 : 1);
   }
   if (Object.keys(weights).length) return weightedKey(weights, rng);
   // Archetyp nie ma drugiej profesji dla tej rasy - dowolna z tej samej klasy.
   const sameClass = gd.allProfessionNames().filter(
-    (p) => p !== main && gd.getProfession(p)?.class === mainClass && gd.professionAllowsRace(p, race)
+    (p) => p !== main && gd.getProfession(p)?.class === mainClass && raceOk(p, race)
   );
   return pick(sameClass, rng);
 }
@@ -423,6 +440,13 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     let picks = tier?.talentsPerLevel ?? 1;
     if (!deterministic && tier && chance(tier.extraTalentChance, rng)) picks += 1;
     const available = [...pool];
+    // Talenty tozsamosci archetypu (np. Magia Prosta u czarodzieja) - zawsze.
+    for (const t of pool) {
+      if (arch?.requiredTalents?.some((r) => matchesKey(t, r))) {
+        gainTalent(npc, t, chars);
+        available.splice(available.indexOf(t), 1);
+      }
+    }
     for (let i = 0; i < picks && available.length; i++) {
       const choice = deterministic
         ? [...available].sort((a, b) => talentWeight(arch, b) - talentWeight(arch, a))[0]
@@ -512,16 +536,20 @@ export function traitCountForRoll(roll: number): number {
   return 0;
 }
 
-/** Losuje cechy opcjonalne bez powtorzen, z wagami archetypu. */
-export function pickTraits(count: number, archetype: string, exclude: string[], rng: Rng): string[] {
+/**
+ * Losuje cechy opcjonalne bez powtorzen, z wagami archetypu (albo rodziny
+ * stworzenia - wtedy cechy spoza rodziny maja wage 0.2).
+ */
+export function pickTraits(count: number, archetype: string, exclude: string[], rng: Rng, weights?: Record<string, number>): string[] {
   const arch = gd.getArchetype(archetype);
-  const def = gd.getSettings().defaultTraitWeight;
+  const def = weights ? 0.2 : gd.getSettings().defaultTraitWeight;
+  const table = weights ?? arch?.traits;
   const pool = Object.entries(gd.getCreatureTraits())
     .filter(([name, t]) => t.randomPool && !exclude.includes(name))
     .map(([name]) => name);
   const out: string[] = [];
   for (let i = 0; i < count && pool.length; i++) {
-    const t = weightedPick(pool, (name) => arch?.traits?.[name] ?? def, rng);
+    const t = weightedPick(pool, (name) => table?.[name] ?? def, rng);
     if (!t) break;
     out.push(t);
     pool.splice(pool.indexOf(t), 1);
@@ -529,17 +557,23 @@ export function pickTraits(count: number, archetype: string, exclude: string[], 
   return out;
 }
 
-function rollTraits(spec: GenSpec, archetype: string, rng: Rng): string[] {
+function rollTraits(spec: GenSpec, npc: Npc, rng: Rng): string[] {
   const chosen = [...(spec.traits ?? [])];
   const random = spec.randomTraits ?? !spec.deterministic;
   if (!random) return chosen;
-  return [...chosen, ...pickTraits(traitCountForRoll(rollK100(rng)), archetype, chosen, rng)];
+  const weights = isBeast(npc) ? familyTraitWeights(gd.getCreature(npc.creature)) : undefined;
+  return [...chosen, ...pickTraits(traitCountForRoll(rollK100(rng)), npc.archetype, chosen, rng, weights)];
 }
 
-function heroProfilesFor(spec: GenSpec, tierId: TierId): string[] {
+/** Bestia = stworzenie bez archetypu (rozwoj przez cechy, nie profesje). */
+export function isBeast(npc: Pick<Npc, "creature" | "archetype">): boolean {
+  return !!npc.creature && !npc.archetype;
+}
+
+function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean): string[] {
   const out = new Set<string>(spec.heroProfiles ?? []);
   const auto = gd.getTier(tierId)?.heroProfile;
-  if (auto && spec.autoHeroProfile !== false) out.add(auto);
+  if (auto && !beast && spec.autoHeroProfile !== false) out.add(auto);
   if (spec.commander) out.add(COMMANDER_PROFILE);
   return [...out];
 }
@@ -554,30 +588,82 @@ export function newId(): string {
   return `npc-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+function rollAttributes(npc: Npc, rng: Rng, deterministic = false): Record<Attribute, number> {
+  const arch = gd.getArchetype(npc.archetype);
+  const creature = gd.getCreature(npc.creature);
+  return creature
+    ? rollCreature(creature, arch?.characteristics ?? [], rng, deterministic)
+    : rollCharacteristics(arch, rng, deterministic);
+}
+
+/**
+ * Sekcja "rozwoj": sciezka profesji (ludzie, stworzenia cywilizowane) albo
+ * rozwoj bestii, a do tego bron i pancerz.
+ */
+function develop(npc: Npc, professions: string[] | undefined, rng: Rng, deterministic: boolean): void {
+  const creature = gd.getCreature(npc.creature);
+  if (creature && isBeast(npc)) {
+    npc.careerPath = [];
+    npc.charAdvances = emptyAttrs();
+    npc.skills = [];
+    npc.talents = [];
+    npc.specChoices = {};
+    bookSkillsAndTalents(npc, creature);
+    beastSkills(npc, creature);
+    npc.trappings = creature.trappings.map((t) => rollDiceText(t, rng, deterministic));
+    npc.weapons = [];
+    npc.armour = [];
+    npc.money = "";
+    return;
+  }
+  npc.careerPath = buildCareerPath({ professions }, npc.archetype, npc.tier, npc.race, rng);
+  developCareer(npc, rng, deterministic);
+  if (creature) bookSkillsAndTalents(npc, creature);
+  equipNpc(npc, rng);
+}
+
+/** Sekcja "cechyStworzen": cechy opcjonalne (15/5/1%), cechy poziomu bestii, mutacje. */
+function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean): void {
+  const creature = gd.getCreature(npc.creature);
+  npc.traits = rollTraits(spec, npc, rng);
+  if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
+  npc.mutations = rollNpcMutations(creature?.traits ?? [], rng, deterministic);
+}
+
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
-  const archetype = pickArchetype(spec, rng);
+  const creature: CreatureDef | undefined = gd.getCreature(spec.creature);
+  const civilized = creature ? gd.isCivilized(creature.name) : false;
+  const archetype = creature
+    ? (civilized && spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : "")
+    : pickArchetype(spec, rng);
   const tier = pickTier(spec, rng);
-  const race = pickRace(spec, archetype, rng);
+  const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
   const det = !!spec.deterministic;
+  const beast = !!creature && !archetype;
 
   const npc: Npc = {
     id: newId(),
     version: 1,
-    name: spec.name?.trim() || pickName(race, sex, rng),
+    name: spec.name?.trim() || (beast ? creature!.name : pickName(race, sex, rng)),
     sex,
     race,
+    creature: creature?.name,
     archetype,
     tier,
     label: spec.label,
     careerPath: [],
-    rolls: rollCharacteristics(gd.getArchetype(archetype), rng, det),
+    rolls: emptyAttrs(),
     charAdvances: emptyAttrs(),
     skills: [],
     talents: [],
     traits: [],
-    heroProfiles: heroProfilesFor(spec, tier),
+    heroProfiles: heroProfilesFor(spec, tier, beast),
+    weapons: [],
+    armour: [],
+    spells: [],
+    mutations: [],
     trappings: [],
     money: "",
     notes: "",
@@ -585,31 +671,32 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     locks: {},
     createdAt: new Date().toISOString()
   };
-  npc.careerPath = buildCareerPath(spec, archetype, tier, race, rng);
-  developCareer(npc, rng, det);
-  npc.traits = rollTraits(spec, archetype, rng);
+  npc.rolls = rollAttributes(npc, rng, det);
+  develop(npc, spec.professions, rng, det);
+  rollFeatures(npc, spec, rng, det);
+  npc.spells = pickSpells(npc, rng, det);
   return npc;
 }
 
 /**
  * Losuje ponownie niezablokowane sekcje BN. Rasa, archetyp i poziom zostaja;
- * zablokowana sekcja "rozwoj" zachowuje sciezke profesji.
+ * zablokowana sekcja "rozwoj" zachowuje sciezke profesji, bron i zaklecia.
  */
 export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
   const next: Npc = structuredClone(npc);
+  next.weapons ??= [];
+  next.armour ??= [];
+  next.spells ??= [];
+  next.mutations ??= [];
   const unlocked = (s: NpcSection) => !npc.locks[s];
-  if (unlocked("tozsamosc")) {
+  if (unlocked("tozsamosc") && !isBeast(next)) {
     next.sex = chance(0.5, rng) ? "M" : "K";
     next.name = pickName(next.race, next.sex, rng);
   }
-  if (unlocked("rzuty")) next.rolls = rollCharacteristics(gd.getArchetype(next.archetype), rng);
-  if (unlocked("rozwoj")) {
-    next.careerPath = buildCareerPath({}, next.archetype, next.tier, next.race, rng);
-    developCareer(next, rng);
-  }
-  if (unlocked("cechyStworzen")) {
-    next.traits = pickTraits(traitCountForRoll(rollK100(rng)), next.archetype, [], rng);
-  }
+  if (unlocked("rzuty")) next.rolls = rollAttributes(next, rng);
+  if (unlocked("rozwoj")) develop(next, undefined, rng, false);
+  if (unlocked("cechyStworzen")) rollFeatures(next, {}, rng, false);
+  if (unlocked("rozwoj") || unlocked("cechyStworzen")) next.spells = pickSpells(next, rng);
   return next;
 }
 
@@ -619,11 +706,11 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
  */
 export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng): Npc {
   const next: Npc = structuredClone(npc);
-  next.careerPath = buildCareerPath({ professions }, next.archetype, next.tier, next.race, rng);
-  developCareer(next, rng);
+  develop(next, professions, rng, false);
+  next.spells = pickSpells(next, rng);
   const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);
   next.heroProfiles = next.heroProfiles.filter((h) => !auto.has(h));
   const tierProfile = gd.getTier(next.tier)?.heroProfile;
-  if (tierProfile) next.heroProfiles.unshift(tierProfile);
+  if (tierProfile && !isBeast(next)) next.heroProfiles.unshift(tierProfile);
   return next;
 }
