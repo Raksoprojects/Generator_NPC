@@ -582,9 +582,17 @@ function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean, rng: Rng
   const tier = gd.getTier(tierId);
   const autoOn = !beast && spec.autoHeroProfile !== false;
   if (tier?.heroProfile && autoOn) out.add(tier.heroProfile);
-  // Mala szansa na profil (np. zaawansowany jako Pomniejszy Bohater) - tylko przy losowaniu.
-  const extra = tier?.heroProfileChance;
-  if (extra && autoOn && !spec.deterministic && chance(extra.chance, rng)) out.add(extra.profile);
+  // Mala szansa na dodatkowy profil (Weteran, Doborowy, Pomniejszy Bohater) - tylko przy losowaniu.
+  if (autoOn && !spec.deterministic && tier?.heroProfileChances?.length) {
+    let roll = rng();
+    for (const c of tier.heroProfileChances) {
+      if (roll < c.chance) {
+        out.add(c.profile);
+        break;
+      }
+      roll -= c.chance;
+    }
+  }
   if (spec.commander) out.add(COMMANDER_PROFILE);
   return [...out];
 }
@@ -720,8 +728,8 @@ export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, 
   develop(next, professions, rng, false);
   next.spells = pickSpells(next, rng);
   const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);
-  // Profil wylosowany z szansy poziomu (np. zaawansowany Pomniejszy Bohater) zostaje.
-  auto.delete(gd.getTier(next.tier)?.heroProfileChance?.profile ?? "");
+  // Profil, ktory nowy poziom moze wylosowac (np. zaawansowany Pomniejszy Bohater), zostaje.
+  for (const c of gd.getTier(next.tier)?.heroProfileChances ?? []) auto.delete(c.profile);
   next.heroProfiles = next.heroProfiles.filter((h) => !auto.has(h));
   const tierProfile = gd.getTier(next.tier)?.heroProfile;
   if (tierProfile && !isBeast(next)) next.heroProfiles.unshift(tierProfile);

@@ -62,7 +62,7 @@
     },
     "sredni": {
       "label": "Średni",
-      "description": "Typowy przedstawiciel: drugi poziom profesji, około +10, kilka talentów najbardziej pasujących do archetypu.",
+      "description": "Typowy przedstawiciel: drugi poziom profesji, około +10, kilka talentów najbardziej pasujących do archetypu; przy losowaniu mała szansa na profil Weterana.",
       "randomWeight": 4,
       "totalLevels": {
         "2": 1
@@ -73,6 +73,9 @@
       "extraTalentChance": 0.5,
       "talentLevelUpChance": 0.3,
       "heroProfile": null,
+      "heroProfileChances": [
+        { "profile": "Weteran", "chance": 0.1 }
+      ],
       "keySkills": {
         "bonus": [
           3,
@@ -99,7 +102,7 @@
     },
     "zaawansowany": {
       "label": "Zaawansowany",
-      "description": "3–4 poziomy profesji (np. 2 poziomy Żołnierza i 2 Rycerza), około +15, więcej talentów i ich poziomów; przy losowaniu 10% szans na profil Pomniejszego Bohatera.",
+      "description": "3–4 poziomy profesji (np. 2 poziomy Żołnierza i 2 Rycerza), około +15, więcej talentów i ich poziomów; przy losowaniu mała szansa na profil Weterana, Doborowego albo Pomniejszego Bohatera.",
       "randomWeight": 2,
       "totalLevels": {
         "3": 1,
@@ -111,10 +114,11 @@
       "extraTalentChance": 0.5,
       "talentLevelUpChance": 0.5,
       "heroProfile": null,
-      "heroProfileChance": {
-        "profile": "Pomniejszy Bohater",
-        "chance": 0.1
-      },
+      "heroProfileChances": [
+        { "profile": "Weteran", "chance": 0.08 },
+        { "profile": "Doborowy", "chance": 0.05 },
+        { "profile": "Pomniejszy Bohater", "chance": 0.1 }
+      ],
       "keySkills": {
         "bonus": [
           5,
@@ -141,7 +145,7 @@
     },
     "doswiadczony": {
       "label": "Doświadczony",
-      "description": "Czwarty poziom profesji, dodatkowe talenty i ich poziomy, profil Pomniejszego Bohatera.",
+      "description": "Czwarty poziom profesji, dodatkowe talenty i ich poziomy, profil Pomniejszego Bohatera; przy losowaniu mała szansa na dodatkowy profil Doborowego.",
       "randomWeight": 1,
       "totalLevels": {
         "4": 2,
@@ -154,6 +158,9 @@
       "extraTalentChance": 0.7,
       "talentLevelUpChance": 0.6,
       "heroProfile": "Pomniejszy Bohater",
+      "heroProfileChances": [
+        { "profile": "Doborowy", "chance": 0.1 }
+      ],
       "keySkills": {
         "bonus": [
           8,

@@ -50,13 +50,16 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    poniżej **9** jest przerzucany — wojownik nie bywa miernotą w WW.
 4. **Ścieżka profesji.** Liczba poziomów zależy od poziomu BN:
 
-   | Poziom BN | Poziomy profesji | Najwyższy poziom w profesji | Profil bohatera |
-   |---|---|---|---|
-   | Słaby | 1 (czasem 2) | 2 | — |
-   | Średni | 2 | 2 | — |
-   | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | 10% szans na Pomniejszego Bohatera (tylko przy losowaniu) |
-   | Doświadczony | 4 (+ czasem 1 poziom poprzedniej profesji) | 4 | Pomniejszy Bohater |
-   | Heroiczny | 5–6 (4. poziom + poprzednia profesja) | 4 | Wielki Bohater |
+   | Poziom BN | Poziomy profesji | Najwyższy poziom w profesji | Profil bohatera | Szansa na dodatkowy profil (losowanie) |
+   |---|---|---|---|---|
+   | Słaby | 1 (czasem 2) | 2 | — | — |
+   | Średni | 2 | 2 | — | Weteran 10% |
+   | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | — | Weteran 8%, Doborowy 5%, Pomniejszy Bohater 10% |
+   | Doświadczony | 4 (+ czasem 1 poziom poprzedniej profesji) | 4 | Pomniejszy Bohater | Doborowy 10% |
+   | Heroiczny | 5–6 (4. poziom + poprzednia profesja) | 4 | Wielki Bohater | — |
+
+   Dodatkowy profil to najwyżej jeden na BN i pojawia się tylko przy losowaniu
+   (nie w trybie *Własny* i nie po odznaczeniu „Profil bohatera wg poziomu”).
 
    Tylko Doświadczeni i Heroiczni dochodzą do 4. poziomu. Pozostali, gdy mają
    więcej poziomów, przechodzą do innej, powiązanej profesji.
@@ -81,7 +84,10 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
 8. **Profile bohaterów** dają **stałe** premie, niezależne od rozwinięć. Siła i
    Wytrzymałość zawsze jak w Bestiariuszu; pozostałe wartości są rozkładane wg
    priorytetów archetypu (złodziej dostaje +45 do Zwinności, a nie do WW).
-   *Dowódcę Oddziału* i inne profile można dodać ręcznie.
+   Od najsłabszego: *Weteran* (WW +10, bez cech), *Dowódca Oddziału*,
+   *Doborowy* (WW +20, +1 do Broni — nazwa inna niż Cecha Stworzenia *Elitarny*,
+   żeby się nie myliły), *Pomniejszy Bohater*, *Wielki Bohater*. Każdy można
+   dodać albo zdjąć ręcznie w edytorze BN.
 9. **Broń i pancerz.** Broń i pancerz z wyposażenia profesji; ogólne „broń ręczna”
    czy „broń (dowolna)” zamieniane są na konkretną broń pasującą do postaci
    (krasnolud — topór albo młot, elf — miecz, chłop — pałka albo topór). Brak

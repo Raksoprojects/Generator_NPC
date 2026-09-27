@@ -154,9 +154,10 @@ describe("rozwoj losowy", () => {
         for (let seed = 1; seed <= 25; seed++) {
           const npc = generateNpc({ archetype: archName, tier, race: "Człowiek" }, seedRng(seed));
           const v = computeNpc(npc);
-          // Profil z szansy poziomu (zaawansowany Pomniejszy Bohater) to swiadomy wyjatek - liczymy tylko profil poziomu.
-          const ownProfile = !!gd.getTier(tier)!.heroProfile;
-          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c] + (ownProfile ? v.chars[c].hero : 0));
+          // Profile z szansy poziomu (Weteran, Doborowy...) to swiadomy wyjatek - liczymy tylko staly profil poziomu.
+          const own = gd.getTier(tier)!.heroProfile;
+          const ownHero = (c: (typeof ATTRIBUTES)[number]) => (own ? shapedHeroModifiers(own, archName)[c] : 0);
+          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c] + ownHero(c));
           for (const k of arch.keySkills.slice(0, s.keySkillCount)) {
             note(k, Math.max(0, ...npc.skills.filter((x) => x.name === k || x.name.startsWith(`${k} (`)).map((x) => x.advances)));
           }
@@ -320,13 +321,29 @@ describe("ponowne losowanie", () => {
 });
 
 describe("szansa na profil bohatera", () => {
-  it("zaawansowany czasem jest Pomniejszym Bohaterem, ale tylko przy losowaniu", () => {
-    let heroes = 0;
-    for (let seed = 1; seed <= 300; seed++) {
-      if (generateNpc({ archetype: "Wojownik", tier: "zaawansowany" }, seedRng(seed)).heroProfiles.includes("Pomniejszy Bohater")) heroes++;
+  it("zaawansowany czasem jest Weteranem, Doborowym albo Pomniejszym Bohaterem, ale tylko przy losowaniu", () => {
+    const seen: Record<string, number> = {};
+    for (let seed = 1; seed <= 600; seed++) {
+      const hp = generateNpc({ archetype: "Wojownik", tier: "zaawansowany" }, seedRng(seed)).heroProfiles;
+      expect(hp.length).toBeLessThanOrEqual(1);
+      for (const h of hp) seen[h] = (seen[h] ?? 0) + 1;
     }
-    expect(heroes).toBeGreaterThan(10);
-    expect(heroes).toBeLessThan(60);
+    expect(seen["Weteran"]).toBeGreaterThan(20);
+    expect(seen["Doborowy"]).toBeGreaterThan(10);
+    expect(seen["Pomniejszy Bohater"]).toBeGreaterThan(30);
+    expect(seen["Pomniejszy Bohater"]).toBeLessThan(100);
+    let mid = 0;
+    let exp = 0;
+    for (let seed = 1; seed <= 300; seed++) {
+      const m = generateNpc({ archetype: "Kupiec", tier: "sredni" }, seedRng(seed)).heroProfiles;
+      if (m.includes("Weteran")) mid++;
+      expect(m.every((h) => h === "Weteran")).toBe(true);
+      const d = generateNpc({ archetype: "Kupiec", tier: "doswiadczony" }, seedRng(seed)).heroProfiles;
+      expect(d).toContain("Pomniejszy Bohater");
+      if (d.includes("Doborowy")) exp++;
+    }
+    expect(mid).toBeGreaterThan(10);
+    expect(exp).toBeGreaterThan(10);
     for (let seed = 1; seed <= 50; seed++) {
       expect(generateNpc({ archetype: "Wojownik", tier: "zaawansowany", deterministic: true }, seedRng(seed)).heroProfiles).toEqual([]);
       expect(generateNpc({ archetype: "Wojownik", tier: "zaawansowany", autoHeroProfile: false }, seedRng(seed)).heroProfiles).toEqual([]);

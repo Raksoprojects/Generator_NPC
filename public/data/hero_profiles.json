@@ -1,4 +1,16 @@
 {
+  "Weteran": {
+    "modifiers": { "WW": 10, "US": 5, "S": 5, "Wt": 5, "I": 10, "Zw": 5, "Int": 0, "SW": 10, "Ogd": 0 },
+    "traits": [],
+    "description": "Ktoś, kto przeżył więcej niż inni w jego fachu — zna swoje rzemiosło i nie traci głowy.",
+    "source": "Generator (na wzór Bestiariusza 2.0)"
+  },
+  "Doborowy": {
+    "modifiers": { "WW": 20, "US": 15, "S": 5, "Wt": 5, "I": 15, "Zw": 10, "Zr": 5, "Int": 5, "SW": 15, "Ogd": 5 },
+    "traits": ["+1 do Broni"],
+    "description": "Wyborowy przedstawiciel swojego rodzaju — gwardia przyboczna, doborowy oddział, najlepszy w okolicy.",
+    "source": "Generator (na wzór Bestiariusza 2.0)"
+  },
   "Dowódca Oddziału": {
     "modifiers": { "WW": 15, "US": 10, "S": 5, "Wt": 5, "I": 10, "Zw": 5, "Int": 5, "SW": 10, "Ogd": 10 },
     "traits": [],

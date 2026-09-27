@@ -143,8 +143,11 @@ export interface TierDef {
   talentLevelUpChance: number;
   /** Profil bohatera nakladany automatycznie (lub null). */
   heroProfile: string | null;
-  /** Szansa na profil bohatera przy losowaniu (np. zaawansowany: Pomniejszy Bohater 10%). */
-  heroProfileChance?: { profile: string; chance: number };
+  /**
+   * Dodatkowy profil przy losowaniu - najwyzej jeden, szanse sie wykluczaja
+   * (np. zaawansowany: Weteran 10%, Doborowy 5%, Pomniejszy Bohater 10%).
+   */
+  heroProfileChances?: { profile: string; chance: number }[];
   /** Premia kluczowych umiejetnosci archetypu i laczne rozwiniecia min/max. */
   keySkills: KeyBonus;
   /** Premia kluczowych cech archetypu i laczne rozwiniecia min/max (bez profilu bohatera). */
