@@ -24,6 +24,11 @@ export function loadTestGameData(): void {
     archetypes: readJson("archetypes.json"),
     specializations: readJson("specializations.json"),
     names: readJson("names.json"),
-    groupPresets: readJson("group_presets.json")
+    groupPresets: readJson("group_presets.json"),
+    spells: readJson("spells.json"),
+    weapons: readJson("weapons.json"),
+    creatures: readJson("creatures.json"),
+    creatureFamilies: readJson("creature_families.json"),
+    mutations: readJson("mutations.json")
   } as GameData);
 }

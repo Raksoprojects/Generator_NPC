@@ -141,6 +141,8 @@ export interface TierDef {
   talentLevelUpChance: number;
   /** Profil bohatera nakladany automatycznie (lub null). */
   heroProfile: string | null;
+  /** Zaklecia: najwyzszy PZ oraz odchylenie liczby zaklec tajemnych od Bonusu z Int. */
+  spells: { maxCn: number; arcane: [number, number] };
 }
 
 export interface GeneratorSettings {
@@ -187,6 +189,119 @@ export interface Archetype {
   traits?: Record<string, number>;
   /** Preferowane specjalizacje: nazwa bazowa -> {specjalizacja: waga}. */
   specializations?: Record<string, Record<string, number>>;
+  /** Talenty brane zawsze, gdy pojawia sie na poziomie profesji (np. Magia Prosta). */
+  requiredTalents?: string[];
+  /** Zestaw pancerza (klucz z weapons.json armourSets) wg poziomu BN. */
+  armour?: Partial<Record<TierId, string>>;
+}
+
+// ---------------------------------------------------------------------------
+// Zaklecia, bron, stworzenia, mutacje
+// ---------------------------------------------------------------------------
+
+export interface SpellDef {
+  name: string;
+  /** Klucz tradycji (Prosta, Tajemna, Ognia, Metalu...). */
+  lore: string;
+  /** Poziom Zaklecia (PZ). */
+  cn: number;
+  range: string;
+  target: string;
+  duration: string;
+  description: string;
+  source: string;
+  page: number;
+}
+
+export interface SpellsData {
+  lores: Record<string, { label: string; wind: string | null }>;
+  spells: SpellDef[];
+}
+
+export interface WeaponDef {
+  group: string;
+  twoHanded?: boolean;
+  reach?: string;
+  range?: string;
+  /** Obrazenia broni (bez BS); null = brak obrazen (np. arkan). */
+  damage: number | null;
+  /** Czy do obrazen dodaje sie Bonus z Sily. */
+  sb: boolean;
+  qualities: string[];
+  shield?: number;
+  note?: string;
+}
+
+export interface ArmourDef {
+  type: string;
+  locations: string[];
+  ap: number;
+  qualities: string[];
+  penalty?: string;
+}
+
+export interface WeaponsData {
+  melee: Record<string, WeaponDef>;
+  ranged: Record<string, WeaponDef>;
+  armour: Record<string, ArmourDef>;
+  armourSets: Record<string, string[]>;
+  aliases: Record<string, string>;
+  qualities: Record<string, string>;
+}
+
+/** Stworzenie z bestiariusza (creatures.json). Wartosci cech jak w ksiazce. */
+export interface CreatureDef {
+  name: string;
+  source: string;
+  page: number;
+  group: string;
+  family: string;
+  unique?: boolean;
+  /** Sz, WW ... Ogd, Żyw; null = stworzenie nie posiada cechy ("–"). */
+  stats: Record<string, number | null>;
+  skills: { name: string; value: number }[];
+  talents: string[];
+  traits: string[];
+  optional: string[];
+  abilities: { name: string; description: string }[];
+  trappings: string[];
+}
+
+export interface CreatureFamily {
+  civilized?: boolean;
+  skills: Record<string, number>;
+  traits: Record<string, number>;
+}
+
+export interface CreatureFamiliesData {
+  settings: {
+    tierFactor: Record<TierId, number>;
+    traitCount: Record<TierId, number>;
+    optionalChance: Record<TierId, number>;
+    tierLabels: Record<TierId, string>;
+  };
+  families: Record<string, CreatureFamily>;
+  notCivilized: string[];
+}
+
+export interface MutationRow {
+  min: number;
+  max: number;
+  name: string;
+  effect: string;
+  modifiers?: Partial<Record<Attribute, number>>;
+  movement?: number;
+  armour?: number;
+  headArmour?: number;
+  trait?: string;
+  rollLocation?: boolean;
+}
+
+export interface MutationsData {
+  settings: { chance: number; mentalShare: number };
+  physical: MutationRow[];
+  mental: MutationRow[];
+  locations: { min: number; max: number; name: string }[];
 }
 
 export interface SpecializationsData {
@@ -203,7 +318,10 @@ export interface NameTable {
 
 export interface GroupRow {
   count: number;
+  /** Archetyp (dla ras i stworzen cywilizowanych); pusty dla bestii. */
   archetype: string;
+  /** Stworzenie z bestiariusza (zamiast rasy). */
+  creature?: string;
   tier: TierId;
   race?: string;
   commander?: boolean;
@@ -237,6 +355,12 @@ export interface NpcTalent {
   level: number;
 }
 
+export interface NpcMutation {
+  kind: "physical" | "mental";
+  name: string;
+  location?: string;
+}
+
 /** Sekcje BN, ktore mozna zablokowac przed ponownym losowaniem. */
 export type NpcSection = "tozsamosc" | "rzuty" | "rozwoj" | "cechyStworzen";
 
@@ -248,7 +372,11 @@ export interface Npc {
   version: 1;
   name: string;
   sex: Sex;
+  /** Rasa (dla stworzen: nazwa stworzenia). */
   race: string;
+  /** Stworzenie z bestiariusza - baza cech to wartosci z ksiazki minus 10. */
+  creature?: string;
+  /** Archetyp; pusty dla bestii bez profesji. */
   archetype: string;
   tier: TierId;
   /** Etykieta w grupie (np. "Herszt"). */
@@ -266,6 +394,13 @@ export interface Npc {
   traits: string[];
   /** Profile bohaterow (np. Dowodca Oddzialu). */
   heroProfiles: string[];
+  /** Bron (nazwy z weapons.json). */
+  weapons: string[];
+  /** Elementy pancerza (nazwy z weapons.json). */
+  armour: string[];
+  /** Zaklecia (nazwy z spells.json). */
+  spells: string[];
+  mutations: NpcMutation[];
   trappings: string[];
   money: string;
   notes: string;

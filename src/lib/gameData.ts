@@ -8,7 +8,13 @@
 import type {
   Archetype,
   ClassesData,
+  CreatureDef,
+  CreatureFamiliesData,
   CreatureTrait,
+  MutationsData,
+  SpellDef,
+  SpellsData,
+  WeaponsData,
   GeneratorSettings,
   GroupPreset,
   HeroProfile,
@@ -41,6 +47,11 @@ export interface GameData {
   specializations: SpecializationsData;
   names: Record<string, NameTable>;
   groupPresets: Record<string, GroupPreset>;
+  spells: SpellsData;
+  weapons: WeaponsData;
+  creatures: { creatures: CreatureDef[] };
+  creatureFamilies: CreatureFamiliesData;
+  mutations: MutationsData;
   /** Opcjonalna nakladka profesji dla zasad domowych. */
   professionsDomowe?: ProfessionsData;
 }
@@ -63,7 +74,12 @@ const FILES = {
   archetypes: "archetypes.json",
   specializations: "specializations.json",
   names: "names.json",
-  groupPresets: "group_presets.json"
+  groupPresets: "group_presets.json",
+  spells: "spells.json",
+  weapons: "weapons.json",
+  creatures: "creatures.json",
+  creatureFamilies: "creature_families.json",
+  mutations: "mutations.json"
 } as const;
 
 /** Wstrzykuje dane bezposrednio (testy). */
@@ -297,4 +313,58 @@ export function getNames(race: string): NameTable | undefined {
 
 export function getGroupPresets(): Record<string, GroupPreset> {
   return data().groupPresets;
+}
+
+// ---------------------------------------------------------------------------
+// Zaklecia, bron, stworzenia, mutacje
+// ---------------------------------------------------------------------------
+
+export function getSpellsData(): SpellsData {
+  return data().spells;
+}
+
+export function getSpell(name: string): SpellDef | undefined {
+  const target = normalize(name);
+  return data().spells.spells.find((s) => normalize(s.name) === target);
+}
+
+/** Klucz tradycji zaklec dla nazwy z talentu, np. "Cienia" -> "Cieni", "Guślarstwo" -> "Guślarstwa". */
+export function spellLoreKey(name: string): string | undefined {
+  const lores = Object.keys(data().spells.lores);
+  const n = normalize(name);
+  if (!n) return undefined;
+  return lores.find((l) => normalize(l) === n) ?? lores.find((l) => normalize(l).slice(0, 5) === n.slice(0, 5));
+}
+
+export function getWeapons(): WeaponsData {
+  return data().weapons;
+}
+
+export function allCreatureNames(): string[] {
+  return data().creatures.creatures.map((c) => c.name);
+}
+
+export function getCreature(name: string | undefined): CreatureDef | undefined {
+  if (!name) return undefined;
+  return data().creatures.creatures.find((c) => c.name === name);
+}
+
+export function getCreatures(): CreatureDef[] {
+  return data().creatures.creatures;
+}
+
+export function getCreatureFamilies(): CreatureFamiliesData {
+  return data().creatureFamilies;
+}
+
+/** Czy stworzenie moze rozwijac sie przez profesje (orkowie, skaveny, kultysci...). */
+export function isCivilized(creature: string | undefined): boolean {
+  const c = getCreature(creature);
+  if (!c) return false;
+  const fam = data().creatureFamilies;
+  return !!fam.families[c.family]?.civilized && !fam.notCivilized.includes(c.name);
+}
+
+export function getMutations(): MutationsData {
+  return data().mutations;
 }
