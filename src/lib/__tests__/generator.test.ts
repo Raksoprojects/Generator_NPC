@@ -119,14 +119,54 @@ describe("rozwoj losowy", () => {
     }
   });
 
-  it("premia archetypu to najwyzej +5 w umiejetnosci i +3 w cesze", () => {
+  it("premia archetypu zalezy od poziomu BN (sredni: umiejetnosci 15-18, cechy 13-15)", () => {
     for (const seed of SEEDS) {
       const npc = generateNpc({ archetype: "Kupiec", tier: "sredni", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
-      // Ogd: Kupiec 1 i 2 -> maks. 10 z profesji + 3 premii.
-      expect(npc.charAdvances.Ogd).toBeLessThanOrEqual(13);
+      expect(npc.charAdvances.Ogd).toBeGreaterThanOrEqual(13);
+      expect(npc.charAdvances.Ogd).toBeLessThanOrEqual(15);
       const barter = npc.skills.find((s) => s.name === "Targowanie")!;
-      expect(barter.advances).toBeLessThanOrEqual(15);
-      expect(barter.advances).toBeGreaterThanOrEqual(8);
+      expect(barter.advances).toBeGreaterThanOrEqual(15);
+      expect(barter.advances).toBeLessThanOrEqual(18);
+    }
+  });
+
+  it("najslabszy BN wyzszego poziomu jest lepszy w kluczowych rzeczach od najsilniejszego nizszego", () => {
+    const s = gd.getSettings();
+    const tiers: TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny"];
+    // Progi z tiers.json nie nachodza na siebie (cechy od doswiadczonego rozdziela profil bohatera).
+    for (let i = 1; i < tiers.length; i++) {
+      const lower = gd.getTier(tiers[i - 1])!;
+      const upper = gd.getTier(tiers[i])!;
+      expect(upper.keySkills.min ?? 0, `${tiers[i]} umiejetnosci`).toBeGreaterThan(lower.keySkills.max ?? Infinity);
+      if (upper.heroProfile === lower.heroProfile) {
+        expect(upper.keyChars.min ?? 0, `${tiers[i]} cechy`).toBeGreaterThan(lower.keyChars.max ?? Infinity);
+      }
+    }
+    for (const archName of gd.allArchetypeNames()) {
+      const arch = gd.getArchetype(archName)!;
+      // Dla kazdej kluczowej cechy i umiejetnosci: [najmniej, najwiecej] rozwiniec na poziomie.
+      const range = (tier: TierId) => {
+        const out: Record<string, [number, number]> = {};
+        const note = (key: string, value: number) => {
+          const [lo, hi] = out[key] ?? [Infinity, -Infinity];
+          out[key] = [Math.min(lo, value), Math.max(hi, value)];
+        };
+        for (let seed = 1; seed <= 25; seed++) {
+          const npc = generateNpc({ archetype: archName, tier, race: "Człowiek" }, seedRng(seed));
+          const v = computeNpc(npc);
+          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c] + v.chars[c].hero);
+          for (const k of arch.keySkills.slice(0, s.keySkillCount)) {
+            note(k, Math.max(0, ...npc.skills.filter((x) => x.name === k || x.name.startsWith(`${k} (`)).map((x) => x.advances)));
+          }
+        }
+        return out;
+      };
+      const ranges = tiers.map(range);
+      for (let i = 1; i < tiers.length; i++) {
+        for (const [key, [lo]] of Object.entries(ranges[i])) {
+          expect(lo, `${archName} ${tiers[i]} ${key}`).toBeGreaterThan(ranges[i - 1][key][1]);
+        }
+      }
     }
   });
 

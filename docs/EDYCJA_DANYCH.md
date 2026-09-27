@@ -68,8 +68,8 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `minKeyRoll` | Minimalny wynik 2k10 w kluczowych cechach (domyślnie 9). |
 | `advancePerLevel` | Rozwinięcia za każdy ukończony poziom profesji (5). |
 | `currentLevelMin` | Najmniej rozwinięć za obecny, nieukończony poziom (2). |
-| `keySkillCount`, `keySkillBonus` | Ile najważniejszych umiejętności archetypu dostaje premię i jaką najwyżej (4, +5). |
-| `keyCharCount`, `keyCharBonus` | Ile najważniejszych cech archetypu dostaje premię i jaką najwyżej (2, +3). |
+| `keySkillCount` | Ile najważniejszych umiejętności archetypu dostaje premię (4). |
+| `keyCharCount` | Ile najważniejszych cech archetypu dostaje premię (2). |
 | `heroProfileShape` | `"archetype"` — S i Wt jak w Bestiariuszu, reszta rozkładana wg kolejności cech archetypu; `"bestiary"` — dosłownie. Profil zawsze dodaje stałe wartości. |
 | `traitRoll` | Progi k100 dla liczby cech opcjonalnych (`upTo` = do jakiego wyniku, `count` = ile cech). |
 | `unlimitedTalentCap` | Ile poziomów może mieć talent bez maksimum. |
@@ -85,6 +85,7 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `maxCareers` | Ile profesji może mieć ścieżka (1 lub 2). |
 | `talentsPerLevel`, `extraTalentChance`, `talentLevelUpChance` | Talenty za poziom, szansa na dodatkowy talent, szansa na kolejny poziom talentu. |
 | `heroProfile` | Profil nakładany automatycznie (`null` = brak). |
+| `keySkills`, `keyChars` | Premia kluczowych umiejętności / cech archetypu: `bonus` — zakres losowania, `min` / `max` — łączne rozwinięcia po premii. Trzymaj progi rozłączne (`min` wyższego poziomu > `max` niższego), wtedy wyższy poziom jest zawsze lepszy. |
 | `spells.maxCn`, `spells.arcane` | Najwyższy PZ zaklęć tradycji i odchylenie ich liczby od Bonusu z Inteligencji, np. `[-1, 3]`. |
 
 ---

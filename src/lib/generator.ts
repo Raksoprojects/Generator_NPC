@@ -24,7 +24,7 @@ import * as gd from "./gameData";
 import { pickSpells } from "./magic";
 import { rollNpcMutations } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
-import type { Archetype, CareerStep, CreatureDef, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
+import type { Archetype, CareerStep, CreatureDef, KeyBonus, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
 
 /** Parametry generowania. Brak pola = wartosc losowa. */
@@ -484,30 +484,37 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
 
 /**
  * Premie archetypu ponad rozwoj z profesji: kilka najwazniejszych umiejetnosci
- * (domyslnie 4, do +5) i cech (domyslnie 2, do +3). Umiejetnosci maja
- * pierwszenstwo - zamiast +9 w Wytrzymalosci BN ma raczej +12 w Odpornosci.
+ * (domyslnie 4) i cech (domyslnie 2). Wysokosc premii i progi zalezne od
+ * poziomu BN (tiers.json: keySkills, keyChars) - np. sredni +3..+8 i razem
+ * 15..18 rozwiniec, zaawansowany +5..+10 i razem 20..30. Progi nie nachodza
+ * na siebie: najslabszy zaawansowany jest lepszy od najsilniejszego sredniego.
  */
 function applyArchetypeBonuses(npc: Npc, arch: Archetype | undefined, rng: Rng, deterministic: boolean): void {
-  if (!arch) return;
+  const tier = gd.getTier(npc.tier);
+  if (!arch || !tier) return;
   const s = gd.getSettings();
-  const roll = (lo: number, hi: number) => (deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng));
+  const roll = ([lo, hi]: [number, number]) => (deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng));
+  const clamp = (v: number, band: KeyBonus) => Math.min(band.max ?? Infinity, Math.max(band.min ?? 0, v));
 
   arch.keySkills.slice(0, s.keySkillCount).forEach((key) => {
-    const bonus = roll(1, s.keySkillBonus);
+    const bonus = roll(tier.keySkills.bonus);
     const owned = npc.skills.filter((sk) => matchesKey(sk.name, key));
     if (owned.length) {
       // Najbardziej rozwinieta pasujaca umiejetnosc dostaje premie (np. jedna bron).
-      owned.sort((a, b) => b.advances - a.advances)[0].advances += bonus;
-    } else if (bonus > 0) {
+      const best = owned.sort((a, b) => b.advances - a.advances)[0];
+      best.advances = clamp(best.advances + bonus, tier.keySkills);
+    } else {
+      const value = clamp(bonus, tier.keySkills);
+      if (value <= 0) return;
       const name = gd.splitSpec(key).spec === null && gd.getSpecializations().options[key]
         ? resolveSpecName(`${key} (Dowolna)`, npc.specChoices, arch, rng, deterministic)
         : key;
-      addSkill(npc, name, bonus);
+      addSkill(npc, name, value);
     }
   });
 
   arch.characteristics.slice(0, s.keyCharCount).forEach((code) => {
-    npc.charAdvances[code] += roll(0, s.keyCharBonus);
+    npc.charAdvances[code] = clamp(npc.charAdvances[code] + roll(tier.keyChars.bonus), tier.keyChars);
   });
 }
 

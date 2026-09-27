@@ -64,8 +64,18 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    umiejętności dostępnych na tym poziomie (narastająco). Obecny, nieukończony
    poziom daje od +2 do +5. Talent z każdego poziomu dobierany wg preferencji
    archetypu; czarujący zawsze biorą swoje talenty magiczne.
-6. **Premie archetypu.** 4 najważniejsze umiejętności dostają dodatkowo do +5,
-   2 najważniejsze cechy do +3 — BN jest lepszy w tym, co robi, ale bez przesady.
+6. **Premie archetypu.** 4 najważniejsze umiejętności i 2 najważniejsze cechy
+   dostają premię zależną od poziomu BN, a ich łączne rozwinięcia trzymane są w
+   progach, które na siebie nie nachodzą — najsłabszy zaawansowany jest w swoich
+   kluczowych rzeczach lepszy od najsilniejszego średniego:
+
+   | Poziom | Umiejętności: premia / łącznie | Cechy: premia / łącznie |
+   |---|---|---|
+   | Słaby | +1…+3 / do 13 | +0…+2 / do 12 |
+   | Średni | +3…+8 / 15–18 | +2…+5 / 13–15 |
+   | Zaawansowany | +5…+10 / 20–30 | +3…+7 / 17–27 |
+   | Doświadczony | +8…+15 / 32–40 | +5…+10 / 20–35 + profil bohatera |
+   | Heroiczny | +10…+15 / od 42 | +8…+12 / od 27 + profil bohatera |
 7. **Cechy opcjonalne.** Jeden rzut k100: **1** = trzy Cechy Stworzeń,
    **2–5** = dwie, **6–20** = jedna. Losowane z wagami archetypu.
 8. **Profile bohaterów** dają **stałe** premie, niezależne od rozwinięć. Siła i

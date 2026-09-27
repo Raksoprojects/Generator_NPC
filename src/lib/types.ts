@@ -143,8 +143,23 @@ export interface TierDef {
   talentLevelUpChance: number;
   /** Profil bohatera nakladany automatycznie (lub null). */
   heroProfile: string | null;
+  /** Premia kluczowych umiejetnosci archetypu i laczne rozwiniecia min/max. */
+  keySkills: KeyBonus;
+  /** Premia kluczowych cech archetypu i laczne rozwiniecia min/max (bez profilu bohatera). */
+  keyChars: KeyBonus;
   /** Zaklecia: najwyzszy PZ oraz odchylenie liczby zaklec tajemnych od Bonusu z Int. */
   spells: { maxCn: number; arcane: [number, number] };
+}
+
+/**
+ * Premia archetypu na poziomie BN: losowa premia z zakresu `bonus`, a potem
+ * laczne rozwiniecia przyciete do [min, max]. Progi nie nachodza na siebie,
+ * wiec wyzszy poziom tego samego BN jest zawsze lepszy w kluczowych rzeczach.
+ */
+export interface KeyBonus {
+  bonus: [number, number];
+  min?: number;
+  max?: number;
 }
 
 export interface GeneratorSettings {
@@ -154,12 +169,10 @@ export interface GeneratorSettings {
   advancePerLevel: number;
   /** Najmniejsze rozwiniecie za obecny, nieukonczony poziom profesji. */
   currentLevelMin: number;
-  /** Ile najwazniejszych umiejetnosci archetypu dostaje premie i jaka maksymalnie. */
+  /** Ile najwazniejszych umiejetnosci archetypu dostaje premie (wysokosc - w poziomie BN). */
   keySkillCount: number;
-  keySkillBonus: number;
-  /** Ile najwazniejszych cech archetypu dostaje premie i jaka maksymalnie. */
+  /** Ile najwazniejszych cech archetypu dostaje premie (wysokosc - w poziomie BN). */
   keyCharCount: number;
-  keyCharBonus: number;
   /** "archetype": S i Wt stale, reszta wg kolejnosci cech archetypu; "bestiary": doslownie. */
   heroProfileShape: "archetype" | "bestiary";
   /** Progi k100 dla liczby cech opcjonalnych. */
