@@ -54,7 +54,7 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    |---|---|---|---|
    | Słaby | 1 (czasem 2) | 2 | — |
    | Średni | 2 | 2 | — |
-   | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | — |
+   | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | 10% szans na Pomniejszego Bohatera (tylko przy losowaniu) |
    | Doświadczony | 4 (+ czasem 1 poziom poprzedniej profesji) | 4 | Pomniejszy Bohater |
    | Heroiczny | 5–6 (4. poziom + poprzednia profesja) | 4 | Wielki Bohater |
 

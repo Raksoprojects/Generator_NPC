@@ -154,7 +154,9 @@ describe("rozwoj losowy", () => {
         for (let seed = 1; seed <= 25; seed++) {
           const npc = generateNpc({ archetype: archName, tier, race: "Człowiek" }, seedRng(seed));
           const v = computeNpc(npc);
-          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c] + v.chars[c].hero);
+          // Profil z szansy poziomu (zaawansowany Pomniejszy Bohater) to swiadomy wyjatek - liczymy tylko profil poziomu.
+          const ownProfile = !!gd.getTier(tier)!.heroProfile;
+          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c] + (ownProfile ? v.chars[c].hero : 0));
           for (const k of arch.keySkills.slice(0, s.keySkillCount)) {
             note(k, Math.max(0, ...npc.skills.filter((x) => x.name === k || x.name.startsWith(`${k} (`)).map((x) => x.advances)));
           }
@@ -314,6 +316,21 @@ describe("ponowne losowanie", () => {
     const next = rebuildDevelopment({ ...npc, tier: "sredni" }, undefined, seedRng(4));
     expect(next.heroProfiles).not.toContain("Pomniejszy Bohater");
     expect(Math.max(...next.careerPath.map((s) => s.level))).toBeLessThanOrEqual(2);
+  });
+});
+
+describe("szansa na profil bohatera", () => {
+  it("zaawansowany czasem jest Pomniejszym Bohaterem, ale tylko przy losowaniu", () => {
+    let heroes = 0;
+    for (let seed = 1; seed <= 300; seed++) {
+      if (generateNpc({ archetype: "Wojownik", tier: "zaawansowany" }, seedRng(seed)).heroProfiles.includes("Pomniejszy Bohater")) heroes++;
+    }
+    expect(heroes).toBeGreaterThan(10);
+    expect(heroes).toBeLessThan(60);
+    for (let seed = 1; seed <= 50; seed++) {
+      expect(generateNpc({ archetype: "Wojownik", tier: "zaawansowany", deterministic: true }, seedRng(seed)).heroProfiles).toEqual([]);
+      expect(generateNpc({ archetype: "Wojownik", tier: "zaawansowany", autoHeroProfile: false }, seedRng(seed)).heroProfiles).toEqual([]);
+    }
   });
 });
 

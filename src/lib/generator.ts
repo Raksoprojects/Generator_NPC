@@ -577,10 +577,14 @@ export function isBeast(npc: Pick<Npc, "creature" | "archetype">): boolean {
   return !!npc.creature && !npc.archetype;
 }
 
-function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean): string[] {
+function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean, rng: Rng): string[] {
   const out = new Set<string>(spec.heroProfiles ?? []);
-  const auto = gd.getTier(tierId)?.heroProfile;
-  if (auto && !beast && spec.autoHeroProfile !== false) out.add(auto);
+  const tier = gd.getTier(tierId);
+  const autoOn = !beast && spec.autoHeroProfile !== false;
+  if (tier?.heroProfile && autoOn) out.add(tier.heroProfile);
+  // Mala szansa na profil (np. zaawansowany jako Pomniejszy Bohater) - tylko przy losowaniu.
+  const extra = tier?.heroProfileChance;
+  if (extra && autoOn && !spec.deterministic && chance(extra.chance, rng)) out.add(extra.profile);
   if (spec.commander) out.add(COMMANDER_PROFILE);
   return [...out];
 }
@@ -666,7 +670,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     skills: [],
     talents: [],
     traits: [],
-    heroProfiles: heroProfilesFor(spec, tier, beast),
+    heroProfiles: heroProfilesFor(spec, tier, beast, rng),
     weapons: [],
     armour: [],
     spells: [],
@@ -716,6 +720,8 @@ export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, 
   develop(next, professions, rng, false);
   next.spells = pickSpells(next, rng);
   const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);
+  // Profil wylosowany z szansy poziomu (np. zaawansowany Pomniejszy Bohater) zostaje.
+  auto.delete(gd.getTier(next.tier)?.heroProfileChance?.profile ?? "");
   next.heroProfiles = next.heroProfiles.filter((h) => !auto.has(h));
   const tierProfile = gd.getTier(next.tier)?.heroProfile;
   if (tierProfile && !isBeast(next)) next.heroProfiles.unshift(tierProfile);

@@ -99,7 +99,7 @@
     },
     "zaawansowany": {
       "label": "Zaawansowany",
-      "description": "3–4 poziomy profesji (np. 2 poziomy Żołnierza i 2 Rycerza), około +15, więcej talentów i ich poziomów.",
+      "description": "3–4 poziomy profesji (np. 2 poziomy Żołnierza i 2 Rycerza), około +15, więcej talentów i ich poziomów; przy losowaniu 10% szans na profil Pomniejszego Bohatera.",
       "randomWeight": 2,
       "totalLevels": {
         "3": 1,
@@ -111,6 +111,10 @@
       "extraTalentChance": 0.5,
       "talentLevelUpChance": 0.5,
       "heroProfile": null,
+      "heroProfileChance": {
+        "profile": "Pomniejszy Bohater",
+        "chance": 0.1
+      },
       "keySkills": {
         "bonus": [
           5,
