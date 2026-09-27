@@ -317,6 +317,29 @@ describe("ponowne losowanie", () => {
   });
 });
 
+describe("tytuly wg plci", () => {
+  it("kazda profesja i kazdy poziom maja forme meska i zenska", () => {
+    for (const name of gd.allProfessionNames()) {
+      expect(gd.professionName(name, "M"), name).toBeTruthy();
+      for (const lvl of gd.getProfession(name)!.levels) {
+        expect(gd.professionTitle(name, lvl.level, "M"), `${name} ${lvl.level}`).toBeTruthy();
+        expect(gd.professionTitle(name, lvl.level, "K"), `${name} ${lvl.level}`).toBeTruthy();
+      }
+    }
+  });
+
+  it("tytul i nazwa profesji zgadzaja sie z plcia BN", () => {
+    const npc = generateNpc({ archetype: "Czarodziej", tier: "sredni", sex: "M", race: "Człowiek", professions: ["Druidka"] }, seedRng(1));
+    const view = computeNpc(npc);
+    expect(view.career!.professionName).toBe("Druid");
+    expect(view.careerPathText).toBe("Uczeń Druida → Druid");
+    npc.sex = "K";
+    expect(computeNpc(npc).careerPathText).toBe("Uczennica Druidki → Druidka");
+    npc.careerPath = [{ profession: "Czarodziej", level: 4 }];
+    expect(computeNpc(npc).career!.title).toBe("Arcymagini");
+  });
+});
+
 describe("pieniadze", () => {
   it("rzut na Zarobki wg Statusu", () => {
     expect(rollMoney("Złoto 2", seedRng(1))).toBe("2 zk");

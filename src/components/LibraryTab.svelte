@@ -29,7 +29,7 @@
 
   function currentTitle(n: Npc): string {
     const last = n.careerPath[n.careerPath.length - 1];
-    return last ? careerLevelInfo(last.profession, last.level).title : "";
+    return last ? careerLevelInfo(last.profession, last.level, n.sex).title : "";
   }
 
   function toggle(n: Npc) {

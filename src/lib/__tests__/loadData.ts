@@ -29,6 +29,7 @@ export function loadTestGameData(): void {
     weapons: readJson("weapons.json"),
     creatures: readJson("creatures.json"),
     creatureFamilies: readJson("creature_families.json"),
-    mutations: readJson("mutations.json")
+    mutations: readJson("mutations.json"),
+    professionTitles: readJson("profession_titles.json")
   } as GameData);
 }

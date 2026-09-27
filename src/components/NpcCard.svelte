@@ -269,7 +269,7 @@
       {#if view.career}
         <p class="career">
           <b>{view.career.title}</b>
-          <span class="text-dim">({view.career.profession} {view.career.level}{view.career.status ? `, ${view.career.status}` : ""})</span>
+          <span class="text-dim">({view.career.professionName} {view.career.level}{view.career.status ? `, ${view.career.status}` : ""})</span>
         </p>
         {#if npc.careerPath.length > 1}
           <p class="path text-dim">{view.careerPathText}</p>

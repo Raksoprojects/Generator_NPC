@@ -12,7 +12,7 @@ import { armourPoints, getWeaponDef, LOCATIONS, type Location } from "./equipmen
 import * as gd from "./gameData";
 import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
-import type { Npc, NpcMutation, SpellDef } from "./types";
+import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
 
 export interface CharView {
   code: Attribute;
@@ -77,7 +77,7 @@ export interface NpcView {
   wounds: number;
   movement: number;
   heroTraits: string[];
-  career: { profession: string; level: number; title: string; status: string } | null;
+  career: { profession: string; level: number; title: string; status: string; professionName: string } | null;
   careerPathText: string;
 }
 
@@ -111,10 +111,18 @@ function heroModifier(npc: Npc, code: Attribute): number {
   return npc.heroProfiles.reduce((sum, name) => sum + shapedHeroModifiers(name, npc.archetype)[code], 0);
 }
 
-/** Tytul i status poziomu profesji. */
-export function careerLevelInfo(profession: string, level: number): { title: string; status: string } {
+/** Tytul (w formie dla plci), nazwa profesji i status poziomu. */
+export function careerLevelInfo(
+  profession: string,
+  level: number,
+  sex?: Sex
+): { title: string; status: string; professionName: string } {
   const lvl = gd.getProfession(profession)?.levels.find((l) => l.level === level);
-  return { title: lvl?.title ?? profession, status: lvl?.status ?? "" };
+  return {
+    title: gd.professionTitle(profession, level, sex) ?? profession,
+    status: lvl?.status ?? "",
+    professionName: gd.professionName(profession, sex)
+  };
 }
 
 /** Limit poziomow talentu dla danych cech (null = brak limitu). */
@@ -313,7 +321,7 @@ export function computeNpc(input: Npc): NpcView {
   spells.sort((a, b) => (a.lore === "Prosta" ? -1 : 0) - (b.lore === "Prosta" ? -1 : 0) || a.cn - b.cn || a.name.localeCompare(b.name, "pl"));
 
   const last = npc.careerPath[npc.careerPath.length - 1];
-  const career = last ? { ...last, ...careerLevelInfo(last.profession, last.level) } : null;
+  const career = last ? { ...last, ...careerLevelInfo(last.profession, last.level, npc.sex) } : null;
 
   return {
     chars,
@@ -336,7 +344,7 @@ export function computeNpc(input: Npc): NpcView {
 
 /** "Rekrut → Żołnierz → Giermek" - tytuly kolejnych poziomow sciezki. */
 export function careerPathText(npc: Npc): string {
-  return npc.careerPath.map((s) => careerLevelInfo(s.profession, s.level).title).join(" → ");
+  return npc.careerPath.map((s) => careerLevelInfo(s.profession, s.level, npc.sex).title).join(" → ");
 }
 
 /** "Miecz (+8/52)" - bron w formacie bloku statystyk. */
@@ -360,7 +368,7 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   const title = npc.label ? `${npc.name} (${npc.label})` : npc.name;
   lines.push(`${title} — ${npc.race}${npc.archetype ? `, ${npc.archetype}` : ""} (${tier})`);
   if (view.career) {
-    lines.push(`Profesja: ${view.career.title} (${view.career.profession} ${view.career.level}, ${view.career.status})`);
+    lines.push(`Profesja: ${view.career.title} (${view.career.professionName} ${view.career.level}, ${view.career.status})`);
     if (npc.careerPath.length > 1) lines.push(`Ścieżka: ${view.careerPathText}`);
   }
   const stat = (c: Attribute) => (view.chars[c].absent ? "–" : String(view.chars[c].total));

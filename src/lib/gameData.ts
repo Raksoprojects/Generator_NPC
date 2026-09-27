@@ -12,6 +12,8 @@ import type {
   CreatureFamiliesData,
   CreatureTrait,
   MutationsData,
+  ProfessionTitlesData,
+  Sex,
   SpellDef,
   SpellsData,
   WeaponsData,
@@ -52,6 +54,8 @@ export interface GameData {
   creatures: { creatures: CreatureDef[] };
   creatureFamilies: CreatureFamiliesData;
   mutations: MutationsData;
+  /** Formy [meska, zenska] nazw profesji i tytulow. */
+  professionTitles?: ProfessionTitlesData;
   /** Opcjonalna nakladka profesji dla zasad domowych. */
   professionsDomowe?: ProfessionsData;
 }
@@ -79,7 +83,8 @@ const FILES = {
   weapons: "weapons.json",
   creatures: "creatures.json",
   creatureFamilies: "creature_families.json",
-  mutations: "mutations.json"
+  mutations: "mutations.json",
+  professionTitles: "profession_titles.json"
 } as const;
 
 /** Wstrzykuje dane bezposrednio (testy). */
@@ -363,6 +368,19 @@ export function isCivilized(creature: string | undefined): boolean {
   if (!c) return false;
   const fam = data().creatureFamilies;
   return !!fam.families[c.family]?.civilized && !fam.notCivilized.includes(c.name);
+}
+
+/** Nazwa profesji w formie dla plci (brak danych = nazwa z ksiazki). */
+export function professionName(profession: string, sex: Sex | undefined): string {
+  const forms = data().professionTitles?.professions[profession];
+  return forms && sex ? forms[sex === "K" ? 1 : 0] : profession;
+}
+
+/** Tytul poziomu profesji w formie dla plci (bez plci - tytul z ksiazki). */
+export function professionTitle(profession: string, level: number, sex: Sex | undefined): string | undefined {
+  const forms = data().professionTitles?.titles[`${profession}|${level}`];
+  if (forms && sex) return forms[sex === "K" ? 1 : 0];
+  return getProfession(profession)?.levels.find((l) => l.level === level)?.title;
 }
 
 export function getMutations(): MutationsData {

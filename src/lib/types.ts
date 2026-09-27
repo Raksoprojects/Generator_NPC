@@ -320,6 +320,12 @@ export interface CreatureFamiliesData {
   notCivilized: string[];
 }
 
+/** Formy [meska, zenska]: nazwy profesji i tytuly poziomow ("Profesja|poziom"). */
+export interface ProfessionTitlesData {
+  professions: Record<string, [string, string]>;
+  titles: Record<string, [string, string]>;
+}
+
 /** Liczba albo kosci rzucane przy losowaniu mutacji, np. "k10", "-2k10". */
 export type MutationValue = number | string;
 

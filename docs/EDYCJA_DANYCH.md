@@ -24,6 +24,7 @@ przy talentach, ale polskie znaki tak).
 | `weapons.json` | Broń (karty *Pod Bronią*), pancerze, zestawy pancerza, dobór broni, opisy Zalet i Wad |
 | `spells.json` | Zaklęcia (podręcznik + *Wiatry Magii*) |
 | `mutations.json` | Tabele mutacji i szansa na mutację |
+| `profession_titles.json` | Formy `[męska, żeńska]` nazw profesji i tytułów poziomów (klucz tytułu: `"Profesja\|poziom"`) |
 | `talents.json`, `skills.json`, `professions.json`, `classes.json`, `races.json` | Dane gry przeniesione z karty postaci |
 
 ---
