@@ -2,57 +2,261 @@
   "Banda rozbójników": {
     "description": "Kilku oprychów i łucznik pod wodzą herszta.",
     "rows": [
-      { "count": 4, "archetype": "Oprych", "tier": "slaby" },
-      { "count": 1, "archetype": "Strzelec", "tier": "slaby" },
-      { "count": 1, "archetype": "Oprych", "tier": "sredni", "commander": true, "label": "Herszt" }
+      {
+        "count": 4,
+        "archetype": "Oprych",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Strzelec",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Oprych",
+        "tier": "sredni",
+        "commander": true,
+        "label": "Herszt"
+      }
     ]
   },
   "Mała wioska": {
     "description": "Chłopi, kupiec, kapłan, strażnik i sołtys.",
     "rows": [
-      { "count": 4, "archetype": "Chłop", "tier": "slaby" },
-      { "count": 1, "archetype": "Kupiec", "tier": "slaby" },
-      { "count": 1, "archetype": "Kapłan", "tier": "slaby" },
-      { "count": 1, "archetype": "Strażnik", "tier": "sredni" },
-      { "count": 1, "archetype": "Chłop", "tier": "sredni", "label": "Sołtys" }
+      {
+        "count": 4,
+        "archetype": "Chłop",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Kupiec",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Kapłan",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Strażnik",
+        "tier": "sredni"
+      },
+      {
+        "count": 1,
+        "archetype": "Chłop",
+        "tier": "sredni",
+        "label": "Sołtys"
+      }
     ]
   },
   "Patrol straży": {
     "description": "Trzech strażników i sierżant.",
     "rows": [
-      { "count": 3, "archetype": "Strażnik", "tier": "slaby" },
-      { "count": 1, "archetype": "Strażnik", "tier": "sredni", "commander": true, "label": "Sierżant" }
+      {
+        "count": 3,
+        "archetype": "Strażnik",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Strażnik",
+        "tier": "sredni",
+        "commander": true,
+        "label": "Sierżant"
+      }
     ]
   },
   "Oddział żołnierzy": {
     "description": "Piechota, strzelcy i dowódca.",
     "rows": [
-      { "count": 4, "archetype": "Wojownik", "tier": "slaby" },
-      { "count": 2, "archetype": "Strzelec", "tier": "slaby" },
-      { "count": 1, "archetype": "Wojownik", "tier": "zaawansowany", "commander": true, "label": "Dowódca" }
+      {
+        "count": 4,
+        "archetype": "Wojownik",
+        "tier": "slaby"
+      },
+      {
+        "count": 2,
+        "archetype": "Strzelec",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Wojownik",
+        "tier": "zaawansowany",
+        "commander": true,
+        "label": "Dowódca"
+      }
     ]
   },
   "Złodziejska szajka": {
     "description": "Złodzieje, oprych do mokrej roboty i szef szajki.",
     "rows": [
-      { "count": 3, "archetype": "Złodziej", "tier": "slaby" },
-      { "count": 1, "archetype": "Oprych", "tier": "slaby" },
-      { "count": 1, "archetype": "Złodziej", "tier": "sredni", "commander": true, "label": "Szef szajki" }
+      {
+        "count": 3,
+        "archetype": "Złodziej",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Oprych",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Złodziej",
+        "tier": "sredni",
+        "commander": true,
+        "label": "Szef szajki"
+      }
     ]
   },
   "Karawana kupiecka": {
     "description": "Kupiec z ochroną i przewodnikiem.",
     "rows": [
-      { "count": 1, "archetype": "Kupiec", "tier": "sredni" },
-      { "count": 3, "archetype": "Strażnik", "tier": "slaby" },
-      { "count": 1, "archetype": "Zwiadowca", "tier": "slaby" }
+      {
+        "count": 1,
+        "archetype": "Kupiec",
+        "tier": "sredni"
+      },
+      {
+        "count": 3,
+        "archetype": "Strażnik",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Zwiadowca",
+        "tier": "slaby"
+      }
     ]
   },
   "Wiedźmi krąg": {
     "description": "Czarownik i jego poplecznicy.",
     "rows": [
-      { "count": 3, "archetype": "Oprych", "tier": "slaby" },
-      { "count": 1, "archetype": "Czarownik", "tier": "zaawansowany", "label": "Przywódca kręgu" }
+      {
+        "count": 3,
+        "archetype": "Oprych",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Czarownik",
+        "tier": "zaawansowany",
+        "label": "Przywódca kręgu"
+      }
+    ]
+  },
+  "Banda orków": {
+    "description": "Orkowie, gobliny z łukami i orczy herszt.",
+    "rows": [
+      {
+        "count": 4,
+        "archetype": "",
+        "creature": "Ork",
+        "tier": "slaby"
+      },
+      {
+        "count": 3,
+        "archetype": "",
+        "creature": "Goblin",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Wojownik",
+        "creature": "Ork",
+        "tier": "zaawansowany",
+        "commander": true,
+        "label": "Herszt"
+      }
+    ]
+  },
+  "Wataha wilków": {
+    "description": "Wilki prowadzone przez wielkiego wilka.",
+    "rows": [
+      {
+        "count": 5,
+        "archetype": "",
+        "creature": "Wilk",
+        "tier": "sredni"
+      },
+      {
+        "count": 1,
+        "archetype": "",
+        "creature": "Wielki wilk",
+        "tier": "doswiadczony",
+        "label": "Przewodnik stada"
+      }
+    ]
+  },
+  "Stado zwierzoludzi": {
+    "description": "Ungory, gory i szaman rykowców.",
+    "rows": [
+      {
+        "count": 4,
+        "archetype": "",
+        "creature": "Ungor",
+        "tier": "slaby"
+      },
+      {
+        "count": 3,
+        "archetype": "",
+        "creature": "Gor",
+        "tier": "sredni"
+      },
+      {
+        "count": 1,
+        "archetype": "",
+        "creature": "Szaman rykowców",
+        "tier": "zaawansowany",
+        "label": "Szaman"
+      }
+    ]
+  },
+  "Nieumarli z kurhanu": {
+    "description": "Szkielety, zombi i widmo z kurhanu.",
+    "rows": [
+      {
+        "count": 4,
+        "archetype": "",
+        "creature": "Szkielet",
+        "tier": "sredni"
+      },
+      {
+        "count": 3,
+        "archetype": "",
+        "creature": "Zombi",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "",
+        "creature": "Widmo z kurhanu",
+        "tier": "zaawansowany",
+        "label": "Pan kurhanu"
+      }
+    ]
+  },
+  "Skaveński patrol": {
+    "description": "Klanbracia i szturmoszczur.",
+    "rows": [
+      {
+        "count": 5,
+        "archetype": "",
+        "creature": "Klanbrat",
+        "tier": "slaby"
+      },
+      {
+        "count": 1,
+        "archetype": "Wojownik",
+        "creature": "Szturmoszczur",
+        "tier": "sredni",
+        "commander": true,
+        "label": "Kieł"
+      }
     ]
   }
 }

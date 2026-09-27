@@ -54,6 +54,35 @@ describe("professions.json i races.json", () => {
   });
 });
 
+describe("bestiariusz, zaklecia i bron", () => {
+  it("rodziny stworzen istnieja, a ich cechy sa w creature_traits.json", () => {
+    const fam = gd.getCreatureFamilies();
+    for (const c of gd.getCreatures()) expect(fam.families[c.family], `${c.name}: ${c.family}`).toBeDefined();
+    for (const [name, f] of Object.entries(fam.families)) {
+      for (const t of Object.keys(f.traits)) expect(gd.getCreatureTrait(t), `${name}: ${t}`).toBeDefined();
+    }
+  });
+
+  it("kazde zaklecie ma znana tradycje i poprawny PZ", () => {
+    const lores = gd.getSpellsData().lores;
+    for (const s of gd.getSpellsData().spells) {
+      expect(lores[s.lore], s.name).toBeDefined();
+      expect(s.cn, s.name).toBeGreaterThanOrEqual(0);
+      expect(s.cn, s.name).toBeLessThanOrEqual(20);
+    }
+  });
+
+  it("zestawy pancerza archetypow uzywaja istniejacych elementow", () => {
+    const w = gd.getWeapons();
+    for (const [set, pieces] of Object.entries(w.armourSets)) {
+      for (const p of pieces) expect(w.armour[p], `${set}: ${p}`).toBeDefined();
+    }
+    for (const name of gd.allArchetypeNames()) {
+      for (const set of Object.values(gd.getArchetype(name)!.armour ?? {})) expect(w.armourSets[set as string], `${name}: ${set}`).toBeDefined();
+    }
+  });
+});
+
 describe("pozostale pliki generatora", () => {
   it("kazda rasa ma tabele imion", () => {
     for (const race of gd.allRaceNames()) {
@@ -73,7 +102,9 @@ describe("pozostale pliki generatora", () => {
   it("gotowe grupy uzywaja istniejacych archetypow i poziomow", () => {
     for (const [name, preset] of Object.entries(gd.getGroupPresets())) {
       for (const row of preset.rows) {
-        expect(gd.getArchetype(row.archetype), `${name}: ${row.archetype}`).toBeDefined();
+        if (row.creature) expect(gd.getCreature(row.creature), `${name}: ${row.creature}`).toBeDefined();
+        if (row.archetype || !row.creature) expect(gd.getArchetype(row.archetype), `${name}: ${row.archetype}`).toBeDefined();
+        if (row.creature && row.archetype) expect(gd.isCivilized(row.creature), `${name}: ${row.creature}`).toBe(true);
         expect(TIER_IDS, `${name}: ${row.tier}`).toContain(row.tier);
       }
     }

@@ -23,6 +23,30 @@
     groupName = presetName;
   }
 
+  const creatureGroups = (() => {
+    const out: Record<string, string[]> = {};
+    for (const c of gd.getCreatures()) (out[c.group] ??= []).push(c.name);
+    for (const g of Object.values(out)) g.sort((a, b) => a.localeCompare(b, "pl"));
+    return out;
+  })();
+
+  /** Wartosc listy "kto": "a:Archetyp" albo "c:Stworzenie". */
+  function whoOf(row: GroupRow): string {
+    return row.creature ? `c:${row.creature}` : `a:${row.archetype}`;
+  }
+
+  function setWho(row: GroupRow, value: string) {
+    const [kind, name] = [value.slice(0, 1), value.slice(2)];
+    if (kind === "c") {
+      row.creature = name;
+      row.archetype = "";
+      row.race = undefined;
+    } else {
+      row.creature = undefined;
+      row.archetype = name;
+    }
+  }
+
   function addRow() {
     rows.push({ count: 1, archetype: gd.allArchetypeNames()[0], tier: "slaby" });
   }
@@ -33,12 +57,15 @@
       const count = Math.max(0, Math.min(30, Math.trunc(row.count)));
       for (let i = 0; i < count; i++) {
         const npc = generateNpc({
-          archetype: row.archetype,
+          creature: row.creature,
+          archetype: row.archetype || undefined,
           tier: row.tier,
           race: row.race || undefined,
           commander: row.commander,
           label: row.label || undefined
         });
+        // Bestie bez imion numerujemy: Wilk 1, Wilk 2...
+        if (row.creature && npc.name === row.creature && count > 1) npc.name = `${row.creature} ${i + 1}`;
         npc.group = groupName.trim() || undefined;
         out.push(npc);
       }
@@ -49,7 +76,9 @@
 
   function summary(npc: Npc): string {
     const v = computeNpc(npc);
-    return `WW ${v.chars.WW.total} · US ${v.chars.US.total} · Wt ${v.chars.Wt.total} · Żyw ${v.wounds}`;
+    const s = (c: "WW" | "US" | "Wt") => (v.chars[c].absent ? "–" : v.chars[c].total);
+    const w = v.weapons[0];
+    return `WW ${s("WW")} · US ${s("US")} · Wt ${s("Wt")} · Żyw ${v.wounds}${w ? ` · ${w.name} +${w.damage ?? "–"}` : ""}`;
   }
 
   function saveAll() {
@@ -89,16 +118,31 @@
         <div class="row">
           <input class="count" type="number" min="1" max="30" bind:value={row.count} aria-label="Liczba" />
           <span class="x">×</span>
-          <select bind:value={row.archetype} aria-label="Archetyp">
-            {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
+          <select value={whoOf(row)} onchange={(e) => setWho(row, (e.currentTarget as HTMLSelectElement).value)} aria-label="Archetyp albo stworzenie">
+            <optgroup label="Archetypy">
+              {#each gd.allArchetypeNames() as a (a)}<option value={`a:${a}`}>{a}</option>{/each}
+            </optgroup>
+            {#each Object.entries(creatureGroups) as [group, names] (group)}
+              <optgroup label={`Stworzenia: ${group}`}>
+                {#each names as c (c)}<option value={`c:${c}`}>{c}</option>{/each}
+              </optgroup>
+            {/each}
           </select>
+          {#if row.creature && gd.isCivilized(row.creature)}
+            <select bind:value={row.archetype} aria-label="Archetyp stworzenia">
+              <option value="">bez profesji</option>
+              {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
+            </select>
+          {/if}
           <select bind:value={row.tier} aria-label="Poziom">
             {#each TIER_IDS as t (t)}<option value={t}>{gd.getTier(t).label}</option>{/each}
           </select>
-          <select bind:value={row.race} aria-label="Rasa">
-            <option value={undefined}>rasa losowo</option>
-            {#each racesForArchetype(row.archetype) as r (r)}<option value={r}>{r}</option>{/each}
-          </select>
+          {#if !row.creature}
+            <select bind:value={row.race} aria-label="Rasa">
+              <option value={undefined}>rasa losowo</option>
+              {#each racesForArchetype(row.archetype) as r (r)}<option value={r}>{r}</option>{/each}
+            </select>
+          {/if}
           <input class="label" type="text" placeholder="etykieta" bind:value={row.label} aria-label="Etykieta" />
           <label class="check"><input type="checkbox" bind:checked={row.commander} /> dowódca</label>
           <button class="btn-sm ghost" aria-label="Usuń wiersz" onclick={() => rows.splice(i, 1)}>✕</button>
@@ -129,7 +173,7 @@
         {#if collapsed[m.id]}
           <button class="panel collapsed" onclick={() => (collapsed[m.id] = false)}>
             <b>{m.name}</b>{#if m.label} <span class="chip accent">{m.label}</span>{/if}
-            <span class="text-dim">{m.archetype} · {gd.getTier(m.tier).label}</span>
+            <span class="text-dim">{m.archetype || m.creature} · {gd.getTier(m.tier).label}</span>
             <span class="stats-line">{summary(m)}</span>
           </button>
         {:else}

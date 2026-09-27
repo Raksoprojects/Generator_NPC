@@ -5,7 +5,7 @@
   import * as gd from "../lib/gameData";
   import { newId } from "../lib/generator";
   import { libraryToJson, mergeLibrary, parseNpcJson } from "../lib/library";
-  import { careerLevelInfo } from "../lib/npc";
+  import { careerLevelInfo, normalizeNpc } from "../lib/npc";
   import { TIER_IDS, type Npc } from "../lib/types";
 
   let query = $state("");
@@ -33,7 +33,7 @@
   }
 
   function toggle(n: Npc) {
-    open = open?.id === n.id ? null : ($state.snapshot(n) as Npc);
+    open = open?.id === n.id ? null : normalizeNpc($state.snapshot(n) as Npc);
   }
 
   function duplicate(n: Npc) {
@@ -115,7 +115,7 @@
           <button class="entry-main" onclick={() => toggle(n)}>
             <b>{n.name}</b>
             {#if n.label}<span class="chip accent">{n.label}</span>{/if}
-            <span class="text-dim">{n.race} · {n.archetype} · {gd.getTier(n.tier)?.label}</span>
+            <span class="text-dim">{n.race}{n.archetype ? ` · ${n.archetype}` : ""} · {gd.getTier(n.tier)?.label}</span>
             <span class="title">{currentTitle(n)}</span>
             {#if n.group}<span class="chip">{n.group}</span>{/if}
           </button>
