@@ -51,21 +51,29 @@ export interface NpcView {
   careerPathText: string;
 }
 
+/** Cechy, w ktorych profil bohatera zawsze daje wartosc z Bestiariusza. */
+const FIXED_HERO_CHARS: readonly Attribute[] = ["S", "Wt"];
+
 /**
- * Modyfikatory profilu bohatera dopasowane do archetypu (heroProfileShape =
- * "archetype"): wartosci profilu sortujemy malejaco i przydzielamy cechom w
+ * Stale modyfikatory profilu bohatera dopasowane do archetypu (heroProfileShape =
+ * "archetype"). Sila i Wytrzymalosc dostaja zawsze wartosc z Bestiariusza;
+ * pozostale wartosci profilu sortujemy malejaco i przydzielamy cechom w
  * kolejnosci waznosci archetypu. Zlodziej dostaje wiec +45 do Zwinnosci, a nie
- * do Walki Wreczy. Laczna "sila" profilu sie nie zmienia. Przy "bestiary"
- * profil stosowany jest doslownie jak w Bestiariuszu.
+ * do Walki Wreczy. Wartosci sa stale - nic tu nie jest losowane.
  */
 export function shapedHeroModifiers(profile: string, archetype: string): Record<Attribute, number> {
   const mods = gd.getHeroProfile(profile)?.modifiers ?? {};
   const out = Object.fromEntries(ATTRIBUTES.map((c) => [c, mods[c] ?? 0])) as Record<Attribute, number>;
   const arch = gd.getArchetype(archetype);
   if (gd.getSettings().heroProfileShape !== "archetype" || !arch) return out;
-  const order = [...arch.characteristics, ...ATTRIBUTES.filter((c) => !arch.characteristics.includes(c))];
-  const values = ATTRIBUTES.map((c) => out[c]).sort((a, b) => b - a);
-  return Object.fromEntries(order.map((c, i) => [c, values[i]])) as Record<Attribute, number>;
+  const movable = ATTRIBUTES.filter((c) => !FIXED_HERO_CHARS.includes(c));
+  const order = [
+    ...arch.characteristics.filter((c) => movable.includes(c)),
+    ...movable.filter((c) => !arch.characteristics.includes(c))
+  ];
+  const values = movable.map((c) => out[c]).sort((a, b) => b - a);
+  order.forEach((c, i) => (out[c] = values[i]));
+  return out;
 }
 
 /** Suma lub maksimum modyfikatorow profili bohaterow dla cechy. */

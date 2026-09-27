@@ -3,7 +3,7 @@
     "minKeyRoll": 9,
     "advancePerLevel": 5,
     "advanceJitter": 2,
-    "heroProfileMode": "max",
+    "heroProfileMode": "add",
     "heroProfileShape": "archetype",
     "traitRoll": [
       { "upTo": 1, "count": 3 },
