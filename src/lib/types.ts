@@ -107,6 +107,8 @@ export interface CreatureTrait {
   /** Czy cecha bierze udzial w losowaniu cech opcjonalnych. */
   randomPool: boolean;
   description: string;
+  /** Pelny tekst zasady z podrecznika (jesli rozni sie od krotkiego opisu). */
+  rules?: string;
   source?: string;
 }
 

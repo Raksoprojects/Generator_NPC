@@ -1,10 +1,12 @@
 <script lang="ts">
   import Autocomplete from "./Autocomplete.svelte";
   import { app } from "../lib/app.svelte";
+  import { allArmourNames, allWeaponNames } from "../lib/equipment";
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
-  import { pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
-  import { computeNpc, npcToText } from "../lib/npc";
+  import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
+  import { mutationLabel } from "../lib/mutations";
+  import { armourLine, computeNpc, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
   import { TIER_IDS, type Npc, type NpcSection, type TierId } from "../lib/types";
 
@@ -18,6 +20,8 @@
     removeLabel?: string;
   } = $props();
 
+  normalizeNpc(npc);
+
   let editing = $state(false);
   let openInfo = $state<string | null>(null);
 
@@ -26,8 +30,13 @@
     return computeNpc(npc);
   });
 
+  let creature = $derived(gd.getCreature(npc.creature));
+  let beast = $derived(isBeast(npc));
   let keySkills = $derived(gd.getArchetype(npc.archetype)?.keySkills ?? []);
-  let tierLabel = $derived(gd.getTier(npc.tier)?.label ?? npc.tier);
+  let tierLabel = $derived.by(() => {
+    const label = gd.getTier(npc.tier)?.label ?? npc.tier;
+    return beast ? `${label} — ${gd.getCreatureFamilies().settings.tierLabels[npc.tier] ?? ""}` : label;
+  });
   let saved = $derived(app.isSaved(npc.id));
 
   function isKeySkill(name: string): boolean {
@@ -38,6 +47,7 @@
 
   function charTitle(code: (typeof ATTRIBUTES)[number]): string {
     const c = view.chars[code];
+    if (c.absent) return `${ATTRIBUTE_NAMES[code]}: stworzenie nie posiada tej cechy`;
     const parts = [`baza ${c.base}`, `rzut ${c.roll}`, `rozw. ${c.advances}`];
     if (c.hero) parts.push(`profil +${c.hero}`);
     if (c.talent) parts.push(`talenty +${c.talent}`);
@@ -55,7 +65,7 @@
     { id: "tozsamosc", label: "Imię" },
     { id: "rzuty", label: "Rzuty" },
     { id: "rozwoj", label: "Rozwój" },
-    { id: "cechyStworzen", label: "Cechy stw." }
+    { id: "cechyStworzen", label: "Cechy i mutacje" }
   ];
 
   function toggleLock(id: NpcSection) {
@@ -97,7 +107,7 @@
   });
 
   let professionOptions = $derived(
-    gd.allProfessionNames().filter((p) => gd.professionAllowsRace(p, npc.race))
+    gd.allProfessionNames().filter((p) => gd.professionAllowsRace(p, creature ? "Człowiek" : npc.race))
   );
 
   function rebuild() {
@@ -105,10 +115,22 @@
     npc = rebuildDevelopment(snapshot(), profs.length ? profs : undefined);
   }
 
-  // --- Edycja: umiejetnosci, talenty, cechy ---
+  // --- Edycja: umiejetnosci, talenty, bron, zaklecia, cechy ---
 
   let newSkill = $state("");
   let newTalent = $state("");
+  let newWeapon = $state("");
+  let newArmour = $state("");
+  let newSpell = $state("");
+  let newMutation = $state("");
+
+  const weaponNames = allWeaponNames();
+  const armourNames = allArmourNames();
+  const spellNames = gd.getSpellsData().spells.map((s) => s.name);
+  const mutationOptions = [
+    ...gd.getMutations().physical.map((m) => `physical|${m.name}`),
+    ...gd.getMutations().mental.map((m) => `mental|${m.name}`)
+  ];
 
   function addSkill() {
     const name = newSkill.trim();
@@ -122,6 +144,20 @@
     if (!name || npc.talents.some((t) => t.name === name)) return;
     npc.talents.push({ name, level: 1 });
     newTalent = "";
+  }
+
+  function addTo(list: "weapons" | "armour" | "spells", value: string, reset: () => void) {
+    const name = value.trim();
+    if (!name || npc[list].includes(name)) return;
+    npc[list] = [...npc[list], name];
+    reset();
+  }
+
+  function addMutation() {
+    if (!newMutation) return;
+    const [kind, name] = newMutation.split("|") as ["physical" | "mental", string];
+    npc.mutations = [...npc.mutations, { kind, name }];
+    newMutation = "";
   }
 
   function toggleTrait(name: string) {
@@ -140,8 +176,25 @@
     npc.trappings = text.split(/\n|,/).map((s) => s.trim()).filter(Boolean);
   }
 
+  // --- Opisy po kliknieciu ---
+
   function toggleInfo(key: string) {
     openInfo = openInfo === key ? null : key;
+  }
+
+  /** Opis cechy stworzenia: najpierw dokladna nazwa, potem nazwa bazowa ("Pancerz (2)" -> "Pancerz (wartość)"). */
+  function traitText(name: string): string {
+    const all = gd.getCreatureTraits();
+    const exact = all[name];
+    if (exact) return exact.rules ?? exact.description;
+    const base = name.replace(/\s*[+(].*$/, "").trim();
+    const key = Object.keys(all).find((k) => k.replace(/\s*[+(].*$/, "").trim() === base);
+    return key ? (all[key].rules ?? all[key].description) : "";
+  }
+
+  function qualityText(q: string): string {
+    const base = q.replace(/\s+\d+$/, "");
+    return gd.getWeapons().qualities[base] ?? gd.getWeapons().qualities[q] ?? "";
   }
 
   function infoText(key: string): string {
@@ -153,8 +206,16 @@
       const tests = t.tests ? ` Testy: ${t.tests}.` : "";
       return `${t.description ?? "Brak opisu."}${max}${tests}`;
     }
-    if (kind === "c") return gd.getCreatureTrait(name)?.description ?? "";
+    if (kind === "c") return traitText(name);
     if (kind === "p") return gd.getHeroProfile(name)?.description ?? "";
+    if (kind === "q") return qualityText(name);
+    if (kind === "a") return view.abilities.find((a) => a.name === name)?.description ?? "";
+    if (kind === "m") return view.mutations.find((m) => m.label === name)?.effect ?? "";
+    if (kind === "s") {
+      const s = gd.getSpell(name);
+      if (!s) return "";
+      return `PZ ${s.cn} · Zasięg: ${s.range} · Cel: ${s.target} · Czas: ${s.duration}. ${s.description} (${s.source}, s. ${s.page})`;
+    }
     return "";
   }
 </script>
@@ -165,7 +226,7 @@
       {#if editing}
         <div class="name-edit">
           <input class="name-input" type="text" bind:value={npc.name} aria-label="Imię" />
-          <button class="btn-sm ghost" title="Wylosuj nowe imię" onclick={newName}>🎲</button>
+          {#if !beast}<button class="btn-sm ghost" title="Wylosuj nowe imię" onclick={newName}>🎲</button>{/if}
         </div>
       {:else}
         <h3>
@@ -174,7 +235,13 @@
         </h3>
       {/if}
       <p class="meta">
-        {npc.race} · {npc.sex === "K" ? "kobieta" : "mężczyzna"} · <b>{npc.archetype}</b> · {tierLabel}
+        {#if creature}
+          <b>{creature.name}</b> <span class="text-dim">({creature.group})</span>
+          {#if npc.archetype} · {npc.archetype}{/if}
+        {:else}
+          {npc.race} · {npc.sex === "K" ? "kobieta" : "mężczyzna"} · <b>{npc.archetype}</b>
+        {/if}
+        · {tierLabel}
         {#if npc.group}<span class="text-dim"> · {npc.group}</span>{/if}
       </p>
       {#if view.career}
@@ -203,9 +270,9 @@
     {#each ATTRIBUTES as code (code)}
       <div class="stat" role="cell" title={charTitle(code)}>
         <span class="code">{code}</span>
-        <span class="val">{view.chars[code].total}</span>
-        {#if editing}
-          <label class="mini">rzut <input type="number" min="2" max="20" bind:value={npc.rolls[code]} /></label>
+        <span class="val">{view.chars[code].absent ? "–" : view.chars[code].total}</span>
+        {#if editing && !view.chars[code].absent}
+          <label class="mini">rzut <input type="number" min="1" max="20" bind:value={npc.rolls[code]} /></label>
           <label class="mini">rozw. <input type="number" min="0" bind:value={npc.charAdvances[code]} /></label>
         {/if}
       </div>
@@ -219,6 +286,26 @@
       <span class="val">{view.movement}</span>
     </div>
   </div>
+
+  <!-- Walka: bron i redukcja obrazen -->
+  <section class="combat">
+    {#each view.weapons as w (w.name)}
+      <div class="weapon">
+        <b>{weaponLabel(w)}</b>
+        <span class="text-dim small">{w.skillName}</span>
+        {#each w.qualities as q (q)}
+          <button class="quality tap" onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+        {/each}
+        {#if w.note}<span class="text-dim small">{w.note}</span>{/if}
+      </div>
+    {/each}
+    <div class="armour" title="Redukcja obrażeń = Bonus z Wytrzymałości + Punkty Pancerza">
+      <span class="text-dim">Redukcja obrażeń:</span>
+      <b>{armourLine(view)}</b>
+      {#if npc.armour.length}<span class="text-dim small">({npc.armour.join(", ")})</span>{/if}
+      {#each view.armourPenalties as p (p)}<span class="chip warning">{p}</span>{/each}
+    </div>
+  </section>
 
   {#if !editing}
     <section class="block">
@@ -234,25 +321,41 @@
       </p>
     </section>
 
-    <section class="block">
-      <h4>Talenty</h4>
-      <p class="list">
-        {#each view.talents as t (t.name)}
-          <button class="item tap" class:unknown={!t.known} onclick={() => toggleInfo(`t|${t.name}`)}>
-            {t.name}{t.level > 1 ? ` ${t.level}` : ""}
-          </button>
-        {:else}
-          <span class="text-dim">brak</span>
-        {/each}
-      </p>
-    </section>
-
-    {#if npc.traits.length || npc.heroProfiles.length || view.heroTraits.length}
+    {#if view.talents.length}
       <section class="block">
-        <h4>Cechy Stworzeń i profile</h4>
+        <h4>Talenty</h4>
         <p class="list">
+          {#each view.talents as t (t.name)}
+            <button class="item tap" class:unknown={!t.known} onclick={() => toggleInfo(`t|${t.name}`)}>
+              {t.name}{t.level > 1 ? ` ${t.level}` : ""}
+            </button>
+          {/each}
+        </p>
+      </section>
+    {/if}
+
+    {#if view.spells.length}
+      <section class="block">
+        <h4>Zaklęcia</h4>
+        <p class="list">
+          {#each view.spells as s (s.name)}
+            <button class="item tap" class:petty={s.lore === "Prosta"} onclick={() => toggleInfo(`s|${s.name}`)}>
+              {s.name} <span class="text-dim">PZ {s.cn}</span>
+            </button>
+          {/each}
+        </p>
+      </section>
+    {/if}
+
+    {#if view.creatureTraits.length || npc.traits.length || npc.heroProfiles.length || view.heroTraits.length || view.mutations.length}
+      <section class="block">
+        <h4>Cechy Stworzeń, profile i mutacje</h4>
+        <p class="list">
+          {#each view.creatureTraits as tr (tr)}
+            <button class="chip tap" onclick={() => toggleInfo(`c|${tr}`)}>{tr}</button>
+          {/each}
           {#each npc.traits as tr (tr)}
-            <button class="chip warning tap" onclick={() => toggleInfo(`c|${tr}`)}>{tr}</button>
+            <button class="chip warning tap" title="Wylosowana cecha — zmienia statystyki" onclick={() => toggleInfo(`c|${tr}`)}>{tr}</button>
           {/each}
           {#each npc.heroProfiles as hp (hp)}
             <button class="chip info tap" onclick={() => toggleInfo(`p|${hp}`)}>{hp}</button>
@@ -260,13 +363,27 @@
           {#each view.heroTraits as ht (ht)}
             <span class="chip">{ht}</span>
           {/each}
+          {#each view.mutations as m (m.label)}
+            <button class="chip danger tap" title={m.effect} onclick={() => toggleInfo(`m|${m.label}`)}>☣ {m.label}</button>
+          {/each}
+        </p>
+      </section>
+    {/if}
+
+    {#if view.abilities.length}
+      <section class="block">
+        <h4>Zdolności</h4>
+        <p class="list">
+          {#each view.abilities as a (a.name)}
+            <button class="item tap" onclick={() => toggleInfo(`a|${a.name}`)}>{a.name}</button>
+          {/each}
         </p>
       </section>
     {/if}
 
     {#if openInfo}
       <div class="info" role="note">
-        <b>{openInfo.split("|")[1]}:</b> {infoText(openInfo)}
+        <span><b>{openInfo.split("|")[1]}:</b> {infoText(openInfo)}</span>
         <button class="btn-sm ghost" onclick={() => (openInfo = null)} aria-label="Zamknij opis">✕</button>
       </div>
     {/if}
@@ -289,12 +406,14 @@
   {:else}
     <!-- Tryb edycji -->
     <section class="block edit-grid">
-      <label>Płeć
-        <select bind:value={npc.sex}>
-          <option value="M">mężczyzna</option>
-          <option value="K">kobieta</option>
-        </select>
-      </label>
+      {#if !creature}
+        <label>Płeć
+          <select bind:value={npc.sex}>
+            <option value="M">mężczyzna</option>
+            <option value="K">kobieta</option>
+          </select>
+        </label>
+      {/if}
       <label>Etykieta
         <input type="text" placeholder="np. Herszt" bind:value={npc.label} />
       </label>
@@ -304,39 +423,76 @@
     </section>
 
     <section class="block">
-      <h4>Rasa, archetyp, poziom i profesja</h4>
+      <h4>{creature ? "Archetyp, poziom i profesja" : "Rasa, archetyp, poziom i profesja"}</h4>
       <div class="edit-grid">
-        <label>Rasa
-          <select bind:value={npc.race}>
-            {#each gd.allRaceNames() as r (r)}<option value={r} disabled={!racesForArchetype(npc.archetype).includes(r)}>{r}</option>{/each}
-          </select>
-        </label>
-        <label>Archetyp
-          <select bind:value={npc.archetype}>
-            {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
-          </select>
-        </label>
+        {#if !creature}
+          <label>Rasa
+            <select bind:value={npc.race}>
+              {#each gd.allRaceNames() as r (r)}<option value={r} disabled={!racesForArchetype(npc.archetype).includes(r)}>{r}</option>{/each}
+            </select>
+          </label>
+        {/if}
+        {#if !creature || gd.isCivilized(npc.creature)}
+          <label>Archetyp
+            <select bind:value={npc.archetype}>
+              {#if creature}<option value="">— bestia (bez profesji) —</option>{/if}
+              {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
+            </select>
+          </label>
+        {/if}
         <label>Poziom
           <select bind:value={npc.tier}>
             {#each TIER_IDS as t (t)}<option value={t as TierId}>{gd.getTier(t).label}</option>{/each}
           </select>
         </label>
-        <label>Profesja obecna
-          <select bind:value={mainProfession}>
-            <option value="">— losowo —</option>
-            {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
-          </select>
-        </label>
-        <label>Profesja poprzednia
-          <select bind:value={prevProfession}>
-            <option value="">— brak / losowo —</option>
-            {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
-          </select>
-        </label>
+        {#if !beast}
+          <label>Profesja obecna
+            <select bind:value={mainProfession}>
+              <option value="">— losowo —</option>
+              {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
+            </select>
+          </label>
+          <label>Profesja poprzednia
+            <select bind:value={prevProfession}>
+              <option value="">— brak / losowo —</option>
+              {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
+            </select>
+          </label>
+        {/if}
       </div>
       <div class="row">
         <button class="btn-sm primary" onclick={rebuild}>Przebuduj rozwój</button>
-        <span class="hint text-dim">Nowa ścieżka, rozwinięcia, umiejętności i talenty. Rzuty, imię i cechy stworzeń zostają.</span>
+        <span class="hint text-dim">Nowe rozwinięcia, umiejętności, talenty, broń i zaklęcia. Rzuty, imię i cechy stworzeń zostają.</span>
+      </div>
+    </section>
+
+    <section class="block">
+      <h4>Broń i pancerz</h4>
+      <div class="edit-list">
+        {#each npc.weapons as w, i (i)}
+          <div class="edit-row">
+            <span class="grow">⚔ {w}</span>
+            <button class="btn-sm ghost" aria-label="Usuń broń" onclick={() => npc.weapons.splice(i, 1)}>✕</button>
+          </div>
+        {/each}
+        {#each npc.armour as a, i (i)}
+          <div class="edit-row">
+            <span class="grow">🛡 {a}</span>
+            <button class="btn-sm ghost" aria-label="Usuń pancerz" onclick={() => npc.armour.splice(i, 1)}>✕</button>
+          </div>
+        {/each}
+      </div>
+      <div class="edit-row wrap">
+        <select bind:value={newWeapon} aria-label="Dodaj broń">
+          <option value="">+ broń…</option>
+          {#each weaponNames as w (w)}<option value={w}>{w}</option>{/each}
+        </select>
+        <button class="btn-sm" onclick={() => addTo("weapons", newWeapon, () => (newWeapon = ""))}>Dodaj</button>
+        <select bind:value={newArmour} aria-label="Dodaj pancerz">
+          <option value="">+ pancerz…</option>
+          {#each armourNames as a (a)}<option value={a}>{a}</option>{/each}
+        </select>
+        <button class="btn-sm" onclick={() => addTo("armour", newArmour, () => (newArmour = ""))}>Dodaj</button>
       </div>
     </section>
 
@@ -375,10 +531,29 @@
     </section>
 
     <section class="block">
-      <h4>Cechy Stworzeń</h4>
+      <h4>Zaklęcia</h4>
+      <div class="edit-list">
+        {#each npc.spells as s, i (i)}
+          <div class="edit-row">
+            <span class="grow">{s} <span class="text-dim">PZ {gd.getSpell(s)?.cn ?? "?"}</span></span>
+            <button class="btn-sm ghost" aria-label="Usuń zaklęcie" onclick={() => npc.spells.splice(i, 1)}>✕</button>
+          </div>
+        {/each}
+      </div>
+      <div class="edit-row">
+        <Autocomplete bind:value={newSpell} options={spellNames} placeholder="Dodaj zaklęcie…" />
+        <button class="btn-sm" onclick={() => addTo("spells", newSpell, () => (newSpell = ""))}>Dodaj</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h4>Cechy Stworzeń <span class="hint text-dim">(wylosowane — zmieniają statystyki)</span></h4>
       <p class="list">
-        {#each Object.keys(gd.getCreatureTraits()) as tr (tr)}
-          <button class="chip tap" class:warning={npc.traits.includes(tr)} aria-pressed={npc.traits.includes(tr)} title={gd.getCreatureTrait(tr)?.description} onclick={() => toggleTrait(tr)}>{tr}</button>
+        {#each Object.entries(gd.getCreatureTraits()).filter(([, t]) => t.randomPool).map(([n]) => n) as tr (tr)}
+          <button class="chip tap" class:warning={npc.traits.includes(tr)} aria-pressed={npc.traits.includes(tr)} title={traitText(tr)} onclick={() => toggleTrait(tr)}>{tr}</button>
+        {/each}
+        {#each npc.traits.filter((t) => !gd.getCreatureTrait(t)?.randomPool) as tr (tr)}
+          <button class="chip warning tap" aria-pressed="true" title="Kliknij, aby usunąć" onclick={() => toggleTrait(tr)}>{tr} ✕</button>
         {/each}
       </p>
       <h4>Profile bohaterów</h4>
@@ -387,6 +562,24 @@
           <button class="chip tap" class:info={npc.heroProfiles.includes(hp)} aria-pressed={npc.heroProfiles.includes(hp)} title={gd.getHeroProfile(hp)?.description} onclick={() => toggleProfile(hp)}>{hp}</button>
         {/each}
       </p>
+      <h4>Mutacje</h4>
+      <p class="list">
+        {#each npc.mutations as m, i (i)}
+          <button class="chip danger tap" title="Kliknij, aby usunąć" onclick={() => npc.mutations.splice(i, 1)}>☣ {mutationLabel(m)} ✕</button>
+        {/each}
+      </p>
+      <div class="edit-row wrap">
+        <select bind:value={newMutation} aria-label="Dodaj mutację">
+          <option value="">+ mutacja…</option>
+          <optgroup label="Fizyczne">
+            {#each mutationOptions.filter((o) => o.startsWith("physical")) as o (o)}<option value={o}>{o.split("|")[1]}</option>{/each}
+          </optgroup>
+          <optgroup label="Psychiczne">
+            {#each mutationOptions.filter((o) => o.startsWith("mental")) as o (o)}<option value={o}>{o.split("|")[1]}</option>{/each}
+          </optgroup>
+        </select>
+        <button class="btn-sm" onclick={addMutation}>Dodaj</button>
+      </div>
     </section>
 
     <section class="block edit-grid">
@@ -547,6 +740,39 @@
     text-align: center;
   }
 
+  .combat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
+    border-left: 3px solid var(--danger);
+    background: var(--bg-panel-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .weapon,
+  .armour {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-2);
+  }
+
+  .small {
+    font-size: var(--fs-sm);
+  }
+
+  button.quality {
+    background: none;
+    border: none;
+    border-bottom: 1px dotted var(--border-strong);
+    border-radius: 0;
+    padding: 0;
+    min-height: auto;
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+
   .block {
     display: flex;
     flex-direction: column;
@@ -582,6 +808,10 @@
     font-style: italic;
   }
 
+  .item.petty {
+    color: var(--text-muted);
+  }
+
   button.item.tap {
     background: none;
     border: none;
@@ -595,6 +825,12 @@
   button.chip.tap {
     min-height: auto;
     cursor: pointer;
+  }
+
+  .chip.danger {
+    background: rgba(181, 82, 74, 0.16);
+    border-color: var(--danger-strong);
+    color: var(--danger-strong);
   }
 
   .info {
@@ -655,6 +891,10 @@
     display: flex;
     align-items: center;
     gap: var(--space-1);
+  }
+
+  .edit-row.wrap {
+    flex-wrap: wrap;
   }
 
   .edit-row .grow {
