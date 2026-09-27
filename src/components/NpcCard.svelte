@@ -1,7 +1,7 @@
 <script lang="ts">
   import Autocomplete from "./Autocomplete.svelte";
   import { app } from "../lib/app.svelte";
-  import { allArmourNames, allWeaponNames } from "../lib/equipment";
+  import { allArmourNames, allWeaponNames, qualityDescription } from "../lib/equipment";
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
@@ -192,9 +192,12 @@
     return key ? (all[key].rules ?? all[key].description) : "";
   }
 
+  /** Opis zalety/wady; "A albo B" - opisy obu opcji. */
   function qualityText(q: string): string {
-    const base = q.replace(/\s+\d+$/, "");
-    return gd.getWeapons().qualities[base] ?? gd.getWeapons().qualities[q] ?? "";
+    return q
+      .split(" albo ")
+      .map((part) => `${part}: ${qualityDescription(part) || "—"}`)
+      .join(" ALBO ");
   }
 
   function infoText(key: string): string {
@@ -291,12 +294,14 @@
   <section class="combat">
     {#each view.weapons as w (w.name)}
       <div class="weapon">
-        <b>{weaponLabel(w)}</b>
+        <b title={[w.reach ? `Długość: ${w.reach}` : "", w.note ?? ""].filter(Boolean).join(" · ")}>{weaponLabel(w)}</b>
         <span class="text-dim small">{w.skillName}</span>
         {#each w.qualities as q (q)}
-          <button class="quality tap" onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+          <button class="quality tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
         {/each}
-        {#if w.note}<span class="text-dim small">{w.note}</span>{/if}
+        {#each w.flaws as q (q)}
+          <button class="quality flaw tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+        {/each}
       </div>
     {/each}
     <div class="armour" title="Redukcja obrażeń = Bonus z Wytrzymałości + Punkty Pancerza">
@@ -770,7 +775,11 @@
     padding: 0;
     min-height: auto;
     font-size: var(--fs-sm);
-    color: var(--text-muted);
+    color: var(--success-strong);
+  }
+
+  button.quality.flaw {
+    color: var(--danger-strong);
   }
 
   .block {

@@ -15,7 +15,8 @@ const SEEDS = Array.from({ length: 40 }, (_, i) => i + 1);
 describe("bron i pancerz", () => {
   it("rozpoznaje bron i pancerz w wyposazeniu profesji", () => {
     const rng = seedRng(1);
-    expect(matchTrapping("broń ręczna (bosak)", rng)).toEqual({ kind: "weapon", names: ["Broń Ręczna"] });
+    expect(matchTrapping("broń ręczna (bosak)", rng)).toEqual({ kind: "weapon", names: ["Bosak"] });
+    expect(matchTrapping("broń ręczna (topór)", rng)).toEqual({ kind: "weapon", names: ["Topór"] });
     expect(matchTrapping("kusza z 10 bełtami", rng)).toEqual({ kind: "weapon", names: ["Kusza"] });
     expect(matchTrapping("kaftan kolczy", rng)).toEqual({ kind: "armour", names: ["Kaftan kolczy"] });
     expect(matchTrapping("zbroja płytowa z hełmem", rng)?.names).toContain("Hełm");
@@ -41,14 +42,36 @@ describe("bron i pancerz", () => {
 
   it("obrazenia broni = BS + bron, wartosc testu = umiejetnosc albo WW", () => {
     const npc = generateNpc({ archetype: "Wojownik", tier: "slaby", race: "Człowiek", professions: ["Żołnierz"], deterministic: true }, seedRng(4));
-    npc.weapons = ["Broń Ręczna", "Halabarda"];
+    npc.weapons = ["Broń Ręczna", "Halabarda", "Topór"];
     const v = computeNpc(npc);
-    const sword = v.weapons.find((w) => w.name === "Broń Ręczna")!;
+    // Stara nazwa z zapisanych BN jest mapowana na karte "Miecz".
+    const sword = v.weapons.find((w) => w.name === "Miecz")!;
     const halberd = v.weapons.find((w) => w.name === "Halabarda")!;
+    const axe = v.weapons.find((w) => w.name === "Topór")!;
     expect(sword.damage).toBe(v.chars.S.bonus + 4);
     expect(sword.skill).toBe(v.skills.find((s) => s.name === "Broń Biała (Podstawowa)")!.total);
     expect(halberd.skillName).toBe(v.skills.some((s) => s.name === "Broń Biała (Drzewcowa)") ? "Broń Biała (Drzewcowa)" : "WW");
-    expect(weaponLabel(sword)).toMatch(/^Broń Ręczna \(\+\d+\/\d+\)$/);
+    expect(halberd.qualities).toContain("Nadziewająca albo Rąbiąca");
+    expect(axe.flaws).toContain("Niewyważony");
+    expect(weaponLabel(sword)).toMatch(/^Miecz \(\+\d+\/\d+\)$/);
+  });
+
+  it("krasnolud z bronia reczna dostaje topor albo mlot", () => {
+    const counts: Record<string, number> = {};
+    for (const seed of SEEDS) {
+      const npc = generateNpc({ archetype: "Wojownik", race: "Krasnolud", tier: "slaby" }, seedRng(seed));
+      for (const w of npc.weapons) counts[w] = (counts[w] ?? 0) + 1;
+    }
+    const axesAndHammers = (counts["Topór"] ?? 0) + (counts["Młot jednoręczny"] ?? 0) + (counts["Wielki topór"] ?? 0) + (counts["Młot bojowy"] ?? 0);
+    expect(axesAndHammers).toBeGreaterThan(counts["Miecz"] ?? 0);
+  });
+
+  it("zadna pozycja wyposazenia nie zostaje jako 'broń (dowolna)'", () => {
+    for (const seed of SEEDS) {
+      const npc = generateNpc({ archetype: "Wojownik", tier: "zaawansowany" }, seedRng(seed));
+      expect(npc.trappings.some((t) => /broń/i.test(t) && /dowoln|ręczna/i.test(t))).toBe(false);
+      for (const w of npc.weapons) expect(w.startsWith("@")).toBe(false);
+    }
   });
 });
 
