@@ -136,10 +136,6 @@ export interface TierDef {
   requireLevel4?: boolean;
   /** Maksymalna liczba profesji w sciezce. */
   maxCareers: number;
-  /** Maks. dodatkowe rozwiniecia kluczowych umiejetnosci archetypu. */
-  keySkillBonus: number;
-  /** Maks. dodatkowe rozwiniecia kluczowych cech archetypu. */
-  keyCharBonus: number;
   talentsPerLevel: number;
   extraTalentChance: number;
   talentLevelUpChance: number;
@@ -150,12 +146,19 @@ export interface TierDef {
 export interface GeneratorSettings {
   /** Minimalny wynik 2k10 w kluczowych cechach archetypu (nizszy = przerzut). */
   minKeyRoll: number;
+  /** Rozwiniecia za kazdy ukonczony poziom profesji (minimum na poziom). */
   advancePerLevel: number;
-  /** Losowe odchylenie rozwiniec na poziom (+/-). */
-  advanceJitter: number;
-  /** "max": profil bohatera zastepuje rozwiniecia, gdy jest wyzszy; "add": sumuje. */
+  /** Najmniejsze rozwiniecie za obecny, nieukonczony poziom profesji. */
+  currentLevelMin: number;
+  /** Ile najwazniejszych umiejetnosci archetypu dostaje premie i jaka maksymalnie. */
+  keySkillCount: number;
+  keySkillBonus: number;
+  /** Ile najwazniejszych cech archetypu dostaje premie i jaka maksymalnie. */
+  keyCharCount: number;
+  keyCharBonus: number;
+  /** "add": profil bohatera dodaje stale wartosci; "max": liczy sie tylko nadwyzka ponad rozwiniecia. */
   heroProfileMode: "max" | "add";
-  /** "archetype": wartosci profilu przydzielane wg kolejnosci cech archetypu; "bestiary": doslownie. */
+  /** "archetype": S i Wt stale, reszta wg kolejnosci cech archetypu; "bestiary": doslownie. */
   heroProfileShape: "archetype" | "bestiary";
   /** Progi k100 dla liczby cech opcjonalnych. */
   traitRoll: { upTo: number; count: number }[];

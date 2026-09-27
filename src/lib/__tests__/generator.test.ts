@@ -8,6 +8,7 @@ import {
   rebuildDevelopment,
   rerollNpc,
   resolveSpecName,
+  rollDiceText,
   rollMoney,
   traitCountForRoll
 } from "../generator";
@@ -106,6 +107,44 @@ describe("rozwoj w trybie wlasnym (deterministycznym)", () => {
   });
 });
 
+describe("rozwoj losowy", () => {
+  it("ukonczone poziomy daja pelne +5, obecny od 2 do 5", () => {
+    for (const seed of SEEDS) {
+      const npc = generateNpc({ archetype: "Kupiec", tier: "sredni", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
+      // Kupiec 1: Zw, SW, Ogd; poziom 2 dodaje Int. Zw nie jest cecha kluczowa Kupca (Ogd, SW).
+      expect(npc.charAdvances.Zw).toBeGreaterThanOrEqual(5 + 2);
+      expect(npc.charAdvances.Zw).toBeLessThanOrEqual(10);
+      expect(npc.charAdvances.Int).toBeGreaterThanOrEqual(2);
+      expect(npc.charAdvances.Int).toBeLessThanOrEqual(5);
+    }
+  });
+
+  it("premia archetypu to najwyzej +5 w umiejetnosci i +3 w cesze", () => {
+    for (const seed of SEEDS) {
+      const npc = generateNpc({ archetype: "Kupiec", tier: "sredni", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
+      // Ogd: Kupiec 1 i 2 -> maks. 10 z profesji + 3 premii.
+      expect(npc.charAdvances.Ogd).toBeLessThanOrEqual(13);
+      const barter = npc.skills.find((s) => s.name === "Targowanie")!;
+      expect(barter.advances).toBeLessThanOrEqual(15);
+      expect(barter.advances).toBeGreaterThanOrEqual(8);
+    }
+  });
+
+  it("rzuty w wyposazeniu sa wykonywane", () => {
+    const rng = seedRng(3);
+    for (let i = 0; i < 20; i++) {
+      const out = rollDiceText("3k10 szylingów i k10 szmat", rng);
+      const [a, b] = out.match(/\d+/g)!.map(Number);
+      expect(a).toBeGreaterThanOrEqual(3);
+      expect(a).toBeLessThanOrEqual(30);
+      expect(b).toBeGreaterThanOrEqual(1);
+      expect(b).toBeLessThanOrEqual(10);
+      expect(out).not.toMatch(/k10/);
+    }
+    expect(rollDiceText("2k10 monet", rng, true)).toBe("11 monet");
+  });
+});
+
 describe("specjalizacje", () => {
   it("szkola magii i wiatr pasuja do siebie", () => {
     for (const seed of SEEDS.slice(0, 20)) {
@@ -157,18 +196,31 @@ describe("wartosci koncowe", () => {
     const plain = computeNpc(base);
     const boosted = computeNpc({ ...base, traits: ["Zabijaka"], heroProfiles: [COMMANDER_PROFILE] });
     const heroS = shapedHeroModifiers(COMMANDER_PROFILE, "Oprych").S;
-    expect(boosted.chars.S.total - plain.chars.S.total).toBe(10 + Math.max(0, heroS - base.charAdvances.S));
+    expect(heroS).toBe(5);
+    expect(boosted.chars.S.total - plain.chars.S.total).toBe(10 + heroS);
     expect(boosted.chars.WW.total).toBeGreaterThan(plain.chars.WW.total);
   });
 
-  it("profil bohatera jest rozkladany wg priorytetow archetypu", () => {
+  it("profil bohatera: S i Wt stale, reszta wg priorytetow archetypu", () => {
     const thief = shapedHeroModifiers("Wielki Bohater", "Złodziej");
     expect(thief.Zw).toBe(45);
     expect(thief.WW).toBe(30);
+    expect(thief.S).toBe(20);
+    expect(thief.Wt).toBe(20);
     const wizard = shapedHeroModifiers("Wielki Bohater", "Czarodziej");
     expect(wizard.SW).toBe(45);
+    expect(wizard.S).toBe(20);
     const sum = (m: Record<string, number>) => Object.values(m).reduce((a, b) => a + b, 0);
     expect(sum(thief)).toBe(sum(wizard));
+  });
+
+  it("profil bohatera daje stala premie niezaleznie od rozwiniec", () => {
+    const npc = generateNpc({ archetype: "Złodziej", tier: "slaby" }, seedRng(21));
+    const with1 = computeNpc({ ...npc, heroProfiles: ["Pomniejszy Bohater"] });
+    const with2 = computeNpc({ ...npc, heroProfiles: ["Pomniejszy Bohater"], charAdvances: { ...npc.charAdvances, Zw: 40 } });
+    expect(with1.chars.Zw.hero).toBe(30);
+    expect(with2.chars.Zw.hero).toBe(30);
+    expect(with1.chars.S.hero).toBe(10);
   });
 
   it("Czujny daje +30 do Percepcji nawet bez tej umiejetnosci", () => {

@@ -347,10 +347,26 @@ function addSkill(npc: Npc, name: string, advances: number): void {
   else npc.skills.push({ name, advances });
 }
 
-function advanceAmount(rng: Rng, deterministic: boolean): number {
-  const { advancePerLevel, advanceJitter } = gd.getSettings();
-  if (deterministic) return advancePerLevel;
-  return Math.max(1, advancePerLevel + randInt(-advanceJitter, advanceJitter, rng));
+/**
+ * Rozwiniecia za jeden poziom profesji. Ukonczony poziom daje pelne +5;
+ * poziom obecny (ostatni w sciezce, jeszcze w toku) moze dac mniej.
+ */
+function advanceAmount(current: boolean, rng: Rng, deterministic: boolean): number {
+  const { advancePerLevel, currentLevelMin } = gd.getSettings();
+  if (!current || deterministic) return advancePerLevel;
+  return randInt(Math.min(currentLevelMin, advancePerLevel), advancePerLevel, rng);
+}
+
+/** Zamienia rzuty w tekscie na wyniki, np. "3k10 szylingów" -> "17 szylingów". */
+export function rollDiceText(text: string, rng: Rng, deterministic = false): string {
+  return text.replace(/(\d*)\s?[kK](\d+)/g, (_, count: string, sides: string) => {
+    const n = Number(count || 1);
+    const s = Number(sides);
+    if (deterministic) return String(Math.round((n * (s + 1)) / 2));
+    let sum = 0;
+    for (let i = 0; i < n; i++) sum += rollDie(s, rng);
+    return String(sum);
+  });
 }
 
 function emptyAttrs(): Record<Attribute, number> {
@@ -389,16 +405,17 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     return resolvedSkills.get(key)!;
   };
 
-  for (const step of npc.careerPath) {
+  npc.careerPath.forEach((step, index) => {
     const prof = gd.getProfession(step.profession);
     const lvl = prof?.levels.find((l) => l.level === step.level);
-    if (!prof || !lvl) continue;
+    if (!prof || !lvl) return;
+    const current = index === npc.careerPath.length - 1;
 
     for (const code of levelCharacteristics(step.profession, step.level, arch)) {
-      npc.charAdvances[code] += advanceAmount(rng, deterministic);
+      npc.charAdvances[code] += advanceAmount(current, rng, deterministic);
     }
     for (const raw of levelSkills(step.profession, step.level)) {
-      addSkill(npc, resolveSkill(step.profession, raw), advanceAmount(rng, deterministic));
+      addSkill(npc, resolveSkill(step.profession, raw), advanceAmount(current, rng, deterministic));
     }
 
     const chars = approxChars(npc);
@@ -417,11 +434,14 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
 
     // Wyposazenie tylko z obecnej profesji - poprzednia zostawila po sobie najwyzej wspomnienia.
     if (step.profession === npc.careerPath[npc.careerPath.length - 1].profession) {
-      for (const item of lvl.trappings) if (!npc.trappings.includes(item)) npc.trappings.push(item);
+      for (const raw of lvl.trappings) {
+        const item = rollDiceText(raw, rng, deterministic);
+        if (!npc.trappings.includes(item)) npc.trappings.push(item);
+      }
     }
-  }
+  });
 
-  applyArchetypeBonuses(npc, arch, tier, rng, deterministic);
+  applyArchetypeBonuses(npc, arch, rng, deterministic);
 
   // Poziomy talentow: szansa na kolejny poziom za kazdy poziom profesji ponad pierwszy.
   if (tier && !deterministic) {
@@ -438,16 +458,19 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
   npc.money = last ? rollMoney(gd.getProfession(last.profession)?.levels.find((l) => l.level === last.level)?.status ?? "", rng, deterministic) : "";
 }
 
-/** Premie archetypu: wiecej w kluczowych umiejetnosciach i cechach (skalowane poziomem BN). */
-function applyArchetypeBonuses(npc: Npc, arch: Archetype | undefined, tier: TierDef | undefined, rng: Rng, deterministic: boolean): void {
-  if (!arch || !tier) return;
+/**
+ * Premie archetypu ponad rozwoj z profesji: kilka najwazniejszych umiejetnosci
+ * (domyslnie 4, do +5) i cech (domyslnie 2, do +3). Umiejetnosci maja
+ * pierwszenstwo - zamiast +9 w Wytrzymalosci BN ma raczej +12 w Odpornosci.
+ */
+function applyArchetypeBonuses(npc: Npc, arch: Archetype | undefined, rng: Rng, deterministic: boolean): void {
+  if (!arch) return;
+  const s = gd.getSettings();
   const roll = (lo: number, hi: number) => (deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng));
 
-  const skillMax = tier.keySkillBonus;
-  arch.keySkills.forEach((key, index) => {
-    const primary = index < 2;
-    const bonus = primary ? roll(Math.ceil(skillMax / 2), skillMax) : roll(0, Math.ceil(skillMax / 2));
-    const owned = npc.skills.filter((s) => matchesKey(s.name, key));
+  arch.keySkills.slice(0, s.keySkillCount).forEach((key) => {
+    const bonus = roll(1, s.keySkillBonus);
+    const owned = npc.skills.filter((sk) => matchesKey(sk.name, key));
     if (owned.length) {
       // Najbardziej rozwinieta pasujaca umiejetnosc dostaje premie (np. jedna bron).
       owned.sort((a, b) => b.advances - a.advances)[0].advances += bonus;
@@ -459,9 +482,8 @@ function applyArchetypeBonuses(npc: Npc, arch: Archetype | undefined, tier: Tier
     }
   });
 
-  const charMax = tier.keyCharBonus;
-  arch.characteristics.slice(0, 3).forEach((code, index) => {
-    npc.charAdvances[code] += index < 2 ? roll(0, charMax) : roll(0, Math.ceil(charMax / 2));
+  arch.characteristics.slice(0, s.keyCharCount).forEach((code) => {
+    npc.charAdvances[code] += roll(0, s.keyCharBonus);
   });
 }
 
