@@ -5,10 +5,10 @@
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
-  import { mutationLabel } from "../lib/mutations";
+  import { mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { armourLine, computeNpc, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
-  import { TIER_IDS, type Npc, type NpcSection, type TierId } from "../lib/types";
+  import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type TierId } from "../lib/types";
 
   let {
     npc = $bindable(),
@@ -127,10 +127,18 @@
   const weaponNames = allWeaponNames();
   const armourNames = allArmourNames();
   const spellNames = gd.getSpellsData().spells.map((s) => s.name);
-  const mutationOptions = [
-    ...gd.getMutations().physical.map((m) => `physical|${m.name}`),
-    ...gd.getMutations().mental.map((m) => `mental|${m.name}`)
-  ];
+  const KIND_LABEL = { physical: "Fizyczne", mental: "Psychiczne" } as const;
+  const SEVERITY_LABEL = { trivial: "błahe", minor: "pomniejsze", major: "poważne" } as const;
+  const mutationGroups = (["physical", "mental"] as const).flatMap((kind) =>
+    usesHandbook()
+      ? (["trivial", "minor", "major"] as const).map((table) => ({
+          label: `${KIND_LABEL[kind]} — ${SEVERITY_LABEL[table]}`,
+          options: mutationTable(kind, table)
+            .filter((r) => !r.reroll)
+            .map((r) => ({ value: `${kind}|${table}|${r.name}`, text: r.name }))
+        }))
+      : [{ label: KIND_LABEL[kind], options: mutationTable(kind).map((r) => ({ value: `${kind}||${r.name}`, text: r.name })) }]
+  );
 
   function addSkill() {
     const name = newSkill.trim();
@@ -155,9 +163,20 @@
 
   function addMutation() {
     if (!newMutation) return;
-    const [kind, name] = newMutation.split("|") as ["physical" | "mental", string];
-    npc.mutations = [...npc.mutations, { kind, name }];
+    const [kind, table, name] = newMutation.split("|") as ["physical" | "mental", MutationSeverity | "", string];
+    const m: NpcMutation = { kind, name };
+    if (table) m.table = table;
+    const row = mutationRow(m);
+    if (row?.rollLocation) m.location = rollLocation(Math.random);
+    const rolled = row && rollMutationDice(row, Math.random);
+    if (rolled) m.rolled = rolled;
+    npc.mutations = [...npc.mutations, m];
     newMutation = "";
+  }
+
+  function addRandomMutation() {
+    const m = rollMutation(Math.random, undefined, npc.mutations.map((x) => x.name), npc.mutations.length);
+    npc.mutations = [...npc.mutations, m];
   }
 
   function toggleTrait(name: string) {
@@ -576,14 +595,14 @@
       <div class="edit-row wrap">
         <select bind:value={newMutation} aria-label="Dodaj mutację">
           <option value="">+ mutacja…</option>
-          <optgroup label="Fizyczne">
-            {#each mutationOptions.filter((o) => o.startsWith("physical")) as o (o)}<option value={o}>{o.split("|")[1]}</option>{/each}
-          </optgroup>
-          <optgroup label="Psychiczne">
-            {#each mutationOptions.filter((o) => o.startsWith("mental")) as o (o)}<option value={o}>{o.split("|")[1]}</option>{/each}
-          </optgroup>
+          {#each mutationGroups as g (g.label)}
+            <optgroup label={g.label}>
+              {#each g.options as o (o.value)}<option value={o.value}>{o.text}</option>{/each}
+            </optgroup>
+          {/each}
         </select>
         <button class="btn-sm" onclick={addMutation}>Dodaj</button>
+        <button class="btn-sm" onclick={addRandomMutation} title="Losuj mutację z tabel">🎲 Losuj</button>
       </div>
     </section>
 

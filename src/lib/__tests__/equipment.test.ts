@@ -4,7 +4,7 @@ import { armourPoints, matchTrapping } from "../equipment";
 import * as gd from "../gameData";
 import { generateNpc } from "../generator";
 import { casterLores } from "../magic";
-import { rollMutation } from "../mutations";
+import { mutationRow, rollMutation } from "../mutations";
 import { computeNpc, weaponLabel } from "../npc";
 import { loadTestGameData } from "./loadData";
 
@@ -113,7 +113,8 @@ describe("zaklecia", () => {
 describe("mutacje", () => {
   it("mutacje pochodza z tabel i zmieniaja cechy", () => {
     const m = rollMutation(seedRng(3), "physical");
-    expect(gd.getMutations().physical.some((r) => r.name === m.name)).toBe(true);
+    expect(m.table).toBeDefined();
+    expect(mutationRow(m)).toBeDefined();
     const npc = generateNpc({ archetype: "Kupiec", tier: "slaby", deterministic: true }, seedRng(1));
     const before = computeNpc(npc).chars.S.total;
     npc.mutations = [{ kind: "physical", name: "Wychudzone ciało" }];
@@ -126,5 +127,32 @@ describe("mutacje", () => {
     expect(mutated).toBeGreaterThan(5);
     expect(mutated).toBeLessThan(45);
     expect(generateNpc({ creature: "Mutant" }, seedRng(1)).mutations.length).toBeGreaterThan(0);
+  });
+
+  it("tabele Mutant's Handbook: ciagle zakresy, kosci i przejscie na wyzsza tabele", () => {
+    const hb = gd.getMutations().handbook!;
+    for (const kind of ["physical", "mental"] as const) {
+      for (const table of ["trivial", "minor", "major"] as const) {
+        const rows = hb[kind][table];
+        rows.forEach((r, i) => expect(r.min).toBe(i ? rows[i - 1].max + 1 : 1));
+        expect(rows[rows.length - 1].max).toBe(100);
+      }
+    }
+    const seen = new Set<string>();
+    for (let seed = 1; seed <= 400; seed++) {
+      const m = rollMutation(seedRng(seed), undefined, [], 4);
+      expect(mutationRow(m)?.reroll).toBeUndefined();
+      seen.add(m.table!);
+    }
+    expect(seen.has("major")).toBe(true);
+
+    const npc = generateNpc({ archetype: "Kupiec", tier: "slaby", deterministic: true }, seedRng(1));
+    const before = computeNpc(npc).chars.Zw.total;
+    npc.mutations = [{ kind: "physical", table: "trivial", name: "Garb", rolled: { Zw: -7 } }];
+    const view = computeNpc(npc);
+    expect(view.chars.Zw.total).toBe(before - 7);
+    expect(view.mutations[0].effect).toContain("−7");
+    npc.mutations = [{ kind: "physical", table: "major", name: "Ohydny wygląd" }];
+    expect(computeNpc(npc).chars.Ogd.total).toBe(0);
   });
 });

@@ -172,8 +172,17 @@ Zaklęcie: `name`, `lore` (klucz tradycji z `lores`), `cn` (PZ), zasięg, cel, c
 opis. `Prosta` = Magia Prosta, `Tajemna` = wspólne zaklęcia tajemne. Opisy pochodzą
 z OCR skanów — mogą zawierać pojedyncze literówki (np. „VV” zamiast „W”).
 
-`mutations.json`: `settings.chance` (0.01 = 1%), `settings.mentalShare` (udział
-mutacji psychicznych), tabele `physical` / `mental` z modyfikatorami cech.
+`mutations.json`:
+
+- `settings.chance` (0.01 = 1%), `settings.mentalShare` (udział mutacji psychicznych).
+- `settings.source` — `"handbook"` (tabele *Mutant's Handbook* z `handbook`) albo
+  `"core"` (tabele `physical` / `mental` z podręcznika).
+- `settings.severity` — progi k100 dla tabel `trivial` / `minor` / `major`;
+  `severityPerMutation` i `severityMaxBonus` — premia za posiadane mutacje.
+- Wiersz mutacji: `modifiers` (cechy), `skills`, `movement`, `wounds`, `armour`,
+  `maxChar` (górny limit cechy, np. `{ "Ogd": 0 }`), `rollLocation` (losowe miejsce
+  na ciele), `reroll` (przejście na wyższą tabelę). Wartości mogą być kośćmi:
+  `"k10"`, `"-k10"`, `"-2k10"` — rzucane przy losowaniu.
 
 ---
 

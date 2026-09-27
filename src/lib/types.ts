@@ -302,23 +302,43 @@ export interface CreatureFamiliesData {
   notCivilized: string[];
 }
 
+/** Liczba albo kosci rzucane przy losowaniu mutacji, np. "k10", "-2k10". */
+export type MutationValue = number | string;
+
+export type MutationSeverity = "trivial" | "minor" | "major";
+
 export interface MutationRow {
   min: number;
   max: number;
   name: string;
-  effect: string;
-  modifiers?: Partial<Record<Attribute, number>>;
+  effect?: string;
+  modifiers?: Partial<Record<Attribute, MutationValue>>;
+  skills?: Record<string, MutationValue>;
   movement?: number;
+  wounds?: number;
   armour?: number;
   headArmour?: number;
+  /** Gorny limit cechy, np. Ogłada nie wyzej niz 0. */
+  maxChar?: Partial<Record<Attribute, number>>;
   trait?: string;
   rollLocation?: boolean;
+  /** Wiersz "rzuc na wyzsza tabele". */
+  reroll?: MutationSeverity;
 }
 
 export interface MutationsData {
-  settings: { chance: number; mentalShare: number };
+  settings: {
+    chance: number;
+    mentalShare: number;
+    /** "handbook" - tabele Mutant's Handbook wg powagi; "core" - tabele z podrecznika. */
+    source?: "handbook" | "core";
+    severity?: { min: number; max: number; table: MutationSeverity }[];
+    severityPerMutation?: number;
+    severityMaxBonus?: number;
+  };
   physical: MutationRow[];
   mental: MutationRow[];
+  handbook?: Record<"physical" | "mental", Record<MutationSeverity, MutationRow[]>>;
   locations: { min: number; max: number; name: string }[];
 }
 
@@ -376,7 +396,11 @@ export interface NpcTalent {
 export interface NpcMutation {
   kind: "physical" | "mental";
   name: string;
+  /** Tabela Mutant's Handbook; brak = tabele z podrecznika. */
+  table?: MutationSeverity;
   location?: string;
+  /** Wyniki kosci z wiersza, np. { "Zw": -7, "skill:Atletyka": 4 }. */
+  rolled?: Record<string, number>;
 }
 
 /** Sekcje BN, ktore mozna zablokowac przed ponownym losowaniem. */

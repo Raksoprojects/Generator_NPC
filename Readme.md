@@ -24,7 +24,8 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
   *Pod Bronią* oraz redukcja obrażeń na lokacjach (Bonus z Wytrzymałości + PP).
 - **Zaklęcia** dla czarujących (Magia Prosta + tradycje tajemne, guślarstwo,
   czarownictwo, nekromancja, Chaos) z opisami po kliknięciu.
-- **Mutacje** z tabel Spaczenia Fizycznego i Zepsucia Psychicznego.
+- **Mutacje** z *Mutant's Handbook* (224 mutacje, tabele błahe / pomniejsze /
+  poważne) albo z tabel Spaczenia Fizycznego i Zepsucia Psychicznego podręcznika.
 - **Edycja wyniku** — każdy element BN można zmienić: rzuty i rozwinięcia cech,
   umiejętności, talenty, broń, pancerz, zaklęcia, Cechy Stworzeń, profile
   bohaterów, mutacje, wyposażenie, pieniądze, notatki; można też przebudować
@@ -88,6 +89,9 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
     | Doświadczony | 12 | BInt +0…+4 |
     | Heroiczny | bez limitu | BInt +1…+5 |
 11. **Mutacje.** 1% szans na mutację u każdego BN (70% fizyczne, 30% psychiczne).
+    Powaga wg *Mutant's Handbook*: k100 (+10 za każdą posiadaną mutację, maks. +40)
+    — 01–60 błaha, 61–100 pomniejsza, 101+ poważna; wiersz „rzuć na wyższą tabelę”
+    przenosi rzut wyżej. Kości w efektach (np. Zwinność −1k10) rzucane są od razu.
 12. **Wyposażenie i pieniądze.** Rzuty w wyposażeniu (np. „3k10 szylingów”)
     wykonywane są od razu; pieniądze wg Statusu.
 

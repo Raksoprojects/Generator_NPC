@@ -10,7 +10,7 @@
 import { creatureArmour, creatureBase, creatureWounds, naturalAttacks } from "./creatures";
 import { armourPoints, getWeaponDef, LOCATIONS, type Location } from "./equipment";
 import * as gd from "./gameData";
-import { mutationLabel, mutationRow } from "./mutations";
+import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
 import type { Npc, NpcMutation, SpellDef } from "./types";
 
@@ -184,13 +184,21 @@ export function computeNpc(input: Npc): NpcView {
     movement += tr.movement ?? 0;
     if (/^Twardziel/.test(name)) hardy += 1;
   }
+  let mutationWounds = 0;
+  const charCaps: Partial<Record<Attribute, number>> = {};
   const mutations = npc.mutations.map((m) => {
     const row = mutationRow(m);
-    addMods(row?.modifiers);
+    const fx = mutationEffects(m, row);
+    addMods(fx.chars as Partial<Record<Attribute, number>>);
+    for (const [skill, v] of Object.entries(fx.skills)) traitSkills[skill] = (traitSkills[skill] ?? 0) + v;
+    for (const [code, cap] of Object.entries(row?.maxChar ?? {})) {
+      charCaps[code as Attribute] = Math.min(charCaps[code as Attribute] ?? Infinity, cap ?? Infinity);
+    }
     movement += row?.movement ?? 0;
+    mutationWounds += row?.wounds ?? 0;
     extraAp += row?.armour ?? 0;
     headAp += row?.headArmour ?? 0;
-    return { label: mutationLabel(m), effect: row?.effect ?? "", kind: m.kind };
+    return { label: mutationLabel(m), effect: mutationEffectText(m, row), kind: m.kind };
   });
 
   const chars = {} as Record<Attribute, CharView>;
@@ -204,7 +212,7 @@ export function computeNpc(input: Npc): NpcView {
     const hero = heroModifier(npc, code);
     const talent = talentBonus[code] ?? 0;
     const trait = traitBonus[code] ?? 0;
-    const total = absent ? 0 : Math.max(0, base + roll + adv + hero + talent + trait);
+    const total = absent ? 0 : Math.max(0, Math.min(charCaps[code] ?? Infinity, base + roll + adv + hero + talent + trait));
     totals[code] = total;
     chars[code] = { code, base, roll, advances: adv, hero, talent, trait, total, bonus: characteristicBonus(total), absent };
   }
@@ -295,9 +303,11 @@ export function computeNpc(input: Npc): NpcView {
     ...new Set(npc.armour.map((a) => gd.getWeapons().armour[a]?.penalty).filter(Boolean) as string[])
   ];
 
-  const wounds = creature
-    ? creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, bookTraits, hardy + (bookTraits.some((t) => /^Twardziel/.test(t)) ? 1 : 0))
-    : computeWounds(totals.S, totals.Wt, totals.SW, race?.woundsIncludeStrength ?? true, hardy);
+  const wounds =
+    mutationWounds +
+    (creature
+      ? creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, bookTraits, hardy + (bookTraits.some((t) => /^Twardziel/.test(t)) ? 1 : 0))
+      : computeWounds(totals.S, totals.Wt, totals.SW, race?.woundsIncludeStrength ?? true, hardy));
 
   const spells = npc.spells.map((n) => gd.getSpell(n)).filter(Boolean) as SpellDef[];
   spells.sort((a, b) => (a.lore === "Prosta" ? -1 : 0) - (b.lore === "Prosta" ? -1 : 0) || a.cn - b.cn || a.name.localeCompare(b.name, "pl"));
