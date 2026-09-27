@@ -148,7 +148,9 @@ zasady specjalne. `family` wskazuje rodzinę z `creature_families.json`, `group`
 
 ## Rozwój bestii (`creature_families.json`)
 
-- `settings.tierFactor` — jaka część „pasowania” trafia do umiejętności na danym poziomie.
+- `settings.tierFactor` — jaka część „pasowania” trafia do umiejętności na danym poziomie (słaby 0 = profil z książki).
+- `settings.skillBonus` — rozwinięcia dodawane do każdej umiejętności bestii na poziomie.
+- `settings.charAdvances`, `settings.charCodes` — rozwinięcia cech (domyślnie WW, S, Wt, I, Zw) na poziomie.
 - `settings.traitCount` — ile Cech Stworzeń z rodziny dostaje bestia na poziomie.
 - `settings.optionalChance` — szansa na jedną cechę „Opcjonalną” z książki.
 - `families.<rodzina>.skills` — umiejętność → pasowanie (premia na najwyższym poziomie, 10–40).

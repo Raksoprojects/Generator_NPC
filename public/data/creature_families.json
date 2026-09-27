@@ -1,13 +1,16 @@
 {
   "settings": {
-    "note": "System rozwoju stworzeń (bez profesji). skills = premia na najwyższym poziomie; niższe poziomy dostają ułamek (tierFactor), zaokrąglony do 5.",
-    "tierFactor": { "slaby": 0.25, "sredni": 0.5, "zaawansowany": 0.75, "doswiadczony": 1, "heroiczny": 1 },
-    "traitCount": { "slaby": 0, "sredni": 0, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3 },
+    "note": "System rozwoju stworzeń (bez profesji). Słaby = profil z książki. Wyżej: umiejętność = max(książka, pasowanie × tierFactor zaokr. do 5) + skillBonus, charAdvances do cech z charCodes, Cechy Stworzeń rodziny (traitCount) i szansa na cechę Opcjonalną.",
+    "tierFactor": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1 },
+    "skillBonus": { "slaby": 0, "sredni": 3, "zaawansowany": 6, "doswiadczony": 9, "heroiczny": 12 },
+    "charAdvances": { "slaby": 0, "sredni": 3, "zaawansowany": 6, "doswiadczony": 10, "heroiczny": 15 },
+    "charCodes": ["WW", "S", "Wt", "I", "Zw"],
+    "traitCount": { "slaby": 0, "sredni": 1, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3 },
     "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1 },
     "tierLabels": {
-      "slaby": "młody / słaby osobnik",
-      "sredni": "typowy osobnik",
-      "zaawansowany": "rosły, doświadczony osobnik",
+      "slaby": "typowy osobnik (profil z książki)",
+      "sredni": "rosły, silniejszy osobnik",
+      "zaawansowany": "doświadczony łowca / weteran stada",
       "doswiadczony": "przewodnik stada / stary osobnik",
       "heroiczny": "legendarna bestia"
     }

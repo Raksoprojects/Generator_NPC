@@ -12,7 +12,7 @@ beforeAll(() => loadTestGameData());
 
 /** BN o cechach dokladnie jak w ksiazce (rzut = 10, a dla cech <= 5 rzut = wartosc). */
 function bookNpc(c: CreatureDef): Npc {
-  const npc = generateNpc({ creature: c.name, tier: "sredni", deterministic: true, randomTraits: false }, seedRng(1));
+  const npc = generateNpc({ creature: c.name, tier: "slaby", deterministic: true, randomTraits: false }, seedRng(1));
   for (const code of ATTRIBUTES) {
     const v = c.stats[code];
     const { die } = creatureBase(c, code);
@@ -75,16 +75,42 @@ describe("stworzenia z bestiariusza", () => {
 describe("rozwoj bestii", () => {
   it("bestia nie ma profesji ani profilu bohatera, a premie rosna z poziomem", () => {
     const weak = generateNpc({ creature: "Dziki kot", tier: "slaby", deterministic: true }, seedRng(2));
+    const mid = generateNpc({ creature: "Dziki kot", tier: "sredni", deterministic: true }, seedRng(2));
     const top = generateNpc({ creature: "Dziki kot", tier: "doswiadczony", deterministic: true }, seedRng(2));
     expect(isBeast(weak)).toBe(true);
     expect(weak.careerPath).toEqual([]);
     expect(top.heroProfiles).toEqual([]);
     const stealth = (n: Npc) => n.skills.find((s) => s.name === "Skradanie (Wieś)")!.advances;
-    // Ksiazka: Skradanie 75 przy Zw 55 = +20; rodzina Kot: +40 na szczycie, +10 na dole.
-    // Liczy sie wyzsza z wartosci (ksiazka albo rodzina).
+    // Ksiazka: Skradanie 75 przy Zw 55 = +20. Slaby = ksiazka; sredni max(20, 40 x 0.25) + 3;
+    // doswiadczony max(20, 40 x 0.75) + 9.
     expect(stealth(weak)).toBe(20);
-    expect(stealth(top)).toBe(40);
+    expect(weak.traits).toEqual([]);
+    expect(Object.values(weak.charAdvances).every((v) => v === 0)).toBe(true);
+    expect(stealth(mid)).toBe(23);
+    expect(mid.charAdvances.Zw).toBe(3);
+    expect(mid.traits.length).toBe(1);
+    expect(stealth(top)).toBe(39);
     expect(top.traits.length).toBe(2);
+  });
+
+  it("wyzszy poziom tej samej bestii jest zawsze silniejszy", () => {
+    const tiers = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny"] as const;
+    for (const c of gd.getCreatures().filter((x) => !gd.isCivilized(x.name))) {
+      let prev: ReturnType<typeof computeNpc> | null = null;
+      for (const tier of tiers) {
+        const npc = generateNpc({ creature: c.name, tier, deterministic: true, randomTraits: false }, seedRng(5));
+        npc.traits = [];
+        npc.mutations = [];
+        const v = computeNpc(npc);
+        if (prev) {
+          for (const code of ATTRIBUTES) expect(v.chars[code].total, `${c.name} ${tier} ${code}`).toBeGreaterThanOrEqual(prev.chars[code].total);
+          for (const s of prev.skills) {
+            expect(v.skills.find((x) => x.name === s.name)!.total, `${c.name} ${tier} ${s.name}`).toBeGreaterThan(s.total);
+          }
+        }
+        prev = v;
+      }
+    }
   });
 
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {

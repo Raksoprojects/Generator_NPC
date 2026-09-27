@@ -294,6 +294,11 @@ export interface CreatureFamily {
 export interface CreatureFamiliesData {
   settings: {
     tierFactor: Record<TierId, number>;
+    /** Rozwiniecia ponad umiejetnosci z ksiazki. */
+    skillBonus?: Record<TierId, number>;
+    /** Rozwiniecia cech z charCodes (tylko cechy, ktore stworzenie ma). */
+    charAdvances?: Record<TierId, number>;
+    charCodes?: Attribute[];
     traitCount: Record<TierId, number>;
     optionalChance: Record<TierId, number>;
     tierLabels: Record<TierId, string>;

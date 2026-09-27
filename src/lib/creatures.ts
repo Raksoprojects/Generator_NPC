@@ -7,8 +7,9 @@
  * stworzenia (np. Twardy trolla) - dodajemy tylko cechy wylosowane.
  *
  * Rozwoj bestii (bez profesji) - patrz creature_families.json:
+ *   - slaby = profil z ksiazki; wyzej premie do cech i umiejetnosci z ksiazki,
  *   - umiejetnosci rodziny: premia = pasowanie (10–40) x wspolczynnik poziomu,
- *   - Cechy Stworzen z wag rodziny: 0/0/1/2/3 wg poziomu,
+ *   - Cechy Stworzen z wag rodziny: 0/1/1/2/3 wg poziomu,
  *   - cechy "Opcjonalne" z ksiazki: szansa rosnaca z poziomem.
  * Stworzenia cywilizowane (orkowie, skaveny, kultysci...) z archetypem
  * rozwijaja sie przez profesje jak ludzie.
@@ -147,19 +148,30 @@ export function usableOptional(creature: CreatureDef): string[] {
 }
 
 /**
- * Umiejetnosci rodziny bestii: rozwiniecia = pasowanie x wspolczynnik poziomu
- * (zaokraglone do 5). Jesli ksiazka daje stworzeniu wiecej, zostaje wartosc
- * z ksiazki - typowy osobnik odpowiada wiec profilowi z bestiariusza.
+ * Rozwoj bestii ponad profil z ksiazki (slaby = dokladnie ksiazka):
+ *   - umiejetnosci rodziny: pasowanie x wspolczynnik poziomu (do 5), liczy sie
+ *     wyzsza wartosc (ksiazka albo rodzina),
+ *   - kazda umiejetnosc dostaje skillBonus poziomu,
+ *   - cechy z charCodes dostaja charAdvances poziomu.
+ * Kazdy skladnik rosnie z poziomem, wiec wyzszy poziom tej samej bestii jest zawsze silniejszy.
  */
 export function beastSkills(npc: Npc, creature: CreatureDef): void {
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
-  const factor = fam.settings.tierFactor[npc.tier] ?? 0.5;
-  for (const [skill, fit] of Object.entries(family?.skills ?? {})) {
-    const bonus = Math.max(5, Math.round((fit * factor) / 5) * 5);
-    const owned = npc.skills.find((s) => s.name === skill);
-    if (owned) owned.advances = Math.max(owned.advances, bonus);
-    else npc.skills.push({ name: skill, advances: bonus });
+  const factor = fam.settings.tierFactor[npc.tier] ?? 0;
+  if (factor > 0) {
+    for (const [skill, fit] of Object.entries(family?.skills ?? {})) {
+      const bonus = Math.max(5, Math.round((fit * factor) / 5) * 5);
+      const owned = npc.skills.find((s) => s.name === skill);
+      if (owned) owned.advances = Math.max(owned.advances, bonus);
+      else npc.skills.push({ name: skill, advances: bonus });
+    }
+  }
+  const bump = fam.settings.skillBonus?.[npc.tier] ?? 0;
+  for (const s of npc.skills) s.advances += bump;
+  const adv = fam.settings.charAdvances?.[npc.tier] ?? 0;
+  for (const code of fam.settings.charCodes ?? []) {
+    if (creature.stats[code] != null) npc.charAdvances[code] = (npc.charAdvances[code] ?? 0) + adv;
   }
 }
 
