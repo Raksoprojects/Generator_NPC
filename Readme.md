@@ -114,21 +114,20 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
 - **Stworzenia cywilizowane** (orkowie, gobliny, skaveny, zwierzoludzie, kultyści,
   ogry…) mogą dostać archetyp i rozwijać się przez profesje jak ludzie.
 - **Bestie** rozwijają się bez profesji (`creature_families.json`). **Słaby to
-  dokładnie profil z książki**, każdy wyższy poziom tej samej bestii jest
-  silniejszy:
+  profil z książki plus pasujące umiejętności** — bestie z podręcznika głównego
+  nie mają w książce żadnych umiejętności, więc dostają je z rodziny (połowa
+  „pasowania”, np. niedźwiedź Broń Biała (Bijatyka) +15, wilk +10). Liczy się
+  wyższa wartość: książka albo rodzina. Każdy wyższy poziom dodaje +5:
 
-  | Poziom | Cechy (WW, S, Wt, I, Zw) | Umiejętności rodziny | Premia do umiejętności | Cechy Stworzeń z rodziny | Cechy „Opcjonalne” |
-  |---|---|---|---|---|---|
-  | Słaby — profil z książki | +0 | — | +0 | 0 | — |
-  | Średni — rosły osobnik | +3 | 25% pasowania | +3 | 1 | 25% szans |
-  | Zaawansowany — weteran stada | +6 | 50% | +6 | 1 | 50% |
-  | Doświadczony — przewodnik stada | +10 | 75% | +9 | 2 | 75% |
-  | Heroiczny — legendarna bestia | +15 | 100% | +12 | 3 | 100% |
+  | Poziom | Cechy (WW, S, Wt, I, Zw) | Umiejętności | Cechy Stworzeń z rodziny | Cechy „Opcjonalne” |
+  |---|---|---|---|---|
+  | Słaby — typowy osobnik | +0 | książka / rodzina | 0 | — |
+  | Średni — rosły osobnik | +5 | +5 | 1 | 25% szans |
+  | Zaawansowany — weteran stada | +10 | +10 | 1 | 50% |
+  | Doświadczony — przewodnik stada | +15 | +15 | 2 | 75% |
+  | Heroiczny — legendarna bestia | +20 | +20 | 3 | 100% |
 
-  Pasowanie to premia 10–40 do umiejętności rodziny (np. koty: Skradanie +40,
-  Broń Biała (Bijatyka) +20). Liczy się wyższa wartość (książka albo rodzina), a
-  do niej dochodzi premia poziomu. Dziki kot: Skradanie 75 w książce → 81 u
-  średniego, 104 u doświadczonego.
+  Niedźwiedź (WW 35): Bijatyka około 50 u słabego, 60 u średniego, 70 u zaawansowanego.
 
 ## Uruchomienie lokalne
 

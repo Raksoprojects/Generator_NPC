@@ -7,7 +7,7 @@
  * stworzenia (np. Twardy trolla) - dodajemy tylko cechy wylosowane.
  *
  * Rozwoj bestii (bez profesji) - patrz creature_families.json:
- *   - slaby = profil z ksiazki; wyzej premie do cech i umiejetnosci z ksiazki,
+ *   - slaby = profil z ksiazki + umiejetnosci rodziny; kazdy poziom wyzej +5 do cech i umiejetnosci,
  *   - umiejetnosci rodziny: premia = pasowanie (10–40) x wspolczynnik poziomu,
  *   - Cechy Stworzen z wag rodziny: 0/1/1/2/3 wg poziomu,
  *   - cechy "Opcjonalne" z ksiazki: szansa rosnaca z poziomem.
@@ -148,9 +148,10 @@ export function usableOptional(creature: CreatureDef): string[] {
 }
 
 /**
- * Rozwoj bestii ponad profil z ksiazki (slaby = dokladnie ksiazka):
+ * Rozwoj bestii ponad profil z ksiazki:
  *   - umiejetnosci rodziny: pasowanie x wspolczynnik poziomu (do 5), liczy sie
- *     wyzsza wartosc (ksiazka albo rodzina),
+ *     wyzsza wartosc (ksiazka albo rodzina) - bestie z podrecznika nie maja
+ *     w ksiazce umiejetnosci, wiec slaby niedzwiedz dostaje np. Bijatyke,
  *   - kazda umiejetnosc dostaje skillBonus poziomu,
  *   - cechy z charCodes dostaja charAdvances poziomu.
  * Kazdy skladnik rosnie z poziomem, wiec wyzszy poziom tej samej bestii jest zawsze silniejszy.

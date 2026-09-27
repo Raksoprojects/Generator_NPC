@@ -1,14 +1,14 @@
 {
   "settings": {
-    "note": "System rozwoju stworzeń (bez profesji). Słaby = profil z książki. Wyżej: umiejętność = max(książka, pasowanie × tierFactor zaokr. do 5) + skillBonus, charAdvances do cech z charCodes, Cechy Stworzeń rodziny (traitCount) i szansa na cechę Opcjonalną.",
-    "tierFactor": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1 },
-    "skillBonus": { "slaby": 0, "sredni": 3, "zaawansowany": 6, "doswiadczony": 9, "heroiczny": 12 },
-    "charAdvances": { "slaby": 0, "sredni": 3, "zaawansowany": 6, "doswiadczony": 10, "heroiczny": 15 },
+    "note": "System rozwoju stworzeń (bez profesji). Słaby = profil z książki + umiejętności rodziny (bestie z podręcznika nie mają umiejętności). Umiejętność = max(książka, pasowanie × tierFactor zaokr. do 5) + skillBonus; charAdvances do cech z charCodes; Cechy Stworzeń rodziny (traitCount) i szansa na cechę Opcjonalną.",
+    "tierFactor": { "slaby": 0.5, "sredni": 0.5, "zaawansowany": 0.5, "doswiadczony": 0.5, "heroiczny": 0.5 },
+    "skillBonus": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20 },
+    "charAdvances": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
     "traitCount": { "slaby": 0, "sredni": 1, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3 },
     "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1 },
     "tierLabels": {
-      "slaby": "typowy osobnik (profil z książki)",
+      "slaby": "typowy osobnik (profil z książki + umiejętności)",
       "sredni": "rosły, silniejszy osobnik",
       "zaawansowany": "doświadczony łowca / weteran stada",
       "doswiadczony": "przewodnik stada / stary osobnik",
@@ -29,7 +29,7 @@
       "traits": { "Duży": 3, "Brutalny": 2, "Twardy": 2, "Zabijaka": 2 }
     },
     "Zwierzę roślinożerne": {
-      "skills": { "Percepcja": 30, "Atletyka": 30, "Odporność": 20, "Broń Biała (Bijatyka)": 10 },
+      "skills": { "Percepcja": 30, "Atletyka": 30, "Odporność": 20, "Broń Biała (Bijatyka)": 20 },
       "traits": { "Szybki": 3, "Czujny": 3, "Duży": 1, "Twardy": 1 }
     },
     "Pająk": {
@@ -37,7 +37,7 @@
       "traits": { "Szybki": 2, "Czujny": 2, "Duży": 2, "Zabijaka": 1 }
     },
     "Gryzoń": {
-      "skills": { "Skradanie (Miasto)": 20, "Percepcja": 20, "Wspinaczka": 20, "Pływanie": 20 },
+      "skills": { "Skradanie (Miasto)": 20, "Percepcja": 20, "Wspinaczka": 20, "Pływanie": 20, "Broń Biała (Bijatyka)": 10 },
       "traits": { "Szybki": 3, "Czujny": 2, "Duży": 1 }
     },
     "Gad": {
@@ -65,11 +65,11 @@
       "traits": { "Elitarny": 3, "Duży": 2, "Brutalny": 2, "Twardy": 2, "Zabijaka": 2 }
     },
     "Nieumarły": {
-      "skills": { "Broń Biała (Podstawowa)": 20, "Zastraszanie": 30, "Percepcja": 10 },
+      "skills": { "Broń Biała (Podstawowa)": 20, "Broń Biała (Bijatyka)": 20, "Zastraszanie": 30, "Percepcja": 10 },
       "traits": { "Elitarny": 2, "Twardy": 2, "Zabijaka": 1 }
     },
     "Demon": {
-      "skills": { "Broń Biała (Podstawowa)": 30, "Zastraszanie": 30, "Percepcja": 20, "Unik": 20 },
+      "skills": { "Broń Biała (Podstawowa)": 30, "Broń Biała (Bijatyka)": 30, "Zastraszanie": 30, "Percepcja": 20, "Unik": 20 },
       "traits": { "Elitarny": 3, "Zabijaka": 2, "Szybki": 1, "Przywódca": 1 }
     },
     "Zielonoskóry": {

@@ -81,16 +81,22 @@ describe("rozwoj bestii", () => {
     expect(weak.careerPath).toEqual([]);
     expect(top.heroProfiles).toEqual([]);
     const stealth = (n: Npc) => n.skills.find((s) => s.name === "Skradanie (Wieś)")!.advances;
-    // Ksiazka: Skradanie 75 przy Zw 55 = +20. Slaby = ksiazka; sredni max(20, 40 x 0.25) + 3;
-    // doswiadczony max(20, 40 x 0.75) + 9.
+    // Ksiazka: Skradanie 75 przy Zw 55 = +20; rodzina Kot: 40 x 0.5 = 20. Kazdy poziom wyzej +5.
     expect(stealth(weak)).toBe(20);
     expect(weak.traits).toEqual([]);
     expect(Object.values(weak.charAdvances).every((v) => v === 0)).toBe(true);
-    expect(stealth(mid)).toBe(23);
-    expect(mid.charAdvances.Zw).toBe(3);
+    expect(stealth(mid)).toBe(25);
+    expect(mid.charAdvances.Zw).toBe(5);
     expect(mid.traits.length).toBe(1);
-    expect(stealth(top)).toBe(39);
+    expect(stealth(top)).toBe(35);
     expect(top.traits.length).toBe(2);
+  });
+
+  it("slaba bestia z podrecznika dostaje umiejetnosci rodziny (niedzwiedz: Bijatyka)", () => {
+    const bear = generateNpc({ creature: "Niedźwiedź", tier: "slaby", deterministic: true }, seedRng(1));
+    expect(gd.getCreature("Niedźwiedź")!.skills).toEqual([]);
+    expect(bear.skills.find((s) => s.name === "Broń Biała (Bijatyka)")?.advances).toBe(15);
+    expect(Object.values(bear.charAdvances).every((v) => v === 0)).toBe(true);
   });
 
   it("wyzszy poziom tej samej bestii jest zawsze silniejszy", () => {
