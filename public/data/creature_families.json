@@ -1,0 +1,99 @@
+{
+  "settings": {
+    "note": "System rozwoju stworzeń (bez profesji). skills = premia na najwyższym poziomie; niższe poziomy dostają ułamek (tierFactor), zaokrąglony do 5.",
+    "tierFactor": { "slaby": 0.25, "sredni": 0.5, "zaawansowany": 0.75, "doswiadczony": 1, "heroiczny": 1 },
+    "traitCount": { "slaby": 0, "sredni": 0, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3 },
+    "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1 },
+    "tierLabels": {
+      "slaby": "młody / słaby osobnik",
+      "sredni": "typowy osobnik",
+      "zaawansowany": "rosły, doświadczony osobnik",
+      "doswiadczony": "przewodnik stada / stary osobnik",
+      "heroiczny": "legendarna bestia"
+    }
+  },
+  "families": {
+    "Kot": {
+      "skills": { "Skradanie (Wieś)": 40, "Broń Biała (Bijatyka)": 20, "Percepcja": 20, "Atletyka": 20, "Wspinaczka": 20 },
+      "traits": { "Szybki": 3, "Czujny": 2, "Zabijaka": 2, "Elitarny": 1, "Duży": 1 }
+    },
+    "Psowate": {
+      "skills": { "Percepcja": 30, "Tropienie": 30, "Broń Biała (Bijatyka)": 20, "Atletyka": 20, "Odporność": 10 },
+      "traits": { "Czujny": 3, "Szybki": 2, "Zabijaka": 2, "Duży": 1, "Twardy": 1 }
+    },
+    "Drapieżnik": {
+      "skills": { "Broń Biała (Bijatyka)": 30, "Zastraszanie": 20, "Odporność": 20, "Percepcja": 20 },
+      "traits": { "Duży": 3, "Brutalny": 2, "Twardy": 2, "Zabijaka": 2 }
+    },
+    "Zwierzę roślinożerne": {
+      "skills": { "Percepcja": 30, "Atletyka": 30, "Odporność": 20, "Broń Biała (Bijatyka)": 10 },
+      "traits": { "Szybki": 3, "Czujny": 3, "Duży": 1, "Twardy": 1 }
+    },
+    "Pająk": {
+      "skills": { "Wspinaczka": 40, "Skradanie (Wieś)": 30, "Percepcja": 20, "Broń Biała (Bijatyka)": 20 },
+      "traits": { "Szybki": 2, "Czujny": 2, "Duży": 2, "Zabijaka": 1 }
+    },
+    "Gryzoń": {
+      "skills": { "Skradanie (Miasto)": 20, "Percepcja": 20, "Wspinaczka": 20, "Pływanie": 20 },
+      "traits": { "Szybki": 3, "Czujny": 2, "Duży": 1 }
+    },
+    "Gad": {
+      "skills": { "Skradanie (Wieś)": 30, "Percepcja": 20, "Pływanie": 20, "Broń Biała (Bijatyka)": 20 },
+      "traits": { "Czujny": 2, "Szybki": 2, "Twardy": 1 }
+    },
+    "Ptak": {
+      "skills": { "Percepcja": 40, "Broń Biała (Bijatyka)": 20, "Unik": 20 },
+      "traits": { "Szybki": 3, "Czujny": 3, "Zabijaka": 1 }
+    },
+    "Wodny": {
+      "skills": { "Pływanie": 40, "Skradanie (Wieś)": 20, "Broń Biała (Bijatyka)": 20, "Percepcja": 20 },
+      "traits": { "Duży": 3, "Twardy": 2, "Brutalny": 2, "Zabijaka": 1 }
+    },
+    "Gad olbrzymi": {
+      "skills": { "Broń Biała (Bijatyka)": 30, "Zastraszanie": 30, "Odporność": 30, "Percepcja": 10 },
+      "traits": { "Brutalny": 3, "Duży": 2, "Twardy": 2, "Zabijaka": 1 }
+    },
+    "Potwór latający": {
+      "skills": { "Percepcja": 30, "Broń Biała (Bijatyka)": 20, "Zastraszanie": 20 },
+      "traits": { "Szybki": 2, "Elitarny": 2, "Czujny": 2 }
+    },
+    "Potwór": {
+      "skills": { "Broń Biała (Bijatyka)": 30, "Zastraszanie": 30, "Percepcja": 20, "Odporność": 20 },
+      "traits": { "Elitarny": 3, "Duży": 2, "Brutalny": 2, "Twardy": 2, "Zabijaka": 2 }
+    },
+    "Nieumarły": {
+      "skills": { "Broń Biała (Podstawowa)": 20, "Zastraszanie": 30, "Percepcja": 10 },
+      "traits": { "Elitarny": 2, "Twardy": 2, "Zabijaka": 1 }
+    },
+    "Demon": {
+      "skills": { "Broń Biała (Podstawowa)": 30, "Zastraszanie": 30, "Percepcja": 20, "Unik": 20 },
+      "traits": { "Elitarny": 3, "Zabijaka": 2, "Szybki": 1, "Przywódca": 1 }
+    },
+    "Zielonoskóry": {
+      "civilized": true,
+      "skills": { "Broń Biała (Podstawowa)": 20, "Zastraszanie": 20, "Odporność": 10, "Percepcja": 10 },
+      "traits": { "Zabijaka": 3, "Brutalny": 2, "Twardy": 2, "Duży": 1, "Przywódca": 1 }
+    },
+    "Skaven": {
+      "civilized": true,
+      "skills": { "Skradanie (Podziemia)": 30, "Percepcja": 20, "Unik": 20, "Broń Biała (Podstawowa)": 20 },
+      "traits": { "Szybki": 3, "Przebiegły": 2, "Czujny": 2, "Zabijaka": 1 }
+    },
+    "Zwierzoczłek": {
+      "civilized": true,
+      "skills": { "Broń Biała (Podstawowa)": 20, "Percepcja": 20, "Tropienie": 20, "Skradanie (Wieś)": 20, "Zastraszanie": 20 },
+      "traits": { "Zabijaka": 3, "Brutalny": 2, "Duży": 2, "Twardy": 1 }
+    },
+    "Sługa Chaosu": {
+      "civilized": true,
+      "skills": { "Broń Biała (Podstawowa)": 30, "Zastraszanie": 20, "Opanowanie": 20, "Odporność": 20 },
+      "traits": { "Elitarny": 2, "Zabijaka": 2, "Twardy": 2, "Przywódca": 1 }
+    },
+    "Humanoid": {
+      "civilized": true,
+      "skills": { "Broń Biała (Podstawowa)": 20, "Zastraszanie": 20, "Odporność": 20, "Mocna Głowa": 20 },
+      "traits": { "Brutalny": 2, "Zabijaka": 2, "Twardy": 2, "Duży": 1 }
+    }
+  },
+  "notCivilized": ["Snotling", "Szczurogr", "Szczurogr łamignat", "Szczurowilk", "Unikatowy eksperyment klanu Moulder", "Minotaur", "Wilkoskóry", "Coś z Martwego Lasu", "Peryt", "Brzytwogor", "Stary Kościogrzbiet"]
+}
