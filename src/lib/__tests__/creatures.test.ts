@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { creatureBase, naturalAttacks } from "../creatures";
+import { findMagicItem } from "../magicItems";
 import { seedRng } from "../dice";
 import * as gd from "../gameData";
 import { generateNpc, isBeast } from "../generator";
@@ -209,6 +210,17 @@ describe("rozwoj bestii", () => {
       }
     }
     expect(staff).toBeGreaterThan(0);
+    // Czarodziej od 3. poziomu zawsze ma wylosowany przedmiot magiczny (poza kosturem i szatami).
+    for (let seed = 1; seed <= 40; seed++) {
+      const w = generateNpc({ archetype: "Czarodziej", tier: "doswiadczony", race: "Człowiek" }, seedRng(seed));
+      // Kto ma kostur z profesji, ten musi wylosowac cos innego.
+      const hasStaff = gd.getProfession(w.careerPath.at(-1)!.profession)!.levels.some((l) => l.trappings.includes("kostur"));
+      const extra = w.trappings.filter((t) => {
+        const item = findMagicItem(t);
+        return (item && !item.group && !(hasStaff && item.name === "umagiczniony kostur")) || t.startsWith("zwój z zaklęciem");
+      });
+      expect(extra.length, `${seed}: ${w.careerPath.at(-1)?.profession} ${w.trappings.join(", ")}`).toBeGreaterThan(0);
+    }
     const npc = generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Człowiek", professions: ["Piromanta"], deterministic: true }, seedRng(1));
     npc.trappings = ["zwykłe szaty", "umagiczniony kostur"];
     npc.talents = [...npc.talents, { name: "Precyzyjne Inkantowanie", level: 1 }];

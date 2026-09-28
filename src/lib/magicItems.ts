@@ -51,6 +51,8 @@ export function rollMagicItem(npc: Npc, rng: Rng, deterministic = false): string
   const data = gd.getMagicItems();
   const lores = new Set(loresOf(npc));
   const owned = new Set(npc.trappings.map((t) => findMagicItem(t)?.name));
+  // Kostur niesie (i dostaje umagiczniony) kazdy czarodziej - nie losujemy go ponownie.
+  if (npc.trappings.some((t) => /kostur/i.test(t))) owned.add("umagiczniony kostur");
   const pool = (data?.items ?? []).filter((i) => i.random && !owned.has(i.name));
   const weight = (i: MagicItem) => (i.random!.weight ?? 1) * (i.random!.lores?.some((l) => lores.has(l)) ? 3 : 1);
   const item = deterministic ? [...pool].sort((a, b) => weight(b) - weight(a))[0] : weightedPick(pool, weight, rng);
@@ -67,12 +69,14 @@ export function resolveMagicTrappings(npc: Npc, rng: Rng, deterministic = false)
   const last = npc.careerPath[npc.careerPath.length - 1];
   const wizard = loresOf(npc).length > 0;
   const level = last?.level ?? 0;
-  const mapped = npc.trappings.map((t) => {
-    if (isMagicPlaceholder(t)) return rollMagicItem(npc, rng, deterministic);
+  // Najpierw ulepszenia (kostur, szaty), potem losowanie - inaczej wylosowany kostur
+  // pokrywal sie z ulepszonym zwyklym i przedmiot magiczny znikal.
+  npc.trappings = npc.trappings.map((t) => {
     if (wizard && level >= 2 && norm(t) === "kostur") return "umagiczniony kostur";
     if (wizard && norm(t) === "praktyczne szaty" && level >= 3) return level >= 4 ? "wyszukane szaty" : "zwykłe szaty";
     return t;
   });
+  const mapped = npc.trappings.map((t) => (isMagicPlaceholder(t) ? rollMagicItem(npc, rng, deterministic) : t));
   // Z grupy (szaty) zostaje tylko najlepszy komplet; bez duplikatow.
   const best = new Map<string, string>();
   for (const t of mapped) {
