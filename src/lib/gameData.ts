@@ -91,6 +91,7 @@ const FILES = {
 export function setGameData(data: GameData, ruleset: Ruleset = "pod_bronia"): void {
   raw = data;
   activeRuleset = ruleset;
+  traitIndex = null;
   applyRuleset();
 }
 
@@ -298,6 +299,35 @@ export function getCreatureTraits(): Record<string, CreatureTrait> {
 
 export function getCreatureTrait(name: string): CreatureTrait | undefined {
   return data().creatureTraits[name];
+}
+
+/** Nazwa cechy bez wartosci: "Demoniczny 8+" / "Srogi (2)" / "2× Macki +5" / "Broń (Pazury) +7" -> rdzen. */
+export function traitBase(name: string): string {
+  return normalize(
+    name
+      .replace(/^\d+\s*×?\s*/, "")
+      .replace(/\s*\(.*?\)/g, "")
+      .replace(/\s*\+.*$/, "")
+      .replace(/\s+\d+\+?$/, "")
+      .replace(/^#\s*/, "")
+  );
+}
+
+let traitIndex: Map<string, string> | null = null;
+
+/** Cecha Stworzenia po nazwie z ksiazki - takze z wartoscia i pod inna nazwa (aliasy). */
+export function findCreatureTrait(name: string): { key: string; trait: CreatureTrait } | undefined {
+  const all = data().creatureTraits;
+  if (all[name]) return { key: name, trait: all[name] };
+  if (!traitIndex) {
+    traitIndex = new Map();
+    for (const [key, t] of Object.entries(all)) {
+      traitIndex.set(traitBase(key), key);
+      for (const a of t.aliases ?? []) traitIndex.set(traitBase(a), key);
+    }
+  }
+  const key = traitIndex.get(traitBase(name));
+  return key ? { key, trait: all[key] } : undefined;
 }
 
 export function getHeroProfiles(): Record<string, HeroProfile> {

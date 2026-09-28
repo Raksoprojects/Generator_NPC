@@ -185,7 +185,7 @@ export function computeNpc(input: Npc): NpcView {
     }
   };
   for (const name of npc.traits) {
-    const tr = gd.getCreatureTrait(name);
+    const tr = gd.findCreatureTrait(name)?.trait;
     if (!tr) continue;
     addMods(tr.modifiers);
     for (const [skill, v] of Object.entries(tr.skills ?? {})) traitSkills[skill] = (traitSkills[skill] ?? 0) + v;

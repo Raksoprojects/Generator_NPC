@@ -110,6 +110,8 @@ export interface CreatureTrait {
   /** Pelny tekst zasady z podrecznika (jesli rozni sie od krotkiego opisu). */
   rules?: string;
   source?: string;
+  /** Inne nazwy tej cechy (Bestiariusz 2.0, opisy stworzen), np. Czempion: ["Mistrz"]. */
+  aliases?: string[];
 }
 
 /** Profil Bohatera z Bestiariusza (hero_profiles.json). */

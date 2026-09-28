@@ -3,6 +3,8 @@
  * komunikat wskazuje plik i bledna nazwe.
  */
 import { beforeAll, describe, expect, it } from "vitest";
+import { usableOptional } from "../creatures";
+import { qualityDescription } from "../equipment";
 import * as gd from "../gameData";
 import { ATTRIBUTES } from "../rules";
 import { TIER_IDS } from "../types";
@@ -90,6 +92,39 @@ describe("pozostale pliki generatora", () => {
       expect(t, race).toBeDefined();
       expect(t!.male.length && t!.female.length && t!.surnames.length).toBeTruthy();
     }
+  });
+
+  it("kazda Cecha Stworzenia uzyta w danych ma opis (takze z wartoscia i pod inna nazwa)", () => {
+    const used = new Set<string>();
+    for (const c of gd.getCreatures()) {
+      c.traits.forEach((t) => used.add(t));
+      usableOptional(c).forEach((t) => used.add(t));
+    }
+    for (const p of Object.values(gd.getHeroProfiles())) p.traits.filter((t) => !/^\+\d/.test(t)).forEach((t) => used.add(t));
+    const hb = gd.getMutations().handbook!;
+    for (const kind of Object.values(hb)) for (const rows of Object.values(kind)) rows.forEach((r) => r.trait && used.add(r.trait));
+    const own = (name: string) => gd.getCreatures().some((c) => c.abilities.some((a) => a.name === name));
+    const missing = [...used].filter((t) => !gd.findCreatureTrait(t) && !own(t));
+    expect(missing).toEqual([]);
+    expect(gd.findCreatureTrait("Demoniczny 8+")?.key).toBe("Demoniczny (Próg)");
+    expect(gd.findCreatureTrait("Broń (Pazury) +7")?.key).toBe("Broń +Obrażenia");
+    expect(gd.findCreatureTrait("Mistrz")?.key).toBe("Czempion");
+    expect(gd.findCreatureTrait("Srogi (2)")?.key).toBe("Srogi (Wartość)");
+  });
+
+  it("kazda Zaleta i Wada broni i pancerza ma opis", () => {
+    const w = gd.getWeapons();
+    const used = new Set<string>();
+    for (const d of [...Object.values(w.melee), ...Object.values(w.ranged), ...Object.values(w.armour)]) {
+      for (const q of [...(d.qualities ?? []), ...(d.flaws ?? [])]) q.split(" albo ").forEach((p) => used.add(p.trim()));
+    }
+    expect([...used].filter((q) => !qualityDescription(q))).toEqual([]);
+  });
+
+  it("talenty z profesji i archetypow maja opisy (poza brakujacymi w zrodlach)", () => {
+    const noSource = new Set(["Pamiętliwy", "Mistrzowska Magia Runiczna"]);
+    const empty = gd.allTalentNames().filter((n) => !noSource.has(n) && !gd.getTalent(n)?.description?.trim());
+    expect(empty).toEqual([]);
   });
 
   it("poziomy wskazuja istniejace profile bohaterow", () => {

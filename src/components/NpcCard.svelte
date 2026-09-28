@@ -203,12 +203,21 @@
 
   /** Opis cechy stworzenia: najpierw dokladna nazwa, potem nazwa bazowa ("Pancerz (2)" -> "Pancerz (wartość)"). */
   function traitText(name: string): string {
-    const all = gd.getCreatureTraits();
-    const exact = all[name];
-    if (exact) return exact.rules ?? exact.description;
-    const base = name.replace(/\s*[+(].*$/, "").trim();
-    const key = Object.keys(all).find((k) => k.replace(/\s*[+(].*$/, "").trim() === base);
-    return key ? (all[key].rules ?? all[key].description) : "";
+    // Premie z profili bohaterow (Bestiariusz 2.0).
+    const bonus = /^\+(\d+) do (Pancerza|Broni)/.exec(name);
+    if (bonus) {
+      return bonus[2] === "Pancerza"
+        ? `Stworzenie ma dodatkowe ${bonus[1]} PP na wszystkich Miejscach Trafienia (profil bohatera, Bestiariusz 2.0).`
+        : `Ataki stworzenia zadają +${bonus[1]} Obrażeń (profil bohatera, Bestiariusz 2.0).`;
+    }
+    const hit = gd.findCreatureTrait(name);
+    if (hit) {
+      const text = hit.trait.rules || hit.trait.description;
+      // Inna nazwa tej samej cechy (np. "Mistrz" = Czempion) - pokaz nazwe z podrecznika.
+      return gd.traitBase(hit.key) === gd.traitBase(name) ? text : `${hit.key}: ${text}`;
+    }
+    // Zdolnosc wlasna stworzenia zapisana jako cecha (np. Pochlonięcie ameby).
+    return view.abilities.find((a) => gd.normalize(a.name) === gd.normalize(name))?.description ?? "";
   }
 
   /** Opis zalety/wady; "A albo B" - opisy obu opcji. */

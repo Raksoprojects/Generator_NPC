@@ -109,6 +109,12 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 (15% / 5% / 1%). Cechy z `false` można dodać tylko ręcznie. Tutaj trafią też
 cechy bestii i potworów.
 
+- `description` — krótki opis, `rules` — pełny tekst zasady (pokazywany po kliknięciu).
+- Wartość w nazwie jest pomijana przy szukaniu opisu: „Demoniczny 8+”, „Srogi (2)”
+  czy „Broń (Pazury) +7” znajdą wpisy „Demoniczny (Próg)”, „Srogi (Wartość)”, „Broń +Obrażenia”.
+- `aliases` — inne nazwy tej samej cechy, np. `"Czempion": { "aliases": ["Mistrz"] }`
+  (Bestiariusz 2.0), `"Nie Czuje Bólu": { "aliases": ["Niewrażliwy na Ból"] }`.
+
 ## Profile Bohaterów (`hero_profiles.json`)
 
 `modifiers` — premie do cech, `traits` — dodatkowe Cechy Stworzeń wypisywane

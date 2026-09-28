@@ -142,9 +142,14 @@ export function bookSkillsAndTalents(npc: Npc, creature: CreatureDef): void {
   }
 }
 
-/** Cechy "Opcjonalne", ktore mozna nadac automatycznie (bez instrukcji i zmian Rozmiaru). */
+/** Cechy "Opcjonalne", ktore mozna nadac automatycznie (bez instrukcji, zmian Rozmiaru i umiejetnosci). */
 export function usableOptional(creature: CreatureDef): string[] {
-  return creature.optional.filter((o) => !/usuń|dodaj|zmień|zwiększ|^Rozmiar|Wszystkie Cechy|^Mutacja|jedynie/i.test(o) && o.length < 60);
+  return creature.optional.filter(
+    (o) =>
+      !/usuń|dodaj|zmień|zwiększ|^Rozmiar|Wszystkie Cechy|^Mutacja|jedynie/i.test(o) &&
+      o.length < 60 &&
+      !gd.skillAttr(o.replace(/\s+\d+$/, ""))
+  );
 }
 
 /**
