@@ -10954,5 +10954,220 @@
         ]
       }
     ]
+  },
+  "Elementalista": {
+    "races": [
+      "Człowiek",
+      "Leśny elf"
+    ],
+    "characteristics_pending": true,
+    "source": "Grimuar (nieoficjalny), s. 26",
+    "levels": [
+      {
+        "level": 1,
+        "title": "Uczeń Elementalisty",
+        "status": "Brąz 2",
+        "characteristics": [],
+        "skills": [
+          "Splatanie Magii (Dowolny)",
+          "Plotkowanie",
+          "Język (Magiczny)",
+          "Wiedza (Natura)",
+          "Broń Biała (Podstawowa)",
+          "Nawigacja",
+          "Sztuka Przetrwania",
+          "Pływanie"
+        ],
+        "talents": [
+          "Zmysł Magii",
+          "Magia Prosta",
+          "Czytanie/Pisanie",
+          "Percepcja Magiczna"
+        ],
+        "trappings": [
+          "grimuar",
+          "broń ręczna"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Elementalista",
+        "status": "Brąz 4",
+        "characteristics": [],
+        "skills": [
+          "Opieka nad Zwierzętami",
+          "Leczenie",
+          "Unik",
+          "Odporność",
+          "Intuicja",
+          "Wiedza (Zioła)",
+          "Skradanie (Dowolne)",
+          "Rzemiosło (Zielarz)"
+        ],
+        "talents": [
+          "Niegodny Uwagi",
+          "Magia Tajemna (Elementalizm)",
+          "Odporny na (Zepsucie)"
+        ],
+        "trappings": [
+          "okład leczniczy",
+          "narzędzia rzemieślnicze (Zielarstwo)"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Mistrz Kształtowania",
+        "status": "Srebro 2",
+        "characteristics": [],
+        "skills": [
+          "Charyzma",
+          "Wspinaczka",
+          "Percepcja",
+          "Jeździectwo (Konie)",
+          "Wioślarstwo"
+        ],
+        "talents": [
+          "Wyczulony Zmysł (Dowolny)",
+          "Na Cztery Łapy",
+          "Ruchliwe dłonie",
+          "Precyzyjne Inkantowanie"
+        ],
+        "trappings": [
+          "odosobniony dom",
+          "koń wierzchowy albo mała łódź",
+          "przedmiot magiczny"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Władca Elementalistów",
+        "status": "Srebro 4",
+        "characteristics": [],
+        "skills": [
+          "Wiedza (Dowolna)",
+          "Badania Naukowe"
+        ],
+        "talents": [
+          "Rozpoznanie Artefaktu",
+          "Towarzyski",
+          "Wykrywanie Magii",
+          "Świetny Pływak"
+        ],
+        "trappings": [
+          "uczeń",
+          "biblioteka (Magia)",
+          "pracownia (Magia)"
+        ]
+      }
+    ]
+  },
+  "Kapłan Druidzki": {
+    "races": [
+      "Człowiek"
+    ],
+    "characteristics_pending": true,
+    "source": "Grimuar (nieoficjalny), s. 19",
+    "levels": [
+      {
+        "level": 1,
+        "title": "Inicjat Druidzki",
+        "status": "Brąz 1",
+        "characteristics": [],
+        "skills": [
+          "Opieka nad Zwierzętami",
+          "Splatanie Magii (Ghyran)",
+          "Oswajanie",
+          "Leczenie",
+          "Wiedza (Stara Wiara)",
+          "Nawigacja",
+          "Sztuka Przetrwania",
+          "Zastawianie Pułapek"
+        ],
+        "talents": [
+          "Posłuch u Zwierząt",
+          "Wyczucie Kierunku",
+          "Percepcja Magiczna",
+          "Duchowy Chowaniec"
+        ],
+        "trappings": [
+          "buty",
+          "sztylet",
+          "samodziałowa szata",
+          "sakiewka z orzechami i jagodami na dwa dni",
+          "symbol Matki"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Kapłan Druidzki",
+        "status": "Brąz 2",
+        "characteristics": [],
+        "skills": [
+          "Tresura (Dowolna)",
+          "Odporność",
+          "Język (Magiczny)",
+          "Wiedza (Zioła)",
+          "Broń Biała (Podstawowa)",
+          "Broń Biała (Drzewcowa)",
+          "Rzemiosło (Zielarz)"
+        ],
+        "talents": [
+          "Magia Prosta",
+          "Odporny na (Zepsucie)",
+          "Obieżyświat",
+          "Doświadczony Wędrowiec (Lasy)"
+        ],
+        "trappings": [
+          "lecznicze okłady",
+          "broń ręczna albo kostur",
+          "torba",
+          "narzędzia rzemieślnicze (Zielarstwo)"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Mistrz Druidzki",
+        "status": "Brąz 3",
+        "characteristics": [],
+        "skills": [
+          "Występy (Gawędziarstwo)",
+          "Intuicja",
+          "Wiedza (Lasy)",
+          "Skradanie (Wieś)"
+        ],
+        "talents": [
+          "Magia Tajemna (Druidyzm)",
+          "Twardziel",
+          "Precyzyjne Inkantowanie",
+          "Czujny"
+        ],
+        "trappings": [
+          "plecak",
+          "odosobniona chata"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Starszy Druid",
+        "status": "Brąz 5",
+        "characteristics": [],
+        "skills": [
+          "Charyzma",
+          "Opanowanie",
+          "Pływanie"
+        ],
+        "talents": [
+          "Zmysł Magii",
+          "Zimna krew",
+          "Wykrywanie Magii",
+          "Czysta Dusza"
+        ],
+        "trappings": [
+          "piecza nad okolicą",
+          "szata starszego",
+          "inicjat"
+        ]
+      }
+    ]
   }
 }

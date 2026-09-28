@@ -93,7 +93,9 @@
     "Lekki Kawalerzysta": ["Lekki Kawalerzysta", "Lekka Kawalerzystka"],
     "Specjalista Oblężniczy": ["Specjalista Oblężniczy", "Specjalistka Oblężnicza"],
     "Pikinier": ["Pikinier", "Pikinierka"],
-    "Kapłanka Bitewna Myrmidii": ["Kapłan Bitewny Myrmidii", "Kapłanka Bitewna Myrmidii"]
+    "Kapłanka Bitewna Myrmidii": ["Kapłan Bitewny Myrmidii", "Kapłanka Bitewna Myrmidii"],
+    "Elementalista": ["Elementalista", "Elementalistka"],
+    "Kapłan Druidzki": ["Kapłan Druidzki", "Kapłanka Druidzka"]
   },
   "titles": {
     "Aptekarka|1": ["Uczeń Aptekarza", "Uczennica Aptekarki"],
@@ -467,6 +469,14 @@
     "Kapłanka Bitewna Myrmidii|1": ["Pierwszy Orzeł", "Pierwsza Orlica"],
     "Kapłanka Bitewna Myrmidii|2": ["Kapłan Bitewny Myrmidii", "Kapłanka Bitewna Myrmidii"],
     "Kapłanka Bitewna Myrmidii|3": ["Kapłan-Sierżant Myrmidii", "Kapłanka-Sierżant Myrmidii"],
-    "Kapłanka Bitewna Myrmidii|4": ["Kapłan-Kapitan Myrmidii", "Kapłanka-Kapitan Myrmidii"]
+    "Kapłanka Bitewna Myrmidii|4": ["Kapłan-Kapitan Myrmidii", "Kapłanka-Kapitan Myrmidii"],
+    "Elementalista|1": ["Uczeń Elementalisty", "Uczennica Elementalisty"],
+    "Elementalista|2": ["Elementalista", "Elementalistka"],
+    "Elementalista|3": ["Mistrz Kształtowania", "Mistrzyni Kształtowania"],
+    "Elementalista|4": ["Władca Elementalistów", "Władczyni Elementalistów"],
+    "Kapłan Druidzki|1": ["Inicjat Druidzki", "Inicjatka Druidzka"],
+    "Kapłan Druidzki|2": ["Kapłan Druidzki", "Kapłanka Druidzka"],
+    "Kapłan Druidzki|3": ["Mistrz Druidzki", "Mistrzyni Druidzka"],
+    "Kapłan Druidzki|4": ["Starszy Druid", "Starsza Druidka"]
   }
 }

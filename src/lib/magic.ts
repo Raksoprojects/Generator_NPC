@@ -16,6 +16,22 @@ import type { Npc, SpellDef } from "./types";
 const CHAOS_LORES = ["Nurgla", "Slaanesha", "Tzeentcha"];
 const COLLEGE_LORES = ["Ognia", "Metalu", "Życia", "Niebios", "Cieni", "Śmierci", "Światła", "Zwierząt"];
 
+/**
+ * Wlasna Magia Prosta i wspolne zaklecia tajemne tradycji (Grimuar): druidzi maja
+ * druidzka Magie Prosta, skaveny i zielonoskorzy - swoja i nie znaja wspolnych
+ * zaklec tajemnych, czarownicy Chaosu dostaja tez tajemne zaklecia Chaosu.
+ */
+const LORE_FAMILY: Record<string, { petty?: string; common: string[] }> = {
+  "Pór Roku": { petty: "Prosta (Druidzka)", common: ["Tajemna"] },
+  Spaczenia: { petty: "Prosta (Spaczenie)", common: [] },
+  "Najmniejszego Waaagh!": { petty: "Prosta (Waaagh!)", common: [] },
+  "Wielkiego Waaagh!": { petty: "Prosta (Waaagh!)", common: [] },
+  Nurgla: { common: ["Tajemna", "Tajemna Chaosu"] },
+  Slaanesha: { common: ["Tajemna", "Tajemna Chaosu"] },
+  Tzeentcha: { common: ["Tajemna", "Tajemna Chaosu"] },
+};
+const familyOf = (lore: string) => LORE_FAMILY[lore] ?? { common: ["Tajemna"] };
+
 /** Tradycja z opisu cechy "Rzucanie Czarów (…)" - moze zawierac alternatywy. */
 function loreFromTrait(spec: string, rng: Rng): string | undefined {
   const s = spec.toLowerCase();
@@ -32,6 +48,10 @@ function loreFromTrait(spec: string, rng: Rng): string | undefined {
     else if (/nurgl/i.test(o)) resolved.push("Nurgla");
     else if (/slaanesh/i.test(o)) resolved.push("Slaanesha");
     else if (/tzeentch/i.test(o)) resolved.push("Tzeentcha");
+    else if (/spacze|skave/i.test(o)) resolved.push("Spaczenia");
+    else if (/waaagh|ork/i.test(o)) resolved.push(/najmniejsz|goblin/i.test(o) ? "Najmniejszego Waaagh!" : "Wielkiego Waaagh!");
+    else if (/elementali|żywioł/i.test(o)) resolved.push("Elementalizmu");
+    else if (/pór roku|druid/i.test(o)) resolved.push("Pór Roku");
     else {
       const key = gd.spellLoreKey(o);
       if (key) resolved.push(key);
@@ -78,7 +98,11 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const { wp, int } = bonuses(npc);
   const out: string[] = [];
 
-  const pettyPool = all.filter((s) => s.lore === "Prosta");
+  // Wlasna Magia Prosta tradycji (skaveny, zielonoskorzy) zastepuje zwykla; druidzi maja obie.
+  const ownPetty = lores.map((l) => familyOf(l).petty).filter(Boolean) as string[];
+  const replacesPetty = lores.some((l) => familyOf(l).petty && !familyOf(l).common.includes("Tajemna"));
+  const pettyLores = new Set([...(replacesPetty ? [] : ["Prosta"]), ...ownPetty]);
+  const pettyPool = all.filter((s) => pettyLores.has(s.lore));
   const pettyCount = Math.max(1, wp + (deterministic ? 0 : randInt(-1, 1, rng)));
   out.push(...drawSpells(pettyPool, pettyCount, () => 1, rng, deterministic).map((s) => s.name));
 
@@ -86,8 +110,9 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   if (!lores.length || maxCn <= 0) return out;
 
   const loreSet = new Set(lores);
+  const common = new Set(lores.flatMap((l) => familyOf(l).common));
   const arcanePool = all.filter(
-    (s) => s.lore !== "Prosta" && (loreSet.has(s.lore) || s.lore === "Tajemna") && s.cn <= maxCn && !out.includes(s.name)
+    (s) => !pettyLores.has(s.lore) && (loreSet.has(s.lore) || common.has(s.lore)) && s.cn <= maxCn && !out.includes(s.name)
   );
   if (!arcanePool.length) return out;
   const [lo, hi] = tier?.spells.arcane ?? [0, 0];

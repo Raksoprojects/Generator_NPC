@@ -23,6 +23,7 @@ import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
 import { pickSpells } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
+import { rollVampire } from "./vampires";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
 import type { Archetype, CareerStep, CreatureDef, KeyBonus, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
@@ -135,10 +136,14 @@ function raceOk(profession: string, race: string): boolean {
   return gd.professionAllowsRace(profession, gd.getCreature(race) ? "Człowiek" : race);
 }
 
-function professionCandidates(arch: Archetype, race: string): Record<string, number> {
+function professionCandidates(arch: Archetype, race: string, withFallback = false): Record<string, number> {
   const out: Record<string, number> = {};
   for (const [name, w] of Object.entries(arch.professions)) {
     if (gd.getProfession(name) && raceOk(name, race)) out[name] = w;
+  }
+  // Waga <= 0.01 = profesja zapasowa, tylko gdy rasa nie ma innej (np. ogolny Czarodziej dla elfow).
+  if (!withFallback && Object.values(out).some((w) => w > 0.01)) {
+    for (const [name, w] of Object.entries(out)) if (w <= 0.01) delete out[name];
   }
   if (Object.keys(out).length) return out;
   // Zadna profesja archetypu nie pasuje do rasy - bierzemy dowolna istniejaca.
@@ -149,7 +154,7 @@ function professionCandidates(arch: Archetype, race: string): Record<string, num
 /** Druga (wczesniejsza) profesja: inna niz glowna, preferowana ta sama klasa. */
 function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rng): string | undefined {
   const mainClass = gd.getProfession(main)?.class;
-  const cands = professionCandidates(arch, race);
+  const cands = professionCandidates(arch, race, true);
   delete cands[main];
   const weights: Record<string, number> = {};
   for (const [name, w] of Object.entries(cands)) {
@@ -646,7 +651,13 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   const creature = gd.getCreature(npc.creature);
   npc.traits = rollTraits(spec, npc, rng);
   if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
-  npc.mutations = [...rollNpcMutations(creature?.traits ?? [], rng, deterministic), ...rollChaosGifts(npc, rng, deterministic)];
+  const vampire = rollVampire(npc, rng, deterministic);
+  npc.traits = [...npc.traits, ...vampire.traits.filter((t) => !npc.traits.includes(t))];
+  npc.mutations = [
+    ...vampire.entries,
+    ...rollNpcMutations(creature?.traits ?? [], rng, deterministic),
+    ...rollChaosGifts(npc, rng, deterministic)
+  ];
 }
 
 /** Poziom BN nie nizszy niz minimalny poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego). */

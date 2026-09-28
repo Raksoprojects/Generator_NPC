@@ -67,6 +67,42 @@
   "Tzeentcha": {
    "label": "Magia Chaosu (Tzeentcha)",
    "wind": "Dhar"
+  },
+  "Prosta (Druidzka)": {
+   "label": "Magia Prosta (druidzka)",
+   "wind": null
+  },
+  "Pór Roku": {
+   "label": "Tradycja Pór Roku (druidzi)",
+   "wind": null
+  },
+  "Elementalizmu": {
+   "label": "Tradycja Elementalizmu",
+   "wind": null
+  },
+  "Tajemna Chaosu": {
+   "label": "Tajemne zaklęcia Chaosu",
+   "wind": "Dhar"
+  },
+  "Prosta (Spaczenie)": {
+   "label": "Magia Prosta (Spaczenie, skaveny)",
+   "wind": "Dhar"
+  },
+  "Spaczenia": {
+   "label": "Tradycja Spaczenia (skaveny)",
+   "wind": "Dhar"
+  },
+  "Prosta (Waaagh!)": {
+   "label": "Magia Prosta (Waaagh!)",
+   "wind": null
+  },
+  "Najmniejszego Waaagh!": {
+   "label": "Tradycja Najmniejszego Waaagh! (gobliny)",
+   "wind": null
+  },
+  "Wielkiego Waaagh!": {
+   "label": "Tradycja Wielkiego Waaagh! (orki)",
+   "wind": null
   }
  },
  "spells": [
@@ -269,6 +305,17 @@
    "page": 111
   },
   {
+   "name": "Zasłona działań",
+   "lore": "Cieni",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Gromadząc wokół siebie cienie Ulgu, maskujesz swoje działania — w tym również rzucanie samego tego zaklęcia — i wydaje się, że robisz coś zupełnie innego (twój wybór). Dla obserwatora twoje położenie pozostaje takie samo, lecz zdajesz się zajęty inną czynnością. Na przykład w oczach wszystkich możesz czytać książkę, podczas gdy w rzeczywistości walisz kogoś pięścią w twarz. Jeśli twoje działanie dotyka kogoś innego (np. atak, zaklęcie, kradzież kieszonkowa itp.), ofierze przysługuje Test Przeciwstawny Percepcji/Splatania Magii (Ulgu) pozwalający przejrzeć iluzję. Ci, którzy mają Talent Percepcja Magiczna, muszą zdać Trudny (-10) Test Percepcji, by zauważyć iluzję.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 17
+  },
+  {
    "name": "Materia cienia",
    "lore": "Cieni",
    "cn": 9,
@@ -401,6 +448,39 @@
    "page": 256
   },
   {
+   "name": "Spętanie demona",
+   "lore": "Demonologii",
+   "cn": 3,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Splatasz grube pasma Dharu, które pętają jednego lub więcej Demonów dowolnego rodzaju w Zasięgu. Wykonaj pojedynczy Test Splatania Magii (Dhar), któremu przeciwstawia się Siła Woli każdego celu. Jeśli wygrasz, Demon zyskuje specjalny Stan Utrata Przytomności na czas trwania zaklęcia: Demon jest unieruchomiony, ale poza tym w pełni świadomy tego, co dzieje się wokół niego i kto rzucił zaklęcie pętające. Demoniczny amulet (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 37
+  },
+  {
+   "name": "Dręcząca wizja",
+   "lore": "Demonologii",
+   "cn": 4,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Specjalny",
+   "description": "Splatasz Dhar i kierujesz go tak, by uderzył w jedno stworzenie w Zasięgu, zsyłając na cel piekielną wizję. Stworzenie musi zdać Wymagający (+0) Test Opanowania, inaczej zyskuje 1 + PS Stanów Oszołomienie. Jeśli cel nie usunie tych Stanów w ciągu swojej Premii z Siły Woli rund, otrzymuje tyle punktów Zepsucia Psychicznego, ile ma wówczas Stanów.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 38
+  },
+  {
+   "name": "Wezwanie mocy",
+   "lore": "Demonologii",
+   "cn": 4,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Splatasz wokół siebie wijącą się mgłę Dharu, wchłaniając jej mroczną energię w ciało i duszę.Wykonaj Test Odporności na Umiarkowany Wpływ Zepsucia. Dopóki zaklęcie trwa, wszystkie Twoje Testy Splatania Magii i Rzucania Zaklęć wykonujesz z Przeciętną (+20) Trudnością. Ponadto zyskujesz dostęp do jednego wybranego przez siebie, nieopanowanego Zaklęcia ze swoich list zaklęć Tajemnych lub Tradycji. Przez Czas trwania liczysz się, jakbyś zapamiętał to zaklęcie, ale nie możesz przepisać go do grimuaru ani na zwój.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 37
+  },
+  {
    "name": "Wykrycie demona",
    "lore": "Demonologii",
    "cn": 4,
@@ -410,6 +490,17 @@
    "description": "Twoje zaklęcie namierza wszelkie demoniczne wpływy w otaczającym cię obszarze. Automatycznie wiesz, czy w Zasięgu znajduje się demon, czy to przyzwany, czy zaklęty w przedmiocie, opętujący śmiertelnika itd.",
    "source": "Podręcznik podstawowy",
    "page": 257
+  },
+  {
+   "name": "Przyzwanie demonicznego rumaka",
+   "lore": "Demonologii",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Kierujesz migotliwym pasmem Dharu, które zręcznie otwiera wielkie rozdarcie w świecie materialnym, manifestując pojedynczego Demonicznego Rumaka, wezwanego przez Ciebie z Krainy Chaosu. Wykonaj Test Przeciwstawny Splatania Magii (Dhar)/Siły Woli z Rumakiem. Jeśli wygrasz, Demon zgodzi się być Twoim wierzchowcem i będzie słuchał Twoich rozkazów, dopóki zaklęcie trwa. W przeciwnym razie Rumak zaatakuje Ciebie (albo zachowa się tak, jak zadecyduje MG). Wzmocnienie: Za każdy +1 PS możesz utrudnić Test Siły Woli celu o jeden stopień (czyli z Wymagającego na Trudny).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 38
   },
   {
    "name": "Zniszczenie pomniejszego demona",
@@ -434,6 +525,17 @@
    "page": 257
   },
   {
+   "name": "Słowo bólu",
+   "lore": "Demonologii",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Wypowiadasz zakazane słowo, być może demonicznego pochodzenia, które zadaje potworny ból wszystkim żywym stworzeniom w Obszarze (poza Tobą). Wszystkie objęte działaniem cele otrzymują magiczny pocisk o Obrażeniach +8, ignorujący Punkty Zbroi. Ponadto Twoje cele muszą zdać Wymagający (+0) Test Opanowania, inaczej zyskują PS Stanów Panika (minimum 1).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 38
+  },
+  {
    "name": "Oktagram",
    "lore": "Demonologii",
    "cn": 10,
@@ -443,6 +545,270 @@
    "description": "Wymalowujesz oktogram na podłodze, znacząc go bluźnierczymi symbolami, co chroni cię przed wszelkimi demonicznymi wpływami. Stworzenia o Cesze Stworzenia Demoniczny nie mogą wejść ani wyjść z kręgu, chyba że ich Siła Woli jest dwa razy większa od twojej.",
    "source": "Podręcznik podstawowy",
    "page": 257
+  },
+  {
+   "name": "Piekielna jazda",
+   "lore": "Demonologii",
+   "cn": 10,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Przyzwawszy Demonicznego Rumaka i zapanowawszy nad nim, dotykasz teraz wierzchowca i przesycasz go Dharem. Rumak poniesie następnie swojego jeźdźca oraz jednego pasażera poza świat śmiertelników, ku rubieżom krainy Chaosu, pokonując ogromne odległości w zaledwie kilka minut. Choć jeźdźcy postrzegają podróż tylko mgliście, skutki oglądania takich okropności są wstrząsające. Jazda musi rozpocząć się w ciągu 2 Rund od rzucenia zaklęcia i trwa 1k10 minut. Na koniec każdej minuty obaj jeźdźcy muszą wykonać Wymagający (+0) Test Opanowania, inaczej zyskują +1 punkt Zepsucia Psychicznego. Na koniec jazdy jeźdźcy muszą też wykonać Wymagający (+0) Test Odporności na Umiarkowany Wpływ Zepsucia. Na szczęście szybkość i zręczność Rumaka chronią jeźdźców przed bliższym spotkaniem z innymi mieszkańcami tej krainy. Gdy jazda dobiegnie końca, Rumak i jego pasażerowie wpadają z powrotem do świata materialnego w obranym miejscu przeznaczenia, które musi znajdować się w promieniu 100 mil od początku podróży. Powiadają, że potężniejsza wersja tego zaklęcia prowadzi bliżej serca Krainy Chaosu, pokonując tym samym o wiele większe odległości w świecie materialnym. Z pewnością jednak takie zaklęcie nie istnieje, bo podróżowanie w ten sposób byłoby czystym szaleństwem. Inwokacja absolutnej mocy (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 37
+  },
+  {
+   "name": "Wypędzenie demonów",
+   "lore": "Demonologii",
+   "cn": 10,
+   "range": "Ty",
+   "target": "Obszar (Siła Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Twoje czary destabilizują Dhar spajający wszystkie Demony w Obszarze. Wszystkie objęte działaniem cele z Cechą Stworzenia Demoniczny muszą zdać Trudny (-10) Test Siły Woli, inaczej otrzymują magiczny pocisk o Obrażeniach równych Twojej Premii z Siły Woli (ignorujący Punkty Zbroi). Przy Zdumiewającej Porażce (6+) cel zostaje wygnany z tego świata, o ile ma Cechę Stworzenia Niestabilny. Wzmocnienie: Za każde +2 PS możesz utrudnić Test Siły Woli o jeden stopień (czyli z Bardzo Trudnego na Beznadziejny). Bestialska transmogryfikacja wszechmocnego Tchara (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 37
+  },
+  {
+   "name": "Przyzwanie demonicznej sfory",
+   "lore": "Demonologii",
+   "cn": 16,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz tyle Pomniejszych Demonów lub Demonicznych Sług, ile wynosi Twoja Premia z Siły Woli. Wyłaniają się przez rozdarcie w świecie materialnym i pojawiają się jako grupa w Zasięgu. Wykonaj Test Przeciwstawny Splatania Magii (Dhar)/Siły Woli z przywódcą sfory. Jeśli wygrasz, Demony wykonają — całkiem dosłownie — jeden wydany przez Ciebie rozkaz, a potem znikną, o ile zdążą go wypełnić przed końcem Czasu trwania. Jeśli przegrasz Test, Demony zaatakują Ciebie (albo zachowają się tak, jak zadecyduje MG). Wzmocnienie: Za każde +2 PS możesz utrudnić Test Siły Woli celu o jeden stopień (czyli z Wymagającego na Trudny).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 38
+  },
+  {
+   "name": "Chmura dymu (Ogień)",
+   "lore": "Elementalizmu",
+   "cn": 2,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wydmuchujesz z płuc gęsty dym. Chmura otacza Ciebie, ale jeśli się poruszysz, pozostaje nieruchoma, dopóki się nie rozwieje. Stworzenia w Obszarze nie widzą na zewnątrz ani przez dym, a te na zewnątrz nie widzą do jego wnętrza ani poza niego. Stworzenia wewnątrz muszą poruszać się z połową tempa marszu albo błądzą w losowym kierunku (patrz tabela Rozrzutu, WFRP4 s. 163) i podlegają skutkom terenu trudnego do przebycia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Chodzenie po wodzie (Woda)",
+   "lore": "Elementalizmu",
+   "cn": 2,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Specjalny",
+   "description": "Woda magicznie odpycha lekko Twoje stopy, gdy się poruszasz, pozwalając Ci bez trudu przemierzać rzeki, strumienie, jeziora, bagna, sadzawki, błoto, śliskie podłoże i tym podobne. Musisz wejść na taflę wody w ciągu minuty od rzucenia zaklęcia, a zaklęcie kończy się, gdy staniesz na suchym lądzie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Lekki jak piórko (Powietrze)",
+   "lore": "Elementalizmu",
+   "cn": 2,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Przywołujesz kłębiącą się poduszkę powietrza, która łagodzi upadek celu lub jego zejście z większej wysokości. Twój cel opada w tempie marszu i nie otrzymuje Obrażeń od Upadku, chyba że zaklęcie skończy się, zanim dotknie ziemi.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Oddychanie pod wodą (Woda)",
+   "lore": "Elementalizmu",
+   "cn": 2,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Twój cel zyskuje zdolność oddychania pod wodą lub w próżni, a także premię +2 PS do Testów Odporności wykonywanych, by oprzeć się dymowi, gazom oraz unoszącym się w powietrzu zarodnikom i truciznom.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Odporność na ogień (Ogień)",
+   "lore": "Elementalizmu",
+   "cn": 4,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Otulasz się magicznym płaszczem, który odpycha ogień, w tym Magiczne zaklęcia i płonącą broń. Zyskujesz Cechę Stworzenia Niewrażliwość (Ogień) .",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Ognista dłoń (Ogień)",
+   "lore": "Elementalizmu",
+   "cn": 4,
+   "range": "Specjalny",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twoja broń biała płonie migotliwym ogniem, który świeci niczym pochodnia. Broń zyskuje Cechę Magiczny. Każde stworzenie trafione tą bronią zyskuje +1 Stan Podpalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Podsycenie ognia (Ogień)",
+   "lore": "Elementalizmu",
+   "cn": 4,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Podpalasz jedno źródło łatwopalnego materiału w Zasięgu, sprawiając, że staje w płomieniach i zyskuje 1 Stan Podpalenie. To MG decyduje, co liczy się jako łatwopalne i jak szybko ogień może się rozprzestrzenić. Wzmocnienie: Za każde +2 PS możesz wywołać +1 Stan Podpalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Gaszenie ognia (Woda)",
+   "lore": "Elementalizmu",
+   "cn": 5,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Wykrzykujesz słowa mocy i przywołujesz dość wody, by ugasić wszystkie ognie w Obszarze. Wewnątrz natychmiast usunięte zostają wszystkie Stany Podpalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Kruszenie kamienia (Ziemia)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "Dotyk",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk sprawia, że wybrany kamień, skała lub cegła pękają i kruszą się, zadając magiczny pocisk o Obrażeniach +6, który ignoruje Premię z Wytrzymałości konstrukcji.To zaklęcie nie rani stworzeń bezpośrednio.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Oczyszczający podmuch (Powietrze)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Przyzywasz silny wiatr, który rozprasza wszelkie zanieczyszczenia w powietrzu i przynosi uczucie wiosennej świeżości. Przez Czas trwania zaklęcia unoszące się w powietrzu trucizny, gazy, dym, efekty oddechu oraz zaklęcia oparte na wietrze nie odnoszą żadnego skutku. Orzeźwieni, wszyscy w Zasięgu usuwają jeden Stan Zmęczenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Oślepiający błysk (Powietrze)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz kulę oślepiającego światła. Każdy, kto nie został ostrzeżony przed błyskiem, musi zdać Trudny (-10) Test Intuicji albo zyskuje PS+1 Stanów Oślepienie. Ci, którym Test się powiedzie, nie mogą obrać Cię za cel, nie zostając przy tym oślepionymi.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Przywołanie deszczu (Woda)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Skupiasz otaczającą wilgoć i uwalniasz ją w postaci nagłej ulewy (nawet w pomieszczeniu, jeśli MG na to pozwoli). Wszelki ogień zostaje zgaszony. Zastosuj efekty Ulewy wymienione w Enemy in Shadows Companion s. 33.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Rój (Ziemia)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Kładąc dłonie na ziemi lub skale, wysyłasz energię, która przyciąga Rój zwykłych owadów, pająków, skorpionów, węży, jaszczurek itp. o Średnim rozmiarze. Rój będzie wykonywał Twoje proste polecenia, dopóki Ty albo rój nie zostaniecie zniszczeni lub dopóki zaklęcie nie dobiegnie końca. Wzmocnienie: Za każde +3 PS możesz zwiększyć jego Rozmiar o jeden stopień.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Szturm kamienia (Ziemia)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Przywołujesz garść kamyków i ciskasz je wysoko w powietrze. Wznosząc się, kamienie rosną, po czym spadają deszczem na wybrany Obszar. Wszystkie ofiary otrzymują magiczny pocisk o Obrażeniach +4 i muszą zdać Wymagający (+0) Test Odporności albo zyskują Stan Powalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Uderzenie gromu (Powietrze)",
+   "lore": "Elementalizmu",
+   "cn": 6,
+   "range": "1 mila",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Twoja magia wyzwala potężny huk gromu, słyszalny na wielką odległość. Wszystkie stworzenia posiadające Cechy Stworzenia Płochliwy lub Głupi zyskują 3 Stany Panika. MG może zażądać od jeźdźców zdania Trudnego (-10) Testu Powożenia lub Jeździectwa, aby uspokoili swoje wierzchowce.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Burza pyłowa (Powietrze)",
+   "lore": "Elementalizmu",
+   "cn": 7,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz w Zasięgu wirujący wiatr pełen ziemi i pyłu, którym możesz dowolnie poruszać, zdając Przeciętny (+20) Test Splatania Magii. W chwili powstania burzy oraz na początku każdej kolejnej Rundy wszystkie stworzenia uwięzione w jej wnętrzu otrzymują magiczny pocisk o Obrażeniach +0.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Płachta płomieni (Ogień)",
+   "lore": "Elementalizmu",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Specjalny)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Rozpościerasz ścianę płomieni o szerokości i wysokości Premii z Siły Woli metrów oraz grubości 2 metrów. Dotknięcie ściany ognia powoduje zyskanie Stanu Podpalenie. Wzmocnienie: Za każde +2 PS możesz wydłużyć jeden z wymiarów bariery o podaną wartość.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 28
+  },
+  {
+   "name": "Rozstąpienie wód (Woda)",
+   "lore": "Elementalizmu",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Wyciągasz dłonie ku pobliskiemu zbiornikowi wodnemu (sadzawce, rzece, jezioru, strumieniowi) i rozwierasz w nim przejście o rozmiarze Obszaru. Możesz przez nie przejść i poruszać się w tempie marszu po rozmokłym dnie. Stworzenia, które zastanie powracająca woda, muszą zdać Ciężki (-20) Test Pływania, inaczej porwie je prąd i podlegają zasadom Tonięcia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Ruchome piaski (Ziemia)",
+   "lore": "Elementalizmu",
+   "cn": 9,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Obierasz za cel skrawek ziemi, błota lub piasku i zamieniasz go w magiczne ruchome piaski. Gęste, zasysające błoto więzi wszystkie stojące w nim stworzenia, nakładając Stan Pochwycenie (o Sile równej Twojej Umiejętności Splatania Magii). Na początku każdej Rundy ofiary zyskują +1 Stan Pochwycenie. Jeśli ofiara jest w stanie się poruszać, ruchome piaski liczą się jako teren trudny do przebycia (połowa szybkości; bez biegu i sprintu). Jeśli stworzenie ma więcej Stanów Pochwycenie, niż wynosi jego Premia z Siły, zostaje wessane w ruchome piaski i podlega zasadom Duszenia się. Stworzenia, które nie oddychają, nie duszą się, ale najpewniej pozostaną uwięzione, gdy zaklęcie się skończy.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Kształtowanie żywiołaka",
+   "lore": "Elementalizmu",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Recytujesz inkantację w pobliżu obranego za cel żywiołu w Zasięgu i kształtujesz jego bezpostaciową naturalną energię w humanoidalną postać o Dużym rozmiarze. Musisz teraz zapanować nad nią, zdając Test Splatania Magii. Za każdy stopień rozmiaru większy od Twojego wykonaj ten Test o jeden stopień trudniejszy (czyli z Wymagającego na Trudny). Jeśli Ci się powiedzie, żywiołak porusza się i działa zgodnie z Twoimi rozkazami. Jeśli zawiedziesz, MG przejmuje kontrolę nad stworzeniem albo rzuca 1k10 w każdej Rundzie: przy 1-5 nie robi nic albo dalej robi to, co w poprzedniej Rundzie; przy 6-7 atakuje swojego przyzywającego; przy 8-10 atakuje najbliższe stworzenie. Wzmocnienie: Za każde +3 PS możesz zwiększyć jego Rozmiar o jeden stopień.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
+  },
+  {
+   "name": "Burzyciel murów (Ziemia)",
+   "lore": "Elementalizmu",
+   "cn": 16,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Sprawiasz, że ziemia drży i dudni, a fundamenty oraz podpory wszystkich budynków w Zasięgu pękają. Wykonaj Test Przeciwstawny Splatania Magii/ Wytrzymałości przeciwko każdemu budynkowi (Ty rzucasz raz, a MG rzuca za każdy budynek): Materiały Budowlane Wt Materiały Budowlane Wt Trawa/Błoto/Strzecha 40 Lite Drewno 75 Plecionka/Lepianka 55 Konstrukcja Ceglana 90 Glina/Lekkie Drewno 65 Konstrukcja Kamienna 100 Każdy wygrany Test powoduje zawalenie się obranego budynku (wedle uznania MG). Wszystkie stworzenia w środku otrzymują Obrażenia od Zawalenia. Wstrząs wtórny tego zaklęcia rozchodzi się na wiele mil wokół, zwracając uwagę każdego, kto ma Talent Percepcja Magiczna, a kto może być wrogo nastawiony do tak jawnego użycia niszczycielskiej siły.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 29
   },
   {
    "name": "Dobra wola",
@@ -520,6 +886,17 @@
    "description": "Grawerujesz na metalowej powierzchni słowa albo obraz, po prostu przesuwając nad nią ręką. Zapisanie każdych dwunastu słów wymaga jednej Rundy. Jeśli osiągniesz +2 PS, grawerunek może zostać zakodowany jako tajemna runa. Inny czarodziej Tradycji Złota może odkryć tajemną runę po rzuceniu tego zaklęcia na grawerowaną powierzchnię. W przeciwnym razie tekst jest niewidzialny. Czarodzieje Tradycji Złota wykorzystują to zaklęcie do sekretnej komunikacji. W sytuacji kryzysowej zaklęcia można użyć jako rozprysku kwasu działającego na krótkim dystansie, skutecznego wobec wrogów noszących metalowy pancerz. Rozprysk jest traktowany jak magiczny pocisk zadający +2 Obrażeń. Udane trafienie niszczy również 1 Punkt Pancerza na danym Miejscu Trafienia, o ile kwas nie zostanie zmyty w przeciągu 10 Rund.",
    "source": "Wiatry Magii",
    "page": 74
+  },
+  {
+   "name": "Rozniecenie kuźni",
+   "lore": "Metalu",
+   "cn": 2,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Sprawiasz, że płonący już ogień w dowolnej kuźni, kominku, piecu lub podobnym palenisku, w którym podsyca się żar i płomień, pali się tak gorąco, jak to naturalnie możliwe, bez zużywania dodatkowego paliwa.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 17
   },
   {
    "name": "Skaza",
@@ -720,6 +1097,17 @@
    "page": 77
   },
   {
+   "name": "Opowieść metalu",
+   "lore": "Metalu",
+   "cn": 8,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Dotykasz dowolnego metalowego przedmiotu i zaglądasz w jego przeszłość, odsłaniając jego sekrety i widząc okoliczności jego wykucia i powstania, jakbyś sam był przy tym obecny. Możesz wykonać Wymagający (+0) Test Splatania Magii, aby rozpoznać specjalne właściwości magicznego przedmiotu — poznajesz jedną specjalną właściwość wybraną przez MG za każdy PS (minimum 1). W przypadku przedmiotów przeklętych, skalanych lub zepsutych właściwości niebezpieczne odkrywasz na samym końcu.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 17
+  },
+  {
    "name": "Kuźnia Chamonu",
    "lore": "Metalu",
    "cn": 9,
@@ -775,6 +1163,270 @@
    "page": 77
   },
   {
+   "name": "Gork to naprawi",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 4,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wskazujesz swój cel i przeklinasz go w imię Gorka. Dopóki zaklęcie trwa, cel nie zyskuje Przewagi za Wygrywanie ani za Wymanewrowanie przeciwników.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Cieknące mózgi",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 5,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Rzucasz złe oko na pojedynczy cel, który musi władać magią Tajemną, magią Chaosu, Magią Prostą albo religijną magią Boską. Cel natychmiast otrzymuje Stan Zmęczenie. Wzmocnienie: Za każde +2 PS Twój cel zyskuje +1 Stan Zmęczenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Mściwe spojrzenie",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 5,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Z Twoich oczu wystrzeliwują zielone pociski najczystszej złości, które wybuchają, pękają i skwierczą pośród Twoich wrogów. Wszystkie cele w Obszarze otrzymują magiczny pocisk o Obrażeniach +3 i zyskują +1 Stan Oślepienie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Podstępne odwracanie uwagi",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 5,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Rechoczesz maniakalnie i podskakujesz dookoła, trzaskając energią. Zyskujesz Cechę Stworzenia Dekoncentrujący. Liczysz się też jako dodatkowe stworzenie przy ustalaniu Przewagi Liczebnej. Podstępne dźganie Patrz WFRP4 Starter Set Adventure Book, s. 36.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Przestań krwawić",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 5,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Splatając najzieleńszy Waaagh!, kładziesz dłonie na swoim celu, lecząc 1k10 punktów Żywotności i usuwając wszystkie Stany Krwawienie. Jeśli Twoim celem jest Zielonoskóry, wścieknie się, że mu pomogłeś.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Dar Pajęczego Boga",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Ogłada Zielonoskórych",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Sycząc i szczerząc kły, wzywasz na pomoc Pajęczego Boga. Twoje cele przybierają pajęcze rysy, zyskując +1 do Szybkości oraz Cechy Stworzenia Jad (Przeciętny) i Wspinacz. Wzmocnienie: Za każde +2 PS możesz podnieść Trudność Cechy Jad o jeden stopień (na przykład z Przeciętnego na Wymagający).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Nocny całun",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Czujesz, jak moc grzybka nocnego cienia płynie w Twoich żyłach, i wydychasz chmurę atramentowej ciemności. Chmura przemieszcza się razem z Tobą, mając Cię w swoim środku. Każdy objęty Obszarem, kto nie ma Talentu Widzenie w Ciemności ani Cechy Stworzenia Widzenie w Mroku, zyskuje 1 + PS Stanów Oślepienie. Cele próbujące poruszać się szybciej niż w połowie tempa marszu muszą zdać Wymagający (+0) Test Percepcji albo zyskują Stan Powalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Wielka zielona złość",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Premia z Ogłady Wrogów",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Skupiasz złość wszystkich zielonoskórych sojuszników w zasięgu na obranych wrogach, przemieniając ją w paskudną klątwę. Wszystkie cele natychmiast zyskują Cechę Stworzenia Lęk (Zielonoskórzy). Pobliscy zielonoskórzy sojusznicy wykorzystają swoją Turę, by zaszarżować na jeden z celów, nawet jeśli musieliby wycofać się z walki. Każdy Zielonoskóry atakujący obranego wroga zyskuje +1 Przewagi na początku swojej Tury. Swędząca udręka Patrz WFRP4 Starter Set Adventure Book, s. 36.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Zwędzić! Zwędzić!",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wyczarowujesz parę wielkich, zielonych dłoni, które pojawiają się nad Twoim celem: jedna chwyta cel, a druga przetrząsa jego wyposażenie w poszukiwaniu czegokolwiek dość błyszczącego, by to ukraść. Cel otrzymuje magiczny pocisk o Obrażeniach +1k10 (ignorujący Punkty Zbroi) i zyskuje Stan Pochwycenie. Wdajesz się ze swoim celem w Zapasy. Twój wróg może jedynie próbować wyrwać się z Zapasów; nie może zadawać obrażeń ani oplątać dłoni. W swoich kolejnych Turach możesz zrezygnować ze wszystkich Darmowych Akcji i rozkazywać zapaśniczej dłoni, wykonując Test Przeciwstawny Splatania Magii/Siły. Jeśli wygrasz, wybierasz jeden z efektów Zapasów (WFRP4 s. 163). Dopóki Zapasy trwają, złodziejska dłoń działa niezależnie od Twojej woli i na koniec każdej Rundy próbuje ukraść jeden cenny lub błyskotliwy przedmiot, taki jak pieniądze albo magiczny artefakt. Cel ma prawo do Wymagającego (+0) Testu Siły albo Uniku, by oprzeć się każdej próbie kradzieży. Gdy cel wyrwie się na wolność albo zaklęcie się skończy, dłonie oddają Ci swój skradziony łup, a cel zyskuje Stan Powalenie .",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Klątwa Złego Księżyca",
+   "lore": "Najmniejszego Waaagh!",
+   "cn": 10,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli rund)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Mrożącym krew w żyłach wyciem przywołujesz wielki, blady księżyc, który spogląda w dół szyderczym, goblinowatym obliczem o wielkich kłach niczym ciosy. Wykonaj Wymagający (+0) Test Splatania Magii, by zapanować nad umiejscowieniem księżyca. Jeśli wygrasz, możesz umieścić Obszar w dowolnym miejscu w zasięgu. Jeśli Ci się nie powiedzie, MG bierze Twoje położenie początkowe i przesuwa Obszar o 2k10 metrów w losowym kierunku (patrz Rozrzut, WFRP4, s. 163). Na koniec każdej Rundy Obszar księżyca przesuwa się o 2k10 metrów w losowym kierunku. Jeśli poświęcisz swoją Akcję i zdasz Wymagający (+0) Test Splatania Magii — możesz wybrać kierunek (ale nie prędkość) spojrzenia księżyca, a także rodzaj testowanej Cechy. Gdy zaklęcie zostaje rzucone, a potem na początku każdej kolejnej Rundy, rzuć 1k10: 1-3 Siła, 4-7 Wytrzymałość, 8-10 Siła Woli. To Cecha przeklęta przez księżyc. Każdy objęty Obszarem musi zdać Wymagający (+0) Test oparty na wylosowanej Cesze. Jeśli Test się nie powiedzie, cel zostaje porażony złowrogim spojrzeniem księżyca i traci 1k10 + PS punktów Żywotności (ignorując Punkty Zbroi). Dodatkowo cel traci 20 z tej Cechy, dopóki zaklęcie trwa.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 50
+  },
+  {
+   "name": "Fontanny krwi",
+   "lore": "Nekromancji",
+   "cn": 3,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Emanujesz wokół siebie nieustanną aurą Dharu, która obejmuje wszystkie żywe stworzenia w Obszarze — w tym Ciebie samego, jeśli żyjesz. Dhar zatruwa krew wszystkich celów. Dopóki zaklęcie trwa, każdy cel, który straci punkt Żywotności, zyskuje też +1 Stan Krwawienie. Każde pobliskie stworzenie z Cechami Stworzenia Żarłoczny i Wampiryczny otrzymuje karę -20 do swojego Testu Siły Woli na powstrzymanie się przed pożywieniem się najbliższym posiłkiem.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Trupie Ciało",
+   "lore": "Nekromancji",
+   "cn": 3,
+   "range": "Siła Woli w metrach",
+   "target": "1",
+   "duration": "Bonus z Siły Woli rund",
+   "description": "Możesz zmienić ciało jednego nieumarłego celu w grubą, skórzastą zbroję. Daje to premię +2 PP, tak jakby skóra celu była utwardzonym rzemieniem, bez żadnych kar ani wad przedmiotu. Kumuluje się z posiadanym pancerzem.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Nieumarła Maść",
+   "lore": "Nekromancji",
+   "cn": 4,
+   "range": "dotyk",
+   "target": "specjalny",
+   "duration": "Bonus z Siły Woli godzin",
+   "description": "Nasycasz Dharem kielich własnej krwi. Każde nieumarłe stworzenie, które wypije ten napój, odzyska tyle punktów Żywotności, ile wynosi twój Bonus z Siły Woli, ale przez tyle godzin, ile punktów odzyskało, będzie miało -2 PS w każdym Teście Przeciwstawnym przeciwko tobie. Z napoju mogą skorzystać także Ghule, choć formalnie wciąż żyją.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 45
+  },
+  {
+   "name": "Plugawa Mądrość",
+   "lore": "Nekromancji",
+   "cn": 4,
+   "range": "ty",
+   "target": "ty",
+   "duration": "Bonus z Siły Woli minut",
+   "description": "Możesz wypić krew świeżych zwłok (martwych krócej niż godzinę), by tymczasowo uzyskać dostęp do ich wiedzy. Na czas trwania zaklęcia zyskujesz dostęp do wszystkich ich Umiejętności Wiedza i Język, testując je według ich wartości, jeśli są wyższe od twoich.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 46
+  },
+  {
+   "name": "Powstrzymanie nieumarłych",
+   "lore": "Nekromancji",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Do wschodu słońca",
+   "description": "Dotykasz drzwi budynku i strzeżesz go przed wtargnięciem nieumarłych. Dopóki zaklęcie trwa, każde stworzenie z Cechą Ożywieniec musi wygrać Test Przeciwstawny Siły Woli, by pozostać w budynku lub do niego wtargnąć; w przeciwnym razie stworzenie zyskuje Stan Panika i musi opuścić budynek, tracąc PS+1 punktów Żywotności na Rundę (z pominięciem Premii z Wytrzymałości i Punktów Zbroi). Zasięg tego zaklęcia ogranicza się do pojedynczej budowli (takiej jak dom czy sklep) o długości, szerokości i wysokości nie większej niż Siła Woli metrów.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Dłoń prochu",
+   "lore": "Nekromancji",
+   "cn": 5,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk zdziera ciało z żywych przeciwników; liczy się to jako magiczny pocisk o Obrażeniach +5, ignorujący Punkty Zbroi. Ponadto cel zyskuje PS Stanów Krwawienie (minimum 1). Stworzenia z Cechą Ożywieniec są odporne na to zaklęcie. Głód życia (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Ożywcza Vitae",
+   "lore": "Nekromancji",
+   "cn": 5,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Siła Woli minut",
+   "description": "Musisz rzucić to zaklęcie, zanim napijesz się krwi z ciała — żywego lub martwego. Zyskujesz Cechy Stworzenia Ugryzienie+0, Żarłoczny i Wampiryczny. Pożywianie się i picie krwi ze zwłok zabitych w ciągu ostatniej godziny leczy Cię o 1k10 punktów Żywotności.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Inwokacja Neheka",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Obierasz za cel pojedyncze stworzenie z Cechą Stworzenia Ożywieniec, napełniając je mroczną, odmładzającą energią. Stworzenie zyskuje Cechę Regeneracja. (Dzięki uprzejmości Malcantheta z Discorda Ratcatcher.) Wzniesienie katapulty z kości (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Kontrola ducha",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Specjalny",
+   "description": "Obierasz za cel jedno stworzenie z Cechami Eteryczny i Ożywieniec i naginasz je do swojej woli. Wykonaj Test Przeciwstawny Siły Woli, w którym zyskujesz premię +PS równą PS Twojego Testu Języka (Magicznego). Jeśli wygrasz, cel przechodzi pod Twoją kontrolę na PS dni (minimum 1).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Nalegania Nehekhary",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "Bonus z Siły Woli rund",
+   "description": "Wszystkie nieumarłe stworzenia na obszarze działania zyskują na czas trwania zaklęcia Cechę Regeneracja i tracą Cechę Niestabilny.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Ożywcza Posoka",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "ty",
+   "target": "ty",
+   "duration": "specjalny",
+   "description": "Pijesz krew świeżych zwłok, odzyskując na rundę tyle punktów Żywotności, ile wynosi twój Bonus z Siły Woli (najwyżej do pierwotnej Żywotności zwłok). Jeśli przestaniesz pić, zaklęcie się kończy.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Piekielny Wigor",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "Siła Woli w metrach",
+   "target": "Bonus z Inteligencji",
+   "duration": "Bonus z Siły Woli rund",
+   "description": "Możesz wskazać grupę podległych ci stworzeń w liczbie równej twojemu Bonusowi z Inteligencji. Każde z nich może przed wygaśnięciem zaklęcia przerzucić jeden nieudany Test Broni Białej.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Plugawy Wgląd",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "ty",
+   "target": "ty",
+   "duration": "Bonus z Siły Woli minut",
+   "description": "Możesz wypić krew świeżych zwłok (martwych krócej niż godzinę), by porozumieć się z ich duchem. Duch staje przed tobą, ale widzisz go tylko ty i ci, którzy mają Wzrok Śmierci. Możesz zadawać mu pytania, ale nie musi odpowiadać, chyba że go do tego zmusisz. Jeśli jednak odpowie, nie może skłamać. Ś",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 45
+  },
+  {
+   "name": "Powstanie Wierzchowca",
+   "lore": "Nekromancji",
+   "cn": 6,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "do wschodu słońca",
+   "description": "Podnosisz padłego konia — najlepiej rumaka bojowego — jako straszliwego wierzchowca. Będzie to Zmora albo wytrzymały Szkieletowy Rumak (jeśli zostały szczątki) lub chyży Widmowy Rumak (jeśli szczątków nie ma). Stworzenie otrzyma wszystkie podstawowe Cechy wymienione w jego profilu w Dodatku oraz Cechę Wyszkolony (wierzchowiec). Za każde +2 PS możesz wybrać jedną Cechę Opcjonalną.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 44
+  },
+  {
    "name": "Zew Vanhela",
    "lore": "Nekromancji",
    "cn": 6,
@@ -784,6 +1436,50 @@
    "description": "Manipulujesz skomplikowanym wirem Dhar i wysyłasz go w stronę swoich celów, wypełniając je jego przytłaczającą energią. Cele o Cesze Stworzenia Ożywieniec w liczbie równej twemu Bonusowi z Inteligencji zyskują dodatkowy Ruch lub Akcję – wybierz jeden efekt, który wpłynie na wszystkie cele. Efekt następuje w momencie rzucenia zaklęcia. Za każde +2 PS w Teście Rzucenia Zaklęcia możesz wpłynąć na dodatkowe cele (w liczbie równej Bonusowi z Inteligencji).",
    "source": "Podręcznik podstawowy",
    "page": 258
+  },
+  {
+   "name": "Fala Uwiądu",
+   "lore": "Nekromancji",
+   "cn": 7,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "natychmiastowy",
+   "description": "Machasz ręką i sprawiasz, że cel usycha. To magiczny pocisk ignorujący Pancerz i Bonus z Wytrzymałości, zadający +6 obrażeń.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 46
+  },
+  {
+   "name": "Panowanie nad Widmem",
+   "lore": "Nekromancji",
+   "cn": 7,
+   "range": "Siła Woli w metrach",
+   "target": "1",
+   "duration": "do wschodu słońca",
+   "description": "Możesz rozkazywać jednemu stworzeniu mającemu zarazem Cechy Ożywieniec i Eteryczny. Stworzenie zyskuje Stan Przymus.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Spojrzenie Nagasha",
+   "lore": "Nekromancji",
+   "cn": 7,
+   "range": "Siła Woli w metrach",
+   "target": "1",
+   "duration": "natychmiastowy",
+   "description": "Wystrzeliwujesz z oczu pociski Dharu. To magiczny pocisk zadający +10 obrażeń i +1 Stan Oszołomienie, działający wyłącznie na stworzenia bez Cechy Ożywieniec.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Danse Macabre Vanhela",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Siła Woli w metrach",
+   "target": "specjalny",
+   "duration": "jedna runda",
+   "description": "Twoi sojusznicy zostają przesyceni Dharem, który czyni ich szybszymi i trudniejszymi do trafienia. Przez jedną pełną rundę sojusznicy w liczbie równej twojemu Bonusowi z Inteligencji zyskują Dar Krwi Szybkokrwisty albo Rtęć (musisz wybrać jeden Dar dla wszystkich). Za każde +2 PS możesz wzmocnić kolejnych sojuszników w liczbie równej Bonusowi z Inteligencji.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 45
   },
   {
    "name": "Ożywienie",
@@ -808,6 +1504,50 @@
    "page": 257
   },
   {
+   "name": "Pocałunek Asaph",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Siła Woli w metrach",
+   "target": "specjalny",
+   "duration": "natychmiastowy",
+   "description": "Nazwany od nehekhariańskiej wężowej bogini piękna, magii i zemsty Pocałunek Asaph zmienia twoją własną krew we wrzącą truciznę, która parzy wrogów. Wyrzucasz z ciała płonącą krew jako magiczny pocisk, przeskakujący od celu do celu w linii prostej. Tracisz 1 punkt Żywotności, by uruchomić tę moc, ale odzyskujesz 1 punkt za każdą osobę, którą pocisk zrani. Wyrzucona krew podpala pierwszy napotkany cel bez Cechy Ożywieniec. Pocisk uderza z +12 do obrażeń i zadaje +1 Stan Podpalenie. Jeśli zada temu celowi co najmniej 1 punkt obrażeń Żywotności, przeskoczy na kolejny dostępny cel, potem na następny i tak dalej. Przy każdym kolejnym uderzeniu pocisk zadaje o 1 obrażeń mniej. Gdy nie zdoła zadać żadnych obrażeń albo zabraknie celów, pocisk zanika.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Przekleństwo Nagasha (Nekromancji)",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "Bonus z Siły Woli rund",
+   "description": "Rzucasz magiczny pocisk zadający +12 obrażeń wszystkim żywym celom w promieniu tylu metrów, ile wynosi twój Bonus z Siły Woli. Każdy cel, który otrzyma co najmniej 1 punkt obrażeń Żywotności, zyskuje też +1 Stan Zmęczenie, gdy uchodzi z niego siła życiowa. Za każdy zraniony cel odzyskujesz 1 punkt Żywotności.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Wezwanie Piekielnego Rumaka",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Siła Woli w metrach",
+   "target": "specjalny",
+   "duration": "natychmiastowy",
+   "description": "Otwierasz w ziemi rozpadlinę i wydobywasz z niej potężnego Piekielnego Rumaka. Przyjmuje on podstawowy profil Zmory oraz główne Cechy wymienione dla Piekielnego Rumaka. Każde +2 PS dodaje jedną wybraną przez ciebie Cechę Opcjonalną.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Widmowy Całun",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "dotyk",
+   "target": "1",
+   "duration": "Bonus z Siły Woli rund",
+   "description": "Dotykasz cielesnego nieumarłego celu i pozwalasz mu bezszelestnie wśliznąć się w przestrzeń między światami. Daje mu to całkowitą niewidzialność i niewrażliwość na wszystkie ataki, które nie działają na istoty eteryczne. Twój cel może przechodzić przez drzwi i ściany, ale nie może niczego dotknąć ani utrzymać. Wyczuć go i zranić mogą tylko ci, którzy sami potrafią oddziaływać na umarłych. Gdy zaklęcie się kończy, cel znów staje się cielesny. Dodatek 1: Bestiariusz Armie Ożywieńców Warhammer zakłada, że ziemia pełna jest kości wojowników poległych przez tysiąclecia bitew i rozlewu krwi. Gdy ożywiasz tak stare i różnorodne szczątki, niespodzianek nie brakuje. Żeby nadać nieumarłym armiom kolorytu, możesz skorzystać z Tabeli Losowych Cech Ożywieńców i dać im wyjątkowe właściwości: ślady niewygasłej woli albo zbroję. Dzięki temu twoje hordy przestaną być kolejnym zestawem szkieletów.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 46
+  },
+  {
    "name": "Wrzeszcząca czaszka",
    "lore": "Nekromancji",
    "cn": 8,
@@ -817,6 +1557,193 @@
    "description": "Wykrzykujesz słowa zaklęcia wysokim głosem i wielka, czarna czaszka opleciona zielono-fioletowym ogniem tworzy się przed tobą, a potem przelatuje naprzód, wrzeszcząc i wyjąc. Czaszka porusza się w linii prostej w Zasięgu zaklęcia, unosząc się nad ziemią i przenikając wszelkie przeszkody. Wrzeszcząca czaszka jest magicznym pociskiem, który wpływa wyłącznie na cele, które nie mają Cechy Stworzenia Ożywieniec. Ma współczynnik Obrażeń równy +Bonus z Siły Woli. Każde stworzenie, które otrzyma Obrażenia, musi zdać Wymagający (+0) Test Opanowania albo otrzymuje +1 poziom Stanu Panika.",
    "source": "Podręcznik podstawowy",
    "page": 258
+  },
+  {
+   "name": "Wskrzeszenie czempiona",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Do wschodu słońca",
+   "description": "Kierujesz Dhar ku kościom pojedynczego martwego stworzenia, które za życia było postacią o znacznej potędze. Dla orientacji: wymaga to humanoidalnej postaci lub stworzenia, które osiągnęło trzeci Poziom Profesji lub wyższy (albo jego odpowiednik w Cechach). Szkieletowy czempion zaczyna ze Stanem Powalenie i potrafi co do joty wypełniać Twoje proste polecenia. Zależnie od użytych kości MG może dodać dawne Umiejętności i Talenty stworzenia do podstawowego profilu Szkieletu albo zamiast tego skorzystać z poniższego przykładowego profilu:",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Wypędzenie nieumarłych",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Tworzysz magiczny wir Dharu, który wysysa energię ze wszystkich stworzeń posiadających Cechę Ożywieniec. Wszystkie takie cele otrzymują magiczny pocisk o Obrażeniach +5. Szkielety i Zombie zostają zamiast tego natychmiast zniszczone.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 39
+  },
+  {
+   "name": "Wędrówka Ducha (Nekromancji)",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "ty",
+   "target": "ty",
+   "duration": "specjalny",
+   "description": "Wysyłasz ducha poza ciało, by błąkał się po ziemi. Twojego ducha nie ograniczają bariery ani wampirze Słabości. Nie możesz wpływać na świat, ale możesz go obserwować. Jeśli twoje ciało zostanie zniszczone, prawdopodobnie wrócisz jako Kurhanowe Widmo, ale jeśli ocaleje choć część mózgu albo serca, możesz ponownie zająć własne ciało i użyć magii lub Daru Krwi, które je odbudują. Możesz wrócić do ciała w dowolnej chwili, kończąc zaklęcie; twój duch i tak wskoczy z powrotem w ciało o najbliższym wschodzie słońca.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 45
+  },
+  {
+   "name": "Śmiertelne Włości",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "dotyk",
+   "target": "obszarowy (jedno miejsce)",
+   "duration": "Siła Woli dni",
+   "description": "Miejsce, którego dotkniesz, zostaje nawiedzone. Duchy nie mogą wyrządzić prawdziwej krzywdy, ale każdy, kto wejdzie w to miejsce, musi raz dziennie rzucić przeciwko Grozie 1. Duchom trzeba chwili, by się rozkręcić, lecz nawet najspokojniejsi uznają ich obecność za niepokojącą. Każdy, kto zaśnie w tym miejscu, zyskuje +1 Stan Zmęczenie na noc, który ustępuje dopiero po opuszczeniu miejsca.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Śmiertelny Homunkulus",
+   "lore": "Nekromancji",
+   "cn": 8,
+   "range": "Siła Woli w metrach",
+   "target": "specjalny",
+   "duration": "Bonus z Siły Woli minut",
+   "description": "Zbierasz kamień i ziemię wraz ze szczątkami pobliskich żywych stworzeń, by ulepić z nich homunkulusa. Rozmiar stworzenia zależy od liczby PS uzyskanych w Teście Języka (Magicznego) rzuconym na to zaklęcie (patrz tabela). Cechy: Konstrukt, Strach 3, Niewrażliwość na Psychologię, Magiczny, Nie Czuje Bólu, Redukowalny, Ożywieniec, Niestabilny, Broń* * Patrz tabela poniżej. PS Rozmiar Sz WW US S Wt I Zw Zr Int SW Ogd Żyw. Broń 0–1 Drobny 2 10 — 10 10 10 10 — — — — 1 +4 2 Mały 3 20 — 20 20 20 20 — — — — 4 +6 3 Średni 4 30 — 30 30 30 30 — — — — 9 +8 4 Duży 5 40 — 40 40 40 40 — — — — 24 +10 5 Olbrzymi 6 50 — 50 50 50 50 — — — — 60 +12",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Jazda przez Noc",
+   "lore": "Nekromancji",
+   "cn": 10,
+   "range": "Siła Woli w metrach",
+   "target": "specjalny",
+   "duration": "do wschodu słońca",
+   "description": "Możesz napełnić ożywczą mocą Dharu wierzchowce w liczbie do twojego Bonusu z Inteligencji. Każde objęte zaklęciem stworzenie zyskuje +1 Szybkości i może wykonać Akcję Biegu, nawet jeśli inne efekty normalnie by mu to uniemożliwiły. Wierzchowce, ich jeźdźcy i wszelkie ciągnięte przez nie powozy zyskują Cechę Eteryczny.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Przebudzenie",
+   "lore": "Nekromancji",
+   "cn": 10,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Do wschodu słońca",
+   "description": "Zbierasz przed sobą delikatne, lecz potężne włókna Dharu i kierujesz je w zwłoki BN-ów o potężnych Cechach albo Postaci, które ukończyły więcej niż dwa Poziomy Profesji. Każde takie zwłoki zostają ożywione jako Upiór, przy czym w Zasięgu można ożywić maksymalnie PS+1 Upiorów. Upiory zaczynają ze Stanem Powalenie, pozostają całkowicie pod Twoją kontrolą i mogą wykonywać proste rozkazy, jakie im wydasz. Jeśli zginiesz albo zyskasz Stan Utrata Przytomności, zaklęcie się kończy, a ożywione zwłoki znów padają martwe.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 38
+  },
+  {
+   "name": "Wiatr Śmierci",
+   "lore": "Nekromancji",
+   "cn": 10,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "natychmiastowy",
+   "description": "Tworzysz wir Dharu, by zaatakować wrogów. Krąży on wokół żywych przeciwników, smagając ich ciemnością i wyjącymi krzykami z najgłębszego piekła. To magiczny pocisk obejmujący wszystkie żywe istoty na obszarze działania. Zadaje +10 obrażeń ignorujących Bonus z Wytrzymałości i Punkty Pancerza oraz nakłada +1 Stan Panika na wszystkie objęte żywe istoty.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 46
+  },
+  {
+   "name": "Wróżenie z Wnętrzności",
+   "lore": "Nekromancji",
+   "cn": 10,
+   "range": "dotyk",
+   "target": "1",
+   "duration": "Bonus z Siły Woli rund",
+   "description": "Możesz zbadać ciało niedawno zmarłego stworzenia lub istoty (martwej krócej niż dobę) i odebrać wizje z jego wnętrzności i krwi. Jeśli użyjesz zwłok istoty rozumnej, możesz zadać jedno pytanie, a wspomnienia zmarłego objawią ci się w sposób, jaki uzna za stosowny MG (wizje, wrażenia, słowa albo imiona). Jeśli użyjesz szczątków zwierzęcia, możesz zamiast tego zadać jedno pytanie o przyszłość; odpowiedź przyjdzie jako proroctwo albo zagadka. Wspomnienia są prawdziwe, choć ograniczone wiedzą i pamięcią samej istoty. Za każde +2 PS w tym Teście możesz zadać jedno dodatkowe pytanie i otrzymać odpowiedź w ten sam sposób. Śmiertelnicy rzucający to zaklęcie na istoty rozumne muszą za każdym razem zdać Test, by uniknąć Umiarkowanego Wpływu Zepsucia.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Zaklęcie Przebudzenia",
+   "lore": "Nekromancji",
+   "cn": 10,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "do wschodu słońca",
+   "description": "Podnosisz z martwych Upiory w liczbie równej twojemu Bonusowi z Siły Woli. Jeśli zginiesz albo zyskasz Stan Utrata Przytomności, Upiory osuwają się, znów martwe. Każde +2 PS zwiększa liczbę podniesionych Upiorów o jeden. Profil Upiora znajdziesz w Dodatku.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Złodziej Dusz",
+   "lore": "Nekromancji",
+   "cn": 10,
+   "range": "Siła Woli w metrach",
+   "target": "specjalny",
+   "duration": "natychmiastowy",
+   "description": "Rzucasz magiczny pocisk zadający +12 obrażeń i ignorujący Punkty Pancerza z lekkich zbroi. Uderza w pierwszy cel, zadając pełne obrażenia (minimum 1 punkt Żywotności), a potem przechodzi na kolejny najbliższy cel, zadając +11 obrażeń (minimum 0). Będzie uderzał w kolejne cele, za każdym razem z obrażeniami mniejszymi o 1 (minimum 0), dopóki nie zada żadnych obrażeń albo nie spadnie do 0. Każdemu celowi zabitemu przez pocisk wydziera się duszę z ciała; w kolejnych turach można go wskrzesić Nekromancją jako Zombie.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 45
+  },
+  {
+   "name": "Klątwa Lat",
+   "lore": "Nekromancji",
+   "cn": 14,
+   "range": "Siła Woli w metrach",
+   "target": "1",
+   "duration": "natychmiastowy",
+   "description": "Możesz wskazać cel i sprawić, że gwałtownie się zestarzeje. Ludzie starzeją się o 20 lat plus 5 lat za każde +2 PS. U niziołków tempo to rośnie o 50% (zaokrąglając w górę), a krasnoludy i elfy starzeją się dwa razy szybciej niż ludzie, choć naturalna Odporność na Magię krasnoluda nadal działa. Starzenie da się odwrócić wyłącznie magicznym leczeniem albo rozproszeniem.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Krwawy Deszcz",
+   "lore": "Nekromancji",
+   "cn": 14,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "natychmiastowy",
+   "description": "Przyzywasz ulewę krwi, by nakarmić swoje nieumarłe armie. Każda istota z Cechą Wampiryczny znajdująca się na obszarze działania zostaje nasycona krwią i odzyskuje wszystkie utracone punkty Żywotności.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Niewolnik Widm",
+   "lore": "Nekromancji",
+   "cn": 14,
+   "range": "dotyk",
+   "target": "1",
+   "duration": "specjalny",
+   "description": "Możesz wymusić opętanie żywego ciała przez złośliwego ducha. Przy sukcesie cel zostaje opętany przez ducha, którym możesz próbować kierować wszelkimi dostępnymi ci sposobami. Cel może raz dziennie o wschodzie słońca wykonać Przeciwstawny Test Opanowania, by odzyskać władzę nad ciałem; w przeciwnym razie opętanie trwa bez końca. Duch korzysta w tym Teście z twojej Umiejętności Opanowanie. Za każde +2 PS w pierwotnym rzucie na rzucenie zaklęcia duch zyskuje +1 Przewagi w Teście Opanowania, która ubywa w tempie jednego punktu dziennie. Przy +6 PS opętanie jest trwałe. Cel może natychmiast, w chwili opętania, wydać Punkt Przeznaczenia, by odepchnąć ducha i zignorować zaklęcie — ale nie może zrobić tego później.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Zaklęcie Wiecznej Służby",
+   "lore": "Nekromancji",
+   "cn": 14,
+   "range": "Siła Woli w metrach",
+   "target": "obszarowy (Bonus z Siły Woli w metrach)",
+   "duration": "trwały",
+   "description": "Możesz ożywić nieumarłe stworzenie i kierować nim, dopóki nie zostanie zniszczone albo dopóki nie zginiesz ty. Podnosisz z martwych Szkielety albo Zombie w liczbie równej twojemu Bonusowi z Siły Woli lub pojedynczego Upiora, Zmorę albo Szkieletowego Rumaka. Stworzenia te nabywają wobec ciebie Cechę Psychologiczną Miłość i wypełniają twoją wolę najlepiej, jak potrafią. Nigdy nie potrzebują jedzenia ani wygód i będą ci służyć aż do końca. Jeśli zginiesz, wszystkie takie stworzenia natychmiast się osuwają, znów martwe. Jeśli same zostaną zniszczone, odchodzą do Ogrodów Morra i na zawsze uwalniają się od nekromanckiej ingerencji.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 45
+  },
+  {
+   "name": "Życie w Śmierci",
+   "lore": "Nekromancji",
+   "cn": 14,
+   "range": "ty",
+   "target": "ty",
+   "duration": "miesiąc",
+   "description": "Pierwszy krok ku prawdziwej nieśmiertelności: to zaklęcie pozwala ci po śmierci opuścić własne ciało i odnaleźć inne. Jeśli zginiesz w ciągu miesiąca, twój duch będzie błąkał się po Miedzy w poszukiwaniu nowego naczynia. O ile znajdziesz żywe stworzenie przed wschodem słońca, możesz spróbować Przeciwstawnego Testu Dowodzenia/Opanowania, by je opętać. Za każde +2 PS w rzucie na rzucenie zaklęcia zyskujesz +1 PS do Testu Dowodzenia. Przy sukcesie zajmujesz ciało, ale nie masz dostępu do wspomnień ani osobowości ofiary. Przy porażce musisz szukać nowego gospodarza. Jeśli wyrzucisz Pech albo nadejdzie świt, jesteś skazany na tułaczkę jako zbłąkana dusza, dopóki ktoś nie rzuci na ciebie Odrodzenia we Krwi. Jeśli kiedykolwiek zostaniesz wypchnięty z ciała, uśpiony duch gospodarza odzyska władzę, a ty umrzesz ponownie.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Odrodzenie we Krwi",
+   "lore": "Nekromancji",
+   "cn": 20,
+   "range": "Siła Woli w metrach",
+   "target": "1",
+   "duration": "natychmiastowy",
+   "description": "Możesz wskrzeszać wampiry, choć to długi i mozolny proces. To zaklęcie można rzucić wyłącznie w Geheimnistag. W tygodniach poprzedzających Wigilię Geheimnisnacht musisz poświęcić Zajęcie na zebranie składników i odprawienie rytuałów przygotowawczych. Musisz też zdobyć serce i mózg wampira albo jego prochy, inaczej PZ rośnie o +5. Gdy wszystko będzie gotowe, musisz udać się w miejsce wielkiej tragedii, cierpienia albo śmierci przy pełni obu księżyców i wystawić szczątki na bezpośrednie światło księżyca. Następnie musisz przelać na nie własną krew, tracąc co najmniej 1 punkt Żywotności, i wykonać wymagane Testy Splatania Magii oraz Języka (Magicznego). Przy sukcesie ożywiasz wampira, który wraca nagi i ze Stanem Nienasycenie, ale poza tym w pełni sił. Przy porażce możesz spróbować ponownie w innym miejscu, ale cały proces musisz zacząć od nowa. Śmiertelnicy rzucający to zaklęcie zwykle zostają pożarci przez nienasycone wampirze — choć podsunięcie mu odpowiedniej ofiary może dać im dość czasu, by uciec, póki powstała bestia gasi pragnienie.",
+   "source": "Wampiry (nieoficjalny)",
+   "page": 44
   },
   {
    "name": "Pucowanie na błysk",
@@ -872,6 +1799,17 @@
    "description": "Nie możesz otrzymać Stanu Zaskoczenie. MG musi ostrzec cię przed niebezpieczeństwem tyle Rund wcześniej, ile wynosi twój Bonus z Inicjatywy, przed wpadnięciem w zasadzkę albo znalezieniem się w podobnej sytuacji. Możesz wykorzystać ten czas, by uciec albo przygotować własną niespodziankę.",
    "source": "Wiatry Magii",
    "page": 101
+  },
+  {
+   "name": "Mowa ptaków",
+   "lore": "Niebios",
+   "cn": 5,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Potrafisz mówić językami ptaków i je rozumieć. Zaklęcie nie zmusza ptaków do rozmowy ani do zwracania na ciebie uwagi. Przebiegłe ptaki mogą nawet cię okłamać albo zażądać przysług w zamian za swoją wiedzę. Opinia ptaka o tobie będzie zależeć od tego, jak wyglądasz i jak się zachowujesz, przefiltrowanych przez jego własną osobowość. Orzeł, sowa, kruk i wróbel to zupełnie różne stworzenia. Zyskujesz wgląd w obyczaje i zachowania ptaków — rozumiesz, czemu stado właśnie teraz odlatuje albo czemu gniazdo zostało porzucone. MG powinien pozwolić na Test Intuicji lub Percepcji z modyfikatorem Łatwy (+40), gdy sytuacja na to pozwala.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 15
   },
   {
    "name": "Wyjaśnienie losu",
@@ -995,6 +1933,17 @@
    "page": 100
   },
   {
+   "name": "Podmuch wiatru",
+   "lore": "Niebios",
+   "cn": 7,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Sprowadzasz z nieba szalejące wichury. Każdy w Obszarze Działania otrzymuje Stan Oszołomienie, który utrzymuje się, dopóki nie opuści Obszaru albo zaklęcie się nie skończy. Objęci nim muszą zdać Ciężki (-20) Test Zwinności lub Odporności albo zyskują Stan Powalenie. Ataki Bronią Zasięgową w głąb Obszaru i wewnątrz niego są niemożliwe. Zgodnie z Tabelą Trudności Walki (WFRP4 s. 161) wszystkie ataki wewnątrz Obszaru wykonuje się z modyfikatorem -20.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 16
+  },
+  {
    "name": "Projekcja astralna",
    "lore": "Niebios",
    "cn": 7,
@@ -1083,6 +2032,94 @@
    "page": 101
   },
   {
+   "name": "Zgnilizna (Nurgla)",
+   "lore": "Nurgla",
+   "cn": 2,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Obierasz za cel obszar, przez który przetacza się cuchnący, gnilny prąd Dharu. Wszystkie mikstury, prowiant, żywność, woda i inne rzeczy do spożycia w Obszarze stają się bezużyteczne albo niebezpiecznie zakażone i zgniłe. Wyznawcy Nurgla mogą jednak czerpać z takich rzeczy pożywienie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Chmura much",
+   "lore": "Nurgla",
+   "cn": 3,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przyciągasz wielki rój drobnych, gryzących much, które krążą wokół Ciebie, drażniąc Twoich wrogów. Każdy w promieniu 2 metrów od Ciebie otrzymuje -10 do Walki Wręcz i traci 1 punkt Żywotności na koniec każdej Rundy. Wzmocnienie: Za każde +3 PS możesz zwiększyć te kary o 1 i 10.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
+  },
+  {
+   "name": "Wspaniałe dymienice",
+   "lore": "Nurgla",
+   "cn": 4,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Łaskawym machnięciem dłoni obdarzasz swój cel darem jadowitych krost. Liczy się to jako magiczny pocisk o Obrażeniach +2, a cel zyskuje +1 Stan Zatrucie. Ponadto Twój cel musi zdać Wymagający (+0) Test Odporności, inaczej zarazi się Dymienicami (WFRP4, s. 188), których pozbyć się można wyłącznie dzięki leczeniu.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Miazmat zarazy",
+   "lore": "Nurgla",
+   "cn": 5,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz plugawą zieloną mgłę, która kłębi się wokół Ciebie, sprawiając, że wszystkie żywe stworzenia w Obszarze czują się potwornie chore. Wszystkie cele zyskują +1 Stan Zatrucie oraz +1 Stan Zmęczenie, który usunąć można wyłącznie głębokim snem. Jesteś odporny na to zaklęcie, podobnie jak słudzy Nurgla oraz stworzenia z Cechami Konstrukt, Demoniczny lub Ożywieniec.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Złośliwy odrost",
+   "lore": "Nurgla",
+   "cn": 5,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Specjalny",
+   "description": "Plugawe płyny magicznie zastępują Twoją krew, regenerując ciało niebezpiecznym odrostem. Zyskujesz Cechę Stworzenia Regeneracja na Premię z Siły Woli rund, ale za każdym razem, gdy odzyskujesz punkty Żywotności, przechodzisz też losową mutację fizyczną. Po 1k10 minutach Twoje ciało powraca do normalnej postaci, a Ty zyskujesz +1 Stan Zmęczenie za każdą doświadczoną tymczasową mutację.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Smród Nurgla",
+   "lore": "Nurgla",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wydzielasz tak plugawy odór rozkładu, że wszystkie żywe stworzenia w Obszarze dostają mdłości. Zyskujesz Cechę Stworzenia Dekoncentrujący. Wszystkie cele, które nie zdadzą Wymagającego (+0) Testu Odporności, zostają obezwładnione torsjami i zyskują Stan Oszołomienie, dopóki nie zdadzą Testu. Słudzy Nurgla oraz stworzenia z Cechami Konstrukt, Demoniczny lub Ożywieniec nie podlegają działaniu tego zaklęcia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Dotyk Nurgla",
+   "lore": "Nurgla",
+   "cn": 7,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Wykorzystujesz zmienną naturę Dharu, by wchłonąć z celu jedną chorobę i zatrzymać ją we własnym ciele. Dopóki zaklęcie trwa, jesteś odporny na skutki i Objawy tej choroby, ale liczysz się jako posiadający Cechę Stworzenia Zaraźliwy (Typ). Gdy obierzesz za cel inne stworzenie, przysługuje mu Test zarażenia, by się oprzeć, zgodnie z Cechą Zaraźliwy. Jeśli nabawi się choroby, zaklęcie się kończy i przestajesz być Zaraźliwy. W przeciwnym razie możesz dalej obierać za cel kolejne stworzenia, aż uda Ci się przenieść chorobę. Jeśli nie zdołasz przenieść choroby, zanim zaklęcie się skończy, sam ją złapiesz. Jeśli już ją masz, staje się poważniejsza (być może śmiertelna), wedle uznania MG. Wzmocnienie: Za każde +2 PS możesz utrudnić Test zarażenia o jeden stopień (czyli z Wymagającego na Trudny).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Wijący się płaszcz",
+   "lore": "Nurgla",
+   "cn": 7,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Siła Woli minut",
+   "description": "Na całym Twoim ciele manifestuje się masa wijących się, chorych czerwi, dodając +2 do Punktów Zbroi we wszystkich Lokacjach. Zyskujesz Cechę Strach (0). Gdy otrzymasz Obrażenia od ataku Bronią Białą lub Bronią Zasięgową, wszystkie żywe stworzenia w promieniu 2 metrów od Ciebie muszą zdać Ciężki (-20) Test Uniku, inaczej zyskują +1 Stan Zatrucie. Czerwie mają Cechy Stworzenia Zaraza oraz Choroba (Zgnilizna Nurgla). Jesteś odporny na szkodliwe działanie czerwi, podobnie jak słudzy Nurgla oraz stworzenia z Cechami Konstrukt, Demoniczny lub Ożywieniec.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
    "name": "Struga zepsucia",
    "lore": "Nurgla",
    "cn": 9,
@@ -1092,6 +2129,28 @@
    "description": "Twoje szczęki rozwierają się przerażająco szeroko, a następnie wyrzygujesz przed siebie obrzydliwy opar chorób i potworności. Natychmiast wykonujesz Zionięcie – jak przy wydaniu 2 Przewag na aktywację odpowiedniej Cechy Stworzenia (patrz strona 343). Zionięcie jest magicznym pociskiem o współczynniku Obrażeń równym +Bonus z Wytrzymałości. Ignoruje Punkty Pancerza. Atak ma również właściwości Kwas oraz Trucizna opisane w Cesze Stworzenia Zionięcie. Ponadto, jeśli jakiś cel otrzyma więcej Ran, niż wynosi jego Bonus z Wytrzymałości, natychmiast musi wykonać Wymagający (+0) Test Odporności – jeśli się nie powiedzie, w celu rozwinie się Zatrucie Krwi. Za każde 2 PS możesz zwiększyć Obrażenia o +2.",
    "source": "Podręcznik podstawowy",
    "page": 258
+  },
+  {
+   "name": "Wiatr zarazy",
+   "lore": "Nurgla",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przyzywasz ohydnie cuchnący podmuch zimna, który przenika wszelkie ubrania i zbroje, a towarzyszą mu upiorne jęki, obłąkańczy śmiech oraz inne dźwięki śmierci i majaczenia. Chmura posiada Cechę Stworzenia Groza (1). Wszystkie żywe stworzenia w Obszarze muszą wykonać Test zarażenia Zgnilizną Nurgla. Poświęcając swoją Akcję w każdej Rundzie, możesz spróbować zdać Przeciętny (+20) Test Splatania Magii, by przesunąć chmurę o odległość do swojego tempa marszu. W przeciwnym razie wiatr przesunie się o 1k10 metrów w losowym kierunku (użyj tabeli Rozrzutu z WFRP4 s. 163). Wzmocnienie: Za każde +2 PS możesz utrudnić Test zarażenia o jeden stopień (czyli z Przeciętnego na Wymagający). Za każde +3 PS możesz dodać 1 do poziomu Grozy chmury. Odsłonięcie wewnętrznego piękna Patrz Rough Nights and Hard Days, s. 52.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 33
+  },
+  {
+   "name": "Krąg życia dziadka Nurgla",
+   "lore": "Nurgla",
+   "cn": 14,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Powiada się, że Ojciec Zarazy mieszka w każdej żywej istocie. Wydobywając jego obecność ze wszystkich celów w Obszarze, uderzasz w nie magicznym pociskiem o Obrażeniach +7, ignorującym Punkty Zbroi. Każdy cel zyskuje +1 Stan Zatrucie . Na koniec Rundy zsumuj wszystkie punkty Żywotności utracone za sprawą zaklęcia. Każdy taki punkt uwalnia w okolicę odrobinę Dharu, co liczy się jako Umiarkowany Wpływ Zepsucia. Jeśli zadano więcej niż 7 punktów Żywotności, istnieje 49% szansy, że pojawi się Nosiciel Zarazy w Obszarze, tak jakby rzucono zaklęcie Przyzwanie pomniejszego demona. Jeśli zadano więcej niż 14 punktów Żywotności, albo pojawia się Nosiciel Zarazy, albo istnieje 7% szansy, że zamiast niego przybywa Książę Demonów Nurgla (patrz WFRP4, s. 335). Książę Demonów zachowuje się losowo albo wedle uznania MG. Wzmocnienie: Za każde +3 PS możesz zwiększyć szansę przybycia Demona o +7%.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
   },
   {
    "name": "Gniew",
@@ -1413,6 +2472,17 @@
    "page": 241
   },
   {
+   "name": "Drobna klątwa",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Specjalny",
+   "description": "Nakładasz na swój cel drobną klątwę. Niechętna lub niczego niepodejrzewająca ofiara może wykonać Przeciwstawny Test Siły Woli, by się jej oprzeć. Klątwę można zdjąć wyłącznie udanym rozproszeniem dokonanym przez kogoś z Talentem Zdjęcie Klątwy. Dokładne skutki każdej klątwy wybierasz sam, ale MG powinien dopilnować, by były mniej więcej równe wymienionym tutaj — uciążliwe i żenujące, lecz nie groźne. Przykłady: Brodawki, czyraki, hemoroidy, łysina, dotkliwa wysypka, cuchnący oddech, wzdęcia, włosy zmieniające barwę na jaskrawą, nieregularne wypróżnienia, śmierdzące stopy itd.…",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
+  },
+  {
    "name": "Jak kamień w wodę",
    "lore": "Prosta",
    "cn": 0,
@@ -1422,6 +2492,17 @@
    "description": "Magia przepływająca przez twoje stopy sprawia, że wszelka materia organiczna, po której przechodzisz, pozostaje nietknięta – gałązki się nie łamią, trawa wraca do poprzedniej pozycji, nic nie dzieje się nawet delikatnym kwiatkom. Ci, którzy będą próbować tropić rzucającego czar na wiejskich terenach, otrzymają karę -30 do Testu.",
    "source": "Podręcznik podstawowy",
    "page": 241
+  },
+  {
+   "name": "Kleks",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk sprawia, że pół pinty rozlanej lub zebranej w kałużę cieczy natychmiast wysycha. Nie zostaje po niej żadna plama, ale uszkodzenia powierzchni pozostają (na przykład zacieki po oleju czy wżery po kwasie).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 7
   },
   {
    "name": "Królik z kapelusza",
@@ -1457,6 +2538,61 @@
    "page": 241
   },
   {
+   "name": "Magiczny zamek",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Siła Woli minut",
+   "description": "To zaklęcie można rzucić na pojedynczą niemagiczną zasuwę lub zamek. Zamek liczy się jako Magiczny i nie da się go otworzyć wytrychem ani sforsować. Zaklęcie nie powstrzymuje jednak nikogo przed wyważeniem magicznie zamkniętych drzwi czy rozbiciem samej skrzyni.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
+   "name": "Naprawa przedmiotu",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Wplatasz subtelne nici magii w zebrane kawałki jednego zepsutego przedmiotu o Wyporności równej twojej Premii z Siły Woli lub niższej, naprawiając go. Tym zaklęciem nie da się naprawić przedmiotu, którego normalnie nie można naprawić, ani takiego, który ma złożone, niezależne części. Dopóki wprawny rzemieślnik go nie naprawi, przedmiot traci Zaletę Wytrzymały i zyskuje Wady Tandetny oraz Zawodny. Ponowne rzucenie tego zaklęcia na ten sam przedmiot zniszczy go.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
+   "name": "Niebezpieczeństwo",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Możesz subtelnie ostrzec wybrany cel przed zasadzką albo nadciągającym, niebezpiecznym wydarzeniem. Przybiera to postać prostej myśli, którą przesyłasz do umysłu celu. Linia wzroku nie jest wymagana, ale musisz umieć wyobrazić sobie cel. Musisz też mówić jego językiem. Jeśli cel posłucha ostrzeżenia, zyskuje najwyższy możliwy poziom Talentu Szósty Zmysł.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 7
+  },
+  {
+   "name": "Niewrażliwe dłonie",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Magia wpływa w twoje dłonie, czyniąc je odpornymi na gorąco, zimno i korozję, a także na żrące oraz trujące substancje. Z tego zaklęcia często korzystają magowie pracujący z niebezpiecznymi temperaturami i szkodliwymi chemikaliami.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
+   "name": "Nocny wzrok",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wykorzystujesz swoją wrodzoną magię, by wzmocnić zdolność widzenia w bardzo słabym świetle. Zyskujesz Talent Widzenie w Ciemności.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
    "name": "Ochrona przed deszczem",
    "lore": "Prosta",
    "cn": 0,
@@ -1479,6 +2615,17 @@
    "page": 242
   },
   {
+   "name": "Odczytanie na głos",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Bezcielesny głos odczyta na głos, bez tłumaczenia ani modulacji, tekst jednego dokumentu, zwoju, księgi, szyldu lub podobnego zapisu — powoli i wyraźnie, tak by słyszeli go wszyscy w pobliżu. Po rozpoczęciu cały tekst zostaje odczytany do końca i nie da się tego przerwać inaczej niż rozpraszając zaklęcie. Słuchacz może wykonać Łatwy (+40) Test Inteligencji, by zapamiętać odczytywane informacje, z kumulującą się karą -10 za każde 10 minut słuchania. Zaklęcie nie zadziała ani nie pomoże ci zapamiętać magicznych formuł,przywołań, modlitw i tym podobnych.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
+  },
+  {
    "name": "Odgłosy",
    "lore": "Prosta",
    "cn": 0,
@@ -1488,6 +2635,39 @@
    "description": "Niedaleko siebie wytwarzasz niewielki odgłos. To może być cichy, niewyraźny dźwięk, który wydaje się dochodzić z konkretnego miejsca niezależnie od zasięgu wzroku. Odgłosy mogą przypominać coś konkretnego, np. chód, szept czy dźwięki zwierząt, ale nic na tyle szczególnego, by mogło nieść wiadomość. Podczas trwania zaklęcia możesz kontrolować przemieszczanie się dźwięku, jeśli powiedzie ci się Przeciętny (+20) Test Splatania Magii. Sukces umożliwia ci przesuwać dźwięk do innego miejsca w zasięgu lub zwiększać i zmniejszać jego głośność.",
    "source": "Podręcznik podstawowy",
    "page": 242
+  },
+  {
+   "name": "Odnalezienie przedmiotu",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Dzięki Wiatrom Magii potrafisz odnaleźć w zasięgu jeden zagubiony przedmiot. Jeśli przedmiot nie należy do ciebie, musiała go dotykać żywa osoba, która pragnie go odnaleźć, a ty musisz dotknąć tej osoby podczas rzucania zaklęcia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
+   "name": "Odporność na truciznę",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Zyskujesz +20 do każdego Testu na oparcie się narkotykom i truciznom. Jeśli dana trucizna normalnie nie pozwala na Test, możesz wykonać Wymagający (+0) Test Odporności, by się jej oprzeć. Zaklęcie nie działa na trucizny i Stany, które już zaczęły działać.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
+  },
+  {
+   "name": "Odstraszenie robactwa",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Obszar (Siła Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Otaczasz się aurą, która płoszy zwierzęta. Twoja obecność odstrasza pobliskie stworzenia o Rozmiarze Drobnym i Niewielkim, które posiadają Cechę Stworzenia Płochliwy.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
   },
   {
    "name": "Orientacja",
@@ -1545,6 +2725,17 @@
    "page": 242
   },
   {
+   "name": "Podcięcie",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Sprawiasz, że coś w podłożu się przesuwa albo czyjeś buty się rozluźniają. Jeśli cel idzie, musi zdać Przeciętny (+20) Test Zwinności albo się potknie i otrzyma Stan Powalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
+  },
+  {
    "name": "Podmuch",
    "lore": "Prosta",
    "cn": 0,
@@ -1565,6 +2756,17 @@
    "description": "Możesz usłyszeć, co mówią twoje cele, tak jakby stały obok ciebie.",
    "source": "Podręcznik podstawowy",
    "page": 242
+  },
+  {
+   "name": "Pogoda",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Obszar (Okolica)",
+   "duration": "Natychmiastowy",
+   "description": "Medytujesz przez dziesięć minut pod gołym niebem, wciągając w siebie Wiatry Magii, i zyskujesz przeczucie, jaka pogoda zapanuje w okolicy przez najbliższe 24 godziny. MG może wybrać wynik albo rzucić na Tabeli Pogody zamieszczonej w Enemy in Shadows Companion s. 32.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
   },
   {
    "name": "Porażenie",
@@ -1589,6 +2791,83 @@
    "page": 242
   },
   {
+   "name": "Regulacja temperatury",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Bierzesz na cel niewielki przedmiot nieożywiony, taki jak flaszka, garnek, pudełko, słoik czy zlewka, i możesz go ogrzać lub schłodzić do pożądanej temperatury w ciągu 1k10 minut. Tego zaklęcia często używa się przy warzeniu mikstur albo po to, by zawartość pojemnika pozostała gorąca lub zamarznięta.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 7
+  },
+  {
+   "name": "Rozmowa przy świecy",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Premia z Siły Woli mil (każdy)",
+   "target": "Ty",
+   "duration": "Siła Woli minut (każdy)",
+   "description": "Potrafisz rozmawiać z innym Magiem poprzez światło świecy. Każdy z Magów musi znajdować się w odległości nie większej niż Premia z Siły Woli mil od drugiego, a każdy Mag może porozumiewać się tylko przez tyle minut, ile wynosi jego Siła Woli. Zaklęcie działa wyłącznie wtedy, gdy Magowie rzucą je o wcześniej umówionej porze przy zapalonej świecy, wypowiadając imię drugiego na końcu inwokacji. Płomień na obu świecach zmienia się w zielony, gdy tylko drugi mag ukończy zaklęcie. Zaklęcie można zakończyć wcześniej, po prostu zdmuchując którąkolwiek ze świec.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 7
+  },
+  {
+   "name": "Smak",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Dodajesz smaku wszelkiemu jedzeniu spożywanemu w Zasięgu, sprawiając, że okrętowe suchary stają się jadalne, a dobrze przyrządzone potrawy zmieniają się w książęcą ucztę. Zaklęcie nie wpływa na jakość jedzenia, ale MG może uznać, że pojawiają się jakieś skutki psychologiczne lub społeczne. Na przykład po tygodniu podróżnych racji posiłek o wybornym smaku może usunąć Stan Zmęczenie wywołany podróżą. Albo możesz zyskać +1 PS do Przeciwstawnego Testu Charyzmy, gdy podajesz taki posiłek.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
+   "name": "Szybkie czytanie",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Zostajesz przepełniony zdolnością czytania wszystkiego (listów, ksiąg, zwojów itd.) znacznie szybciej niż zwykle, przyswajając przy tym tyle samo informacji. Zyskujesz Talent Szybkie czytanie, a każdy +1 PS daje ci dodatkowy poziom tego Talentu.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
+  },
+  {
+   "name": "Ukojenie",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Tworzysz wokół siebie mistyczną kopułę, która powstrzymuje skrajności żywiołów, łagodzi upał i chłód oraz minimalizuje skutki deszczu, śniegu i wiatru. Przy rzucie na efekty Ekspozycji odwróć wynik i wybierz lepszy rezultat. Dzięki temu powstaje wygodna przestrzeń na odpoczynek i rozbicie obozu.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 7
+  },
+  {
+   "name": "Umocnienie",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli dni",
+   "description": "Dotykasz pojedynczych drzwi, wrót, skrzyni albo podobnego przedmiotu lub konstrukcji i czynisz je fizycznie twardszymi oraz odporniejszymi na uszkodzenia. Zwiększ Premię z Wytrzymałości przedmiotu o 1, a jego Żywotność o 2. Patrz Enemy in Shadows",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
+  },
+  {
+   "name": "Unoszenie (Prosta)",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Magiczna energia sprawia, że unosisz się na wodzie. Dopóki woda nie jest wzburzona, szczególnie niebezpieczna ani rwąca, możesz utrzymywać głowę nad powierzchnią i przemieszczać się w wybranym kierunku bez Testu. W przeciwnym razie zaklęcie nie odnosi skutku. Patrz umiejętność Pływanie (WFRP4 s. 131).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
    "name": "Uśpienie",
    "lore": "Prosta",
    "cn": 0,
@@ -1600,6 +2879,50 @@
    "page": 243
   },
   {
+   "name": "Wahanie",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Specjalny",
+   "description": "Wywołujesz u celu chwilę dezorientacji. Jeśli cel nie zda Przeciętnego (+20) Testu Opanowania, traci swoją następną Turę. Nawet jeśli Test zostanie zdany, cel się waha i wykonuje swoją następną Turę jako ostatni w Kolejności Inicjatywy.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
+  },
+  {
+   "name": "Wiedźmi blask",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Wybierasz cel w zasięgu i tworzysz wokół niego subtelny, świetlisty zarys, który dostrzec może wyłącznie ktoś z Talentem Percepcja Magiczna. MG określa drobne korzyści płynące z tego blasku, takie jak brak konieczności wykonywania Testu Percepcji podczas śledzenia celu albo możliwość wypatrzenia go w tłumie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
+  },
+  {
+   "name": "Wyostrzony węch",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Wyostrzasz swój zmysł węchu, zyskując Talent Wyczulony Zmysł (Węch). Każdy +1 PS daje ci dodatkowy poziom tego Talentu, aż do jego maksimum.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 7
+  },
+  {
+   "name": "Wypaczenie błogosławieństwa",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Wystrzeliwuje z ciebie agresywna energia, która spowija pojedynczy cel objęty jednym lub kilkoma Błogosławieństwami. Wszystkie Błogosławieństwa na celu zostają zniweczone.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 9
+  },
+  {
    "name": "Wyssanie",
    "lore": "Prosta",
    "cn": 0,
@@ -1609,6 +2932,17 @@
    "description": "Dotykasz celu, wysysając z niego życie. Zaklęcie to jest magicznym pociskiem zadającym +0 Obrażeń ignorujących Punkty Pancerza. Leczysz 1 Ranę.",
    "source": "Podręcznik podstawowy",
    "page": 243
+  },
+  {
+   "name": "Wzrost",
+   "lore": "Prosta",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Twój delikatny dotyk ożywia jedną roślinę lub małe drzewo, które jeszcze nie obumarło, zapewniając mu zdrowy i silny wzrost zgodny z jego naturą, o ile nie zostanie porażone chorobą ani zniszczone.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 8
   },
   {
    "name": "Zgnilizna",
@@ -1644,6 +2978,490 @@
    "page": 243
   },
   {
+   "name": "Bursztynowy zarys",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Wskazujesz jeden cel i obrysowujesz jego kształt, tworząc wokół niego subtelny kontur z migotliwych strug Ghur. Wszystkie Testy walki wymierzone w obrysowane stworzenie zyskują +1 Przewagi. Uwaga:To zaklęcie może mieć zastosowania inne niż bezpośrednia walka. Na przykład Twój MG może uznać, że rozwścieczony tłum zareaguje wrogo na obrysowaną postać albo że straż zatrzyma ją na przesłuchanie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Leśna wędrówka",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Siła Woli minut",
+   "description": "Zyskujesz cechę Mieszkaniec Lasu (s. 338) i możesz bez przeszkód przechodzić przez wszelką roślinność, choćby najgęstszą i najbardziej ciernistą. Drzewa się uginają, a krzewy magicznie rozchylają. Noszone i przenoszone przez Ciebie wyposażenie przechodzi razem z Tobą, ale nic poza tym nie korzysta z dobrodziejstw zaklęcia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Obcowanie",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Posługując się chowańcem jako medium, rozmawiasz z niewidzialnymi duchami lasu, rzeki, pustyni, jaskiń itd. (czyli tego naturalnego miejsca, w którym akurat przebywasz). Nie masz nad tymi duchami żadnej władzy ani kontroli, ale możesz zadać jedno pytanie na każdą minutę Czasu trwania zaklęcia. Duch (lub duchy), który udzieli odpowiedzi, uczyni to szczerze i bezstronnie, opowiadając o okolicy i tutejszych wydarzeniach. Tylko Ty i Twój chowaniec słyszycie odpowiedzi duchów.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Oczyszczający płomień z trucizny",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk usuwa z celu stan Zatrucie. Ukojenie Patrz Nieoficjalny Grimuar, s. 8.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Odwszawienie",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Usuwasz niemagiczną plagę pasożytów z postaci lub zwykłego zwierzęcia o Twoim rozmiarze bądź mniejszego.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Ukojenie bólu",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk leczy stworzeniu 1 punkt Żywotności, raz na sesję.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Ukojenie dzikiej rośliny",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Usypiasz pojedynczą wrogą roślinę lub drzewo (na przykład Krwawą Turzycę albo magicznie ożywiony żywopłot) na Czas trwania zaklęcia. Zaklęcie nie działa na rośliny o Inteligencji wyższej niż 10, takie jak Drzewce.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Uspokajająca dłoń",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk uspokaja stworzenie mniejsze od Ciebie, które posiada cechę Zwierzęcy.Twój cel traci jeden stan Panika lub Oszołomienie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Wyczucie wody",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "1 mila",
+   "target": "Specjalny",
+   "duration": "Siła Woli minut",
+   "description": "Potrafisz wyczuć kierunek i odległość do zbiornika wodnego, takiego jak jezioro, strumień czy ocean — nawet jeśli znajduje się pod ziemią, jest oazą na pustyni albo leży daleko poza zasięgiem wzroku. To zaklęcie pozwala rzucającemu przejrzeć iluzje, w których występuje jakieś wyobrażenie wody.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Wyczucie zwierzyny",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "1 mila",
+   "target": "Specjalny",
+   "duration": "Siła Woli minut",
+   "description": "Jeśli rzucisz to zaklęcie na otwartej przestrzeni poza miastem, możesz wyczuć kierunek, w którym znajduje się określone zwykłe zwierzę lub roślina, o ile takie w ogóle występuje w zasięgu. Rzucając zaklęcie, musisz nazwać poszukiwane zwierzę lub roślinę, a jeśli nazwana rzecz nie występuje w Zasięgu ani w Czasie trwania, nie dowiesz się niczego więcej. To zaklęcie zapewnia premię +20 do wszelkich Testów związanych ze zbieraniem żywności i ziół.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Zmysł zieleni",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Siła Woli minut",
+   "description": "Twój chowaniec bada okolicę i ustala, czy tutejsza flora i fauna są naturalne. „Nienaturalne”, drapieżne lub obce rośliny — takie jak niszczycielskie pleśnie i grzyby, rośliny i stworzenia Chaosu, istoty Zepsute, byty Demoniczne oraz wrogie iluzje — zostają dostrzeżone takimi, jakimi są naprawdę. Poznajesz położenie i rodzaj wszystkich niemagicznych pułapek oraz niewielkich konstrukcji w Zasięgu. Ponadto zyskujesz premię +1 PS do udanych Testów Wpływu na Zwierzęta i Tropienia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Zmysły ducha",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Siła Woli metrów",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Zamykasz oczy i medytujesz, doświadczając wszystkich zmysłów swojego duchowego chowańca tak, jakby były Twoimi własnymi. Dopóki zaklęcie trwa, nie możesz mówić ani porozumiewać się w żaden inny sposób. Liczysz się jako Bezbronny Cel.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Złagodzenie objawów",
+   "lore": "Prosta (Druidzka)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Łagodzisz nasilenie jednego Objawu choroby o jeden stopień: z Ciężkiego na Wymagający, z Wymagającego na Przeciętny albo z Przeciętnego na Łatwy.To zaklęcie nie leczy Choroby ani nie usuwa jej objawów.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 22
+  },
+  {
+   "name": "Nosiciel",
+   "lore": "Prosta (Spaczenie)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Siła Woli godzin",
+   "description": "Twój dotyk sieje spustoszenie w układzie odpornościowym celu. Dopóki zaklęcie trwa, we wszystkich Testach Odporności celu na choroby i zakażenia trzeba odwrócić wynik rzutu, jeśli sprawiłoby to, że Test zakończy się porażką — chyba że cel ma Talent Odporny na (Choroby).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Szczurzy niewolnik",
+   "lore": "Prosta (Spaczenie)",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Przywołujesz zwykłego brunatnego szczura. Dopóki zaklęcie trwa, możesz porozumiewać się ze szczurem, jakbyście mówili wspólnym językiem, a on wykona każdy Twój rozkaz, nawet jeśli miałby przez to zginąć. Szczurzy niewolnicy potrafią przynosić małe przedmioty, przegryzać liny i wykonywać inne ogólne zadania, którym podołałby zwykły szczur, ale takie misje ogranicza zwierzęca inteligencja szczura.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Udręka",
+   "lore": "Prosta (Spaczenie)",
+   "cn": 0,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój cel doznaje ukłucia palącego bólu i otrzymuje PS Obrażeń w Lokację Trafienia, pomniejszonych o Premię z Wytrzymałości i Punkty Zbroi (minimum 1). Ból wywoła dalsze skutki, jeśli nie zda się Wymagającego (+0) Testu. Przy trafieniu w Głowę nieudany Test Opanowania powoduje 1 Stan Oszołomienie u ofiary. Przy trafieniu w Rękę nieudany Test Zręczności sprawia, że cel upuszcza to, co trzymał w tej dłoni. Przy trafieniu w Korpus nieudany Test Odporności powoduje 1 Stan Oszołomienie. Przy trafieniu w Nogę nieudany Test Zwinności nadaje celowi Stan Powalenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Upiorny płomień",
+   "lore": "Prosta (Spaczenie)",
+   "cn": 0,
+   "range": "Obszar (Premia z Siły Woli metrów)",
+   "target": "Ty",
+   "duration": "Siła Woli minut",
+   "description": "Przywołujesz unoszącą się kulę jarzącego się ognia w barwie kamienia spaczenia, z której podczas palenia skapuje lepka zielona ciecz. Płomień daje światło o promieniu równym Zasięgowi, dopóki zaklęcie nie dobiegnie końca albo dopóki kula nie zostanie rzucona. Możesz cisnąć ognistą kulą w pojedynczy cel w Zasięgu, wykonując Test Broni Zasięgowej (Miotana): jeśli trafisz, ofiara zyskuje Stan Podpalenie i musi wykonać Test na Zepsucie (Drobne).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Znak Rogatego Szczura",
+   "lore": "Prosta (Spaczenie)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Na ciele celu pojawia się szpetna skaza w postaci otwartej, sączącej się rany na czole albo na wierzchu dłoni. Wobec tych, którzy widzą tę skazę, znak nakłada karę jednego stopnia Trudności do Testów Ogłady celu (czyli z Przeciętnego na Wymagający). Szarzy Prorocy używają tego zaklęcia, by znaczyć swoich posłańców.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Łaska",
+   "lore": "Prosta (Spaczenie)",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Specjalny",
+   "description": "Twój następny Test w trakcie tej sceny lub starcia staje się łatwiejszy o jeden stopień Trudności (czyli z Przeciętnego na Łatwy).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 41
+  },
+  {
+   "name": "Broń Gorka",
+   "lore": "Prosta (Waaagh!)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Twój dotyk przesyła odrobinę magii Waaagh! w obraną broń, nadając jej Cechę Magiczny.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 49
+  },
+  {
+   "name": "Mały Waaagh!",
+   "lore": "Prosta (Waaagh!)",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Obszar (Siła Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Zawodzisz do Gorka i Morka, prosząc o pomoc we wznieceniu Waaagh!. MG powinien natychmiast wykonać test Waaagh!, dodając +10 do szansy.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 49
+  },
+  {
+   "name": "Potęga Morka",
+   "lore": "Prosta (Waaagh!)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1 Zielonoskóry",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój dotyk przesyła odrobinę magii Waaagh! w obranego Zielonoskórego. Zyskuje on premię +5 do Walki Wręcz i Siły.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 49
+  },
+  {
+   "name": "Rzuć tym!",
+   "lore": "Prosta (Waaagh!)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1 Zielonoskóry",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój dotyk przesyła odrobinę magii Waaagh! w obranego Zielonoskórego. Zyskuje on premię +10 do Umiejętności Strzeleckich.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 49
+  },
+  {
+   "name": "Wstawej!",
+   "lore": "Prosta (Waaagh!)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Fala Waaagh! wpływa w Twoją dłoń i przenika do celu. Cel usuwa 1 Stan i odzyskuje 1 punkt Żywotności. Stworzenie może być celem tego zaklęcia tylko raz dziennie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 49
+  },
+  {
+   "name": "Łap to!",
+   "lore": "Prosta (Waaagh!)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój cel zyskuje +10 do Zręczności.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 49
+  },
+  {
+   "name": "Twardy kostur",
+   "lore": "Pór Roku",
+   "cn": 3,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Wplatasz energię w swój kostur, nadając mu Cechę Magiczny.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Panowanie nad zwierzętami",
+   "lore": "Pór Roku",
+   "cn": 4,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Nawiązujesz bezsłowne, telepatyczne połączenie ze zwykłym zwierzęciem o Twoim rozmiarze bądź mniejszym. Porozumiewasz się z nim swobodnie, na tyle, na ile pozwala jego Inteligencja. W tym czasie nie możesz rozmawiać z innymi ani rzucać zaklęć. Zależnie od natury i usposobienia zwierzęcia możesz nawet wydawać mu proste polecenia, choć MG może poprosić Cię o wykonanie Testu Przeciwstawnego Wpływu na Zwierzęta lub Tresury przeciwko jego Sile Woli. Wzmocnienie: Za każde +2 PS zyskujesz premię +20 do wszelkich Testów Wpływu na Zwierzęta lub Tresury wykonywanych, dopóki zaklęcie trwa. Za +3 PS zaklęcie może objąć stworzenie o Rozmiarze Duży.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Uleczenie zwierzęcia",
+   "lore": "Pór Roku",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk przywraca wszystkie zwykłe punkty Żywotności oraz leczy wszystkie stany i Choroby zwykłego zwierzęcia, o ile nie zostało ono zabite. Jednak to zaklęcie nie uleczy skutków Zepsucia, złamanych kości, zerwanych mięśni ani amputacji. Nie cofnie też uwiądu starości.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
+   "name": "Jesienny rozkład",
+   "lore": "Pór Roku",
+   "cn": 5,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Specjalny)",
+   "duration": "Natychmiastowy",
+   "description": "Z czubków Twoich palców wystrzeliwuje promień ciemnozielonego światła, obejmujący Obszar o promieniu Premii z Siły Woli metrów. Wszelka martwa materia organiczna (drewno, skóra, włókna roślinne lub tkaniny) na drodze promienia natychmiast gnije i obraca się w pył albo maź. Stworzenia mogą zdać Trudny (-10) Test Uniku, aby uchronić swoje wyposażenie przed zniszczeniem, poza tym jednak nic im nie grozi. Jedynym wyjątkiem są stworzenia posiadające cechy Konstrukt i Ożywieniec. Takie stworzenia otrzymują magiczny pocisk o Obrażeniach +5.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
+   "name": "Letni deszcz",
+   "lore": "Pór Roku",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Twoje magiczne słowa przywołują znikąd ciemne chmury, sprowadzając ulewny deszcz w każdym otwartym terenie z wyjątkiem pustyni. Ulewa gasi ogień, broń palną i materiały wybuchowe.Wszystkie ataki Bronią Zasięgową liczą się tak, jakby oddano je z odległości o dwa stopnie Zasięgu większej: Bezpośredni liczy się jako Średni, Krótki jako Ekstremalny, a wszystko dalsze jest niemożliwe. Okoliczny teren staje się trudny do przebycia, dopóki nie wyschnie. Deszcz daje pożywienie miejscowemu życiu, tworząc kałuże czystej wody do picia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Poranna mgła",
+   "lore": "Pór Roku",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Jeśli znajdujesz się pod gołym niebem albo w wilgotnym wnętrzu, możesz przywołać mgłę, która zasłania wzrok wszystkim, którzy się w niej znaleźli. Wszystkie cele zyskują PS+1 Stanów Oślepienie. Każdy, kto próbuje się poruszyć, musi zdać Test Percepcji albo zyskuje Stan Powalenie. Ci, którzy obierają cele we mgle, wykonują swoją Akcję z modyfikatorem Bardzo Trudny (-30). Na Ciebie mgła nie działa.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Plątanina cierni",
+   "lore": "Pór Roku",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Obierasz za cel nagi skrawek ziemi i wywołujesz z niej gęsty żywopłot cierni, pnączy i jeżyn. Rośliny smagają i chwytają wszystko, co porusza się w Obszarze, zadając na koniec Twojej Tury w każdej Rundzie magiczny pocisk o Obrażeniach +0. Obszar liczy się jako teren trudny do przebycia. Każde stworzenie próbujące przejść przez Obszar pieszo musi zdać Trudny (-10) Test Zwinności albo zyskuje +1 Stan Pochwycenie, którego Siła równa się Twojej Sile Woli. Gdy zaklęcie się kończy, ciernisty żywopłot traci swoje nadprzyrodzone właściwości.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Przywołanie błyskawicy",
+   "lore": "Pór Roku",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Gdy niebo zasnute jest chmurami, Twój kostur wywołuje w pobliskich obłokach wyładowanie elektryczne. W cel uderza piorun, zadając magiczny pocisk o Obrażeniach +4, które ignorują Punkty Zbroi. Każdy, kto jest zwarty w walce z pierwotnym celem, otrzymuje to samo trafienie o Obrażeniach +2. Każdy, kto jest zwarty w walce z celem wtórnym, otrzymuje to samo trafienie o Obrażeniach +0. Przy wszystkich tych trafieniach metalowy pancerz zwiększa Obrażenia o wartość równą PZ trafionej lokacji. Jeśli MG na to pozwoli, zaklęcie może wywołać stan Podpalenie u pobliskich łatwopalnych przedmiotów (ale nie u stworzeń).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
+   "name": "Ukłucie zimy",
+   "lore": "Pór Roku",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Zaklęcie to można rzucić wyłącznie pod gołym niebem. Wywołujesz nagłą i gwałtowną burzę wielkiego gradu. Dopóki burza trwa, cele znajdujące się w Obszarze na początku swojej Tury otrzymują magiczny pocisk o Obrażeniach +0 i muszą zdać Przeciętny (+20) Test Opanowania albo zyskują Stan Panika (szukają schronienia). Widoczność wewnątrz gradu i do jego wnętrza pogarsza Premia z Siły Woli Stanów Oślepienie. Burza gasi ogień, broń palną i materiały wybuchowe. Teren staje się trudny do przebycia jeszcze przez 1k10 minut po zakończeniu zaklęcia. Poruszanie się szybciej niż tempem marszu wymaga Przeciętnego (+20) Testu Atletyki (modyfikowanego przez Stany), inaczej cel zyskuje Stan Powalenie. Sprint jest niemożliwy.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Zew dziczy",
+   "lore": "Pór Roku",
+   "cn": 8,
+   "range": "Premia z Siły Woli mil",
+   "target": "Specjalny",
+   "duration": "Do wschodu słońca",
+   "description": "Dmiesz w duchowy róg z nadprzyrodzoną siłą, przyzywając wszystkie zwykłe stworzenia w Zasięgu. Pod koniec Rundy z pomocą przybywa Ci naturalny kuzyn Twojego chowańca. Przyzwane stworzenie będzie miało Rozmiar Duży albo przybędzie jako Duża wataha/stado/rój mniejszych zwierząt. Jeśli Twoim chowańcem jest Niedźwiedź, przywołasz u swojego boku pojedynczego Dużego Niedźwiedzia. Jeśli Twoim chowańcem jest Gronostaj, przyzwiesz Duży Rój Gronostajów zwykłej wielkości. Stworzenie wyczuje Twoją potrzebę i będzie Cię bronić do śmierci, stojąc u Twego boku i czuwając nad Tobą, gdy śpisz. Stworzenie strzeże Cię, dopóki nie obudzisz się o kolejnym świcie. Wzmocnienie: Za +4 PS możesz wybrać zwierzę, które przybędzie Ci z pomocą — na przykład Dziki, Orły, Szczury, Wilki czy Zdziczałe Psy. Od MG zależy, czy możesz przyzwać pojedyncze Duże stworzenie, czy watahę/stado/rój mniejszych zwierząt. Uświęcenie świętego gaju (Rytuał) To zaklęcie jest rytuałem — szczegóły znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
+   "name": "Duchowa jaźń",
+   "lore": "Pór Roku",
+   "cn": 9,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Twoje ciało staje się niematerialne i niemal niewidzialne. Inni widzą Cię jako subtelny, bursztynowy zarys o jasnozielonych oczach. Zyskujesz Cechę Eteryczny. Nie możesz oddziaływać na świat materialny ani przywołać energii potrzebnej do rzucania zaklęć. Zyskujesz premię +20 do swoich Testów Skradania, a stworzenia otrzymują karę -20 do Testów Percepcji wykonywanych, by Cię dostrzec.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Obrzęd wiosny",
+   "lore": "Pór Roku",
+   "cn": 9,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój cel zyskuje Cechy Stworzenia Magiczny i Regeneracja.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Zrastanie kości",
+   "lore": "Pór Roku",
+   "cn": 9,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk przywraca celowi PS+1 punktów Żywotności i leczy jedno Drobne Złamanie Kości lub Zerwanie Mięśnia, ale po rzuceniu zaklęcia Twój cel musi przespać całą noc, w przeciwnym razie zyskuje Stan Zmęczenie. Poważne Złamanie Kości lub Zerwanie Mięśnia można podleczyć na tyle, by uznać je za Drobne — dalej obowiązuje wtedy zwykły czas leczenia (WFRP4 s. 179). Tego samego obrażenia nie można obrać za cel dwa razy w ciągu tego samego tygodnia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Ożywienie (Pór Roku)",
+   "lore": "Pór Roku",
+   "cn": 11,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Twój dotyk budzi drzewo do ruchliwego, na wpół świadomego życia i poddaje je Twoim rozkazom. Dopóki zaklęcie trwa, możesz poruszać się i działać normalnie, ale musisz być w stanie utrzymać koncentrację (patrz Przerwania, WFRP4 s. 237), inaczej zaklęcie rozprasza się, a drzewo znów staje się nieruchome. Ożywione drzewo ma cechy Drzewca (patrz Nieoficjalny Bestiariusz), z tym że posiada Cechę Stworzenia Głupi oraz Inteligencję 10.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Moc ziemi",
+   "lore": "Pór Roku",
+   "cn": 12,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Jeśli znajdujesz się w odległości kilku metrów od ogamu, kamiennego kręgu lub świętego gaju, PZ tego zaklęcia zostaje obniżony o 2. Musisz mieć fizyczny kontakt z ziemią i medytować przez godzinę, zanim rzucisz to zaklęcie. Przez Czas trwania zaklęcia wszystkie Twoje Poziomy Zaklęć zostają zmniejszone o połowę, a rzucając zaklęcie, możesz wybrać, który efekt Tradycji zastosujesz do tego konkretnego zaklęcia: Ghur, Ghyran czy Ulgu. Stałeś się przewodnikiem dla ogromu mocy. Każdy nieudany Test Języka (Magicznego) wywołuje Mniejszą Manifestację, a każde Trafienie Krytyczne lub Pech staje się Większą Manifestacją. Gdy zaklęcie się kończy, energia uwalnia się cała naraz, wstrząsając Twoim ciałem. Zyskujesz stan Zmęczenie i tracisz 2k10 minus Premia z Siły Woli punktów Żywotności (minimum 1).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
+   "name": "Odnowienie wzrostu",
+   "lore": "Pór Roku",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Ożywiasz roślinność na wyschniętym, zwiędłym lub jałowym skrawku ziemi albo na chłopskim polu, o ile taka roślinność nie jest dla danego regionu nienaturalna (np. dżungla na pustyni). Uleczone zostają skutki suszy, zatrucia, zarazy, chorób roślin, pasożytów, Zepsucia i Mutacji. Możesz wybrać obszar objęty działaniem w granicach Zasięgu zaklęcia. Pierwsze oznaki odrostu widać po 1k10 minutach, a efekty są trwałe. W ciągu kolejnych dni, tygodni i miesięcy zaklęcie przywoła z powrotem rodzime rośliny i zwierzęta.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 25
+  },
+  {
+   "name": "Wchłonięcie zepsucia",
+   "lore": "Pór Roku",
+   "cn": 12,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Kładziesz dłonie na postaci lub zwykłym zwierzęciu o Twoim Rozmiarze bądź mniejszym i usuwasz z niego 1 punkt Zepsucia, wchłaniając go we własną duszę. Przy okazji musisz wykonać Test Odporności przeciwko Drobnemu Zetknięciu z Zepsuciem. Rzucenie tego zaklęcia na stworzenie posiadające cechę Spaczenie nie odnosi żadnego skutku, chyba że MG zdecyduje inaczej. Wzmocnienie: Za każde +3 PS możesz wchłonąć kolejny punkt Zepsucia, ale musisz wykonać następny Test przeciwko zetknięciu z Zepsuciem (Drobnemu).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 23
+  },
+  {
+   "name": "Ściągnięcie księżyca",
+   "lore": "Pór Roku",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Jeśli widoczny jest choćby skrawek Mannslieba, sprowadzasz na wszystkie stworzenia w Obszarze rodzaj księżycowego szaleństwa. Zaklęcie nie odnosi żadnego skutku, gdy na niebie stoi Morrslieb. Skąpujesz swoje cele w jarzącym się blasku księżyca, osłabiając ich wolę i przyprawiając je o omamy: wszystkie zyskują stan Oszołomienie i nie mogą korzystać z Przeznaczenia, Szczęścia, Odporności Psychicznej ani Determinacji. Cele zostają całkowicie oczyszczone z punktów Zepsucia Fizycznego. Ponadto dotknięte stworzenia muszą spróbować wygrać z Tobą Test Przeciwstawny Opanowania/ Splatania Magii, w przeciwnym razie zyskują PS stanów Oszołomienie. W tym stanie Twoje cele poruszają się losowo, zgodnie z tabelą Rozrzutu (WFRP4 s. 163). Stworzenia, którym nie uda się usunąć wszystkich stanów Oszołomienie przed końcem zaklęcia, muszą następnie zdać Test Zepsucia Psychicznego (Umiarkowanego). Zaklęcie nie wywiera wpływu umysłowego na stworzenia Niewrażliwe na Psychologię. Stworzenia posiadające cechy Demoniczny, Mutacja, Zmiennokształtny lub Ożywieniec są jednak dotknięte inaczej — zamiast tego otrzymują magiczny pocisk o Obrażeniach +6.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
+   "name": "Aura czystości",
+   "lore": "Pór Roku",
+   "cn": 16,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "To zaklęcie wymaga dziesięciu minut cichej medytacji, zanim przystąpisz do splatania i rzucania. Przywołujesz kopułę z przezroczystej, bursztynowo-nefrytowej energii, która odpycha większość stworzeń i wysusza inwazyjną roślinność. Kapłani Druidzcy, wyznawcy Starej Wiary oraz zwykłe zwierzęta mogą swobodnie wchodzić w Obszar i go opuszczać. Stworzenia posiadające cechy Spaczenie, Demoniczny, Mutacja lub Ożywieniec zyskują stan Panika, dopóki go nie opuszczą. Wszystkim pozostałym stworzeniom przysługuje Przeciwstawny Test Opanowania, aby oprzeć się zyskaniu stanu Panika, z następującymi modyfikatorami: Rasa Trudność Testu Opanowania Leśne Elfy, Zwiadowcy Przeciętny (+20) Ludzie, Niziołki, Gnomy Trudny (-10) Krasnoludy,Wysokie Elfy Ciężki (-20) Pozostałe żywe stworzenia Bardzo Trudny (-30)",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 24
+  },
+  {
    "name": "Idylla",
    "lore": "Slaanesha",
    "cn": 5,
@@ -1653,6 +3471,336 @@
    "description": "Twoja magia wbija się głęboko w cel, zalewając jego duszę dręczącą świadomością jego zniszczonych marzeń. Inicjatywa celu spada do 10, jeśli jeszcze nie była poniżej tego poziomu, ponieważ jego umysł wywraca się na nice. W Turze celu jego ruch jest losowy i ustalany przez MG. Cel zaczyna lamentować nad swoim życiem, lubieżnie opowiadając wszystko, co miało się wydarzyć, i machając rękoma w powietrzu. Ponadto cel może wykonać Akcję jedynie wtedy, gdy powiedzie mu się Wymagający (+0) Test Opanowania. W przeciwnym razie jest zbyt zajęty opłakiwaniem wszystkiego, co mogło się wydarzyć, a nie wydarzyło.",
    "source": "Podręcznik podstawowy",
    "page": 258
+  },
+  {
+   "name": "Bicz Slaanesha",
+   "lore": "Slaanesha",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Przywołujesz długi, przypominający język bicz z Dharu, którym smagasz swoich wrogów. Wybierz punkt w Zasięgu jako koniec bicza. Każde stworzenie znajdujące się na linii prostej między Tobą a tym punktem otrzymuje magiczny pocisk o Obrażeniach +1k10. Jeśli wynik na kostce przekroczy Premię z Wytrzymałości ofiary, zyskuje ona również Stan Oszołomienie. Jeśli pojawi się wątpliwość, czy bicz dosięgnąłby danego stworzenia, może ono wykonać Wymagający (+0) Test Uniku, by uchylić się przed atakiem.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 34
+  },
+  {
+   "name": "Fantasmagoria",
+   "lore": "Slaanesha",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Siła Woli minut",
+   "description": "Przyzywasz iluzoryczne stworzenia, które przemykają po obszarze działania, uwodząc i dezorientując Twoich wrogów. Iluzoryczne stworzenia zwiodą każdego, kto nie ma Talentu Percepcja Magiczna. Ci, którzy mają Percepcję Magiczną, mogą zdać Trudny (-10) Test Percepcji, by pojąć, że to iluzja, i uniknąć jej skutków, ale nie mogą przez nią przejrzeć. Stworzenia zachowują się tak, jak im nakażesz, i mają Cechę Stworzenia Dekoncentrujący. Jeśli stworzenia są nęcące, każdy, kto na nie patrzy, zyskuje Stan Oszołomienie. Jeśli stworzenia są straszliwe, mają Cechę Stworzenia Strach 1 . Iluzja jest nieruchoma. Poświęcając swoją Akcję, możesz wykonać Ciężki (-20) Test Splatania Magii, by sprawić, że iluzja poruszy się w danej Rundzie. Wzmocnienie: Za każde +2 PS możesz zwiększyć liczbę nakładanych Stanów albo poziom Strachu o +1.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 35
+  },
+  {
+   "name": "Oślepienie (Slaanesha)",
+   "lore": "Slaanesha",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Otacza Cię olśniewająca, zwodnicza aura, która sprawia, że Twoi wrogowie niechętnie wyrządzają Ci jakąkolwiek krzywdę. Zyskujesz Cechy Stworzenia Atrakcyjny, Dekoncentrujący i Strach (2) . Zaklęcie to znane jest również jako Charyzmatyczna Obecność.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 34
+  },
+  {
+   "name": "Szepty zagłady",
+   "lore": "Slaanesha",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Twoje straszliwe zaśpiewy manifestują się jako upiorne szepty w umyśle celu, nakazujące mu uciekać za wszelką cenę, bo koniec jest bliski. Twój cel musi zdać Bardzo Trudny (-30) Test Opanowania, inaczej zyskuje 1 Stan Panika. Jeśli Test się nie powiedzie, szepty przeskakują na kolejny cel w promieniu Premii z Siły Woli metrów od pierwotnego celu: tym razem Test jest Ciężki (-20). Reakcja łańcuchowa trwa dalej, a Trudność za każdym razem maleje o jeden stopień. Maksymalna liczba celów równa jest Twojej Premii z Siły Woli. Zaklęcie to nie działa na stworzenia z następującymi Cechami: Konstrukt, Demoniczny, Niewrażliwość na Psychologię, Ożywieniec. Wzmocnienie: Za każde +2 PS możesz zwiększyć liczbę Stanów dla wszystkich celów o 1.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 35
+  },
+  {
+   "name": "Perfumy Slaanesha",
+   "lore": "Slaanesha",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Obszar (Siła Woli metrów)",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Ty oraz wszyscy Twoi żywi sojusznicy i słudzy w Zasięgu zostajecie skąpani w przyjemnych doznaniach i uodparniacie się na ból. Wszystkie cele zyskują Cechę Stworzenia Nie Czuje Bólu oraz odporność na wszelkie umiejętności i zaklęcia, które działają poprzez zastraszanie lub ból fizyczny. Ponadto wszystkie cele zyskują Cechę Stworzenia Ochrona 9+ . Wzmocnienie: Za każde +3 PS możesz poprawić poziom Ochrony o 1 (na przykład z Ochrony 9+ na Ochronę 8+).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 34
+  },
+  {
+   "name": "Pawana Slaanesha",
+   "lore": "Slaanesha",
+   "cn": 9,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Wszystkie żywe stworzenia w Obszarze muszą zdać Trudny (-10) Test Opanowania, inaczej nie robią nic poza staniem w miejscu i lubieżnym tańcem do nieziemskiej muzyki, którą słyszą tylko one. Cele nie mogą wykonywać żadnego Ruchu ani Akcji, dopóki działanie zaklęcia nie ustanie: liczą się jako Bezbronne Cele (WFRP4, s. 162). Zaklęcie kończy się, gdy dowolne dotknięte nim stworzenie zostanie zaatakowane.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 34
+  },
+  {
+   "name": "Pieśń uwodzenia",
+   "lore": "Slaanesha",
+   "cn": 9,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Wskazujesz na jedno żywe stworzenie, posyłasz mu zachęcające spojrzenie i śpiewasz zwodniczą melodię. Jeśli cel przegra Test Przeciwstawny Siły Woli, zostaje oczarowany Twoją oczywiście wyższą urodą i charyzmą i będzie posłuszny Twoim poleceniom — wypowiadanym na głos i wysyłanym myślą. Możesz nawet wkładać swojemu celowi słowa w usta. Twoja nowa zabawka zrobi wszystko, o co poprosisz, i wypełni każdy obowiązek z zapałem, nawet jeśli zaszkodzi to jej samej lub jej sojusznikom. Nie ma niczego, czego Twój nowy przyjaciel by dla Ciebie nie zrobił. Zaklęcie to bywa też nazywane Cielesną Marionetką. Wzmocnienie: Za każde +2 PS możesz ułatwić swój Test Przeciwstawny o jeden stopień (czyli z Wymagającego na Przeciętny).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 35
+  },
+  {
+   "name": "Promień Slaanesha",
+   "lore": "Slaanesha",
+   "cn": 9,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Z Twoich palców wystrzeliwuje olśniewająca tęcza światła, wprawiając wszystkie żywe stworzenia w Obszarze w stan euforii. Cele otrzymują magiczny pocisk o Obrażeniach +0 i zyskują 1 + PS Stanów Oszołomienie na czas trwania zaklęcia (minimum 1).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 34
+  },
+  {
+   "name": "Cielesna klątwa",
+   "lore": "Slaanesha",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Przywołujesz plugawe energie, które wystrzeliwują ku pojedynczemu żywemu stworzeniu, sprawiając, że mutuje ono w obrzydliwy sposób. Twojemu celowi przysługuje Ciężki (-20) Test Opanowania, by oprzeć się działaniu zaklęcia. Jeśli go nie zda, wyrastają na nim potworne narośla: zniekształcone usta, dłonie, oczy, nogi i inne kończyny. Liczy się to jako Poważny Wpływ Zepsucia. Na początku każdej Rundy po rzuceniu zaklęcia rzuć 1k10 i sprawdź w poniższej tabeli dalsze efekty: 1k10 Efekt Cielesnej Klątwy w Tej Rundzie 1-3 Narośla z tłuszczu, ścięgien i mięśni wystrzeliwują z ofiary na 2 metry w losowym kierunku. 4-6 Macka wystrzeliwuje na 1k10+2 metry w losowym kierunku. Dotyka wszystkich na swojej drodze. 7-9 W tej Rundzie nic się nie dzieje. Cel przestaje rosnąć, jeśli zda Ciężki (-20) Test Opanowania. Rosnący cel przemieszcza się o 2k10 metrów w losowym kierunku. Patrz tabela Rozrzutu (s. 163). Każdemu żywemu stworzeniu, które zetknie się z jedną z narośli lub macek, przysługuje Wymagający (+0) Test Uniku, by się wywinąć. Jeśli go nie zda, ofiara zostaje zaduszona mięsem i zyskuje +2 Stany Pochwycenie (o Sile równej Twojej Sile Woli). Dopóki jest unieruchomiona, nowa ofiara podlega zasadom Tonięcia i Duszenia się (WFRP4, s. 181). Za każdą Rundę, w której Twój pierwotny cel rośnie, zyskuje on jeden poziom Talentu Twardziel . Gdy osiągnie maksymalny poziom Talentu Twardziel, na koniec każdej kolejnej Rundy musi zdawać Przeciętny (+20) Test Odporności, inaczej doznaje śmiertelnego zawału serca. Skutki klątwy są trwałe, dopóki nie zostanie ona zdjęta. Dopóki działa na niego to zaklęcie, pierwotny cel liczy się jako Bezbronny Cel. Ofiara rośnie i rośnie, dopóki nie zda Testu Opanowania, nie zginie albo klątwa nie zostanie zdjęta przez kogoś z Talentem Zdjęcie Klątwy. W przeciwnym razie stworzenie skazane jest na krótkie życie w męce. Jeśli klątwa zostanie zdjęta, ofiara zyskuje 1 punkt Zepsucia Psychicznego z powodu przeżytej traumy i otrzymuje 1k10 Stanów Zmęczenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 34
+  },
+  {
+   "name": "Odłamki Slaanesha",
+   "lore": "Slaanesha",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Strzelasz nadgarstkiem i z Twojej dłoni wystrzeliwuje chmura eterycznych strzałek, które tną dusze Twoich wrogów. Wszystkie cele objęte Obszarem otrzymują magiczny pocisk o Obrażeniach +6, ignorujący Punkty Zbroi, i zyskują 3 Stany Oszołomienie z powodu mieszaniny bólu i rozkoszy. Każdy cel sprowadzony do 0 punktów Żywotności natychmiast zyskuje Stan Utrata Przytomności. Każdy, kto nie jest Twoim sojusznikiem, a doświadcza lub widzi tę ekstazę i mękę, musi natychmiast zdać Ciężki (-20) Test Opanowania, inaczej zyskuje 1 + PS Stanów Panika. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 35
+  },
+  {
+   "name": "Sukkub",
+   "lore": "Slaanesha",
+   "cn": 14,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Twój duch opuszcza ciało, które traci 1k10 punktów Żywotności i zyskuje Stan Utrata Przytomności, niemożliwy do usunięcia, dopóki dusza doń nie wróci. Musisz połączyć się ze swoim ciałem, zanim zaklęcie się skończy, inaczej ciało w końcu umrze, a Ty na zawsze pozostaniesz błąkającym się duchem. W postaci ducha zyskujesz Cechy Stworzenia Eteryczny oraz Latanie (Siła Woli). Nie możesz mówić i jesteś niewidzialny dla każdego, kto nie ma Talentu Percepcja Magiczna; posiadający go musi zdać Przeciętny (+20) Test Percepcji, by Cię dostrzec. Nie możesz atakować innych, a oni nie mogą atakować Ciebie inaczej niż środkami magicznymi. Jeśli zetkniesz się z żywym ciałem, możesz spróbować zdać Wymagający (+0) Test Splatania Magii, by przywołać uroki Slaanesha. Jeśli Test się powiedzie, zdołasz pobudzić zmysły swojej ofiary, choć ta nie może Cię zobaczyć, poczuć, powąchać, posmakować ani usłyszeć. W ten sposób możesz wysysać jej duszę i wzmacniać własną. Za każdą godzinę, którą spędzisz, rozkoszując śpiącą ofiarę, traci ona 1k10 punktów Żywotności i zyskuje 1 punkt Zepsucia Psychicznego z powodu bólu i rozkoszy. Jeśli ofiara nie śpi, przysługuje jej Łączony Test Odporności/Opanowania, by oprzeć się odpowiednio utracie Żywotności i zyskaniu Zepsucia. Jeśli obie strony Testu się powiodą albo jeden z Testów będzie Krytyczny, ofiara Cię odpycha i nie możesz już próbować jej uwieść. Przytomna ofiara, na którą działają Twoje uroki, może normalnie zajmować się swoimi sprawami, ale będzie odczuwać dziwne doznania i wydawać się osobliwa dla postronnych. Gdy wrócisz do swojego ciała, zsumuj w jeden wynik wszystkie punkty Żywotności i punkty Zepsucia, które spowodowałeś. Odzyskujesz tyle punktów Żywotności, co może wynieść Cię ponad Twoje maksimum. Zachowujesz tę nadwyżkę Żywotności, dopóki jej w jakiś sposób nie stracisz. Nigdy jednak nie możesz mieć więcej punktów Żywotności, niż wynosi Twoja cecha Siła Woli. Uwaga: Zamieściłem to zaklęcie — na razie — ponieważ jest klimatyczne i pasuje do realiów świata. Zadbaj jednak o wyczucie wobec reakcji swoich Graczy na taki materiał. Ważniejsze jest, by wszyscy dobrze się bawili, niż by kogokolwiek urazić kontrowersyjnością mrocznej i niebezpiecznej treści.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 35
+  },
+  {
+   "name": "Unoszenie (Spaczenia)",
+   "lore": "Spaczenia",
+   "cn": 2,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Stajesz się tak lekki jak kawałek drewna balsa, dzięki czemu możesz stąpać po powierzchni cieczy — wody, ścieków czy oleju — jakby były stałym gruntem. Piszczenie Poziom Zaklęcia: 12 Zasięg: Ty Cel: Obszar (Siła Woli metrów) Czas: Premia z Siły Woli godzin Uwalniasz sieć obłędu ze Spaczenia, wypaczając umysły wszystkich w Obszarze. Wszystkie humanoidy niebędące Skavenami w zasięgu muszą zdać Wymagający (+0) Test Opanowania, inaczej stoczą się do poziomu bezmyślnej, szczuropodobnej hordy, instynktownie pomagającej wszystkim Skavenom, a Tobie w szczególności. Gromadzą się wokół Ciebie jako przyboczni, wykonują Twoje proste polecenia i atakują Twoich wrogów rękami oraz zębami. Cele tracą zdolność mowy i porozumiewają się gestami i szczurzym piskiem, od którego zaklęcie wzięło swoją nazwę. Gdy zaklęcie się kończy, cele rozpierzchają się i uciekają, wracając do normalnego stanu w ciągu 1k10 minut. Zyskują Stan Zmęczenie i muszą wykonać Test na Zepsucie (Poważne).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Pisk",
+   "lore": "Spaczenia",
+   "cn": 3,
+   "range": "Premia z Siły Woli mil",
+   "target": "Ty",
+   "duration": "Natychmiastowy",
+   "description": "Odrzucasz głowę do tyłu i napinasz struny głosowe, by wydać z siebie przenikliwy wrzask, który niesie się na bardzo dużą odległość. Większość stworzeń ledwie słyszy ten magiczny pisk, ale wyczulone uszy Skavenów i niektórych dzikich bestii go wychwycą. Pisk jest tylko wołaniem i nie niesie żadnej informacji, choć ton może wyrażać emocje takie jak gniew, rozpacz, strach czy zapał. Każdy Skaven, który usłyszy to wołanie, może je zignorować.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Zgnilizna (Spaczenia)",
+   "lore": "Spaczenia",
+   "cn": 3,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Twoja plugawa magia sprawia, że całe jedzenie w Obszarze gnije i psuje się, stając się skrajnie niezdrowe i odrażające dla zmysłów. Każde stworzenie, które zje skażone jedzenie, musi zdać Wymagający (+0) Test Odporności, inaczej dopadnie je Galopująca Biegunka.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Kruche kości",
+   "lore": "Spaczenia",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "To jedno z najstarszych zaklęć Skavenów. Twój dotyk wtłacza w cel Dhar, osłabiając na Czas trwania jego kości i mięśnie. Powodujesz automatyczne Trafienie Krytyczne: rzuć na Tabeli Trafień Krytycznych, ale pomiń kolumnę Dodatkowych Efektów. Zamiast tego zadajesz wyrzuconą utratę Żywotności, a cel cierpi na skutki Złamanej Kości (Drobnej) do końca zaklęcia. Przy wyniku 100 cel zyskuje Stan Utrata Przytomności.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Towarzysz cienia",
+   "lore": "Spaczenia",
+   "cn": 5,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Siła Woli minut",
+   "description": "Wtapiasz się w ciemność, po prostu wchodząc w cień. Dopóki pozostajesz w cieniu, zyskujesz premię +40 do Testów Skradania, a wszystkie Testy Percepcji na wykrycie Ciebie wykonuje się z karą -20, chyba że nasłuchujący ma Talent Wyczulony Zmysł (Słuch) .",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Futro zabójcy",
+   "lore": "Spaczenia",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Splatasz nieustannie zmienną magię Spaczenia i dopasowujesz barwę swojego futra do otoczenia. Zyskujesz 1 Punkt Zbroi w każdej lokacji oraz premię +40 do wszystkich Testów Skradania wykonywanych w dowolnym otoczeniu poza pełnym światłem dnia. Nie możesz rzucić tego zaklęcia, jeśli nosisz niemagiczny pancerz.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Uschły język",
+   "lore": "Spaczenia",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz mały, migotliwie zielony pocisk, który uderza cel w twarz i wsącza mu się do ust, wysuszając język. Cel otrzymuje Trafienie Krytyczne w Głowę z wynikiem 4 w kolumnie Żywotności (znanym w nieoficjalnych zasadach jako „Furia Ulrica”). Jego Język kurczy się do bezużytecznego kikuta — Amputacja (Wymagająca): patrz Amputowany Język (WFRP4 s. 180). Gdy zaklęcie się kończy, język wraca do normy w ciągu 1k10 minut (MG może nałożyć drobną karę do testów porozumiewania się w czasie powrotu do zdrowia albo po prostu obrócić to w żart).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Zarażające spojrzenie",
+   "lore": "Spaczenia",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "To jedno z najbardziej perfidnych zaklęć Skavenów. Skupiasz magię Spaczenia w oczach i wyobrażasz sobie chorobę, którą chcesz rozsiać, wybierając spośród Czarnej Zarazy albo Szczurzej Gorączki (patrz WFRP4 s. 186). Następnie, wpatrując się w pojedynczy cel w zasięgu, zsyłasz na niego swoją chorobę. Celowi przysługuje Przeciętny (+20) Test Odporności, by nie zarazić się chorobą. Cele rzadko rozumieją, co się stało, a nawet gdy choroba się rozwinie, ofiara może nie zdać sobie sprawy, że jej przyczyna jest magiczna. Wzmocnienie: Za każde +2 PS możesz utrudnić Test Odporności o jeden stopień (czyli z Przeciętnego na Wymagający).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Zasłona much",
+   "lore": "Spaczenia",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Bzyczącym przekleństwem i wymachiwaniem ramion przywołujesz chmarę meszek i gryzących much. Rój owadów porusza się wraz z Tobą i atakuje Twoich wrogów. Zyskujesz Cechę Stworzenia Dekoncentrujący, a każdy, kto jest z Tobą w zwarciu, automatycznie traci 1 punkt Żywotności na koniec każdej Rundy. Wobec ataków Bronią Zasięgową liczysz się jako znajdujący się za lekką osłoną (kara -10).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Chyże łapy",
+   "lore": "Spaczenia",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Znane także jako Lepkie Śmyganie, to zaklęcie daje Ci zwiększoną swobodę ruchu. Twoja Szybkość zostaje podwojona, a Ty zyskujesz Cechę Stworzenia Wspinacz. Przedmioty, które niesiesz lub nosisz, wciąż podlegają grawitacji w normalny sposób i spadną na ziemię, jeśli nie zostaną zabezpieczone.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Oskórowująca zguba",
+   "lore": "Spaczenia",
+   "cn": 8,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Splatasz szalone zielone wstęgi energii Spaczenia i posyłasz je, by szarpały ciało pojedynczego celu. Obrane stworzenie zostaje trafione magicznym pociskiem o Obrażeniach +5. Ponadto zgubne wstęgi podążają za Twoim celem, dokądkolwiek się uda, aż do końca zaklęcia. Na koniec każdej Rundy, wliczając bieżącą, cel zyskuje +1 Stan Krwawienie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Śmierć bez śladu",
+   "lore": "Spaczenia",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Rzucając to zaklęcie, musisz medytować przez godzinę razem ze wszystkimi, których chcesz objąć jego działaniem, powoli scalając energie potrzebne do wywołania jego skutków. Jeśli coś przerwie Ci w tym czasie, zaklęcie zawodzi. Jeśli ktoś, kto podczas rytuału znajdował się w Obszarze zaklęcia, zginie, gdy zaklęcie wciąż działa, jego ciało rozpłynie się w cuchnący czarny śluz. Zaklęcie to zwykle rzuca się na zabójców z Klanu Eshin, zanim wyruszą na łowy, by mieć pewność, że nie zostaną po nich zwłoki Skavenów.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Śmigły skok",
+   "lore": "Spaczenia",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Zbierasz wokół siebie dym, zyskując premię +20 do Testów Skradania i odejmując 10 od prób trafienia Cię przez wrogów. Dopóki zaklęcie trwa, możesz Darmową Akcją wyszeptać magiczne słowo i teleportować siebie albo kogoś, kogo dotkniesz (o rozmiarze nie większym niż Twój), w dowolne widoczne miejsce w promieniu Siły Woli metrów.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
+  },
+  {
+   "name": "Źródło zarazy",
+   "lore": "Spaczenia",
+   "cn": 8,
+   "range": "1 metr",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Wtłaczasz plugastwo Spaczenia w pobliskie źródło wody, zmieniając je w nosiciela choroby. Konkretna choroba wprowadzona do wody zależy od kostki jedności z Twojego rzutu na Rzucanie Zaklęcia: przy 1-7 jest to Szczurza Gorączka; przy 8-0 jest to Czarna Nieurodzaj. Źródła, stawy, studnie, beczułki i puchary to typowe cele tego zaklęcia. Jakikolwiek kontakt z zarażoną wodą wymaga od stworzenia zdania Łatwego (+40) Testu Odporności, inaczej zarazi się chorobą. MG powinien dostosować Trudność do rodzaju źródła wody i sposobu kontaktu. Małe naczynie, takie jak kubek, fiolka czy dzbanek, utrudnia Test o dwa stopnie (czyli z Łatwego na Wymagający). Średnie naczynie, takie jak bardzo mały staw, beczułka czy beczka, utrudnia go o jeden stopień. Podobnie wypicie wody albo kąpiel w niej utrudnia Test o dwa stopnie, natomiast umycie w niej rąk czy przetarcie nią twarzy liczy się jako jeden stopień. Duży zbiornik wodny, taki jak szeroka rzeka, jezioro czy ocean, po prostu rozcieńczy chorobę z jednego zaklęcia, choć plotka głosi, że Czarnoksiężnicy Skavenów gromadzą się w wielkich grupach, by zarażać większe akweny.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Szczurza fala",
+   "lore": "Spaczenia",
+   "cn": 9,
+   "range": "Specjalny",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz ze Spaczenia ogromną masę żarłocznych szczurów, która materializuje się wokół Ciebie. Horda przybiera postać Roju o Wielkim rozmiarze, kłębiącego się tysiącami maleńkich, wygłodniałych szczurów. Rój ma następujący profil, oparty na Unof­ficial Bestiary s. 9.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 45
+  },
+  {
+   "name": "Ogryzanie",
+   "lore": "Spaczenia",
+   "cn": 10,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (2 metry)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wtłaczasz wir energii Spaczenia w niewielki obszar, uwalniając hordę niewidzialnych szczurów, które przegryzają wszystko w Obszarze. Ich zaciekłość jest taka, że gryzą, dopóki cel nie przestanie istnieć. Choć zaklęcie ma wiele zastosowań, Ogryzanie bywa często używane do „wybijania dziur” w drewnianych wrotach, umocnieniach ziemnych czy palisadach podczas oblężeń. Horda zadaje 2k10 Obrażeń na Rundę wszystkiemu w Obszarze, ignorując niemagiczne Punkty Zbroi (minimum 1). Horda nie potrafi jednak przegryźć się przez rzeczy, których nie zniszczyłyby zwykłe szczury, takie jak lity kamień czy stal. Żywym stworzeniom przysługuje Ciężki (-20) Test Uniku, by uniknąć napaści. Dopóki zaklęcie działa, możesz poświęcić Akcję, by pokierować położeniem magicznej hordy, zdając Przeciętny (+20) Test Splatania Magii; pozwala Ci to przesunąć obrany Obszar w dowolnym kierunku z szybkością Marszu lub Biegu szczurów. Wszystko, co znajdzie się na drodze, otrzymuje powyższe Obrażenia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Morowy oddech",
+   "lore": "Spaczenia",
+   "cn": 12,
+   "range": "Specjalny",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Wciągasz plugastwo Spaczenia i wydmuchujesz w stronę wrogów morowy obłok w kształcie stożka. Choroba roznoszona Twoim oddechem zależy od kostki jedności z Twojego rzutu na Rzucanie Zaklęcia: przy 1-7 jest to Szczurza Gorączka; przy 8-0 jest to Czarna Nieurodzaj. Wybierz pojedynczy widoczny cel w odległości do połowy swojej Siły Woli w metrach (zaokrąglając w górę). Cel ten staje się środkiem kolistego Obszaru o średnicy równej Twojej Premii z Siły Woli w metrach. Trafione zostają wszystkie stworzenia w tym Obszarze, a także wszystkie stworzenia między Tobą a Obszarem. Wykonaj Test Przeciwstawny Splatania Magii/Uniku przeciwko wszystkim objętym oddechem ofiarom (używając swojego pojedynczego rzutu przeciwko rzutowi każdego celu z osobna). Wszystkie ofiary, które przegrają Test, otrzymują magiczny pocisk o Obrażeniach +4, ignorujący Premię z Wytrzymałości i Punkty Zbroi. Cel, który utraci Żywotność, musi zdać Wymagający (+0) Test Odporności, inaczej zarazi się chorobą przenoszoną przez oddech. Podobnie jak przy Cesze Stworzenia Zionięcie, jesteś odporny na działanie tego zaklęcia. Wzmocnienie: Za każde +2 PS możesz utrudnić Test Odporności o jeden stopień (czyli z Wymagającego na Trudny).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Klątwa Rogatego",
+   "lore": "Spaczenia",
+   "cn": 13,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Siła Woli godzin",
+   "description": "Znane z niewiadomych powodów jako Straszliwe Trzynaste Zaklęcie, przemienia Twój cel w postać Skavena, przy czym celowi przysługuje Beznadziejny (-50) Test Opanowania, by się temu oprzeć. Jeśli go nie zda, Twój cel znajduje się całkowicie pod Twoim wpływem i zrobi wszystko, co mu każesz (z wyjątkiem bezpośredniego odebrania sobie życia). Cel zachowuje swoje Cechy, ale dodaje podstawowe Cechy Stworzenia Klanowca. Gdy zaklęcie dobiega końca, cel musi zdać Wymagający (+0) Test Odporności na przetrwanie przemiany bez szwanku. Jeśli Test się nie powiedzie, ofiara otrzymuje 2k10 Obrażeń ignorujących pancerz (minimum 1). Jeśli Test zakończy się Pechem, cel otrzymuje Trafienie Krytyczne, dodając +60 do rzutu na Tabeli Trafień Krytycznych.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 43
+  },
+  {
+   "name": "Przywołanie szczurzego władcy",
+   "lore": "Spaczenia",
+   "cn": 16,
+   "range": "Specjalny",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Po rzuceniu zaklęcia potrzeba godziny medytacji, by scalić energie. Jeśli cokolwiek Ci przerwie, zaklęcie idzie na marne. Następnie wskazujesz dowolne miejsce w promieniu Premii z Siły Woli metrów od siebie i magią Spaczenia rozdzierasz tkankę świata materialnego, sprowadzając jednego ze straszliwych Szczurzych Władców, Wielkich Demonów Rogatego Szczura. Skorzystaj z profilu podanego w Unof­ficial Bestiary. Gdy Demon się pojawi, wykonaj Test Przeciwstawny Splatania Magii/Siły Woli, by nad nim zapanować. Czarnoksiężnik posiadający Umiejętność Splatanie Magii (Spaczenie) może Pomóc (+10) w opanowaniu przywołanego Demona. Bez pomocy ryzyko dla Ciebie jest ogromne. Jeśli wygrasz Test, Szczurzemu Władcy można wyznaczyć jedno zadanie, które da się wykonać w Czasie trwania zaklęcia. Jeśli przegrasz Test, MG decyduje, czy Demon zaatakuje Ciebie i Twoich sprzymierzeńców, czy też po prostu spokojnie odejdzie z powrotem do Eteru — tak marny i mizerny jesteś w jego oczach. Jeśli którykolwiek rzut na Splatanie Magii lub Rzucanie Zaklęcia związany z tym zaklęciem zakończy się Pechem, zostajesz wessany do Krainy Chaosu i stajesz się zabawką jednego ze Szczurzych Władców, których miałeś głupotę przyzywać. Jeśli wydasz Punkt Przeznaczenia, z jakiegoś tajemniczego powodu zostajesz wypluty z powrotem do rzeczywistości. Wzmocnienie: Za każde +2 PS możesz zwiększyć PS swojego Testu Przeciwstawnego o +1. Nauka tego zaklęcia kosztuje Czarnoksiężnika Skavenów 400 PD. Paranoja skaveńskich czarnoksiężników i sztywna hierarchia społeczeństwa Skavenów sprawiają, że dla aspirujących czarnoksiężników nauczenie się i użycie tego zaklęcia jest niemal niemożliwe.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 44
   },
   {
    "name": "Niezdarność",
@@ -1677,6 +3825,17 @@
    "page": 245
   },
   {
+   "name": "Eteryczna strzała",
+   "lore": "Tajemna",
+   "cn": 2,
+   "range": "Specjalny",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Przywołujesz unoszącą się w powietrzu Magiczną strzałę i dłońmi ‚ciskasz’ ją w cel. Aby tego dokonać, obie twoje dłonie muszą być puste i wolne. Wykonaj zwykły atak Bronią Zasięgową (Miotaną), używając wartości swojej Siły Woli zamiast Zasięgu broni. Obrażenia oblicza się jak dla łuku ze strzałą, ale z twoją Premią z Siły Woli zamiast Premii z Siły. Jeśli którakolwiek strzała zrani cel, zyskujesz za te ataki najwyżej 1 Przewagę. Wzmocnienie: Za każde +2 PS możesz przywołać dodatkową strzałę, wykonując Darmowy Atak przeciwko dowolnemu stworzeniu w zasięgu i rzucając kolejny Test Broni Zasięgowej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
+  },
+  {
    "name": "Magiczna broń",
    "lore": "Tajemna",
    "cn": 2,
@@ -1686,6 +3845,17 @@
    "description": "Możesz stworzyć broń białą, której Obrażenia równe będą +Bonus z Siły Woli. Broń ta może przybrać dowolną formę i używa się jej za pomocą dowolnej posiadanej Umiejętności Broń Biała. Uznaje się ją za Magiczną.",
    "source": "Podręcznik podstawowy",
    "page": 244
+  },
+  {
+   "name": "Obserwacja",
+   "lore": "Tajemna",
+   "cn": 2,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój cel zyskuje +20 do wszystkich Testów Percepcji. Dopóki zaklęcie trwa, cel może wykonać Ocenę Sytuacji (zyskując +1 Przewagi) bez wykonywania Testu Umiejętności, choć nadal wymaga to Akcji.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
   },
   {
    "name": "Pancerz Eteru",
@@ -1721,6 +3891,28 @@
    "page": 26
   },
   {
+   "name": "Berserk",
+   "lore": "Tajemna",
+   "cn": 3,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój cel zyskuje Cechę Stworzenia Szał Bojowy (patrz s. 190).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 11
+  },
+  {
+   "name": "Języki",
+   "lore": "Tajemna",
+   "cn": 3,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Potrafisz mówić i być rozumianym w każdym powszechnie używanym języku mówionym.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
+  },
+  {
    "name": "Niszczyciel strzał",
    "lore": "Tajemna",
    "cn": 3,
@@ -1752,6 +3944,50 @@
    "description": "Wypełniasz siebie magią, budząc grozę wśród wrogów. Zyskujesz 1 poziom Strachu. Za każde 3 PS możesz zwiększyć poziom Strachu o 1.",
    "source": "Podręcznik podstawowy",
    "page": 245
+  },
+  {
+   "name": "Zapał",
+   "lore": "Tajemna",
+   "cn": 3,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przelewasz nadzieję i entuzjazm do umysłu żywej osoby o twoim Rozmiarze lub mniejszej. Cel zyskuje 2 Przewagi i otrzymuje premię +10 do wszystkich Testów opartych na Sile Woli i Ogładzie. Zaklęcie nie działa na stworzenia posiadające którąkolwiek z tych Cech: Zwierzęcy, Demoniczny, Niewrażliwość na Psychologię, Bezmyślny, Ożywieniec. Wzmocnienie: Za każde +2 PS możesz zwiększyć wpływ na cechy o kolejne +10.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
+  },
+  {
+   "name": "Zniechęcenie",
+   "lore": "Tajemna",
+   "cn": 3,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Zaszczepiasz w umyśle żywej osoby o twoim Rozmiarze lub mniejszej uczucie beznadziei i przygnębienia. Cel traci 2 Przewagi i otrzymuje karę -10 do wszystkich Testów opartych na Sile Woli i Ogładzie. Zaklęcie nie działa na stworzenia posiadające którąkolwiek z tych Cech: Zwierzęcy, Demoniczny, Niewrażliwość na Psychologię, Bezmyślny, Ożywieniec. Wzmocnienie: Za każde +2 PS możesz zwiększyć wpływ na cechy o kolejne -10.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 11
+  },
+  {
+   "name": "Śliskie podłoże",
+   "lore": "Tajemna",
+   "cn": 3,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Wskazujesz połać podłoża i oblewasz ją magiczną substancją o gęstości oleju (która jednak nie jest łatwopalna). Obszar staje się trudny do przebycia. Każde dwunożne stworzenie poruszające się po Obszarze musi zdać Wymagający (+0) Test Atletyki albo zyskuje Stan Powalenie. Upadające stworzenie musi zdać Test Zręczności albo upuszcza wszystkie przedmioty trzymane w dłoniach. Wzmocnienie: Za każde +2 PS możesz zwiększyć Trudność tego Testu o jeden stopień (np. z Wymagającego na Trudny).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
+  },
+  {
+   "name": "Alarm",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli dni",
+   "description": "Możesz rzucić to zaklęcie na dowolne miejsce lub przedmiot. Gdy jakieś stworzenie zbliży się do celu na odległość Premii z Siły Woli w metrach, natychmiast przeszywa cię świadomość zakłócenia, gdziekolwiek byś się nie znajdował.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
   },
   {
    "name": "Aura codzienności",
@@ -1820,6 +4056,17 @@
    "page": 244
   },
   {
+   "name": "Nieczuły na ból",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wchłaniasz potężną energię, która czyni cię odpornym na większość bólu. Zmniejsz Obrażenia z każdego fizycznego ciosu o 1 i zyskaj Cechę StworzeniaNie Czuje Bólu. Gdy zaklęcie się kończy, zostają zastosowane wszystkie odpowiednie efekty Trafień Krytycznych.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
+  },
+  {
    "name": "Pocisk",
    "lore": "Tajemna",
    "cn": 4,
@@ -1831,6 +4078,28 @@
    "page": 244
   },
   {
+   "name": "Przyspieszenie",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przyspieszasz zmysły swojego celu, dając mu +1 do Szybkości, +10 do Zwinności i +10 do Inicjatywy w walce. Cel objęty tym zaklęciem nie może wykonywać Testów Splatania Magii, Języka (Magicznego) ani Modlitwy. Gdy zaklęcie się kończy, cel otrzymuje Stan Zmęczenie na 1k10 minut. Wzmocnienie: Za każde +2 PS możesz zwiększyć premie do cech o +1/+10. Jeśli wzmocnisz zaklęcie o +6 PS, twój cel zyskuje ponadto dodatkową Akcję w swojej Turze.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
+  },
+  {
+   "name": "Roztrzaskanie",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Wskazujesz drzwi, przedmiot nieożywiony albo niewielką powierzchnię lub fragment muru o Obszarze równym Premii z Siły Woli w metrach. W cel uderza magiczny pocisk o Obrażeniach +10. Zaklęcie nie działa na stworzenia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
+  },
+  {
    "name": "Wybuch",
    "lore": "Tajemna",
    "cn": 4,
@@ -1840,6 +4109,17 @@
    "description": "Formujesz magię w wybuchowy podmuch. Uznawany jest on za magiczny pocisk o współczynniku Obrażeń +3 zadawanym wszystkim celom w Zasięgu.",
    "source": "Podręcznik podstawowy",
    "page": 245
+  },
+  {
+   "name": "Zagrzanie do boju",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Sprawiasz, że żywa osoba cierpiąca na Stan Panika oraz Strach i/lub Grozę natychmiast się pozbiera. Objęty zaklęciem cel może poruszać się i działać normalnie, gdy nadejdzie jego Tura, oraz zyskuje +1 Przewagi.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
   },
   {
    "name": "Zgniłe i pełne much korzenie",
@@ -1862,6 +4142,28 @@
    "description": "Przeprowadzasz magiczne śledztwo, aby sprawdzić, czy przedmiot jest przeklęty. Udane zidentyfikowanie przeklętego przedmiotu pozwala odkryć jego sekrety: fakt, że jest przeklęty, szczegóły jego właściwości i sprowadzanych przezeń nieszczęść oraz sposób, w jaki klątwa zostaje wyzwolona. Ci, chcesz zidentyfikować klątwę, musisz zdać Wymagający (+0) Test Inteligencji. W przypadku niepowodzenia zostajesz wystawiony na kontakt z Umiarkowanym Źródłem Spaczenia (WFRP, strona 183) z powodu dodatkowych złośliwych zabezpieczeń, które wprowadzono w przeklęty przedmiot. Uwaga: Chociaż klątwa została zidentyfikowana, wciąż pozostaje w mocy. Aby ją przerwać, należy przeprowadzić rytuał Zdjęcie klątwy (strona 33).",
    "source": "Wiatry Magii",
    "page": 26
+  },
+  {
+   "name": "Zwinne dłonie",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Wzmacniasz zdolność swojego celu do posługiwania się przedmiotami, dając mu premię +20 do Zręczności. Wzmocnienie: Za każde +2 PS możesz wybrać jeden Talent oparty na Zręczności i dać go swojemu celowi (na przykład Talent Artystyczny, Rzemieślnik, Artylerzysta, Mistrz Rzemiosła, Szybkie Przeładowanie lub Złota Rączka) albo dodać kolejny poziom wybranego Talentu.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 11
+  },
+  {
+   "name": "Złowrogi dotyk",
+   "lore": "Tajemna",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "Specjalny Czas: Natychmiastowy",
+   "duration": "",
+   "description": "Porażasz jeden żywy cel dręczącą energią, zadając magiczny pocisk o Obrażeniach równych podwojonej Premii z Zręczności. Energia niesie ze sobą jeden dodatkowy efekt do twojego wyboru, zastępujący wszelkie efekty Tradycji: Zimno: Cel zyskuje Stan Oszołomienie za każde pełne 5 utraconych punktów Żywotności (minimum 1). Zgodne Tradycje: Śmierci, Elementalizmu, Niebios, Życia, Nekromancji, Slaanesha. Korozja:Dotknięty przedmiot (zbroja lub broń) otrzymuje 1 punkt Obrażeń za każde pełne 5 utraconych punktów Żywotności (minimum 1). Zgodne Tradycje: Demonologii, Metalu, Nekromancji, Nurgla, Spaczenia, Czarownictwa. Zepsucie: Cel musi zdać Łączony Wymagający (+0) Test Odporności/Opanowania albo zyskuje 1 punkt Zepsucia za każdy nieudany Test. Jeśli zaklęcie miałoby wywołać Test na Mutację, jest to Test Ciężki (-20). Zgodne Tradycje: Demonologii, Nekromancji, Nurgla, Slaanesha, Tzeentcha, Spaczenia. Osłabienie: Wszelkie zadane Obrażenia ignorują Premię z Wytrzymałości. Cel otrzymuje Stan Zmęczenie za każde pełne 5 utraconych punktów Żywotności (minimum 1). Zgodne Tradycje: Śmierci, Nekromancji, Czarownictwa. Ogień: Wszelkie zadane Obrażenia ignorują Punkty Zbroi. Cele zyskują Stan Podpalenie. Zgodne Tradycje: Elementalizmu, Ognia, Niebios, Guślarstwa, Światła, Metalu. Elektryczność: Wszelkie zadane Obrażenia ignorują Punkty Zbroi. Cele otrzymują Stan Oszołomienie. Zgodne Tradycje: Demonologii, Elementalizmu, Niebios, Życia, Metalu, Czarownictwa. Nieurodzaj: Wszelkie zadane Obrażenia ignorują Punkty Zbroi. Cel musi zdać Wymagający (+0) Test Odporności albo doznaje Ropiejącej Rany. Zgodne Tradycje: Zwierząt, Nurgla, Spaczenia, Czarownictwa. Trucizna: Wszelkie zadane Obrażenia ignorują Punkty Zbroi. Cele zyskują Stan Zatrucie. Zgodne Tradycje: Zwierząt, Śmierci, Nekromancji, Nurgla, Cieni, Spaczenia, Czarownictwa. Cień: Wszelkie zadane Obrażenia ignorują Punkty Zbroi. Cele zyskują Stan Pochwycenie. Zgodne Tradycje: Demonologii, Nekromancji, Cieni, Czarownictwa.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 11
   },
   {
    "name": "Żrąca krew",
@@ -1908,6 +4210,39 @@
    "page": 245
   },
   {
+   "name": "Tajemna bariera",
+   "lore": "Tajemna",
+   "cn": 5,
+   "range": "Premia z Siły Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund+",
+   "description": "Tworzysz magiczną barierę, która uniemożliwia stworzeniom przejście przez nią. Cienka bariera przybiera postać ściany o szerokości i wysokości równej Premii z Siły Woli w metrach albo całkowicie wypełnia przestrzeń odpowiednich wrót lub przejścia. Dla większości stworzeń bariera jest niemal niewidoczna — jej subtelnie migoczącą energię można dostrzec dopiero po Oszałamiającym Sukcesie (6+) w Teście Percepcji; każdy z Talentem Percepcja Magiczna ujrzy barierę odpowiadającą swojej Tradycji. Możesz przeniknąć własną barierę, zdając Przeciętny (+20) Test Splatania Magii. Stworzenie może spróbować przepchnąć się przez magiczną barierę, wygrywając Test Opanowania lub Splatania Magii przeciwstawny twojemu Splataniu Magii. Jeśli stworzenie przegra Test, zyskuje Stan Oszołomienie. Bariera nie powstrzymuje ataków Bronią Zasięgową, ale pochłania zaklęcia. Jeśli Magiczny atak uderzy w barierę, musisz zdać Test Siły Woli albo bariera zostanie rozproszona. Wzmocnienie: Za każde +2 PS możesz ułatwić swoje Testy Splatania Magii związane z barierą o jeden stopień Trudności (np. z Przeciętnego na Łatwy). Za +6 PS możesz wydłużyć Czas trwania do Premii z Siły Woli w godzinach.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
+  },
+  {
+   "name": "Ochronna aura",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Tworzysz wokół siebie aurę ochronnej energii. Każde żywe stworzenie, które chce zaatakować w zwarciu cel znajdujący się w Obszarze, musi najpierw wygrać Przeciwstawny Test Opanowania/Splatania Magii.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
+  },
+  {
+   "name": "Ociężałość",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój cel staje się powolny niczym melasa. Objęte stworzenie zyskuje Wadę Powolna przy wszystkich atakach i może poruszać się wyłącznie w tempie marszu. Szarża, Bieg, Sprint ani Ucieczka nie są dozwolone. Stworzenie może wejść w Zwarcie z przeciwnikiem, ale nie zyskuje za to premii z Przewagi.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
+  },
+  {
    "name": "Odepchnięcie",
    "lore": "Tajemna",
    "cn": 6,
@@ -1919,6 +4254,50 @@
    "page": 244
   },
   {
+   "name": "Panika",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Wzbudzasz w swoim celu nagłą chęć ucieczki, zadając Stan Panika, jeśli nie zda Testu Opanowania. Zaklęcie nie działa na stworzenia posiadające którąkolwiek z tych Cech: Zwierzęcy, Demoniczny, Niewrażliwość na Psychologię, Bezmyślny, Ożywieniec. Wzmocnienie: Za każde +2 PS możesz dodać 1 Stan Panika.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
+  },
+  {
+   "name": "Paraliż",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Próbujesz sparaliżować jedno żywe stworzenie o twoim Rozmiarze lub mniejsze. Wykonaj Przeciwstawny Test Splatania Magii/Opanowania: jeśli wygrasz, cel otrzymuje po 1 Stanie Pochwycenie i 1 Stanie Oszołomienie za każde 2 PS Testu Przeciwstawnego (minimum 1). Jeśli wygrasz o 6 PS lub więcej, cel otrzymuje Stan Utrata Przytomności na cały Czas trwania. Wzmocnienie: Za każde +2 PS możesz dodać +1 PS do swojego Testu Przeciwstawnego. Za każde +3 PS możesz zwiększyć Rozmiar objętego stworzenia o jeden stopień.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
+  },
+  {
+   "name": "Pojedynek magów",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Wciągasz się w natychmiastowe starcie umysłów z rywalizującym magiem. Jeśli cel nie posiada Umiejętności Splatanie Magii, natychmiast doznajesz Mniejszej Manifestacji. Po rozpoczęciu ty i twój cel jesteście uwięzieni w pojedynku, a wy oboje liczycie się jako posiadający Stan Zaskoczenie, dopóki starcie się nie zakończy. Na początku każdej Rundy wykonaj Przeciwstawny Test Splatania Magii. Przegrany zyskuje +1 Stan Zmęczenie; jeśli PS Testu Przeciwstawnego przewyższa jego Premię z Siły Woli, musi zdać Wymagający (+0) Test Odporności albo otrzymuje Stan Utrata Przytomności. Jeśli walczący otrzyma więcej Stanów Zmęczenie, niż wynosi jego Premia z Wytrzymałości, doznaje Stanu Utrata Przytomności. Pojedynek kończy się, gdy jeden z walczących otrzyma Stan Utrata Przytomności; gdy ktoś z zewnątrz przerwie któremuś z pojedynkujących się, przez co zerwane połączenie zadaje obu Stan Zaskoczenie; albo gdy zwycięzca danej Rundy postanowi zakończyć pojedynek — natychmiast zadając przegranemu +1 Stan Oszołomienie za każdą Rundę, którą wygrałeś. Wzmocnienie: Za każde +1 PS możesz dodać 1 PS do pierwszego Testu Przeciwstawnego, jeśli Test się powiedzie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
+  },
+  {
+   "name": "Prowokacja",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Sięgasz do wnętrza umysłu swojej ofiary i wykrzywiasz go tak, by wywołać gwałtowną reakcję emocjonalną, zadając wybraną przez siebie Wrogość, Nienawiść lub Uprzedzenie wobec konkretnego, wskazanego przez ciebie Celu. Gdy zaklęcie się kończy, wprawione w ruch wydarzenia zapewne potoczą się dalej, a ofiara może się domyślić, że przydarzyło się jej coś podejrzanego. Zaklęcie nie działa na stworzenia posiadające którąkolwiek z tych Cech: Zwierzęcy, Demoniczny, Niewrażliwość na Psychologię, Bezmyślny, Ożywieniec.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
+  },
+  {
    "name": "Seria pocisków",
    "lore": "Tajemna",
    "cn": 6,
@@ -1928,6 +4307,39 @@
    "description": "Wyzwalasz z magii wirujące i raniące cel zaklęcia kolce. Uznaje się je za magiczne pociski, które zadają +4 Obrażenia. Jeśli Seria pocisków zmniejszy Żywotność celu do 0, przenosi się na następny cel w ramach początkowego Zasięgu zaklęcia i w odległości tylu metrów od poprzedniego celu, ile wynosi Bonus z Siły Woli rzucającego, nadal zadając takie same obrażenia. Kolce mogą przeskakiwać w ten sposób tyle razy, ile wynosi Bonus z Siły Woli. Za każde 2 PS kolce mogą przeskoczyć na jeden dodatkowy cel.",
    "source": "Podręcznik podstawowy",
    "page": 245
+  },
+  {
+   "name": "Słowo nietykalności",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wypowiadasz magiczne słowo, które otula cię ochronnym płaszczem pochłaniającym Obrażenia z niemagicznych źródeł (takich jak ataki, upadek, uduszenie itp.). Nie chroni cię ono przed dodatkowymi efektami Trafień Krytycznych. Zaklęcie pochłania Obrażenia w liczbie Premii z Siły Woli + PS, po czym płaszcz się rozprasza. Wzmocnienie: Za każde +2 PS możesz zwiększyć liczbę pochłanianych Obrażeń o 1.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 14
+  },
+  {
+   "name": "Wierność",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój delikatny dotyk na chwilę uspokaja cel o twoim Rozmiarze lub mniejszy, nawet jeśli był twoim śmiertelnym wrogiem. By zaklęcie odniosło dalszy skutek, cel musi rozumieć twój język, nie może być Niewrażliwy na Psychologię ani posiadać Cech Stworzenia Zwierzęcy, Demoniczny, Szał Bojowy, Bezmyślny, ani Ożywieniec. Jeśli wygrasz Przeciwstawny Test Siły Woli, stworzenie natychmiast uznaje cię za sprzymierzeńca i można je poprosić o pomoc w walce lub o wykonanie zadań stosownych do jego zdolności i charakteru. Na przykład szlachcic nie wykona pracy służącego, a obowiązkowy żołnierz nie odbierze życia swojemu dowódcy. Nie można też nakazać stworzeniu zrobienia czegoś nadmiernie szkodliwego dla jego zdrowia, jak skok z mostu czy wyzwanie smoka na pojedynek. Taka prośba natychmiast przerywa zaklęcie. Gdy zaklęcie się kończy, stworzenie pamięta wszystko, co zaszło. Wzmocnienie: Za każde +2 PS możesz zwiększyć swój wynik w Teście Przeciwstawnym o +1 PS. Za każde +4 PS możesz zwiększyć objęty Rozmiar o jeden stopień.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 10
+  },
+  {
+   "name": "Wypaczenie cudu",
+   "lore": "Tajemna",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Wystrzeliwuje z ciebie wroga energia, która mknie ku celowi działającego Cudu. Cud natychmiast się kończy, a wszystkie jego efekty zostają zniweczone.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
   },
   {
    "name": "Zionięcie",
@@ -1974,6 +4386,17 @@
    "page": 245
   },
   {
+   "name": "Kradzież aury",
+   "lore": "Tajemna",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz parę migotliwych magicznych dłoni, które rzucają się na twój cel — musi nim być pojedyncze stworzenie chronione magicznym zaklęciem lub aurą. Wykonaj Przeciwstawny Test Splatania Magii/Opanowania przeciwko wskazanemu stworzeniu. Jeśli wygrasz, migotliwe dłonie zdzierają z celu ochronne czary i przekazują je tobie. Czas trwania skradzionego zaklęcia zostaje teraz odliczony od nowa, według twojego Profilu. Nie zyskujesz żadnych korzyści z Tradycji skradzionego zaklęcia. Przykłady zaklęć ochronnych to: Magiczna ochrona przed deszczem, Pancerz Eteru, Niszczyciel strzał, Kopuła, Magiczna tarcza, Aura codzienności, Magiczna ochrona, Ukojenie, Nieczuły na ból, Ochronna aura, Słowo nietykalności, Skóra łowcy, Purpurowy całun, Tarcza Aqshy, Oczyszczający płomień, Niebiańska tarcza, Lśniąca szata, Skóra z kory, Regeneracja, Wypędzenie, Magiczna ochrona Phâ, Całun niewidzialności. Wzmocnienie: Za każde +2 PS możesz dodać 1 PS do swojego Testu Przeciwstawnego.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 13
+  },
+  {
    "name": "Lot",
    "lore": "Tajemna",
    "cn": 8,
@@ -1983,6 +4406,17 @@
    "description": "Możesz latać – dzięki eterycznym skrzydłom, w kolumnie magicznego światła lub w inny odpowiedni dla Tradycji sposób. Zyskujesz Cechę Stworzenia Latanie (Zwinność) (strona 339).",
    "source": "Podręcznik podstawowy",
    "page": 244
+  },
+  {
+   "name": "Stłumienie",
+   "lore": "Tajemna",
+   "cn": 8,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Natychmiast blokujesz w umyśle innej żywej postaci wspomnienie określonego wydarzenia. Musisz znać szczegóły tego wydarzenia i móc porozumieć się z postacią w języku, który ona rozumie. Jeśli zablokowane wspomnienie ma przerażającą naturę, postać będzie miewać koszmary mgliście przywodzące je na myśl. Po każdym nocnym odpoczynku ofiara może wykonać Bardzo Trudny (-30) Test Inteligencji, by odzyskać swoje wspomnienie; jeśli je odzyska, postać musi wykonać Trudny (-10) Test Opanowania albo zyskuje punkt Zepsucia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 12
   },
   {
    "name": "Zakłócenie magii",
@@ -1996,6 +4430,127 @@
    "page": 26
   },
   {
+   "name": "Dezorientowanie (Tajemna Chaosu)",
+   "lore": "Tajemna Chaosu",
+   "cn": 2,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój dotyk wysysa energię z ciała celu. Czuje on senność i otępienie, zyskując +1 Stan Zmęczenie na czas trwania zaklęcia.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 31
+  },
+  {
+   "name": "Stłumienie mutacji",
+   "lore": "Tajemna Chaosu",
+   "cn": 5,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Dotykasz jedno zmutowane stworzenie i kierujesz Dhar tak, by odmienił jego postać. Dopóki zaklęcie trwa, Twój cel traci jedną fizyczną Mutację. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec , ani na stworzenia pozbawione mutacji. Przemiana Kadona (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej. Wir Chaosu (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
+  },
+  {
+   "name": "Mroczna dłoń zniszczenia",
+   "lore": "Tajemna Chaosu",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Z palców Twojej dominującej dłoni wyrastają długie szpony z Dharu , tworząc broń, która liczy się jako Magiczna i zadaje Obrażenia równe Twojej Premii z Siły Woli. Twój atak zyskuje Zalety broni Nadziewająca i Przekłuwająca, nawet jeśli nie posiadasz Umiejętności Broń Biała (Bijatyka).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 31
+  },
+  {
+   "name": "Mroźny wicher",
+   "lore": "Tajemna Chaosu",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przemieniasz Dhar w mrożącą dusze wichurę, która przenika wszystkie cele chłodem do szpiku kości. Każdy objęty Obszarem traci 1k10 + Premia z Siły Woli punktów Żywotności, zmodyfikowanych przez Premię z Wytrzymałości (minimum 1). Za każde pełne 5 utraconych punktów Żywotności cel zyskuje +1 Stan Oszołomienie. Efekty te działają w każdej Rundzie, dopóki zaklęcie trwa. Możesz poświęcić swoją Akcję, by zdać Przeciętny (+20) Test Splatania Magii i przesunąć wicher o 1k10+2 metry w wybranym przez siebie kierunku. Wzmocnienie: Za każde +2 PS możesz zwiększyć Obrażenia o +1. Demoniczne oblicze Patrz Enemy in Shadows Companion, s. 79.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 31
+  },
+  {
+   "name": "Pocisk zagłady",
+   "lore": "Tajemna Chaosu",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Przyzywasz z Eteru wrzący pocisk Dharu i ciskasz nim w swój cel. Liczy się to jako magiczny pocisk o Obrażeniach +5, który ignoruje Punkty Zbroi. Magia zadaje też potworny ból: Twój cel musi zdać Wymagający (+0) Test Odporności, inaczej zyskuje Stan Powalenie i 1 Stan Oszołomienie. Za każde +2 PS możesz utrudnić Test Odporności o jeden stopień (czyli z Wymagającego na Trudny) albo dodać +1 Stan Oszołomienie. Stworzenie z Cechą Nie Czuje Bólu automatycznie zdaje Test Odporności. Plugawy posłaniec Patrz Enemy in Shadows Companion, s. 80. Radosne oblicze Patrz Enemy in Shadows Companion, s. 80.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
+  },
+  {
+   "name": "Wyssanie duszy",
+   "lore": "Tajemna Chaosu",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Specjalny",
+   "description": "Sprawiasz, że w obranym za cel obszarze na 1 Rundę formuje się przerażająca czarna chmura. Wszystkie stworzenia w Obszarze otrzymują magiczny pocisk o Obrażeniach +4, ignorujący Punkty Zbroi. Zsumuj wszystkie zadane punkty Żywotności: za każde 2 zadane punkty odzyskujesz 1 punkt Żywotności. Zauważ, że możesz w ten sposób przekroczyć swoje maksimum Żywotności — nadwyżka utrzymuje się, dopóki jej nie stracisz albo nie pójdziesz spać.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
+  },
+  {
+   "name": "Śmiertelny skurcz",
+   "lore": "Tajemna Chaosu",
+   "cn": 9,
+   "range": "Premia z Siły Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Z Twoich palców wystrzeliwuje złowroga iskra ciemności, która uderza w pobliski cel. Ofiara musi zdać Bardzo Trudny (-30) Test Odporności, inaczej natychmiast otrzymuje Trafienie Krytyczne w trafioną Lokację. Każdy PS nieudanego Testu dodaje +5 do rzutu na Tabeli Trafień Krytycznych. Skurcze są tak gwałtowne, że każdy w zasięgu walki wręcz musi zdać Wymagający (+0) Test Inicjatywy , inaczej zyskuje Stan Zaskoczenie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
+  },
+  {
+   "name": "Przekleństwo Nagasha (Tajemna Chaosu)",
+   "lore": "Tajemna Chaosu",
+   "cn": 10,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Natychmiastowy",
+   "description": "Rzucasz na swój cel mroczne klątwy, a Twoja magia rozcina jego ciało niezliczonymi drobnymi ranami i szramami. Każdy w Obszarze zyskuje 1 + PS Stanów Krwawienie. Wszystkie cele muszą zdać Bardzo Trudny (-30) Test Odporności, inaczej zyskują 2 Stany Oszołomienie. Gdy wszystkie Stany Oszołomienie zostaną usunięte, każdy cel musi zdać Wymagający (+0) Test Opanowania , inaczej z powodu przeżytej traumy otrzymuje 1 punkt Zepsucia Psychicznego. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec. Obsesja Patrz Enemy in Shadows Companion, s. 80. Moc Chaosu Patrz Enemy in Shadows Companion, s. 80. Rozdarcie Eteru Patrz Enemy in Shadows Companion, s. 80-81. Niewolnik ciemności Patrz Enemy in Shadows Companion, s. 81.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 32
+  },
+  {
+   "name": "Wiatr ostrzy",
+   "lore": "Tajemna Chaosu",
+   "cn": 10,
+   "range": "Specjalny",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Przywołujesz wirujący wokół Ciebie odmęt mieczy, które tną na oślep w poszukiwaniu krwi. Poświęcając swoją Akcję, możesz przesunąć tnące miecze w dowolnym kierunku o maksymalnie PS+1 metrów, zdając Wymagający (+0) Test Splatania Magii. Na koniec Twojej Tury burza mieczy wykonuje dwa Darmowe Ataki przeciwko wszystkim stworzeniom objętym Obszarem, z wyjątkiem Ciebie. Zamiast Umiejętności Broń Biała użyj swojej Umiejętności Splatania Magii. Magiczne miecze zadają Obrażenia równe Premii z Siły Woli+4 i przy udanym trafieniu nakładają +1 Stan Krwawienie . Wybuch zepsucia Patrz Enemy in Shadows Companion, s. 79. Pocisk zepsucia Patrz Enemy in Shadows Companion, s. 79.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 31
+  },
+  {
+   "name": "Groza Arnizipala",
+   "lore": "Tajemna Chaosu",
+   "cn": 16,
+   "range": "Specjalny",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Z ziemi wzbiera kłębiąca się chmura czarnych, żrących oparów, która Cię otacza. Z Domeny Chaosu wyciągają się macki czarnego dymu i smagają wszystkie stworzenia w pobliżu chmury, wciągając ofiary ku zagładzie. Ci, którzy mają Talent Magia Chaosu albo Cechy Stworzenia Demoniczny, Eteryczny lub Ożywieniec, są odporni na działanie chmury. Dopóki zaklęcie trwa, czarna chmura sunie naprzód i niestrudzenie szuka nowych ofiar, poruszając się i działając na koniec Twojej Tury. Przesuwa się o 1k10+2 metry w stronę największego skupiska potencjalnych celów (wedle uznania MG); możesz też, poświęcając swój Ruch, wybrać jej kierunek. Każdy, kto doświadcza lub widzi działanie chmury, podlega Strachowi 3. Każdy dotknięty przez chmurę otrzymuje 1k10+6 Obrażeń, ignorujących Punkty Zbroi (minimum 1). Na początku każdej Rundy cele otrzymują Obrażenia od Duszenia się wywołane trującymi oparami. Ponadto chmura wypuszcza dymne macki, by pochwycić każdego wewnątrz Obszaru lub w promieniu 2 metrów od niego, nakładając na wszystkie cele +1 Stan Pochwycenie (o Sile równej Twojej Sile Woli) w każdej Rundzie. Efekt ten jest stały i natychmiastowy. Cel, który zyska więcej Stanów Pochwycenie, niż wynosi jego Premia z Siły, zostaje wessany do Domeny Chaosu, gdzie ginie straszliwą śmiercią. Można wydać Punkt Przeznaczenia, by uniknąć śmierci, ale postać zostaje wyłączona z gry do czasu, który MG uzna za stosowny. Uwięzienie w Domenie Chaosu liczy się jako Poważny Wpływ Zepsucia z modyfikatorem Bardzo Trudny (-30). Gdy postać wydostanie się z chmury, musi wykonać Test narażenia na Zepsucie. Jedna Runda w środku liczy się jako Zepsucie (Drobne), dwie Rundy jako Zepsucie (Umiarkowane), a trzy Rundy jako Zepsucie (Poważne). Co więcej, istnieje szansa, że jej dobytek uległ korozji i zgnił. Wszelka żywność i płyny są całkowicie zepsute, w tym magiczne mikstury. Za każdą Rundę spędzoną wewnątrz chmury istnieje +10% szansy, że ubrania, torby i podobne Wyposażenie ulegną zniszczeniu, oraz +5% szansy, że zniszczeniu ulegnie broń i amunicja. MG powinien ustalić, czy inne przedmioty ucierpiały podobnie. Magiczne przedmioty, bronie i zbroje pozostają nietknięte.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 31
+  },
+  {
+   "name": "Nadanie błogosławieństwa odmieńca",
+   "lore": "Tzeentcha",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Inteligencji dni",
+   "description": "Gdy dotykasz swojego celu, przepływa przez Ciebie wola Tzeentcha, zsyłając drobną i uciążliwą widoczną mutację wedle Twojego wyboru. Cel wykonuje Łączony Wymagający (+0) Test Opanowania/Odporności. Jeśli nie zda Testu Opanowania, zyskuje punkt Zepsucia Psychicznego. Jeśli nie zda Testu Odporności, dotyka go wybrana mutacja. „Drobna” mutacja może być czymkolwiek — od trzeciego oka na czole, przez powiększone uszy, po dodatkowe palce u dłoni. Czymkolwiek by nie była, da premię +10 do jednej odpowiedniej Umiejętności lub Cechy, wedle uznania MG (przykłady znajdziesz w Tabeli Zepsucia Fizycznego ). Naznaczy jednak także cel jako stworzenie Chaosu, obniżając jego Ogładę o -30 w niektórych kręgach towarzyskich i być może zwracając uwagę Łowców Czarownic oraz rozwścieczonego motłochu. Błękitny ogień Tzeentcha Patrz Enemy in Shadows Companion, s. 82. Pocisk przemiany Patrz Enemy in Shadows Companion, s. 82. Dar Tzeentcha Patrz Enemy in Shadows Companion, s. 81. Uwaga: Zaklęcie to bywa też nazywane Podarunkiem Tzeentcha. Klątwa Tzeentcha Patrz Enemy in Shadows Companion, s. 82.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 36
+  },
+  {
    "name": "Zdradliwość Tzeentcha",
    "lore": "Tzeentcha",
    "cn": 6,
@@ -2005,6 +4560,193 @@
    "description": "Kierujesz zwiewne pasma zdradziecko splecionych Wiatrów Magii prosto w umysł swojego celu, wypaczając motywacje, osłabiając pragnienia i rozpalając ognie niezadowolenia. Cel nie może używać Talentów ani Rozwinięć Umiejętności podczas wykonywania Testów, co oznacza, że przeprowadza się je jedynie z podstawowymi Cechami.",
    "source": "Podręcznik podstawowy",
    "page": 258
+  },
+  {
+   "name": "Koszmarna rzeczywistość",
+   "lore": "Tzeentcha",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Obszar (Premia z Inteligencji metrów)",
+   "duration": "Inteligencja minut",
+   "description": "Dhar wylewa się z Ciebie, odmieniając wygląd otaczającego Cię obszaru. Przerażająca iluzja przemieszcza się wraz z Tobą. Drzewa wyginają się i wykrzywiają, kora układa się w szydercze lub wykrzywione grymasem twarze, w kamieniarce zdają się formować chwytające dłonie, a martwe przedmioty wyglądają, jakby przepełniał je złowrogi zamiar. Każdy, kto nie ma Talentu Percepcja Magiczna, a zobaczy obrany za cel obszar, musi zdać Wymagający (+0) Test Opanowania , inaczej podlega działaniu Grozy (1 + PS). Nieudany Test powoduje też liczbę punktów Zepsucia równą Twojej Premii z Siły Woli. Ci, którzy mają Percepcję Magiczną, mogą zdać Trudny (-10) Test Percepcji,by pojąć, że to iluzja, choć nie przejrzą przez nią. Różowy ogień Tzeentcha Patrz Enemy in Shadows Companion, s. 83. Purpurowa dłoń Patrz Enemy in Shadows Companion, s. 81. Wyczucie nici losu Patrz Enemy in Shadows Companion, s. 83. Przemiana Tzeentcha Patrz Enemy in Shadows Companion, s. 83.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 36
+  },
+  {
+   "name": "Zniszczenie magii",
+   "lore": "Tzeentcha",
+   "cn": 9,
+   "range": "Premia z Inteligencji metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli minut",
+   "description": "Kierujesz kapryśną władzę Tzeentcha nad magią na pojedynczy magiczny artefakt w Zasięgu. Wykonaj Test Przeciwstawny Splatania Magii/Siły Woli przeciwko wybranemu przedmiotowi (patrz Unof­ficial Treasure & Artefacts). Jeśli wygrasz albo przedmiot nie ma wartości Siły Woli, traci on całą swoją magię i na czas trwania zaklęcia staje się zwykłym przedmiotem. Jeśli wygrasz o 6+ PS, efekt jest trwały. Odsysasz też część mocy magicznej dla siebie, by wykorzystać ją w zaklęciu w następnej Rundzie, tak jakbyś ją Splótł. Jest jej tyle, ile wyniósł PS Testu Przeciwstawnego. Jeśli przegrasz Test, przedmiot pozostaje nietknięty, a Ty zyskujesz PS punktów Zepsucia. Migotliwe płomienie kapryśnego losu Patrz Enemy in Shadows Companion, s. 82. Władca fortuny Patrz Enemy in Shadows Companion, s. 82. Ogień umysłu Patrz Enemy in Shadows Companion, s. 83.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 36
+  },
+  {
+   "name": "Rąbcie ich, chłopaki!",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 4,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Kierujesz wściekłość Gorka i Morka we wszystkich pobliskich Zielonoskórych. Dopóki zaklęcie trwa, wszyscy Orkowie i Gobliny w obranym obszarze dodają +1 do Obrażeń zadawanych atakami Bronią Białą, wliczając w to Trafienia Krytyczne.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Bij po łbie, chłopaki!",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 6,
+   "range": "Ty",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Podburzasz wszystkich Zielonoskórych wokół siebie. Ośmieleni Twoją magią, zaczynają walić po głowach. Dopóki zaklęcie trwa, wszystkie cele ignorują modyfikator za Trafienie w Wybraną Lokację (WFRP4 s. 161). Do automatycznego trafienia w Lokację Głowy potrzebny jest udany Test Broni Białej; w przeciwnym razie, gdy trafią, użyj wylosowanej Lokacji.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Główka",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Wykonujesz ruch, jakbyś uderzał głową, a magiczna siła wali w Lokację Głowy Twojego celu. Liczy się to jako magiczny pocisk o Obrażeniach +4, ignorujący Punkty Zbroi. Cel musi też zdać Ciężki (-20) Test Odporności albo zyskuje Stan Powalenie. Jeśli obierzesz za cel kogoś rzucającego zaklęcia, Obrażenia zaklęcia wynoszą zamiast tego +8.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Mork cię chce!",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wyczarowujesz gigantyczny zielony szpon z pulsującej dziury w niebie, wiele metrów nad głową Twojego celu. Twój cel zyskuje Stan Zaskoczenie, gdy szpon zlatuje w dół, a potem chwyta go i unosi w powietrze w tempie czterech metrów na Rundę. Gdy zaskoczenie minie, cel może wykorzystać swoją Akcję, by spróbować Testu Przeciwstawnego Siły/Splatania Magii i wyrwać się. Jeśli cel wygra, szpon wycofuje się do dziury, a cel spada na ziemię, otrzymując Obrażenia od Upadku jak przy skoku w dół. Jeśli cel nigdy się nie uwolni, zaklęcie kończy się, gdy szpon próbuje przecisnąć cel przez dziurę. Istnieje 50% szans, że cel zostanie wciągnięty do środka i nikt go już nigdy nie zobaczy (chyba że wyda Punkt Przeznaczenia).W przeciwnym razie cel spada na ziemię, otrzymując Obrażenia od Upadku.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Mózgotrzask",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów Cel: 1",
+   "target": "",
+   "duration": "Natychmiastowy",
+   "description": "Wypuszczasz w stronę celu pocisk siły roztapiającej mózg, zadając magiczny pocisk o Obrażeniach +6. Cel musi też zdać Wymagający (+0) Test Odporności albo zyskuje Stan Oszołomienie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "No to jazda!",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wzywasz Gorka i Morka, by obdarzyli Twoje cele większą szybkością i wytrzymałością. Dopóki zaklęcie trwa, cele zyskują +2 do Szybkości, +10 do Wytrzymałości (a tym samym +2 punkty Żywotności) oraz +20 do Inicjatywy w walce.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Spojrzenie Morka",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 6,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Twoje oczy świecą zielenią mocy Waaagh!, a Ty wyzwalasz niszczycielski wybuch kipiącej energii magicznej. Promień ma metr szerokości i sięga tak daleko, jak wynosi Twoja Siła Woli w metrach. O ile nie pochłonie go nieożywiony obiekt o Premii z Wytrzymałości 6 lub wyższej, promień zniszczy i przebije każdą słabszą przeszkodę. Każde stworzenie na drodze promienia otrzymuje magiczny pocisk o Obrażeniach +6. Promień niszczy wszystkie Punkty Zbroi na trafionej Lokacji. Jeśli nie ma pewności, czy stworzenie znajduje się na drodze promienia, rzuć 1k10: 1-5 chybienie, 6-10 trafienie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Dłoń Gorka",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 8,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Specjalny)",
+   "duration": "Natychmiastowy",
+   "description": "Twoje oczy wywracają się na białka, a ogromna dłoń z upiornej zieleni materializuje się, by porwać Twoich sojuszników i postawić ich tam, gdzie walka jest najzacieklejsza. Możesz obrać za cel grupę zielonoskórych sojuszników mieszczącą się w Obszarze o promieniu Premii z Siły Woli metrów w zasięgu. Dłoń Gorka strząśnie wszystkich związanych z nimi walką wrogów: liczy się to jako darmowe Wycofanie dla wszystkich celów. Wybierasz obszar w zasięgu, w którym sojusznicy zostaną postawieni.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Pięści Gorka",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 8,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Świecisz jaskrawą zielenią, gdy moc Gorka przepływa przez Twoje ciało. Zyskujesz +20 do Siły oraz Cechę Stworzenia Czempion, gdy atakujesz i bronisz się pięściami. W ramach swojej Akcji możesz wykonać osobne ataki każdą z pięści, bez kary za słabszą rękę. Każde zadane trafienie uruchamia zasadę Śmiertelnego Ciosu (patrz WFRP4 s. 160), niezależnie od Twojego rozmiaru.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Twardy jak skała",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 9,
+   "range": "Siła Woli metrów",
+   "target": "Premia z Ogłady Orków",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Moc Waaagh! hartuje Twoje cele, zwiększając ich Premię z Wytrzymałości o +2 i dając im Cechy Stworzenia Nie Czuje Bólu oraz Ochrona 6+. Za każdym razem, gdy Ochrona powstrzyma cios, zwiększ Poziom dla wszystkich celów o 1 (na przykład z 5+ na 6+).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Chrupot",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 10,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Specjalny)",
+   "duration": "Natychmiastowy",
+   "description": "Otwierasz pulsującą dziurę w niebie, z której wyłania się ogromna stopa Gorka, by tupnąć i rozgnieść Twoich wrogów. Obszar stopy ma około 6 metrów długości i 4 metry szerokości, a rozmieszczasz go wedle uznania. Wszystkie cele otrzymują magiczny pocisk o Obrażeniach +12 i zyskują Stan Powalenie . (Zaklęcie to znane jest również jako Stopa Gorka.)",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Waaaaaagh!",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 10,
+   "range": "Ty",
+   "target": "Obszar (Siła Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Moc Waaagh! przepływa przez Ciebie niepowstrzymanym potokiem magicznej energii. Wszyscy Orkowie i Gobliny w zasięgu dodają +20 do swojej Walki Wręcz i zyskują Talent Nieustraszony (Wszystko) , dopóki zaklęcie trwa. Ponadto każdy rzucający zaklęcia w zasięgu musi wygrać z Tobą Test Przeciwstawny Splatania Magii albo traci 2k10 punktów Żywotności, ignorując Premię z Wytrzymałości i Punkty Zbroi.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Wznieś wielkiego bożka",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wytężając całą swoją magiczną moc, wyczarowujesz bożka Gorka (a może Morka), który wyrasta z ziemi. Pod kamiennym spojrzeniem bożka sojuszniczy Zielonoskórzy w promieniu Siły Woli metrów od niego nabierają ochoty do jeszcze większej przemocy i zyskują dodatkowy +1 Przewagi przy Szarży. Cele mogą odwracać kość przy wszystkich atakach Bronią Białą i Bronią Zasięgową, wybierając korzystniejszy wynik.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
+  },
+  {
+   "name": "Złe słońce",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 12,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Premia z Siły Woli metrów)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Splatasz wielką moc i wyczarowujesz płonący rdzeń energii, który ma potężne kły i szydercze oblicze. Obierasz punkt w zasięgu i posyłasz złe słońce, by roztrzaskało się o ziemię. Wszystkie cele w Obszarze zostają trafione magicznym pociskiem o Obrażeniach +12 i zyskują +1 Stan Podpalenie oraz Stan Powalenie. Po pierwszym uderzeniu zaklęcie nie zachowuje się już jak magiczny pocisk, ale ognie płoną dalej, dopóki zaklęcie trwa. Każdy, kto wejdzie w Obszar, a także każdy, kto się w nim znajduje na początku Rundy, zyskuje +1 Stan Podpalenie .",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 51
+  },
+  {
+   "name": "Potężny wielki chrupot",
+   "lore": "Wielkiego Waaagh!",
+   "cn": 14,
+   "range": "Siła Woli metrów",
+   "target": "Obszar (Specjalny)",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Wznosisz ramiona ku niebu i dziko gestykulujesz. Pojawia się wszechmocna zielona stopa Gorka i rozpoczyna niebezpieczny pochód tupania. Gdy stopa pojawia się po raz pierwszy, efekt jest dokładnie taki sam jak przy zaklęciu Chrupot. Obszar stopy ma 6 metrów długości i 4 metry szerokości, a rozmieszczasz go wedle uznania. Wszystkie cele otrzymują magiczny pocisk o Obrażeniach +12 i zyskują Stan Powalenie . Na początku każdej kolejnej Rundy, aż zaklęcie się skończy, rzuć na tabeli reakcji Gorka: 1k10 Stopa Gorka 1 Gork „potyka się”i depcze Ciebie! Gork „potyka się”i depcze Twoich zielonoskórych sojuszników! MG losowo ustala pierwszy cel. 3-6 Gorkowi się nudzi i odchodzi w losowym kierunku. Stopa porusza się tak, jakby należała do istoty tytanicznych rozmiarów. MG ustala wszelkie inne skutki (takie jak zmiażdżeni wieśniacy, roztratowane domy, przewrócona wieża itp.). Jeśli na drodze stopy znajdą się jakiekolwiek takie cele, istnieje 33% szans, że zostaną zniszczone przez rozszalałą stopę. 7-10 Gork depcze innego z Twoich wrogów, wybranego losowo.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 52
   },
   {
    "name": "Rozpylenie piżma",
@@ -2216,6 +4958,17 @@
    "page": 146
   },
   {
+   "name": "Długi sen zimy",
+   "lore": "Zwierząt",
+   "cn": 8,
+   "range": "Dotyk",
+   "target": "Specjalny Czas: Specjalny",
+   "duration": "",
+   "description": "Twój dotyk sprawia, że chętne stworzenie o twoim Rozmiarze lub mniejsze zapada w głęboki sen przypominający niedźwiedzią hibernację. Hibernacja trwa wiele miesięcy, aż do najbliższego przesilenia lub równonocy. Cel nie musi jeść ani pić. Wszelkie choroby, trucizny i podobne dolegliwości, na które cierpi postać, zostają wstrzymane, a ich niszczące działanie spowalnia niemal do zera. Obecne kary pozostają jednak w mocy. Naturalne leczenie przebiega normalnie. Celu nie da się obudzić przed wygaśnięciem zaklęcia, chyba że zostanie ono rozproszone. Możesz rzucić to zaklęcie także na siebie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 14
+  },
+  {
    "name": "Księżyce łowcy",
    "lore": "Zwierząt",
    "cn": 8,
@@ -2357,6 +5110,17 @@
    "description": "Przyzywasz dwa ogary stróżujące, stworzone z fioletowego cienia. Psów nie da się dostrzec, po prostu na nie patrząc, ale postać, która zda Trudny (−20) Test Percepcji, może na chwilę ujrzeć ogary jako śliniące się bestie o ostrych jak igły kłach. W twojej Turze psy mogą zaatakować wrogów znajdujących się w promieniu 4 metrów od ciebie. Każdy ogar ma Umiejętność Broń Biała równą 50 oraz Cechę Stworzenia Broń (Ugryzienie) +8. Psów nie da się zaatakować i nie mogą one zdobywać Przewagi.",
    "source": "Wiatry Magii",
    "page": 122
+  },
+  {
+   "name": "Klątwa grabieżcy grobów",
+   "lore": "Śmierci",
+   "cn": 5,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Specjalny",
+   "description": "Przesycasz pojedyncze zwłoki, grobowiec lub miejsce pochówku długotrwałą klątwą Shyish. Każdy, kto zbezcześci ciało lub to miejsce w ciągu następnego roku, zyskuje punkt Zepsucia i cierpi na Stan Zmęczenie przez 1k10 dni.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 15
   },
   {
    "name": "Odrętwienie",
@@ -2667,6 +5431,17 @@
    "page": 62
   },
   {
+   "name": "Moc prawdy",
+   "lore": "Światła",
+   "cn": 6,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój cel zostaje przepełniony przekonującą pewnością prawdy i słuszności — ale wyłącznie wtedy, gdy mówi szczerze (zgodnie z tym, co wie lub w co wierzy). Jeśli tak jest, cel zyskuje premię +40 do Testów Charyzmy oraz maksymalną dla siebie liczbę wykupień Talentów Krasomówstwo i Mówca . Wpływ tego zaklęcia nie jest widoczny dla innych, nie ma więc łatwego sposobu, by ocenić szczerość celu. Możesz rzucić to zaklęcie na siebie.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 16
+  },
+  {
    "name": "Oczy Volansa",
    "lore": "Światła",
    "cn": 6,
@@ -2687,6 +5462,17 @@
    "description": "Napełniasz jedno źródło światła oczyszczającą magią. Wszyscy w zasięgu tego światła otrzymują Talent Odporny na (Choroby). Co więcej, czarodzieje dostają premię do rozpraszania zaklęć Magii Czarnoksięskiej i Chaosu równą liczbie PS uzyskanych w twoim Teście Rzucenia Zaklęcia. Zasięg i Czas trwania tego zaklęcia zależą od źródła światła, na które zostało rzucone (WFRP, strona 309), do maksymalnie półtora kilometra i jednego dnia.",
    "source": "Wiatry Magii",
    "page": 63
+  },
+  {
+   "name": "Świetlista broń",
+   "lore": "Światła",
+   "cn": 6,
+   "range": "Dotyk",
+   "target": "Specjalny",
+   "duration": "Premia z Siły Woli rund",
+   "description": "Twój dotyk spowija niemagiczną broń białą powłoką jaskrawego światła. Broń liczy się jako magiczna, zyskuje premię do Obrażeń równą twojej Premii z Siły Woli oraz Zaletę Niełamliwa. Każdy zaatakowany tą bronią liczy się jako cel zaklęcia Tradycji. Z powodu jasnego blasku dzierżyciel tej broni automatycznie oblewa wszystkie Testy Skradania.",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 16
   },
   {
    "name": "Natchnienie",

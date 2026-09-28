@@ -457,7 +457,6 @@
       "Ogd"
     ],
     "professions": {
-      "Czarodziej": 3,
       "Piromanta": 1,
       "Hierofant": 1,
       "Alchemik": 1,
@@ -466,7 +465,9 @@
       "Iluzjonista": 1,
       "Spirytysta": 1,
       "Szamanka": 1,
-      "Magister Rewizor": 0.5
+      "Magister Rewizor": 0.5,
+      "Elementalista": 1,
+      "Czarodziej": 0.01
     },
     "keySkills": [
       "Splatanie Magii",
@@ -529,7 +530,8 @@
       "Czarownica": 4,
       "Guślarz": 3,
       "Mistyczka": 1,
-      "Jasnowidząca": 1
+      "Jasnowidząca": 1,
+      "Kapłan Druidzki": 2
     },
     "keySkills": [
       "Splatanie Magii",

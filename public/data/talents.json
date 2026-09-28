@@ -1995,5 +1995,15 @@
     "tests": "Percepcja (Wzrok)",
     "description": "Dar Tzeentcha. Jako Akcję badasz przeciwników w walce; w następnej Turze twoje ataki wręcz ignorują ich Bonus z Wytrzymałości i Punkty Pancerza. Liczba badanych przeciwników = poziom Talentu.",
     "source": "Warriors of Chaos (Ratter)"
+  },
+  "Duchowy Chowaniec": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": null,
+    "source": "Grimuar (nieoficjalny), s. 20",
+    "description": "Duch zwierzęcia z twojej wizji staje się twoim chowańcem — podąża za tobą i przynosi korzyści w zamian za przestrzeganie Nakazów Starej Wiary. Zwierzęta z gatunku chowańca reagują na ciebie obojętnie albo przyjaźnie. Druid musi mieć ten Talent, by rzucać zaklęcia."
   }
 }

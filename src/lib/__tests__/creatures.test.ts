@@ -162,6 +162,39 @@ describe("rozwoj bestii", () => {
     expect(s.spells.length).toBeGreaterThan(0);
   });
 
+  it("wampir dostaje Linie Krwi, 6 Slabosci, Dary Krwi wg poziomu, Wiek i nekromancje", () => {
+    const v = generateNpc({ creature: "Wampir", tier: "heroiczny" }, seedRng(2));
+    const kinds = (k: string) => v.mutations.filter((m) => m.kind === k);
+    expect(kinds("bloodline")).toHaveLength(1);
+    expect(kinds("weakness")).toHaveLength(6);
+    expect(kinds("blood")).toHaveLength(gd.getVampires()!.giftsPerTier.heroiczny);
+    expect(v.traits).toContain("Wiek (5)");
+    expect(v.spells.some((s) => gd.getSpell(s)?.lore === "Nekromancji")).toBe(true);
+    const line = gd.getVampires()!.bloodlines.find((b) => b.name === kinds("bloodline")[0].name)!;
+    expect(kinds("weakness").map((m) => m.name).sort()).toEqual([...line.weaknesses].sort());
+    // modyfikatory linii (np. Nekrarcha +30 Int) dzialaja jak mutacje
+    const npc = bookNpc(gd.getCreature("Wampir")!);
+    const before = computeNpc(npc).chars.Int.total;
+    npc.mutations = [{ kind: "bloodline", name: "Nekrarcha" }];
+    expect(computeNpc(npc).chars.Int.total).toBe(before + 30);
+    expect(generateNpc({ creature: "Wilk", tier: "sredni" }, seedRng(2)).mutations.some((m) => m.kind === "bloodline")).toBe(false);
+  });
+
+  it("zaklecia Grimuaru: elementalista, druid, skaveny i zielonoskorzy maja swoje tradycje", () => {
+    const lores = new Set(gd.getSpellsData().spells.map((s) => s.lore));
+    for (const l of ["Elementalizmu", "Pór Roku", "Prosta (Druidzka)", "Spaczenia", "Wielkiego Waaagh!", "Tajemna Chaosu"]) {
+      expect(lores.has(l), l).toBe(true);
+    }
+    const el = generateNpc({ archetype: "Czarodziej", tier: "zaawansowany", race: "Człowiek", professions: ["Elementalista"] }, seedRng(4));
+    expect(el.spells.some((s) => gd.getSpell(s)?.lore === "Elementalizmu")).toBe(true);
+    // Ogolny Czarodziej zostaje tylko dla elfow (8 tradycji jest dla ludzi).
+    for (let seed = 1; seed <= 60; seed++) {
+      const w = generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Człowiek" }, seedRng(seed));
+      expect(w.careerPath.some((s) => s.profession === "Czarodziej")).toBe(false);
+    }
+    expect(generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Wysoki elf" }, seedRng(1)).careerPath.length).toBeGreaterThan(0);
+  });
+
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {
     const orc = generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "sredni" }, seedRng(3));
     expect(orc.careerPath.length).toBe(2);
