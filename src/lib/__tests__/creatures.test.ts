@@ -105,7 +105,8 @@ describe("rozwoj bestii", () => {
     const tiers = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny"] as const;
     for (const c of gd.getCreatures().filter((x) => !gd.isCivilized(x.name))) {
       let prev: ReturnType<typeof computeNpc> | null = null;
-      for (const tier of tiers) {
+      // Ponizej minimalnego poziomu stworzenie i tak jest podnoszone do minimum.
+      for (const tier of tiers.slice(tiers.indexOf(c.minTier ?? "slaby"))) {
         const npc = generateNpc({ creature: c.name, tier, deterministic: true, randomTraits: false }, seedRng(5));
         npc.traits = [];
         npc.mutations = [];

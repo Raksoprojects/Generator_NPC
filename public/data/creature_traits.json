@@ -627,5 +627,30 @@
     "description": "W ramach Ruchu może przekopać się tyle metrów, ile wynosi wartość; biorąc je na cel, zwiększ dystans o 2 poziomy.",
     "source": "Imperialny Zwierzyniec",
     "rules": "W ramach Ruchu stworzenie może przekopać maksymalnie tyle metrów, ile wynosi podana wartość. Ryjąc, ignoruje wszelkie przeszkody terenowe i inne postaci. Pod koniec tego Ruchu musi zdecydować, czy będzie dalej ryć, czy się wyłoni. W ramach tego Ruchu może wykonać Szarżę. Jeśli zaczyna swoją Turę, ryjąc, to musi wybrać Rycie jako swój Ruch. Biorąc to stworzenie na cel, zwiększ dystans o 2 poziomy."
+  },
+  "Wchłanianie": {
+    "randomPool": false,
+    "description": "Stworzenie wchłania trafiające je niemagiczne przedmioty i ciała; to, co utknie w jego masie, może zostać strawione.",
+    "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
+  },
+  "Bezkształtny": {
+    "randomPool": false,
+    "description": "Stworzenie nie ma stałego kształtu: przeciska się przez szczeliny i ignoruje kary za ciasne przejścia; nie ma Miejsc Trafienia (wszystko trafia w korpus).",
+    "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
+  },
+  "Pełzający": {
+    "randomPool": false,
+    "description": "Stworzenie pełznie po ziemi i ścianach; porusza się tylko z połową Szybkości, ale nie da się go powalić.",
+    "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
+  },
+  "Bezmyślny": {
+    "randomPool": false,
+    "description": "Stworzenie nie ma własnej woli ani rozumu: ignoruje zasady Psychologii i nie da się go przekonać ani zastraszyć.",
+    "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
+  },
+  "Pochłonięcie": {
+    "randomPool": false,
+    "description": "Stworzenie może objąć celem swojej masy przeciwnika o mniejszym Rozmiarze (Test Przeciwstawny, jak Zapasy); objęty cel co Rundę zdaje Trudny (−20) Test Odporności albo zyskuje mutację.",
+    "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
   }
 }

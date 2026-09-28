@@ -146,7 +146,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Pająk"
+   "family": "Pająk",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Drakwaldzki człekołap (olbrzymi pająk)",
@@ -343,7 +344,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Gad olbrzymi"
+   "family": "Gad olbrzymi",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Rogaty",
@@ -438,7 +440,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Gad olbrzymi"
+   "family": "Gad olbrzymi",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Dziki kot",
@@ -596,7 +599,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Wodny"
+   "family": "Wodny",
+   "minTier": "heroiczny"
   },
   {
    "name": "Il Potente Granchio",
@@ -649,7 +653,8 @@
    "trappings": [],
    "group": "Potwory",
    "family": "Wodny",
-   "unique": true
+   "unique": true,
+   "minTier": "heroiczny"
   },
   {
    "name": "Syrena",
@@ -745,7 +750,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Wodny"
+   "family": "Wodny",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Ostrokolcy smok",
@@ -800,7 +806,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Fantasma",
@@ -856,7 +863,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Nieumarły rycerz (upiór)",
@@ -908,7 +916,8 @@
    ],
    "trappings": [],
    "group": "Nieumarli",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Inżynier spaczenia klanu Skryre",
@@ -1156,7 +1165,8 @@
    "trappings": [],
    "group": "Chaos",
    "family": "Zwierzoczłek",
-   "unique": true
+   "unique": true,
+   "minTier": "heroiczny"
   },
   {
    "name": "Gryf",
@@ -1206,7 +1216,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Straszna paszcza",
@@ -1260,7 +1271,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "sredni"
   },
   {
    "name": "Nosorożnik",
@@ -1359,7 +1371,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Zwierzę roślinożerne"
+   "family": "Zwierzę roślinożerne",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Nocny goblin",
@@ -1477,7 +1490,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "heroiczny"
   },
   {
    "name": "Caledair, Kosa Ognia",
@@ -1540,7 +1554,8 @@
    "trappings": [],
    "group": "Potwory",
    "family": "Potwór",
-   "unique": true
+   "unique": true,
+   "minTier": "heroiczny"
   },
   {
    "name": "Wywerna",
@@ -1585,7 +1600,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Halagrundsor „Straszliwy”, olbrzym szpieg",
@@ -1806,7 +1822,8 @@
    "trappings": [],
    "group": "Chaos",
    "family": "Sługa Chaosu",
-   "unique": true
+   "unique": true,
+   "minTier": "zaawansowany"
   },
   {
    "name": "Poganiacz klanu Moulder",
@@ -1902,7 +1919,8 @@
    ],
    "trappings": [],
    "group": "Skaveny",
-   "family": "Skaven"
+   "family": "Skaven",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Szczurowilk",
@@ -2015,7 +2033,8 @@
    ],
    "trappings": [],
    "group": "Skaveny",
-   "family": "Skaven"
+   "family": "Skaven",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Ameba",
@@ -2212,7 +2231,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "sredni"
   },
   {
    "name": "Trollowa wiedźma rzeczna",
@@ -2277,7 +2297,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Kameleopij",
@@ -2380,7 +2401,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Wodny"
+   "family": "Wodny",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Rozdzieracz Ciał",
@@ -2432,7 +2454,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Mroczny pegaz",
@@ -2519,7 +2542,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Ptak"
+   "family": "Ptak",
+   "minTier": "sredni"
   },
   {
    "name": "Peryt",
@@ -2567,7 +2591,8 @@
    ],
    "trappings": [],
    "group": "Chaos",
-   "family": "Sługa Chaosu"
+   "family": "Sługa Chaosu",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Wielki orzeł",
@@ -2615,7 +2640,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Ptak"
+   "family": "Ptak",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Szary jastrząb górski",
@@ -2706,7 +2732,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Ptak"
+   "family": "Ptak",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Kuroliszek",
@@ -2755,7 +2782,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Chimera",
@@ -2812,7 +2840,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Bestia ze Strany",
@@ -2877,7 +2906,8 @@
    "trappings": [],
    "group": "Potwory",
    "family": "Potwór",
-   "unique": true
+   "unique": true,
+   "minTier": "doswiadczony"
   },
   {
    "name": "Kultysta Zwodniczego Księżyca",
@@ -3035,7 +3065,8 @@
    ],
    "trappings": [],
    "group": "Chaos",
-   "family": "Sługa Chaosu"
+   "family": "Sługa Chaosu",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Wielki taurus",
@@ -3088,7 +3119,8 @@
    ],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Tregara",
@@ -3226,7 +3258,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Ludy",
-   "family": "Humanoid"
+   "family": "Humanoid",
+   "minTier": "sredni"
   },
   {
    "name": "Niedźwiedź",
@@ -3349,11 +3382,17 @@
     "Widzenie w Ciemności"
    ],
    "optional": [],
-   "abilities": [],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Książę demonów to Wybraniec Chaosu wyniesiony przez swego boga — śmiertelny czempion, który zdobył dość łask, by na wieczność zasiąść w Królestwach Chaosu (podręcznik, s. 336)."
+    }
+   ],
    "trappings": [],
    "group": "Demony",
    "family": "Demon",
-   "unique": true
+   "unique": true,
+   "minTier": "heroiczny"
   },
   {
    "name": "Fr'hough Żałobny Oddech (książę demonów Nurgla)",
@@ -3392,11 +3431,17 @@
     "Zionięcie +12 (Kwas)"
    ],
    "optional": [],
-   "abilities": [],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Książę demonów to Wybraniec Chaosu wyniesiony przez swego boga — śmiertelny czempion, który zdobył dość łask, by na wieczność zasiąść w Królestwach Chaosu (podręcznik, s. 336)."
+    }
+   ],
    "trappings": [],
    "group": "Demony",
    "family": "Demon",
-   "unique": true
+   "unique": true,
+   "minTier": "heroiczny"
   },
   {
    "name": "Klanbrat",
@@ -3513,7 +3558,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Skaveny",
-   "family": "Skaven"
+   "family": "Skaven",
+   "minTier": "sredni"
   },
   {
    "name": "Pies",
@@ -3835,7 +3881,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Bagienna ośmiornica",
@@ -3951,7 +3998,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Smok",
@@ -4000,7 +4048,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Bestia bagienna",
@@ -4043,7 +4092,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "sredni"
   },
   {
    "name": "Fimir",
@@ -4080,7 +4130,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "sredni"
   },
   {
    "name": "Olbrzym",
@@ -4122,7 +4173,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Gryf (podręcznik)",
@@ -4159,7 +4211,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Hipogryf",
@@ -4203,7 +4256,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Hydra",
@@ -4246,7 +4300,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Dżabersmok",
@@ -4290,7 +4345,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Mantikora",
@@ -4331,7 +4387,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Pegaz",
@@ -4415,7 +4472,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "sredni"
   },
   {
    "name": "Wywerna (podręcznik)",
@@ -4454,7 +4512,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Ork",
@@ -4697,7 +4756,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "minTier": "sredni"
   },
   {
    "name": "Ghul z krypt",
@@ -4781,7 +4841,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Widmo z kurhanu",
@@ -4821,7 +4882,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Upiorna płaczka",
@@ -4862,7 +4924,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Wampir",
@@ -4914,7 +4977,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "minTier": "doswiadczony"
   },
   {
    "name": "Duch",
@@ -5079,7 +5143,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
-   "family": "Zwierzoczłek"
+   "family": "Zwierzoczłek",
+   "minTier": "sredni"
   },
   {
    "name": "Szaman rykowców",
@@ -5267,7 +5332,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Demony",
-   "family": "Demon"
+   "family": "Demon",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Demonetka Slaanesha",
@@ -5303,7 +5369,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Demony",
-   "family": "Demon"
+   "family": "Demon",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Maruder Chaosu",
@@ -6504,7 +6571,12 @@
     "Broń (Topór dwuręczny) +16",
     "Broń (Miecz dwuręczny) +15"
    ],
-   "abilities": [],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Czempion, który zdobędzie pełną łaskę swojego boga, może zostać wyniesiony do rangi księcia demonów (zob. Książę demonów Khorne’a, Tzeentcha, Nurgle’a, Slaanesha)."
+    }
+   ],
    "trappings": [],
    "group": "Chaos",
    "family": "Sługa Chaosu",
@@ -8319,7 +8391,12 @@
     "Broń (Topór dwuręczny) +18",
     "Broń (Miecz dwuręczny) +17"
    ],
-   "abilities": [],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Czempion, który zdobędzie pełną łaskę swojego boga, może zostać wyniesiony do rangi księcia demonów (zob. Książę demonów Khorne’a, Tzeentcha, Nurgle’a, Slaanesha)."
+    }
+   ],
    "trappings": [],
    "group": "Chaos",
    "family": "Sługa Chaosu",
@@ -8527,12 +8604,4566 @@
     "Broń (Topór dwuręczny) +22",
     "Broń (Miecz dwuręczny) +21"
    ],
-   "abilities": [],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Czempion, który zdobędzie pełną łaskę swojego boga, może zostać wyniesiony do rangi księcia demonów (zob. Książę demonów Khorne’a, Tzeentcha, Nurgle’a, Slaanesha)."
+    }
+   ],
    "trappings": [],
    "group": "Chaos",
    "family": "Sługa Chaosu",
    "status": "Złoto 8",
    "minTier": "heroiczny"
+  },
+  {
+   "name": "Rozrywacz Wrogów",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 56,
+   "stats": {
+    "Sz": 4,
+    "WW": 50,
+    "US": 30,
+    "S": 40,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 17
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 40
+    },
+    {
+     "name": "Opanowanie",
+     "value": 35
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 55
+    },
+    {
+     "name": "Muzyka (Bęben)",
+     "value": 30
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 2",
+    "Dwie Bronie",
+    "Groźny",
+    "Odwrócenie Szans",
+    "Ogłuszenie"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (1) – gruba skóra",
+    "Furia",
+    "Nienawiść (Ludzie)",
+    "Rogi +7",
+    "Widzenie w Ciemności",
+    "Broń (Topór i puklerz) +8",
+    "Broń (Włócznia) +8"
+   ],
+   "optional": [
+    "Pancerz (2) – skóra i skóry",
+    "Spaczenie (Pomniejsze)",
+    "Choroba (Ospa Tragarzy)",
+    "Rogi (Bovigor) +8",
+    "Zakażony",
+    "Zaraza",
+    "Rój"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Brąz 4"
+  },
+  {
+   "name": "Bestigor",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 56,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": 30,
+    "S": 45,
+    "Wt": 60,
+    "I": 40,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 45
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 55
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 70
+    },
+    {
+     "name": "Opanowanie",
+     "value": 40
+    },
+    {
+     "name": "Unik",
+     "value": 45
+    },
+    {
+     "name": "Odporność",
+     "value": 70
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Korbacz albo Dwuręczna)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 65
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 35
+    },
+    {
+     "name": "Percepcja",
+     "value": 50
+    },
+    {
+     "name": "Muzyka (Bęben)",
+     "value": 35
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 3",
+    "Zmysł Bitewny 2",
+    "Dwie Bronie 2",
+    "Nieustraszony (Ludzie)",
+    "Groźny 2",
+    "Odwrócenie Szans 2",
+    "Krzepki 2",
+    "Ogłuszenie 2",
+    "Niezwykle Odporny"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (4) – skóra i półpłyta",
+    "Spaczenie (Pomniejsze)",
+    "Furia",
+    "Nienawiść (Ludzie)",
+    "Rogi +7",
+    "Widzenie w Ciemności",
+    "Broń (Dwa topory bojowe) +8",
+    "Broń (Włócznia) +8"
+   ],
+   "optional": [
+    "Czempion",
+    "Choroba (Ospa Tragarzy)",
+    "Rogi (Bovigor) +8",
+    "Zakażony",
+    "Zaraza",
+    "Broń (Korbacz i tarcza) +9",
+    "Broń (Topór dwuręczny) +10"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Srebro 2",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Wargor",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 56,
+   "stats": {
+    "Sz": 4,
+    "WW": 60,
+    "US": 30,
+    "S": 50,
+    "Wt": 65,
+    "I": 45,
+    "Zw": 50,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 40,
+    "Ogd": 35,
+    "Żyw": 21
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 65
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 65
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 80
+    },
+    {
+     "name": "Opanowanie",
+     "value": 55
+    },
+    {
+     "name": "Unik",
+     "value": 65
+    },
+    {
+     "name": "Odporność",
+     "value": 80
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Korbacz albo Dwuręczna)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 75
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 40
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Muzyka (Bęben)",
+     "value": 40
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 65
+    },
+    {
+     "name": "Pływanie",
+     "value": 65
+    },
+    {
+     "name": "Tropienie",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 4",
+    "Zmysł Bitewny 2",
+    "Rozbrojenie",
+    "Dwie Bronie 3",
+    "Nieustraszony (Ludzie) 2",
+    "Żelazna Szczęka",
+    "Groźny 3",
+    "Odwrócenie Szans 3",
+    "Krzepki 3",
+    "Silny Cios 2",
+    "Ogłuszenie 3",
+    "Niezwykle Odporny",
+    "Wódz 3"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (4) – skóra i półpłyta",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Furia",
+    "Nienawiść (Ludzie)",
+    "Rogi +10",
+    "Przywódca",
+    "Widzenie w Ciemności",
+    "Broń (Dwa topory bojowe) +11",
+    "Broń (Włócznia) +11"
+   ],
+   "optional": [
+    "Duży",
+    "Przebiegły",
+    "Choroba (Ospa Tragarzy)",
+    "Rogi (Bovigor) +11",
+    "Zakażony",
+    "Zaraza",
+    "Twardy",
+    "Broń (Korbacz i tarcza) +12",
+    "Broń (Topór dwuręczny) +13"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Srebro 4",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Władca Zwierzoludzi",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 57,
+   "stats": {
+    "Sz": 4,
+    "WW": 65,
+    "US": 30,
+    "S": 65,
+    "Wt": 90,
+    "I": 50,
+    "Zw": 50,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 70,
+    "Ogd": 35,
+    "Żyw": 31
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 70
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 85
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 110
+    },
+    {
+     "name": "Opanowanie",
+     "value": 90
+    },
+    {
+     "name": "Unik",
+     "value": 70
+    },
+    {
+     "name": "Odporność",
+     "value": 110
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 85
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Korbacz albo Dwuręczna)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 95
+    },
+    {
+     "name": "Nawigacja",
+     "value": 70
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 45
+    },
+    {
+     "name": "Percepcja",
+     "value": 70
+    },
+    {
+     "name": "Muzyka (Bęben)",
+     "value": 45
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 70
+    },
+    {
+     "name": "Pływanie",
+     "value": 85
+    },
+    {
+     "name": "Tropienie",
+     "value": 70
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 5",
+    "Zmysł Bitewny 3",
+    "Władcza Postura 3",
+    "Rozbrojenie 3",
+    "Dwie Bronie 5",
+    "Nieustraszony (Ludzie) 5",
+    "Żelazna Szczęka 3",
+    "Żelazna Wola 3",
+    "Groźny 5",
+    "Odwrócenie Szans 5",
+    "Krzepki 5",
+    "Szósty Zmysł 3",
+    "Silny Cios 4",
+    "Ogłuszenie 5",
+    "Niezwykle Odporny",
+    "Wódz 3"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (5) – kolczuga i półpłyta",
+    "Duży",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Strach (5)",
+    "Furia",
+    "Nienawiść (Ludzie)",
+    "Rogi +13",
+    "Przywódca",
+    "Widzenie w Ciemności",
+    "Twardy",
+    "Broń (Dwa topory bojowe) +14",
+    "Broń (Włócznia) +14"
+   ],
+   "optional": [
+    "Przebiegły",
+    "Choroba (Ospa Tragarzy)",
+    "Rogi (Bovigor) +14",
+    "Zakażony",
+    "Zaraza",
+    "Broń (Korbacz i tarcza) +15",
+    "Broń (Topór dwuręczny) +16"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Ungor Najeźdźca",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 57,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 45,
+    "S": 40,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 35,
+    "Ogd": 25,
+    "Żyw": 15
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 45
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 55
+    },
+    {
+     "name": "Opanowanie",
+     "value": 45
+    },
+    {
+     "name": "Unik",
+     "value": 45
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Hazard",
+     "value": 35
+    },
+    {
+     "name": "Leczenie",
+     "value": 35
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 55
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 35
+    },
+    {
+     "name": "Percepcja",
+     "value": 40
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 55
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 55
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Celny Strzał 2",
+    "Zmysł Bitewny 2",
+    "Chodu! 3",
+    "Oko Łowcy",
+    "Strzelec Wyborowy",
+    "Włóczykij 2",
+    "Ogłuszenie",
+    "Traper"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (1) – skóry",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Ludzie)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Krótki łuk) +8 (25)",
+    "Broń (Sztylet) +6",
+    "Broń (Włócznia) +8"
+   ],
+   "optional": [
+    "Choroba (Ospa Tragarzy)",
+    "Zakażony",
+    "Zaraza",
+    "Strzelanie (Łuk) +9 (50)",
+    "Strzelanie (Oszczep) +9 (9)",
+    "Rój"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Brąz 2"
+  },
+  {
+   "name": "Półróg",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 57,
+   "stats": {
+    "Sz": 4,
+    "WW": 50,
+    "US": 50,
+    "S": 45,
+    "Wt": 50,
+    "I": 45,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 25,
+    "SW": 35,
+    "Ogd": 25,
+    "Żyw": 17
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 50
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 50
+    },
+    {
+     "name": "Unik",
+     "value": 50
+    },
+    {
+     "name": "Odporność",
+     "value": 65
+    },
+    {
+     "name": "Hazard",
+     "value": 40
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 40
+    },
+    {
+     "name": "Leczenie",
+     "value": 40
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 65
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 40
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 65
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 65
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 50
+    }
+   ],
+   "talents": [
+    "Celny Strzał 3",
+    "Zmysł Bitewny 3",
+    "Chodu! 3",
+    "Oko Łowcy",
+    "Strzelec Wyborowy",
+    "Groźny 2",
+    "Nieustępliwy 2",
+    "Włóczykij 3",
+    "Strzał w Dziesiątkę",
+    "Szybkobiegacz 2",
+    "Ogłuszenie 2",
+    "Traper 2"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (3) – skóry i kolczuga",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Ludzie)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Łuk) +9 (50)",
+    "Broń (Sztylet) +6",
+    "Broń (Włócznia) +8"
+   ],
+   "optional": [
+    "Choroba (Ospa Tragarzy)",
+    "Zakażony",
+    "Zaraza",
+    "Przywódca",
+    "Strzelanie (Oszczep) +9 (9)",
+    "Rój"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Brąz 5",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Krwawy Byk",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 57,
+   "stats": {
+    "Sz": 6,
+    "WW": 60,
+    "US": 25,
+    "S": 60,
+    "Wt": 70,
+    "I": 35,
+    "Zw": 50,
+    "Zr": 25,
+    "Int": 20,
+    "SW": 50,
+    "Ogd": 25,
+    "Żyw": 50
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 65
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 65
+    },
+    {
+     "name": "Unik",
+     "value": 65
+    },
+    {
+     "name": "Odporność",
+     "value": 85
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 40
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Intuicja",
+     "value": 50
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 35
+    },
+    {
+     "name": "Wiedza (Zwierzęta)",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Korbacz)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 75
+    },
+    {
+     "name": "Nawigacja",
+     "value": 50
+    },
+    {
+     "name": "Percepcja",
+     "value": 50
+    },
+    {
+     "name": "Kuglarstwo (Walka Pokazowa)",
+     "value": 65
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Wyczulony Zmysł (Węch)",
+    "Oburęczność 2",
+    "Mistrz Walki",
+    "Bitewny Refleks 2",
+    "Cios Poniżej Pasa 4",
+    "Rozbrojenie 2",
+    "Dwie Bronie 2",
+    "Skrócenie Dystansu 2",
+    "Żelazna Szczęka 3",
+    "Groźny 3",
+    "Nieugięty 4",
+    "Odwrócenie Szans 3",
+    "Krzepki 3"
+   ],
+   "traits": [
+    "Pancerz (3) – półpłyta",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Furia",
+    "Rogi +11",
+    "Żarłoczny",
+    "Przywódca",
+    "Widzenie w Ciemności",
+    "Rozmiar (Duży)",
+    "Twardy",
+    "Broń (Dwa topory bojowe) +10"
+   ],
+   "optional": [
+    "Mieszkaniec Lasu",
+    "Choroba (Ospa Tragarzy)",
+    "Zakażony",
+    "Zaraza",
+    "Strzelanie (Topór do rzucania) +9 (10)",
+    "Broń (Dwa korbacze) +11",
+    "Broń (Topór dwuręczny) +12",
+    "Broń (Korbacz bojowy) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Byk Zagłady",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 58,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": 25,
+    "S": 75,
+    "Wt": 85,
+    "I": 40,
+    "Zw": 50,
+    "Zr": 25,
+    "Int": 20,
+    "SW": 50,
+    "Ogd": 45,
+    "Żyw": 50
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 70
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 105
+    },
+    {
+     "name": "Opanowanie",
+     "value": 70
+    },
+    {
+     "name": "Unik",
+     "value": 70
+    },
+    {
+     "name": "Odporność",
+     "value": 105
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 65
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 95
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 40
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 65
+    },
+    {
+     "name": "Wiedza (Zwierzęta)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Korbacz)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 95
+    },
+    {
+     "name": "Nawigacja",
+     "value": 60
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Kuglarstwo (Walka Pokazowa)",
+     "value": 70
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 55
+    }
+   ],
+   "talents": [
+    "Wyczulony Zmysł (Węch)",
+    "Oburęczność 2",
+    "Mistrz Walki 3",
+    "Bitewny Refleks 3",
+    "Cios Poniżej Pasa 4",
+    "Rozbrojenie 4",
+    "Dwie Bronie 3",
+    "Wściekły Atak 3",
+    "Nieubłagany 3",
+    "Skrócenie Dystansu 2",
+    "Żelazna Szczęka 5",
+    "Groźny 5",
+    "Atak Wyprzedzający 3",
+    "Nieugięty 6",
+    "Odwrócenie Szans 5",
+    "Krzepki 5"
+   ],
+   "traits": [
+    "Pancerz (5) – skóry i płyty",
+    "Wojowniczy",
+    "Duży",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Strach (6)",
+    "Furia",
+    "Rogi +12",
+    "Żarłoczny",
+    "Przywódca",
+    "Widzenie w Ciemności",
+    "Rozmiar (Duży)",
+    "Twardy",
+    "Broń (Dwa topory bojowe) +11"
+   ],
+   "optional": [
+    "Mieszkaniec Lasu",
+    "Choroba (Ospa Tragarzy)",
+    "Szał Bojowy",
+    "Twardziel",
+    "Zakażony",
+    "Zaraza",
+    "Strzelanie (Topór do rzucania) +10 (10)",
+    "Broń (Dwa korbacze) +12",
+    "Broń (Topór dwuręczny) +13",
+    "Broń (Korbacz bojowy) +13"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Centigor",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 58,
+   "stats": {
+    "Sz": 7,
+    "WW": 55,
+    "US": 45,
+    "S": 50,
+    "Wt": 45,
+    "I": 20,
+    "Zw": 40,
+    "Zr": 15,
+    "Int": 30,
+    "SW": 30,
+    "Ogd": 30,
+    "Żyw": 32
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 40
+    },
+    {
+     "name": "Atletyka",
+     "value": 50
+    },
+    {
+     "name": "Oswajanie",
+     "value": 40
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 65
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 40
+    },
+    {
+     "name": "Percepcja",
+     "value": 30
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 55
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 55
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 50
+    }
+   ],
+   "talents": [
+    "Hulaka 2",
+    "Zmysł Bitewny",
+    "Etykieta (Zwierzoludzie) 2",
+    "Szybki Refleks",
+    "Groźny 2",
+    "Obieżyświat",
+    "Silny Cios",
+    "Tragarz 2"
+   ],
+   "traits": [
+    "Pancerz (1) – gruba skóra",
+    "Mieszkaniec Lasu",
+    "Nienawiść (Ludzie)",
+    "Rogi +9",
+    "Widzenie w Ciemności",
+    "Uprzedzenie (Dwunożni)",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Broń (Kopyta) +9",
+    "Broń (Włócznia) +10"
+   ],
+   "optional": [
+    "Pancerz (2) – skóra i skóry",
+    "Duży",
+    "Spaczenie (Pomniejsze)",
+    "Choroba (Ospa Tragarzy)",
+    "Zakażony",
+    "Zaraza",
+    "Strzelanie (Łuk) +8 (50)",
+    "Strzelanie (Oszczep) +8 (15)",
+    "Staje Dęba",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Srebro 2",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Krwawokopyty",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 58,
+   "stats": {
+    "Sz": 7,
+    "WW": 60,
+    "US": 50,
+    "S": 55,
+    "Wt": 45,
+    "I": 35,
+    "Zw": 45,
+    "Zr": 15,
+    "Int": 30,
+    "SW": 30,
+    "Ogd": 30,
+    "Żyw": 32
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Atletyka",
+     "value": 60
+    },
+    {
+     "name": "Oswajanie",
+     "value": 45
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 75
+    },
+    {
+     "name": "Opanowanie",
+     "value": 45
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 70
+    },
+    {
+     "name": "Intuicja",
+     "value": 50
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 75
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 45
+    },
+    {
+     "name": "Percepcja",
+     "value": 50
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 65
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 65
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Hulaka 3",
+    "Zmysł Bitewny 2",
+    "Bitewny Refleks 2",
+    "Etykieta (Zwierzoludzie) 3",
+    "Błyskawiczny Strzał 2",
+    "Szybki Refleks",
+    "Groźny 3",
+    "Obieżyświat 2",
+    "Silny Cios 2",
+    "Tragarz 3",
+    "Wódz 3"
+   ],
+   "traits": [
+    "Pancerz (2) – skóra i skóry",
+    "Mieszkaniec Lasu",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Zielonoskórzy)",
+    "Nienawiść (Ludzie)",
+    "Rogi +10",
+    "Widzenie w Ciemności",
+    "Uprzedzenie (Dwunożni)",
+    "Staje Dęba",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Broń (Kopyta) +10",
+    "Broń (Włócznia) +11"
+   ],
+   "optional": [
+    "Pancerz (3) – skóra i kolczuga",
+    "Duży",
+    "Choroba (Ospa Tragarzy)",
+    "Zakażony",
+    "Zaraza",
+    "Przywódca",
+    "Strzelanie (Łuk) +8 (50)",
+    "Strzelanie (Oszczep) +8 (15)",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Srebro 4",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Wielki Szaman Rykowców",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 58,
+   "stats": {
+    "Sz": 4,
+    "WW": 60,
+    "US": 30,
+    "S": 30,
+    "Wt": 65,
+    "I": 70,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 70,
+    "SW": 70,
+    "Ogd": 50,
+    "Żyw": 22
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (Ghur, Shyish albo Ulgu)",
+     "value": 100
+    },
+    {
+     "name": "Splatanie Magii (Dhar)",
+     "value": 100
+    },
+    {
+     "name": "Charyzma",
+     "value": 70
+    },
+    {
+     "name": "Opanowanie",
+     "value": 90
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 70
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 70
+    },
+    {
+     "name": "Leczenie",
+     "value": 80
+    },
+    {
+     "name": "Intuicja",
+     "value": 90
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 90
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 100
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 80
+    },
+    {
+     "name": "Wiedza (Zwierzoludzie)",
+     "value": 90
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 90
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 80
+    },
+    {
+     "name": "Percepcja",
+     "value": 90
+    },
+    {
+     "name": "Modlitwa",
+     "value": 70
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 55
+    },
+    {
+     "name": "Rzemiosło (Amulety albo Zielarz)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Zmysł Magii 5",
+    "Magia Tajemna (Zwierzęta, Śmierci albo Cieni)",
+    "Magia Chaosu (Nurgle, Slaanesh albo Tzeentch)",
+    "Wytwórca (Amulety albo Zielarz) 2",
+    "Etykieta (Zwierzoludzie) 5",
+    "Ruchliwe dłonie 4",
+    "Porywająca Gorliwość 3",
+    "Inspirujący 5",
+    "Precyzyjne Inkantowanie 5",
+    "Krasomówstwo 3",
+    "Magia Prosta",
+    "Mówca 5",
+    "Odporny na (Choroby) 3",
+    "Percepcja Magiczna 3",
+    "Mag Bitewny"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (1) – gruba skóra",
+    "Sprytny",
+    "Spaczenie (Pomniejsze)",
+    "Strach (3)",
+    "Furia",
+    "Rogi +6",
+    "Widzenie w Ciemności",
+    "Broń (Kij) +7"
+   ],
+   "optional": [
+    "Pancerz (2) – skóra i skóry",
+    "Przebiegły",
+    "Choroba (Ospa Tragarzy)",
+    "Zakażony",
+    "Zaraza",
+    "Przywódca"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzoczłek",
+   "status": "Złoto 1",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Krasnolud Chaosu, wojownik",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 59,
+   "stats": {
+    "Sz": 3,
+    "WW": 55,
+    "US": 40,
+    "S": 30,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 40,
+    "Int": 30,
+    "SW": 60,
+    "Ogd": 20,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 30
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 40
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 70
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Hazard",
+     "value": 40
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 65
+    },
+    {
+     "name": "Muzyka (Bęben)",
+     "value": 50
+    }
+   ],
+   "talents": [
+    "Szuler Kościany",
+    "Musztra 2",
+    "Etykieta (Żołnierze)",
+    "Nieugięty",
+    "Tarczownik 2",
+    "Mocne Plecy 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (4) – płyty",
+    "Nienawiść (Skaveny)",
+    "Odporność na Magię (4)",
+    "Widzenie w Ciemności",
+    "Broń (Topór i tarcza) +7"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Rój",
+    "Twardy",
+    "Broń (Młot i tarcza) +7"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Krasnolud Chaosu z garłaczem",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 59,
+   "stats": {
+    "Sz": 3,
+    "WW": 50,
+    "US": 45,
+    "S": 30,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 40,
+    "Int": 30,
+    "SW": 60,
+    "Ogd": 20,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 30
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 40
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 70
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Hazard",
+     "value": 40
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 55
+    },
+    {
+     "name": "Muzyka (Bęben)",
+     "value": 50
+    },
+    {
+     "name": "Broń Zasięgowa (Prochowa)",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Szuler Kościany",
+    "Musztra",
+    "Etykieta (Żołnierze)",
+    "Artylerzysta 2",
+    "Strzelec Wyborowy",
+    "Szybkie Przeładowanie",
+    "Tarczownik",
+    "Mocne Plecy"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (2) – kolczuga",
+    "Nienawiść (Zielonoskórzy)",
+    "Odporność na Magię (2)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Garłacz śrutowy) +8 (20)",
+    "Broń (Topór i tarcza) +7"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Broń (Młot i tarcza) +7"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Nieśmiertelny Krasnolud Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 59,
+   "stats": {
+    "Sz": 3,
+    "WW": 75,
+    "US": 30,
+    "S": 55,
+    "Wt": 65,
+    "I": 45,
+    "Zw": 45,
+    "Zr": 40,
+    "Int": 35,
+    "SW": 85,
+    "Ogd": 15,
+    "Żyw": 25
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 55
+    },
+    {
+     "name": "Opanowanie",
+     "value": 95
+    },
+    {
+     "name": "Unik",
+     "value": 55
+    },
+    {
+     "name": "Odporność",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 85
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 85
+    },
+    {
+     "name": "Nawigacja",
+     "value": 55
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 45
+    },
+    {
+     "name": "Percepcja",
+     "value": 55
+    },
+    {
+     "name": "Tropienie",
+     "value": 55
+    }
+   ],
+   "talents": [
+    "Dwie Bronie 2",
+    "Walka w Ciasnocie 2",
+    "Etykieta (Mutanci)",
+    "Groźny 2",
+    "Nieugięty 2",
+    "Odwrócenie Szans",
+    "Tarczownik",
+    "Silny Cios 2"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Broń (Krasnoludzki młot i tarcza) +11"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Furia",
+    "Spaczenie Umysłu",
+    "Broń (Dwa krasnoludzkie młoty) +11",
+    "Broń (Topór dwuręczny) +13",
+    "Broń (Młot bojowy) +13"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 4",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Czempion Nieśmiertelnych",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 59,
+   "stats": {
+    "Sz": 3,
+    "WW": 80,
+    "US": 30,
+    "S": 60,
+    "Wt": 70,
+    "I": 45,
+    "Zw": 60,
+    "Zr": 40,
+    "Int": 35,
+    "SW": 95,
+    "Ogd": 15,
+    "Żyw": 29
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 75
+    },
+    {
+     "name": "Opanowanie",
+     "value": 105
+    },
+    {
+     "name": "Unik",
+     "value": 75
+    },
+    {
+     "name": "Odporność",
+     "value": 85
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 50
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 50
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 30
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Imperium)",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 95
+    },
+    {
+     "name": "Nawigacja",
+     "value": 60
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 50
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Tropienie",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Mistrz Walki",
+    "Zimna krew",
+    "Dwie Bronie 3",
+    "Walka w Ciasnocie 3",
+    "Etykieta (Mutanci)",
+    "Wściekły Atak",
+    "Groźny 3",
+    "Nieugięty 3",
+    "Odwrócenie Szans 2",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Morderczy Atak 2"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Broń (Broń Chaosu i duża tarcza) +13"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Furia",
+    "Spaczenie Umysłu",
+    "Broń (Dwa krasnoludzkie młoty) +13",
+    "Broń (Topór dwuręczny) +15",
+    "Broń (Młot bojowy) +15"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Wybrany Nieśmiertelny Hashuta",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 60,
+   "stats": {
+    "Sz": 4,
+    "WW": 85,
+    "US": 30,
+    "S": 65,
+    "Wt": 75,
+    "I": 65,
+    "Zw": 65,
+    "Zr": 40,
+    "Int": 35,
+    "SW": 100,
+    "Ogd": 15,
+    "Żyw": 37
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 120
+    },
+    {
+     "name": "Unik",
+     "value": 85
+    },
+    {
+     "name": "Odporność",
+     "value": 95
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 85
+    },
+    {
+     "name": "Intuicja",
+     "value": 85
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 55
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 55
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 35
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 55
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 55
+    },
+    {
+     "name": "Wiedza (Imperium)",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 105
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 105
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 105
+    },
+    {
+     "name": "Nawigacja",
+     "value": 85
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 55
+    },
+    {
+     "name": "Percepcja",
+     "value": 85
+    },
+    {
+     "name": "Tropienie",
+     "value": 85
+    }
+   ],
+   "talents": [
+    "Mistrz Walki 2",
+    "Zimna krew",
+    "Dwie Bronie 4",
+    "Walka w Ciasnocie 4",
+    "Etykieta (Mutanci)",
+    "Wściekły Atak 2",
+    "Groźny 4",
+    "Nieugięty 4",
+    "Odwrócenie Szans 3",
+    "Obieżyświat 3",
+    "Tarczownik 3",
+    "Zabójca",
+    "Silny Cios 4",
+    "Morderczy Atak 3"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Twardziel",
+    "Broń (Broń Chaosu i duża tarcza) +14"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Furia",
+    "Spaczenie Umysłu",
+    "Broń (Broń z uwięzionym demonem i duża tarcza) +14",
+    "Broń (Dwa krasnoludzkie młoty) +14",
+    "Broń (Topór dwuręczny) +16",
+    "Broń (Młot bojowy) +16"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 1",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Piekielny Strażnik",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 60,
+   "stats": {
+    "Sz": 3,
+    "WW": 50,
+    "US": 30,
+    "S": 30,
+    "Wt": 50,
+    "I": 40,
+    "Zw": 20,
+    "Zr": 40,
+    "Int": 30,
+    "SW": 60,
+    "Ogd": 20,
+    "Żyw": 24
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 30
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 70
+    },
+    {
+     "name": "Unik",
+     "value": 30
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 30
+    },
+    {
+     "name": "Hazard",
+     "value": 40
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 30
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 40
+    },
+    {
+     "name": "Intuicja",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 65
+    },
+    {
+     "name": "Percepcja",
+     "value": 50
+    },
+    {
+     "name": "Broń Zasięgowa (Inżynieria)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Musztra 3",
+    "Nieustraszony (Wszystko)",
+    "Nieubłagany 2",
+    "Odporny na (Ognia)",
+    "Odwrócenie Szans 2",
+    "Silny Cios 2",
+    "Wytrwały"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (5) – Czarny odłamek",
+    "Czempion",
+    "Twardziel",
+    "Nienawiść (Skaveny)",
+    "Odporność na Magię (4)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Wielostrzałowa ognista glewia) +9 (0)",
+    "Broń (Krasnoludzki młot) +9",
+    "Broń (Ognista glewia) +9"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 2",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Piekielny Żelazoprzysiężny",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 60,
+   "stats": {
+    "Sz": 3,
+    "WW": 75,
+    "US": 50,
+    "S": 45,
+    "Wt": 55,
+    "I": 45,
+    "Zw": 20,
+    "Zr": 40,
+    "Int": 30,
+    "SW": 85,
+    "Ogd": 20,
+    "Żyw": 32
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 35
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 70
+    },
+    {
+     "name": "Opanowanie",
+     "value": 100
+    },
+    {
+     "name": "Unik",
+     "value": 35
+    },
+    {
+     "name": "Odporność",
+     "value": 70
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 35
+    },
+    {
+     "name": "Hazard",
+     "value": 45
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 35
+    },
+    {
+     "name": "Leczenie",
+     "value": 45
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Zharr-Naggrund)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 95
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Broń Zasięgowa (Inżynieria)",
+     "value": 70
+    }
+   ],
+   "talents": [
+    "Musztra 4",
+    "Nieustraszony (Wszystko) 2",
+    "Wściekły Atak",
+    "Nieubłagany 3",
+    "Nieustępliwy 2",
+    "Odporny na (Ognia) 3",
+    "Odwrócenie Szans 3",
+    "Krzepki 2",
+    "Silny Cios 3",
+    "Waleczne Serce 2",
+    "Wytrwały 2"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (5) – Czarny odłamek",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Elita",
+    "Twardziel 2",
+    "Nienawiść (Skaveny)",
+    "Odporność na Magię (4)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Wielostrzałowa ognista glewia) +9 (0)",
+    "Broń (Krasnoludzki młot) +11",
+    "Broń (Ognista glewia) +11"
+   ],
+   "optional": [
+    "Twardy",
+    "Broń (Topór dwuręczny) +13",
+    "Broń (Młot bojowy) +13"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Piekielny Kasztelan",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 60,
+   "stats": {
+    "Sz": 3,
+    "WW": 80,
+    "US": 50,
+    "S": 50,
+    "Wt": 65,
+    "I": 50,
+    "Zw": 20,
+    "Zr": 40,
+    "Int": 50,
+    "SW": 90,
+    "Ogd": 20,
+    "Żyw": 44
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 40
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 110
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 85
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 40
+    },
+    {
+     "name": "Hazard",
+     "value": 70
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 40
+    },
+    {
+     "name": "Leczenie",
+     "value": 70
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 70
+    },
+    {
+     "name": "Intuicja",
+     "value": 70
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 70
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Zharr-Naggrund)",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 70
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 110
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 110
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 110
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Broń Zasięgowa (Inżynieria)",
+     "value": 80
+    }
+   ],
+   "talents": [
+    "Mistrz Walki 2",
+    "Musztra 5",
+    "Nieustraszony (Wszystko) 3",
+    "Wściekły Atak 2",
+    "Nieubłagany 5",
+    "Żelazna Wola 3",
+    "Nieustępliwy 2",
+    "Odporny na (Ognia) 5",
+    "Odwrócenie Szans 5",
+    "Krzepki 4",
+    "Silny Cios 5",
+    "Waleczne Serce 3",
+    "Wytrwały 4",
+    "Niezwykle Odporny"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (5) – Czarny odłamek",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Elita",
+    "Strach (5)",
+    "Twardziel 3",
+    "Nienawiść (Skaveny)",
+    "Odporność na Magię (4)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Wielostrzałowa ognista glewia) +9 (0)",
+    "Broń (Krasnoludzki młot) +14",
+    "Broń (Ognista glewia) +14"
+   ],
+   "optional": [
+    "Twardy",
+    "Broń (Topór dwuręczny) +16",
+    "Broń (Młot bojowy) +16"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Artylerzysta Krasnoludów Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 60,
+   "stats": {
+    "Sz": 3,
+    "WW": 40,
+    "US": 45,
+    "S": 30,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 50,
+    "Int": 30,
+    "SW": 60,
+    "Ogd": 20,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Mocna Głowa",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 70
+    },
+    {
+     "name": "Powożenie",
+     "value": 30
+    },
+    {
+     "name": "Unik",
+     "value": 30
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Uzbrojenie)",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Inżynier)",
+     "value": 40
+    },
+    {
+     "name": "Nawigacja",
+     "value": 40
+    },
+    {
+     "name": "Percepcja",
+     "value": 40
+    },
+    {
+     "name": "Broń Zasięgowa (Prochowa)",
+     "value": 60
+    },
+    {
+     "name": "Broń Zasięgowa (Inżynieria)",
+     "value": 60
+    },
+    {
+     "name": "Badania Naukowe",
+     "value": 40
+    },
+    {
+     "name": "Rzemiosło (Rusznikarz)",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Wytwórca (Rusznikarz)",
+    "Etykieta (Żołnierze)",
+    "Artylerzysta",
+    "Strzelec Wyborowy",
+    "Czytanie/Pisanie",
+    "Strzał w Dziesiątkę",
+    "Tragarz",
+    "Złota Rączka"
+   ],
+   "traits": [
+    "Pancerz (1) – skóry",
+    "Strzelanie (Krasnoludzki pistolet) +9 (30)",
+    "Strzelanie (Garłacz śrutowy) +8 (20)",
+    "Broń (Klucz) +5"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Przywódca"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Mistrz Inżynier Krasnoludów Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 60,
+   "stats": {
+    "Sz": 3,
+    "WW": 40,
+    "US": 55,
+    "S": 30,
+    "Wt": 60,
+    "I": 50,
+    "Zw": 20,
+    "Zr": 60,
+    "Int": 50,
+    "SW": 70,
+    "Ogd": 20,
+    "Żyw": 22
+   },
+   "skills": [
+    {
+     "name": "Mocna Głowa",
+     "value": 80
+    },
+    {
+     "name": "Opanowanie",
+     "value": 90
+    },
+    {
+     "name": "Powożenie",
+     "value": 40
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 80
+    },
+    {
+     "name": "Język (Klasyczny)",
+     "value": 80
+    },
+    {
+     "name": "Język (Członkowie Gildii)",
+     "value": 80
+    },
+    {
+     "name": "Język (Tileański)",
+     "value": 80
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Uzbrojenie)",
+     "value": 80
+    },
+    {
+     "name": "Wiedza (Inżynier)",
+     "value": 80
+    },
+    {
+     "name": "Nawigacja",
+     "value": 70
+    },
+    {
+     "name": "Percepcja",
+     "value": 70
+    },
+    {
+     "name": "Broń Zasięgowa (Prochowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Zasięgowa (Inżynieria)",
+     "value": 95
+    },
+    {
+     "name": "Badania Naukowe",
+     "value": 70
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 50
+    },
+    {
+     "name": "Sekretne Znaki (Członkowie Gildii)",
+     "value": 70
+    },
+    {
+     "name": "Rzemiosło (Inżynier)",
+     "value": 100
+    }
+   ],
+   "talents": [
+    "Talent Artystyczny",
+    "Wytwórca (Inżynier) 6",
+    "Etykieta (Członkowie Gildii) 3",
+    "Etykieta (Uczeni) 3",
+    "Artylerzysta 5",
+    "Strzelec Wyborowy",
+    "Mistrz Rzemiosła (Inżynieria) 6",
+    "Wyczucie Kierunku",
+    "Szybkie Przeładowanie 3",
+    "Czytanie/Pisanie",
+    "Znawca (Inżynieria) 3",
+    "Snajper 4",
+    "Geniusz Arytmetyczny 3",
+    "Złota Rączka 6",
+    "Niewzruszony 3"
+   ],
+   "traits": [
+    "Pancerz (3) – półpłyta",
+    "Strzelanie (Krasnoludzki pistolet) +9 (30)",
+    "Strzelanie (Garłacz śrutowy) +10 (20)",
+    "Broń (Klucz) +5"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Sprytny",
+    "Przywódca",
+    "Strzelanie (Wielostrzałowy muszkiet) +10 (30)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Demonokowal",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 61,
+   "stats": {
+    "Sz": 3,
+    "WW": 50,
+    "US": 30,
+    "S": 45,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 55,
+    "Int": 30,
+    "SW": 60,
+    "Ogd": 20,
+    "Żyw": 18
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (Dhar)",
+     "value": 80
+    },
+    {
+     "name": "Opanowanie",
+     "value": 70
+    },
+    {
+     "name": "Odporność",
+     "value": 50
+    },
+    {
+     "name": "Wycena",
+     "value": 40
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 30
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 40
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Hashut)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Metalurgia)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 60
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 60
+    },
+    {
+     "name": "Percepcja",
+     "value": 40
+    },
+    {
+     "name": "Rzemiosło (Demonokowal)",
+     "value": 65
+    },
+    {
+     "name": "Rzemiosło (Inżynier albo Kowalstwo)",
+     "value": 65
+    }
+   ],
+   "talents": [
+    "Zmysł Magii 3",
+    "Magia Tajemna (Demonologia)",
+    "Magia Chaosu (Hashut)",
+    "Wytwórca (Inżynier albo Kowalstwo) 3",
+    "Etykieta (Demony) 2",
+    "Ruchliwe dłonie 2",
+    "Zręczny",
+    "Bardzo Silny"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (3) – półpłyta",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Skaveny)",
+    "Widzenie w Ciemności",
+    "Broń (Kij) +8"
+   ],
+   "optional": [
+    "Sprytny",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 1",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Czarnoksiężnik-Prorok",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 61,
+   "stats": {
+    "Sz": 3,
+    "WW": 60,
+    "US": 30,
+    "S": 55,
+    "Wt": 40,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 65,
+    "Int": 50,
+    "SW": 80,
+    "Ogd": 50,
+    "Żyw": 21
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (Dhar)",
+     "value": 110
+    },
+    {
+     "name": "Opanowanie",
+     "value": 100
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Występy (Przemowy)",
+     "value": 70
+    },
+    {
+     "name": "Wycena",
+     "value": 70
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 70
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Intuicja",
+     "value": 50
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 70
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 80
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Demonologia)",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Hashut)",
+     "value": 80
+    },
+    {
+     "name": "Wiedza (Metalurgia)",
+     "value": 70
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 80
+    },
+    {
+     "name": "Percepcja",
+     "value": 50
+    },
+    {
+     "name": "Badania Naukowe",
+     "value": 70
+    },
+    {
+     "name": "Rzemiosło (Demonokowal)",
+     "value": 85
+    },
+    {
+     "name": "Rzemiosło (Inżynier albo Kowalstwo)",
+     "value": 85
+    }
+   ],
+   "talents": [
+    "Zmysł Magii 3",
+    "Magia Tajemna (Demonologia)",
+    "Magia Chaosu (Hashut)",
+    "Wytwórca (Demonokowal) 5",
+    "Wytwórca (Inżynier albo Kowalstwo) 5",
+    "Etykieta (Demony)",
+    "Ruchliwe dłonie 5",
+    "Porywająca Gorliwość 3",
+    "Precyzyjne Inkantowanie 3",
+    "Arcydzieło 3",
+    "Mistrz Rzemiosła (Demonokowal) 5",
+    "Zręczny",
+    "Mówca 5",
+    "Złota Rączka 5",
+    "Bardzo Silny",
+    "Mag Bitewny"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (5) – Czarny odłamek",
+    "Spaczenie (Poważne)",
+    "Nienawiść (Skaveny)",
+    "Przywódca",
+    "Widzenie w Ciemności",
+    "Broń (Kij) +9"
+   ],
+   "optional": [
+    "Sprytny",
+    "Przebiegły",
+    "Elita",
+    "Twardziel",
+    "Twardy",
+    "Ochrona (7+)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 8",
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Wódz Krasnoludów Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 61,
+   "stats": {
+    "Sz": 3,
+    "WW": 80,
+    "US": 50,
+    "S": 60,
+    "Wt": 40,
+    "I": 50,
+    "Zw": 20,
+    "Zr": 40,
+    "Int": 50,
+    "SW": 100,
+    "Ogd": 55,
+    "Żyw": 24
+   },
+   "skills": [
+    {
+     "name": "Charyzma",
+     "value": 75
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 120
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Występy (Przemowy)",
+     "value": 75
+    },
+    {
+     "name": "Hazard",
+     "value": 70
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 80
+    },
+    {
+     "name": "Intuicja",
+     "value": 70
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 70
+    },
+    {
+     "name": "Język (Goblinski)",
+     "value": 70
+    },
+    {
+     "name": "Język (Grumbarth)",
+     "value": 70
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 85
+    },
+    {
+     "name": "Wiedza (Mroczne Krainy)",
+     "value": 80
+    },
+    {
+     "name": "Wiedza (Krasnoludy)",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Heraldyka)",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Polityka)",
+     "value": 80
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 100
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 100
+    },
+    {
+     "name": "Jeździectwo (Wielki Taurus)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Hulaka 3",
+    "Władcza Postura 3",
+    "Etykieta (Wyznawcy Chaosu) 3",
+    "Porywająca Gorliwość 3",
+    "Inspirujący 5",
+    "Żelazna Wola 3",
+    "Błękitna Krew",
+    "Mówca 5",
+    "Czytanie/Pisanie",
+    "Odwrócenie Szans 5",
+    "Tarczownik 5",
+    "Waleczne Serce 3",
+    "Silny Cios 4",
+    "Charyzmatyczny",
+    "Wódz 5"
+   ],
+   "traits": [
+    "Wrogość (Krasnoludy)",
+    "Pancerz (5) – Czarny odłamek",
+    "Nienawiść (Skaveny)",
+    "Przywódca",
+    "Odporność na Magię (8)",
+    "Widzenie w Ciemności",
+    "Broń (Krasnoludzki młot i duża tarcza) +14"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Przebiegły",
+    "Rój",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 7",
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Byczy Centaur, strażnik świątyni",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 61,
+   "stats": {
+    "Sz": 6,
+    "WW": 70,
+    "US": 35,
+    "S": 50,
+    "Wt": 55,
+    "I": 30,
+    "Zw": 25,
+    "Zr": 45,
+    "Int": 30,
+    "SW": 50,
+    "Ogd": 20,
+    "Żyw": 40
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 35
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 40
+    },
+    {
+     "name": "Oswajanie",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 60
+    },
+    {
+     "name": "Unik",
+     "value": 35
+    },
+    {
+     "name": "Odporność",
+     "value": 65
+    },
+    {
+     "name": "Leczenie",
+     "value": 40
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Hashut)",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Heraldyka)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 80
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 55
+    }
+   ],
+   "talents": [
+    "Etykieta (Kultyści)",
+    "Żelazna Szczęka 2",
+    "Groźny 2",
+    "Nieugięty 2",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Tragarz 3",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (5) – skóra i półpłyta",
+    "Nienawiść (Intruzi)",
+    "Nienawiść (Skaveny)",
+    "Rogi +12",
+    "Żarłoczny",
+    "Widzenie w Ciemności",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Broń (Kopyta) +11",
+    "Broń (Topór bojowy i tarcza) +12"
+   ],
+   "optional": [
+    "Duży",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Furia",
+    "Mutacja",
+    "Staje Dęba",
+    "Twardy",
+    "Broń (Topór dwuręczny) +14"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Byczy Centaur Taur’ruk",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 61,
+   "stats": {
+    "Sz": 6,
+    "WW": 75,
+    "US": 35,
+    "S": 55,
+    "Wt": 55,
+    "I": 35,
+    "Zw": 30,
+    "Zr": 45,
+    "Int": 30,
+    "SW": 65,
+    "Ogd": 20,
+    "Żyw": 42
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 45
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Charyzma",
+     "value": 35
+    },
+    {
+     "name": "Oswajanie",
+     "value": 70
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 70
+    },
+    {
+     "name": "Opanowanie",
+     "value": 80
+    },
+    {
+     "name": "Unik",
+     "value": 45
+    },
+    {
+     "name": "Odporność",
+     "value": 70
+    },
+    {
+     "name": "Leczenie",
+     "value": 45
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 70
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 35
+    },
+    {
+     "name": "Wiedza (Hashut)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Heraldyka)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 90
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Etykieta (Kultyści) 2",
+    "Nieustraszony (Intruzi) 3",
+    "Żelazna Szczęka 3",
+    "Groźny 3",
+    "Nieugięty 4",
+    "Tarczownik 3",
+    "Waleczne Serce 2",
+    "Silny Cios 4",
+    "Tragarz 4",
+    "Niewzruszony 2",
+    "Wódz 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (5) – skóra i półpłyta",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Intruzi)",
+    "Nienawiść (Skaveny)",
+    "Rogi +12",
+    "Żarłoczny",
+    "Widzenie w Ciemności",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Broń (Kopyta) +12",
+    "Broń (Topór bojowy i tarcza) +13"
+   ],
+   "optional": [
+    "Duży",
+    "Furia",
+    "Mutacja",
+    "Staje Dęba",
+    "Twardy",
+    "Broń (Topór dwuręczny) +15"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Olbrzym Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 6,
+    "WW": 50,
+    "US": 35,
+    "S": 70,
+    "Wt": 60,
+    "I": 30,
+    "Zw": 20,
+    "Zr": 15,
+    "Int": 25,
+    "SW": 50,
+    "Ogd": 20,
+    "Żyw": 96
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (1) – gruba skóra",
+    "Wojowniczy",
+    "Spaczenie (Umiarkowane)",
+    "Widzenie w Ciemności",
+    "Rozmiar (Wielki)",
+    "Długi Krok",
+    "Twardy",
+    "Broń (Maczuga) +11"
+   ],
+   "optional": [
+    "Pancerz (2) – skóra i skóry",
+    "Pancerz (5) – skóra i płyty",
+    "Zwierzęcy",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Rogi +11",
+    "Żarłoczny",
+    "Zakażony",
+    "Zaraza",
+    "Rozmiar (Monstrualny)",
+    "Głupi",
+    "Macki +8",
+    "Wymiot",
+    "Broń (Korbacz) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Śluz Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": null,
+    "S": 40,
+    "Wt": 55,
+    "I": null,
+    "Zw": 15,
+    "Zr": null,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 18
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Wchłanianie",
+    "Bezkształtny",
+    "Ziemnowodny",
+    "Spaczenie (Umiarkowane)",
+    "Pełzający",
+    "Pochłonięcie",
+    "Bezmyślny",
+    "Nie Czuje Bólu",
+    "Bagnołaz",
+    "2× Macki +6",
+    "Broń +6"
+   ],
+   "optional": [
+    "Zwierzęcy",
+    "Kwasowa Krew",
+    "Widzenie w Mroku",
+    "Nie do Zdarcia",
+    "Regeneracja",
+    "Rozmiar (od Małego do Wielkiego)",
+    "Macki +6",
+    "Tropiciel",
+    "Jad (Przeciętny–Trudny)",
+    "Wspinacz"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "sredni"
+  },
+  {
+   "name": "Pomiot Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": null,
+    "S": 40,
+    "Wt": 55,
+    "I": 25,
+    "Zw": 25,
+    "Zr": 25,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 18
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Zwierzęcy",
+    "Ugryzienie +7",
+    "Spaczenie (Umiarkowane)",
+    "Strach (2)",
+    "Szał Bojowy",
+    "Niewrażliwość na Psychologię",
+    "Zakażony",
+    "Nie Czuje Bólu",
+    "4× Macki +5",
+    "Broń (Pazury) +8"
+   ],
+   "optional": [
+    "Wchłanianie",
+    "Pancerz (1–5) – pancerz z chityny",
+    "Duży",
+    "Zaraza (rodzaj)",
+    "Zionięcie +5 (Ogień)",
+    "Siłacz",
+    "Choroba (rodzaj)",
+    "Dekoncentrujący",
+    "Elita",
+    "Zaraza",
+    "Rozmiar (od Małego do Wielkiego)",
+    "Długi Krok",
+    "Macki +5"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "sredni"
+  },
+  {
+   "name": "Troll Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 6,
+    "WW": 50,
+    "US": 25,
+    "S": 60,
+    "Wt": 50,
+    "I": 10,
+    "Zw": 15,
+    "Zr": 15,
+    "Int": 20,
+    "SW": 45,
+    "Ogd": 5,
+    "Żyw": 40
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (2) – gruba skóra",
+    "Wojowniczy",
+    "Ugryzienie +9",
+    "Spaczenie (Pomniejsze)",
+    "Nie do Zdarcia",
+    "Strach (3)",
+    "Furia",
+    "Zakażony",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Głupi",
+    "Twardy",
+    "Wymiot",
+    "Broń (Maczuga) +10"
+   ],
+   "optional": [
+    "Ziemnowodny",
+    "Pancerz (4) – kamienna skóra",
+    "Zwierzęcy",
+    "Siłacz",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Żarłoczny",
+    "Zaraza",
+    "Odporność na Magię",
+    "Widzenie w Ciemności",
+    "Nie Czuje Bólu",
+    "Skryty",
+    "Bagnołaz",
+    "Macki +7",
+    "Broń (Topór dwuręczny) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "sredni"
+  },
+  {
+   "name": "Ogar Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 7,
+    "WW": 40,
+    "US": null,
+    "S": 35,
+    "Wt": 35,
+    "I": 30,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 15,
+    "SW": 40,
+    "Ogd": null,
+    "Żyw": 14
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (1) – gruba skóra",
+    "Wojowniczy",
+    "Ugryzienie +6",
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Mroku",
+    "Strach (2)",
+    "Długi Krok",
+    "Rój",
+    "Tropiciel",
+    "Broń (Kły) +6"
+   ],
+   "optional": [
+    "Duży",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Zakażony",
+    "Zaraza",
+    "Nie Czuje Bólu",
+    "Rozmiar (Duży)",
+    "Terytorialny"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Psowate",
+   "status": null
+  },
+  {
+   "name": "Cygor",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 7,
+    "WW": 45,
+    "US": 30,
+    "S": 60,
+    "Wt": 55,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 20,
+    "Int": 20,
+    "SW": 35,
+    "Ogd": 15,
+    "Żyw": 76
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (1) – gruba skóra",
+    "Rogi +11",
+    "Żarłoczny",
+    "Niewrażliwość na Psychologię",
+    "Widzenie w Ciemności",
+    "Strzelanie (Wielki głaz) +9 (18)",
+    "Staje Dęba",
+    "Rozmiar (Wielki)",
+    "Broń (Wielki głaz) +9",
+    "Broń (Kopyto) +9"
+   ],
+   "optional": [
+    "Mieszkaniec Lasu",
+    "Spaczenie (Umiarkowane)",
+    "Choroba (Ospa Tragarzy)",
+    "Furia",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Smoczy Ogr",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 7,
+    "WW": 55,
+    "US": 20,
+    "S": 55,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 20,
+    "Int": 40,
+    "SW": 50,
+    "Ogd": 20,
+    "Żyw": 80
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (3) – gruba skóra",
+    "Wojowniczy",
+    "Ugryzienie +9",
+    "Spaczenie (Umiarkowane)",
+    "Niewrażliwość (Błyskawice albo Trucizny)",
+    "Magiczny",
+    "Staje Dęba",
+    "Rozmiar (Wielki)",
+    "Długi Krok",
+    "Atak Ogonem +8",
+    "Twardy",
+    "Broń (Szponiaste stopy) +9",
+    "Broń (Topór dwuręczny) +11"
+   ],
+   "optional": [
+    "Pancerz (5) – skóra i półpłyta",
+    "Czempion",
+    "Furia",
+    "Twardziel",
+    "Mutacja",
+    "Broń (Młot bojowy) +11"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Smoczy Ogr Shaggoth",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 62,
+   "stats": {
+    "Sz": 7,
+    "WW": 75,
+    "US": 40,
+    "S": 65,
+    "Wt": 60,
+    "I": 45,
+    "Zw": 30,
+    "Zr": 20,
+    "Int": 60,
+    "SW": 70,
+    "Ogd": 30,
+    "Żyw": 200
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (4) – gruba skóra",
+    "Ugryzienie +10",
+    "Spaczenie (Umiarkowane)",
+    "Niewrażliwość (Błyskawice albo Trucizny)",
+    "Niewrażliwość na Psychologię",
+    "Magiczny",
+    "Staje Dęba",
+    "Rozmiar (Monstrualny)",
+    "Długi Krok",
+    "Atak Ogonem +9",
+    "Twardy",
+    "Broń (Szponiaste stopy) +10",
+    "Broń (Topór dwuręczny) +12"
+   ],
+   "optional": [
+    "Pancerz (7) – skóra i półpłyta",
+    "Czempion",
+    "Elita",
+    "Furia",
+    "Twardziel",
+    "Mutacja",
+    "Broń (Młot bojowy) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Ghorgon",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 63,
+   "stats": {
+    "Sz": 7,
+    "WW": 55,
+    "US": 25,
+    "S": 65,
+    "Wt": 65,
+    "I": 30,
+    "Zw": 25,
+    "Zr": 25,
+    "Int": 20,
+    "SW": 50,
+    "Ogd": 15,
+    "Żyw": 92
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (1) – gruba skóra",
+    "Duży",
+    "Szał Bojowy",
+    "Rogi +11",
+    "Żarłoczny",
+    "Niewrażliwość na Psychologię",
+    "Widzenie w Ciemności",
+    "Staje Dęba",
+    "Rozmiar (Wielki)",
+    "Groza (3)",
+    "Broń (Topór) +11",
+    "Broń (Kopyto) +9"
+   ],
+   "optional": [
+    "Mieszkaniec Lasu",
+    "Pancerz (2) – skóra i skóry",
+    "Spaczenie (Umiarkowane)",
+    "Choroba (Ospa Tragarzy)",
+    "Furia",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Troll lodowy",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 63,
+   "stats": {
+    "Sz": 6,
+    "WW": 40,
+    "US": 15,
+    "S": 55,
+    "Wt": 65,
+    "I": 10,
+    "Zw": 15,
+    "Zr": 15,
+    "Int": 10,
+    "SW": 30,
+    "Ogd": 5,
+    "Żyw": 40
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (4) – Mroźna skóra",
+    "Wojowniczy",
+    "Ugryzienie +8",
+    "Zionięcie +6 (Ice)",
+    "Nie do Zdarcia",
+    "Rogi +9",
+    "Zakażony",
+    "Odporność na Magię (4)",
+    "Widzenie w Ciemności",
+    "Nie Czuje Bólu",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Głupi",
+    "Twardy",
+    "Wymiot",
+    "Broń (Lodowy młot) +10"
+   ],
+   "optional": [
+    "Zwierzęcy",
+    "Widzenie w Mroku",
+    "Szał Bojowy",
+    "Twardziel",
+    "Żarłoczny",
+    "Mutacja"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Potwory",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "sredni"
+  },
+  {
+   "name": "K’Daai Niszczyciel",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 63,
+   "stats": {
+    "Sz": 8,
+    "WW": 85,
+    "US": null,
+    "S": 70,
+    "Wt": 75,
+    "I": 45,
+    "Zw": 55,
+    "Zr": null,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 224
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (6) – runiczny brąz",
+    "Czempion",
+    "Konstrukt",
+    "Spaczenie (Poważne)",
+    "Demoniczny 7+",
+    "Widzenie w Mroku",
+    "Dekoncentrujący",
+    "Strach (5)",
+    "Furia",
+    "Rogi +13",
+    "Niewrażliwość (Ognia)",
+    "Nie Czuje Bólu",
+    "Rozmiar (Wielki)",
+    "Długi Krok",
+    "Groza (4)",
+    "Twardy",
+    "Broń (Tylne kopyta) +10",
+    "Broń (Kończyny-ostrza) +11"
+   ],
+   "optional": [
+    "Zionięcie +16 (Ogień)",
+    "Rozmiar (Monstrualny)",
+    "Terytorialny",
+    "Wymiot (Lawa)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Demon",
+   "status": null,
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "K’Daai Zrodzony z Ognia",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 63,
+   "stats": {
+    "Sz": 5,
+    "WW": 75,
+    "US": 35,
+    "S": 60,
+    "Wt": 65,
+    "I": 40,
+    "Zw": 15,
+    "Zr": 10,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 48
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (6) – runiczny brąz",
+    "Czempion",
+    "Konstrukt",
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Widzenie w Mroku",
+    "Dekoncentrujący",
+    "Strach (4)",
+    "Furia",
+    "Niewrażliwość (Ognia)",
+    "Nie Czuje Bólu",
+    "Rozmiar (Duży)",
+    "Groza (3)",
+    "Twardy",
+    "Broń (Pazury) +9",
+    "Broń (Krasnoludzki młot) +10"
+   ],
+   "optional": [
+    "Zionięcie +8 (Ogień)",
+    "Terytorialny",
+    "Wymiot (Lawa)",
+    "Broń (Piekielne ostrze) +10",
+    "Broń (Topór bojowy) +10",
+    "Broń (Młot bojowy) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Demon",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Lammasu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 63,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": null,
+    "S": 50,
+    "Wt": 50,
+    "I": 65,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 65,
+    "SW": 75,
+    "Ogd": 60,
+    "Żyw": 88
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (Aqshy, Shyish albo Ulgu)",
+     "value": 85
+    },
+    {
+     "name": "Charyzma",
+     "value": 75
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 75
+    }
+   ],
+   "talents": [
+    "Zmysł Magii",
+    "Precyzyjne Inkantowanie",
+    "Wykrywanie Magii",
+    "Percepcja Magiczna"
+   ],
+   "traits": [
+    "Pancerz (2) – gruba skóra",
+    "Ugryzienie +8",
+    "Sprytny",
+    "Przebiegły",
+    "Latanie (80)",
+    "Rogi +10",
+    "Niewrażliwość (Magiczna broń)",
+    "Odporność na Magię (6)",
+    "Rozmiar (Wielki)",
+    "Rzucanie Czarów (Śmierci, Ognia albo Cieni)",
+    "Długi Krok",
+    "Atak Ogonem +8",
+    "Broń (Pazury) +9"
+   ],
+   "optional": [
+    "Czempion",
+    "Elita",
+    "Twardziel",
+    "Przywódca",
+    "Mutacja",
+    "Wyszkolony (Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Krasnoludy Chaosu",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Kłogor",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 64,
+   "stats": {
+    "Sz": 7,
+    "WW": 35,
+    "US": null,
+    "S": 35,
+    "Wt": 45,
+    "I": 35,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 10,
+    "SW": 30,
+    "Ogd": 10,
+    "Żyw": 14
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (2) – gruba skóra",
+    "Zwierzęcy",
+    "Rogi (Kły) +7",
+    "Żarłoczny",
+    "Widzenie w Ciemności",
+    "Płochliwy",
+    "Długi Krok",
+    "Broń (Kolce) +7"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Spaczenie (Pomniejsze)",
+    "Choroba (Ospa Tragarzy)",
+    "Szał Bojowy",
+    "Zakażony",
+    "Zaraza",
+    "Mutacja",
+    "Terytorialny",
+    "Wyszkolony (Ujarzmiony, Pociągowy, Magiczny, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzę roślinożerne",
+   "status": null
+  },
+  {
+   "name": "Smok Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": 60,
+    "S": 65,
+    "Wt": 75,
+    "I": 70,
+    "Zw": 30,
+    "Zr": 15,
+    "Int": 55,
+    "SW": 90,
+    "Ogd": 35,
+    "Żyw": 116
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (5) – gruba skóra",
+    "Ugryzienie +10",
+    "Zionięcie +17 (Various)",
+    "Spaczenie (Umiarkowane)",
+    "Przebiegły",
+    "Latanie (80)",
+    "Magiczny",
+    "Spaczenie Umysłu",
+    "Widzenie w Ciemności",
+    "Rozmiar (Wielki)",
+    "Atak Ogonem +9",
+    "Broń (Pazury) +10"
+   ],
+   "optional": [
+    "Duży",
+    "Czempion",
+    "Sprytny",
+    "Elita",
+    "Mutacja",
+    "Rozmiar (Monstrualny)",
+    "Rzucanie Czarów (Tzeentch)",
+    "Wyszkolony (Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Rumak Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 7,
+    "WW": 40,
+    "US": null,
+    "S": 45,
+    "Wt": 45,
+    "I": 20,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 10,
+    "SW": 20,
+    "Ogd": 0,
+    "Żyw": 28
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Spaczenie (Pomniejsze)",
+    "Magiczny",
+    "Mutacja",
+    "Rozmiar (Duży)",
+    "Płochliwy",
+    "Długi Krok",
+    "Broń (Kopyta) +7"
+   ],
+   "optional": [
+    "Czempion",
+    "Sprytny",
+    "Choroba",
+    "Dekoncentrujący",
+    "Elita",
+    "Szał Bojowy",
+    "Twardziel",
+    "Staje Dęba",
+    "Twardy",
+    "Wyszkolony (Ujarzmiony, Pociągowy, Magiczny, Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Zwierzę roślinożerne",
+   "status": null
+  },
+  {
+   "name": "Demoniczny Wierzchowiec",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 5,
+    "WW": 40,
+    "US": null,
+    "S": 60,
+    "Wt": 60,
+    "I": 30,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 15,
+    "SW": 60,
+    "Ogd": 10,
+    "Żyw": 48
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (2) – gruba skóra",
+    "Zionięcie +6 (Varies)",
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Strach (3)",
+    "Rogi +9",
+    "Widzenie w Ciemności",
+    "Niestabilny",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Broń (Kopyta) +9"
+   ],
+   "optional": [
+    "Czempion",
+    "Sprytny",
+    "Choroba",
+    "Dekoncentrujący",
+    "Elita",
+    "Szał Bojowy",
+    "Furia",
+    "Twardziel",
+    "Zakażony",
+    "Zaraza",
+    "Mutacja",
+    "Staje Dęba",
+    "Twardy",
+    "Wyszkolony (Ujarzmiony, Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Demon",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Dysk Tzeentcha",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 1,
+    "WW": 35,
+    "US": null,
+    "S": 50,
+    "Wt": 55,
+    "I": 60,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 45,
+    "SW": 80,
+    "Ogd": null,
+    "Żyw": 23
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Strach (2)",
+    "Latanie (100)",
+    "Mutacja",
+    "Widzenie w Ciemności",
+    "Skryty",
+    "Niestabilny",
+    "Broń (Kolce) +8"
+   ],
+   "optional": [
+    "Sprytny",
+    "Przebiegły",
+    "Twardziel",
+    "Rozmiar (Duży)",
+    "Rzucanie Czarów (Tzeentch)",
+    "Twardy",
+    "Wyszkolony (Ujarzmiony, Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Krwawa Bestia",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 7,
+    "WW": 40,
+    "US": 10,
+    "S": 55,
+    "Wt": 55,
+    "I": 25,
+    "Zw": 35,
+    "Zr": 25,
+    "Int": 10,
+    "SW": 45,
+    "Ogd": 10,
+    "Żyw": 48
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (2) – gruba skóra",
+    "Spaczenie (Pomniejsze)",
+    "Strach (2)",
+    "Furia",
+    "Twardziel",
+    "Zakażony",
+    "Mutacja",
+    "Widzenie w Ciemności",
+    "Staje Dęba",
+    "Rozmiar (Duży)",
+    "Twardy",
+    "Broń (Pazury) +9"
+   ],
+   "optional": [
+    "Siłacz",
+    "Czempion",
+    "Choroba",
+    "Elita",
+    "Zaraza",
+    "Wyszkolony (Pociągowy, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Juggernaut Khorne’a",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 7,
+    "WW": 55,
+    "US": null,
+    "S": 55,
+    "Wt": 60,
+    "I": 10,
+    "Zw": 15,
+    "Zr": null,
+    "Int": 5,
+    "SW": 65,
+    "Ogd": null,
+    "Żyw": 58
+   },
+   "skills": [],
+   "talents": [
+    "Berserkerska Szarża",
+    "Nieugięty 3"
+   ],
+   "traits": [
+    "Pancerz (5) – gruba skóra",
+    "Wojowniczy",
+    "Ugryzienie +8",
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Strach (4)",
+    "Szał Bojowy",
+    "Furia",
+    "Twardziel",
+    "Rogi +10",
+    "Widzenie w Ciemności",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Niestabilny",
+    "Broń (Kopyta) +9"
+   ],
+   "optional": [
+    "Czempion",
+    "Elita",
+    "Mutacja",
+    "Staje Dęba",
+    "Twardy",
+    "Wyszkolony (Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Mantikora bojowa",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 6,
+    "WW": 65,
+    "US": null,
+    "S": 55,
+    "Wt": 55,
+    "I": 50,
+    "Zw": 65,
+    "Zr": null,
+    "Int": 10,
+    "SW": 35,
+    "Ogd": 10,
+    "Żyw": 72
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (2) – gruba skóra",
+    "Zwierzęcy",
+    "Ugryzienie +9",
+    "Latanie (80)",
+    "Rozmiar (Wielki)",
+    "Atak Ogonem +8",
+    "Terytorialny",
+    "Wyszkolony (Ujarzmiony, Magiczny, Wierzchowiec, Bojowy)",
+    "Jad (Trudny)",
+    "Broń (Pazury) +9"
+   ],
+   "optional": [
+    "Czempion",
+    "Elita",
+    "Twardziel",
+    "Nienawiść (Drapieżniki)",
+    "Mutacja",
+    "Staje Dęba"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Rumak Slaanesha",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 50,
+   "stats": {
+    "Sz": 9,
+    "WW": 45,
+    "US": 45,
+    "S": 40,
+    "Wt": 50,
+    "I": 65,
+    "Zw": 50,
+    "Zr": null,
+    "Int": 10,
+    "SW": 70,
+    "Ogd": 5,
+    "Żyw": 42
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Dekoncentrujący",
+    "Szybki",
+    "Strach (3)",
+    "Widzenie w Ciemności",
+    "Niestabilny",
+    "Rozmiar (Duży)",
+    "Atak Językiem +4 (12)",
+    "Jad (Trudny)",
+    "Broń (Język) +8"
+   ],
+   "optional": [
+    "Czempion",
+    "Sprytny",
+    "Elita",
+    "Mutacja",
+    "Twardy",
+    "Wyszkolony (Ujarzmiony, Wierzchowiec, Bojowy)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Książę demonów Khorne’a",
+   "source": "Generator (na wzór podręcznika, s. 335–336)",
+   "page": 336,
+   "group": "Demony",
+   "family": "Demon",
+   "unique": false,
+   "stats": {
+    "Sz": 6,
+    "WW": 100,
+    "US": 30,
+    "S": 120,
+    "Wt": 110,
+    "I": 80,
+    "Zw": 70,
+    "Zr": 30,
+    "Int": 45,
+    "SW": 90,
+    "Ogd": 40,
+    "Żyw": 86
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Topór Khorne’a) +18",
+    "Czempion",
+    "Demoniczny 7+",
+    "Groza (3)",
+    "Nie Czuje Bólu",
+    "Niestabilny",
+    "Odporność na Magię (3)",
+    "Pancerz (5)",
+    "Rogi +15",
+    "Rozmiar (Duży)",
+    "Spaczenie (Większe)",
+    "Szał Bojowy",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Latanie (60)",
+    "Furia"
+   ],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Książę demonów to Wybraniec Chaosu wyniesiony przez swego boga — śmiertelny czempion, który zdobył dość łask, by na wieczność zasiąść w Królestwach Chaosu (podręcznik, s. 336)."
+    }
+   ],
+   "trappings": [],
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Książę demonów Tzeentcha",
+   "source": "Generator (na wzór podręcznika, s. 335–336)",
+   "page": 336,
+   "group": "Demony",
+   "family": "Demon",
+   "unique": false,
+   "stats": {
+    "Sz": 6,
+    "WW": 75,
+    "US": 90,
+    "S": 100,
+    "Wt": 100,
+    "I": 95,
+    "Zw": 80,
+    "Zr": 45,
+    "Int": 110,
+    "SW": 110,
+    "Ogd": 60,
+    "Żyw": 82
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +14",
+    "Demoniczny 8+",
+    "Groza (3)",
+    "Latanie (80)",
+    "Niestabilny",
+    "Pancerz (2)",
+    "Rogi +13",
+    "Rozmiar (Duży)",
+    "Rzucanie Czarów (Tzeentch)",
+    "Spaczenie (Większe)",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Odporność na Magię (3)",
+    "Czempion"
+   ],
+   "abilities": [
+    {
+     "name": "Wyniesienie",
+     "description": "Książę demonów to Wybraniec Chaosu wyniesiony przez swego boga — śmiertelny czempion, który zdobył dość łask, by na wieczność zasiąść w Królestwach Chaosu (podręcznik, s. 336)."
+    }
+   ],
+   "trappings": [],
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Zarazonośca Nurgle’a",
+   "source": "Generator (na wzór podręcznika, s. 335–336)",
+   "page": 335,
+   "group": "Demony",
+   "family": "Demon",
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 30,
+    "S": 40,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 25,
+    "Zr": 30,
+    "Int": 30,
+    "SW": 60,
+    "Ogd": 5,
+    "Żyw": 18
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń (Zardzewiały miecz) +8",
+    "Choroba (Ospa Swędząca)",
+    "Demoniczny 8+",
+    "Nie Czuje Bólu",
+    "Niestabilny",
+    "Rogi +6",
+    "Spaczenie (Średnie)",
+    "Strach (2)",
+    "Zakażony",
+    "Zaraza"
+   ],
+   "optional": [
+    "Dekoncentrujący"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Różowy Horror Tzeentcha",
+   "source": "Generator (na wzór podręcznika, s. 335–336)",
+   "page": 335,
+   "group": "Demony",
+   "family": "Demon",
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 45,
+    "S": 35,
+    "Wt": 35,
+    "I": 55,
+    "Zw": 50,
+    "Zr": 40,
+    "Int": 50,
+    "SW": 65,
+    "Ogd": 30,
+    "Żyw": 15
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +7",
+    "Demoniczny 8+",
+    "Niestabilny",
+    "Rzucanie Czarów (Tzeentch)",
+    "Spaczenie (Średnie)",
+    "Strach (2)",
+    "Widzenie w Ciemności"
+   ],
+   "optional": [
+    "Dekoncentrujący"
+   ],
+   "abilities": [
+    {
+     "name": "Rozszczepienie",
+     "description": "Gdy Różowy Horror zginie, rozpada się na dwa mniejsze, wiecznie zrzędzące Niebieskie Horrory (połowa Żywotności każdy, bez Rzucania Czarów)."
+    }
+   ],
+   "trappings": [],
+   "minTier": "zaawansowany"
   }
  ]
 }
