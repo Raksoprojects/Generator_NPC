@@ -143,6 +143,10 @@ export function qualityDescription(quality: string): string {
   const all = gd.getWeapons().qualities;
   const name = quality.replace(/\s*\(\d+P\)$|\s+\d+$/, "").trim();
   if (all[name]) return all[name];
+  // Inny rodzaj gramatyczny: Celny/Celna, Tępy/Tępe/Tępa, Szybki/Szybka.
+  const genderless = (s: string) => s.toLowerCase().slice(0, -1);
+  const sameWord = Object.keys(all).find((k) => genderless(k) === genderless(name));
+  if (sameWord) return all[sameWord];
   const stem = name.toLowerCase().slice(0, Math.max(5, name.length - 2));
   const key = Object.keys(all).find((k) => k.toLowerCase().startsWith(stem));
   return key ? all[key] : "";
