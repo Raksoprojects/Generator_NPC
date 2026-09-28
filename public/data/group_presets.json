@@ -258,5 +258,35 @@
         "label": "Kieł"
       }
     ]
+  },
+  "Banda Chaosu": {
+    "description": "Maruderzy z Północy pod wodzą czempiona i wojownika Chaosu (Warriors of Chaos).",
+    "rows": [
+      {
+        "count": 4,
+        "archetype": "",
+        "creature": "Maruder Chaosu",
+        "tier": "sredni"
+      },
+      {
+        "count": 1,
+        "archetype": "",
+        "creature": "Maruder Berserker",
+        "tier": "sredni"
+      },
+      {
+        "count": 1,
+        "archetype": "",
+        "creature": "Czempion Maruderów",
+        "tier": "zaawansowany",
+        "commander": true
+      },
+      {
+        "count": 1,
+        "archetype": "",
+        "creature": "Wojownik Chaosu z Pustkowi",
+        "tier": "zaawansowany"
+      }
+    ]
   }
 }

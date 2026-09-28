@@ -1963,5 +1963,37 @@
     "tests": "Testy, w których Splatanie Magii (Ulgu) zastępuje Skradanie",
     "description": "Możesz używać Splatania Magii (Ulgu) zamiast Skradania we wszystkich stosownych testach. Każde udane rzucenie zaklęcia z Tradycji Cienia w promieniu 8 metrów od ciebie zyskuje +1 PS (premia tylko raz).",
     "source": "Bestiariusz 2.0"
+  },
+  "Znak Chaosu (Bóg)": {
+    "max": {
+      "type": "fixed",
+      "value": 3
+    },
+    "max_raw": "3 (ogólny Znak Chaosu: 1)",
+    "tests": null,
+    "description": "Czempion ślubuje jednemu Mrocznemu Bogu i otrzymuje jego znak (wybór ostateczny). Khorne: Nienawiść (Slaanesh) i Wrogość (Tzeentch), nie może używać magii, Szał Bojowy bez Testu; 2. poziom — brak Zmęczenia po Szale; 3. poziom — dwa Darmowe Ataki wręcz na Rundę. Nurgle: Nienawiść (Tzeentch) i Wrogość (Slaanesh), Cecha Nie Czuje Bólu; 2. — Dekoncentrujący; 3. — Regeneracja. Slaanesh: Nienawiść (Khorne) i Wrogość (Nurgle), +poziom do PS Testów Psychologii; 2. — Wojowniczy; 3. — ignoruje kary od Cech Stworzeń wpływających na walkę. Tzeentch: Nienawiść (Nurgle) i Wrogość (Khorne), Ochrona (9+) i o 1 lepsza za poziom (do 7+); 2. — Odporność na Magię równa BSW; 3. — Talent Przeszywające Spojrzenie. Czarujący wybierają tylko Nurgle’a, Slaanesha albo Tzeentcha i używają jego Tradycji Chaosu.",
+    "source": "Warriors of Chaos (Ratter)"
+  },
+  "Oko Bogów": {
+    "max": {
+      "type": "characteristic",
+      "attr": "WW",
+      "attr_name": "Walki Wręcz"
+    },
+    "max_raw": "Bonus z Walki Wręcz",
+    "tests": "Walka wręcz w pojedynku",
+    "description": "Wszyscy czterej Mroczni Bogowie uznali cię za Czempiona Chaosu. W walce możesz jako Akcję wyzwać jednego przeciwnika na pojedynek (+1 do Obrażeń wręcz w pojedynku); wyzwania elitarnych wrogów musisz przyjąć. Przegrany albo odrzucony pojedynek: 1k10+8 Ran ignorujących BWt i PP. Zwycięstwo nad godnym rywalem: rzut k10 na tabelę Daru Chaosu.",
+    "source": "Warriors of Chaos (Ratter)"
+  },
+  "Przeszywające Spojrzenie": {
+    "max": {
+      "type": "characteristic",
+      "attr": "I",
+      "attr_name": "Inicjatywy"
+    },
+    "max_raw": "Bonus z Inicjatywy",
+    "tests": "Percepcja (Wzrok)",
+    "description": "Dar Tzeentcha. Jako Akcję badasz przeciwników w walce; w następnej Turze twoje ataki wręcz ignorują ich Bonus z Wytrzymałości i Punkty Pancerza. Liczba badanych przeciwników = poziom Talentu.",
+    "source": "Warriors of Chaos (Ratter)"
   }
 }

@@ -5227,7 +5227,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
-   "family": "Sługa Chaosu"
+   "family": "Sługa Chaosu",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Krwiopuszcz Khorna",
@@ -5303,6 +5304,3235 @@
    "trappings": [],
    "group": "Demony",
    "family": "Demon"
+  },
+  {
+   "name": "Maruder Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 51,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 30,
+    "S": 50,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 40,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 20
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 35
+    },
+    {
+     "name": "Atletyka",
+     "value": 50
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 55
+    },
+    {
+     "name": "Unik",
+     "value": 50
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 35
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 35
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 55
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 35
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Cios Poniżej Pasa 2",
+    "Doświadczony Wędrowiec (Teren Skalisty)",
+    "Mocne Plecy 2",
+    "Odporność Psychiczna 2",
+    "Wstrzemięźliwy",
+    "Wytrwały 2",
+    "Bardzo Silny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (1) – skóry",
+    "Wojowniczy",
+    "Twardziel",
+    "Nienawiść (Południowcy)",
+    "Strzelanie (Topór do rzucania) +8 (10)",
+    "Broń (Topór i puklerz) +9"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Rój",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Brąz 3"
+  },
+  {
+   "name": "Konny Maruder",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 51,
+   "stats": {
+    "Sz": 4,
+    "WW": 45,
+    "US": 30,
+    "S": 50,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 40,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 20
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 35
+    },
+    {
+     "name": "Atletyka",
+     "value": 50
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 55
+    },
+    {
+     "name": "Unik",
+     "value": 50
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 35
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 35
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 55
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 35
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 50
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 50
+    }
+   ],
+   "talents": [
+    "Cios Poniżej Pasa 2",
+    "Doświadczony Wędrowiec (Teren Skalisty)",
+    "Mocne Plecy 2",
+    "Odporność Psychiczna 2",
+    "Wstrzemięźliwy",
+    "Wytrwały 2",
+    "Bardzo Silny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (1) – skóry",
+    "Wojowniczy",
+    "Twardziel",
+    "Nienawiść (Południowcy)",
+    "Strzelanie (Łuk) +8 (50)",
+    "Broń (Topór i puklerz) +9"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Brąz 3"
+  },
+  {
+   "name": "Maruder Łowca",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 51,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": 45,
+    "S": 45,
+    "Wt": 45,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 40,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Oswajanie",
+     "value": 40
+    },
+    {
+     "name": "Wspinaczka",
+     "value": 55
+    },
+    {
+     "name": "Opanowanie",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Intuicja",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Zwierzęta)",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 45
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 35
+    },
+    {
+     "name": "Percepcja",
+     "value": 40
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 60
+    },
+    {
+     "name": "Broń Zasięgowa (Proca)",
+     "value": 60
+    },
+    {
+     "name": "Sekretne Znaki (Łowców)",
+     "value": 35
+    },
+    {
+     "name": "Zastawianie Pułapek",
+     "value": 50
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Celny Strzał 2",
+    "Błyskawiczny Strzał",
+    "Oko Łowcy 2",
+    "Strzelec Wyborowy",
+    "Włóczykij 2",
+    "Doświadczony Wędrowiec (Teren Skalisty)",
+    "Traper 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (1) – skóry",
+    "Wojowniczy",
+    "Twardziel",
+    "Nienawiść (Południowcy)",
+    "Strzelanie (Łuk) +9 (50)",
+    "Strzelanie (Proca) +8 (60)",
+    "Broń (Topór) +8"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Długi łuk) +10 (0)",
+    "Strzelanie (Proca drzewcowa) +9 (100)",
+    "Twardy"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Brąz 4"
+  },
+  {
+   "name": "Maruder Berserker",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 51,
+   "stats": {
+    "Sz": 5,
+    "WW": 45,
+    "US": 30,
+    "S": 50,
+    "Wt": 50,
+    "I": 30,
+    "Zw": 30,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 50,
+    "Ogd": 25,
+    "Żyw": 25
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 40
+    },
+    {
+     "name": "Opanowanie",
+     "value": 60
+    },
+    {
+     "name": "Unik",
+     "value": 40
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Leczenie",
+     "value": 35
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Intuicja",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Khorne)",
+     "value": 35
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 60
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 60
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 60
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 35
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Bitewna Furia 2",
+    "Berserkerska Szarża 3",
+    "Dwie Bronie",
+    "Bardzo Szybki",
+    "Nieubłagany 2",
+    "Szybkobiegacz",
+    "Niezwykle Odporny",
+    "Bardzo Silny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wojowniczy",
+    "Szał Bojowy",
+    "Furia",
+    "Twardziel",
+    "Nienawiść (Południowcy)",
+    "Strzelanie (Topór do rzucania) +8 (10)",
+    "Broń (Dwa topory bojowe) +9"
+   ],
+   "optional": [
+    "Siłacz",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Twardy",
+    "Broń (Topór dwuręczny) +11"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Brąz 0",
+   "minTier": "sredni"
+  },
+  {
+   "name": "Czempion Maruderów",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 52,
+   "stats": {
+    "Sz": 4,
+    "WW": 50,
+    "US": 30,
+    "S": 55,
+    "Wt": 55,
+    "I": 45,
+    "Zw": 45,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 28
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 40
+    },
+    {
+     "name": "Atletyka",
+     "value": 60
+    },
+    {
+     "name": "Charyzma",
+     "value": 40
+    },
+    {
+     "name": "Oswajanie",
+     "value": 45
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 70
+    },
+    {
+     "name": "Unik",
+     "value": 60
+    },
+    {
+     "name": "Odporność",
+     "value": 70
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 40
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 40
+    },
+    {
+     "name": "Targowanie",
+     "value": 40
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 70
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 70
+    },
+    {
+     "name": "Broń Biała (Korbacz albo Dwuręczna)",
+     "value": 70
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 40
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 45
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Cios Poniżej Pasa 3",
+    "Krzepki 2",
+    "Doświadczony Wędrowiec (Teren Skalisty) 2",
+    "Mocne Plecy 3",
+    "Odporność Psychiczna 3",
+    "Wstrzemięźliwy 2",
+    "Waleczne Serce",
+    "Wytrwały 2",
+    "Niezwykle Odporny",
+    "Bardzo Silny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (4) – skóry i półpłyta",
+    "Wojowniczy",
+    "Czempion",
+    "Twardziel 2",
+    "Nienawiść (Południowcy)",
+    "Strzelanie (Topór do rzucania) +8 (10)",
+    "Broń (Topór bojowy i tarcza) +9"
+   ],
+   "optional": [
+    "Siłacz",
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Twardy",
+    "Broń (Korbacz i tarcza) +10",
+    "Broń (Topór dwuręczny) +11",
+    "Broń (Korbacz bojowy) +11",
+    "Broń (Młot bojowy) +11"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Mistrz Jeźdźców",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 52,
+   "stats": {
+    "Sz": 4,
+    "WW": 50,
+    "US": 30,
+    "S": 55,
+    "Wt": 55,
+    "I": 45,
+    "Zw": 45,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 28
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 40
+    },
+    {
+     "name": "Atletyka",
+     "value": 60
+    },
+    {
+     "name": "Charyzma",
+     "value": 40
+    },
+    {
+     "name": "Oswajanie",
+     "value": 45
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 70
+    },
+    {
+     "name": "Unik",
+     "value": 60
+    },
+    {
+     "name": "Odporność",
+     "value": 70
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 40
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 40
+    },
+    {
+     "name": "Targowanie",
+     "value": 40
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 70
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 40
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Korbacz)",
+     "value": 65
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 40
+    },
+    {
+     "name": "Broń Zasięgowa (Łuk)",
+     "value": 55
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Cios Poniżej Pasa 2",
+    "Krzepki",
+    "Urodzony w Siodle 3",
+    "Doświadczony Wędrowiec (Teren Skalisty) 2",
+    "Mocne Plecy 3",
+    "Odporność Psychiczna 2",
+    "Wstrzemięźliwy 2",
+    "Waleczne Serce",
+    "Wytrwały 2",
+    "Niezwykle Odporny",
+    "Bardzo Silny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (3) – skóry i kolczuga",
+    "Wojowniczy",
+    "Czempion",
+    "Twardziel",
+    "Nienawiść (Południowcy)",
+    "Strzelanie (Łuk) +8 (50)",
+    "Broń (Topór bojowy i puklerz) +9"
+   ],
+   "optional": [
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Strzelanie (Długi łuk) +9 (100)",
+    "Twardy",
+    "Broń (Korbacz i puklerz) +10"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 3",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Wódz Maruderów",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 52,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": 30,
+    "S": 60,
+    "Wt": 60,
+    "I": 50,
+    "Zw": 50,
+    "Zr": 30,
+    "Int": 25,
+    "SW": 40,
+    "Ogd": 55,
+    "Żyw": 45
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Atletyka",
+     "value": 70
+    },
+    {
+     "name": "Charyzma",
+     "value": 75
+    },
+    {
+     "name": "Oswajanie",
+     "value": 60
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 80
+    },
+    {
+     "name": "Unik",
+     "value": 70
+    },
+    {
+     "name": "Odporność",
+     "value": 80
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 75
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 75
+    },
+    {
+     "name": "Targowanie",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 80
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Wschodnie Stepy)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Lokalna)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 85
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 85
+    },
+    {
+     "name": "Broń Biała (Korbacz albo Dwuręczna)",
+     "value": 85
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 45
+    },
+    {
+     "name": "Broń Zasięgowa (Miotana)",
+     "value": 55
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 70
+    }
+   ],
+   "talents": [
+    "Cios Poniżej Pasa 4",
+    "Nieubłagany 3",
+    "Inspirujący 3",
+    "Mówca 3",
+    "Krzepki 4",
+    "Urodzony w Siodle 3",
+    "Obieżyświat",
+    "Doświadczony Wędrowiec (Teren Skalisty) 3",
+    "Mocne Plecy 5",
+    "Odporność Psychiczna 4",
+    "Wstrzemięźliwy 3",
+    "Waleczne Serce 3",
+    "Wytrwały 4",
+    "Niezwykle Odporny",
+    "Bardzo Silny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (4) – skóry i półpłyta",
+    "Wojowniczy",
+    "Czempion",
+    "Twardziel 4",
+    "Nienawiść (Południowcy)",
+    "Przywódca",
+    "Mutacja",
+    "Strzelanie (Topór do rzucania) +9 (10)",
+    "Broń (Topór bojowy i tarcza) +10"
+   ],
+   "optional": [
+    "Pancerz (5) – skóry i płyty",
+    "Siłacz",
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Ciemności",
+    "Twardy",
+    "Broń (Korbacz i tarcza) +11",
+    "Broń (Topór dwuręczny) +12",
+    "Broń (Korbacz bojowy) +12",
+    "Broń (Młot bojowy) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 1",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Wojownik Chaosu z Pustkowi",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 52,
+   "stats": {
+    "Sz": 4,
+    "WW": 65,
+    "US": 30,
+    "S": 55,
+    "Wt": 55,
+    "I": 45,
+    "Zw": 55,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 65,
+    "Ogd": 25,
+    "Żyw": 21
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 75
+    },
+    {
+     "name": "Unik",
+     "value": 65
+    },
+    {
+     "name": "Odporność",
+     "value": 65
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 75
+    },
+    {
+     "name": "Nawigacja",
+     "value": 55
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 45
+    },
+    {
+     "name": "Percepcja",
+     "value": 55
+    },
+    {
+     "name": "Tropienie",
+     "value": 55
+    }
+   ],
+   "talents": [
+    "Dwie Bronie 2",
+    "Walka w Ciasnocie 2",
+    "Etykieta (Kultyści)",
+    "Groźny 2",
+    "Odwrócenie Szans",
+    "Tarczownik",
+    "Silny Cios 2"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Broń (Miecz i tarcza) +11"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Choroba",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Spaczenie Umysłu",
+    "Broń (Dwa topory bojowe) +11",
+    "Broń (Topór dwuręczny) +13",
+    "Broń (Miecz dwuręczny) +12"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 4",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Aspirujący Czempion",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 52,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 30,
+    "S": 60,
+    "Wt": 60,
+    "I": 45,
+    "Zw": 70,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 75,
+    "Ogd": 25,
+    "Żyw": 25
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 90
+    },
+    {
+     "name": "Unik",
+     "value": 85
+    },
+    {
+     "name": "Odporność",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Intuicja",
+     "value": 60
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 50
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 50
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Imperium)",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 85
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 85
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 85
+    },
+    {
+     "name": "Nawigacja",
+     "value": 60
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 50
+    },
+    {
+     "name": "Percepcja",
+     "value": 60
+    },
+    {
+     "name": "Tropienie",
+     "value": 60
+    }
+   ],
+   "talents": [
+    "Mistrz Walki",
+    "Zimna krew",
+    "Dwie Bronie 3",
+    "Walka w Ciasnocie 3",
+    "Etykieta (Kultyści)",
+    "Wściekły Atak",
+    "Groźny 3",
+    "Odwrócenie Szans 2",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Morderczy Atak 2"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Broń (Broń Chaosu i duża tarcza) +13"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Choroba",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Spaczenie Umysłu",
+    "Broń (Dwa topory bojowe) +13",
+    "Broń (Topór dwuręczny) +15",
+    "Broń (Miecz dwuręczny) +14"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Wybraniec Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 52,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 65,
+    "Wt": 65,
+    "I": 65,
+    "Zw": 75,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 80,
+    "Ogd": 25,
+    "Żyw": 32
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 95
+    },
+    {
+     "name": "Opanowanie",
+     "value": 100
+    },
+    {
+     "name": "Unik",
+     "value": 95
+    },
+    {
+     "name": "Odporność",
+     "value": 85
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 85
+    },
+    {
+     "name": "Intuicja",
+     "value": 85
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 55
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 55
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 55
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 55
+    },
+    {
+     "name": "Wiedza (Imperium)",
+     "value": 55
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 95
+    },
+    {
+     "name": "Nawigacja",
+     "value": 85
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 55
+    },
+    {
+     "name": "Percepcja",
+     "value": 85
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 95
+    },
+    {
+     "name": "Tropienie",
+     "value": 85
+    }
+   ],
+   "talents": [
+    "Mistrz Walki 2",
+    "Zimna krew",
+    "Dwie Bronie 4",
+    "Walka w Ciasnocie 4",
+    "Etykieta (Kultyści) 2",
+    "Wściekły Atak 2",
+    "Znak Chaosu (dowolny)",
+    "Groźny 4",
+    "Odwrócenie Szans 3",
+    "Obieżyświat 3",
+    "Tarczownik 3",
+    "Zabójca",
+    "Silny Cios 4",
+    "Morderczy Atak 3"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Twardziel",
+    "Broń (Broń Chaosu i duża tarcza) +14"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Choroba",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Spaczenie Umysłu",
+    "Broń (Broń z uwięzionym demonem i duża tarcza) +14",
+    "Broń (Dwa topory bojowe) +14",
+    "Broń (Topór dwuręczny) +16",
+    "Broń (Miecz dwuręczny) +15"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 1",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Wyklęty",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 3,
+    "WW": 65,
+    "US": 30,
+    "S": 65,
+    "Wt": 65,
+    "I": 45,
+    "Zw": 45,
+    "Zr": 30,
+    "Int": 15,
+    "SW": 65,
+    "Ogd": 5,
+    "Żyw": 24
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 60
+    },
+    {
+     "name": "Unik",
+     "value": 60
+    },
+    {
+     "name": "Odporność",
+     "value": 80
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 80
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 30
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Bijatyka)",
+     "value": 75
+    },
+    {
+     "name": "Nawigacja",
+     "value": 55
+    },
+    {
+     "name": "Percepcja",
+     "value": 55
+    },
+    {
+     "name": "Tropienie",
+     "value": 55
+    }
+   ],
+   "talents": [
+    "Walka w Ciasnocie",
+    "Wściekły Atak",
+    "Groźny 3",
+    "Odwrócenie Szans 2",
+    "Silny Cios 3",
+    "Morderczy Atak 2"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Zwierzęcy",
+    "Siłacz",
+    "Czempion",
+    "Spaczenie (Poważne)",
+    "Strach (2)",
+    "Żarłoczny",
+    "Niewrażliwość na Psychologię",
+    "Spaczenie Umysłu",
+    "Macki +7",
+    "Broń (Zmutowany szpon) +13"
+   ],
+   "optional": [
+    "Choroba",
+    "Dekoncentrujący",
+    "Rozmiar (Duży)",
+    "Broń (Topór bojowy) +13",
+    "Broń (Buzdygan) +13"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Ogr, Wojownik Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 6,
+    "WW": 40,
+    "US": 20,
+    "S": 55,
+    "Wt": 55,
+    "I": 10,
+    "Zw": 25,
+    "Zr": 20,
+    "Int": 20,
+    "SW": 50,
+    "Ogd": 20,
+    "Żyw": 40
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 35
+    },
+    {
+     "name": "Opanowanie",
+     "value": 50
+    },
+    {
+     "name": "Unik",
+     "value": 35
+    },
+    {
+     "name": "Odporność",
+     "value": 70
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 70
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 30
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 30
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 30
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 60
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 60
+    },
+    {
+     "name": "Nawigacja",
+     "value": 20
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 30
+    },
+    {
+     "name": "Percepcja",
+     "value": 20
+    },
+    {
+     "name": "Tropienie",
+     "value": 20
+    }
+   ],
+   "talents": [
+    "Dwie Bronie",
+    "Walka w Ciasnocie",
+    "Etykieta (Mutanci)",
+    "Groźny 3",
+    "Odwrócenie Szans 2",
+    "Tarczownik",
+    "Silny Cios 4"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Rozmiar (Duży)",
+    "Broń (Nabijana pałka i tarcza) +13"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Choroba",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Zakażony",
+    "Spaczenie Umysłu",
+    "Tropiciel",
+    "Broń (Dwa topory bojowe) +13",
+    "Broń (Topór dwuręczny) +15",
+    "Broń (Młot bojowy) +15"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 4",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Rycerz Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 30,
+    "S": 55,
+    "Wt": 45,
+    "I": 55,
+    "Zw": 65,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 55,
+    "Ogd": 25,
+    "Żyw": 18
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 75
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Oswajanie",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 65
+    },
+    {
+     "name": "Unik",
+     "value": 75
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Leczenie",
+     "value": 45
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 80
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 75
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Groźny 2",
+    "Nieustępliwy 2",
+    "Nieugięty 2",
+    "Urodzony w Siodle",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Tragarz",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Broń (Kopia) +14",
+    "Broń (Miecz i tarcza) +12"
+   ],
+   "optional": [
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Rycerz Zagłady",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 60,
+    "Wt": 45,
+    "I": 60,
+    "Zw": 70,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 70,
+    "Ogd": 25,
+    "Żyw": 21
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 85
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 50
+    },
+    {
+     "name": "Charyzma",
+     "value": 40
+    },
+    {
+     "name": "Oswajanie",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 85
+    },
+    {
+     "name": "Unik",
+     "value": 85
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Leczenie",
+     "value": 50
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 50
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 90
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 85
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Oko Bogów 3",
+    "Nieustraszony (Siły Porządku)",
+    "Groźny 3",
+    "Nieustępliwy 3",
+    "Nieugięty 3",
+    "Urodzony w Siodle 3",
+    "Tarczownik 3",
+    "Silny Cios 4",
+    "Waleczne Serce 2",
+    "Tragarz 2",
+    "Wódz 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Broń (Kopia) +16",
+    "Broń (Broń Chaosu i duża tarcza) +14"
+   ],
+   "optional": [
+    "Przywódca",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Miażdżyczaszka Khorne'a",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 30,
+    "S": 55,
+    "Wt": 45,
+    "I": 55,
+    "Zw": 55,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 65,
+    "Ogd": 25,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 65
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Oswajanie",
+     "value": 75
+    },
+    {
+     "name": "Opanowanie",
+     "value": 75
+    },
+    {
+     "name": "Unik",
+     "value": 65
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Leczenie",
+     "value": 45
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Khorne)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 80
+    },
+    {
+     "name": "Jeździectwo (Juggernaut)",
+     "value": 65
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 2",
+    "Groźny 2",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Urodzony w Siodle",
+    "Tragarz",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Tzeentch)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Szał Bojowy",
+    "Furia",
+    "Nienawiść (Slaanesh)",
+    "Broń (Młot kawaleryjski) +13",
+    "Broń (Topór bojowy i tarcza) +12"
+   ],
+   "optional": [
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Łowca Czaszek Khorne'a",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 60,
+    "Wt": 45,
+    "I": 60,
+    "Zw": 70,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 70,
+    "Ogd": 25,
+    "Żyw": 21
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 85
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 50
+    },
+    {
+     "name": "Oswajanie",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 85
+    },
+    {
+     "name": "Unik",
+     "value": 85
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Leczenie",
+     "value": 50
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Intuicja",
+     "value": 75
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 50
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Khorne)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 90
+    },
+    {
+     "name": "Kuglarstwo (Walka Pokazowa)",
+     "value": 85
+    },
+    {
+     "name": "Jeździectwo (Juggernaut)",
+     "value": 85
+    }
+   ],
+   "talents": [
+    "Berserkerska Szarża 3",
+    "Znak Chaosu (Khorne) 3",
+    "Groźny 3",
+    "Tarczownik 3",
+    "Silny Cios 5",
+    "Urodzony w Siodle",
+    "Szybkobiegacz 2",
+    "Tragarz 2",
+    "Wódz 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Tzeentch)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Szał Bojowy",
+    "Furia",
+    "Nienawiść (Slaanesh)",
+    "Odporność na Magię (4)",
+    "Broń (Młot kawaleryjski) +16",
+    "Broń (Broń Chaosu i duża tarcza) +15"
+   ],
+   "optional": [
+    "Spaczenie Umysłu",
+    "Broń (Topór dwuręczny) +16"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Rycerz Tzeentcha",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 53,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 65,
+    "Zw": 65,
+    "Zr": 30,
+    "Int": 65,
+    "SW": 55,
+    "Ogd": 25,
+    "Żyw": 17
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 75
+    },
+    {
+     "name": "Oswajanie",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 65
+    },
+    {
+     "name": "Unik",
+     "value": 75
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Leczenie",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 55
+    },
+    {
+     "name": "Intuicja",
+     "value": 75
+    },
+    {
+     "name": "Język (wszystkie)",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Tzeentch)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 80
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 75
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Szczęście 2",
+    "Groźny 2",
+    "Urodzony w Siodle",
+    "Percepcja Magiczna",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Tragarz",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Khorne)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Sprytny",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Nurgle)",
+    "Broń (Kopia) +13",
+    "Broń (Miecz i tarcza) +11"
+   ],
+   "optional": [
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Runiczny Rycerz Tzeentcha",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 54,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 70,
+    "Zw": 70,
+    "Zr": 30,
+    "Int": 70,
+    "SW": 70,
+    "Ogd": 25,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 85
+    },
+    {
+     "name": "Charyzma",
+     "value": 40
+    },
+    {
+     "name": "Oswajanie",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 85
+    },
+    {
+     "name": "Unik",
+     "value": 85
+    },
+    {
+     "name": "Powożenie",
+     "value": 85
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Leczenie",
+     "value": 85
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 60
+    },
+    {
+     "name": "Intuicja",
+     "value": 85
+    },
+    {
+     "name": "Język (wszystkie)",
+     "value": 85
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Tzeentch)",
+     "value": 85
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 85
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 90
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 85
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Nieustraszony (Siły Porządku)",
+    "Szczęście 3",
+    "Znak Chaosu (Tzeentch) 3",
+    "Groźny 3",
+    "Przeszywające Spojrzenie 3",
+    "Urodzony w Siodle 3",
+    "Percepcja Magiczna 3",
+    "Tarczownik 3",
+    "Silny Cios 4",
+    "Waleczne Serce 2",
+    "Tragarz 2",
+    "Wódz 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Khorne)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Nienawiść (Nurgle)",
+    "Odporność na Magię (7)",
+    "Ochrona (7+)",
+    "Broń (Kopia) +14",
+    "Broń (Broń Chaosu i tarcza) +11"
+   ],
+   "optional": [
+    "Przebiegły",
+    "Przywódca",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Rycerz Zarazy Nurgle'a",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 54,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 30,
+    "S": 55,
+    "Wt": 60,
+    "I": 55,
+    "Zw": 55,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 55,
+    "Ogd": 25,
+    "Żyw": 22
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 65
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Oswajanie",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 65
+    },
+    {
+     "name": "Unik",
+     "value": 65
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Leczenie",
+     "value": 45
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Nurgle)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 80
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 65
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Groźny 2",
+    "Odporny na (Choroby) 2",
+    "Urodzony w Siodle",
+    "Tarczownik 2",
+    "Silny Cios 3",
+    "Tragarz",
+    "Niezwykle Odporny",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Slaanesh)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Tzeentch)",
+    "Zakażony",
+    "Zaraza",
+    "Broń (Kopia) +14",
+    "Broń (Miecz i tarcza) +12"
+   ],
+   "optional": [
+    "Choroba (dowolny)",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Zwiastun Śmierci Nurgle'a",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 54,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 60,
+    "Wt": 65,
+    "I": 60,
+    "Zw": 55,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 70,
+    "Ogd": 25,
+    "Żyw": 25
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 70
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 50
+    },
+    {
+     "name": "Charyzma",
+     "value": 40
+    },
+    {
+     "name": "Oswajanie",
+     "value": 85
+    },
+    {
+     "name": "Opanowanie",
+     "value": 85
+    },
+    {
+     "name": "Unik",
+     "value": 70
+    },
+    {
+     "name": "Odporność",
+     "value": 80
+    },
+    {
+     "name": "Leczenie",
+     "value": 50
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 75
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 40
+    },
+    {
+     "name": "Wiedza (Nurgle)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Kawaleryjska)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Korbacz)",
+     "value": 90
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 70
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Nieustraszony (Siły Porządku)",
+    "Znak Chaosu (Nurgle) 3",
+    "Groźny 3",
+    "Odporny na (Choroby) 2",
+    "Urodzony w Siodle 3",
+    "Tarczownik 3",
+    "Waleczne Serce 2",
+    "Silny Cios 4",
+    "Tragarz",
+    "Niezwykle Odporny",
+    "Wódz 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Slaanesh)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Dekoncentrujący",
+    "Nienawiść (Tzeentch)",
+    "Zakażony",
+    "Zaraza",
+    "Nie Czuje Bólu",
+    "Regeneracja",
+    "Broń (Kopia) +16",
+    "Broń (Broń Chaosu i duża tarcza) +14"
+   ],
+   "optional": [
+    "Choroba (dowolny)",
+    "Spaczenie Umysłu",
+    "Broń (Korbacz bojowy) +16"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Piekielny Rycerz Slaanesha",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 54,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 55,
+    "Zw": 65,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 55,
+    "Ogd": 45,
+    "Żyw": 17
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 75
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 45
+    },
+    {
+     "name": "Charyzma",
+     "value": 55
+    },
+    {
+     "name": "Oswajanie",
+     "value": 65
+    },
+    {
+     "name": "Opanowanie",
+     "value": 65
+    },
+    {
+     "name": "Unik",
+     "value": 75
+    },
+    {
+     "name": "Odporność",
+     "value": 55
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 55
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 45
+    },
+    {
+     "name": "Wiedza (Slaanesh)",
+     "value": 45
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 80
+    },
+    {
+     "name": "Broń Biała (Szermiercza)",
+     "value": 80
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 75
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 40
+    }
+   ],
+   "talents": [
+    "Atrakcyjny 2",
+    "Zbicie Broni 2",
+    "Etykieta (Demony)",
+    "Finta 2",
+    "Odwrócenie Szans 2",
+    "Urodzony w Siodle",
+    "Silny Cios 3",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Nurgle)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Nienawiść (Khorne)",
+    "Broń (Rapier i tarcza) +11"
+   ],
+   "optional": [
+    "Dekoncentrujący",
+    "Szybki",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 5",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Diabelski Rycerz Slaanesha",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 54,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 60,
+    "Zw": 70,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 70,
+    "Ogd": 50,
+    "Żyw": 19
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 85
+    },
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 50
+    },
+    {
+     "name": "Charyzma",
+     "value": 65
+    },
+    {
+     "name": "Oswajanie",
+     "value": 85
+    },
+    {
+     "name": "Mocna Głowa",
+     "value": 60
+    },
+    {
+     "name": "Opanowanie",
+     "value": 85
+    },
+    {
+     "name": "Unik",
+     "value": 85
+    },
+    {
+     "name": "Odporność",
+     "value": 60
+    },
+    {
+     "name": "Plotkowanie",
+     "value": 65
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 50
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 65
+    },
+    {
+     "name": "Wiedza (Slaanesh)",
+     "value": 50
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 50
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Szermiercza)",
+     "value": 90
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 90
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 85
+    },
+    {
+     "name": "Rzemiosło (Kowalstwo)",
+     "value": 45
+    }
+   ],
+   "talents": [
+    "Atrakcyjny 3",
+    "Zbicie Broni 3",
+    "Etykieta (Demony)",
+    "Nieustraszony (Wszystko)",
+    "Finta 3",
+    "Znak Chaosu (Slaanesh) 3",
+    "Odwrócenie Szans 3",
+    "Riposta 2",
+    "Urodzony w Siodle",
+    "Silny Cios 4",
+    "Waleczne Serce 2",
+    "Urodzony Wojownik"
+   ],
+   "traits": [
+    "Wrogość (Nurgle)",
+    "Pancerz (5) – Zbroja Chaosu",
+    "Wojowniczy",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Dekoncentrujący",
+    "Nienawiść (Khorne)",
+    "Broń (Rapier i tarcza) +12"
+   ],
+   "optional": [
+    "Szybki",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Czarnoksiężnik Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 54,
+   "stats": {
+    "Sz": 4,
+    "WW": 65,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 55,
+    "Zw": 55,
+    "Zr": 30,
+    "Int": 45,
+    "SW": 65,
+    "Ogd": 25,
+    "Żyw": 18
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (dowolny Wiatr Kolegium)",
+     "value": 75
+    },
+    {
+     "name": "Splatanie Magii (Dhar)",
+     "value": 75
+    },
+    {
+     "name": "Charyzma",
+     "value": 35
+    },
+    {
+     "name": "Opanowanie",
+     "value": 75
+    },
+    {
+     "name": "Unik",
+     "value": 65
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 55
+    },
+    {
+     "name": "Intuicja",
+     "value": 65
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 65
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 65
+    },
+    {
+     "name": "Wiedza (Magia)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 75
+    },
+    {
+     "name": "Percepcja",
+     "value": 65
+    },
+    {
+     "name": "Badania Naukowe",
+     "value": 55
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 65
+    }
+   ],
+   "talents": [
+    "Magia Tajemna (Demonologia, Śmierci, Ognia, Metalu albo Cieni)",
+    "Gładkie Słówka 3",
+    "Magia Chaosu (Nurgle, Slaanesh albo Tzeentch)",
+    "Precyzyjne Inkantowanie 3",
+    "Magia Prosta",
+    "Intrygant 3",
+    "Percepcja Magiczna",
+    "Szybkie Czytanie"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Broń (Sztylet) +6",
+    "Broń (Kij) +8"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Sprytny",
+    "Choroba",
+    "Dekoncentrujący",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Srebro 4",
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Władca Czarnoksiężników",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 55,
+   "stats": {
+    "Sz": 4,
+    "WW": 75,
+    "US": 30,
+    "S": 45,
+    "Wt": 45,
+    "I": 65,
+    "Zw": 75,
+    "Zr": 30,
+    "Int": 75,
+    "SW": 75,
+    "Ogd": 55,
+    "Żyw": 18
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (dowolny Wiatr Kolegium)",
+     "value": 100
+    },
+    {
+     "name": "Splatanie Magii (Dhar)",
+     "value": 100
+    },
+    {
+     "name": "Charyzma",
+     "value": 75
+    },
+    {
+     "name": "Opanowanie",
+     "value": 95
+    },
+    {
+     "name": "Unik",
+     "value": 95
+    },
+    {
+     "name": "Występy (Gawędziarstwo)",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 65
+    },
+    {
+     "name": "Intuicja",
+     "value": 85
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 95
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 100
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 85
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 100
+    },
+    {
+     "name": "Wiedza (Magia)",
+     "value": 100
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 100
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 95
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 95
+    },
+    {
+     "name": "Percepcja",
+     "value": 85
+    },
+    {
+     "name": "Badania Naukowe",
+     "value": 95
+    },
+    {
+     "name": "Jeździectwo (Dysk Tzeentcha albo Konie)",
+     "value": 95
+    },
+    {
+     "name": "Skradanie (Wieś)",
+     "value": 95
+    }
+   ],
+   "talents": [
+    "Zmysł Magii 5",
+    "Magia Tajemna (Demonologia, Śmierci, Ognia, Metalu albo Cieni)",
+    "Gładkie Słówka 5",
+    "Magia Chaosu (Nurgle, Slaanesh albo Tzeentch)",
+    "Władcza Postura 3",
+    "Etykieta (Demony) 3",
+    "Precyzyjne Inkantowanie 5",
+    "Wykrywanie Magii",
+    "Znak Chaosu (Nurgle, Slaanesh albo Tzeentch)",
+    "Magia Prosta",
+    "Znawca (Chaos) 3",
+    "Intrygant 5",
+    "Percepcja Magiczna 3",
+    "Szybkie Czytanie 3",
+    "Mag Bitewny"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Sprytny",
+    "Spaczenie (Pomniejsze)",
+    "Przywódca",
+    "Broń (Broń Chaosu) +8",
+    "Broń (Kij) +8"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Przebiegły",
+    "Choroba",
+    "Dekoncentrujący",
+    "Spaczenie Umysłu"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 2",
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Wywyższony Bohater Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 55,
+   "stats": {
+    "Sz": 4,
+    "WW": 85,
+    "US": 30,
+    "S": 75,
+    "Wt": 75,
+    "I": 65,
+    "Zw": 75,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 90,
+    "Ogd": 25,
+    "Żyw": 37
+   },
+   "skills": [
+    {
+     "name": "Atletyka",
+     "value": 105
+    },
+    {
+     "name": "Charyzma",
+     "value": 55
+    },
+    {
+     "name": "Opanowanie",
+     "value": 120
+    },
+    {
+     "name": "Unik",
+     "value": 105
+    },
+    {
+     "name": "Powożenie",
+     "value": 105
+    },
+    {
+     "name": "Odporność",
+     "value": 105
+    },
+    {
+     "name": "Występy (Przemowy)",
+     "value": 55
+    },
+    {
+     "name": "Leczenie",
+     "value": 65
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 105
+    },
+    {
+     "name": "Intuicja",
+     "value": 95
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 65
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 65
+    },
+    {
+     "name": "Język (Hung, Kurgański albo Norski)",
+     "value": 65
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 55
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 65
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 65
+    },
+    {
+     "name": "Wiedza (Imperium)",
+     "value": 65
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 115
+    },
+    {
+     "name": "Broń Biała (Korbacz)",
+     "value": 115
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 115
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 115
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 115
+    },
+    {
+     "name": "Nawigacja",
+     "value": 95
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 65
+    },
+    {
+     "name": "Percepcja",
+     "value": 95
+    },
+    {
+     "name": "Modlitwa",
+     "value": 55
+    },
+    {
+     "name": "Jeździectwo (Demoniczny Wierzchowiec)",
+     "value": 105
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 105
+    },
+    {
+     "name": "Tropienie",
+     "value": 95
+    }
+   ],
+   "talents": [
+    "Mistrz Walki 3",
+    "Zimna krew",
+    "Dwie Bronie 5",
+    "Walka w Ciasnocie 5",
+    "Etykieta (Wyznawcy Chaosu) 2",
+    "Etykieta (Kultyści) 2",
+    "Etykieta (Demony) 2",
+    "Nieustraszony (Wszystko) 3",
+    "Wściekły Atak 3",
+    "Inspirujący 2",
+    "Znak Chaosu 3",
+    "Groźny 5",
+    "Wyczucie Kierunku 3",
+    "Odwrócenie Szans 4",
+    "Obieżyświat 3",
+    "Tarczownik 4",
+    "Zabójca",
+    "Silny Cios 5",
+    "Morderczy Atak 5",
+    "Odporność Psychiczna 3"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Poważne)",
+    "Strach (5)",
+    "Twardziel",
+    "Broń (Broń Chaosu i duża tarcza) +16"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Choroba",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Spaczenie Umysłu",
+    "Broń (Broń z uwięzionym demonem i duża tarcza) +16",
+    "Broń (Dwie bronie Chaosu) +16",
+    "Broń (Topór dwuręczny) +18",
+    "Broń (Miecz dwuręczny) +17"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 4",
+   "minTier": "heroiczny"
+  },
+  {
+   "name": "Władca Chaosu",
+   "source": "Warriors of Chaos (Ratter)",
+   "page": 55,
+   "stats": {
+    "Sz": 4,
+    "WW": 95,
+    "US": 30,
+    "S": 85,
+    "Wt": 85,
+    "I": 85,
+    "Zw": 75,
+    "Zr": 30,
+    "Int": 35,
+    "SW": 100,
+    "Ogd": 65,
+    "Żyw": 42
+   },
+   "skills": [
+    {
+     "name": "Opieka nad Zwierzętami",
+     "value": 75
+    },
+    {
+     "name": "Atletyka",
+     "value": 115
+    },
+    {
+     "name": "Charyzma",
+     "value": 105
+    },
+    {
+     "name": "Opanowanie",
+     "value": 140
+    },
+    {
+     "name": "Unik",
+     "value": 115
+    },
+    {
+     "name": "Powożenie",
+     "value": 115
+    },
+    {
+     "name": "Odporność",
+     "value": 125
+    },
+    {
+     "name": "Występy (Przemowy)",
+     "value": 105
+    },
+    {
+     "name": "Leczenie",
+     "value": 75
+    },
+    {
+     "name": "Zastraszanie",
+     "value": 125
+    },
+    {
+     "name": "Intuicja",
+     "value": 125
+    },
+    {
+     "name": "Język (Bitewny)",
+     "value": 75
+    },
+    {
+     "name": "Język (Demoniczny)",
+     "value": 75
+    },
+    {
+     "name": "Język (Mroczna Mowa)",
+     "value": 75
+    },
+    {
+     "name": "Język (Hung, Kurgański albo Norski)",
+     "value": 75
+    },
+    {
+     "name": "Dowodzenie",
+     "value": 105
+    },
+    {
+     "name": "Wiedza (Chaos)",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Pustkowia Chaosu)",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Imperium)",
+     "value": 75
+    },
+    {
+     "name": "Wiedza (Wojskowość)",
+     "value": 75
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 135
+    },
+    {
+     "name": "Broń Biała (Korbacz)",
+     "value": 135
+    },
+    {
+     "name": "Broń Biała (Parująca)",
+     "value": 135
+    },
+    {
+     "name": "Broń Biała (Drzewcowa)",
+     "value": 135
+    },
+    {
+     "name": "Broń Biała (Dwuręczna)",
+     "value": 135
+    },
+    {
+     "name": "Nawigacja",
+     "value": 125
+    },
+    {
+     "name": "Sztuka Przetrwania",
+     "value": 75
+    },
+    {
+     "name": "Percepcja",
+     "value": 125
+    },
+    {
+     "name": "Modlitwa",
+     "value": 105
+    },
+    {
+     "name": "Jeździectwo (Demoniczny Wierzchowiec)",
+     "value": 115
+    },
+    {
+     "name": "Jeździectwo (Smok albo Mantikora)",
+     "value": 115
+    },
+    {
+     "name": "Jeździectwo (Konie)",
+     "value": 115
+    },
+    {
+     "name": "Tropienie",
+     "value": 125
+    }
+   ],
+   "talents": [
+    "Zmysł Bitewny 5",
+    "Mistrz Walki 5",
+    "Władcza Postura 3",
+    "Zimna krew",
+    "Dwie Bronie 6",
+    "Walka w Ciasnocie 6",
+    "Etykieta (Wyznawcy Chaosu) 3",
+    "Etykieta (Kultyści) 3",
+    "Etykieta (Demony) 3",
+    "Nieustraszony (Wszystko) 5",
+    "Wściekły Atak 5",
+    "Porywająca Gorliwość 3",
+    "Inspirujący 6",
+    "Żelazna Wola 5",
+    "Znak Chaosu 5",
+    "Krasomówstwo 5",
+    "Groźny 6",
+    "Wyczucie Kierunku 3",
+    "Mówca 6",
+    "Odwrócenie Szans 5",
+    "Znawca (Wojskowość) 3",
+    "Obieżyświat 3",
+    "Tarczownik 5",
+    "Zabójca",
+    "Silny Cios 8",
+    "Morderczy Atak 8",
+    "Odporność Psychiczna 8",
+    "Wódz 5"
+   ],
+   "traits": [
+    "Pancerz (5) – Zbroja Chaosu",
+    "Czempion",
+    "Spaczenie (Poważne)",
+    "Strach (5)",
+    "Twardziel",
+    "Broń (Broń Chaosu i duża tarcza) +20"
+   ],
+   "optional": [
+    "Wojowniczy",
+    "Choroba",
+    "Dekoncentrujący",
+    "Szał Bojowy",
+    "Spaczenie Umysłu",
+    "Broń (Broń z uwięzionym demonem i duża tarcza) +20",
+    "Broń (Dwie bronie Chaosu) +20",
+    "Broń (Topór dwuręczny) +22",
+    "Broń (Miecz dwuręczny) +21"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "family": "Sługa Chaosu",
+   "status": "Złoto 8",
+   "minTier": "heroiczny"
   }
  ]
 }
