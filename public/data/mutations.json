@@ -311,5 +311,43 @@
     { "min": 45, "max": 79, "name": "korpus" },
     { "min": 80, "max": 89, "name": "lewa noga" },
     { "min": 90, "max": 100, "name": "prawa noga" }
-  ]
+  ],
+  "chaosGifts": {
+    "note": "Dary Chaosu (Warriors of Chaos, tabela Oka Bogów). Każda liczba w \"chances\" to szansa na kolejny dar na danym poziomie BN. Grupy wskazują stworzenia z nazwy albo BN z talentem (np. Magia Chaosu).",
+    "groups": {
+      "Wojownicy Chaosu": {
+        "creatures": ["Wojownik Chaosu", "Wojownik Chaosu z Pustkowi", "Aspirujący Czempion", "Wybraniec Chaosu", "Wyklęty", "Ogr, Wojownik Chaosu", "Rycerz Chaosu", "Rycerz Zagłady", "Miażdżyczaszka Khorne'a", "Łowca Czaszek Khorne'a", "Rycerz Tzeentcha", "Runiczny Rycerz Tzeentcha", "Rycerz Zarazy Nurgle'a", "Zwiastun Śmierci Nurgle'a", "Piekielny Rycerz Slaanesha", "Diabelski Rycerz Slaanesha", "Wywyższony Bohater Chaosu", "Władca Chaosu"],
+        "chances": {
+          "slaby": [],
+          "sredni": [0.1],
+          "zaawansowany": [0.3],
+          "doswiadczony": [0.5, 0.2],
+          "heroiczny": [0.75, 0.4, 0.15]
+        }
+      },
+      "Słudzy Chaosu": {
+        "creatures": ["Kultysta", "Kultysta Zwodniczego Księżyca", "Mutant", "Czarnoksiężnik Chaosu", "Władca Czarnoksiężników", "Maruder Chaosu", "Konny Maruder", "Maruder Łowca", "Maruder Berserker", "Czempion Maruderów", "Mistrz Jeźdźców", "Wódz Maruderów"],
+        "talents": ["Magia Chaosu"],
+        "chances": {
+          "slaby": [],
+          "sredni": [],
+          "zaawansowany": [0.05],
+          "doswiadczony": [0.15],
+          "heroiczny": [0.3, 0.1]
+        }
+      }
+    },
+    "rows": [
+      { "min": 1, "max": 1, "name": "Płonąca skóra", "effect": "Kto dotknie postaci (albo ona jego), zdaje Test Atletyki albo dostaje Stan Podpalenie." },
+      { "min": 2, "max": 2, "name": "Pancerz z chityny", "effect": "+1 PP na dwóch losowych Miejscach Trafienia." },
+      { "min": 3, "max": 3, "name": "Złe oko", "effect": "Za Punkt Szczęścia rzuca zaklęcie Złe Oko bez Testu; od razu Pomniejsza Manifestacja." },
+      { "min": 4, "max": 4, "name": "Żelazna skóra", "effect": "+2 PP na wszystkich Miejscach Trafienia, Zwinność −10.", "armour": 2, "modifiers": { "Zw": -10 } },
+      { "min": 5, "max": 5, "name": "Dodatkowe ramiona", "effect": "Jeden Darmowy Atak na Rundę." },
+      { "min": 6, "max": 6, "name": "Dodatkowe nogi", "effect": "Szybkość +1.", "movement": 1 },
+      { "min": 7, "max": 7, "name": "Twarz-czaszka", "effect": "Cecha Stworzenia Strach (2).", "trait": "Strach (2)" },
+      { "min": 8, "max": 8, "name": "Nierówne rogi", "effect": "+1 PP na głowie; rogi to naturalna broń o Obrażeniach równych BS.", "headArmour": 1 },
+      { "min": 9, "max": 9, "name": "Spaczony szał", "effect": "Cecha Stworzenia Furia; w Szale Bojowym tymczasowo zyskuje dodatkową losową mutację fizyczną.", "trait": "Furia" },
+      { "min": 10, "max": 10, "name": "Skrzydła", "effect": "Cecha Stworzenia Latanie (60).", "trait": "Latanie (60)" }
+    ]
+  }
 }

@@ -18,7 +18,7 @@
 import { chance, randInt, roll2k10, rollDie, weightedKey, type Rng } from "./dice";
 import * as gd from "./gameData";
 import { ATTRIBUTES, characteristicBonus, type Attribute } from "./rules";
-import type { CreatureDef, Npc, TierId } from "./types";
+import { TIER_IDS, type CreatureDef, type Npc, type TierId } from "./types";
 
 /** Baza cechy stworzenia i rodzaj rzutu. */
 export function creatureBase(creature: CreatureDef, code: Attribute): { base: number; die: "2k10" | "1k10" | null } {
@@ -161,10 +161,20 @@ export function usableOptional(creature: CreatureDef): string[] {
  *   - cechy z charCodes dostaja charAdvances poziomu.
  * Kazdy skladnik rosnie z poziomem, wiec wyzszy poziom tej samej bestii jest zawsze silniejszy.
  */
+/**
+ * Poziom rozwoju bestii liczony od jej minimalnego poziomu: Wybraniec Chaosu
+ * (od doswiadczonego) na poziomie doswiadczonym to profil z ksiazki, jak slaby wilk.
+ */
+export function beastTier(npc: Pick<Npc, "tier">, creature: CreatureDef): TierId {
+  const shift = TIER_IDS.indexOf(creature.minTier ?? "slaby");
+  return TIER_IDS[Math.max(0, TIER_IDS.indexOf(npc.tier) - shift)];
+}
+
 export function beastSkills(npc: Npc, creature: CreatureDef): void {
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
-  const factor = fam.settings.tierFactor[npc.tier] ?? 0;
+  const tier = beastTier(npc, creature);
+  const factor = fam.settings.tierFactor[tier] ?? 0;
   if (factor > 0) {
     for (const [skill, fit] of Object.entries(family?.skills ?? {})) {
       const bonus = Math.max(5, Math.round((fit * factor) / 5) * 5);
@@ -173,9 +183,9 @@ export function beastSkills(npc: Npc, creature: CreatureDef): void {
       else npc.skills.push({ name: skill, advances: bonus });
     }
   }
-  const bump = fam.settings.skillBonus?.[npc.tier] ?? 0;
+  const bump = fam.settings.skillBonus?.[tier] ?? 0;
   for (const s of npc.skills) s.advances += bump;
-  const adv = fam.settings.charAdvances?.[npc.tier] ?? 0;
+  const adv = fam.settings.charAdvances?.[tier] ?? 0;
   for (const code of fam.settings.charCodes ?? []) {
     if (creature.stats[code] != null) npc.charAdvances[code] = (npc.charAdvances[code] ?? 0) + adv;
   }
@@ -190,7 +200,7 @@ export function familyTraitWeights(creature: CreatureDef | undefined): Record<st
 export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, deterministic = false): void {
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
-  const tier: TierId = npc.tier;
+  const tier: TierId = beastTier(npc, creature);
   const count = fam.settings.traitCount[tier] ?? 0;
   const weights = { ...(family?.traits ?? {}) };
   for (let i = 0; i < count; i++) {

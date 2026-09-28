@@ -5,6 +5,7 @@
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
+  import { beastTier } from "../lib/creatures";
   import { mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { armourLine, computeNpc, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
@@ -35,7 +36,8 @@
   let keySkills = $derived(gd.getArchetype(npc.archetype)?.keySkills ?? []);
   let tierLabel = $derived.by(() => {
     const label = gd.getTier(npc.tier)?.label ?? npc.tier;
-    return beast ? `${label} — ${gd.getCreatureFamilies().settings.tierLabels[npc.tier] ?? ""}` : label;
+    const shifted = creature ? beastTier(npc, creature) : npc.tier;
+    return beast ? `${label} — ${gd.getCreatureFamilies().settings.tierLabels[shifted] ?? ""}` : label;
   });
   let saved = $derived(app.isSaved(npc.id));
 
@@ -138,7 +140,7 @@
             .map((r) => ({ value: `${kind}|${table}|${r.name}`, text: r.name }))
         }))
       : [{ label: KIND_LABEL[kind], options: mutationTable(kind).map((r) => ({ value: `${kind}||${r.name}`, text: r.name })) }]
-  );
+  ).concat([{ label: "Dary Chaosu", options: mutationTable("gift").map((r) => ({ value: `gift||${r.name}`, text: r.name })) }]);
 
   function addSkill() {
     const name = newSkill.trim();
@@ -163,7 +165,7 @@
 
   function addMutation() {
     if (!newMutation) return;
-    const [kind, table, name] = newMutation.split("|") as ["physical" | "mental", MutationSeverity | "", string];
+    const [kind, table, name] = newMutation.split("|") as [NpcMutation["kind"], MutationSeverity | "", string];
     const m: NpcMutation = { kind, name };
     if (table) m.table = table;
     const row = mutationRow(m);

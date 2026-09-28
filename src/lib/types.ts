@@ -303,6 +303,10 @@ export interface CreatureDef {
   optional: string[];
   abilities: { name: string; description: string }[];
   trappings: string[];
+  /** Najnizszy poziom BN, na jakim stworzenie wystepuje (np. Wojownik Chaosu: zaawansowany). */
+  minTier?: TierId;
+  /** Status z bloku (dodatki, np. "Srebro 4"). */
+  status?: string | null;
 }
 
 export interface CreatureFamily {
@@ -370,6 +374,11 @@ export interface MutationsData {
   physical: MutationRow[];
   mental: MutationRow[];
   handbook?: Record<"physical" | "mental", Record<MutationSeverity, MutationRow[]>>;
+  /** Dary Chaosu (Warriors of Chaos): grupy BN i ich szanse wg poziomu oraz tabela k10. */
+  chaosGifts?: {
+    groups: Record<string, { creatures?: string[]; talents?: string[]; chances: Record<TierId, number[]> }>;
+    rows: MutationRow[];
+  };
   locations: { min: number; max: number; name: string }[];
 }
 
@@ -425,7 +434,8 @@ export interface NpcTalent {
 }
 
 export interface NpcMutation {
-  kind: "physical" | "mental";
+  /** gift = Dar Chaosu (tabela Oka Bogow). */
+  kind: "physical" | "mental" | "gift";
   name: string;
   /** Tabela Mutant's Handbook; brak = tabele z podrecznika. */
   table?: MutationSeverity;

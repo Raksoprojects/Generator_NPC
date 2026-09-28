@@ -5,7 +5,7 @@ import * as gd from "../gameData";
 import { generateNpc, isBeast } from "../generator";
 import { computeNpc } from "../npc";
 import { ATTRIBUTES, type Attribute } from "../rules";
-import type { CreatureDef, Npc } from "../types";
+import type { CreatureDef, Npc, TierId } from "../types";
 import { loadTestGameData } from "./loadData";
 
 beforeAll(() => loadTestGameData());
@@ -48,7 +48,9 @@ describe("stworzenia z bestiariusza", () => {
     // Hipogryf: Rozmiar (Duży) daje ze wzoru 36, w ksiazce wydrukowano 72 (wartosc dla Wielkiego).
     const bookErrata = new Set(["Hipogryf"]);
     const wrong: string[] = [];
-    for (const c of gd.getCreatures().filter((x) => !bookErrata.has(x.name))) {
+    // Tylko oficjalne podreczniki - fanowskie dodatki (Warriors of Chaos) maja w blokach bledy rachunkowe.
+    const official = new Set(["Podręcznik podstawowy", "Imperialny Zwierzyniec"]);
+    for (const c of gd.getCreatures().filter((x) => !bookErrata.has(x.name) && official.has(x.source))) {
       const v = computeNpc(bookNpc(c));
       if (v.wounds !== c.stats["Żyw"]) wrong.push(`${c.name}: ${v.wounds} zamiast ${c.stats["Żyw"]}`);
     }
@@ -117,6 +119,46 @@ describe("rozwoj bestii", () => {
         prev = v;
       }
     }
+  });
+
+  it("stworzenie z minimalnym poziomem nie wystepuje nizej, a na minimalnym ma profil z ksiazki", () => {
+    expect(generateNpc({ creature: "Wojownik Chaosu", tier: "slaby" }, seedRng(1)).tier).toBe("zaawansowany");
+    const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "sredni", deterministic: true }, seedRng(1));
+    expect(chosen.tier).toBe("doswiadczony");
+    expect(Object.values(chosen.charAdvances).every((v) => v === 0)).toBe(true);
+    const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
+    expect(lord.charAdvances.WW).toBe(5);
+  });
+
+  it("talenty z bloku stworzenia nie podwajaja premii do cech", () => {
+    const c = gd.getCreature("Maruder Chaosu")!;
+    const v = computeNpc(bookNpc(c));
+    expect(v.chars.WW.total).toBe(c.stats.WW);
+    expect(v.chars.S.total).toBe(c.stats.S);
+  });
+
+  it("dary Chaosu: wojownicy dostaja je czesciej i tym czesciej, im wyzszy poziom", () => {
+    const gifts = (creature: string, tier: TierId) => {
+      let n = 0;
+      for (let seed = 1; seed <= 200; seed++) {
+        n += generateNpc({ creature, tier }, seedRng(seed)).mutations.filter((m) => m.kind === "gift").length;
+      }
+      return n;
+    };
+    expect(gifts("Kultysta", "slaby")).toBe(0);
+    expect(gifts("Wojownik Chaosu z Pustkowi", "zaawansowany")).toBeGreaterThan(gifts("Kultysta", "zaawansowany"));
+    expect(gifts("Wybraniec Chaosu", "heroiczny")).toBeGreaterThan(gifts("Wybraniec Chaosu", "doswiadczony"));
+    const npc = bookNpc(gd.getCreature("Wybraniec Chaosu")!);
+    const before = computeNpc(npc);
+    npc.mutations = [{ kind: "gift", name: "Żelazna skóra" }];
+    const after = computeNpc(npc);
+    expect(after.armour.korpus.ap).toBe(before.armour.korpus.ap + 2);
+    expect(after.chars.Zw.total).toBe(before.chars.Zw.total - 10);
+  });
+
+  it("czarnoksieznik Chaosu zna zaklecia Tradycji Chaosu", () => {
+    const s = generateNpc({ creature: "Czarnoksiężnik Chaosu", tier: "zaawansowany" }, seedRng(3));
+    expect(s.spells.length).toBeGreaterThan(0);
   });
 
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {

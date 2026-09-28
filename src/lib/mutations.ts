@@ -5,12 +5,13 @@
 
 import { chance, rollDie, rollK100, type Rng } from "./dice";
 import * as gd from "./gameData";
-import type { MutationRow, MutationSeverity, MutationValue, NpcMutation } from "./types";
+import type { MutationRow, MutationSeverity, MutationValue, Npc, NpcMutation } from "./types";
 
 type Kind = NpcMutation["kind"];
 
 export function mutationTable(kind: Kind, table?: MutationSeverity): MutationRow[] {
   const data = gd.getMutations();
+  if (kind === "gift") return data.chaosGifts?.rows ?? [];
   if (table) return data.handbook?.[kind]?.[table] ?? [];
   return kind === "mental" ? data.mental : data.physical;
 }
@@ -111,6 +112,29 @@ export function rollNpcMutations(creatureTraits: string[], rng: Rng, determinist
   if (creatureTraits.some((t) => /^Mutacja/.test(t))) add("physical");
   if (creatureTraits.some((t) => /^Spaczenie Umysłu/.test(t))) add("mental");
   if (!deterministic && chance(gd.getMutations().settings.chance, rng)) add();
+  return out;
+}
+
+/**
+ * Dary Chaosu (tabela Oka Bogow, k10) dla slug Chaosu wg grup z mutations.json:
+ * kazda liczba w chances[poziom] to szansa na kolejny dar; dary sie nie powtarzaja.
+ */
+export function rollChaosGifts(npc: Pick<Npc, "creature" | "tier" | "talents">, rng: Rng, deterministic = false): NpcMutation[] {
+  const cfg = gd.getMutations().chaosGifts;
+  if (!cfg || deterministic) return [];
+  const group = Object.values(cfg.groups).find(
+    (g) =>
+      (npc.creature && g.creatures?.includes(npc.creature)) ||
+      g.talents?.some((t) => npc.talents.some((x) => x.name.startsWith(t)))
+  );
+  const out: NpcMutation[] = [];
+  for (const p of group?.chances[npc.tier] ?? []) {
+    if (!chance(p, rng)) break;
+    const free = cfg.rows.filter((r) => !out.some((m) => m.name === r.name));
+    const roll = rollDie(10, rng);
+    const row = free.find((r) => roll >= r.min && roll <= r.max) ?? free[roll % Math.max(1, free.length)];
+    if (row) out.push({ kind: "gift", name: row.name });
+  }
   return out;
 }
 

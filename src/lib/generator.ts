@@ -22,7 +22,7 @@ import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weighte
 import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
 import { pickSpells } from "./magic";
-import { rollNpcMutations } from "./mutations";
+import { rollChaosGifts, rollNpcMutations } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
 import type { Archetype, CareerStep, CreatureDef, KeyBonus, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
@@ -646,7 +646,13 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   const creature = gd.getCreature(npc.creature);
   npc.traits = rollTraits(spec, npc, rng);
   if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
-  npc.mutations = rollNpcMutations(creature?.traits ?? [], rng, deterministic);
+  npc.mutations = [...rollNpcMutations(creature?.traits ?? [], rng, deterministic), ...rollChaosGifts(npc, rng, deterministic)];
+}
+
+/** Poziom BN nie nizszy niz minimalny poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego). */
+export function clampTier(tier: TierId, creature: CreatureDef | undefined): TierId {
+  const min = TIER_IDS.indexOf(creature?.minTier ?? "slaby");
+  return TIER_IDS.indexOf(tier) < min ? TIER_IDS[min] : tier;
 }
 
 /** Generuje kompletnego BN wg specyfikacji. */
@@ -656,7 +662,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const archetype = creature
     ? (civilized && spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : "")
     : pickArchetype(spec, rng);
-  const tier = pickTier(spec, rng);
+  const tier = clampTier(pickTier(spec, rng), creature);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
   const det = !!spec.deterministic;
@@ -725,6 +731,7 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
  */
 export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng): Npc {
   const next: Npc = structuredClone(npc);
+  next.tier = clampTier(next.tier, gd.getCreature(next.creature));
   develop(next, professions, rng, false);
   next.spells = pickSpells(next, rng);
   const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);

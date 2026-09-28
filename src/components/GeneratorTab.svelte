@@ -21,6 +21,12 @@
   const typicalCreatures = gd.getCreatures().filter((c) => !c.unique).map((c) => c.name);
 
   let civilized = $derived(!!creature && gd.isCivilized(creature));
+  /** Najnizszy poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego). */
+  let minTierIdx = $derived(TIER_IDS.indexOf(gd.getCreature(creature)?.minTier ?? "slaby"));
+
+  $effect(() => {
+    if (kind === "stworzenia" && tier && TIER_IDS.indexOf(tier) < minTierIdx) tier = TIER_IDS[minTierIdx];
+  });
 
   const MODES: { id: Mode; label: string; hint: string }[] = [
     { id: "losowy", label: "Losowy", hint: "Wszystko losowe — jedno kliknięcie." },
@@ -181,8 +187,10 @@
         <label>Poziom
           <select bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
-            {#each TIER_IDS as t (t)}
-              <option value={t}>{gd.getTier(t).label}{!civilized || !archetype ? ` — ${gd.getCreatureFamilies().settings.tierLabels[t]}` : ""}</option>
+            {#each TIER_IDS as t, i (t)}
+              <option value={t} disabled={i < minTierIdx}>{gd.getTier(t).label}{!civilized || !archetype
+                  ? ` — ${gd.getCreatureFamilies().settings.tierLabels[TIER_IDS[Math.max(0, i - minTierIdx)]]}`
+                  : ""}</option>
             {/each}
           </select>
         </label>
@@ -194,6 +202,7 @@
         <p class="text-dim hint">
           {gd.getCreature(creature)?.source}, s. {gd.getCreature(creature)?.page} · rodzina: {gd.getCreature(creature)?.family}
           {civilized ? " · może rozwijać się przez profesje" : " · rozwój przez umiejętności i Cechy Stworzeń"}
+          {minTierIdx > 0 ? ` · występuje od poziomu: ${gd.getTier(TIER_IDS[minTierIdx]).label}` : ""}
         </p>
       {/if}
     {/if}
