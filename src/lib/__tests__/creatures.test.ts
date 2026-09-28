@@ -195,6 +195,29 @@ describe("rozwoj bestii", () => {
     expect(generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Wysoki elf" }, seedRng(1)).careerPath.length).toBeGreaterThan(0);
   });
 
+  it("czarodziej: przedmiot magiczny jest losowany, szaty i kostur daja premie widoczne w podsumowaniu", () => {
+    let staff = 0;
+    for (let seed = 1; seed <= 30; seed++) {
+      const npc = generateNpc({ archetype: "Czarodziej", tier: "zaawansowany", race: "Człowiek", professions: ["Piromanta"] }, seedRng(seed));
+      expect(npc.trappings.some((t) => /^(przedmiot magiczny|magiczny przedmiot)$/i.test(t))).toBe(false);
+      const v = computeNpc(npc);
+      expect(v.casting).not.toBeNull();
+      expect(v.casting!.lores.some((l) => l.key === "Ognia" && l.rule)).toBe(true);
+      if (npc.trappings.includes("umagiczniony kostur")) {
+        staff++;
+        expect(v.casting!.cnMod).toBe(-1);
+      }
+    }
+    expect(staff).toBeGreaterThan(0);
+    const npc = generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Człowiek", professions: ["Piromanta"], deterministic: true }, seedRng(1));
+    npc.trappings = ["zwykłe szaty", "umagiczniony kostur"];
+    npc.talents = [...npc.talents, { name: "Precyzyjne Inkantowanie", level: 1 }];
+    const c = computeNpc(npc).casting!;
+    expect(c.channel.sl).toBe(2);
+    expect(c.cast.sl).toBe(1);
+    expect(c.cnMod).toBe(-1);
+  });
+
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {
     const orc = generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "sredni" }, seedRng(3));
     expect(orc.careerPath.length).toBe(2);

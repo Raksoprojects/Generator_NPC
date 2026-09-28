@@ -7,7 +7,8 @@
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
   import { beastTier } from "../lib/creatures";
   import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
-  import { armourLine, computeNpc, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
+  import { findMagicItem } from "../lib/magicItems";
+  import { armourLine, computeNpc, effectiveCn, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
   import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type TierId } from "../lib/types";
 
@@ -253,6 +254,14 @@
     if (kind === "q") return qualityText(name);
     if (kind === "a") return view.abilities.find((a) => a.name === name)?.description ?? "";
     if (kind === "m") return view.mutations.find((m) => m.label === name)?.effect ?? "";
+    if (kind === "l") return `${gd.getSpellsData().lores[name]?.label ?? name}: ${gd.getSpellsData().lores[name]?.rule ?? ""}`;
+    if (kind === "i") {
+      const item = findMagicItem(name);
+      const scroll = /^zwój z zaklęciem: (.+)$/.exec(name);
+      const spell = scroll ? gd.getSpell(scroll[1]) : undefined;
+      const base = item ? `${item.description}${item.source ? ` (${item.source}, s. ${item.page})` : ""}` : "";
+      return spell ? `${base} Zaklęcie: ${spell.name} — PZ ${spell.cn}, ${spell.range}, ${spell.target}, ${spell.duration}. ${spell.description}` : base;
+    }
     if (kind === "s") {
       const s = gd.getSpell(name);
       if (!s) return "";
@@ -343,6 +352,26 @@
         {/each}
       </div>
     {/each}
+    {#if view.casting}
+      {@const c = view.casting}
+      <div class="casting">
+        <span title={c.channel.sources.join(", ")}>
+          <span class="text-dim">Splatanie:</span> <b>{c.channel.value}</b>
+          <span class="text-dim small">{c.channel.name}</span>{#if c.channel.sl}<b class="bonus">+{c.channel.sl} PS</b>{/if}
+        </span>
+        <span title={c.cast.sources.join(", ")}>
+          <span class="text-dim">Rzucanie:</span> <b>{c.cast.value}</b>
+          <span class="text-dim small">{c.cast.name}</span>{#if c.cast.sl}<b class="bonus">+{c.cast.sl} PS</b>{/if}
+        </span>
+        {#if c.cnMod}<span class="chip info" title={c.cnSources.join(", ")}>PZ −{Math.abs(c.cnMod)} ({c.cnSources.join(", ")})</span>{/if}
+        {#each c.lores.filter((l) => l.rule) as l (l.key)}
+          <button class="chip tap" title={l.rule} onclick={() => toggleInfo(`l|${l.key}`)}>{l.label}</button>
+        {/each}
+        {#if c.channel.sources.length || c.cast.sources.length}
+          <span class="text-dim small">{[...c.channel.sources, ...c.cast.sources].join(" · ")}</span>
+        {/if}
+      </div>
+    {/if}
     <div class="armour" title="Redukcja obrażeń = Bonus z Wytrzymałości + Punkty Pancerza">
       <span class="text-dim">Redukcja obrażeń:</span>
       <b>{armourLine(view)}</b>
@@ -384,7 +413,7 @@
         <p class="list">
           {#each view.spells as s (s.name)}
             <button class="item tap" class:petty={s.lore === "Prosta"} onclick={() => toggleInfo(`s|${s.name}`)}>
-              {s.name} <span class="text-dim">PZ {s.cn}</span>
+              {s.name} <span class="text-dim">PZ {effectiveCn(s, view.casting)}{effectiveCn(s, view.casting) !== s.cn ? ` (z ${s.cn})` : ""}</span>
             </button>
           {/each}
         </p>
@@ -436,7 +465,11 @@
       <section class="block">
         <h4>Wyposażenie</h4>
         <p class="plain">
-          {npc.trappings.join(", ")}{#if npc.money}{npc.trappings.length ? " · " : ""}<b>{npc.money}</b>{/if}
+          {#each npc.trappings as t, i (i)}{#if i}{", "}{/if}{#if findMagicItem(t) || t.startsWith("zwój z zaklęciem")}<button
+                class="item tap magic"
+                title={findMagicItem(t)?.description}
+                onclick={() => toggleInfo(`i|${t}`)}>✦ {t}</button
+              >{:else}{t}{/if}{/each}{#if npc.money}{npc.trappings.length ? " · " : ""}<b>{npc.money}</b>{/if}
         </p>
       </section>
     {/if}
@@ -795,7 +828,8 @@
   }
 
   .weapon,
-  .armour {
+  .armour,
+  .casting {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -858,6 +892,16 @@
 
   .item.petty {
     color: var(--text-muted);
+  }
+
+  .bonus {
+    margin-left: var(--space-1);
+    color: var(--success-strong);
+  }
+
+  .item.magic {
+    color: var(--info-strong, var(--accent-strong));
+    white-space: normal;
   }
 
   button.item.tap {

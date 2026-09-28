@@ -10,43 +10,53 @@
   },
   "Ognia": {
    "label": "Tradycja Ognia",
-   "wind": "Aqshy"
+   "wind": "Aqshy",
+   "rule": "Możesz zadać +1 poziom Podpalenia każdemu celowi zaklęć Tradycji Ognia, jeśli nie ma on Talentu Magia Tajemna (Ogień). Każdy poziom Podpalenia w zasięgu twojego Bonusu z Siły Woli metrów dodaje +10 do Testów Rzucania Zaklęć i Splatania Magii Wiatru Aqshy."
   },
   "Metalu": {
    "label": "Tradycja Metalu",
-   "wind": "Chamon"
+   "wind": "Chamon",
+   "rule": "Zaklęcia zadają Obrażenia ignorujące Punkty Pancerza metalowych zbroi i dodatkowe Obrażenia równe Punktom Pancerza metalowej zbroi noszonej na trafionym miejscu. Jeśli więc zaklęcie uderzy w ramię chronione przez metalowy pancerz z 2 Punktami Pancerza, zada dodatkowe 2 Obrażenia, w dodatku ignorujące 2 Punkty Pancerza."
   },
   "Życia": {
    "label": "Tradycja Życia",
-   "wind": "Ghyran"
+   "wind": "Ghyran",
+   "rule": "Otrzymujesz premię +10 do Testów Rzucania Zaklęć i Splatania Magii, jeśli znajdujesz się w środowisku wiejskim lub dzikim. te, które nie mają Cechy Stworzenia Demoniczny lub Ożywieniec) będące celem magii z Tradycji Życia tracą wszystkie poziomy Krwawienia i Zmęczenia dzięki temu, że życiodajna magia przepływa przez ich ciała. Z drugiej strony stworzenia, które mają Cechę Stworzenia Ożywieniec, otrzymują dodatkowe Obrażenia równe Bonusowi z Siły Woli rzucającego, które ignorują Bonus za Wytrzymałość oraz Punkty Pancerza."
   },
   "Niebios": {
    "label": "Tradycja Niebios",
-   "wind": "Azyr"
+   "wind": "Azyr",
+   "rule": "Zaklęcia zadające Obrażenia ignorują Punkty Pancerza metalowych zbroi i przeskakują do wszystkich celów w promieniu 2 metrów, oprócz takich istot, które mają Talent Magia Tajemna (Niebiosa), zadając Obrażenia równe Bonusowi z Siły Woli (traktowane jak magiczny pocisk)."
   },
   "Cieni": {
    "label": "Tradycja Cieni",
-   "wind": "Ulgu"
+   "wind": "Ulgu",
+   "rule": "Ponadto wszystkie zaklęcia z Tradycji Cieni zadają Obrażenia, które ignorują wszelkie niemagiczne Punkty Pancerza."
   },
   "Śmierci": {
    "label": "Tradycja Śmierci",
-   "wind": "Shyish"
+   "wind": "Shyish",
+   "rule": "Możesz dopisać +1 poziom Zmęczenia do każdego żywego celu zaklęcia z tej Tradycji. W ten sposób cel może otrzymać wyłącznie 1 poziom Zmęczenia na jedno zaklęcie."
   },
   "Światła": {
    "label": "Tradycja Światła",
-   "wind": "Hysh"
+   "wind": "Hysh",
+   "rule": "Możesz zadać +1 poziom Oślepienia wszystkim celom zaklęć Tradycji Światła, chyba że mają Talent Magia Tajemna (Światło). Jeśli cel ma Cechę Stworzenia Demoniczny albo Ożywieniec, zaklęcia zadają dodatkowe Obrażenia równe Bonusowi z Inteligencji, które ignorują Bonus z Wytrzymałości oraz Punkty Pancerza."
   },
   "Zwierząt": {
    "label": "Tradycja Zwierząt",
-   "wind": "Ghur"
+   "wind": "Ghur",
+   "rule": "Wiatr Bursztynowy, Ghur, niesie ze sobą dreszcz, pierwotną wściekłość, która wytrąca z równowagi zarówno zwierzęta, jak i stworzenia myślące. Po każdym udanym rzuceniu zaklęcia z Tradycji Zwierząt możesz dodatkowo zyskać Cechę Stworzenia Strach (1) (strona 339) na 1k10 Rund."
   },
   "Guślarstwa": {
    "label": "Tradycja Guślarstwa",
-   "wind": null
+   "wind": null,
+   "rule": "Udany Test Wiedzy (Zielarstwa) skutkuje pozyskaniem 1 + PS składników, jak opisano w ramce Zbieranie Pożywienia i Ziół na stronie 129."
   },
   "Czarownictwa": {
    "label": "Tradycja Czarownictwa",
-   "wind": null
+   "wind": null,
+   "rule": "Każde zaklęcie tej Tradycji może zadać dodatkowo każdemu celowi 1 poziom Stanu Krwawienie. Poza tym Testy Rzucania zaklęć i Splatania Magii z tej Tradycji skutkują automatyczną Manifestacją, chyba że do rzucenia zaklęcia używane są składniki. Udany Test skutkuje pozyskaniem 1 + PS składników, jak opisano w ramce Zdobywanie Pożywienia i Ziół na stronie 129."
   },
   "Nekromancji": {
    "label": "Tradycja Nekromancji",

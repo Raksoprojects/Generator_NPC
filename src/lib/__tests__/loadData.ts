@@ -31,6 +31,7 @@ export function loadTestGameData(): void {
     creatureFamilies: readJson("creature_families.json"),
     mutations: readJson("mutations.json"),
     professionTitles: readJson("profession_titles.json"),
-    vampires: readJson("vampires.json")
+    vampires: readJson("vampires.json"),
+    magicItems: readJson("magic_items.json")
   } as GameData);
 }

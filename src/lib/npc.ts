@@ -10,6 +10,7 @@
 import { creatureArmour, creatureBase, creatureWounds, naturalAttacks } from "./creatures";
 import { armourPoints, getWeaponDef, LOCATIONS, type Location } from "./equipment";
 import * as gd from "./gameData";
+import { castingSummary, type CastingView } from "./magicItems";
 import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
 import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
@@ -79,6 +80,8 @@ export interface NpcView {
   heroTraits: string[];
   career: { profession: string; level: number; title: string; status: string; professionName: string } | null;
   careerPathText: string;
+  /** Czarowanie: Splatanie i Rzucanie z premiami PS, zmiana PZ, reguly tradycji. */
+  casting: CastingView | null;
 }
 
 /** Cechy, w ktorych profil bohatera zawsze daje wartosc z Bestiariusza. */
@@ -147,6 +150,12 @@ export function normalizeNpc(npc: Npc): Npc {
   npc.heroProfiles ??= [];
   npc.archetype ??= "";
   return npc;
+}
+
+/** PZ zaklecia z uwzglednieniem kostura (tradycje wlasciciela i wspolne tajemne), min. 0. */
+export function effectiveCn(spell: SpellDef, casting: CastingView | null): number {
+  if (!casting?.cnMod || !casting.cnLores.includes(spell.lore)) return spell.cn;
+  return Math.max(0, spell.cn + casting.cnMod);
 }
 
 /** Poziom cechy Twardziel z ksiazki ("Twardziel" = 1, "Twardziel 4" = 4). */
@@ -352,7 +361,8 @@ export function computeNpc(input: Npc): NpcView {
     movement: Math.max(0, movement),
     heroTraits,
     career,
-    careerPathText: careerPathText(npc)
+    careerPathText: careerPathText(npc),
+    casting: castingSummary(npc, skills, chars)
   };
 }
 
@@ -398,7 +408,12 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   if (npc.armour.length) lines.push("Pancerz: " + npc.armour.join(", "));
   if (view.skills.length) lines.push("Umiejętności: " + view.skills.map((s) => `${s.name} ${s.total}`).join(", "));
   if (view.talents.length) lines.push("Talenty: " + view.talents.map((t) => (t.level > 1 ? `${t.name} ${t.level}` : t.name)).join(", "));
-  if (view.spells.length) lines.push("Zaklęcia: " + view.spells.map((s) => `${s.name} (PZ ${s.cn})`).join(", "));
+  if (view.casting) {
+    const c = view.casting;
+    const sl = (n: number) => (n ? ` (+${n} PS)` : "");
+    lines.push(`Czarowanie: ${c.channel.name} ${c.channel.value}${sl(c.channel.sl)}, ${c.cast.name} ${c.cast.value}${sl(c.cast.sl)}${c.cnMod ? `, PZ ${c.cnMod}` : ""}`);
+  }
+  if (view.spells.length) lines.push("Zaklęcia: " + view.spells.map((s) => `${s.name} (PZ ${effectiveCn(s, view.casting)})`).join(", "));
   const traits = [...view.creatureTraits, ...npc.traits, ...view.heroTraits];
   if (traits.length) lines.push("Cechy Stworzeń: " + traits.join(", "));
   if (view.abilities.length) lines.push("Zdolności: " + view.abilities.map((a) => `${a.name} — ${a.description}`).join(" "));

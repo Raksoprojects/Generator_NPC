@@ -234,7 +234,8 @@ export interface SpellDef {
 }
 
 export interface SpellsData {
-  lores: Record<string, { label: string; wind: string | null }>;
+  /** rule = regula tradycji z podrecznika (np. Ognia: +1 poziom Podpalenia). */
+  lores: Record<string, { label: string; wind: string | null; rule?: string }>;
   spells: SpellDef[];
 }
 
@@ -329,6 +330,30 @@ export interface CreatureFamiliesData {
   };
   families: Record<string, CreatureFamily>;
   notCivilized: string[];
+}
+
+/** Przedmiot magiczny (Wiatry Magii) z premiami do czarowania. */
+export interface MagicItem {
+  name: string;
+  /** Nazwy w wyposazeniu profesji oznaczajace ten przedmiot. */
+  matches: string[];
+  description: string;
+  channelSL?: number;
+  castSL?: number;
+  /** Zmiana PZ zaklec tradycji wlasciciela i wspolnych tajemnych. */
+  cnMod?: number;
+  scroll?: boolean;
+  /** Przedmioty z tej samej grupy (np. szaty) nie sumuja sie - liczy sie najlepszy. */
+  group?: string;
+  source?: string;
+  page?: number;
+  random?: { weight?: number; lores?: string[] };
+}
+
+export interface MagicItemsData {
+  talents: Record<string, { castSL?: number; channelSL?: number; note?: string }>;
+  items: MagicItem[];
+  magicItemTrappings: string[];
 }
 
 /** Wampiry (dodatek): Linie Krwi, Dary Krwi i Slabosci w formacie wierszy mutacji. */

@@ -24,6 +24,7 @@ import * as gd from "./gameData";
 import { pickSpells } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
 import { rollVampire } from "./vampires";
+import { resolveMagicTrappings } from "./magicItems";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
 import type { Archetype, CareerStep, CreatureDef, KeyBonus, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
@@ -643,6 +644,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
   npc.careerPath = buildCareerPath({ professions }, npc.archetype, npc.tier, npc.race, rng);
   developCareer(npc, rng, deterministic);
   if (creature) bookSkillsAndTalents(npc, creature);
+  resolveMagicTrappings(npc, rng, deterministic);
   equipNpc(npc, rng);
 }
 
