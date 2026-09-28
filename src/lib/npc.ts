@@ -149,6 +149,12 @@ export function normalizeNpc(npc: Npc): Npc {
   return npc;
 }
 
+/** Poziom cechy Twardziel z ksiazki ("Twardziel" = 1, "Twardziel 4" = 4). */
+function bookHardy(traits: string[]): number {
+  const t = traits.find((x) => /^Twardziel/.test(x));
+  return t ? Number(/(\d+)\s*$/.exec(t)?.[1] ?? 1) : 0;
+}
+
 /** Wartosc testu broni: umiejetnosc z grupy albo sama cecha (bez szkolenia). */
 function weaponSkill(skills: SkillView[], chars: Record<Attribute, CharView>, ranged: boolean, group: string): { value: number; name: string } {
   const base = ranged ? "Broń Zasięgowa" : "Broń Biała";
@@ -166,10 +172,12 @@ export function computeNpc(input: Npc): NpcView {
 
   const talentBonus: Partial<Record<Attribute, number>> = {};
   let hardy = 0;
+  // Premie do cech z talentow bloku stworzenia (np. Urodzony Wojownik) sa juz wliczone w jego statystyki.
+  const bookTalents = new Set((creature?.talents ?? []).map((t) => gd.normalize(t.replace(/\s+\d+$/, ""))));
   for (const t of npc.talents) {
     const def = gd.getTalent(t.name);
     const code = def?.adds_characteristic as Attribute | undefined;
-    if (code) talentBonus[code] = (talentBonus[code] ?? 0) + 5;
+    if (code && !bookTalents.has(gd.normalize(t.name))) talentBonus[code] = (talentBonus[code] ?? 0) + 5;
     if (def?.wounds_toughness_bonus) hardy += t.level;
   }
 
@@ -281,7 +289,13 @@ export function computeNpc(input: Npc): NpcView {
       const skill = ranged
         ? weaponSkill(skills, chars, true, a.name)
         : (() => {
-            const own = skills.find((s) => s.name === `Broń Biała (${a.name})`) ?? skills.find((s) => s.name === "Broń Biała (Bijatyka)");
+            // Wlasna grupa, Bijatyka, a dla broni z nazwy (np. "Broń Chaosu i tarcza") najlepsza Broń Biała.
+            const melee = skills.filter((s) => s.name.startsWith("Broń Biała")).sort((x, y) => y.total - x.total);
+            const bodyPart = /^(Broń$|Ugryzienie|Ogon|Rogi|Macki|Pazury|Zmutowany|Kły|Szpony)/.test(a.name);
+            const own =
+              skills.find((s) => s.name === `Broń Biała (${a.name})`) ??
+              (bodyPart ? skills.find((s) => s.name === "Broń Biała (Bijatyka)") : melee[0]) ??
+              skills.find((s) => s.name === "Broń Biała (Bijatyka)");
             return own ? { value: own.total, name: own.name } : { value: totals.WW, name: "WW" };
           })();
       weapons.push({
@@ -314,7 +328,7 @@ export function computeNpc(input: Npc): NpcView {
   const wounds =
     mutationWounds +
     (creature
-      ? creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, bookTraits, hardy + (bookTraits.some((t) => /^Twardziel/.test(t)) ? 1 : 0))
+      ? creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, bookTraits, hardy + bookHardy(bookTraits))
       : computeWounds(totals.S, totals.Wt, totals.SW, race?.woundsIncludeStrength ?? true, hardy));
 
   const spells = npc.spells.map((n) => gd.getSpell(n)).filter(Boolean) as SpellDef[];

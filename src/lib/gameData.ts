@@ -305,7 +305,8 @@ export function getCreatureTrait(name: string): CreatureTrait | undefined {
 export function traitBase(name: string): string {
   return normalize(
     name
-      .replace(/^\d+\s*×?\s*/, "")
+      .replace(/^\d+(k\d+)?\s*×?\s*/, "")
+      .replace(/\s+[–-]\s+.*$/, "")
       .replace(/\s*\(.*?\)/g, "")
       .replace(/\s*\+.*$/, "")
       .replace(/\s+\d+\+?$/, "")
