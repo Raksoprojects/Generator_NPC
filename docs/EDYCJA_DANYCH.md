@@ -155,6 +155,21 @@ odejmie 10 i dorzuci 2k10 (albo 1k10 dla cech do 5). `traits` to cechy z książ
 zasady specjalne. `family` wskazuje rodzinę z `creature_families.json`, `group`
 — grupę w listach (Zwierzęta, Potwory, Zielonoskórzy…).
 
+- `minTier` — najniższy poziom BN, na jakim stworzenie występuje (np. `"zaawansowany"`
+  dla Wojownika Chaosu). Niższy poziom jest podnoszony, a rozwój bestii liczy się od
+  tego poziomu (na `minTier` stworzenie ma profil z książki).
+- `talents`, `skills` z bloku są już wliczone w statystyki — generator nie dodaje
+  drugi raz premii do cech z talentów (np. Urodzony Wojownik).
+- `status` — Status z bloku dodatku (np. `"Srebro 4"`).
+
+## Dary Chaosu (`mutations.json` → `chaosGifts`)
+
+- `groups` — kto dostaje dary: `creatures` (nazwy stworzeń) albo `talents`
+  (np. każdy BN z Magią Chaosu). `chances.<poziom>` to lista szans na kolejne dary,
+  np. `"doswiadczony": [0.5, 0.2]` = 50% na pierwszy dar, potem 20% na drugi.
+- `rows` — tabela k10 (Oko Bogów z *Warriors of Chaos*) w formacie mutacji
+  (`modifiers`, `movement`, `armour`, `headArmour`, `trait`).
+
 ## Rozwój bestii (`creature_families.json`)
 
 - `settings.tierFactor` — jaka część „pasowania” trafia do umiejętności na danym poziomie (słaby 0 = profil z książki).

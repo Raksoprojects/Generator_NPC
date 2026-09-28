@@ -119,6 +119,14 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
   zgadza się z książką dla 110 ze 111 stworzeń (Hipogryf ma w książce błąd).
 - **Stworzenia cywilizowane** (orkowie, gobliny, skaveny, zwierzoludzie, kultyści,
   ogry…) mogą dostać archetyp i rozwijać się przez profesje jak ludzie.
+- **Wojownicy Chaosu** z *Warriors of Chaos* (26 profili: maruderzy, wojownicy,
+  czempioni, rycerze czterech bogów, czarnoksiężnicy, Władca Chaosu) z nazwami
+  terminów z polskiego podręcznika. Część stworzeń występuje dopiero od wyższego
+  poziomu (Wojownik Chaosu od zaawansowanego, Wybraniec od doświadczonego, Władca
+  Chaosu — heroiczny); na swoim najniższym poziomie mają profil z książki.
+- **Dary Chaosu** (tabela Oka Bogów, k10): wojownicy Chaosu 10% (średni) … 75% + kolejne
+  dary (heroiczny); kultyści, mutanci, maruderzy, czarnoksiężnicy i BN z Magią Chaosu
+  dopiero od zaawansowanego, 5% … 30%.
 - **Bestie** rozwijają się bez profesji (`creature_families.json`). **Słaby to
   profil z książki plus pasujące umiejętności** — bestie z podręcznika głównego
   nie mają w książce żadnych umiejętności, więc dostają je z rodziny (połowa
