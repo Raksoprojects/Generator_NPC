@@ -25,6 +25,8 @@ przy talentach, ale polskie znaki tak).
 | `spells.json` | Zaklęcia (podręcznik + *Wiatry Magii*) |
 | `mutations.json` | Tabele mutacji i szansa na mutację |
 | `profession_titles.json` | Formy `[męska, żeńska]` nazw profesji i tytułów poziomów (klucz tytułu: `"Profesja\|poziom"`) |
+| `vampires.json` | Wampiry: Linie Krwi (k100, modyfikatory cech, listy darów i słabości, tradycje), Dary Krwi, Słabości, liczba darów i Wiek wg poziomu |
+| `magic_items.json` | Przedmioty magiczne (szaty, kostur, mikstury, zwój) i premie do czarowania z talentów |
 | `talents.json`, `skills.json`, `professions.json`, `classes.json`, `races.json` | Dane gry przeniesione z karty postaci |
 
 ---
@@ -237,3 +239,24 @@ Wariant *Pełne Domowe* nakłada na dane:
 - opcjonalny plik `professions.domowe.json` (nadpisania i nowe profesje).
 
 Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
+
+## Wampiry (`vampires.json`)
+
+- `creatures` — stworzenia traktowane jako wampiry (domyślnie `Wampir`).
+- `bloodlines` — Linia Krwi: `min`/`max` (k100), `modifiers` (względem von Carsteinów),
+  `gifts` (lista darów linii), `weaknesses` (6 Słabości), `lores` (tradycje, np.
+  `"Zwierząt albo Cieni, Nekromancja"` — każda grupa po przecinku to jedna tradycja).
+- `giftsPerTier`, `ageByTier` — liczba Darów Krwi i Wiek wg poziomu BN;
+  `bloodlineGiftWeight` — o ile częściej losowane są dary z listy linii niż „dowolne”.
+- `gifts`, `weaknesses` — opisy (pokazywane po kliknięciu 🩸 / ⚠ na karcie).
+
+## Przedmioty magiczne (`magic_items.json`)
+
+- `items[]`: `name`, `matches` (nazwy w wyposażeniu profesji), `description`,
+  `channelSL` / `castSL` (premia PS do Splatania / Rzucania), `cnMod` (zmiana PZ zaklęć
+  tradycji właściciela i wspólnych tajemnych), `group` (z jednej grupy liczy się
+  najlepszy przedmiot — szaty), `random.weight` i `random.lores` (losowanie za
+  „przedmiot magiczny”), `scroll: true` (zwój — dostaje konkretne zaklęcie).
+- `talents` — premie z talentów, np. `"Precyzyjne Inkantowanie": { "castSL": 1 }`.
+- `magicItemTrappings` — napisy w wyposażeniu zamieniane na wylosowany przedmiot.
+- Reguły tradycji (np. Ognia: +1 poziom Podpalenia) są w `spells.json` → `lores.<tradycja>.rule`.

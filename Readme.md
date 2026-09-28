@@ -23,7 +23,17 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
   `Topór (+9/116)` (obrażenia / wartość testu) z Zaletami i Wadami z kart
   *Pod Bronią* oraz redukcja obrażeń na lokacjach (Bonus z Wytrzymałości + PP).
 - **Zaklęcia** dla czarujących (Magia Prosta + tradycje tajemne, guślarstwo,
-  czarownictwo, nekromancja, Chaos) z opisami po kliknięciu.
+  czarownictwo, nekromancja, Chaos) z opisami po kliknięciu, a z nieoficjalnego
+  *Grimuaru* także Elementalizm, druidzka Tradycja Pór Roku, magia skavenów
+  i zielonoskórych oraz nowe zaklęcia proste i tajemne (523 zaklęcia, 26 tradycji).
+- **Czarowanie na pierwszy rzut oka** — przy broni: wartość Splatania i Rzucania
+  z premiami PS (szaty +1/+2/+3, Precyzyjne Inkantowanie +1 PS), PZ −1 z
+  umagicznionego kostura przy każdym zaklęciu oraz reguła tradycji (np. Ognia:
+  +1 poziom Podpalenia). Przedmioty magiczne w wyposażeniu (✦) mają opisy, a
+  „przedmiot magiczny” z profesji jest losowany pod tradycję postaci (mikstury,
+  zwoje z zaklęciem, kostur).
+- **Wampiry** (nieoficjalny dodatek *Wampiry*): Linia Krwi z k100, 6 Słabości
+  linii, Dary Krwi wg poziomu (głównie z listy linii), Wiek i preferowane tradycje.
 - **Mutacje** z *Mutant's Handbook* (224 mutacje, tabele błahe / pomniejsze /
   poważne) albo z tabel Spaczenia Fizycznego i Zepsucia Psychicznego podręcznika.
 - **Edycja wyniku** — każdy element BN można zmienić: rzuty i rozwinięcia cech,
@@ -142,6 +152,9 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
   | Heroiczny — legendarna bestia | +20 | +20 | 3 | 100% |
 
   Niedźwiedź (WW 35): Bijatyka około 50 u słabego, 60 u średniego, 70 u zaawansowanego.
+
+Pełna lista stworzeń (205, z poziomem „od”, rodziną i źródłem) oraz tradycji i
+linii krwi: [docs/LISTA_STWORZEN.md](docs/LISTA_STWORZEN.md).
 
 ## Uruchomienie lokalne
 
