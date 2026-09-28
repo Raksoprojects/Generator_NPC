@@ -1,0 +1,1049 @@
+{
+ "note": "Wampiry (nieoficjalny dodatek, połączone Vampire Counts i Arystokracja Nocy). Każdy wampir dostaje Linię Krwi (k100), 6 Słabości swojej linii, Dary Krwi (z listy linii, rzadziej dowolne) i Cechę Wiek. Modyfikatory cech linii są liczone względem von Carsteinów (profil Wampira z podręcznika).",
+ "creatures": [
+  "Wampir"
+ ],
+ "giftsPerTier": {
+  "slaby": 3,
+  "sredni": 4,
+  "zaawansowany": 5,
+  "doswiadczony": 6,
+  "heroiczny": 8
+ },
+ "bloodlineGiftWeight": 4,
+ "ageByTier": {
+  "slaby": 1,
+  "sredni": 2,
+  "zaawansowany": 3,
+  "doswiadczony": 4,
+  "heroiczny": 5
+ },
+ "bloodlines": [
+  {
+   "min": 1,
+   "max": 15,
+   "name": "Krwawy Smok",
+   "effect": "Upadli rycerze Abhorasha — straszliwi wojownicy o rycerskim kodeksie, dążący do uwolnienia się od Głodu. Preferowane tradycje: Zwierząt albo Cieni, Nekromancja.",
+   "modifiers": {
+    "Ogd": -10
+   },
+   "gifts": [
+    "Mistrz Ostrza",
+    "Wybuch Krwi",
+    "Żelazne Ścięgna",
+    "Trwały Obraz",
+    "Przeszywający Cios",
+    "Wyssanie Duszy",
+    "Węch Krwi",
+    "Przyzwanie Wilków",
+    "Bezbożna Dusza",
+    "Skrzydła"
+   ],
+   "weaknesses": [
+    "Brak Odbicia",
+    "Symbole Religijne",
+    "Bieżąca Woda",
+    "Srebro",
+    "Słońce",
+    "Łzy"
+   ],
+   "lores": "Zwierząt albo Cieni, Nekromancja"
+  },
+  {
+   "min": 16,
+   "max": 40,
+   "name": "Lahmianin",
+   "effect": "Najstarsza linia, od Neferaty — uwodziciele i intryganci, skrycie rządzący ludzkimi dworami. Preferowane tradycje: Cieni, Nekromancja albo Czarownictwo.",
+   "modifiers": {
+    "WW": -10,
+    "I": 10,
+    "Ogd": 10
+   },
+   "gifts": [
+    "Eteryczny Szyfr",
+    "Zepsuta Niewinność",
+    "Wyzwanie Świtu",
+    "Dominacja",
+    "Postać Chowańca",
+    "Nocna Wiedźma",
+    "Szlachetne Pochodzenie",
+    "Szybkokrwisty",
+    "Rtęć",
+    "Hipnotyczne Spojrzenie"
+   ],
+   "weaknesses": [
+    "Demoniczny Korzeń i Wiedźmie Ziele",
+    "Ogień",
+    "Brak Odbicia",
+    "Bieżąca Woda",
+    "Srebro",
+    "Słońce"
+   ],
+   "lores": "Cieni, Nekromancja albo Czarownictwo"
+  },
+  {
+   "min": 41,
+   "max": 50,
+   "name": "Nekrarcha",
+   "effect": "Potomkowie W’sorana — trupio wyglądający nekromanci-uczeni, strażnicy sekretów Nagasha. Preferowane tradycje: Śmierci, Ognia, Metalu albo Cieni, Nekromancja.",
+   "modifiers": {
+    "WW": -20,
+    "Zw": -20,
+    "Int": 30,
+    "Ogd": -20
+   },
+   "gifts": [
+    "Eteryczny Szyfr",
+    "Zimnokrwistość",
+    "Mroczny Majestat",
+    "Wzrok Śmierci",
+    "Władza nad Śmiercią",
+    "Nehekhariańskie Zwoje",
+    "Pasożyt",
+    "Przyzwanie Pradawnych",
+    "Krocząca Śmierć",
+    "Źródło Dharu"
+   ],
+   "weaknesses": [
+    "Bariery",
+    "Demoniczny Korzeń i Wiedźmie Ziele",
+    "Symbole Religijne",
+    "Bieżąca Woda",
+    "Srebro",
+    "Słońce"
+   ],
+   "lores": "Śmierci, Ognia, Metalu albo Cieni, Nekromancja"
+  },
+  {
+   "min": 51,
+   "max": 65,
+   "name": "Strigoi",
+   "effect": "Bestialscy potomkowie Ushorana — tułacze cmentarzy i głuszy, władcy ghuli. Preferowane tradycje: Zwierząt, Nekromancja.",
+   "modifiers": {
+    "WW": -10,
+    "S": 10,
+    "Zw": 10,
+    "SW": -10,
+    "Ogd": -20
+   },
+   "gifts": [
+    "Postać Nietoperza",
+    "Zapalczywość",
+    "Nasycony Krwią",
+    "Żelazne Ścięgna",
+    "Potworna Masa",
+    "Powstały",
+    "Przyzwanie Ghuli",
+    "Przyzwanie Robactwa",
+    "Bezbożna Dusza",
+    "Krocząca Śmierć"
+   ],
+   "weaknesses": [
+    "Demoniczny Korzeń i Wiedźmie Ziele",
+    "Czosnek",
+    "Symbole Religijne",
+    "Bieżąca Woda",
+    "Srebro",
+    "Słońce"
+   ],
+   "lores": "Zwierząt, Nekromancja"
+  },
+  {
+   "min": 66,
+   "max": 90,
+   "name": "Von Carstein",
+   "effect": "Zdegenerowana arystokracja Sylwanii — dumni, okrutni władcy pobierający krwawe daniny. Preferowane tradycje: Zwierząt, Śmierci albo Cieni, Nekromancja.",
+   "modifiers": {},
+   "gifts": [
+    "Postać Nietoperza",
+    "Wyzwanie Świtu",
+    "Eteryczna Mgła",
+    "Dręczyciel Umysłów",
+    "Szlachetne Pochodzenie",
+    "Trwały Obraz",
+    "Przyzwanie Burzy",
+    "Przyzwanie Wilków",
+    "Postać Wilka",
+    "Chodzenie po Ścianach"
+   ],
+   "weaknesses": [
+    "Brak Odbicia",
+    "Symbole Religijne",
+    "Bieżąca Woda",
+    "Srebro",
+    "Śpiący w Ziemi",
+    "Słońce"
+   ],
+   "lores": "Zwierząt, Śmierci albo Cieni, Nekromancja"
+  },
+  {
+   "min": 91,
+   "max": 100,
+   "name": "Niezależny",
+   "effect": "Wyrzutki bez linii albo z pomniejszych rodów — zaradni i nieufni wobec wszelkich rozkazów. Preferowane tradycje: Śmierci albo Cieni, Nekromancja albo Czarownictwo.",
+   "modifiers": {
+    "WW": -20,
+    "S": -10,
+    "Wt": -10,
+    "I": -10,
+    "Zw": -10,
+    "Zr": -10,
+    "SW": -10,
+    "Ogd": -10
+   },
+   "gifts": [
+    "Odwieczna Przebiegłość",
+    "Wybuch Krwi",
+    "Eteryczna Mgła",
+    "Wyssanie Duszy",
+    "Węch Krwi",
+    "Posrebrzona Krew",
+    "Przyzwanie Robactwa",
+    "Postać Roju (rodzaj)",
+    "Chodzenie po Wodzie",
+    "Skrzydła"
+   ],
+   "weaknesses": [
+    "Demoniczny Korzeń i Wiedźmie Ziele",
+    "Brak Odbicia",
+    "Symbole Religijne",
+    "Bieżąca Woda",
+    "Srebro",
+    "Słońce"
+   ],
+   "lores": "Śmierci albo Cieni, Nekromancja albo Czarownictwo"
+  }
+ ],
+ "gifts": [
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Atak Językiem",
+   "effect": "Zyskujesz Cechę Atak Językiem (+BS+3). Zasięg równy jest twojemu Bonusowi z Umiejętności Strzeleckich w metrach. Każdy kolejny zakup zwiększa obrażenia i zasięg w metrach o jeden.",
+   "limit": "Bonus z Siły",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Awangarda",
+   "effect": "Jeśli masz wierzchowca z Cechą Długi Krok, możesz wykonać jedną darmową Akcję Biegu, zanim ktokolwiek inny zacznie działać w starciu. Nadal możesz wykonać swoją Akcję i Ruch w swojej zwykłej turze Inicjatywy.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Bezbożna Dusza",
+   "effect": "Jesteś niewrażliwy na odstraszające działanie przedmiotów religijnych i możesz swobodnie wchodzić do miejsc kultu, takich jak świątynie i kaplice. Ani bóg, ani demon cię nie onieśmieli. Poświęcona broń zachowuje jednak swoją skuteczność. Tego Daru Krwi nie można łączyć z Wyzwaniem Świtu, i odwrotnie.",
+   "limit": "1",
+   "recommended": "Lahmianie, Krwawe Smoki, Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Bezbożna Regeneracja",
+   "effect": "Twoje rany goją się w zdumiewającym tempie. Zyskujesz Cechę Stworzenia Regeneracja. Rany zadane srebrnym orężem nie goją się dzięki tej Cesze.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Bezbożny Impet",
+   "effect": "Ilekroć zabijesz wroga w walce, wszystkie stworzenia nieumarłe i Ghule w promieniu tylu metrów, ile wynosi twój Bonus z Ogłady, mogą natychmiast wykonać Darmowy Atak albo darmowy Ruch.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Błędny Rycerz",
+   "effect": "Nie tracisz już Przewagi tylko dlatego, że jesteś w mniejszości. Przeciwnicy nadal otrzymują zwykłe modyfikatory do trafienia.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Chodzenie po Wodzie",
+   "effect": "Po udanym Teście Opanowania o poziomie Wymagającym (+0) możesz przekroczyć zbiornik wodny, przejść przez niego w bród albo go przepłynąć bez obrażeń i bez złych skutków. Musisz rzucać na nowo przy każdym kolejnym zbiorniku albo co 100 metrów przebytej wody. Drugi zakup tego Daru Krwi oznacza pełną niewrażliwość na wodę i brak konieczności rzucania.",
+   "limit": "2",
+   "recommended": "Krwawe Smoki, Strigoi, Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Chodzenie po Ścianach",
+   "effect": "Zyskujesz Cechę Chodzenie po Ścianach.",
+   "limit": "1",
+   "recommended": "von Carstein"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Chory (rodzaj)",
+   "effect": "Jesteś nosicielem konkretnej choroby i zyskujesz Cechę Choroba (rodzaj). Najczęstszą zarazą jest Szkorbutowe Szaleństwo, ale możesz wybrać inną. Jeśli masz Talent Twardziel na (choroby), nigdy nie możesz wziąć tego Daru Krwi. Nowa choroba: Szkorbutowe Szaleństwo Szkorbutowe Szaleństwo powoduje opuchliznę warg, dziąseł i języka, które przy najlżejszym bodźcu pękają, wyrzucając zakaźną ropę. Głównymi objawami są omamy, gorączka i niewiarygodne pragnienie; chorych trzeba często polewać zimną wodą, by nie doszło do śmiertelnego przegrzania. Skutki Szkorbutowego Szaleństwa bywają tak silne, że ludzie wpadali w gwałtowny szał albo przyznawali się do najohydniejszych zbrodni. Zarażenie: gdy nie zdasz Testu Odporności o poziomie Wymagającym (+0) po kontakcie z ropą albo z zarażonymi. Wylęganie: k10 dni Czas trwania: 2k10 dni Objawy: Zaraza (umiarkowana), Kaszel i Kichanie, Gorączka (silna), Ospa",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Czempion (rodzaj)",
+   "effect": "Możesz wybrać Czempiona, który będzie ci służył. To istota rozumna, mająca własną wolę i osobowość, podlegająca zasadom Popleczników. Może to być Dziewica albo Wielbiciel, Sylwański Pospolitak, Zszywaniec, Klątwiec, Groza Krypt, Wilk Zagłady, Król Upiorów, Varghulf albo Vargheist. Czempion zaczyna z podstawowym profilem, wszystkimi standardowymi Cechami i jedną wybraną przez ciebie Cechą Opcjonalną. Czempiona możesz kupować wielokrotnie jako nowy Dar Krwi, zyskując przy każdym zakupie kolejnego Czempiona.",
+   "limit": "Bonus z Ogłady",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Diabelski Krzyk",
+   "effect": "Możesz wydać całą swoją Przewagę (minimum 2), by wydać straszliwy krzyk, który przeszywa serca żywych istot i napełnia je palącą męką. To Darmowy Atak obejmujący wszystkie żywe cele w promieniu tylu metrów, ile wynosi twoja Inicjatywa, zadający +3 Stany Ogłuszenie. Drugi zakup tego Daru Krwi dokłada +k10 obrażeń, które ignorują Bonus z Wytrzymałości i Punkty Pancerza. Trzeci zakup dokłada dla wszystkich celów Test Odporności o poziomie Przeciętnym (+20), by uniknąć +1 Stanu Panika (po trzecim zakupie Dar działa identycznie jak Cecha Upiorne Wycie).",
+   "limit": "3",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Dominacja",
+   "effect": "Możesz spróbować nagiąć czyjś umysł Przeciwstawnym Testem Charyzmy/Opanowania. Jeśli ci się powiedzie, przeciwnik otrzymuje tyle Stanów Przymus, ile uzyskałeś PS; usunie je wyłącznie przez wykonanie twoich poleceń. Nowy Stan: Przymus Stan Przymus wywołują nadprzyrodzone efekty naginające umysł i uczucia. Zwykle opierasz się im Opanowaniem (przeciwko Ogładzie albo Sile Woli sprawcy). Pod wpływem Stanu Przymus odczuwasz silne pragnienie wykonania wydanego ci polecenia. Jeśli nie zniesiesz Stanu natychmiast Determinacją, nie możesz wydawać ani odzyskiwać Punktów Determinacji ani Bohatera, dopóki polecenie nie zostanie wypełnione. Stan nie może zmusić cię do bezpośredniego skrzywdzenia kogoś, chyba że przymuszające stworzenie uzyska 6+ PS. Możesz natomiast zostać poproszony o zejście z drogi albo o przyzwolenie na coś, o ile nie naraża to bezpośrednio ciebie ani kogoś, kogo kochasz (jeśli wampirzyca prosi, byś zszedł jej z drogi, gdy chce uderzyć twojego pana, jest to dopuszczalne, o ile naprawdę tego pana nie kochasz). Jeśli polecenie kłóci się wprost z twoją osobowością albo Motywacją, możesz zamiast tego przyjąć +1 Stan Oszołomienie za każdy uzyskany PS. Naraża cię to na większą krzywdę fizyczną, ale oszczędza szkód duchowych, jakie taki czyn mógłby wyrządzić na dłuższą metę. Dopóki Stan trwa, masz karę -10 do wszystkich Testów, które nie służą wypełnieniu polecenia. Skutki wielu Stanów Przymus kumulują się. Stany Przymus ustępują same, gdy wykonasz polecenie najlepiej, jak potrafisz. Po wykonaniu zadania zyskujesz +1 Stan Zmęczenie i odzyskujesz +1 punkt Determinacji. Jeśli po godzinie nie zdołasz wypełnić zadania, możesz wykonać Test Opanowania o poziomie Wymagającym (+0), by usunąć 1 Stan Przymus — i natychmiast zyskujesz wtedy +1 Stan Zmęczenie. Rzut możesz powtarzać co godzinę, aż wszystkie Stany Przymus ustąpią; za każdy usunięty w ten sposób Stan zyskujesz +1 Stan Zmęczenie.",
+   "limit": "1",
+   "recommended": "Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Dręczyciel Umysłów",
+   "effect": "Możesz użyć swojej straszliwej woli, by łamać cudze umysły. W ramach Akcji możesz wydać całą Przewagę (minimum 2), by wywołać Przeciwstawny Test Opanowania. Przy sukcesie przeciwnik otrzymuje Stan Oszołomienie plus jeden dodatkowy Stan Oszołomienie za każdy kolejny poziom Dręczyciela Umysłów. Jeśli wygrasz o 6+ PS, przeciwnik zyskuje zamiast tego +1 Stan Panika. Jeśli celem jest czarownik, Test może być przeciwstawiony Językiem (Magicznym), bo rzuca on kontrzaklęcia.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "von Carstein"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Eteryczna Mgła",
+   "effect": "Raz dziennie możesz poświęcić Akcję, by zmienić siebie i cały niesiony dobytek w upiorny opar. W tej postaci nie możesz otrzymywać obrażeń zwykłymi środkami i liczysz się jako posiadający Cechy Eteryczny i Unoszący się. Dryfujesz ze swoją zwykłą Szybkością i nie można cię rozproszyć. Aby odzyskać zwykłą postać, musisz poświęcić kolejną Akcję. Przy drugim zakupie tego Daru Krwi przemiana w obie strony staje się Darmową Akcją. Nowa Cecha: Unoszący się Możesz wznieść się na wysokość do 2 metrów nad ziemią i unosić się. Dzięki temu pokonujesz bez kar każdy trudny teren, w tym przeszkody i wodę. Twoja prędkość równa jest podstawowej Szybkości, ale nie możesz biec.",
+   "limit": "2",
+   "recommended": "von Carstein, Lahmianie,"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Eteryczny Szyfr",
+   "effect": "Testy: każdy Test Opanowania przeciw Percepcji Magicznej Potrafisz ukryć własne zdolności magiczne przed wścibskimi oczami. Każdy, kto używa Talentu Wykrywanie Magii, by ustalić, czy władasz magią, musi wygrać Przeciwstawny Test Intuicji/Opanowania przeciwko tobie. Ponadto amulety z czosnku, demonicznego korzenia i wiedźmiego ziela przestają na ciebie działać.",
+   "limit": "Bonus z Siły Woli",
+   "recommended": "Lahmianie, Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Gospodarz",
+   "effect": "Twoje ciało jest opanowane przez ohydne owady i robactwo. Ilekroć stracisz 2 lub więcej punktów Żywotności od jednego ataku, robactwo ukazuje się w całej swojej odrażającej okazałości. Każdy, kto ujrzy ten groteskowy pokaz, musi zdać Rozszerzony Test Opanowania tak, jakby twoja wartość Strachu była o +2 wyższa niż zwykle (minimum Strach 3).",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Hipnotyczne Spojrzenie",
+   "effect": "Możesz poświęcić Akcję i wdać się w Przeciwstawny Test Charyzmy/Opanowania z kimkolwiek w polu widzenia. Jeśli wygrasz, ofiara liczy się przez następną rundę jako Bezbronny Cel. Możesz utrzymywać tę moc przez kilka tur, ale ofiara może raz na turę spróbować się wyrwać.",
+   "limit": "1",
+   "recommended": "von Carstein, Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Hipnoza",
+   "effect": "W ramach Akcji możesz spróbować Przeciwstawnego Testu Dowodzenia/Opanowania, by usunąć celowi świeże wspomnienia. Usuwane wspomnienia muszą tworzyć jeden ciągły blok zdarzeń mieszczący się w okresie wyznaczonym przez twoje poziomy tego Daru Krwi, ale możesz z tego okresu wyjąć dowolny fragment — od jednej sekundy po całość. Jeśli wygrasz, przeciwnik zyskuje +1 Stan Oszołomienie i zapomina, co zaszło. Za każde +2 PS przewagi nad nim zyskuje kolejny Stan Oszołomienie. Kolejne zakupy tego Daru wydłużają okres, który da się usunąć. Poziomy Okres 1 godzina 2 doba 3 tydzień 4 miesiąc 5 4 miesiące 6 rok 7 4 lata 8 dekada 9+ całe życie Przykład: przez ostatnie dwa dni używałeś Dominacji, by zmusić człowieka do zabicia miejscowego Łowcy Wampirów. Teraz chcesz zatrzeć ślady przed wyjazdem z miasta. Masz Hipnozę 3 i chcesz usunąć wspomnienia z ostatnich dwóch dni. To jeden ciągły blok, więc wystarczy jeden Przeciwstawny Test Dowodzenia/Opanowania. Gdybyś korzystał z tego człowieka przez dwa dni, potem zrobił dwa dni przerwy i znów użył go przez dwa dni, musiałbyś albo usunąć wspomnienia z całych sześciu dni, albo dwukrotnie zastosować Hipnozę, by usunąć oba bloki.",
+   "limit": "4",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Iluzja",
+   "effect": "Testy: każdy Test Charyzmy w przebraniu Możesz wykorzystać wrodzoną wampirzą zdolność do kamuflażu, by zmieniać swój wygląd bez Zestawu do Charakteryzacji. Korzystając z Ludzkiego Pozoru, możesz poświęcić Akcję, by wydać się piękniejszym (+10 Ogłady), brzydszym (+10 Zastraszania) albo niepodobnym do siebie (+10 Występów (Aktorstwo)) na liczbę minut równą Bonusowi z Siły Woli powiększonemu o PS. Efekt możesz przedłużać w nieskończoność o minutę za każdy PS uzyskany w Rozszerzonym Teście Opanowania. Naśladowanie wyglądu konkretnej osoby wymaga godziny studiowania jej twarzy i zachowania, a potem Testu Intuicji o poziomie Wymagającym (+0). Jeśli dana osoba pochodzi z innego kręgu etnicznego, jest innej rasy, płci, wieku albo rozmiaru, Poziom Trudności rośnie. Przy sukcesie twój wygląd przekona większość ludzi mijanych przelotnie, ale ktoś, kto zna twój cel bardzo dobrze (członek rodziny albo bliski przyjaciel), może wykonać Przeciwstawny Test Intuicji/Występów (Aktorstwo), by zorientować się, że coś jest nie tak. Jeśli wygra, nie będzie pewien, co dokładnie, chyba że uzyska 6+ PS — ale zacznie patrzeć na ciebie podejrzliwie, a ty dostaniesz karę -20 do wszystkich Testów Ogłady wobec tej osoby.",
+   "limit": "Bonus z Ogłady",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Jadowita Żółć",
+   "effect": "Zyskujesz Cechę Jad (Wymagający). Każdy kolejny zakup zwiększa Poziom Trudności obrony przed Jadem o jeden stopień.",
+   "limit": "3",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Kroczenie z Wiatrem",
+   "effect": "Możesz unosić się do 2 metrów nad ziemią. Zyskujesz Cechę Unoszący się i możesz poruszać się ze swoją zwykłą Szybkością. Woda ani przeszkody w rodzaju bram, nad którymi możesz się unieść, nie stanowią dla ciebie problemu.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Krocząca Śmierć",
+   "effect": "Jeśli zechcesz, możesz ujawnić swoją nieumarłą naturę, przybierając potworne, trupie oblicze. Zyskujesz tymczasowo Cechę Groza o wartości 1. Jeśli masz już Grozę, Krocząca Śmierć dodaje +1 do jej wartości za każdy poziom tego Daru Krwi.",
+   "limit": "Bonus z Wytrzymałości",
+   "recommended": "von Carstein, Nekrarchowie, Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Krwawa Furia",
+   "effect": "Zyskujesz Cechę Furia.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Kwasowa Krew",
+   "effect": "Zyskujesz Cechę Kwasowa Krew.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Lodowata Obecność",
+   "effect": "Zyskujesz Cechę Lodowaty Uścisk, z tym że podstawowe obrażenia równe są 0 + liczba PS uzyskanych w Teście. Drugi zakup zwiększa obrażenia do k10 + PS punktów Żywotności.",
+   "limit": "2",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Ludzki Pozór",
+   "effect": "Potrafisz przybrać ludzki wygląd. Rysy ci łagodnieją, kły i pazury chowają się, wszelkie deformacje chwilowo znikają, a ty przestajesz budzić Strach i Grozę. Zmiana postaci to Darmowa Akcja, którą możesz wykonywać dowolnie często.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Mieszana Krew",
+   "effect": "Pochodzisz z kundlowatej Linii Krwi i w twoich żyłach płyną zdolności kilku Pierwszych Dzieci, choć słabsze niż u ich czystokrwistych potomków. Możesz brać Dary Krwi spoza listy swojej Linii Krwi, ale kosztują cię one dwa razy więcej niż Dary z tej listy.",
+   "limit": "1",
+   "recommended": "Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Mistrz Ostrza",
+   "effect": "Jesteś mistrzem każdego stylu i odmiany walki wręcz, przez co przewidujesz każdy ruch przeciwnika. Zyskujesz Cechę Stworzenia Czempion.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Mroczne Przeznaczenie",
+   "effect": "Jakiś bóg gdzieś ci sprzyja. Może Khaine, bóg mordu, dostrzegł rozlew krwi, który powodujesz, i przemoc, jaką zaszczepiasz w sercach innych — mimo twojej własnej zimnej, beznamiętnej natury. A może to sam Nagash kieruje twoją ręką ku jakiemuś niewysłowionemu przeznaczeniu. Tak czy inaczej masz Punkty Mrocznego Przeznaczenia. Za każdy poziom tego Daru Krwi zyskujesz +1 Punkt Mrocznego Przeznaczenia i +1 Punkt Mrocznego Szczęścia. Możesz wydawać je jak zwykłe Punkty Przeznaczenia i Szczęścia, a te drugie odnawiają się jak zwykle. O ile jednak Przeznaczenie odzyskuje się za czyny bohaterskie, Mroczne Przeznaczenie należy przyznawać za czyny czystego łajdactwa i zła.",
+   "limit": "Bonus z Siły Woli",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Mroczny Akolita",
+   "effect": "Testy: każdy Przeciwstawny Test Języka (Magicznego) Twoje zaklęcia trudniej rozproszyć niż zwykle. Każda próba rozproszenia wywołuje Mniejszą Manifestację, jeśli się powiedzie, albo Większą Manifestację, jeśli zawiedzie. Ponadto wynik Krytyczny liczy się jako Drobna Ekspozycja na Wpływ Zepsucia, a Pech — jako Umiarkowana Ekspozycja. Wampiry nie odczuwają tych skutków, ale mogą one przeskoczyć na pobliską żywą istotę (zwykle taką, która ma związek z wampirem próbującym rozproszyć magię).",
+   "limit": "Bonus z Siły Woli",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Mroczny Majestat",
+   "effect": "Testy: każdy Test Charyzmy wobec Ożywieńców i Ghuli Możesz rozkazywać liczbie stworzeń równej dwukrotności twojej Siły Woli. Za każdy kupiony poziom tego Daru Krwi zwiększasz podstawową liczbę stworzeń, którymi możesz kierować, o wartość swojej Siły Woli. Mając zatem Mroczny Majestat 3, możesz rozkazywać liczbie stworzeń równej czterokrotności twojej Siły Woli.",
+   "limit": "Bonus z Ogłady",
+   "recommended": "von Carstein, Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Nasycony Krwią",
+   "effect": "Testy: każdy Test Opanowania, by oprzeć się karmieniu Głodniejesz dwa razy wolniej niż inni. Możesz odmawiać sobie krwi przez dwa razy dłuższy czas niż normalnie. Ponadto Test Opanowania, by nie karmić się, wykonujesz tylko co drugi Odstęp Karmienia. Kumuluje się to z Talentem Wstrzemięźliwy.",
+   "limit": "1",
+   "recommended": "Nekrarchowie, Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Nehekhariańskie Zwoje",
+   "effect": "Zachowałeś część pradawnej wiedzy Krainy Umarłych. Wybierz jedno zaklęcie z Tradycji Nekromancji albo z Tradycji Śmierci. Możesz odtąd rzucać to zaklęcie, jakby należało do twojej listy zaklęć. Za każdym razem, gdy zdobywasz tę Cechę na nowo, zyskujesz kolejne zaklęcie.",
+   "limit": "1",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Niezapadająca w Pamięć Twarz",
+   "effect": "O ile zachowujesz dyskrecję, łatwo o tobie zapomnieć — rozpływasz się we mgle wspomnień. Każdy, kto próbuje cię sobie przypomnieć, w tym twój wygląd albo twój udział w wydarzeniach, których był świadkiem, musi najpierw wykonać Rozszerzony Test Opanowania i uzyskać więcej PS, niż wynosi twój Bonus z Siły Woli powiększony o poziomy tego Daru Krwi. Poziom Trudności może zależeć od twoich czynów i tego, jak bardzo rzucałeś się w oczy — dużo łatwiej zapamiętać kogoś, kto skrzywdził ciebie albo twoją rodzinę, niż nieznajomego mijanego w nocy. Jednak nawet ci, którzy pamiętają oczywiste zdarzenia, nie zdołają przypomnieć sobie szczegółów twojej twarzy bez 6+ PS. Zapiski i wizerunki przedstawiające ciebie również blakną, plamią się albo znikają w ciągu k10 dni. Jeśli nie masz jeszcze Słabości Brak Odbicia, zyskujesz ją wraz z tym Darem Krwi — możesz więc mieć więcej niż 6 Słabości.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Niezmordowany",
+   "effect": "Dhar w twoim ciele stale cię pobudza. Możesz zignorować karę -10 z jednego Stanu Zmęczenie. Każdy kolejny poziom Niezmordowanego pozwala zignorować karę z kolejnego Stanu Zmęczenie.",
+   "limit": "Bonus z Wytrzymałości",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Nieśmiertelni Słudzy",
+   "effect": "Testy: każdy Test Dowodzenia wobec Ożywieńców Wszystkie stworzenia z Cechą Ożywieniec w promieniu tylu metrów, ile wynosi twój Bonus z Siły Woli, tymczasowo ignorują Cechę Niestabilny. Cecha ta wraca, gdy tylko stworzenia opuszczą ten zasięg. Za każdy poziom tego Daru Krwi zwiększasz zasięg o kolejny Bonus z Siły Woli w metrach.",
+   "limit": "Bonus z Ogłady",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Nocna Wiedźma",
+   "effect": "Traktujesz Język (Magiczny) i Splatanie Magii (Dhar) jak Umiejętności należące do każdej Profesji, do której wchodzisz; jeśli już w niej są, kupujesz je o 5 PD taniej za Rozwinięcie.",
+   "limit": "1",
+   "recommended": "Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Nocny Drapieżnik",
+   "effect": "Atakując z cienia, możesz użyć Skradania zamiast Broni Białej w Przeciwstawnych Testach Broni Białej.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Objawienie Potwora",
+   "effect": "Nawet na tle innych wampirów twoja potworna natura budzi wstręt — jest brutalnym przypomnieniem bestii mieszkającej we wszystkich wampirach, cokolwiek by udawały. Zyskujesz Cechę Broń (szpony) o obrażeniach BS+6 oraz Cechę Ugryzienie o obrażeniach BS+4, co oddaje bestialską i potworną postać, do jakiej sprowadzono wampiry Strigoi. Ten Dar Krwi mogą wziąć tylko wampiry Strigoi.",
+   "limit": "1",
+   "recommended": "Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Odwieczna Przebiegłość",
+   "effect": "Testy: każdy Test Przeciwstawny narzucający Zaskoczenie lub przed nim chroniący Jesteś mistrzem zasadzek i ataków z ukrycia, po których wrogowie zataczają się oszołomieni. Możesz wydać całą swoją Przewagę (minimum 2), by wywołać Zaskoczenie u jednego przeciwnika, nawet jeśli walka już się zaczęła.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Ognioodporność",
+   "effect": "Ten Dar Krwi pozwala dodać do redukcji obrażeń od ognia niemagicznego premię równą twojemu Bonusowi z Wytrzymałości. Jeśli masz Słabość Ogień, pozwala ci to redukować obrażenia od ognia normalnie. Jeśli jej nie masz, w praktyce podwajasz swój Bonus z Wytrzymałości wobec ognia. Stany Podpalenie wywołane Słabościami Bieżąca Woda i Symbole Religijne nie pochodzą tak naprawdę od ognia, lecz od parzącego działania wody, więc ten Dar Krwi na nie nie wpływa. Stany Podpalenie od Światła Słonecznego podlegają mu normalnie.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Opancerzone Ciało",
+   "effect": "Zyskujesz Cechę Pancerz o wartości 1 Punktu Pancerza w każdej lokacji. Każdy kolejny zakup tego Daru Krwi zwiększa wartość Pancerza o +1 PP. Gdy odbijasz tym Pancerzem Rany Krytyczne, częściowo niszczysz zgrubiałe tkanki, które cię chronią. Odtworzenie każdego uszkodzonego PP wymaga 5 punktów Żywotności wypitej krwi. PP leczą się równomiernie po całym ciele, zaczynając od najbardziej poranionej Lokacji Trafienia (albo od Lokacji wybranej przez ciebie, jeśli wszystkie są poranione tak samo). Przykład: odbijasz po 2 PP na Głowie i Prawym Ramieniu oraz 3 PP na Korpusie. Wypijasz potem krew wartą 20 punktów Żywotności, czyli dość, by wyleczyć 4 PP. Najpierw wyleczysz po 1 PP we wszystkich trzech Lokacjach, zaczynając od Korpusu, a potem drugi PP na Korpusie. Wszystkie trzy Lokacje będą wtedy na -1 PP.",
+   "limit": "Bonus z Wytrzymałości",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Pasożyt",
+   "effect": "Zaznałeś czasów rozpaczy i je przetrwałeś. Możesz żywić się martwym mięsem i krwią. Smak nie jest przyjemny i nigdy go nie polubisz, ale nie musisz polować na żywych, by odpędzić głód. Ponadto możesz pożerać robactwo i owady, by się nasycić.",
+   "limit": "1",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Posrebrzona Krew",
+   "effect": "Srebrna broń nie zadaje ci dodatkowych obrażeń — zachowuje się jak każda inna. Nie możesz wziąć tego Daru Krwi, jeśli masz Wyzwanie Świtu, i odwrotnie.",
+   "limit": "1",
+   "recommended": "von Carstein, Nekrarchowie,"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Postać Chowańca",
+   "effect": "W ramach Akcji możesz przemienić się w dowolne zwierzę nie większe niż pies domowy. Twój dobytek przemienia się razem z tobą i pojawia się z powrotem, gdy wracasz do zwykłej postaci. Zyskujesz wszystkie Cechy tego zwierzęcia, ale zachowujesz własną Inicjatywę, Inteligencję, Siłę Woli, Ogładę i Żywotność. Możesz wrócić do swojej postaci, kiedy zechcesz, i korzystać z tej zdolności tak często, jak trzeba. Przy drugim zakupie przemiana w obie strony staje się Darmową Akcją. Szczegóły wampirzych chowańców znajdziesz w Dodatku.",
+   "limit": "2",
+   "recommended": "Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Postać Nietoperza",
+   "effect": "Możesz poświęcić Akcję, by przemienić się w nietoperza. Twoje ubranie i dobytek wchłaniają się w ciało i pojawiają ponownie po zakończeniu przemiany. Zyskujesz wszystkie Cechy tego zwierzęcia, ale zachowujesz własną Inicjatywę, Inteligencję, Siłę Woli, Ogładę i Żywotność. Patrz profil Wampirzego Nietoperza w Dodatku. Powrót do zwykłej postaci też jest Akcją, ale możesz go dokonać, kiedy zechcesz. Przy drugim zakupie tego Daru Krwi przemiana w obie strony staje się Darmową Akcją.",
+   "limit": "2",
+   "recommended": "von Carstein, Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Postać Roju (rodzaj)",
+   "effect": "Raz dziennie, w ramach Akcji, możesz zmienić swoje ciało w rój stworzeń — chrząszczy, karaluchów, much, myszy, szczurów albo kruków. Przy zakupie tego Daru Krwi wybierasz jedną postać roju i zawsze będziesz przybierać tę samą. Cały dobytek przemienia się razem z tobą i odtwarza, gdy wracasz do swojej postaci. W tej postaci nie możesz atakować ani odnosić ran, choć atakujący sprawiają ci dyskomfort. Przeciśniesz się przez każdą szczelinę dość dużą, by przeszło przez nią jedno ze stworzeń twojego roju. Postać ta trwa przez liczbę minut równą twojemu Bonusowi z Siły Woli. Przy drugim zakupie możesz stać się rojem Darmową Akcją w dowolnym momencie przed końcem swojej tury (nawet przed swoim zwykłym miejscem w kolejności Inicjatywy). Pozwala to przemienić się, zanim wróg zdąży zadać cios. Ten Dar Krwi możesz kupować od nowa, jak nowy Dar, by nabyć kolejne postaci roju.",
+   "limit": "2",
+   "recommended": "Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Postać Wilka",
+   "effect": "W ramach Akcji możesz przemienić się w Wilka Zagłady (patrz Dodatek). Całe Wyposażenie i dobytek wchłaniają się w twoje ciało i pojawiają ponownie po odwróceniu przemiany. Powrót również zajmuje Akcję, ale możesz go dokonać w dowolnej chwili. Przy drugim zakupie tego Daru Krwi możesz przemieniać się Darmową Akcją.",
+   "limit": "2",
+   "recommended": "von Carstein, Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Potworna Chwała",
+   "effect": "W chwili swojego krwawego zwycięstwa jesteś naprawdę ogromny. Ilekroć zabijesz wroga, wszyscy jego sojusznicy w promieniu tylu metrów, ile wynosi twój Bonus z Siły Woli, muszą zdać Test Opanowania o poziomie Wymagającym (+0) albo otrzymują +1 Stan Panika.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Potworna Masa",
+   "effect": "Jesteś tak ogromny i potworny, że nawet Rany Krytyczne mniej ci szkodzą. Rany Krytyczne zadają ci o 2 punkty Żywotności mniej (minimum 1), a każdy przeciwnik rzucający przeciwko tobie na Ranę Krytyczną musi rzucić dwa razy i przyjąć niższy wynik.",
+   "limit": "1",
+   "recommended": "Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Potężna Postać",
+   "effect": "Masz teraz blisko trzy metry wzrostu. Zyskujesz Cechę Rozmiar (Duży). Korzystając z Ludzkiego Pozoru, wracasz do Rozmiaru Średniego, ale i tak jesteś o co najmniej trzydzieści centymetrów wyższy niż wcześniej. Dla tych, którzy znali cię za życia, będzie to wyraźny znak twojej bezbożnej natury.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Powolna Śmierć",
+   "effect": "Twoje zęby i pazury kryją paskudne niespodzianki. Gdy atakujesz nimi, ofiary mogą umierać powoli od zadanych ran. Zyskujesz Cechę Zakażony.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Powstały",
+   "effect": "Jeśli spadniesz do 0 punktów Żywotności, możesz natychmiast wykonać Test Odporności o poziomie Wymagającym (+0), by wyleczyć 1 punkt Żywotności i odzyskać przytomność. Jeśli masz zarówno Powstałego, jak i Bezbożną Regenerację, musisz najpierw użyć Powstałego, zanim spróbujesz Bezbożnej Regeneracji.",
+   "limit": "1",
+   "recommended": "Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Przeszywający Cios",
+   "effect": "Ilekroć zadasz przeciwnikowi Ranę Krytyczną, możesz rzucić dwa razy i przyjąć wyższy wynik.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Przyzwanie Burzy",
+   "effect": "Raz dziennie możesz poświęcić Akcję, by przyzwać burzę. Zaciemni ona światło w promieniu półtora kilometra wokół ciebie i uniemożliwi latanie. Wszystkie Testy Umiejętności Strzeleckich i Percepcji mają karę -10. Burza trwa przez liczbę godzin równą twojemu Bonusowi z Siły Woli.",
+   "limit": "1",
+   "recommended": "von Carstein"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Przyzwanie Ghuli",
+   "effect": "Wydajesz ryk, który niesie się daleko i zwabia okoliczne Ghule z ich kryjówek. Musisz poświęcić Akcję i zdać Test Dowodzenia o poziomie Wymagającym (+0), a także móc krzyknąć na cały głos. Z okolicy przybędzie tyle ghuli, ile uzyskałeś PS, plus k10 (minimum 1). Dotrą po liczbie rund równej połowie kości jedności twojego Testu. W walce działają w twojej rundzie Inicjatywy i słuchają twoich rozkazów. Odejdą po liczbie godzin równej twojemu Bonusowi z Siły Woli.",
+   "limit": "1",
+   "recommended": "Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Przyzwanie Pradawnych",
+   "effect": "Rzucając dowolne zaklęcie ożywiania albo przyzywania na cele martwe lub nieumarłe, liczysz się jako mający +2 PS w udanym Teście za każdy poziom tego Daru Krwi. Premię tę możesz przeznaczyć na nadczarowanie, by przyzwać więcej sług albo wydłużyć czas trwania zaklęcia. Na przykład przy Powstaniu Umarłych każdy poziom pozwala przyzwać dodatkowe +PS szkieletów.",
+   "limit": "Bonus z Siły Woli",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Przyzwanie Robactwa",
+   "effect": "Wydajesz przenikliwy pisk, który niesie się daleko, i wykonujesz Test Dowodzenia o poziomie Wymagającym (+0). Przyzywasz z okolicy rój Wielkich Szczurów, Wielkich Pająków albo węży. Użyj standardowego profilu danego stworzenia z dodaną Cechą Rój. Za każde +2 PS w Teście dodaj rojowi 1 punkt Żywotności. Stworzenia przybywają natychmiast, pełznąc ze wszystkich stron. W walce działają w twojej rundzie Inicjatywy i słuchają prostych rozkazów: atakuj, tropij, broń. Rozpierzchną się albo odejdą po liczbie godzin równej twojemu Bonusowi z Siły Woli.",
+   "limit": "1",
+   "recommended": "Strigoi, Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Przyzwanie Wilków",
+   "effect": "Wydajesz potężny ryk, który niesie się daleko. Testem Dowodzenia o poziomie Wymagającym (+0) przyzywasz nim wilki albo straszliwe wilki w zasięgu słuchu. Z okolicy przybędzie tyle wilków, ile uzyskałeś PS, albo o połowę mniej straszliwych wilków (minimum 1). Dotrą po liczbie rund równej połowie kości jedności twojego Testu. W walce działają w twojej rundzie Inicjatywy i słuchają prostych rozkazów: atakuj, tropij, broń. Odejdą po liczbie godzin równej twojemu Bonusowi z Siły Woli.",
+   "limit": "1",
+   "recommended": "von Carstein, Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Rtęć",
+   "effect": "Poruszasz się tak szybko, że w walce zawsze działasz pierwszy. Przy Broni Białej działasz jako pierwszy w kolejności Inicjatywy, tak jakbyś atakował bronią z cechą Szybka i wybrał pierwszeństwo. Jeśli inny walczący ma broń Szybką, atakuje po tobie. Jeśli dwa wampiry mają Rtęć, pierwszy działa to o wyższej Inicjatywie.",
+   "limit": "1",
+   "recommended": "Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Rycerski Honor",
+   "effect": "Testy: każdy Test Opanowania wykonany zgodnie z twoim kodeksem honorowym Wyznajesz wypaczoną formę rycerskości. Ilekroć przyjmiesz formalne wyzwanie do walki, natychmiast zyskujesz +1 Przewagi i +1 punkt Determinacji. Jeśli odrzucisz szczere wyzwanie do walki, musisz zamiast tego wydać 1 punkt Determinacji.",
+   "limit": "Bonus z Ogłady",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Skrzydła",
+   "effect": "Możesz wypuścić z pleców skórzaste skrzydła. Zyskujesz Cechę Latanie o wartości równej dwukrotności twojej Szybkości.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki, Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Smród",
+   "effect": "Gdy nie korzystasz z Ludzkiego Pozoru, cuchniesz zgnilizną, padliną i rozkładem. Zyskujesz Cechę Dekoncentrujący.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Straszliwe Ciosy",
+   "effect": "Twoja wielka siła i niebywała szybkość pozwalają ci zasypywać wrogów ciosami o przerażającej mocy. Wszystkie twoje ataki zyskują Zaletę Druzgocąca. Jeśli twój oręż już ją ma, zadajesz zamiast tego dodatkowe +4 obrażeń.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Szlachetne Pochodzenie",
+   "effect": "Twój zasięg władzy nad Ożywieńcami sięga 200 metrów. Każdy kolejny zakup wydłuża go o +100 metrów.",
+   "limit": "Bonus z Ogłady",
+   "recommended": "von Carstein, Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Szpony",
+   "effect": "Gdy nie korzystasz z Ludzkiego Pozoru, możesz Darmową Akcją wydłużyć pazury do dwukrotnej długości. Zamiast BS+4 zadają wtedy BS+6 obrażeń i zyskują cechę Nadziewająca. Ich Zasięg rośnie z Osobistego do Bardzo Krótkiego. Dostajesz też +10 do Testów Wspinaczki i Otwierania Zamków, ale -20 do wszystkich innych Testów opartych na Zręczności, dopóki pazury są wysunięte. Z obnażonymi szponami nie możesz trzymać w rękach żadnej broni poza tarczą.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Szybkokrwisty",
+   "effect": "Testy: Testy Uniku przeciwko atakom dystansowym Jeśli chcesz, możesz używać Uniku, by wymijać ataki dystansowe — również te, których normalnie nie da się uniknąć.",
+   "limit": "Bonus ze Zwinności",
+   "recommended": "Lahmianie, Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Trwały Obraz",
+   "effect": "Zachowujesz odbicie w lustrze i cień.",
+   "limit": "1",
+   "recommended": "von Carstein, Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Trębacz",
+   "effect": "Potrafisz przekuć mrok w swojej duszy w natchnienie dla sojuszników i strach dla wrogów. Możesz poświęcić Akcję, by zadąć w róg albo uderzyć w bęben wojenny. Ty i każdy sojusznik, który usłyszy ten straszliwy zew, zyskujecie +1 Przewagi. Za pierwszym razem, gdy zadmiesz w róg w danym starciu, ty i twoi sojusznicy zyskujecie dodatkowo Strach +1.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Twarda Skóra",
+   "effect": "Twoje ciało jest jak skóra wyprawiona, a kości jak stal, dzięki czemu zbywasz większość skutków tępych uderzeń. Redukując otrzymywane obrażenia od broni z cechą Ogłuszająca, dodajesz Bonus z Wytrzymałości po raz drugi. Jeśli taki atak normalnie ignoruje twój Bonus z Wytrzymałości, ignoruje tylko zwykły bonus, a nie ten dodatkowy z tego Daru Krwi.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wrodzony Nekromanta",
+   "effect": "Możesz intuicyjnie rozkazywać Ożywieńcom i Ghulom w promieniu 100 metrów. Możesz kierować liczbą takich stworzeń do wartości swojej Siły Woli, nawet jeśli nie znasz Nekromancji. Proste polecenia w rodzaju „atakuj\", „broń\", „znajdź\" czy „tropij\" są automatyczne i możesz wydać je wszystkim naraz Darmową Akcją. Bardziej złożone polecenia albo polecenia poza zasięgiem 100 metrów wymagają Testu Dowodzenia o poziomie Wymagającym (+0). Większość Ożywieńców i Ghuli nie opiera się twoim rozkazom, choć wyjątkowo potężni Ożywieńcy mogą spróbować, jeśli MG uzna to za stosowne. Jeśli nauczysz się Nekromancji, nie doświadczasz Mniejszej Manifestacji za wyrzucenie dubletu w udanym Teście Splatania Magii (Dhar) ani w Teście Języka (Magicznego) z użyciem Dharu.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wybuch Krwi",
+   "effect": "Twoja krew jest lepka i tryska z ran. Każdy wróg, który zada ci co najmniej 1 punkt obrażeń Żywotności, musi zdać Test Uniku o poziomie Wymagającym (+0) albo przez następne dwie rundy dostaje -20 do wszystkich Testów wymagających ruchu, w tym do walki.",
+   "limit": "Bonus z Wytrzymałości",
+   "recommended": "Krwawe Smoki, Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wymiociny",
+   "effect": "Zyskujesz Cechę Wymiot.",
+   "limit": "1",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wyssanie Duszy",
+   "effect": "Testy: każdy Przeciwstawny Test Opanowania Nie wystarczy ci sączyć krew ofiar — twoja nieumarła postać potrzebuje o wiele więcej energii, by się utrzymać. Stajesz się studnią uczuć, wysysając wolę i emocje z żywych istot wokół siebie. W każdej rundzie, jako Darmową Akcję, możesz wykonać Przeciwstawny Test Opanowania przeciwko wszystkim żywym istotom w promieniu tylu metrów, ile wynosi twój Bonus z Siły Woli (rzucasz raz, a każdy przeciwnik rzuca raz, próbując dorównać twoim PS albo je przewyższyć). Każdy przeciwnik, który z tobą przegra, otrzymuje kumulatywną karę −10 do wszystkich Cech. Żadnej Cechy nie można w ten sposób obniżyć poniżej 1. Kary te zanikają w tempie 10 punktów za każdą godzinę spędzoną z dala od ciebie.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "Krwawe Smoki, Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wyzwanie Świtu",
+   "effect": "Jeśli zdasz Test Odporności o poziomie Wymagającym (+0), możesz chodzić w świetle dnia przez godzinę. Test możesz powtarzać raz na godzinę z kumulującą się karą -10, by opierać się wyniszczającemu działaniu słońca. Gdy zawiedziesz, zaczynasz otrzymywać obrażenia i skutki Słabości Słońce jak zwykle.",
+   "limit": "1",
+   "recommended": "von Carstein, Lahmianie,"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wzrok Śmierci",
+   "effect": "Testy: każdy Test Charyzmy lub Dowodzenia przy rozmowie z duchami Przez cały czas widzisz i wyczuwasz zjawy, duchy i Eterycznych Ożywieńców. One również są świadome twojej obecności — na dobre albo na złe. Możesz też wykonać Test Intuicji o poziomie Wymagającym (+0), by ocenić, jak zdrowy albo wątły jest cel (na przykład ile zostało mu Żywotności albo ile ma lat).",
+   "limit": "Bonus z Ogłady",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Węch Krwi",
+   "effect": "Wyczuwasz świeżą krew w promieniu 16 metrów, nawet jeśli jeszcze nie została przelana. Żadna żywa istota w tym promieniu nie ukryje przed tobą tego zapachu. Magiczne i zwyczajne próby zamaskowania stworzenia albo jego krwi zawodzą automatycznie.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki, Niezależni"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Władca Nocy",
+   "effect": "Twoi nieumarli sojusznicy i słudzy są chronieni twoją mroczną obecnością. W promieniu tylu metrów, ile wynosi twój Bonus z Siły Woli, zyskują Cechę Ochrona (9+) przeciwko obrażeniom niemagicznym. Każdy kolejny zakup tego Daru Krwi obniża wartość Ochrony o 1. Ś",
+   "limit": "Bonus z Ogłady",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Władza nad Śmiercią",
+   "effect": "Jesteś mistrzem w rozkazywaniu umarłym. Ten Dar Krwi pozwala ci użyć wyniku kości jedności zamiast wyrzuconych PS w każdym udanym Teście Języka (Magicznego) wpływającym na umarłych albo na stworzenia z Cechą Ożywieniec.",
+   "limit": "1",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Wściekła Szarża",
+   "effect": "Jesteś rozjuszonym taranem przemocy i wiesz dokładnie, gdzie wyprowadzić cios, by przyniósł największy skutek. Gdy szarżujesz, twoje ataki ignorują wszystkie Punkty Pancerza.",
+   "limit": "1",
+   "recommended": "Krwawe Smoki"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zapalczywość",
+   "effect": "Zyskujesz Cechę Wojowniczy.",
+   "limit": "1",
+   "recommended": "Strigoi"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zepsuta Niewinność",
+   "effect": "Wyglądasz tak pięknie albo tak niewinnie, że wrogowie muszą się dwa razy zastanowić, zanim cię uderzą. Każda rozumna istota, która chciałaby cię skrzywdzić, musi najpierw wygrać Przeciwstawny Test Opanowania/Charyzmy.",
+   "limit": "1",
+   "recommended": "Lahmianie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zimnokrwistość",
+   "effect": "Zyskujesz Cechę Zimnokrwisty.",
+   "limit": "1",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zmysł Śmierci",
+   "effect": "Testy: każdy Test wykrywania umarłych, ghuli i Ożywieńców Wyczuwasz Wiatry Dharu, co pozwala ci odnajdywać zwłoki na twoje plugawe potrzeby albo szukać Ghuli i Ożywieńców, którymi możesz rozkazywać. Ten Dar Krwi pozwala używać Percepcji, Tropienia i Intuicji do znajdowania, śledzenia i wykrywania umarłych, Ożywieńców oraz Ghuli. Jeśli w promieniu tylu metrów, ile wynosi twoja Siła Woli, znajdują się jakiekolwiek szczątki, nawet niewidoczne, ten Dar Krwi pozwala ci rzucić na Percepcję, by je zlokalizować. Sukces daje ci przybliżone pojęcie o tym, gdzie są zwłoki, ile ich jest i jakiego rodzaju są to szczątki.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zniekształcony",
+   "effect": "Stałeś się w jakiś sposób potwornie odrażający. Czy to pokrywają cię pękające krosty, czy gnije ci skóra — budzisz absolutny wstręt. Gdy nie korzystasz z Ludzkiego Pozoru, masz Cechę Groza 1. Jeśli masz już Grozę, Zniekształcony dodaje +1 do jej wartości za każdy poziom tego Daru Krwi.",
+   "limit": "Bonus z Wytrzymałości",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zwierzęca Percepcja",
+   "effect": "Testy: każdy Test Percepcji podczas korzystania ze Zwierzęcej Percepcji Możesz patrzeć oczami stworzeń, które przyzwałeś albo którymi rozkazujesz. Poświęcając Akcję, odbierasz to, co odbierają one, wszystkimi dostępnymi im zmysłami (również magicznymi). Jeśli zmysły stworzenia są w czymś ograniczone (brakuje mu na przykład oka albo jest Drobne, więc patrzy z niżej), odczuwasz te same ograniczenia.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Zwierzęce Szepty",
+   "effect": "Testy: każdy Test dotyczący porozumiewania się ze zwierzętami Możesz rozmawiać ze zwierzętami. Pozwala to na prawdziwą wymianę myśli, wykraczającą poza proste rozkazy dopuszczalne przy Przyzwaniu Robactwa, Przyzwaniu Wilków czy większości zaklęć. Możesz teraz wydawać szczegółowe polecenia i otrzymywać szczegółowe odpowiedzi. Stworzenia bestialskie porozumiewają się urywanymi słowami i obrazami, ale istoty inteligentniejsze potrafią wyrażać swoje myśli i opinie w sposób bardziej wyszukany.",
+   "limit": "Bonus z Siły Woli",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Źródło Dharu",
+   "effect": "Twoja dusza jest tak zepsuta mroczną magią, że stała się naturalną sadzawką czystego Dharu. Wszyscy czarodzieje w promieniu 24 metrów (w tym ty sam) dodają jedną trzecią twojego Bonusu Siły Woli (w dół) w PS do swojego testu rzucania. Każdy, kto rzuca w zasięgu zaklęcie z innej Tradycji, podlega zasadom takim, jakby splatał Dhar (Enemy in Shadows Companion, s. 78). Możesz być objęty działaniem kilku takich Cech naraz. To jeden z powodów, dla których wampiry Nekrarchów przyjmują uczniów. Możesz wyłączać i włączać tę zdolność Akcją Darmową.",
+   "limit": "1",
+   "recommended": "Nekrarchowie"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Żarłoczna Bestia",
+   "effect": "Testy: każdy Test Percepcji przy wykrywaniu krwi Jesteś nienasyconym potworem, którego głód nie zna granic. Możesz użyć Darmowej Akcji, by dobrowolnie przyjąć +1 Stan Głód, ilekroć widzisz albo czujesz żywy cel. Stan usuwa się na zwykłych zasadach.",
+   "limit": "Bonus z Inicjatywy",
+   "recommended": "dowolna"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Żelazne Ścięgna",
+   "effect": "Stałeś się niebywale silny. W każdym Przeciwstawnym Teście Broni Białej albo Siły przeciwnik otrzymuje karę -2 PS. Magia Ożywieńców Wampiry są istotami plugawego Dharu. Z natury ciągnie je więc do Tradycji Nekromancji, choć niekiedy uczą się też innych Tradycji. Gdy korzystają z innych Tradycji, swobodnie i niebezpiecznie mieszają ze sobą wszystkie Wiatry Magii, manifestując Dhar zamiast właściwego Wiatru danej Tradycji. Takie zaklęcia są wykrzywioną parodią tego,",
+   "limit": "1",
+   "recommended": "Krwawe Smoki, Strigoi"
+  }
+ ],
+ "weaknesses": [
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Bariery",
+   "effect": "Taki wampir nie może wejść do żadnej budowli, która nie należy do niego, o ile nie zostanie wpierw zaproszony. Po zaproszeniu może wchodzić i wychodzić swobodnie. Nekrarchowie zwykle mają tę słabość."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Bieżąca Woda",
+   "effect": "Część wampirów nie potrafi przekroczyć bieżącej wody i doznaje przy próbie ciężkich obrażeń. Na potrzeby tej klątwy woda musi mieć co najmniej metr szerokości, trzydzieści centymetrów głębokości i nurt. Samo ochlapanie wampira wodą nie wystarczy, podobnie jak deszcz czy wylanie mu wiadra wody na głowę. Próba przekroczenia takiego zbiornika zadaje k10 punktów obrażeń za każdą rundę spędzoną w wodzie albo na niej, bez względu na Bonus Wytrzymałości i pancerz. Jeśli wampir spadnie do 0 Żywotności, ginie, rozpuszczając się w wodzie jak błyskawicznie gnijące zwłoki. Przelot, przeskok, przejazd wierzchem albo pojazdem lub statkiem znosi te kary — podobnie jak przejście po moście."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Brak Odbicia",
+   "effect": "Wiele wampirów przeklęto tak, że nigdy nie ujrzą własnego oblicza w tafli lustra ani w cieniu rzucanym przez księżyc. Lustra i inne odbijające powierzchnie nie pokazują wyglądu takich wampirów."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Czosnek",
+   "effect": "Wiele wampirów ma niezwykłą słabość do rzadkich korzeni i roślin, co widać po Demonicznym Korzeniu i Wiedźmim Zielu. Nieliczne obarczone są wrażliwością na rośliny pospolitsze, jak czosnek. Takie wampiry otrzymują karę −20 do wszystkich Testów, póki znajdują się w promieniu 6 metrów od tej substancji."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Demoniczny Korzeń i Wiedźmie Ziele",
+   "effect": "Część wampirów odpychają Demoniczny Korzeń i Wiedźmie Ziele. Wampir z tą słabością musi zdać Test Opanowania, żeby podejść do tych ziół bliżej niż na 2 metry."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Gromril",
+   "effect": "Dotyk krasnoludzkiego gromrilu jest dla części wampirów przekleństwem. Ilekroć taki wampir zostanie zraniony orężem z gromrilu, nie może odejmować Bonusu Wytrzymałości od obrażeń. ignorują twój Bonus z Wytrzymałości, a pancerz chroni cię normalnie. (R6, s. 8)"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Ithilmar",
+   "effect": "Powiada się, że srebrzysta stal elfów kryje w sobie niesamowitą moc magiczną. Choć wiele tego kruszcu idzie na pancerze i przedmioty ozdobne, elfy słyną z potężnego oręża kutego z tej rudy. Jeśli wampir straci co najmniej 1 punkt Żywotności od ataku bronią wykutą z ithilmaru, musi zdać Problematyczny (−10) Test Atletyki albo zyskuje stan Podpalenie. ignorują twój Bonus z Wytrzymałości, a pancerz chroni cię normalnie. (R6, s. 8)"
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Kołki",
+   "effect": "Wbicie kołka w serce jest dla każdego stworzenia dostatecznie wstrząsające, ale przy wampirach z tą słabością każdy atak kołkiem wystarczy, by je odpędzić. Kołek musi być wykonany ze szczególnego drewna, na przykład jesionu, głogu albo różanego. Jeśli wampir zostanie trafiony takim kołkiem i straci co najmniej 1 punkt Żywotności, pozostaje unieruchomiony, póki się kołka nie wyjmie (Akcja). Póki tkwi nieruchomo, nie może wykonywać żadnych Akcji Ruchu."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Liczenie",
+   "effect": "Te wampiry mają osobliwą obsesję na punkcie liczenia. Zawsze gdy wampir stanie przed zbiorem drobnych przedmiotów — nasion maku, monet, kawałków sznurka — musi zdać Problematyczny (−10) Test Opanowania albo zacznie je liczyć, co zwykle zajmuje k10 minut. Jeśli wampir zda test, otrzymuje karę −10 do wszystkich Testów, póki niepoliczone przedmioty pozostają w polu widzenia."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Ogień",
+   "effect": "Nieliczne wampiry są wrażliwe na oczyszczający płomień. Takie wampiry nie mogą odejmować Bonusu Wytrzymałości od obrażeń zadanych ogniem (magicznym czy zwykłym)."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Poświęcona Broń",
+   "effect": "Poświęcona broń zyskuje przeciwko tobie cechę Przebijająca. Woda święcona również cię rani, zadając k10 obrażeń na turę kontaktu, modyfikowanych jak zwykle o Bonus z Wytrzymałości i Pancerz, ale nie mniej niż 1 punkt Żywotności na turę. Przedmioty religijne przyciśnięte do gołej skóry zadają 1 punkt obrażeń Żywotności na turę, ignorując Bonus z Wytrzymałości i Pancerz."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Spaczeń",
+   "effect": "Twoja wampirza postać jest mniej stabilna niż zwykle, a spaczeń wywołuje jej mutacje. Musisz wykonać Test Opanowania o poziomie Wymagającym (+0), by zbliżyć się na mniej niż 6 metrów do spaczenia. Po godzinie w jego obecności musisz przerzucić jeden Dar Krwi i jedną Słabość — zmieniają się one na stałe."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Srebro",
+   "effect": "Sam dotyk srebra pali ciało wampira z tą słabością. Jeśli wampir straci co najmniej 1 punkt Żywotności od posrebrzanego oręża, traci automatycznie 3 kolejne, z pominięciem pancerza i Bonusu Wytrzymałości."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Symbole Religijne",
+   "effect": "Moc wiary jest w Starym Świecie całkiem duża, a śmiertelnicy wznoszący ikony i symbole swoich bogów potrafią czasem odpędzić wampira. Wampir wrażliwy na takie przedmioty musi zdać Test Opanowania, żeby podejść bliżej niż na 2 metry do osoby wznoszącej symbol religijny. Musi też zdać Trudny (−20) Test Opanowania, żeby wejść do świątyni albo chwycić religijną ikonę. MG może zmienić poziom trudności tego testu zależnie od siły wiary wyznawców świątyni albo dzierżyciela ikony."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Słońce",
+   "effect": "Wampir w bezpośrednim świetle słońca ma wszystkie Cechy zmniejszone o połowę (w dół) i traci 1 punkt Żywotności za każdą minutę wystawienia, bez względu na Bonus Wytrzymałości i pancerz. Jeśli wampir spadnie w ten sposób do 0 Żywotności, ginie, podpalony światłem słońca. Kara nie działa, jeśli dzień jest wyraźnie pochmurny (zachmurzenie 80% albo więcej), ale wampir idący gdzieś w taki dzień musi co godzinę rzucić k10 — przy wyniku 1–2 niebo przejaśnia się dostatecznie, by zadać mu obrażenia. Za każdą rundę spędzoną w bezpośrednim świetle słońca wampir musi zdać Problematyczny (−10) Test Atletyki albo zyskuje stan Podpalenie."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Trociny",
+   "effect": "Nieliczne wampiry odpychają akcesoria tych, którzy zajmują się zwłokami, na przykład trociny albo płyn balsamujący. Wampir z tą słabością musi zdać Test przeciw Grozie, gdy zetknie się z tymi substancjami."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Łzy",
+   "effect": "Nieliczne wampiry nie znoszą łez cnotliwego śmiertelnika i dlatego nigdy nie żywią się niewinnymi, wolą zaś zepsutych, okrutnych i przestępców. Takie wampiry często zadają ofiarom szereg pytań, by ocenić jakość swoich śmiertelników, zanim zaatakują."
+  },
+  {
+   "min": 0,
+   "max": 0,
+   "name": "Śpiący w Ziemi",
+   "effect": "Czy to przez zabobon, czy przez duchowe zerwanie więzi z życiodajną ziemią, możesz w pełni zasnąć tylko w ziemi z krain, które nazywałeś domem za życia. Musisz spać z co najmniej dwiema garściami tej ziemi każdego dnia, inaczej po przebudzeniu wieczorem zyskujesz +1 Stan Zmęczenie. Stanów tych nie da się usunąć, dopóki nie prześpisz całego dnia z dwiema garściami rodzinnej ziemi, przy czym ich kary nie mogą obniżyć żadnej Cechy poniżej 10."
+  }
+ ]
+}

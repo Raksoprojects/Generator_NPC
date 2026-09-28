@@ -652,5 +652,30 @@
     "randomPool": false,
     "description": "Stworzenie może objąć celem swojej masy przeciwnika o mniejszym Rozmiarze (Test Przeciwstawny, jak Zapasy); objęty cel co Rundę zdaje Trudny (−20) Test Odporności albo zyskuje mutację.",
     "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
+  },
+  "Wiek (wartość)": {
+    "randomPool": false,
+    "description": "Wampiry z czasem żerują oszczędniej. Wiek 1: do 6 tygodni (karmienie co BWt godzin), 2: do roku (co BWt nocy), 3: do 10 lat (tygodni), 4: do 100 lat (miesięcy), 5: ponad 100 lat (co 4 miesiące).",
+    "source": "Wampiry (nieoficjalny)"
+  },
+  "Pazur (wartość)": {
+    "randomPool": false,
+    "description": "Ataki Pazurami działają jak ataki bronią Umiejętnością Broń Biała (Bijatyka), gdy wiodąca dłoń jest wolna; Obrażenia równe wartości (zwykle BS+4). Dwie ręce z Pazurami + Dwie Bronie = atak obiema.",
+    "source": "Wampiry (nieoficjalny)"
+  },
+  "Klątwa Nocy": {
+    "randomPool": false,
+    "description": "Każdy wampir ma sześć Słabości (zwykle listę swojej Linii Krwi albo Słońce + 5 z tabeli k100); Dary Krwi mogą znieść najwyżej dwie — nigdy mniej niż cztery.",
+    "source": "Wampiry (nieoficjalny)"
+  },
+  "Unoszący się": {
+    "randomPool": false,
+    "description": "Stworzenie unosi się do 2 metrów nad ziemią i bez kar pokonuje trudny teren, przeszkody i wodę; porusza się z podstawową Szybkością, ale nie może biec.",
+    "source": "Wampiry (nieoficjalny)"
+  },
+  "Odbijanie": {
+    "randomPool": false,
+    "description": "Cecha widm z dodatku Wampiry (brak definicji w źródle) — zwykle traktowana jak Ochrona przed zwykłymi atakami.",
+    "source": "Wampiry (nieoficjalny)"
   }
 }

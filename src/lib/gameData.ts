@@ -14,6 +14,7 @@ import type {
   MutationsData,
   ProfessionTitlesData,
   Sex,
+  VampiresData,
   SpellDef,
   SpellsData,
   WeaponsData,
@@ -56,6 +57,8 @@ export interface GameData {
   mutations: MutationsData;
   /** Formy [meska, zenska] nazw profesji i tytulow. */
   professionTitles?: ProfessionTitlesData;
+  /** Wampiry: Linie Krwi, Dary Krwi, Slabosci. */
+  vampires?: VampiresData;
   /** Opcjonalna nakladka profesji dla zasad domowych. */
   professionsDomowe?: ProfessionsData;
 }
@@ -84,7 +87,8 @@ const FILES = {
   creatures: "creatures.json",
   creatureFamilies: "creature_families.json",
   mutations: "mutations.json",
-  professionTitles: "profession_titles.json"
+  professionTitles: "profession_titles.json",
+  vampires: "vampires.json"
 } as const;
 
 /** Wstrzykuje dane bezposrednio (testy). */
@@ -412,6 +416,10 @@ export function professionTitle(profession: string, level: number, sex: Sex | un
   const forms = data().professionTitles?.titles[`${profession}|${level}`];
   if (forms && sex) return forms[sex === "K" ? 1 : 0];
   return getProfession(profession)?.levels.find((l) => l.level === level)?.title;
+}
+
+export function getVampires(): VampiresData | undefined {
+  return data().vampires;
 }
 
 export function getMutations(): MutationsData {

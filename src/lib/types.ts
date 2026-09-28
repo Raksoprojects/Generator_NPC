@@ -331,6 +331,17 @@ export interface CreatureFamiliesData {
   notCivilized: string[];
 }
 
+/** Wampiry (dodatek): Linie Krwi, Dary Krwi i Slabosci w formacie wierszy mutacji. */
+export interface VampiresData {
+  creatures: string[];
+  giftsPerTier: Record<TierId, number>;
+  bloodlineGiftWeight: number;
+  ageByTier: Record<TierId, number>;
+  bloodlines: (MutationRow & { gifts: string[]; weaknesses: string[]; lores: string })[];
+  gifts: (MutationRow & { limit?: string; recommended?: string })[];
+  weaknesses: MutationRow[];
+}
+
 /** Formy [meska, zenska]: nazwy profesji i tytuly poziomow ("Profesja|poziom"). */
 export interface ProfessionTitlesData {
   professions: Record<string, [string, string]>;
@@ -434,8 +445,8 @@ export interface NpcTalent {
 }
 
 export interface NpcMutation {
-  /** gift = Dar Chaosu (tabela Oka Bogow). */
-  kind: "physical" | "mental" | "gift";
+  /** gift = Dar Chaosu (tabela Oka Bogow); bloodline/blood/weakness = Linia Krwi, Dar Krwi, Slabosc wampira. */
+  kind: "physical" | "mental" | "gift" | "bloodline" | "blood" | "weakness";
   name: string;
   /** Tabela Mutant's Handbook; brak = tabele z podrecznika. */
   table?: MutationSeverity;

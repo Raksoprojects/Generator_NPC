@@ -6,7 +6,7 @@
   import * as gd from "../lib/gameData";
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
   import { beastTier } from "../lib/creatures";
-  import { mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
+  import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { armourLine, computeNpc, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
   import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type TierId } from "../lib/types";
@@ -140,7 +140,16 @@
             .map((r) => ({ value: `${kind}|${table}|${r.name}`, text: r.name }))
         }))
       : [{ label: KIND_LABEL[kind], options: mutationTable(kind).map((r) => ({ value: `${kind}||${r.name}`, text: r.name })) }]
-  ).concat([{ label: "Dary Chaosu", options: mutationTable("gift").map((r) => ({ value: `gift||${r.name}`, text: r.name })) }]);
+  ).concat(
+    (
+      [
+        ["gift", "Dary Chaosu"],
+        ["bloodline", "Wampiry — Linia Krwi"],
+        ["blood", "Wampiry — Dary Krwi"],
+        ["weakness", "Wampiry — Słabości"]
+      ] as const
+    ).map(([kind, label]) => ({ label, options: mutationTable(kind).map((r) => ({ value: `${kind}||${r.name}`, text: r.name })) }))
+  );
 
   function addSkill() {
     const name = newSkill.trim();
@@ -399,7 +408,7 @@
             <span class="chip">{ht}</span>
           {/each}
           {#each view.mutations as m (m.label)}
-            <button class="chip danger tap" title={m.effect} onclick={() => toggleInfo(`m|${m.label}`)}>☣ {m.label}</button>
+            <button class="chip danger tap" title={m.effect} onclick={() => toggleInfo(`m|${m.label}`)}>{mutationIcon(m.kind)} {m.label}</button>
           {/each}
         </p>
       </section>
@@ -600,7 +609,7 @@
       <h4>Mutacje</h4>
       <p class="list">
         {#each npc.mutations as m, i (i)}
-          <button class="chip danger tap" title="Kliknij, aby usunąć" onclick={() => npc.mutations.splice(i, 1)}>☣ {mutationLabel(m)} ✕</button>
+          <button class="chip danger tap" title="Kliknij, aby usunąć" onclick={() => npc.mutations.splice(i, 1)}>{mutationIcon(m.kind)} {mutationLabel(m)} ✕</button>
         {/each}
       </p>
       <div class="edit-row wrap">

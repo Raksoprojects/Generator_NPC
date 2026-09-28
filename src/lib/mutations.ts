@@ -12,6 +12,9 @@ type Kind = NpcMutation["kind"];
 export function mutationTable(kind: Kind, table?: MutationSeverity): MutationRow[] {
   const data = gd.getMutations();
   if (kind === "gift") return data.chaosGifts?.rows ?? [];
+  if (kind === "bloodline") return gd.getVampires()?.bloodlines ?? [];
+  if (kind === "blood") return gd.getVampires()?.gifts ?? [];
+  if (kind === "weakness") return gd.getVampires()?.weaknesses ?? [];
   if (table) return data.handbook?.[kind]?.[table] ?? [];
   return kind === "mental" ? data.mental : data.physical;
 }
@@ -136,6 +139,11 @@ export function rollChaosGifts(npc: Pick<Npc, "creature" | "tier" | "talents">, 
     if (row) out.push({ kind: "gift", name: row.name });
   }
   return out;
+}
+
+/** Ikona wpisu: mutacja, Dar Chaosu, Linia Krwi, Dar Krwi, Slabosc. */
+export function mutationIcon(kind: Kind): string {
+  return { gift: "✴", bloodline: "🦇", blood: "🩸", weakness: "⚠" }[kind as string] ?? "☣";
 }
 
 export function mutationLabel(m: NpcMutation): string {
