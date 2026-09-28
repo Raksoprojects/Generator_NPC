@@ -21,7 +21,7 @@ import { beastSkills, beastTraits, bookSkillsAndTalents, familyTraitWeights, rol
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
-import { pickSpells } from "./magic";
+import { pickSpells, rollExtraLores } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
 import { rollVampire } from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
@@ -152,6 +152,23 @@ function professionCandidates(arch: Archetype, race: string, withFallback = fals
   return out;
 }
 
+/** Czy w profesji jest umiejetnosc/talent zaczynajacy sie od ktoregos z przedrostkow. */
+function careerHas(name: string, prefixes: string[]): boolean {
+  return !!gd.getProfession(name)?.levels.some((l) =>
+    [...l.skills, ...l.talents].some((n) => prefixes.some((p) => n.startsWith(p)))
+  );
+}
+const ARCANE = ["Splatanie Magii", "Magia Tajemna"];
+const DIVINE = ["Błogosławieństwo", "Cud"];
+
+/**
+ * Czarodziej nie zmienia tradycji ani nie bywa wczesniej kaplanem: przed profesja
+ * magiczna moze byc inna magiczna tylko, gdy obecna jest profesja renegata (np. Czarownica).
+ */
+function careerSwitchOk(prev: string, main: string): boolean {
+  return !careerHas(main, ARCANE) || !careerHas(prev, [...ARCANE, ...DIVINE]) || !!gd.getProfession(main)?.renegade;
+}
+
 /** Druga (wczesniejsza) profesja: inna niz glowna, preferowana ta sama klasa. */
 function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rng): string | undefined {
   const mainClass = gd.getProfession(main)?.class;
@@ -159,15 +176,17 @@ function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rn
   delete cands[main];
   const weights: Record<string, number> = {};
   for (const [name, w] of Object.entries(cands)) {
-    if (!raceOk(name, race)) continue;
+    if (!raceOk(name, race) || !careerSwitchOk(name, main)) continue;
     weights[name] = w * (gd.getProfession(name)?.class === mainClass ? 2 : 1);
   }
   if (Object.keys(weights).length) return weightedKey(weights, rng);
   // Archetyp nie ma drugiej profesji dla tej rasy - dowolna z tej samej klasy.
   const sameClass = gd.allProfessionNames().filter(
-    (p) => p !== main && gd.getProfession(p)?.class === mainClass && raceOk(p, race)
+    (p) => p !== main && gd.getProfession(p)?.class === mainClass && raceOk(p, race) && careerSwitchOk(p, main)
   );
-  return pick(sameClass, rng);
+  if (sameClass.length) return pick(sameClass, rng);
+  // Np. elf czarodziej: jego klasa to same profesje magiczne - wczesniej byl kimkolwiek innym.
+  return pick(gd.allProfessionNames().filter((p) => p !== main && raceOk(p, race) && careerSwitchOk(p, main)), rng);
 }
 
 /** Podzial laczniej liczby poziomow na [poprzednia, glowna] profesje. */
@@ -643,6 +662,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
   }
   npc.careerPath = buildCareerPath({ professions }, npc.archetype, npc.tier, npc.race, rng);
   developCareer(npc, rng, deterministic);
+  rollExtraLores(npc, rng, deterministic);
   if (creature) bookSkillsAndTalents(npc, creature);
   resolveMagicTrappings(npc, rng, deterministic);
   equipNpc(npc, rng);

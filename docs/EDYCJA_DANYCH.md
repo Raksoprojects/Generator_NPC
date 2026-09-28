@@ -76,6 +76,7 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `heroProfileShape` | `"archetype"` — S i Wt jak w Bestiariuszu, reszta rozkładana wg kolejności cech archetypu; `"bestiary"` — dosłownie. Profil zawsze dodaje stałe wartości. |
 | `traitRoll` | Progi k100 dla liczby cech opcjonalnych (`upTo` = do jakiego wyniku, `count` = ile cech). |
 | `unlimitedTalentCap` | Ile poziomów może mieć talent bez maksimum. |
+| `multiLoreRaces` | Rasy, których czarodzieje mogą poznać kolejne tradycje tajemne (szanse w `spells.extraLores` poziomu), np. `["Wysoki elf", "Leśny elf"]`. |
 
 `tiers` — każdy poziom:
 
@@ -91,6 +92,7 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `heroProfileChances` | Szanse na dodatkowy profil przy losowaniu, np. `[{ "profile": "Weteran", "chance": 0.08 }, { "profile": "Doborowy", "chance": 0.05 }]`. Szanse się wykluczają — BN dostaje najwyżej jeden. |
 | `keySkills`, `keyChars` | Premia kluczowych umiejętności / cech archetypu: `bonus` — zakres losowania, `min` / `max` — łączne rozwinięcia po premii. Trzymaj progi rozłączne (`min` wyższego poziomu > `max` niższego), wtedy wyższy poziom jest zawsze lepszy. |
 | `spells.maxCn`, `spells.arcane` | Najwyższy PZ zaklęć tradycji i odchylenie ich liczby od Bonusu z Inteligencji, np. `[-1, 3]`. |
+| `spells.extraLores` | Szanse na kolejne tradycje dla ras z `multiLoreRaces`, po kolei, np. `[0.5, 0.15]` = 50% na drugą, a jeśli wypadła — 15% na trzecią. Druga tradycja ma połowę zaklęć głównej, trzecia jedną trzecią. |
 
 ---
 
@@ -230,6 +232,14 @@ W `talents.json` są 4 talenty bez opisu i limitu. Znajdziesz je, szukając
 Uzupełnij pola `max`, `max_raw`, `tests`, `description` i `source` (schemat jak
 w innych talentach). Jeśli okaże się, że to inna nazwa istniejącego talentu,
 popraw nazwę w `professions.json` i usuń pusty wpis.
+
+### Zmiana profesji u czarodziejów
+
+Czarodziej zostaje przy swojej tradycji: jeśli obecna profesja ma Splatanie Magii
+albo Magię Tajemną, poprzednia nie może być magiczna ani kapłańska
+(Błogosławieństwo, Cud). Wyjątek to profesje renegatów — wpisz przy nich
+`"renegade": true` w `professions.json` (teraz: Czarownica), a wcześniej
+BN mógł być np. Piromantą. Profesje wybrane ręcznie w generatorze nie są sprawdzane.
 
 ## Zasady domowe
 

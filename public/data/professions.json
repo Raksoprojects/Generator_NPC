@@ -7519,7 +7519,8 @@
     ],
     "class": "Łotry",
     "source": "Podręcznik podstawowy",
-    "page": 102
+    "page": 102,
+    "renegade": true
   },
   "Hiena Cmentarna": {
     "races": [

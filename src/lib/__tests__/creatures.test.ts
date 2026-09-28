@@ -196,6 +196,30 @@ describe("rozwoj bestii", () => {
     expect(generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Wysoki elf" }, seedRng(1)).careerPath.length).toBeGreaterThan(0);
   });
 
+  it("czarodziej nie zmienia tradycji; elfy od zaawansowanego moga znac kolejne", () => {
+    const magic = (p: string) =>
+      gd.getProfession(p)!.levels.some((l) => [...l.skills, ...l.talents].some((n) => n.startsWith("Splatanie Magii")));
+    let elfExtra = 0;
+    for (let seed = 1; seed <= 150; seed++) {
+      const w = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Człowiek" }, seedRng(seed));
+      const profs = [...new Set(w.careerPath.map((s) => s.profession))];
+      expect(profs.filter(magic).length, profs.join(" -> ")).toBeLessThanOrEqual(1);
+
+      const elf = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Wysoki elf" }, seedRng(seed));
+      const lores = elf.talents.filter((t) => t.name.startsWith("Magia Tajemna"));
+      if (lores.length > 1) {
+        elfExtra++;
+        // Kolejna tradycja ma swoje zaklecia, ale mniej niz glowna.
+        const byLore = lores.map((t) => elf.spells.filter((s) => gd.getSpell(s)?.lore === gd.spellLoreKey(gd.splitSpec(t.name).spec!)).length);
+        expect(byLore[1], `${seed}: ${lores.map((t) => t.name)} ${byLore}`).toBeGreaterThan(0);
+        expect(byLore[1]).toBeLessThanOrEqual(byLore[0]);
+      }
+    }
+    expect(elfExtra).toBeGreaterThan(50);
+    const human = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Człowiek" }, seedRng(3));
+    expect(human.talents.filter((t) => t.name.startsWith("Magia Tajemna")).length).toBe(1);
+  });
+
   it("czarodziej: przedmiot magiczny jest losowany, szaty i kostur daja premie widoczne w podsumowaniu", () => {
     let staff = 0;
     for (let seed = 1; seed <= 30; seed++) {
