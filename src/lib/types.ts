@@ -32,6 +32,8 @@ export interface Profession {
   source?: string;
   page?: number | string;
   variants?: EntryVariants<Profession>;
+  /** Profesja renegata: moze po niej przyjsc ktos z innej profesji magicznej (np. zbiegly czarodziej). */
+  renegade?: boolean;
 }
 
 export interface GameClass {
@@ -155,7 +157,8 @@ export interface TierDef {
   /** Premia kluczowych cech archetypu i laczne rozwiniecia min/max (bez profilu bohatera). */
   keyChars: KeyBonus;
   /** Zaklecia: najwyzszy PZ oraz odchylenie liczby zaklec tajemnych od Bonusu z Int. */
-  spells: { maxCn: number; arcane: [number, number] };
+  /** extraLores: szanse na kolejne tradycje (po kolei) dla ras z settings.multiLoreRaces. */
+  spells: { maxCn: number; arcane: [number, number]; extraLores?: number[] };
 }
 
 /**
@@ -187,6 +190,8 @@ export interface GeneratorSettings {
   defaultTraitWeight: number;
   /** Limit poziomow talentu bez maksimum (dla czytelnosci BN). */
   unlimitedTalentCap: number;
+  /** Rasy, ktorych czarodzieje moga poznac kolejne tradycje tajemne (spells.extraLores). */
+  multiLoreRaces?: string[];
 }
 
 export interface TiersData {

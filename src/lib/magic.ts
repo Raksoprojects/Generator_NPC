@@ -8,7 +8,7 @@
  * - Poczatkujacy (maxCn = 0) znaja tylko Magie Prosta.
  */
 
-import { pick, randInt, weightedPick, type Rng } from "./dice";
+import { chance, pick, randInt, weightedPick, type Rng } from "./dice";
 import * as gd from "./gameData";
 import { computeNpc } from "./npc";
 import type { Npc, SpellDef } from "./types";
@@ -83,6 +83,33 @@ export function casterLores(npc: Npc, rng: Rng): { petty: boolean; lores: string
   return { petty, lores: [...lores] };
 }
 
+/**
+ * Elfy nie sa zwiazane jednym kolegium: od zaawansowanego ich czarodzieje moga
+ * poznac kolejne tradycje (tiers.json -> spells.extraLores, settings.multiLoreRaces).
+ * Kazda nowa to talent Magia Tajemna i Splatanie Magii jej wiatru na polowie rozwiniec.
+ */
+export function rollExtraLores(npc: Npc, rng: Rng, deterministic = false): void {
+  const chances = gd.getTier(npc.tier)?.spells.extraLores ?? [];
+  if (deterministic || !chances.length || !gd.getSettings().multiLoreRaces?.includes(npc.race)) return;
+  const colleges = gd.getSpecializations().lores;
+  const known = new Set<string>();
+  for (const t of npc.talents) {
+    const { base, spec } = gd.splitSpec(t.name);
+    if (base === "Magia Tajemna" && spec) known.add(gd.spellLoreKey(spec) ?? spec);
+  }
+  if (!known.size) return;
+  const channel = Math.max(0, ...npc.skills.filter((s) => s.name.startsWith("Splatanie Magii")).map((s) => s.advances));
+  for (const c of chances) {
+    if (!chance(c, rng)) break;
+    const lore = pick(colleges.filter((l) => !known.has(gd.spellLoreKey(l.lore) ?? l.lore)), rng);
+    if (!lore) break;
+    known.add(gd.spellLoreKey(lore.lore) ?? lore.lore);
+    npc.talents.push({ name: `Magia Tajemna (${lore.lore})`, level: 1 });
+    const skill = `Splatanie Magii (${lore.wind})`;
+    if (!npc.skills.some((s) => s.name === skill)) npc.skills.push({ name: skill, advances: Math.floor(channel / 2) });
+  }
+}
+
 /** Bonusy z Siły Woli i Inteligencji z pelnych wartosci BN (z profilem bohatera i cechami). */
 function bonuses(npc: Npc): { wp: number; int: number } {
   const v = computeNpc(npc);
@@ -121,13 +148,21 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
 
   // Jedno zaklecie z gornej polki (najwyzsze PZ osiagalne na tym poziomie).
   const topCn = Math.max(...arcanePool.map((s) => s.cn));
-  const topPool = arcanePool.filter((s) => s.cn >= Math.max(1, topCn - 3) && loreSet.has(s.lore));
+  const topPool = arcanePool.filter((s) => s.cn >= Math.max(1, topCn - 3) && s.lore === lores[0]);
   const top = drawSpells(topPool.length ? topPool : arcanePool, 1, (s) => s.cn, rng, deterministic);
   out.push(...top.map((s) => s.name));
 
-  const rest = arcanePool.filter((s) => !out.includes(s.name));
-  const weight = (s: SpellDef) => (loreSet.has(s.lore) ? 3 : 1);
+  // Kolejne tradycje (elfy): druga dostaje polowe zaklec glownej, trzecia jedna trzecia.
+  const [mainLore, ...extraLores] = lores;
+  const rest = arcanePool.filter((s) => !out.includes(s.name) && !extraLores.includes(s.lore));
+  const weight = (s: SpellDef) => (s.lore === mainLore ? 3 : 1);
   out.push(...drawSpells(rest, count - 1, weight, rng, deterministic).map((s) => s.name));
+  const mainCount = out.filter((n) => gd.getSpell(n)?.lore === mainLore).length;
+  extraLores.forEach((lore, i) => {
+    const pool = arcanePool.filter((s) => s.lore === lore && !out.includes(s.name));
+    const n = Math.max(1, Math.round(mainCount / (i + 2)));
+    out.push(...drawSpells(pool, n, (s) => s.cn, rng, deterministic).map((s) => s.name));
+  });
   return out;
 }
 

@@ -21,7 +21,11 @@
       }
     ],
     "defaultTraitWeight": 1,
-    "unlimitedTalentCap": 3
+    "unlimitedTalentCap": 3,
+    "multiLoreRaces": [
+      "Wysoki elf",
+      "Leśny elf"
+    ]
   },
   "tiers": {
     "slaby": {
@@ -74,7 +78,10 @@
       "talentLevelUpChance": 0.3,
       "heroProfile": null,
       "heroProfileChances": [
-        { "profile": "Weteran", "chance": 0.1 }
+        {
+          "profile": "Weteran",
+          "chance": 0.1
+        }
       ],
       "keySkills": {
         "bonus": [
@@ -115,9 +122,18 @@
       "talentLevelUpChance": 0.5,
       "heroProfile": null,
       "heroProfileChances": [
-        { "profile": "Weteran", "chance": 0.08 },
-        { "profile": "Doborowy", "chance": 0.05 },
-        { "profile": "Pomniejszy Bohater", "chance": 0.1 }
+        {
+          "profile": "Weteran",
+          "chance": 0.08
+        },
+        {
+          "profile": "Doborowy",
+          "chance": 0.05
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.1
+        }
       ],
       "keySkills": {
         "bonus": [
@@ -140,6 +156,9 @@
         "arcane": [
           -1,
           3
+        ],
+        "extraLores": [
+          0.3
         ]
       }
     },
@@ -159,7 +178,10 @@
       "talentLevelUpChance": 0.6,
       "heroProfile": "Pomniejszy Bohater",
       "heroProfileChances": [
-        { "profile": "Doborowy", "chance": 0.1 }
+        {
+          "profile": "Doborowy",
+          "chance": 0.1
+        }
       ],
       "keySkills": {
         "bonus": [
@@ -182,6 +204,10 @@
         "arcane": [
           0,
           4
+        ],
+        "extraLores": [
+          0.5,
+          0.15
         ]
       }
     },
@@ -219,6 +245,10 @@
         "arcane": [
           1,
           5
+        ],
+        "extraLores": [
+          0.7,
+          0.35
         ]
       }
     }
