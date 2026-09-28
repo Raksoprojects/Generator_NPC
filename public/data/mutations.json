@@ -200,7 +200,7 @@
         { "min": 93, "max": 93, "name": "Nienaturalne ciało", "effect": "Całe ciało, z głową i kończynami, zmienia się w coś głęboko nienaturalnego (kryształ, demon, ogień, cień… wg MG)." },
         { "min": 94, "max": 94, "name": "Nienaturalna głowa", "effect": "Głowa przybiera postać istoty nienaturalnej (wg MG). Ogłada −20.", "modifiers": { "Ogd": -20 } },
         { "min": 95, "max": 95, "name": "Szczątkowy bliźniak", "effect": "Z ciała wystaje na wpół wrośnięty bliźniak z własną osobowością i ambicjami; kontroluje tylko głowę i dwie wątłe ręce." },
-        { "min": 96, "max": 96, "name": "Spaczony szał", "effect": "W bitwie ciało wykręca się w nieludzkim szale. Talenty Szał Bojowy, Szarża Berserkera i Wygimnastykowany; w walce Cecha Stworzenia Niewrażliwy na Ból i Strach 1, potem Stan Zmęczenie." },
+        { "min": 96, "max": 96, "name": "Spaczony szał", "effect": "W bitwie ciało wykręca się w nieludzkim szale. Talenty Szał Bojowy, Szarża Berserkera i Wygimnastykowany; w walce Cecha Stworzenia Nie Czuje Bólu i Strach 1, potem Stan Zmęczenie." },
         { "min": 97, "max": 97, "name": "Zwierzołak", "effect": "Jak wilkołak z legend potrafi przemienić się w humanoidalną bestię (Wymagający (+0) Test Siły Woli, modyfikowany fazą Morrslieba)." },
         { "min": 98, "max": 99, "name": "Skrzydła", "effect": "Wyrastają skrzydła (ptasie, nietoperze, jaszczurcze…). 1k100: małe — łagodzą upadek; średnie — Latanie (30); duże — Latanie (60); ogromne — Latanie (120).", "trait": "Latanie (30)" },
         { "min": 100, "max": 100, "name": "Wybraniec Chaosu", "effect": "Postać staje się Wybrańcem Chaosu — Mroczne Bogowie obdarzają ją szczególnymi darami (wg MG)." }
@@ -251,7 +251,7 @@
         { "min": 48, "max": 51, "name": "Księżycowa odmiana", "effect": "Humory zmieniają się z fazami Morrslieba — nocą od Inicjatywa i SW −10 (brak księżyca) do +10 (pełnia)." },
         { "min": 52, "max": 54, "name": "Magiczne liczby", "effect": "Wszędzie widzi wzorce liczbowe i wszystko liczy. Talent Rachmistrz." },
         { "min": 55, "max": 57, "name": "Metamorfoza", "effect": "Przekonany o nadejściu Wielkiej Przemiany — eksperymentuje z nowymi formami istnienia. Talent Artysta, Farmaceuta albo Chirurg." },
-        { "min": 58, "max": 58, "name": "Nihilistyczne odrętwienie", "effect": "Wszystko jest bez znaczenia. Talent Nieustraszony (wszystko), Cecha Stworzenia Niewrażliwy na Ból.", "trait": "Niewrażliwy na Ból" },
+        { "min": 58, "max": 58, "name": "Nihilistyczne odrętwienie", "effect": "Wszystko jest bez znaczenia. Talent Nieustraszony (wszystko), Cecha Stworzenia Nie Czuje Bólu.", "trait": "Nie Czuje Bólu" },
         { "min": 59, "max": 61, "name": "Poszukiwacz bólu", "effect": "Zadając lub otrzymując Ranę, zyskuje na 1k10 rund S, Wt i SW +5 i dostęp do Talentu Szał Bojowy." },
         { "min": 62, "max": 64, "name": "Opętany", "effect": "W podświadomości gnieździ się pomniejszy demon; gdy postać traci przytomność, przejmuje kontrolę, jeśli nie zda Przeciętnego (+20) Testu SW." },
         { "min": 65, "max": 67, "name": "Książę niczego", "effect": "Wierzy, że pochodzi ze szlachetnego, a nawet królewskiego rodu. Talent Charyzmatyczny; zachowanie poniżej „stanu” daje Stan Zmęczenie." },
