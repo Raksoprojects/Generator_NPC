@@ -1892,25 +1892,29 @@
     "max_raw": null,
     "tests": null,
     "description": "",
-    "source": "Do uzupełnienia"
+    "source": "Do uzupełnienia (brak w dostarczonych źródłach)"
   },
   "Zręczne Palce": {
     "max": {
-      "type": "none"
+      "type": "fixed",
+      "value": 1
     },
-    "max_raw": null,
+    "max_raw": "1",
     "tests": null,
-    "description": "",
-    "source": "Do uzupełnienia"
+    "adds_characteristic": "Zr",
+    "description": "W opisach profesji jako „Zręczne Palce” – to Talent Zręczny. Zyskujesz premię +5 do początkowej wartości Zręczności. Nie liczy się ona do sumy Rozwinięć.",
+    "source": "Podręcznik podstawowy (Zręczny)"
   },
   "Przemawianie": {
     "max": {
-      "type": "none"
+      "type": "characteristic",
+      "attr": "Ogd",
+      "attr_name": "Ogłady"
     },
-    "max_raw": null,
+    "max_raw": "Bonus z Ogłady",
     "tests": null,
-    "description": "",
-    "source": "Do uzupełnienia"
+    "description": "W opisach profesji jako „Przemawianie” – to Talent Mówca. Jesteś umiejętnym oratorem i wiesz, jak urabiać tłumy. Poniższa tabela wskazuje, ile osób ulegnie twojemu wpływowi, gdy wykonasz Test Charyzmy (patrz strona 119) podczas przemawiania. Liczba wykupień Talentu Liczba przekonanych 1 zwykła x5 2 zwykła x10 3 zwykła x20 4 zwykła x50 5 zwykła x100 6 zwykła x200 7 zwykła x500 8 zwykła x1000 9 wszyscy, którzy słyszą twój słowiczy głos",
+    "source": "Podręcznik podstawowy (Mówca)"
   },
   "Mistrzowska Magia Runiczna": {
     "max": {
@@ -1919,7 +1923,7 @@
     "max_raw": null,
     "tests": null,
     "description": "",
-    "source": "Do uzupełnienia"
+    "source": "Do uzupełnienia (brak w dostarczonych źródłach)"
   },
   "Kantor": {
     "max": {
