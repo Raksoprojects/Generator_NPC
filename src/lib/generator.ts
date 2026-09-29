@@ -25,6 +25,7 @@ import { pickSpells, rollExtraLores } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
 import { rollVampire } from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
+import { rollCraft, rollTreasures } from "./treasures";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
 import type { Archetype, CareerStep, CreatureDef, KeyBonus, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
@@ -673,6 +674,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.trappings = creature.trappings.map((t) => rollDiceText(t, rng, deterministic));
     npc.weapons = [];
     npc.armour = [];
+    npc.craft = {};
     npc.money = "";
     return;
   }
@@ -682,6 +684,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
   if (creature) bookSkillsAndTalents(npc, creature);
   resolveMagicTrappings(npc, rng, deterministic);
   equipNpc(npc, rng);
+  rollCraft(npc, rng, deterministic);
 }
 
 /** Sekcja "cechyStworzen": cechy opcjonalne (15/5/1%), cechy poziomu bestii, mutacje. */
@@ -759,6 +762,8 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   npc.rolls = rollAttributes(npc, rng, det);
   develop(npc, spec.professions, rng, det);
   rollFeatures(npc, spec, rng, det);
+  // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
+  rollTreasures(npc, rng, det);
   npc.spells = pickSpells(npc, rng, det);
   return npc;
 }
@@ -783,6 +788,7 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
   // Linia Krwi jest jak rasa - zostaje przy ponownym losowaniu cech.
   const bloodline = npc.mutations?.find((m) => m.kind === "bloodline")?.name;
   if (unlocked("cechyStworzen")) rollFeatures(next, { bloodline }, rng, false);
+  if (unlocked("rozwoj")) rollTreasures(next, rng);
   if (unlocked("rozwoj") || unlocked("cechyStworzen")) next.spells = pickSpells(next, rng);
   return next;
 }
@@ -795,6 +801,7 @@ export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, 
   const next: Npc = structuredClone(npc);
   next.tier = clampTier(next.tier, gd.getCreature(next.creature));
   develop(next, professions, rng, false);
+  rollTreasures(next, rng);
   next.spells = pickSpells(next, rng);
   const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);
   // Profil, ktory nowy poziom moze wylosowac (np. zaawansowany Pomniejszy Bohater), zostaje.

@@ -32,6 +32,7 @@ export function loadTestGameData(): void {
     mutations: readJson("mutations.json"),
     professionTitles: readJson("profession_titles.json"),
     vampires: readJson("vampires.json"),
-    magicItems: readJson("magic_items.json")
+    magicItems: readJson("magic_items.json"),
+    treasures: readJson("treasures.json")
   } as GameData);
 }

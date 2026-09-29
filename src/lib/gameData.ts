@@ -16,6 +16,7 @@ import type {
   Sex,
   VampiresData,
   MagicItemsData,
+  TreasuresData,
   SpellDef,
   SpellsData,
   WeaponsData,
@@ -63,6 +64,7 @@ export interface GameData {
   vampires?: VampiresData;
   /** Przedmioty magiczne i premie do czarowania. */
   magicItems?: MagicItemsData;
+  treasures?: TreasuresData;
   /** Opcjonalna nakladka profesji dla zasad domowych. */
   professionsDomowe?: ProfessionsData;
 }
@@ -93,7 +95,8 @@ const FILES = {
   mutations: "mutations.json",
   professionTitles: "profession_titles.json",
   vampires: "vampires.json",
-  magicItems: "magic_items.json"
+  magicItems: "magic_items.json",
+  treasures: "treasures.json"
 } as const;
 
 /** Wstrzykuje dane bezposrednio (testy). */
@@ -453,6 +456,10 @@ export function professionTitle(profession: string, level: number, sex: Sex | un
 
 export function getMagicItems(): MagicItemsData | undefined {
   return data().magicItems;
+}
+
+export function getTreasures(): TreasuresData | undefined {
+  return data().treasures;
 }
 
 export function getVampires(): VampiresData | undefined {

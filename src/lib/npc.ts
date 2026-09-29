@@ -8,9 +8,10 @@
  */
 
 import { creatureArmour, creatureBase, creatureWounds, naturalAttacks } from "./creatures";
-import { armourPoints, getWeaponDef, LOCATIONS, type Location } from "./equipment";
+import { armourPoints, getArmourDef, getWeaponDef, LOCATIONS, pieceLocations, type Location } from "./equipment";
 import * as gd from "./gameData";
 import { castingSummary, type CastingView } from "./magicItems";
+import { describeMagicItem, magicEffects, materialApBonus, materialOf } from "./treasures";
 import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from "./mutations";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
 import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
@@ -60,6 +61,29 @@ export interface WeaponView {
   range?: string;
   note?: string;
   natural: boolean;
+  /** Zalety/Wady wykonania (Wytrzymały, Tandetny...) - pokazywane osobno od Zalet broni. */
+  craftQualities: string[];
+  craftFlaws: string[];
+  /** "gromrilowy", "robota zielonoskórych"... */
+  craftLabel?: string;
+  /** Przedmiot magiczny, ktorym jest ta bron. */
+  magicItem?: string;
+}
+
+export interface ArmourPieceView {
+  name: string;
+  ap: number;
+  locations: string[];
+  qualities: string[];
+  craftQualities: string[];
+  craftFlaws: string[];
+  craftLabel?: string;
+  magicItem?: string;
+}
+
+export interface MagicItemView {
+  name: string;
+  description: string;
 }
 
 export interface NpcView {
@@ -70,6 +94,8 @@ export interface NpcView {
   /** Punkty Pancerza i redukcja obrazen (BWt + PP) na lokacjach. */
   armour: Record<Location, { ap: number; total: number }>;
   armourPenalties: string[];
+  armourPieces: ArmourPieceView[];
+  magicItems: MagicItemView[];
   spells: SpellDef[];
   /** Najdrozsze zaklecia spoza Magii Prostej - pokazywane na gorze, przy czarowaniu. */
   keySpells: SpellDef[];
@@ -206,6 +232,9 @@ export function computeNpc(input: Npc): NpcView {
       traitBonus[code as Attribute] = (traitBonus[code as Attribute] ?? 0) + (v ?? 0);
     }
   };
+  // Przedmioty magiczne: runy, wlasciwosci Broni Chaosu, pierscienie.
+  const magic = magicEffects(npc);
+  addMods(magic.chars);
   for (const name of npc.traits) {
     const tr = gd.findCreatureTrait(name)?.trait;
     if (!tr) continue;
@@ -271,27 +300,37 @@ export function computeNpc(input: Npc): NpcView {
 
   const sb = chars.S.bonus;
   const weapons: WeaponView[] = [];
+  /** Jakosc wykonania i przedmiot magiczny broni/pancerza o tej nazwie. */
+  const craftOf = (name: string) => {
+    const c = npc.craft?.[name];
+    const mat = materialOf(npc, name);
+    const label = [mat?.label, c?.label && !mat ? c.label : undefined].filter(Boolean).join(", ") || undefined;
+    return { craftQualities: c?.qualities ?? [], craftFlaws: c?.flaws ?? [], craftLabel: label };
+  };
   for (const name of npc.weapons) {
     const w = getWeaponDef(name);
     if (!w) {
-      weapons.push({ name, damage: null, skill: totals.WW, skillName: "WW", qualities: [], flaws: [], ranged: false, natural: false });
+      weapons.push({ name, damage: null, skill: totals.WW, skillName: "WW", qualities: [], flaws: [], ranged: false, natural: false, ...craftOf(name) });
       continue;
     }
     const { def, ranged } = w;
-    const dmg = def.damage == null ? null : def.damage + (def.sb ? sb : 0) + heroWeapon;
+    const m = magic.weapon[name];
+    const dmg = def.damage == null ? null : def.damage + (def.sb ? sb : 0) + heroWeapon + (m?.damage ?? 0);
     const skill = weaponSkill(skills, chars, ranged, def.group);
     weapons.push({
       name: w.name,
       damage: dmg,
-      skill: skill.value,
+      skill: skill.value + (m?.skill ?? 0),
       skillName: skill.name,
-      qualities: def.qualities,
+      qualities: [...new Set([...def.qualities, ...(m?.qualities ?? [])])],
       flaws: def.flaws ?? [],
       reach: def.reach,
       ranged,
       range: ranged ? def.range : undefined,
       note: def.note,
-      natural: false
+      natural: false,
+      ...craftOf(name),
+      magicItem: m?.item
     });
   }
   if (creature) {
@@ -299,7 +338,9 @@ export function computeNpc(input: Npc): NpcView {
     for (const a of naturalAttacks(creature)) {
       if (hasCareerWeapon && a.name === "Broń") continue;
       const ranged = !!a.range && a.name !== "Język";
-      const dmg = a.base + (a.addsSb ? sb : 0) + heroWeapon;
+      // Zaklety naturalny oręż (np. goblin z zaklętą bronią zamiast cechy Broń).
+      const m = magic.weapon[a.name];
+      const dmg = a.base + (a.addsSb ? sb : 0) + heroWeapon + (m?.damage ?? 0);
       const skill = ranged
         ? weaponSkill(skills, chars, true, a.name)
         : (() => {
@@ -315,31 +356,56 @@ export function computeNpc(input: Npc): NpcView {
       weapons.push({
         name: a.count && a.count > 1 ? `${a.count}× ${a.name}` : a.name,
         damage: dmg,
-        skill: skill.value,
+        skill: skill.value + (m?.skill ?? 0),
         skillName: skill.name,
-        qualities: [],
+        qualities: m?.qualities ?? [],
         flaws: [],
         ranged,
         range: a.range,
-        natural: true
+        natural: true,
+        craftQualities: [],
+        craftFlaws: [],
+        magicItem: m?.item
       });
     }
   }
 
   const ap = armourPoints(npc.armour);
+  // Plyty z gromrilu (+1 PP) i zaklete elementy pancerza (Kolczuga Skradzionej Chwały).
+  for (const piece of npc.armour) {
+    const bonus = materialApBonus(npc, piece) + (magic.apPiece[piece] ?? 0);
+    for (const loc of pieceLocations(piece)) ap[loc] += bonus;
+  }
+  const armoured = new Set(LOCATIONS.filter((l) => ap[l] > 0));
   // Pancerz z ksiazki u stworzen cywilizowanych to ich zwykla zbroja - zastepuje ja pancerz z profesji.
   const bookAp = npc.armour.length && npc.archetype ? 0 : creatureArmour(bookTraits);
-  const flatAp = bookAp + extraAp + heroArmour;
+  const flatAp = bookAp + extraAp + heroArmour + magic.apAll;
   const armour = {} as Record<Location, { ap: number; total: number }>;
   for (const loc of LOCATIONS) {
-    const points = ap[loc] + flatAp + (loc === "głowa" ? headAp : 0);
+    const points = ap[loc] + flatAp + (loc === "głowa" ? headAp : 0) + (armoured.has(loc) ? magic.apArmoured : 0);
     armour[loc] = { ap: points, total: points + chars.Wt.bonus };
   }
   const armourPenalties = [
     ...new Set(npc.armour.map((a) => gd.getWeapons().armour[a]?.penalty).filter(Boolean) as string[])
   ];
+  const armourMagic = (npc.magicItems ?? []).find((m) => m.base === "pancerz")?.name;
+  const armourPieces: ArmourPieceView[] = npc.armour.map((name) => {
+    const def = getArmourDef(name);
+    return {
+      name,
+      ap: (def?.ap ?? 0) + materialApBonus(npc, name) + (magic.apPiece[name] ?? 0),
+      locations: def?.locations ?? [],
+      qualities: def?.qualities ?? [],
+      ...craftOf(name),
+      // Przy pancerzu tylko material (pochodzenie wyrobu widac juz przy broni).
+      craftLabel: materialOf(npc, name)?.label,
+      magicItem: (npc.magicItems ?? []).find((m) => m.base === name)?.name ?? armourMagic
+    };
+  });
+  const magicItems: MagicItemView[] = (npc.magicItems ?? []).map((m) => ({ name: m.name, description: describeMagicItem(m) }));
 
   const wounds =
+    magic.wounds +
     mutationWounds +
     (creature
       ? creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, bookTraits, hardy + bookHardy(bookTraits))
@@ -362,6 +428,8 @@ export function computeNpc(input: Npc): NpcView {
     weapons,
     armour,
     armourPenalties,
+    armourPieces,
+    magicItems,
     spells,
     keySpells,
     mutations,
@@ -409,13 +477,21 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   lines.push(ATTRIBUTES.map((c) => `${c} ${stat(c)}`).join(" | ") + ` | Żyw ${view.wounds} | Sz ${view.movement}`);
   for (const w of view.weapons) {
     const extra = [
-      w.qualities.length ? `Zalety: ${w.qualities.join(", ")}` : "",
-      w.flaws.length ? `Wady: ${w.flaws.join(", ")}` : ""
+      w.craftLabel ?? "",
+      w.qualities.length || w.craftQualities.length ? `Zalety: ${[...w.qualities, ...w.craftQualities].join(", ")}` : "",
+      w.flaws.length || w.craftFlaws.length ? `Wady: ${[...w.flaws, ...w.craftFlaws].join(", ")}` : ""
     ].filter(Boolean);
-    lines.push(`Broń: ${weaponLabel(w)}${extra.length ? " — " + extra.join("; ") : ""}`);
+    lines.push(`Broń: ${w.magicItem ? `✦ ${w.magicItem} — ` : ""}${weaponLabel(w)}${extra.length ? " — " + extra.join("; ") : ""}`);
   }
   lines.push(`Redukcja obrażeń (BWt+PP): ${armourLine(view)}`);
-  if (npc.armour.length) lines.push("Pancerz: " + npc.armour.join(", "));
+  if (view.armourPieces.length) {
+    const piece = (a: ArmourPieceView) => {
+      const q = [...a.qualities, ...a.craftQualities, ...a.craftFlaws];
+      return `${a.name} ${a.ap} PP${a.craftLabel ? `, ${a.craftLabel}` : ""}${q.length ? ` (${q.join(", ")})` : ""}`;
+    };
+    lines.push("Pancerz: " + view.armourPieces.map(piece).join("; "));
+  }
+  for (const m of view.magicItems) lines.push(`Przedmiot magiczny: ✦ ${m.name} — ${m.description}`);
   if (view.skills.length) lines.push("Umiejętności: " + view.skills.map((s) => `${s.name} ${s.total}`).join(", "));
   if (view.talents.length) lines.push("Talenty: " + view.talents.map((t) => (t.level > 1 ? `${t.name} ${t.level}` : t.name)).join(", "));
   if (view.casting) {

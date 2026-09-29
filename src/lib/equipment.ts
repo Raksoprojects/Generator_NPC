@@ -254,7 +254,9 @@ export function equipNpc(npc: Npc, rng: Rng): void {
   const setName = gd.getArchetype(npc.archetype)?.armour?.[npc.tier];
   for (const piece of (setName && gd.getWeapons().armourSets[setName]) || []) armour.add(piece);
 
-  npc.weapons = [...weapons];
+  // Rasy z wlasnym orezem (krasnoludzki topor zamiast zwyklego) - z szansa z weapons.json.
+  const variants = gd.getCreature(npc.creature) ? undefined : gd.getWeapons().raceVariants?.[npc.race];
+  npc.weapons = [...weapons].map((w) => (variants?.weapons[w] && chance(variants.chance, rng) ? variants.weapons[w] : w));
   npc.armour = [...armour];
   npc.trappings = rest;
 }
@@ -262,16 +264,19 @@ export function equipNpc(npc: Npc, rng: Rng): void {
 export const LOCATIONS = ["głowa", "ręce", "korpus", "nogi"] as const;
 export type Location = (typeof LOCATIONS)[number];
 
+/** Lokacje chronione przez element pancerza ("ramiona" -> "ręce"). */
+export function pieceLocations(name: string): Location[] {
+  const def = getArmourDef(name);
+  return (def?.locations ?? []).map((l) => (l === "ramiona" ? "ręce" : l) as Location).filter((l) => LOCATIONS.includes(l));
+}
+
 /** Punkty Pancerza na lokacjach z elementow pancerza (warstwy sie sumuja). */
 export function armourPoints(armour: string[]): Record<Location, number> {
   const out: Record<Location, number> = { głowa: 0, ręce: 0, korpus: 0, nogi: 0 };
   for (const name of new Set(armour)) {
     const def = getArmourDef(name);
     if (!def) continue;
-    for (const loc of def.locations) {
-      const key = (loc === "ramiona" ? "ręce" : loc) as Location;
-      if (key in out) out[key] += def.ap;
-    }
+    for (const loc of pieceLocations(name)) out[loc] += def.ap;
   }
   return out;
 }

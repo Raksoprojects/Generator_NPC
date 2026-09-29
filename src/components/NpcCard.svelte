@@ -8,6 +8,7 @@
   import { beastTier } from "../lib/creatures";
   import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { findMagicItem } from "../lib/magicItems";
+  import { craftDescription } from "../lib/treasures";
   import { armourLine, computeNpc, effectiveCn, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
   import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type SpellDef, type TierId } from "../lib/types";
@@ -245,7 +246,7 @@
   function qualityText(q: string): string {
     return q
       .split(" albo ")
-      .map((part) => `${part}: ${qualityDescription(part) || "—"}`)
+      .map((part) => `${part}: ${craftDescription(part) || qualityDescription(part) || "—"}`)
       .join(" ALBO ");
   }
 
@@ -261,6 +262,11 @@
     if (kind === "c") return traitText(name);
     if (kind === "p") return gd.getHeroProfile(name)?.description ?? "";
     if (kind === "q") return qualityText(name);
+    if (kind === "x") return view.magicItems.find((m) => m.name === name)?.description ?? "";
+    if (kind === "g") {
+      const mat = gd.getTreasures()?.craft.materials[name];
+      return mat ? `${mat.description} (${mat.source}, s. ${mat.page})` : "";
+    }
     if (kind === "a") return view.abilities.find((a) => a.name === name)?.description ?? "";
     if (kind === "m") return view.mutations.find((m) => m.label === name)?.effect ?? "";
     if (kind === "l") return `${gd.getSpellsData().lores[name]?.label ?? name}: ${gd.getSpellsData().lores[name]?.rule ?? ""}`;
@@ -351,13 +357,21 @@
   <section class="combat">
     {#each view.weapons as w (w.name)}
       <div class="weapon">
+        {#if w.magicItem}<button class="magic-mark tap" title="Przedmiot magiczny" onclick={() => toggleInfo(`x|${w.magicItem}`)}>✦ {w.magicItem}</button>{/if}
         <b title={[w.reach ? `Długość: ${w.reach}` : "", w.note ?? ""].filter(Boolean).join(" · ")}>{weaponLabel(w)}</b>
+        {#if w.craftLabel}<span class="text-dim small">{w.craftLabel}</span>{/if}
         <span class="text-dim small">{w.skillName}</span>
         {#each w.qualities as q (q)}
           <button class="quality tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
         {/each}
         {#each w.flaws as q (q)}
           <button class="quality flaw tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+        {/each}
+        {#each w.craftQualities as q (q)}
+          <button class="quality craft tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+        {/each}
+        {#each w.craftFlaws as q (q)}
+          <button class="quality flaw craft tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
         {/each}
       </div>
     {/each}
@@ -394,9 +408,35 @@
     <div class="armour" title="Redukcja obrażeń = Bonus z Wytrzymałości + Punkty Pancerza">
       <span class="text-dim">Redukcja obrażeń:</span>
       <b>{armourLine(view)}</b>
-      {#if npc.armour.length}<span class="text-dim small">({npc.armour.join(", ")})</span>{/if}
       {#each view.armourPenalties as p (p)}<span class="chip warning">{p}</span>{/each}
     </div>
+    {#if view.armourPieces.length}
+      <div class="armour-pieces">
+        {#each view.armourPieces as a (a.name)}
+          <span class="piece">
+            {#if a.magicItem}<button class="magic-mark tap" onclick={() => toggleInfo(`x|${a.magicItem}`)}>✦</button>{/if}
+            <b>{a.name}</b> <span class="text-dim small">{a.ap} PP{a.craftLabel ? `, ${a.craftLabel}` : ""}</span>
+            {#each a.qualities as q (q)}
+              <button class="quality tap" class:flaw={/Częściow|Wrażliw/.test(q)} title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+            {/each}
+            {#each a.craftQualities as q (q)}
+              <button class="quality craft tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+            {/each}
+            {#each a.craftFlaws as q (q)}
+              <button class="quality flaw craft tap" title={qualityText(q)} onclick={() => toggleInfo(`q|${q}`)}>{q}</button>
+            {/each}
+          </span>
+        {/each}
+      </div>
+    {/if}
+    {#if view.magicItems.length}
+      <div class="magic-items">
+        <span class="text-dim">Przedmioty magiczne:</span>
+        {#each view.magicItems as m (m.name)}
+          <button class="item tap magic" title={m.description} onclick={() => toggleInfo(`x|${m.name}`)}>✦ {m.name}</button>
+        {/each}
+      </div>
+    {/if}
   </section>
 
   {#if !editing}
@@ -865,6 +905,32 @@
     font-size: var(--fs-sm);
   }
 
+  .armour-pieces,
+  .magic-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+    font-size: var(--fs-sm);
+  }
+
+  .piece {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px var(--space-1);
+  }
+
+  button.magic-mark {
+    background: none;
+    border: none;
+    padding: 0;
+    min-height: auto;
+    color: var(--info-strong, var(--accent-strong));
+    font-weight: 600;
+    cursor: pointer;
+  }
+
   .key-spells {
     flex-basis: 100%;
     display: flex;
@@ -886,6 +952,11 @@
 
   button.quality.flaw {
     color: var(--danger-strong);
+  }
+
+  /* Zalety/Wady wykonania (Wytrzymały, Tandetny) - kursywa, by odroznic od cech broni. */
+  button.quality.craft {
+    font-style: italic;
   }
 
   .block {

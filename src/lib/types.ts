@@ -273,6 +273,8 @@ export interface WeaponDef {
   note?: string;
   enc?: string;
   availability?: string;
+  source?: string;
+  page?: number;
 }
 
 /** Wagi wyboru broni dla wyposazenia "broń ręczna" / "broń dwuręczna". */
@@ -301,6 +303,130 @@ export interface WeaponsData {
   handWeapon: WeaponChoice;
   twoHandedWeapon: WeaponChoice;
   qualities: Record<string, string>;
+  /** Wlasne odmiany broni rasy (krasnoludzki topor zamiast topora), z szansa. */
+  raceVariants?: Record<string, { chance: number; weapons: Record<string, string> }>;
+}
+
+/** Warunki dopasowania (rasa, grupa stworzen, archetyp) - wszystkie podane musza pasowac do jednego z wpisow. */
+export interface CraftModifier {
+  races?: string[];
+  groups?: string[];
+  archetypes?: string[];
+  /** Opis pochodzenia wyrobu ("krasnoludzka robota"). */
+  label?: string;
+  /** Zalety, ktore przedmiot ma zawsze (np. elfie "Wytrzymały 1", "Wyśmienity 1"). */
+  always?: string[];
+  flawMult?: number;
+  qualityMult?: number;
+  flaws?: Record<string, number>;
+  qualities?: Record<string, number>;
+}
+
+export interface CraftMaterial {
+  label: string;
+  races: string[];
+  chance: Partial<Record<TierId, number>>;
+  weapon?: { qualities: string[]; byName?: Record<string, string[]> };
+  armour?: { types: string[]; qualities: string[]; apBonus?: Record<string, number> };
+  description: string;
+  source: string;
+  page: number;
+}
+
+export interface CraftData {
+  qualities: Record<string, string>;
+  flaws: Record<string, string>;
+  tiers: Record<TierId, { flaw: number; quality: number; maxQualities: number }>;
+  defaultFlaws: Record<string, number>;
+  defaultQualities: Record<string, number>;
+  modifiers: CraftModifier[];
+  materials: Record<string, CraftMaterial>;
+}
+
+/** Efekty przedmiotu magicznego, runy albo wlasciwosci Broni Chaosu liczone w statystykach. */
+export interface ItemEffects {
+  damage?: number;
+  /** Premia do umiejetnosci broni, na ktorej jest przedmiot. */
+  skill?: number;
+  chars?: Partial<Record<Attribute, number>>;
+  ap?: number;
+  wounds?: number;
+  qualities?: string[];
+}
+
+export interface RuneDef {
+  name: string;
+  sl: number;
+  effect: string;
+  page: number;
+  master?: boolean;
+  effects?: ItemEffects;
+}
+
+export interface ChaosPropertyDef {
+  name: string;
+  god: string;
+  effect: string;
+  page: number;
+  effects?: ItemEffects;
+}
+
+/** Szablon przedmiotu magicznego do losowania (treasures.json). */
+export interface TreasureDef {
+  name: string;
+  /** weapon/armour = zaklina bron albo pancerz BN; item = osobny przedmiot; potion = losowa mikstura. */
+  kind: "weapon" | "armour" | "item" | "potion";
+  description: string;
+  source: string;
+  page?: number;
+  weight: number;
+  minTier?: TierId;
+  forRaces?: string[];
+  forGroups?: string[];
+  forTalents?: string[];
+  forLores?: string[];
+  forCasters?: boolean;
+  forBloodlines?: string[];
+  /** Umiejetnosc, ktora BN musi miec (np. Broń Zasięgowa (Łuk) dla przekletego luku). */
+  needsSkill?: string;
+  /** Bron/pancerz tego rodzaju, ktory przedmiot zastepuje (albo dodaje, gdy extra). */
+  replaces?: string | null;
+  extra?: boolean;
+  runes?: "weapon" | "armour" | "talisman";
+  chaos?: [number, number];
+  material?: string;
+  cursed?: boolean;
+  effects?: ItemEffects;
+}
+
+export interface TreasuresData {
+  chances: Record<TierId, number[]>;
+  runeCount: Partial<Record<TierId, [number, number]>>;
+  masterRuneChance: Partial<Record<TierId, number>>;
+  fitWeight: number;
+  craft: CraftData;
+  runes: Record<"weapon" | "armour" | "talisman", RuneDef[]>;
+  chaosProperties: ChaosPropertyDef[];
+  items: TreasureDef[];
+}
+
+/** Jakosc wykonania broni/pancerza BN. */
+export interface ItemCraft {
+  qualities: string[];
+  flaws: string[];
+  material?: string;
+  label?: string;
+}
+
+/** Przedmiot magiczny BN. */
+export interface NpcMagicItem {
+  /** Szablon z treasures.json (albo nazwa mikstury). */
+  template: string;
+  name: string;
+  /** Bron albo "pancerz", na ktorej jest przedmiot. */
+  base?: string;
+  runes?: string[];
+  properties?: string[];
 }
 
 /** Stworzenie z bestiariusza (creatures.json). Wartosci cech jak w ksiazce. */
@@ -538,6 +664,10 @@ export interface Npc {
   weapons: string[];
   /** Elementy pancerza (nazwy z weapons.json). */
   armour: string[];
+  /** Jakosc wykonania broni i pancerza (nazwa -> Zalety/Wady, material). */
+  craft?: Record<string, ItemCraft>;
+  /** Przedmioty magiczne (zaklete bronie, runy, talizmany...). */
+  magicItems?: NpcMagicItem[];
   /** Zaklecia (nazwy z spells.json). */
   spells: string[];
   mutations: NpcMutation[];
