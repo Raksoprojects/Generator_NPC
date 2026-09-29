@@ -344,6 +344,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Gad olbrzymi",
    "minTier": "doswiadczony"
   },
@@ -388,6 +389,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Gad olbrzymi"
   },
   {
@@ -440,6 +442,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Gad olbrzymi",
    "minTier": "doswiadczony"
   },
@@ -599,6 +602,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny",
    "minTier": "heroiczny"
   },
@@ -652,6 +656,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny",
    "unique": true,
    "minTier": "heroiczny"
@@ -702,6 +707,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny"
   },
   {
@@ -750,6 +756,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny",
    "minTier": "doswiadczony"
   },
@@ -806,6 +813,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -863,6 +871,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -916,6 +925,7 @@
    ],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "minTier": "zaawansowany"
   },
@@ -1119,6 +1129,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek"
   },
   {
@@ -1164,6 +1175,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "unique": true,
    "minTier": "heroiczny"
@@ -1216,6 +1228,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -1271,6 +1284,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór",
    "minTier": "sredni"
   },
@@ -1490,6 +1504,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "heroiczny"
   },
@@ -1553,6 +1568,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "unique": true,
    "minTier": "heroiczny"
@@ -1600,6 +1616,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -1763,6 +1780,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny"
   },
   {
@@ -1821,6 +1839,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Sługa Chaosu",
    "unique": true,
    "minTier": "zaawansowany"
@@ -2080,6 +2099,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór"
   },
   {
@@ -2165,6 +2185,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór",
    "unique": true
   },
@@ -2231,6 +2252,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
    "minTier": "sredni"
   },
@@ -2297,6 +2319,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -2401,6 +2424,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny",
    "minTier": "zaawansowany"
   },
@@ -2454,6 +2478,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -2498,6 +2523,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór"
   },
   {
@@ -2591,6 +2617,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Sługa Chaosu",
    "minTier": "zaawansowany"
   },
@@ -2782,6 +2809,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -2840,6 +2868,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -2905,6 +2934,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór",
    "unique": true,
    "minTier": "doswiadczony"
@@ -3015,6 +3045,7 @@
     "tatuaż Morrslieba"
    ],
    "group": "Chaos",
+   "subgroup": "Kultyści i mutanci",
    "family": "Sługa Chaosu"
   },
   {
@@ -3065,6 +3096,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Kultyści i mutanci",
    "family": "Sługa Chaosu",
    "minTier": "zaawansowany"
   },
@@ -3119,6 +3151,7 @@
    ],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -3389,7 +3422,8 @@
     }
    ],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "unique": true,
    "minTier": "heroiczny"
@@ -3438,7 +3472,8 @@
     }
    ],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "unique": true,
    "minTier": "heroiczny"
@@ -3881,6 +3916,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -3920,6 +3956,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Wodny"
   },
   {
@@ -3998,6 +4035,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -4048,6 +4086,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -4092,6 +4131,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Wodne i bagienne",
    "family": "Potwór",
    "minTier": "sredni"
   },
@@ -4130,6 +4170,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Inne potwory",
    "family": "Potwór",
    "minTier": "sredni"
   },
@@ -4173,6 +4214,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -4211,6 +4253,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -4256,6 +4299,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -4300,6 +4344,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -4345,6 +4390,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "zaawansowany"
   },
@@ -4387,6 +4433,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -4422,6 +4469,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór latający"
   },
   {
@@ -4472,6 +4520,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
    "minTier": "sredni"
   },
@@ -4512,6 +4561,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "minTier": "doswiadczony"
   },
@@ -4669,6 +4719,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły"
   },
   {
@@ -4712,6 +4763,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły"
   },
   {
@@ -4756,6 +4808,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "minTier": "sredni"
   },
@@ -4793,6 +4846,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły"
   },
   {
@@ -4840,7 +4894,7 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Nieumarły",
    "minTier": "doswiadczony"
   },
@@ -4882,6 +4936,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Duchy i widma",
    "family": "Nieumarły",
    "minTier": "zaawansowany"
   },
@@ -4924,6 +4979,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Duchy i widma",
    "family": "Nieumarły",
    "minTier": "zaawansowany"
   },
@@ -4976,9 +5032,9 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Nieumarły",
-   "minTier": "doswiadczony"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Duch",
@@ -5018,6 +5074,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Nieumarli",
+   "subgroup": "Duchy i widma",
    "family": "Nieumarły"
   },
   {
@@ -5061,6 +5118,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek"
   },
   {
@@ -5101,6 +5159,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek"
   },
   {
@@ -5143,6 +5202,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "minTier": "sredni"
   },
@@ -5185,6 +5245,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek"
   },
   {
@@ -5218,6 +5279,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Kultyści i mutanci",
    "family": "Sługa Chaosu"
   },
   {
@@ -5252,6 +5314,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Kultyści i mutanci",
    "family": "Sługa Chaosu"
   },
   {
@@ -5292,6 +5355,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "minTier": "zaawansowany"
   },
@@ -5331,7 +5395,8 @@
    "optional": [],
    "abilities": [],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "minTier": "zaawansowany"
   },
@@ -5368,7 +5433,8 @@
    "optional": [],
    "abilities": [],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "minTier": "zaawansowany"
   },
@@ -5471,6 +5537,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Brąz 3"
   },
@@ -5576,6 +5643,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Brąz 3"
   },
@@ -5684,6 +5752,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Brąz 4"
   },
@@ -5790,6 +5859,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Brąz 0",
    "minTier": "sredni"
@@ -5921,6 +5991,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "zaawansowany"
@@ -6050,6 +6121,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "zaawansowany"
@@ -6197,6 +6269,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 1",
    "minTier": "doswiadczony"
@@ -6305,6 +6378,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 4",
    "minTier": "zaawansowany"
@@ -6433,6 +6507,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -6579,6 +6654,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 1",
    "minTier": "doswiadczony"
@@ -6674,6 +6750,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": null,
    "minTier": "zaawansowany"
@@ -6785,6 +6862,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 4",
    "minTier": "zaawansowany"
@@ -6889,6 +6967,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -7014,6 +7093,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -7121,6 +7201,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -7249,6 +7330,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -7356,6 +7438,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -7487,6 +7570,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -7596,6 +7680,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -7729,6 +7814,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -7836,6 +7922,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -7963,6 +8050,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -8070,6 +8158,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 4",
    "minTier": "zaawansowany"
@@ -8210,6 +8299,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -8399,6 +8489,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 4",
    "minTier": "heroiczny"
@@ -8612,6 +8703,7 @@
    ],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 8",
    "minTier": "heroiczny"
@@ -8697,6 +8789,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Brąz 4"
   },
@@ -8810,6 +8903,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 2",
    "minTier": "sredni"
@@ -8948,6 +9042,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 4",
    "minTier": "zaawansowany"
@@ -9098,6 +9193,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -9209,6 +9305,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Brąz 2"
   },
@@ -9339,6 +9436,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Brąz 5",
    "minTier": "sredni"
@@ -9477,6 +9575,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -9626,6 +9725,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -9743,6 +9843,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 2",
    "minTier": "sredni"
@@ -9881,6 +9982,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 4",
    "minTier": "zaawansowany"
@@ -10024,6 +10126,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Złoto 1",
    "minTier": "doswiadczony"
@@ -10117,7 +10220,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "sredni"
@@ -10211,7 +10315,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "sredni"
@@ -10318,7 +10423,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 4",
    "minTier": "zaawansowany"
@@ -10445,7 +10551,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -10580,7 +10687,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 1",
    "minTier": "doswiadczony"
@@ -10688,7 +10796,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 2",
    "minTier": "sredni"
@@ -10819,7 +10928,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "zaawansowany"
@@ -10962,7 +11072,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "zaawansowany"
@@ -11065,7 +11176,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
    "minTier": "sredni"
@@ -11197,7 +11309,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -11302,7 +11415,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 1",
    "minTier": "doswiadczony"
@@ -11444,7 +11558,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 8",
    "minTier": "heroiczny"
@@ -11587,7 +11702,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 7",
    "minTier": "heroiczny"
@@ -11702,7 +11818,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
    "minTier": "zaawansowany"
@@ -11837,7 +11954,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
    "minTier": "doswiadczony"
@@ -11891,6 +12009,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "zaawansowany"
@@ -11943,6 +12062,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "sredni"
@@ -11997,6 +12117,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "sredni"
@@ -12057,6 +12178,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "sredni"
@@ -12106,6 +12228,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Psowate",
    "status": null
   },
@@ -12152,6 +12275,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "doswiadczony"
@@ -12202,6 +12326,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "zaawansowany"
@@ -12253,6 +12378,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "heroiczny"
@@ -12303,6 +12429,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "doswiadczony"
@@ -12356,6 +12483,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Potwory",
+   "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
    "status": null,
    "minTier": "sredni"
@@ -12408,7 +12536,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Demon",
    "status": null,
    "minTier": "heroiczny"
@@ -12461,7 +12590,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Demon",
    "status": null,
    "minTier": "zaawansowany"
@@ -12529,7 +12659,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Krasnoludy Chaosu",
+   "group": "Chaos",
+   "subgroup": "Krasnoludy Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "doswiadczony"
@@ -12578,6 +12709,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Zwierzę roślinożerne",
    "status": null
   },
@@ -12628,6 +12760,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "heroiczny"
@@ -12676,6 +12809,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Zwierzę roślinożerne",
    "status": null
   },
@@ -12731,6 +12865,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "status": null,
    "minTier": "zaawansowany"
@@ -12777,7 +12912,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "status": null,
    "minTier": "zaawansowany"
@@ -12827,6 +12963,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "zaawansowany"
@@ -12881,7 +13018,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "status": null,
    "minTier": "doswiadczony"
@@ -12929,6 +13067,7 @@
    "abilities": [],
    "trappings": [],
    "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
    "minTier": "doswiadczony"
@@ -12976,7 +13115,8 @@
    ],
    "abilities": [],
    "trappings": [],
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "status": null,
    "minTier": "zaawansowany"
@@ -12985,7 +13125,8 @@
    "name": "Książę demonów Khorne’a",
    "source": "Generator (na wzór podręcznika, s. 335–336)",
    "page": 336,
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "unique": false,
    "stats": {
@@ -13036,7 +13177,8 @@
    "name": "Książę demonów Tzeentcha",
    "source": "Generator (na wzór podręcznika, s. 335–336)",
    "page": 336,
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "unique": false,
    "stats": {
@@ -13085,7 +13227,8 @@
    "name": "Zarazonośca Nurgle’a",
    "source": "Generator (na wzór podręcznika, s. 335–336)",
    "page": 335,
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "stats": {
     "Sz": 4,
@@ -13126,7 +13269,8 @@
    "name": "Różowy Horror Tzeentcha",
    "source": "Generator (na wzór podręcznika, s. 335–336)",
    "page": 335,
-   "group": "Demony",
+   "group": "Chaos",
+   "subgroup": "Demony",
    "family": "Demon",
    "stats": {
     "Sz": 4,
@@ -13169,7 +13313,7 @@
    "name": "Groza Krypt",
    "source": "Wampiry (nieoficjalny)",
    "page": 47,
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Nieumarły",
    "stats": {
     "Sz": 5,
@@ -13220,6 +13364,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 47,
    "group": "Nieumarli",
+   "subgroup": "Duchy i widma",
    "family": "Nieumarły",
    "stats": {
     "Sz": 6,
@@ -13262,6 +13407,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 47,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "stats": {
     "Sz": 4,
@@ -13301,6 +13447,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 47,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "stats": {
     "Sz": 3,
@@ -13344,6 +13491,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 48,
    "group": "Nieumarli",
+   "subgroup": "Duchy i widma",
    "family": "Nieumarły",
    "stats": {
     "Sz": 6,
@@ -13387,7 +13535,7 @@
    "name": "Wielbiciel albo Dziewica",
    "source": "Wampiry (nieoficjalny)",
    "page": 48,
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Humanoid",
    "stats": {
     "Sz": 4,
@@ -13423,7 +13571,7 @@
    "name": "Sylwański Pospolitak",
    "source": "Wampiry (nieoficjalny)",
    "page": 48,
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Humanoid",
    "stats": {
     "Sz": 4,
@@ -13460,7 +13608,7 @@
    "name": "Vargheist",
    "source": "Wampiry (nieoficjalny)",
    "page": 48,
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Nieumarły",
    "stats": {
     "Sz": 7,
@@ -13506,6 +13654,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 48,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "stats": {
     "Sz": 4,
@@ -13550,7 +13699,7 @@
    "name": "Otchłanna Groza",
    "source": "Wampiry (nieoficjalny)",
    "page": 49,
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Nieumarły",
    "stats": {
     "Sz": 8,
@@ -13601,6 +13750,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 49,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "stats": {
     "Sz": 7,
@@ -13651,6 +13801,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 49,
    "group": "Nieumarli",
+   "subgroup": "Duchy i widma",
    "family": "Nieumarły",
    "stats": {
     "Sz": 8,
@@ -13695,7 +13846,7 @@
    "name": "Terrorgheist",
    "source": "Wampiry (nieoficjalny)",
    "page": 50,
-   "group": "Nieumarli",
+   "group": "Wampiry",
    "family": "Nieumarły",
    "stats": {
     "Sz": 8,
@@ -13743,6 +13894,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 50,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "stats": {
     "Sz": 6,
@@ -13793,6 +13945,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 50,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Psowate",
    "stats": {
     "Sz": 9,
@@ -13841,6 +13994,7 @@
    "source": "Wampiry (nieoficjalny)",
    "page": 50,
    "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
    "stats": {
     "Sz": 6,

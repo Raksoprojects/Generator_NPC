@@ -49,7 +49,8 @@ export interface GameData {
   tiers: TiersData;
   archetypes: Record<string, Archetype>;
   specializations: SpecializationsData;
-  names: Record<string, NameTable>;
+  /** Tabela imion albo nazwa innej tabeli (alias, np. Krasnoludy Chaosu -> Krasnolud). */
+  names: Record<string, NameTable | string>;
   groupPresets: Record<string, GroupPreset>;
   spells: SpellsData;
   weapons: WeaponsData;
@@ -352,7 +353,8 @@ export function getSpecializations(): SpecializationsData {
 }
 
 export function getNames(race: string): NameTable | undefined {
-  return data().names[race];
+  const t = data().names[race];
+  return typeof t === "string" ? (data().names[t] as NameTable | undefined) : t;
 }
 
 export function getGroupPresets(): Record<string, GroupPreset> {
@@ -395,6 +397,33 @@ export function getCreature(name: string | undefined): CreatureDef | undefined {
 
 export function getCreatures(): CreatureDef[] {
   return data().creatures.creatures;
+}
+
+export const GROUP_SEP = " › ";
+
+/** "Chaos › Zwierzoludzie" albo samo "Zwierzęta". */
+export function creatureGroupKey(c: CreatureDef): string {
+  return c.subgroup ? `${c.group}${GROUP_SEP}${c.subgroup}` : c.group;
+}
+
+/** Grupy stworzen z podgrupami, w kolejnosci settings.groupOrder (reszta wg pliku). */
+export function creatureGroupTree(): { group: string; subgroups: string[] }[] {
+  const tree = new Map<string, Set<string>>();
+  for (const c of getCreatures()) {
+    const subs = tree.get(c.group) ?? new Set<string>();
+    if (c.subgroup) subs.add(c.subgroup);
+    tree.set(c.group, subs);
+  }
+  const order = getCreatureFamilies().settings.groupOrder ?? [];
+  const rank = (g: string) => (order.includes(g) ? order.indexOf(g) : order.length);
+  return [...tree.entries()]
+    .sort((a, b) => rank(a[0]) - rank(b[0]))
+    .map(([group, subs]) => ({ group, subgroups: [...subs].sort((a, b) => a.localeCompare(b, "pl")) }));
+}
+
+/** Stworzenia grupy ("Chaos") albo podgrupy ("Chaos › Zwierzoludzie"). */
+export function creaturesInGroup(key: string): CreatureDef[] {
+  return getCreatures().filter((c) => c.group === key || creatureGroupKey(c) === key);
 }
 
 export function getCreatureFamilies(): CreatureFamiliesData {

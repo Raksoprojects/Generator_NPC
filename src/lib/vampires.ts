@@ -13,11 +13,19 @@ export function isVampire(npc: Pick<Npc, "creature">): boolean {
 }
 
 /** Linia Krwi, Slabosci, Dary Krwi (jako wpisy listy mutacji) oraz cechy Wiek i tradycje magii. */
-export function rollVampire(npc: Npc, rng: Rng, deterministic = false): { entries: NpcMutation[]; traits: string[] } {
+export function rollVampire(
+  npc: Npc,
+  rng: Rng,
+  deterministic = false,
+  bloodline?: string
+): { entries: NpcMutation[]; traits: string[] } {
   const data = gd.getVampires();
   if (!data || !isVampire(npc)) return { entries: [], traits: [] };
   const roll = deterministic ? 70 : rollK100(rng);
-  const line = data.bloodlines.find((b) => roll >= b.min && roll <= b.max) ?? data.bloodlines[0];
+  const line =
+    data.bloodlines.find((b) => b.name === bloodline) ??
+    data.bloodlines.find((b) => roll >= b.min && roll <= b.max) ??
+    data.bloodlines[0];
   const entries: NpcMutation[] = [{ kind: "bloodline", name: line.name }];
   for (const w of line.weaknesses) entries.push({ kind: "weakness", name: w });
 

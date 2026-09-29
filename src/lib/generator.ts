@@ -33,6 +33,10 @@ import { TIER_IDS } from "./types";
 export interface GenSpec {
   /** Stworzenie z bestiariusza zamiast rasy (archetyp tylko dla cywilizowanych). */
   creature?: string;
+  /** Bez konkretnego stworzenia: losuj z grupy ("Nieumarli") albo podgrupy ("Chaos › Zwierzoludzie"). */
+  creatureGroup?: string;
+  /** Linia Krwi wampira (brak = losowa z tabeli k100). */
+  bloodline?: string;
   race?: string;
   sex?: Sex;
   name?: string;
@@ -96,7 +100,9 @@ export function pickRace(spec: GenSpec, archetype: string, rng: Rng): string {
 
 export function pickName(race: string, sex: Sex, rng: Rng): string {
   const creature = gd.getCreature(race);
-  const table = creature ? gd.getNames(creature.group) : (gd.getNames(race) ?? gd.getNames("Człowiek"));
+  const table = creature
+    ? (gd.getNames(creature.subgroup ?? "") ?? gd.getNames(creature.group))
+    : (gd.getNames(race) ?? gd.getNames("Człowiek"));
   if (creature && !table) return creature.name;
   if (!table) return "Bezimienny";
   const first = pick(sex === "K" ? table.female : table.male, rng) ?? "Bezimienny";
@@ -673,7 +679,7 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   const creature = gd.getCreature(npc.creature);
   npc.traits = rollTraits(spec, npc, rng);
   if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
-  const vampire = rollVampire(npc, rng, deterministic);
+  const vampire = rollVampire(npc, rng, deterministic, spec.bloodline);
   npc.traits = [...npc.traits, ...vampire.traits.filter((t) => !npc.traits.includes(t))];
   npc.mutations = [
     ...vampire.entries,
@@ -688,9 +694,20 @@ export function clampTier(tier: TierId, creature: CreatureDef | undefined): Tier
   return TIER_IDS.indexOf(tier) < min ? TIER_IDS[min] : tier;
 }
 
+/**
+ * Typowe (nie unikatowe) stworzenie z grupy, ktore wystepuje na wybranym poziomie;
+ * bez poziomu - dowolne z grupy.
+ */
+export function pickCreatureFromGroup(group: string, tier: TierId | undefined, rng: Rng): string | undefined {
+  const all = gd.creaturesInGroup(group).filter((c) => !c.unique);
+  const fits = tier ? all.filter((c) => TIER_IDS.indexOf(c.minTier ?? "slaby") <= TIER_IDS.indexOf(tier)) : all;
+  return pick(fits.length ? fits : all, rng)?.name;
+}
+
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
-  const creature: CreatureDef | undefined = gd.getCreature(spec.creature);
+  const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);
+  const creature: CreatureDef | undefined = gd.getCreature(creatureName);
   const civilized = creature ? gd.isCivilized(creature.name) : false;
   const archetype = creature
     ? (civilized && spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : "")
@@ -753,7 +770,9 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
   }
   if (unlocked("rzuty")) next.rolls = rollAttributes(next, rng);
   if (unlocked("rozwoj")) develop(next, undefined, rng, false);
-  if (unlocked("cechyStworzen")) rollFeatures(next, {}, rng, false);
+  // Linia Krwi jest jak rasa - zostaje przy ponownym losowaniu cech.
+  const bloodline = npc.mutations?.find((m) => m.kind === "bloodline")?.name;
+  if (unlocked("cechyStworzen")) rollFeatures(next, { bloodline }, rng, false);
   if (unlocked("rozwoj") || unlocked("cechyStworzen")) next.spells = pickSpells(next, rng);
   return next;
 }

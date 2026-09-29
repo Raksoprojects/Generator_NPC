@@ -157,7 +157,7 @@ export function chooseWeapon(table: WeaponChoice, npc: Npc, rng: Rng): string {
   const creature = gd.getCreature(npc.creature);
   const race = creature ? undefined : table.race?.[npc.race];
   const arch = table.archetype?.[npc.archetype];
-  const group = creature ? table.creatureGroup?.[creature.group] : undefined;
+  const group = creature ? (table.creatureGroup?.[creature.subgroup ?? ""] ?? table.creatureGroup?.[creature.group]) : undefined;
   const keys = new Set([...Object.keys(table.default), ...Object.keys(race ?? {}), ...Object.keys(arch ?? {}), ...Object.keys(group ?? {})]);
   const weights: Record<string, number> = {};
   for (const k of keys) {

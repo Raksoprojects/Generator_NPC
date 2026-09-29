@@ -23,10 +23,15 @@
     groupName = presetName;
   }
 
+  /** Stworzenia wg grup i podgrup ("Chaos › Zwierzoludzie"), w kolejnosci drzewa grup. */
   const creatureGroups = (() => {
     const out: Record<string, string[]> = {};
-    for (const c of gd.getCreatures()) (out[c.group] ??= []).push(c.name);
-    for (const g of Object.values(out)) g.sort((a, b) => a.localeCompare(b, "pl"));
+    for (const { group, subgroups } of gd.creatureGroupTree()) {
+      for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {
+        const names = gd.getCreatures().filter((c) => gd.creatureGroupKey(c) === key).map((c) => c.name);
+        if (names.length) out[key] = names.sort((a, b) => a.localeCompare(b, "pl"));
+      }
+    }
     return out;
   })();
 

@@ -6,7 +6,7 @@ import * as gd from "../gameData";
 import { generateNpc, isBeast } from "../generator";
 import { computeNpc } from "../npc";
 import { ATTRIBUTES, type Attribute } from "../rules";
-import type { CreatureDef, Npc, TierId } from "../types";
+import { TIER_IDS, type CreatureDef, type Npc, type TierId } from "../types";
 import { loadTestGameData } from "./loadData";
 
 beforeAll(() => loadTestGameData());
@@ -103,7 +103,7 @@ describe("rozwoj bestii", () => {
   });
 
   it("wyzszy poziom tej samej bestii jest zawsze silniejszy", () => {
-    const tiers = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny"] as const;
+    const tiers = TIER_IDS;
     for (const c of gd.getCreatures().filter((x) => !gd.isCivilized(x.name))) {
       let prev: ReturnType<typeof computeNpc> | null = null;
       // Ponizej minimalnego poziomu stworzenie i tak jest podnoszone do minimum.
@@ -161,6 +161,39 @@ describe("rozwoj bestii", () => {
   it("czarnoksieznik Chaosu zna zaklecia Tradycji Chaosu", () => {
     const s = generateNpc({ creature: "Czarnoksiężnik Chaosu", tier: "zaawansowany" }, seedRng(3));
     expect(s.spells.length).toBeGreaterThan(0);
+  });
+
+  it("grupa stworzen: losowanie z grupy i podgrupy, z uwzglednieniem poziomu", () => {
+    const tree = gd.creatureGroupTree();
+    expect(tree.find((g) => g.group === "Chaos")?.subgroups).toContain("Zwierzoludzie");
+    expect(tree.some((g) => g.group === "Wampiry")).toBe(true);
+    for (let seed = 1; seed <= 30; seed++) {
+      const undead = generateNpc({ creatureGroup: "Nieumarli", tier: "sredni" }, seedRng(seed));
+      const def = gd.getCreature(undead.creature)!;
+      expect(def.group).toBe("Nieumarli");
+      // Na srednim nie wypada nic, co wystepuje dopiero od zaawansowanego.
+      expect(TIER_IDS.indexOf(def.minTier ?? "slaby")).toBeLessThanOrEqual(TIER_IDS.indexOf("sredni"));
+      const beastman = generateNpc({ creatureGroup: `Chaos${gd.GROUP_SEP}Zwierzoludzie` }, seedRng(seed));
+      expect(gd.getCreature(beastman.creature)!.subgroup).toBe("Zwierzoludzie");
+    }
+  });
+
+  it("wampir: od zaawansowanego, z wybrana Linia Krwi", () => {
+    const weak = generateNpc({ creature: "Wampir", tier: "slaby" }, seedRng(4));
+    expect(weak.tier).toBe("zaawansowany");
+    for (const line of gd.getVampires()!.bloodlines) {
+      const v = generateNpc({ creature: "Wampir", tier: "doswiadczony", bloodline: line.name }, seedRng(7));
+      expect(v.mutations.find((m) => m.kind === "bloodline")?.name).toBe(line.name);
+    }
+  });
+
+  it("legendarny BN: dwie pelne profesje i profil Legendarnego Bohatera", () => {
+    const hero = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek" }, seedRng(3));
+    expect(hero.careerPath).toHaveLength(7);
+    expect(hero.heroProfiles).toContain("Legendarny Bohater");
+    const heroic = generateNpc({ archetype: "Wojownik", tier: "heroiczny", race: "Człowiek", deterministic: true }, seedRng(3));
+    const legend = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek", deterministic: true }, seedRng(3));
+    expect(computeNpc(legend).chars.WW.total).toBeGreaterThan(computeNpc(heroic).chars.WW.total + 10);
   });
 
   it("wampir dostaje Linie Krwi, 6 Slabosci, Dary Krwi wg poziomu, Wiek i nekromancje", () => {

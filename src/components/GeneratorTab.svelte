@@ -10,19 +10,45 @@
 
   let kind = $state<Kind>("rasy");
   let creature = $state("");
+  /** Grupa albo podgrupa stworzen ("Chaos › Zwierzoludzie"); pusta = wszystkie. */
+  let creatureGroup = $state("");
+  let bloodline = $state("");
 
-  /** Stworzenia pogrupowane (Zwierzęta, Potwory, Zielonoskórzy...). */
-  const creatureGroups = (() => {
-    const out: Record<string, string[]> = {};
-    for (const c of gd.getCreatures()) (out[c.group] ??= []).push(c.name);
-    for (const g of Object.values(out)) g.sort((a, b) => a.localeCompare(b, "pl"));
-    return out;
-  })();
+  const groupTree = gd.creatureGroupTree();
+  const bloodlines = gd.getVampires()?.bloodlines.map((b) => b.name) ?? [];
+  const isVampireName = (name: string) => !!gd.getVampires()?.creatures.includes(name);
   const typicalCreatures = gd.getCreatures().filter((c) => !c.unique).map((c) => c.name);
 
+  /** Stworzenia wybranej grupy, pogrupowane wg podgrup (w kolejnosci drzewa grup). */
+  let creatureGroups = $derived.by(() => {
+    const pool = creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.getCreatures();
+    const out: Record<string, string[]> = {};
+    for (const { group, subgroups } of groupTree) {
+      for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {
+        const names = pool.filter((c) => gd.creatureGroupKey(c) === key).map((c) => c.name);
+        if (names.length) out[key] = names.sort((a, b) => a.localeCompare(b, "pl"));
+      }
+    }
+    return out;
+  });
+
+  // Stworzenie spoza nowo wybranej grupy - wracamy do losowania z grupy.
+  $effect(() => {
+    if (creature && creatureGroup && !gd.creaturesInGroup(creatureGroup).some((c) => c.name === creature)) creature = "";
+  });
+
   let civilized = $derived(!!creature && gd.isCivilized(creature));
-  /** Najnizszy poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego). */
-  let minTierIdx = $derived(TIER_IDS.indexOf(gd.getCreature(creature)?.minTier ?? "slaby"));
+  /** Najnizszy poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego); dla grupy - najnizszy w grupie. */
+  let minTierIdx = $derived.by(() => {
+    if (creature) return TIER_IDS.indexOf(gd.getCreature(creature)?.minTier ?? "slaby");
+    if (!creatureGroup) return 0;
+    const typical = gd.creaturesInGroup(creatureGroup).filter((c) => !c.unique);
+    return Math.min(...typical.map((c) => TIER_IDS.indexOf(c.minTier ?? "slaby")));
+  });
+  /** Linia Krwi - gdy wybrany jest wampir albo grupa, z ktorej moze wypasc wampir. */
+  let showBloodline = $derived(
+    creature ? isVampireName(creature) : !!creatureGroup && gd.creaturesInGroup(creatureGroup).some((c) => isVampireName(c.name))
+  );
 
   $effect(() => {
     if (kind === "stworzenia" && tier && TIER_IDS.indexOf(tier) < minTierIdx) tier = TIER_IDS[minTierIdx];
@@ -64,7 +90,7 @@
   $effect(() => {
     if (mode !== "wlasny") return;
     if (kind === "stworzenia") {
-      if (!creature) creature = typicalCreatures[0];
+      if (!creature) creature = Object.values(creatureGroups)[0]?.[0] ?? typicalCreatures[0];
       if (!tier) tier = "sredni";
       randomTraits = false;
       return;
@@ -98,7 +124,9 @@
     if (kind === "stworzenia") {
       if (mode === "losowy") return { creature: pick(typicalCreatures) };
       return {
-        creature: creature || pick(typicalCreatures),
+        creature: creature || (creatureGroup ? undefined : pick(typicalCreatures)),
+        creatureGroup: creature ? undefined : creatureGroup || undefined,
+        bloodline: showBloodline && bloodline ? bloodline : undefined,
         archetype: civilized && archetype ? archetype : undefined,
         tier: (tier || undefined) as TierId | undefined,
         name: name.trim() || undefined,
@@ -138,7 +166,7 @@
   }
 
   function resetForm() {
-    archetype = tier = race = sex = creature = "";
+    archetype = tier = race = sex = creature = creatureGroup = bloodline = "";
     name = mainProfession = prevProfession = "";
     chosenTraits = [];
     randomTraits = true;
@@ -166,9 +194,18 @@
 
     {#if mode !== "losowy" && kind === "stworzenia"}
       <div class="form">
+        <label>Grupa
+          <select bind:value={creatureGroup}>
+            <option value="">— wszystkie —</option>
+            {#each groupTree as g (g.group)}
+              <option value={g.group}>{g.group}</option>
+              {#each g.subgroups as s (s)}<option value={`${g.group}${gd.GROUP_SEP}${s}`}>&nbsp;&nbsp;› {s}</option>{/each}
+            {/each}
+          </select>
+        </label>
         <label>Stworzenie
           <select bind:value={creature}>
-            {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
+            {#if mode === "polLosowy"}<option value="">{creatureGroup ? "— losowo z grupy —" : "— losowo —"}</option>{/if}
             {#each Object.entries(creatureGroups) as [group, names] (group)}
               <optgroup label={group}>
                 {#each names as c (c)}<option value={c}>{c}</option>{/each}
@@ -176,6 +213,14 @@
             {/each}
           </select>
         </label>
+        {#if showBloodline}
+          <label>Linia krwi
+            <select bind:value={bloodline}>
+              <option value="">— losowa —</option>
+              {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
+            </select>
+          </label>
+        {/if}
         {#if civilized}
           <label>Archetyp (profesje)
             <select bind:value={archetype}>

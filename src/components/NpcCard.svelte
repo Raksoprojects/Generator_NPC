@@ -287,7 +287,7 @@
       {/if}
       <p class="meta">
         {#if creature}
-          <b>{creature.name}</b> <span class="text-dim">({creature.group})</span>
+          <b>{creature.name}</b> <span class="text-dim">({gd.creatureGroupKey(creature)})</span>
           {#if npc.archetype} · {npc.archetype}{/if}
         {:else}
           {npc.race} · {npc.sex === "K" ? "kobieta" : "mężczyzna"} · <b>{npc.archetype}</b>
