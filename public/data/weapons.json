@@ -821,6 +821,132 @@
       ],
       "enc": "3",
       "availability": "Powszechna"
+    },
+    "Krasnoludzki topór": {
+      "group": "Podstawowa",
+      "hands": "jednoręczna",
+      "damage": 4,
+      "sb": true,
+      "reach": "Średnia",
+      "twoHanded": false,
+      "qualities": [
+        "Rąbiąca"
+      ],
+      "flaws": [],
+      "enc": "1",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 93
+    },
+    "Krasnoludzki młot bojowy": {
+      "group": "Podstawowa",
+      "hands": "jednoręczna",
+      "damage": 4,
+      "sb": true,
+      "reach": "Średnia",
+      "twoHanded": false,
+      "qualities": [
+        "Ogłuszająca"
+      ],
+      "flaws": [],
+      "enc": "1",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 93
+    },
+    "Wirujące ostrza śmierci": {
+      "group": "Korbacz",
+      "hands": "jednoręczna",
+      "damage": 5,
+      "sb": true,
+      "reach": "Długa",
+      "twoHanded": false,
+      "qualities": [
+        "Dekoncentrująca",
+        "Rąbiąca",
+        "Druzgocząca",
+        "Plącząca"
+      ],
+      "flaws": [
+        "Ciężka"
+      ],
+      "enc": "2",
+      "availability": "Bardzo rzadka",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 93,
+      "note": "Broń Zabójców (Poszukiwaczy Zguby Grimnira)."
+    },
+    "Krasnoludzki wielki topór": {
+      "group": "Dwuręczna",
+      "hands": "dwuręczna",
+      "damage": 6,
+      "sb": true,
+      "reach": "Długa",
+      "twoHanded": true,
+      "qualities": [
+        "Rąbiąca",
+        "Druzgocząca"
+      ],
+      "flaws": [
+        "Ciężka"
+      ],
+      "enc": "3",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 93
+    },
+    "Krasnoludzki wielki młot": {
+      "group": "Dwuręczna",
+      "hands": "dwuręczna",
+      "damage": 7,
+      "sb": true,
+      "reach": "Średnia",
+      "twoHanded": true,
+      "qualities": [
+        "Przebijająca",
+        "Ogłuszająca"
+      ],
+      "flaws": [],
+      "enc": "3",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 93
+    },
+    "Krasnoludzki kilof": {
+      "group": "Dwuręczna",
+      "hands": "dwuręczna",
+      "damage": 6,
+      "sb": true,
+      "reach": "Średnia",
+      "twoHanded": true,
+      "qualities": [
+        "Przebijająca",
+        "Nadziewająca"
+      ],
+      "flaws": [],
+      "enc": "3",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 93,
+      "note": "Często sprzedawany z garścią świec do przymocowania jako prowizoryczne światło."
+    },
+    "Wielki miecz Hoetha": {
+      "group": "Dwuręczna",
+      "hands": "dwuręczna",
+      "damage": 6,
+      "sb": true,
+      "reach": "Długa",
+      "twoHanded": true,
+      "qualities": [
+        "Druzgocząca",
+        "Rąbiąca"
+      ],
+      "flaws": [],
+      "enc": "2",
+      "availability": "Unikatowa",
+      "source": "Podręcznik Gracza: Wysokie Elfy",
+      "page": 33,
+      "note": "Wytrzymały 3, Wyśmienity 3. Niezbędny do tańca mieczy."
     }
   },
   "ranged": {
@@ -1380,6 +1506,85 @@
       "note": "Pech parzysty (00, 88…): wybuch – pełne Obr. w ciebie, broń zniszczona.",
       "enc": "3",
       "availability": "Rzadka"
+    },
+    "Krasnoludzka kusza": {
+      "group": "Kusza",
+      "hands": "dwuręczna",
+      "damage": 10,
+      "sb": false,
+      "range": "60",
+      "twoHanded": true,
+      "qualities": [
+        "Nadziewająca"
+      ],
+      "flaws": [
+        "Przeładowanie 1"
+      ],
+      "enc": "2",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 94
+    },
+    "Krasnoludzka hakownica": {
+      "group": "Prochowa",
+      "hands": "dwuręczna",
+      "damage": 10,
+      "sb": false,
+      "range": "50",
+      "twoHanded": true,
+      "qualities": [
+        "Prochowa",
+        "Przebijająca",
+        "Nadziewająca",
+        "Przekłuwająca"
+      ],
+      "flaws": [
+        "Przeładowanie 3"
+      ],
+      "enc": "2",
+      "availability": "Rzadka",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 94,
+      "note": "Niezawodna — ulega Awarii tylko przy rzucie 00."
+    },
+    "Krasnoludzki pistolet": {
+      "group": "Prochowa",
+      "hands": "jednoręczna",
+      "damage": 10,
+      "sb": false,
+      "range": "20",
+      "twoHanded": false,
+      "qualities": [
+        "Prochowa",
+        "Przebijająca",
+        "Nadziewająca",
+        "Przekłuwająca",
+        "Pistolet"
+      ],
+      "flaws": [
+        "Przeładowanie 1"
+      ],
+      "enc": "0",
+      "availability": "Bardzo rzadka",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 94,
+      "note": "Niezawodny — ulega Awarii tylko przy rzucie 00."
+    },
+    "Krasnoludzki topór do rzucania": {
+      "group": "Miotana",
+      "hands": "jednoręczna",
+      "damage": 4,
+      "sb": true,
+      "range": "BS×2",
+      "twoHanded": false,
+      "qualities": [
+        "Rąbiąca"
+      ],
+      "flaws": [],
+      "enc": "1",
+      "availability": "Powszechna",
+      "source": "Podręcznik Gracza: Krasnoludy",
+      "page": 94
     }
   },
   "armour": {
@@ -1743,6 +1948,22 @@
         "Wielki topór": 4,
         "Miecz dwuręczny": 2,
         "Flamberg": 1
+      }
+    }
+  },
+  "raceVariants": {
+    "Krasnolud": {
+      "chance": 0.85,
+      "weapons": {
+        "Topór": "Krasnoludzki topór",
+        "Młot jednoręczny": "Krasnoludzki młot bojowy",
+        "Wielki topór": "Krasnoludzki wielki topór",
+        "Młot bojowy": "Krasnoludzki wielki młot",
+        "Nadziak": "Krasnoludzki kilof",
+        "Kusza": "Krasnoludzka kusza",
+        "Rusznica": "Krasnoludzka hakownica",
+        "Pistolet": "Krasnoludzki pistolet",
+        "Topór do rzucania": "Krasnoludzki topór do rzucania"
       }
     }
   }
