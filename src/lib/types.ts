@@ -398,6 +398,8 @@ export interface TreasureDef {
   extra?: boolean;
   runes?: "weapon" | "armour" | "talisman";
   chaos?: [number, number];
+  /** Bron demoniczna - demon wg boga BN (daemons w treasures.json). */
+  daemon?: boolean;
   material?: string;
   cursed?: boolean;
   effects?: ItemEffects;
@@ -411,6 +413,9 @@ export interface TreasuresData {
   craft: CraftData;
   runes: Record<"weapon" | "armour" | "talisman", RuneDef[]>;
   chaosProperties: ChaosPropertyDef[];
+  /** Demony broni demonicznej: bog -> pomniejszy/wiekszy. */
+  daemons: Record<string, Record<"lesser" | "greater", { name: string; benefit: string }>>;
+  greaterDaemonChance: Partial<Record<TierId, number>>;
   items: TreasureDef[];
 }
 
@@ -431,6 +436,8 @@ export interface NpcMagicItem {
   base?: string;
   runes?: string[];
   properties?: string[];
+  /** Demon uwieziony w broni demonicznej. */
+  daemon?: string;
 }
 
 /** Stworzenie z bestiariusza (creatures.json). Wartosci cech jak w ksiazce. */

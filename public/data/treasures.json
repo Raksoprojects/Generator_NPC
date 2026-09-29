@@ -877,8 +877,384 @@
    "effects": {
     "damage": 5
    }
+  },
+  {
+   "name": "Ożywiona",
+   "god": "Tzeentch",
+   "effect": "Akcja: broń wylatuje z ręki i walczy sama, dopóki jesteś w promieniu BSW metrów (Konstrukt: WW i umiejętność jak twoje, S 45, Wt 50, Zw 60, Żyw 18, twoje talenty walki; odporna na rozbrojenie i Rany Krytyczne). Przy 0 Żyw zamiera na k10 minut.",
+   "page": 35
+  },
+  {
+   "name": "Wygnanie",
+   "god": "Khorne",
+   "effect": "Przeciw istotom z Cechą Niestabilny ignoruje BWt i PP; zniszczony demon nie wraca, Nieumarły nie może zostać wskrzeszony nekromancją.",
+   "page": 35
+  },
+  {
+   "name": "Oddech",
+   "god": "Tzeentch",
+   "effect": "Trzymając broń, oddychasz pod wodą, jesteś odporny na trujące gazy i ignorujesz odory (także Cechę Rozpraszający).",
+   "page": 36
+  },
+  {
+   "name": "Piłomiecz",
+   "god": "Khorne",
+   "effect": "Dźwignia w rękojeści ożywia zęby ostrza: zamiast Obrażeń udany atak niszczy niemagiczną broń albo trafiony element pancerza o 1 + PS przewagi. Zalety Rąbiąca i Łamacz mieczy.",
+   "page": 36,
+   "effects": {
+    "qualities": [
+     "Rąbiąca",
+     "Łamacz mieczy"
+    ]
+   }
+  },
+  {
+   "name": "Rozkazywanie",
+   "god": "Slaanesh",
+   "effect": "Zaleta Wyśmienita 3; +10 do Ogłady.",
+   "page": 36,
+   "effects": {
+    "chars": {
+     "Ogd": 10
+    }
+   }
+  },
+  {
+   "name": "Opanowanie",
+   "god": "Slaanesh",
+   "effect": "Runy dodają pewności siebie: +20 do wszystkich Testów Opanowania.",
+   "page": 36
+  },
+  {
+   "name": "Bestia: Bazyliszek",
+   "god": "Nurgle",
+   "effect": "Trafiony wykonuje Wymagający (+0) Test Odporności; porażka — 1 Oszołomienie + 1 za każdy PS poniżej 0. Gdy Oszołomień jest więcej niż jego BWt, zamienia się w kamień na zawsze.",
+   "page": 36
+  },
+  {
+   "name": "Bestia: Smok",
+   "god": "Niepodzielny",
+   "effect": "Unosisz się na wysokość Ruchu w metrach i bezpiecznie opadasz. Raz na starcie (Akcja): zionięcie jak Cecha Zionięcie za 2 Przewagi — Obrażenia BWt+3 ignorujące pancerz i 1 Podpalenie.",
+   "page": 36
+  },
+  {
+   "name": "Bestia: Minotaur",
+   "god": "Khorne",
+   "effect": "Zaleta Przekłuwająca; po zranieniu wroga Test Opanowania (+0) albo wpadasz w Szał Bojowy, którego nie kończy Oszołomienie.",
+   "page": 36,
+   "effects": {
+    "qualities": [
+     "Przekłuwająca"
+    ]
+   }
+  },
+  {
+   "name": "Bestia: Szkielet",
+   "god": "Niepodzielny",
+   "effect": "Broń ze zrośniętych kręgów obsadzona zębami: władający ma Cechę Strach 3.",
+   "page": 36
+  },
+  {
+   "name": "Bestia: Pająk",
+   "god": "Nurgle",
+   "effect": "Ataki mają Cechę Jad (Trudny).",
+   "page": 36
+  },
+  {
+   "name": "Bestia: Troll",
+   "god": "Nurgle",
+   "effect": "Raz na starcie (Akcja): Cecha Wymioty (zasięg i Obrażenia wg twojej Wytrzymałości).",
+   "page": 36
+  },
+  {
+   "name": "Bestia: Widmo",
+   "god": "Tzeentch",
+   "effect": "Trafiony traci na stałe 10 Siły (klątwę zdejmuje Rozszerzony Test Języka (Magicznego) na BSW władającego PS). Nieumarli są odporni; kolejne trafienia nie sumują się.",
+   "page": 36
+  },
+  {
+   "name": "Śmierciodajca",
+   "god": "Khorne",
+   "effect": "Dostrojona do jednego rodzaju istot (zwierzęta, zwierzoludzie, demony, krasnoludy, elfy, ludzie, orki, skaveny, wampiry…): trafiony taki cel zdaje Wymagający (+0) Test Odporności albo ginie, obracając się w czarny pył.",
+   "page": 37
+  },
+  {
+   "name": "Degeneracja",
+   "god": "Nurgle",
+   "effect": "Trafiony traci k10 Ran (minus BWt, min. 1) na koniec każdej Rundy przez tyle Rund, ile wynosi BWt władającego; kolejne trafienia +1. Potem odporność na 24 godziny.",
+   "page": 37
+  },
+  {
+   "name": "Odczarowanie",
+   "god": "Khorne",
+   "effect": "Przeciw istotom Demonicznym, Magicznym albo czarującym Trafienie Krytyczne zadaje dwie Rany Krytyczne, których nie da się odbić.",
+   "page": 37
+  },
+  {
+   "name": "Wycieńczenie",
+   "god": "Nurgle",
+   "effect": "Trafienie ryje runę Nurgla: ofiara traci na stałe 10 Wytrzymałości (klątwę zdejmuje Rozszerzony Test Języka (Magicznego) na BSW władającego PS). Kolejne trafienia nie sumują się.",
+   "page": 37
+  },
+  {
+   "name": "Hipnoza",
+   "god": "Slaanesh",
+   "effect": "Blask oszałamia: kto atakuje władającego wręcz albo strzela z BSW metrów, zdaje Wymagający (+0) Test Opanowania albo ma −10 do trafienia i traci 1 Przewagę na koniec Rundy.",
+   "page": 37
+  },
+  {
+   "name": "Zanikanie",
+   "god": "Tzeentch",
+   "effect": "Zaleta Szybka; odporna na Łamacz mieczy i Rozbrojenie. Trafiony zdaje Test SW (+0) albo traci 5 z każdej Cechy na koniec Rundy przez k10 Rund; przy 0 znika w Domenie Chaosu. Kary mijają po 24 godzinach.",
+   "page": 37,
+   "effects": {
+    "qualities": [
+     "Szybka"
+    ]
+   }
+  },
+  {
+   "name": "Lot",
+   "god": "Tzeentch",
+   "effect": "Rękojeść z kości skrzydeł orła: Cecha Lot (Zwinność); z dobytą bronią Wartość Lotu rośnie o twój Bieg w metrach.",
+   "page": 38
+  },
+  {
+   "name": "Zamarzanie",
+   "god": "Tzeentch",
+   "effect": "Trafiony dostaje 1 Oszołomienie za każde pełne 5 Ran (min. 1); zabity zamienia się w lodowy posąg, którego nie da się rozmrozić bez magii.",
+   "page": 38
+  },
+  {
+   "name": "Miotanie",
+   "god": "Slaanesh",
+   "effect": "Można nią rzucać na SB×3 metrów bez utraty Zalet; Darmową Akcją wraca do ręki, wyrywając się z rany (k10 Obrażeń).",
+   "page": 39
+  },
+  {
+   "name": "Iluzja",
+   "god": "Slaanesh",
+   "effect": "Ukrywa mutacje i dziwactwa właściciela — wygląda zwyczajnie (bez Strachu/Grozy z mutacji). Dostrzega to tylko ktoś z Percepcją Magiczną po Bardzo Trudnym (−30) Teście Percepcji.",
+   "page": 39
+  },
+  {
+   "name": "Nietykalność",
+   "god": "Slaanesh",
+   "effect": "Pełna odporność na niemagiczne zimno, choroby, ogień, piorun i truciznę (także zionięcia potworów); ignorujesz wynikające z nich Podpalenie, Zatrucie i Oszołomienie.",
+   "page": 39
+  },
+  {
+   "name": "Bezkarność",
+   "god": "Niepodzielny",
+   "effect": "Rękojeść z żeber i wciąż bijącego serca: dobyta daje Cechę Twardziel 2 (dodatkowe Rany nie przepadają jako pierwsze).",
+   "page": 39
+  },
+  {
+   "name": "Inteligencja",
+   "god": "Tzeentch",
+   "effect": "Wykuta z czaszek uczonych: +10 do Inteligencji.",
+   "page": 39,
+   "effects": {
+    "chars": {
+     "Int": 10
+    }
+   }
+  },
+  {
+   "name": "Smagnięcie",
+   "god": "Slaanesh",
+   "effect": "Jednoręczne ostrze Darmową Akcją zmienia się w bicz o Obrażeniach pierwotnej broni i z jedną jej Zaletą; nie traci Zalet w ataku zasięgowym.",
+   "page": 39
+  },
+  {
+   "name": "Przywództwo",
+   "god": "Niepodzielny",
+   "effect": "Duch potężnego wojownika: w bitwie z dobytą bronią masz Cechę Przywódca.",
+   "page": 39
+  },
+  {
+   "name": "Lewitacja",
+   "god": "Tzeentch",
+   "effect": "Unosisz się na wysokość Ruchu w metrach i bezpiecznie opadasz; dotykiem możesz przekazać to innej istocie (Rozmiar nie większy) na SW minut.",
+   "page": 39
+  },
+  {
+   "name": "Obłęd",
+   "god": "Nurgle",
+   "effect": "Trafiony zdaje Trudny (−10) Test Opanowania albo dostaje 1 Stan Złamany.",
+   "page": 39
+  },
+  {
+   "name": "Pochłanianie Magii",
+   "god": "Khorne",
+   "effect": "Pochłania jedno zaklęcie o PZ do 8 wymierzone w ciebie i trzyma je BSW Rund; Akcją możesz je odesłać rzucającemu (z jego PS i efektami), inaczej samo wybucha.",
+   "page": 39
+  },
+  {
+   "name": "Niszczycielka Magii",
+   "god": "Khorne",
+   "effect": "Trafiony ma −10 do Języka (Magicznego) i Modlitwy na k10 godzin (kumuluje się do −50).",
+   "page": 40
+  },
+  {
+   "name": "Siła Magii",
+   "god": "Tzeentch",
+   "effect": "Akcja: Wymagający (+0) Test Języka (Magicznego) — każdy PS to +1 do Obrażeń broni na BInt Rund.",
+   "page": 40
+  },
+  {
+   "name": "Odbicie Magii",
+   "god": "Tzeentch",
+   "effect": "Przeciwstawny Test Broni Białej przeciw PS magicznego pocisku w polu widzenia: sukces odsyła pocisk z pełnymi Obrażeniami do rzucającego.",
+   "page": 40
+  },
+  {
+   "name": "Potężny Cios",
+   "god": "Khorne",
+   "effect": "Raz na starcie (Darmowa Akcja): podwaja twoją Siłę na jedną Rundę (maks. 100).",
+   "page": 40
+  },
+  {
+   "name": "Pożeracz Umysłów",
+   "god": "Nurgle",
+   "effect": "Zamiast Obrażeń trafienie obniża ofierze Int, SW i Ogd o 5 (Krytyk — o 10); przy 0 dusza zostaje pożarta. Kary mijają po dniu.",
+   "page": 40
+  },
+  {
+   "name": "Posępność",
+   "god": "Slaanesh",
+   "effect": "Trafiony pogrąża się w smutku: −1 PS do wszystkich Testów przez BOgd Rund (kumuluje się).",
+   "page": 40
+  },
+  {
+   "name": "Mutowanie",
+   "god": "Tzeentch",
+   "effect": "Trafiony zdaje Trudny (−10) Test Odporności albo zyskuje mutację Tzeentcha.",
+   "page": 40
+  },
+  {
+   "name": "Relikwia",
+   "god": "Niepodzielny",
+   "effect": "Broń, która oczyszcza: przeciw sługom Chaosu masz Cechę Elitarny; co tydzień Test SW (+0) albo tracisz losową mutację i k10 Punktów Zepsucia. Właściciel nie może zyskać Zepsucia ani mutacji; broń nie opuszcza go, póki go nie oczyści.",
+   "page": 41
+  },
+  {
+   "name": "Uświęcenie",
+   "god": "Nurgle",
+   "effect": "Przeciw istotom z Cechą Ożywieniec ataki mają Zaletę Druzgocząca.",
+   "page": 41
+  },
+  {
+   "name": "Skowyt",
+   "god": "Slaanesh",
+   "effect": "Raz na starcie (Darmowa Akcja): straszliwy krzyk — każdy w promieniu BOgd metrów (przyjaciel i wróg) rzuca raz na tabeli Ran Krytycznych Głowy (bez złamań).",
+   "page": 41
+  },
+  {
+   "name": "Śpiew",
+   "god": "Slaanesh",
+   "effect": "Dobyta śpiewa: żywe istoty w BOgd metrów zdają co Rundę Test Opanowania (+0) albo idą ku broni; potem Test SW (+0) albo dostają Stan Zaskoczenie.",
+   "page": 41
+  },
+  {
+   "name": "Ospałość",
+   "god": "Nurgle",
+   "effect": "Zamiast Obrażeń trafienie obniża Zwinność ofiary o 10; przy 0 — paraliż na k10 godzin (Bezbronny cel).",
+   "page": 42
+  },
+  {
+   "name": "Sen",
+   "god": "Nurgle",
+   "effect": "Akcja: jedna żywa istota w BSW metrów zasypia na k10 godzin (Nieprzytomność), chyba że przeciwstawi się Testem SW (+0); śpiąc, dostaje 1 Punkt Zepsucia z koszmarów.",
+   "page": 42
+  },
+  {
+   "name": "Śluz",
+   "god": "Nurgle",
+   "effect": "Trafiona żywa istota zdaje Trudny (−10) Test Odporności albo wymiotuje: 1 Oszołomienie i Powalenie. Wymiociny istoty Demonicznej stają się Śluzem Chaosu.",
+   "page": 42
+  },
+  {
+   "name": "Zaklęcie",
+   "god": "Tzeentch",
+   "effect": "W broni uwięziony jest czarodziej: Akcją każesz mu rzucać zaklęcia Tradycji Tzeentcha (działa jak osobna postać z połową twoich PD).",
+   "page": 42
+  },
+  {
+   "name": "Kradzież",
+   "god": "Slaanesh",
+   "effect": "Zamiast Obrażeń trafienie odbiera wrogowi jeden Talent (z poziomami) i daje go tobie do końca walki (jeden Talent od każdego wroga).",
+   "page": 42
+  },
+  {
+   "name": "Przywołanie",
+   "god": "Tzeentch",
+   "effect": "Istota (Rozmiar Mały lub większy) zabita tą bronią wydaje z siebie Niebieskiego Horrora, który atakuje najbliższych (nie władającego) przez k10 Rund albo do pierwszego zabójstwa.",
+   "page": 42
+  },
+  {
+   "name": "Kieł Tzeentcha",
+   "god": "Tzeentch",
+   "effect": "Zaleta Przekłuwająca; płomień Chaosu pozwala każdemu, kto go widzi, raz przerzucić Test (potem Test Odporności albo +1 Zepsucia). Po starciu Przeciętny (+20) Test Odporności albo mutacja władającego.",
+   "page": 43,
+   "effects": {
+    "qualities": [
+     "Przekłuwająca"
+    ]
+   }
+  },
+  {
+   "name": "Spaczenie",
+   "god": "Niepodzielny",
+   "effect": "Zamiast Obrażeń udany atak od razu daje celowi (k10+2)/4 mutacji. Zwiastun nowej inwazji Chaosu.",
+   "page": 43
   }
  ],
+ "daemons": {
+  "Khorne": {
+   "lesser": {
+    "name": "Krwiopuszcz Khorna",
+    "benefit": "W Szale Bojowym masz Cechę Czempion."
+   },
+   "greater": {
+    "name": "Krwiopijca",
+    "benefit": "W Szale Bojowym masz Cechy Czempion i Elitarny."
+   }
+  },
+  "Slaanesh": {
+   "lesser": {
+    "name": "Demonetka Slaanesha",
+    "benefit": "Dwa Darmowe Ataki na Rundę."
+   },
+   "greater": {
+    "name": "Strażnik Tajemnic",
+    "benefit": "Dwa Darmowe Ataki na Rundę i Cecha Szybki."
+   }
+  },
+  "Tzeentch": {
+   "lesser": {
+    "name": "Różowy Horror Tzeentcha",
+    "benefit": "Możesz Splatać i rzucać zaklęcia Tradycji Tzeentcha."
+   },
+   "greater": {
+    "name": "Władca Przemian",
+    "benefit": "Możesz Splatać i rzucać zaklęcia Tradycji Tzeentcha, z premią +20 do tych Testów."
+   }
+  },
+  "Nurgle": {
+   "lesser": {
+    "name": "Zarazonośca Nurgle’a",
+    "benefit": "Cechy Żrąca Krew i Wymioty."
+   },
+   "greater": {
+    "name": "Wielki Nieczysty",
+    "benefit": "Cechy Żrąca Krew i Wymioty; niemagiczna broń trafiającego cię wręcz traci 1 punkt, a on 1 PP w losowej lokacji."
+   }
+  }
+ },
+ "greaterDaemonChance": {
+  "legendarny": 0.6
+ },
  "items": [
   {
    "name": "Zaklęta broń",
@@ -1411,15 +1787,9 @@
   {
    "name": "Broń demoniczna",
    "kind": "weapon",
-   "chaos": [
-    2,
-    2
-   ],
+   "daemon": true,
    "weight": 2,
    "minTier": "heroiczny",
-   "effects": {
-    "damage": 2
-   },
    "forGroups": [
     "Chaos › Wojownicy Chaosu",
     "Chaos › Kultyści i mutanci",
@@ -1431,7 +1801,7 @@
    ],
    "source": "Warriors of Chaos (Ratter)",
    "page": 44,
-   "description": "Broń z uwięzionym demonem, zarezerwowana dla największych czempionów: +2 do Obrażeń, dwie właściwości Broni Chaosu. Demon ma własną wolę — przy Pechu próbuje przejąć kontrolę."
+   "description": "Broń Demoniczna rani każdą istotę bez względu na odporności; dobyta daje Cechę Demoniczny (jak u uwięzionego demona) i pozwala używać SW demona zamiast własnej. Skradziona Siła: zabicie celu dzieli jego Siłę na trzy — za każde pełne 10 z ostatniej trzeciej części władający ma +10 S na dobę (najwyżej tyle razy, ile wynosi jego BS). −40 do Testów opierania się mutacjom. Gdy władający spadnie do 0 Żyw, jego dusza trafia do Domeny Chaosu, a demon wyrywa się na wolność."
   },
   {
    "name": "Fetysz szamana",

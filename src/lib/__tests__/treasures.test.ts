@@ -69,6 +69,28 @@ describe("przedmioty magiczne", () => {
     expect(computeNpc(npc).weapons.find((w) => w.name === weapon)!.damage).toBe(before + 2);
   });
 
+  it("Bron Chaosu i demoniczna: wlasciwosci i demon zgodne z bogiem czempiona", () => {
+    const data = gd.getTreasures()!;
+    expect(data.chaosProperties.length).toBeGreaterThan(75);
+    for (const p of data.chaosProperties) expect(p.effect.length, p.name).toBeGreaterThan(8);
+    const khorne = new Set(Object.values(data.daemons.Khorne).map((d) => d.name));
+    let daemons = 0;
+    for (let seed = 1; seed <= 150; seed++) {
+      const npc = generateNpc({ creature: "Łowca Czaszek Khorne'a", tier: "legendarny" }, seedRng(seed));
+      for (const m of npc.magicItems ?? []) {
+        for (const p of m.properties ?? []) {
+          const god = data.chaosProperties.find((x) => x.name === p)!.god;
+          expect(["Khorne", "Niepodzielny"], `${p}: ${god}`).toContain(god);
+        }
+        if (m.daemon) {
+          daemons++;
+          expect(khorne.has(m.daemon), m.daemon).toBe(true);
+        }
+      }
+    }
+    expect(daemons).toBeGreaterThan(0);
+  });
+
   it("szablony odwoluja sie do istniejacych ras, grup, broni i umiejetnosci", () => {
     const groups = new Set(gd.creatureGroupTree().flatMap((g) => [g.group, ...g.subgroups.map((s) => `${g.group}${gd.GROUP_SEP}${s}`)]));
     const lores = new Set(Object.keys(gd.getSpellsData().lores));

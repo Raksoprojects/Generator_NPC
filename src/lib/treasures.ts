@@ -277,6 +277,16 @@ function rollChaosProperties(npc: Npc, range: [number, number], rng: Rng, determ
   return out;
 }
 
+/** Demon broni demonicznej: sluga boga BN (niepodzielny - dowolnego); wiekszy tylko u legendarnych. */
+function rollDaemon(npc: Npc, rng: Rng, deterministic: boolean): string | undefined {
+  const data = gd.getTreasures()!;
+  const gods = Object.keys(data.daemons);
+  const god = npcGod(npc) ?? (deterministic ? gods[0] : pick(gods, rng));
+  const p = data.greaterDaemonChance[npc.tier] ?? 0;
+  const greater = deterministic ? p >= 0.5 : chance(p, rng);
+  return god ? data.daemons[god]?.[greater ? "greater" : "lesser"]?.name : undefined;
+}
+
 /** Nadaje przedmiotowi konkretna bron/pancerz BN (zastepujac bron danego rodzaju). */
 function attach(npc: Npc, t: TreasureDef, owned: NpcMagicItem[]): string | undefined {
   if (t.kind === "weapon") {
@@ -341,6 +351,7 @@ export function rollTreasures(npc: Npc, rng: Rng, deterministic = false): void {
       if (t.kind === "weapon" && base) item.name = `runiczny ${base.toLowerCase()}`;
     }
     if (t.chaos) item.properties = rollChaosProperties(npc, t.chaos, rng, deterministic);
+    if (t.daemon) item.daemon = rollDaemon(npc, rng, deterministic);
     npc.magicItems.push(item);
   }
 }
@@ -413,6 +424,12 @@ export function describeMagicItem(item: NpcMagicItem): string {
   for (const p of item.properties ?? []) {
     const def = gd.getTreasures()?.chaosProperties.find((x) => x.name === p);
     if (def) parts.push(`${p} (${def.god}): ${def.effect}`);
+  }
+  if (item.daemon) {
+    const d = Object.values(gd.getTreasures()?.daemons ?? {})
+      .flatMap((v) => Object.values(v))
+      .find((x) => x.name === item.daemon);
+    if (d) parts.push(`Uwięziony demon — ${d.name}: ${d.benefit}`);
   }
   const src = potion ? `${potion.source ?? ""}${potion.page ? `, s. ${potion.page}` : ""}` : t ? `${t.source}${t.page ? `, s. ${t.page}` : ""}` : "";
   return parts.filter(Boolean).join(" · ") + (src ? ` [${src}]` : "");
