@@ -34,6 +34,12 @@ export interface Profession {
   variants?: EntryVariants<Profession>;
   /** Profesja renegata: moze po niej przyjsc ktos z innej profesji magicznej (np. zbiegly czarodziej). */
   renegade?: boolean;
+  /** Profesja zaawansowana (np. elfi kaplani, poziomy 3-5): wchodzi sie po danym poziomie innej profesji. */
+  entry?: { from: string; level: number };
+  /** Tradycja zaklec profesji, glowna dla BN (np. Magia Vaula u Kaplana-Kowala). */
+  spellLore?: string;
+  /** Najnizszy poziom BN, na ktorym generator losuje te profesje (elfi kaplani - heroiczny). */
+  minTier?: TierId;
 }
 
 export interface GameClass {
@@ -203,6 +209,8 @@ export interface GeneratorSettings {
   multiLoreRaces?: string[];
   /** Profile nakladane automatycznie tylko na stworzenia; rasy dostaja zamiast nich mocniejszy rozwoj (advanceMultiplier). */
   creatureOnlyProfiles?: string[];
+  /** Rzadkie talenty rasy (np. Krew Aenariona u Wysokich Elfow: 1%, u szlachty 5%). */
+  raceTalents?: { race: string; talent: string; chance: number; archetypes?: Record<string, number> }[];
 }
 
 export interface TiersData {

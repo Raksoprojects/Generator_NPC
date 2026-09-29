@@ -161,6 +161,12 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
     najsilniejsze zaklęcia (1 u średniego, 3 u heroicznego, 4 u legendarnego).
     Na karcie **najważniejsze zaklęcia** (najdroższe) są na górze, przy Splataniu
     i Rzucaniu, a pozostałe na samym dole.
+
+    Profesje Wysokich Elfów (*Wysokie Elfy*): Straż Morska, Mistrz Miecza, Wojownik
+    Cienia, Kupiec Poszukiwacz Przygód, Estetyk oraz — od heroicznego — kapłani
+    Kapłan-Kowal Vaula, Tkacz Burzy i Mistrz Wiedzy Hoetha (po 2. poziomie Maga,
+    poziomy 3–5) z własnymi tradycjami Wysokiej Magii (Magia Vaula, Morza, Hoetha).
+    Wysokie Elfy mają 1% szans (szlachta 5%) na talent Krew Aenariona.
 12. **Mutacje.** 1% szans na mutację u każdego BN (70% fizyczne, 30% psychiczne).
     Powaga wg *Mutant's Handbook*: k100 (+10 za każdą posiadaną mutację, maks. +40)
     — 01–60 błaha, 61–100 pomniejsza, 101+ poważna; wiersz „rzuć na wyższą tabelę”

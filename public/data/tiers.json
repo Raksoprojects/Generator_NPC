@@ -30,6 +30,16 @@
       "Pomniejszy Bohater",
       "Wielki Bohater",
       "Legendarny Bohater"
+    ],
+    "raceTalents": [
+      {
+        "race": "Wysoki elf",
+        "talent": "Krew Aenariona",
+        "chance": 0.01,
+        "archetypes": {
+          "Szlachcic": 0.05
+        }
+      }
     ]
   },
   "tiers": {

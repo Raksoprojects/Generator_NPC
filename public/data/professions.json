@@ -11307,5 +11307,870 @@
     "class": "Uczeni",
     "source": "Podręcznik Gracza: Wysokie Elfy",
     "page": 90
+  },
+  "Straż Morska": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Strażnik Morski",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Walka Wręcz",
+          "Umiejętności Strzeleckie",
+          "Zwinność"
+        ],
+        "skills": [
+          "Opieka nad Zwierzętami",
+          "Mocna Głowa",
+          "Unik",
+          "Plotkowanie",
+          "Broń Biała (Podstawowa)",
+          "Broń Biała (Drzewcowa)",
+          "Broń Zasięgowa (Łuk)",
+          "Broń Zasięgowa (Kusza)",
+          "Żeglarstwo",
+          "Pływanie"
+        ],
+        "talents": [
+          "Musztra",
+          "Rybak",
+          "Twardziel",
+          "Urodzony Wojownik"
+        ],
+        "trappings": [
+          "łuk elfi",
+          "włócznia",
+          "mundur"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Straż Morska",
+        "status": "Srebro 3",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Atletyka",
+          "Wspinaczka",
+          "Odporność",
+          "Hazard",
+          "Sztuka Przetrwania",
+          "Żeglarstwo"
+        ],
+        "talents": [
+          "Walka w Ciasnocie",
+          "Szybki Refleks",
+          "Wilk Morski",
+          "Tarczownik"
+        ],
+        "trappings": [
+          "napierśnik",
+          "hełm",
+          "kolczuga",
+          "tarcza"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Mistrz Morza",
+        "status": "Srebro 5",
+        "characteristics": [
+          "Siła"
+        ],
+        "skills": [
+          "Dowodzenie",
+          "Nawigacja",
+          "Percepcja",
+          "Żeglarstwo"
+        ],
+        "talents": [
+          "Inspirujący",
+          "Wodniak",
+          "Znawca (Oceany)",
+          "Cios Mierzony"
+        ],
+        "trappings": [
+          "odznaka rangi",
+          "mundur wysokiej jakości"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Ster Morza",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Powożenie",
+          "Zastraszanie"
+        ],
+        "talents": [
+          "Zmysł Bitewny",
+          "Waleczne Serce",
+          "Doświadczony Wędrowiec (Wybrzeże)",
+          "Świetny Pływak"
+        ],
+        "trappings": [
+          "mundur wysokiej jakości",
+          "rydwan niebiosolotka z chyżopiórym rokiem",
+          "wysoki hełm morski"
+        ]
+      }
+    ],
+    "class": "Wojownicy",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 64
+  },
+  "Mistrz Miecza": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Strażnik Miecza",
+        "status": "Srebro 2",
+        "characteristics": [
+          "Walka Wręcz",
+          "Siła",
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Sztuka (Malarstwo albo Rzeźba)",
+          "Atletyka",
+          "Unik",
+          "Wiedza (Dowolna)",
+          "Broń Biała (Podstawowa)",
+          "Broń Biała (Bijatyka)",
+          "Broń Biała (Dwuręczna)",
+          "Percepcja",
+          "Występy (Akrobatyka)",
+          "Muzyka (Dowolna)"
+        ],
+        "talents": [
+          "Wyczulony Zmysł (Dowolny)",
+          "Wyważony Cios",
+          "Rozbrojenie",
+          "Sztuki Walki"
+        ],
+        "trappings": [
+          "zestaw do rzeźby albo zestaw malarski",
+          "luźne szaty"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Mistrz Miecza",
+        "status": "Srebro 5",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Sztuka (Poezja)",
+          "Opanowanie",
+          "Odporność",
+          "Plotkowanie",
+          "Intuicja",
+          "Wiedza (Dowolna)"
+        ],
+        "talents": [
+          "Zbicie Broni",
+          "Riposta",
+          "Cios Mierzony",
+          "Taniec Miecza"
+        ],
+        "trappings": [
+          "księga o filozofii",
+          "wielki miecz Hoetha",
+          "kolczuga",
+          "wysoki hełm",
+          "strój podróżny"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Mistrz Klingi",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Inteligencja"
+        ],
+        "skills": [
+          "Sztuka (Malarstwo albo Rzeźba)",
+          "Leczenie",
+          "Dowodzenie",
+          "Broń Zasięgowa (Łuk)"
+        ],
+        "talents": [
+          "Mistrz Walki",
+          "Cios Odwetowy",
+          "Percepcja Magiczna",
+          "Silny Cios"
+        ],
+        "trappings": [
+          "księga o sztuce wojny",
+          "grzebienie we włosach",
+          "odznaka rangi"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Władca Ostrzy",
+        "status": "Złoto 2",
+        "characteristics": [
+          "Zwinność"
+        ],
+        "skills": [
+          "Zastraszanie",
+          "Wiedza (Dowolna)"
+        ],
+        "talents": [
+          "Władcza Postura",
+          "Czysta Dusza",
+          "Obieżyświat",
+          "Wódz"
+        ],
+        "trappings": [
+          "tomik poezji",
+          "wykwintne szaty",
+          "zdobiona zbroja"
+        ]
+      }
+    ],
+    "class": "Wojownicy",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 66
+  },
+  "Wojownik Cienia": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Nowicjusz Cienia",
+        "status": "Brąz 2",
+        "characteristics": [
+          "Walka Wręcz",
+          "Umiejętności Strzeleckie",
+          "Zwinność"
+        ],
+        "skills": [
+          "Atletyka",
+          "Wspinaczka",
+          "Odporność",
+          "Broń Biała (Podstawowa)",
+          "Nawigacja",
+          "Sztuka Przetrwania",
+          "Broń Zasięgowa (Łuk)",
+          "Zastawianie Pułapek",
+          "Skradanie (Wieś)",
+          "Pływanie"
+        ],
+        "talents": [
+          "Prosto Między Oczy",
+          "Włóczykij",
+          "Wyborny Wspinacz",
+          "Doświadczony Wędrowiec (Lasy)"
+        ],
+        "trappings": [
+          "śpiwór",
+          "łuk elfi",
+          "lina z hakiem"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Wojownik Cienia",
+        "status": "Brąz 4",
+        "characteristics": [
+          "Siła"
+        ],
+        "skills": [
+          "Opanowanie",
+          "Unik",
+          "Zastraszanie",
+          "Broń Biała (Bijatyka)",
+          "Sekretne Znaki (Wojownicy Cienia)",
+          "Tropienie"
+        ],
+        "talents": [
+          "Zimna krew",
+          "Nieustraszony (Mroczne Elfy)",
+          "Straszny",
+          "Cień"
+        ],
+        "trappings": [
+          "półksiężycowy wisior Lileath",
+          "zasłona na twarz",
+          "hełm",
+          "kolczuga"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Mistrz Cienia",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Inteligencja"
+        ],
+        "skills": [
+          "Charyzma",
+          "Plotkowanie",
+          "Leczenie",
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Celny Strzał",
+          "Dwie Bronie",
+          "Sekretna Tożsamość",
+          "Cios Mierzony"
+        ],
+        "trappings": [
+          "kadra Wojowników Cienia",
+          "kolce przeciwpiechotne",
+          "zestaw do charakteryzacji"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Chodzący w Cieniu",
+        "status": "Srebro 3",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Otwieranie Zamków",
+          "Skradanie (Miasto)"
+        ],
+        "talents": [
+          "Na Cztery Łapy",
+          "Obieżyświat",
+          "Strzelec Wyborowy",
+          "Dobrze Przygotowany"
+        ],
+        "trappings": [
+          "wytrych",
+          "sieć kontaktów"
+        ]
+      }
+    ],
+    "class": "Wędrowcy",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 70
+  },
+  "Kupiec Poszukiwacz Przygód": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Morski Posłaniec",
+        "status": "Brąz 4",
+        "characteristics": [
+          "Walka Wręcz",
+          "Inicjatywa",
+          "Ogłada"
+        ],
+        "skills": [
+          "Atletyka",
+          "Oswajanie",
+          "Wspinaczka",
+          "Unik",
+          "Plotkowanie",
+          "Broń Biała (Podstawowa)",
+          "Nawigacja",
+          "Broń Zasięgowa (Łuk)",
+          "Żeglarstwo",
+          "Pływanie"
+        ],
+        "talents": [
+          "Rybak",
+          "Szczęście",
+          "Wyczucie Kierunku",
+          "Świetny Pływak"
+        ],
+        "trappings": [
+          "liczydło",
+          "łuk elfi",
+          "miecz"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Kupiec Poszukiwacz Przygód",
+        "status": "Srebro 3",
+        "characteristics": [
+          "Zwinność"
+        ],
+        "skills": [
+          "Charyzma",
+          "Mocna Głowa",
+          "Wycena",
+          "Targowanie albo Hazard",
+          "Język (Dowolny)",
+          "Broń Biała (Bijatyka)"
+        ],
+        "talents": [
+          "Cios Poniżej Pasa",
+          "Wodniak",
+          "Pilot",
+          "Obieżyświat"
+        ],
+        "trappings": [
+          "miecz",
+          "skórzany kaftan",
+          "mapy żeglarskie i sekstant",
+          "trzy beczki towarów"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Morski Odkrywca",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Inteligencja"
+        ],
+        "skills": [
+          "Przekupstwo",
+          "Opanowanie",
+          "Odporność",
+          "Język (Dowolny)"
+        ],
+        "talents": [
+          "Rozpoznanie Artefaktu",
+          "Żelazna Szczęka",
+          "Wilk Morski",
+          "Tragarz"
+        ],
+        "trappings": [
+          "flotylla dwóch przypływowców",
+          "magazyn"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Łowca Potworów Morskich",
+        "status": "Złoto 3",
+        "characteristics": [
+          "Siła"
+        ],
+        "skills": [
+          "Zastraszanie",
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Władcza Postura",
+          "Nieustraszony (Potwory Morskie)",
+          "Strzał Przebijający",
+          "Niezwykle Odporny"
+        ],
+        "trappings": [
+          "albatros z załogą",
+          "magazyny w dwóch portach"
+        ]
+      }
+    ],
+    "class": "Wodniacy",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 72
+  },
+  "Estetyk": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Zaopatrzeniowiec",
+        "status": "Brąz 3",
+        "characteristics": [
+          "Zręczność",
+          "Inteligencja",
+          "Ogłada"
+        ],
+        "skills": [
+          "Sztuka (Dowolna)",
+          "Charyzma",
+          "Opanowanie",
+          "Występy (Dowolne)",
+          "Wycena",
+          "Intuicja",
+          "Plotkowanie",
+          "Targowanie",
+          "Percepcja",
+          "Rzemiosło (Jubilerstwo)"
+        ],
+        "talents": [
+          "Wyczulony Zmysł (Dowolny)",
+          "Talent Artystyczny",
+          "Percepcja Magiczna",
+          "Charyzmatyczny"
+        ],
+        "trappings": [
+          "flakonik perfum",
+          "amulety",
+          "kolorowe szale",
+          "grzebień"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Estetyk",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Sztuka (Dowolna)",
+          "Mocna Głowa",
+          "Wiedza (Lokalna)",
+          "Wiedza (Magia)",
+          "Skradanie (Miasto)",
+          "Rzemiosło (Dowolne)"
+        ],
+        "talents": [
+          "Zimna krew",
+          "Wytwórca (Dowolny)",
+          "Etykieta (Szlachta)",
+          "Zręczne Palce"
+        ],
+        "trappings": [
+          "kryształowe wahadełko",
+          "wyzywający strój",
+          "zestaw amuletów"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Arbiter Elegancji",
+        "status": "Srebro 4",
+        "characteristics": [
+          "Zręczność"
+        ],
+        "skills": [
+          "Przekupstwo",
+          "Język (Dowolny)",
+          "Wiedza (Heraldyka)",
+          "Występy (Dowolne)"
+        ],
+        "talents": [
+          "Hulaka",
+          "Rozpoznanie Artefaktu",
+          "Towarzyski",
+          "Arcydzieło (Dowolne)"
+        ],
+        "trappings": [
+          "olejki eteryczne",
+          "kadzidełka",
+          "kamerton"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Mistrz Harmonii",
+        "status": "Złoto 2",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Leczenie",
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Przekonujący",
+          "Święte Wizje",
+          "Dzieło Życia",
+          "Czysta Dusza"
+        ],
+        "trappings": [
+          "eterolabium",
+          "proste szaty wysokiej jakości"
+        ]
+      }
+    ],
+    "class": "Dworzanie",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 74
+  },
+  "Kapłan-Kowal Vaula": {
+    "races": [
+      "Wysoki elf",
+      "Leśny elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 3,
+        "title": "Kapłan-Kowal",
+        "status": "Złoto 2",
+        "characteristics": [
+          "Walka Wręcz",
+          "Zręczność",
+          "Inteligencja",
+          "Siła Woli",
+          "Ogłada"
+        ],
+        "skills": [
+          "Sztuka (Grawerstwo)",
+          "Splatanie Magii (Qhaysh)",
+          "Wycena",
+          "Rzemiosło (Kowalstwo)"
+        ],
+        "talents": [
+          "Talent Artystyczny",
+          "Medytacja Cadai",
+          "Wytwórca (Kowalstwo)",
+          "Wysoka Magia"
+        ],
+        "trappings": [
+          "modlitewnik",
+          "symbol religijny (Vaul)",
+          "narzędzia rzemieślnicze (Kowalstwo)"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Mistrz Kapłan-Kowal",
+        "status": "Złoto 4",
+        "characteristics": [
+          "Siła"
+        ],
+        "skills": [
+          "Targowanie",
+          "Intuicja"
+        ],
+        "talents": [
+          "Arcydzieło (Kowalstwo)",
+          "Umysł Ponad Ciałem",
+          "Mocne Plecy",
+          "Wytrwały"
+        ],
+        "trappings": [
+          "kuźnia"
+        ]
+      },
+      {
+        "level": 5,
+        "title": "Arcykapłan Kuźni",
+        "status": "Złoto 7",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Święte Wizje",
+          "Dzieło Życia",
+          "Szósty Zmysł",
+          "Odporność Psychiczna"
+        ],
+        "trappings": [
+          "ruda ithilmaru",
+          "przedmiot magiczny",
+          "uczeń"
+        ]
+      }
+    ],
+    "class": "Uczeni",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 100,
+    "spellLore": "Vaula",
+    "entry": {
+      "from": "Mag",
+      "level": 2
+    },
+    "minTier": "heroiczny"
+  },
+  "Tkacz Burzy": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 3,
+        "title": "Mag Mgły",
+        "status": "Złoto 2",
+        "characteristics": [
+          "Walka Wręcz",
+          "Zręczność",
+          "Inteligencja",
+          "Siła Woli",
+          "Ogłada"
+        ],
+        "skills": [
+          "Splatanie Magii (Qhaysh)",
+          "Wioślarstwo",
+          "Żeglarstwo",
+          "Pływanie"
+        ],
+        "talents": [
+          "Zmysł Magii",
+          "Medytacja Cadai",
+          "Wysoka Magia",
+          "Oko Sztormu"
+        ],
+        "trappings": [
+          "modlitewnik",
+          "symbol religijny (Mathlann)",
+          "łódź wiosłowa"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Tkacz Burzy",
+        "status": "Złoto 5",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Broń Biała (Podstawowa)",
+          "Nawigacja"
+        ],
+        "talents": [
+          "Nieustraszony (Potwory Morskie)",
+          "Wyczucie Kierunku",
+          "Wilk Morski",
+          "Świetny Pływak"
+        ],
+        "trappings": [
+          "mapy żeglarskie",
+          "sekstant"
+        ]
+      },
+      {
+        "level": 5,
+        "title": "Przyzywacz Wiru",
+        "status": "Złoto 7",
+        "characteristics": [
+          "Zwinność"
+        ],
+        "skills": [
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Święte Wizje",
+          "Wodniak",
+          "Obieżyświat",
+          "Mag Bitewny"
+        ],
+        "trappings": [
+          "statek żaglowy z załogą",
+          "luneta"
+        ]
+      }
+    ],
+    "class": "Uczeni",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 104,
+    "spellLore": "Morza",
+    "entry": {
+      "from": "Mag",
+      "level": 2
+    },
+    "minTier": "heroiczny"
+  },
+  "Mistrz Wiedzy Hoetha": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 3,
+        "title": "Mistrz Wiedzy",
+        "status": "Złoto 2",
+        "characteristics": [
+          "Walka Wręcz",
+          "Zręczność",
+          "Inteligencja",
+          "Siła Woli",
+          "Ogłada"
+        ],
+        "skills": [
+          "Splatanie Magii (Qhaysh)",
+          "Język (Dowolny)",
+          "Wiedza (Dowolna)",
+          "Broń Biała (Podstawowa)",
+          "Modlitwa",
+          "Badania Naukowe"
+        ],
+        "talents": [
+          "Mól Książkowy",
+          "Medytacja Cadai",
+          "Wysoka Magia",
+          "Azyl Umysłu"
+        ],
+        "trappings": [
+          "modlitewnik",
+          "symbol religijny (Hoeth)",
+          "zestaw do pisania"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Arcymistrz Wiedzy",
+        "status": "Złoto 5",
+        "characteristics": [
+          "Zwinność"
+        ],
+        "skills": [
+          "Język (Dowolny)",
+          "Wiedza (Dowolna)"
+        ],
+        "talents": [
+          "Precyzyjne Inkantowanie",
+          "Poliglota",
+          "Szybkie Czytanie",
+          "Wieża Pamięci"
+        ],
+        "trappings": [
+          "wyszukane szaty",
+          "rzadkie księgi"
+        ]
+      },
+      {
+        "level": 5,
+        "title": "Wielki Mistrz Wiedzy",
+        "status": "Złoto 7",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Wiedza (Dowolna)"
+        ],
+        "talents": [
+          "Zmysł Bitewny",
+          "Wykrywanie Magii",
+          "Święte Wizje",
+          "Czysta Dusza"
+        ],
+        "trappings": [
+          "biblioteka",
+          "gabinet"
+        ]
+      }
+    ],
+    "class": "Uczeni",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 108,
+    "spellLore": "Hoetha",
+    "entry": {
+      "from": "Mag",
+      "level": 2
+    },
+    "minTier": "heroiczny"
   }
 }

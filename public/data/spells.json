@@ -127,6 +127,21 @@
    "label": "Tradycja Wysokiej Magii",
    "wind": "Qhaysh",
    "rule": "Tylko z Talentem Wysoka Magia. Poziom Talentu dolicza się do PS Przeciążania; brak dostępu do danego Wiatru nie przeszkadza w rzucaniu zaklęć ośmiu Tradycji. Przeciążenie ponad Bonus z Siły Woli grozi Wypaleniem Magicznym (szansa w % = nadwyżka PS; dni bez czarowania = wynik, dublet — trwałe). Runy Cadai (do BSW) pozwalają przerzucić Splatanie, Rzucanie, Pecha, Zepsucie lub Wypalenie. Elf nie dostaje Piętna Magii — zamiast tego 1k10 dni Wypalenia."
+  },
+  "Vaula": {
+   "label": "Magia Vaula",
+   "wind": "Qhaysh",
+   "rule": "Zaklęcia Wysokiej Magii natchnione przez boga — kapłan uczy się ich przed resztą Tradycji Wysokiej Magii (reguły Wysokiej Magii: Przeciążanie, Wypalenie Magiczne, runy Cadai). Wiele zaklęć ulepsza wykuwany przedmiot — na jeden przedmiot tylko jedno takie zaklęcie."
+  },
+  "Morza": {
+   "label": "Magia Morza (Mathlann)",
+   "wind": "Qhaysh",
+   "rule": "Zaklęcia Wysokiej Magii natchnione przez boga — kapłan uczy się ich przed resztą Tradycji Wysokiej Magii (reguły Wysokiej Magii: Przeciążanie, Wypalenie Magiczne, runy Cadai)."
+  },
+  "Hoetha": {
+   "label": "Magia Hoetha",
+   "wind": "Qhaysh",
+   "rule": "Zaklęcia Wysokiej Magii natchnione przez boga — kapłan uczy się ich przed resztą Tradycji Wysokiej Magii (reguły Wysokiej Magii: Przeciążanie, Wypalenie Magiczne, runy Cadai)."
   }
  },
  "spells": [
@@ -6276,6 +6291,314 @@
    "description": "Otwierasz przed sojusznikami ścieżki między światami. Sprzymierzone cele zyskują Cechę Stworzenia Eteryczny, a ich wartości Ruchu zostają podwojone.\nPrzeciążanie: +5 PS — Czas trwania zaklęcia wydłuża się do liczby minut równej Bonusowi z Inteligencji, jeśli zdasz Ciężki (-20) Test Siły Woli. +8 PS — Cele znajdujące się przy odpowiednim geomantycznym węźle mogą przemierzyć Ścieżki Starożytnych, by dotrzeć do innego węzła. To ty decydujesz, do którego węzła trafiają. Nie ma ograniczenia co do pokonanego dystansu.",
    "source": "Podręcznik Gracza: Wysokie Elfy",
    "page": 89
+  },
+  {
+   "name": "Dotyk Artysty",
+   "lore": "Vaula",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1 przedmiot",
+   "duration": "Natychmiast",
+   "description": "Sprawiasz, że wytwarzany przedmiot staje się miły dla oka. Jeśli rzucisz to zaklęcie na niemagiczny przedmiot, który wytwarzasz, zyskuje on Zaletę Doskonała. Inne Zalety i Wady wciąż można nadawać normalnie.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 102
+  },
+  {
+   "name": "Cierpliwość Vaula",
+   "lore": "Vaula",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1 przedmiot",
+   "duration": "Natychmiast",
+   "description": "Zagęszczasz godziny rzemieślniczej cierpliwości w kilka sekund. Jeśli rzucisz to zaklęcie na niemagiczny przedmiot, który wytwarzasz, wymagane PS dla wszelkich Testów Rozszerzonych związanych z procesem zostają zredukowane do jednej czwartej, bez wpływu na jakość gotowego produktu.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 102
+  },
+  {
+   "name": "Łaska Vaula",
+   "lore": "Vaula",
+   "cn": 7,
+   "range": "Dotyk",
+   "target": "1 przedmiot",
+   "duration": "Natychmiast",
+   "description": "Czynisz broń i pancerze bardziej eleganckimi i mniej uciążliwymi. Jeśli rzucisz to zaklęcie na niemagiczną broń lub element pancerza, który wytwarzasz, zyskuje on Zaletę Lekka. Test Rzemiosła (Kowalstwo) wciąż jest wykonywany, by ustalić inne Zalety lub Wady w przypadku wytwarzania przedmiotu magicznego.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 102
+  },
+  {
+   "name": "Gniew Vaula",
+   "lore": "Vaula",
+   "cn": 5,
+   "range": "Liczba metrów równa Bonusowi z Siły Woli",
+   "target": "1 kuźnia lub ognisko (maksymalnie)",
+   "duration": "Natychmiast",
+   "description": "Twoja kuźnia wybucha potężną eksplozją, która nie czyni ci żadnej krzywdy. Wszyscy inni w promieniu tylu metrów od ognia, ile wynosi Bonus z Siły Woli, otrzymują trafienie magicznym pociskiem w losowe Miejsce Trafienia o Obrażeniach +6, ignorujące Pancerz, i zyskują 2 Stany Podpalenie. Dodatkowo muszą zdać Test Uniku albo zostają powaleni (Stan Powalony ) i zyskują Stan Oszołomiony. Wszyscy w promieniu podwójnego Bonusu z Siły Woli od ognia otrzymują trafienie o Obrażeniach +3 w losowe Miejsce Trafienia i zyskują 1 Stan Podpalenie. Palny teren w zasięgu rażenia staje w płomieniach, lecz ty i twoje narzędzia rzemieślnicze pozostajecie nietknięci.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 102
+  },
+  {
+   "name": "Wróżba Płomieni",
+   "lore": "Vaula",
+   "cn": 4,
+   "range": "Liczba metrów równa Bonusowi z Inicjatywy (maksymalnie)",
+   "target": "1 kuźnia lub ognisko (maksymalnie)",
+   "duration": "Liczba godzin równa Bonusowi z Inteligencji",
+   "description": "Ofiara: 1 przedmiot Wyczuwasz zbliżanie się wrogów do twojej kuźni. Możesz wykryć i dostrzec każde stworzenie w promieniu tylu metrów od wskazanej kuźni (lub ogniska), ile wynosi twoja Inteligencja, nawet jeśli jest ukryte. Widzisz cele zdalnie, niezależnie od linii wzroku czy twojej odległości od kuźni. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +2 PS — Możesz wykrywać niewidzialne stworzenia w obszarze działania. +3 PS — Możesz obejmować wykryte stworzenia zaklęciami, nawet jeśli nie masz linii wzroku, dopóki wciąż znajdują się w zasięgu.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 103
+  },
+  {
+   "name": "Wróżba Kamieni",
+   "lore": "Vaula",
+   "cn": 6,
+   "range": "Liczba mil równa Bonusowi z Inteligencji",
+   "target": "Specjalny",
+   "duration": "Liczba godzin równa Bonusowi z Inteligencji",
+   "description": "Ofiara: 1 przedmiot Wykrywasz obecność rzadkich minerałów potrzebnych do tworzenia magicznych przedmiotów. MG decyduje, czy w zasięgu znajdują się jakieś minerały, zależnie od lokalizacji (50% szans to sprawiedliwa wartość dla terenów górzystych). Jeśli minerały leżą pod ziemią, wskazujesz właściwe miejsce do kopania. Ilość minerałów ustala MG, lecz zwykle znajdziesz ich dość na magiczne przedmioty o wartości 1k10 Obciążenia. Rzadkie minerały poprawiają Trudność Testu Wiedzy (Magia) podczas tworzenia magicznych przedmiotów z Bardzo Trudnego (–30) na Problematyczny (–10). Szczegóły w Archiwach Imperium, tom II, strona 54. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +3 PS — Oprócz innych minerałów wykrywasz obecność ithilmaru. Złoża ithilmaru występują wyłącznie na Kowadle Vaula w Caledorze.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 103
+  },
+  {
+   "name": "Ognie Doskonałości",
+   "lore": "Vaula",
+   "cn": 9,
+   "range": "Dotyk",
+   "target": "1 przedmiot",
+   "duration": "Natychmiast",
+   "description": "Ofiara: Ślepota Przyzywasz perfekcjonizm Vaula, by stworzyć bezbłędny magiczny przedmiot. Jeśli rzucisz to zaklęcie na magiczny przedmiot, który tworzysz, możesz zignorować wszelkie Wady, Dziwactwa lub Klątwy wylosowane podczas procesu wytwarzania. Szczegóły w Archiwach Imperium, tom II, strona 54. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +5 PS — Na ten sam przedmiot można rzucić kolejne zaklęcie wytwórcze Vaula, ignorując ograniczenia zezwalające na użycie wyłącznie na przedmiotach niemagicznych.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 103
+  },
+  {
+   "name": "Mądrość Niebiańskiej Stali",
+   "lore": "Vaula",
+   "cn": 11,
+   "range": "Dotyk",
+   "target": "1 przedmiot",
+   "duration": "1 Przedsięwzięcie",
+   "description": "Ofiara: Ślepota Odkrywasz boską technikę kucia niemagicznych przedmiotów z metalu ithilmarowego. Możesz wykonać przedmiot z ithilmaru za pomocą Przedsięwzięcia Rzemieślniczego, o ile masz potrzebną rudę i inne rzadkie minerały. Ekwipunek wykuty z ithilmaru ma wartość Obciążenia zmniejszoną o 2, minimum do 0. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +4 PS — Możesz natychmiast osłabić przedmiot z ithilmaru, czyniąc go kruchym jak suche drewno. Twój Stan Yenlui przesuwa się ku Yenlui (Mrok). +6 PS — Możesz wykuć magiczny przedmiot z ithilmaru, korzystając z procesu opisanego w Archiwach Imperium, tom II, strona 54. Nie możesz jednak użyć innego zaklęcia Vaula, by ulepszyć ten przedmiot. Tę opcję Nadczarowania musisz wybrać tylko raz, na początku procesu wytwarzania, lecz postępy w tworzeniu przedmiotu możesz czynić wyłącznie, gdy działa Mądrość Niebiańskiej Stali.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 103
+  },
+  {
+   "name": "Forteca Hoteka",
+   "lore": "Vaula",
+   "cn": 14,
+   "range": "Liczba metrów równa Bonusowi z Siły Woli",
+   "target": "1 komnata kuźni lub budynek (maksymalnie)",
+   "duration": "Liczba godzin równa Bonusowi z Siły Woli",
+   "description": "Ofiara: Ślepota Otaczasz swoją kuźnię magicznymi zabezpieczeniami i wardami. Komnata lub budynek, w którym mieści się twoja kuźnia, zyskuje jedną z poniższych ochron: Ognista Bariera: Komnatę lub budynek otacza zaklęcie Ściana Ognia ( WFRP, strona 248). Magiczna Zbroja: Wewnątrz kuźni chroni cię zaklęcie Lśniąca Szata ( WFRP, strona 250). Metalowa Ochrona: Metalowe przedmioty dotykające ścian zostają przeklęte zaklęciem Tygiel Chamonu ( WFRP, strona 249). Rzucając to zaklęcie, możesz wyłączyć wybrane stworzenia spod topienia ich przedmiotów. Wzmocnione Drzwi: Zwykłe drzwi stają się magicznie wzmocnione (Bonus z Wytrzymałości 5, Żywotność 15), a wzmocnione drzwi stają się równoważne bramom (Bonus z Wytrzymałości 10, Żywotność 30). Bramy można uszkodzić wyłącznie bronią oblężniczą. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. Za każde +2 PS możesz dodać jedną dodatkową ochronę z powyższej listy.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 103
+  },
+  {
+   "name": "Zaprzyjaźnianie z Rybami",
+   "lore": "Morza",
+   "cn": 0,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "1",
+   "duration": "Liczba minut równa Sile Woli",
+   "description": "Zjednujesz sobie niemagiczną, niedrapieżną rybę dowolnego Rozmiaru (przyjmij, że każda ryba, która normalnie nie zaatakowałaby Elfa, jest niedrapieżna). Wrogo nastawione stworzenia stają się neutralne i cię nie zaatakują (choć mogą wciąż atakować twoich sprzymierzeńców). Neutralne stworzenia stają się przyjazne i chronią cię, jeśli to możliwe. Przyjazne stworzenia można dosiadać, korzystając z odpowiedniej Umiejętności Jeździectwo. To zaklęcie nie umożliwia porozumiewania się.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 106
+  },
+  {
+   "name": "Wyczucie Burzy",
+   "lore": "Morza",
+   "cn": 0,
+   "range": "Liczba mil równa Inicjatywie",
+   "target": "Specjalny",
+   "duration": "Natychmiastowy",
+   "description": "Otrzymujesz wiedzę o wszystkich pobliskich burzach. Informacje obejmują kierunek i szybkość przemieszczania się, natężenie burzy, to, czy się nasila, czy słabnie, oraz czas jej trwania. Możesz też rozpoznać, czy burza jest magiczna.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 106
+  },
+  {
+   "name": "Gniew Oceanu",
+   "lore": "Morza",
+   "cn": 8,
+   "range": "Rzucający",
+   "target": "Obszarowy (liczba mil równa Bonusowi z Siły Woli)",
+   "duration": "3 x Bonus z Siły Woli w minutach",
+   "description": "(zob. niżej) Przywołujesz w okolicy burzę. Przez pierwszy Bonus z Siły Woli minut natężenie burzy odpowiada Bliskiemu Sztormowi ( Morze Szponów, strona 107). Następnie narasta do Silnego Sztormu przez kolejny Bonus z Siły Woli minut, a wreszcie do Gwałtownej Nawałnicy na resztę czasu trwania zaklęcia. Burza jest niemagiczna i nie można jej Rozproszyć.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 106
+  },
+  {
+   "name": "Duchy Fal",
+   "lore": "Morza",
+   "cn": 5,
+   "range": "Liczba metrów równa podwojonej Ogładzie",
+   "target": "Obszarowy (liczba metrów równa podwojonemu Bonusowi z Ogłady)",
+   "duration": "Liczba minut równa Bonusowi z Ogłady",
+   "description": "Przyzywasz z oceanicznych prądów potężnego żywiołaka wiatru. Żywiołak przybiera postać wirującego cyklonu napędzanego przez oszalale tańczące duchy wody. Możesz przesuwać żywiołaka o 2k10 metrów na Rundę, koncentrując się na nim, w przeciwnym razie porusza się jak losowy wir Statki trafione przez żywiołaka doznają Trafienia Krytycznego w takielunek ( Morze Szponów, strona 118). W promieniu 50 metrów od żywiołaka Widoczność poprawia się o jeden poziom, a natężenie Wiatru spada o jeden poziom ( Morze Szponów, strona 106). Za każde +3 PS możesz przyzwać jednego dodatkowego żywiołaka.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 106
+  },
+  {
+   "name": "Zbroja Mathlanna",
+   "lore": "Morza",
+   "cn": 10,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "1 łódź lub statek",
+   "duration": "Liczba minut równa Sile Woli",
+   "description": "Ofiara: + 2 Stany Zmęczenia Spowijasz kadłub jednomasztowego statku całunem ochronnej magii. Statek zyskuje Cechę Pancerz 2 bez żadnej kary za wagę ( Morze Szponów, strona 97). Takielunek i załoga nie są chronione. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. Za każde +2 PS możesz opancerzyć większy statek, o jeden dodatkowy maszt większy. +4 PS — Statek zyskuje zamiast tego Cechę Pancerz 3. +6 PS — Przed atakami dystansowymi chronieni są również takielunek i załoga.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 106
+  },
+  {
+   "name": "Wezwanie Mórz",
+   "lore": "Morza",
+   "cn": 14,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Specjalny",
+   "duration": "Liczba Rund równa Bonusowi z Siły Woli",
+   "description": "Ofiary: + 2 Stany Zmęczenia i –2 Rany Przyzywasz Merwyrma ( Morze Szponów, strona 145). Potwór potrzebuje pełnej Rundy, by wyłonić się ze wzburzonych fal (nie wlicza się to do czasu trwania zaklęcia). Nie możesz porozumiewać się z potworem ani kontrolować jego działań. Merwyrm liczy się jako niedrapieżna ryba i cel neutralny na potrzeby rzucania Zaprzyjaźniania z Rybami przez czas trwania tego zaklęcia. Stworzenie zanurza się z powrotem w morzu, gdy zaklęcie wygasa. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +5 PS — Merwyrm liczy się jako przyjazny zgodnie z zaklęciem Zaprzyjaźnianie z Rybami. +8 PS — Merwyrm nie wraca w głębiny, gdy zaklęcie wygasa. Twój Stan Yenlui przesuwa się ku Yenlui (Mrok).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 107
+  },
+  {
+   "name": "Płaszcz Mathlanna",
+   "lore": "Morza",
+   "cn": 11,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "1 łódź lub statek",
+   "duration": "Liczba minut równa Sile Woli",
+   "description": "Ofiary: +2 Stany Zmęczenia i –1 Rana Owijasz jednomasztowy statek wraz z jego załogą gęstym płaszczem morskiej mgły. Testy wykonywane, by dostrzec statek lub wziąć go na cel w ataku dystansowym, cierpią karę –3 PS. Spowite mgłą statki wciąż pozostawiają za sobą kilwater i tworzą w mgle wiry, które można zauważyć, zdając Wymagający (+0) Test Percepcji. Czarnych Ark ani potworów morskich nie można spowić mgłą. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. Za każde +2 PS możesz spowić mgłą większy statek, o jeden dodatkowy maszt większy. +8 PS — Czarne Arki i potwory morskie można spowić mgłą. Twój Stan Yenlui przesuwa się ku Yenlui (Mrok).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 107
+  },
+  {
+   "name": "Władczyni Głębin",
+   "lore": "Morza",
+   "cn": 9,
+   "range": "Liczba metrów równa Ogładzie",
+   "target": "Specjalny",
+   "duration": "Liczba Rund równa Bonusowi z Ogłady",
+   "description": "Ofiary: +1 Stan Zmęczenia i –1 Rana Przyzywasz jedną z wodnych dziewic Mathlanna, by rozproszyć uwagę twoich wrogów. Każdej Rundy postacie w promieniu 20 metrów od upiornie śpiewającej Oceanidy muszą zdać Problematyczny (–10) Test Opanowania albo zostają zauroczone. Zauroczone postacie nie mogą wykonywać żadnych czynności poza ruchem w stronę Oceanidy, stając się Bezradne ( WFRP, strona 162). Profil Syreny ( Morze Szponów, strona 145), profil Najady ( Towarzysz Śmierci nad Reikiem, strona 88) lub profil Syreny ( Cesarskie Zoo, strona 86) mogą posłużyć do przedstawienia Oceanid, choć zaleca się profil Najady. Oceanida nie porusza się ani nie atakuje i odpływa, gdy zaklęcie wygasa. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +5 PS — Jesteś odporny na wołanie Oceanidy. +3 PS — Możesz nakazać Oceanidzie poruszać się z Szybkością 6, lecz nie atakować.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 107
+  },
+  {
+   "name": "Wodne Płuca",
+   "lore": "Morza",
+   "cn": 7,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "1",
+   "duration": "Liczba godzin równa Bonusowi z Siły Woli",
+   "description": "Ofiara: +1 Stan Zmęczenia Umożliwiasz celowi oddychanie pod wodą, tak jakby oddychał powietrzem. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +4 PS — Zmysły celu (wzrok, słuch i węch) działają pod wodą tak samo, jak działałyby w powietrzu. +4 PS — Na powietrzu cel podlega zasadom Tonięcia i Duszenia się ( WFRP, strona 181). Cel czuje pociąg do wody i do oddychania wystarczy mu jedynie wiadro wody. Twój Stan Yenlui przesuwa się ku Yenlui (Mrok).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 107
+  },
+  {
+   "name": "Wijące się Mgły",
+   "lore": "Morza",
+   "cn": 6,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Siły Woli)",
+   "duration": "Liczba minut równa Bonusowi z Siły Woli",
+   "description": "Ofiara: +1 Stan Zmęczenia Przywołujesz pachnącą solą mgłę, by ukryć swych sprzymierzeńców. Wszelkie ataki dystansowe przeciwko przyjaznym celom w Obszarze Działania cierpią karę –20 do trafienia. Testy Skradania wykonywane przez przyjazne cele zyskują premię +20. Cele, które opuszczą Obszar Działania, tracą tę ochronę. Mgła nie porusza się i rozprasza się, gdy przestajesz się na niej skupiać. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +3 PS — Możesz przesuwać Obszar Działania mgły o Bonus z Siły Woli w metrach co Rundę. +3 PS — Mgła nadaje sprzymierzeńcom w Obszarze Działania Cechę Stworzenia Strach 1.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 107
+  },
+  {
+   "name": "Boski Rylec",
+   "lore": "Hoetha",
+   "cn": 0,
+   "range": "Rzucający",
+   "target": "Rzucający",
+   "duration": "Liczba minut równa Bonusowi z Siły Woli",
+   "description": "Twój palec może kreślić znaki ze światła. Możesz pisać w dowolnym znanym ci języku, lecz nie możesz rysować obrazów. Znaki można kreślić na twardej powierzchni lub w powietrzu, ich blask odpowiada świecy, a utrzymują się przez liczbę godzin równą Bonusowi z Siły Woli.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 110
+  },
+  {
+   "name": "Oświecenie",
+   "lore": "Hoetha",
+   "cn": 0,
+   "range": "Liczba metrów równa Bonusowi z Siły Woli",
+   "target": "1 zwierzę",
+   "duration": "Liczba minut równa Bonusowi z Inteligencji",
+   "description": "Przepełniasz zwierzę mądrością Hoetha. Zwierzę otrzymuje +20 do Inteligencji i Siły Woli oraz traci Cechy Zwierzęcy i Płochliwy. Oświecone zwierzęta potrafią rozumieć i przekazywać bardziej złożone pojęcia, lecz mogą nie zapamiętać wszystkiego, czego się dowiedziały, gdy zaklęcie wygaśnie.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 110
+  },
+  {
+   "name": "Arkaniczne Zrozumienie",
+   "lore": "Hoetha",
+   "cn": 8,
+   "range": "Dotyk",
+   "target": "1 przedmiot",
+   "duration": "Natychmiastowy",
+   "description": "Poznajesz magiczne właściwości przedmiotu lub artefaktu. Poznajesz jego zdolności, klątwy oraz uwięzione w nim istoty (np. żywiołaki, Demony, duchy). Jeśli zdasz Wymagający (+0) Test Inteligencji, dowiadujesz się, jak przedmiot powstał. Dodatkowe PS ujawniają informacje o jego twórcy. Zrozumienie potężnych artefaktów na tyle, by je naprawić lub odtworzyć, może wymagać Wydłużonego Testu Inteligencji rozłożonego na wiele rzuceń.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 110
+  },
+  {
+   "name": "Wielka Więź Duchowa",
+   "lore": "Hoetha",
+   "cn": 4,
+   "range": "Rzucający",
+   "target": "Specjalny",
+   "duration": "Liczba minut równa Bonusowi z Siły Woli",
+   "description": "Nawiązujesz kontakt dalekiego zasięgu ze Zwierzęcym Kompanem (o ile go posiadasz). To zaklęcie zwiększa normalny 4-metrowy zasięg Telepatii Zwierzęcej i Cech Kompana (zob. Archiwa Imperium, tom III, strony 81– 82) do liczby mil równej Sile Woli. Kompani nie mogą przez tę więź dalekiego zasięgu wspomagać rzucania zaklęć. Mistrzowie Wiedzy korzystają z tego zaklęcia w połączeniu z Cechami Posłaniec i Dzielenie Zmysłów swego Kompana, by prowadzić zaawansowany rekonesans i łączność. Tygiel Światła PZ: 6 Zasięg: Dotyk Cel: 1 miecz Czas trwania: Liczba minut równa Bonusowi z Inteligencji Ofiara: Wydłużony Problematyczny (–10) Test Badań Naukowych do łącznej wartości 10 PS Przepełniasz miecz esencją Hoetha. Miecz liczy się jako magiczny i zyskuje Zaletę Szybka. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem +3 PS — Miecz może otrzymać Zaletę Obronna albo Precyzyjna. +5 PS — Miecz zyskuje własny umysł. Władający nim zyskuje po 1 poziomie w każdym z następujących Talentów: Zmysł Bitewny, Cios Odruchowy i Riposta. +7 PS — Jeśli zaklęcie zostanie rzucone podczas kucia miecza, nadane Zalety stają się trwałe. Dozwolona jest tylko jedna próba na miecz.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 110
+  },
+  {
+   "name": "Kontrola Mnemoniczna",
+   "lore": "Hoetha",
+   "cn": 6,
+   "range": "Liczba metrów równa Bonusowi z Siły Woli",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Ofiara: Wydłużony Problematyczny (–10) Test Badań Naukowych do łącznej wartości 10 PS Sięgasz do podświadomości, by wydobyć zagrzebane wspomnienia. Następny Test Wiedzy lub niemagicznego Języka wykonywany przez cel automatycznie kończy się sukcesem z liczbą PS równą twojemu Testowi Rzucania Zaklęcia. Musi istnieć rozsądne wytłumaczenie w grze, dlaczego cel zetknął się z daną wiedzą. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +2 PS — Cel może wykorzystać automatyczny sukces przy swoim następnym Teście Rzucania Zaklęcia. +3 PS — Zaklęcia można użyć, by wymazać celowi jedno konkretne wspomnienie. Nie możesz wymazać pamięci Umiejętności ani zaklęć.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 111
+  },
+  {
+   "name": "Przesyłanie Myśli",
+   "lore": "Hoetha",
+   "cn": 7,
+   "range": "Liczba mil równa Sile Woli",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Ofiara: Wydłużony Problematyczny (–10) Test Badań Naukowych do łącznej wartości 10 PS. Przekazujesz umysłem długodystansową wiadomość głosową. Odbiorcą musi być ktoś, kogo już wcześniej spotkałeś lub z kim korespondowałeś. Wiadomości mogą trwać do minuty i są słyszane twoim głosem. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +3 PS — Możesz przesłać wraz z wiadomością obraz myślowy. +4 PS — Możesz porozumieć się z nieznajomym, o ile znasz jego pełne imię i nazwisko.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 111
+  },
+  {
+   "name": "Święte Wzmocnienia",
+   "lore": "Hoetha",
+   "cn": 11,
+   "range": "Dotyk",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Inteligencji)",
+   "duration": "Liczba godzin równa Bonusowi z Inteligencji",
+   "description": "Ofiara: Wydłużony Problematyczny (–10) Test Badań Naukowych do łącznej wartości 20 PS Nakładasz na obszar ochronne zaklęcia. Wyznaczone hasło może zwalniać cele z działania wzmocnienia. Wybierz jeden z poniższych efektów, działający na każdego, kto wejdzie w Obszar Działania: Zapomnienie: Wspomnienia z ostatnich 24 godzin zostają utracone. Czystość: Cel otrzymuje Obrażenia (Mutacje x 6), ignorując Bonus z Wytrzymałości i Punkty Pancerza. Demony nie mogą wejść w Obszar Działania. Nadzór: Możesz widzieć przestrzeń w Obszarze Działania, poświęcając Rundę na skupienie. Prawdomówność: W Obszarze Działania nie można wypowiedzieć żadnego kłamstwa. To zaklęcie można rzucić na dany obszar tylko raz. Możesz je odnowić Testem Rzucania Zaklęcia o PZ 0 przed jego wygaśnięciem, zachowując pierwotny Obszar Działania, czas trwania i efekty. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +6 PS — Czas trwania można wydłużyć do liczby tygodni równej Bonusowi z Inteligencji.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 111
+  },
+  {
+   "name": "Rzemiosło Duszy",
+   "lore": "Hoetha",
+   "cn": 10,
+   "range": "Liczba metrów równa Bonusowi z Siły Woli",
+   "target": "1 Duch",
+   "duration": "Natychmiastowy",
+   "description": "Wiążesz Ducha z kamieniem drogi lub linią ley. Istota i naczynie muszą znajdować się w zasięgu w chwili rzucenia zaklęcia. Śmiertelnicy, którzy zmarli w ciągu ostatniej godziny, mogą mieć swe duchy związane z naczyniem, zanim odejdą do krainy duchów. Zwykle robi się to, by oszczędzić duszy wiecznego cierpienia w Krainach Chaosu albo zapobiec zawładnięciu duszą przez Bladą Królową. Jeśli Duch nie chce zostać związany w ten sposób, może przeciwstawić się twojemu Testowi Rzucania Zaklęcia swoim Opanowaniem, skutecznie zwiększając PZ zaklęcia o 1 za każdy uzyskany przez niego PS.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 111
+  },
+  {
+   "name": "Praprzemowa",
+   "lore": "Hoetha",
+   "cn": 15,
+   "range": "Rzucający",
+   "target": "Rzucający",
+   "duration": "Liczba godzin równa Bonusowi z Inteligencji",
+   "description": "Ofiara: Wydłużony Trudny (–20) Test Badań Naukowych do łącznej wartości 20 PS Przywołujesz mistyczny język pierwotny, który istniał przed przybyciem Prastarych. Możesz porozumiewać się na podstawowym poziomie z dowolnym śmiertelnym stworzeniem lub zwierzęciem. Przekazanie lub zrozumienie zaawansowanych pojęć może wymagać Testu Inteligencji jednej lub obu stron. Wymiana zdań brzmi dla postronnych jak bełkot, chyba że znają Anoqeyån — wtedy Przeciętny (+20) Test Języka ( Magiczny) pozwala im pojąć jej ogólny sens. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +2 PS — Umożliwia zaawansowaną komunikację z pradawnymi gatunkami sprzed Prastarych, takimi jak Smoki, Wielkie Orły, Fimirowie i większość zwierząt. +4 PS — Umożliwia podstawową komunikację z dowolnym duchem, żywiołakiem lub Demonem.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 111
   }
  ]
 }

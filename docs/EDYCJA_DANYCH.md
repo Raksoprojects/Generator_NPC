@@ -78,6 +78,8 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `traitRoll` | Progi k100 dla liczby cech opcjonalnych (`upTo` = do jakiego wyniku, `count` = ile cech). |
 | `unlimitedTalentCap` | Ile poziomów może mieć talent bez maksimum. |
 | `multiLoreRaces` | Rasy, których czarodzieje mogą poznać kolejne tradycje tajemne (szanse w `spells.extraLores` poziomu), np. `["Wysoki elf", "Leśny elf"]`. |
+| `creatureOnlyProfiles` | Profile nakładane automatycznie tylko na stworzenia (Pomniejszy, Wielki, Legendarny Bohater). Rasy rosną zamiast tego przez `advanceMultiplier` poziomu. |
+| `raceTalents` | Rzadkie talenty rasy przy losowaniu, np. `{ "race": "Wysoki elf", "talent": "Krew Aenariona", "chance": 0.01, "archetypes": { "Szlachcic": 0.05 } }`. |
 
 `tiers` — każdy poziom:
 
@@ -93,6 +95,9 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `heroProfileChances` | Szanse na dodatkowy profil przy losowaniu, np. `[{ "profile": "Weteran", "chance": 0.08 }, { "profile": "Doborowy", "chance": 0.05 }]`. Szanse się wykluczają — BN dostaje najwyżej jeden. |
 | `keySkills`, `keyChars` | Premia kluczowych umiejętności / cech archetypu: `bonus` — zakres losowania, `min` / `max` — łączne rozwinięcia po premii. Trzymaj progi rozłączne (`min` wyższego poziomu > `max` niższego), wtedy wyższy poziom jest zawsze lepszy. |
 | `spells.maxCn`, `spells.arcane` | Najwyższy PZ zaklęć tradycji i odchylenie ich liczby od Bonusu z Inteligencji, np. `[-1, 3]`. |
+| `advanceMultiplier` | Mnożnik rozwinięć za poziom profesji u ras (np. heroiczny 2,5 — ukończony poziom daje +12/13 zamiast +5). Stworzenia go nie używają — mają profile bohaterów. |
+| `allowLevel5` | Profesja z 5. poziomem (elfi Mag, kapłani elfów) może na nim dojść do 5. |
+| `spells.topSpells` | Ile najsilniejszych zaklęć głównej tradycji BN zna na pewno. |
 | `spells.extraLores` | Szanse na kolejne tradycje dla ras z `multiLoreRaces`, po kolei, np. `[0.5, 0.15]` = 50% na drugą, a jeśli wypadła — 15% na trzecią. Druga tradycja ma połowę zaklęć głównej, trzecia jedną trzecią. |
 
 ---
@@ -234,10 +239,21 @@ W `talents.json` są 4 talenty bez opisu i limitu. Znajdziesz je, szukając
 | Mistrzowska Magia Runiczna | Kowal Run 3 | talent z Podręcznika gracza Krasnoluda |
 | Zręczne Palce | Zielarka 2, Złodziej 3 | możliwe, że to inna nazwa talentu *Ruchliwe Dłonie* — do sprawdzenia w podręczniku |
 | Przemawianie | Zarządca 2 | możliwe, że to inna nazwa talentu *Mówca* — do sprawdzenia w podręczniku |
+| Wyważony Cios | Mistrz Miecza 1 | *Wysokie Elfy* wymieniają go w profesji, ale nie opisują |
+| Cios Odwetowy | Mistrz Miecza 3 | jw. |
+| Dzieło Życia | Estetyk 4, Kapłan-Kowal Vaula 5 | jw. |
 
 Uzupełnij pola `max`, `max_raw`, `tests`, `description` i `source` (schemat jak
 w innych talentach). Jeśli okaże się, że to inna nazwa istniejącego talentu,
 popraw nazwę w `professions.json` i usuń pusty wpis.
+
+### Profesje zaawansowane i kapłani elfów
+
+- `entry: { "from": "Mag", "level": 2 }` — profesja zaczyna się od wyższego poziomu (elfi
+  kapłani: 3–5); BN najpierw przechodzi profesję wejściową do podanego poziomu.
+- `spellLore` — tradycja zaklęć profesji, główna u BN (np. `"Vaula"` — Magia Vaula).
+- `minTier` — najniższy poziom BN, na którym generator losuje profesję (kapłani elfów:
+  `"heroiczny"`, bo ich zaklęcia wymagają Wysokiej Magii).
 
 ### Zmiana profesji u czarodziejów
 

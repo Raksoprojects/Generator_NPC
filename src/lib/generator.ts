@@ -183,17 +183,16 @@ function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rn
   delete cands[main];
   const weights: Record<string, number> = {};
   for (const [name, w] of Object.entries(cands)) {
-    if (!raceOk(name, race) || !careerSwitchOk(name, main)) continue;
+    if (!raceOk(name, race) || !careerSwitchOk(name, main) || firstLevel(name) > 1) continue;
     weights[name] = w * (gd.getProfession(name)?.class === mainClass ? 2 : 1);
   }
   if (Object.keys(weights).length) return weightedKey(weights, rng);
   // Archetyp nie ma drugiej profesji dla tej rasy - dowolna z tej samej klasy.
-  const sameClass = gd.allProfessionNames().filter(
-    (p) => p !== main && gd.getProfession(p)?.class === mainClass && raceOk(p, race) && careerSwitchOk(p, main)
-  );
+  const usable = (p: string) => p !== main && raceOk(p, race) && careerSwitchOk(p, main) && firstLevel(p) === 1;
+  const sameClass = gd.allProfessionNames().filter((p) => gd.getProfession(p)?.class === mainClass && usable(p));
   if (sameClass.length) return pick(sameClass, rng);
   // Np. elf czarodziej: jego klasa to same profesje magiczne - wczesniej byl kimkolwiek innym.
-  return pick(gd.allProfessionNames().filter((p) => p !== main && raceOk(p, race) && careerSwitchOk(p, main)), rng);
+  return pick(gd.allProfessionNames().filter(usable), rng);
 }
 
 /** Podzial laczniej liczby poziomow na [poprzednia, glowna] profesje. */
@@ -211,6 +210,27 @@ function splitLevels(tier: TierDef, total: number, forceTwo: boolean, rng: Rng):
   return [total - main, main];
 }
 
+/** Najwyzszy poziom profesji, jaki BN osiaga na tym poziomie (5 tylko u legendarnych z profesja 5-poziomowa). */
+function topCareerLevel(tier: TierDef): number {
+  return tier.allowLevel5 ? 5 : tier.maxCareerLevel;
+}
+
+const firstLevel = (profession: string) => Math.min(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
+
+/**
+ * Profesja zaawansowana (elfi kaplani, poziomy 3-5): najpierw profesja wejsciowa
+ * (Mag 1-2), potem kaplan od 3. poziomu do najwyzszego osiagalnego.
+ */
+function advancedCareerPath(main: string, tier: TierDef): CareerStep[] {
+  const def = gd.getProfession(main)!;
+  const first = firstLevel(main);
+  const top = Math.max(first, Math.min(Math.max(...def.levels.map((l) => l.level)), topCareerLevel(tier)));
+  const steps: CareerStep[] = [];
+  if (def.entry) for (let l = 1; l <= def.entry.level; l++) steps.push({ profession: def.entry.from, level: l });
+  for (let l = first; l <= top; l++) steps.push({ profession: main, level: l });
+  return steps;
+}
+
 export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId, race: string, rng: Rng): CareerStep[] {
   const arch = gd.getArchetype(archetype);
   const tier = gd.getTier(tierId);
@@ -218,8 +238,19 @@ export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId
   const chosen = (spec.professions ?? []).filter((p) => gd.getProfession(p));
   const total = Number(weightedKey(tier.totalLevels, rng) ?? 1);
 
-  const main = chosen[chosen.length - 1] ?? weightedKey(professionCandidates(arch, race), rng);
+  // Profesje zaczynajace sie od wyzszego poziomu (kaplani) tylko tam, gdzie da sie do nich dojsc.
+  const minOk = (p: string) => TIER_IDS.indexOf(gd.getProfession(p)?.minTier ?? "slaby") <= TIER_IDS.indexOf(tierId);
+  const candidates = Object.fromEntries(
+    Object.entries(professionCandidates(arch, race)).filter(([p]) => firstLevel(p) <= topCareerLevel(tier) && minOk(p))
+  );
+  // Nic nie zostalo (np. elfi kaplan na nizszym poziomie) - profesja wejsciowa kaplanow (Mag).
+  const entries = Object.keys(professionCandidates(arch, race))
+    .map((p) => gd.getProfession(p)?.entry?.from)
+    .filter((p): p is string => !!p && raceOk(p, race));
+  const fallback = entries.length ? Object.fromEntries(entries.map((p) => [p, 1])) : professionCandidates(arch, race);
+  const main = chosen[chosen.length - 1] ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
   if (!main) return [];
+  if (firstLevel(main) > 1) return advancedCareerPath(main, tier);
   let [prevLevels, mainLevels] = splitLevels(tier, total, chosen.length > 1, rng);
   let prev: string | undefined;
   if (prevLevels > 0) {
@@ -692,6 +723,11 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
   }
   npc.careerPath = buildCareerPath({ professions }, npc.archetype, npc.tier, npc.race, rng);
   developCareer(npc, rng, deterministic);
+  // Rzadkie talenty rasy (Krew Aenariona) - tylko przy losowaniu.
+  for (const rt of gd.getSettings().raceTalents ?? []) {
+    if (deterministic || creature || rt.race !== npc.race || npc.talents.some((t) => t.name === rt.talent)) continue;
+    if (chance(rt.archetypes?.[npc.archetype] ?? rt.chance, rng)) npc.talents.push({ name: rt.talent, level: 1 });
+  }
   rollExtraLores(npc, rng, deterministic);
   if (creature) bookSkillsAndTalents(npc, creature);
   resolveMagicTrappings(npc, rng, deterministic);

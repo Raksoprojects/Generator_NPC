@@ -69,6 +69,9 @@ function loreFromTrait(spec: string, rng: Rng): string | undefined {
 export function casterLores(npc: Npc, rng: Rng): { petty: boolean; lores: string[] } {
   let petty = false;
   const lores = new Set<string>();
+  // Kaplan elfow: tradycja boga (Magia Vaula...) jest glowna, przed kolorami i Wysoka Magia.
+  const own = gd.getProfession(npc.careerPath.at(-1)?.profession ?? "")?.spellLore;
+  if (own && npc.talents.some((t) => t.name === "Wysoka Magia")) lores.add(own);
   for (const t of npc.talents) {
     const { base, spec } = gd.splitSpec(t.name);
     if (base === "Magia Prosta") petty = true;

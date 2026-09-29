@@ -258,6 +258,21 @@ describe("rozwoj bestii", () => {
     }
   });
 
+  it("elfi kaplani: od heroicznego, po 2. poziomie Maga, z glowna tradycja swojego boga", () => {
+    const lore: Record<string, string> = { "Kapłan-Kowal Vaula": "Vaula", "Tkacz Burzy": "Morza", "Mistrz Wiedzy Hoetha": "Hoetha" };
+    for (let seed = 1; seed <= 30; seed++) {
+      const hero = generateNpc({ archetype: "Kapłan", tier: "heroiczny", race: "Wysoki elf" }, seedRng(seed));
+      const last = hero.careerPath.at(-1)!;
+      if (lore[last.profession]) {
+        expect(hero.careerPath.slice(0, 2)).toEqual([{ profession: "Mag", level: 1 }, { profession: "Mag", level: 2 }]);
+        expect(hero.careerPath[2]).toEqual({ profession: last.profession, level: 3 });
+        expect(hero.spells.some((s) => gd.getSpell(s)?.lore === lore[last.profession]), last.profession).toBe(true);
+      }
+      const adv = generateNpc({ archetype: "Kapłan", tier: "zaawansowany", race: "Wysoki elf" }, seedRng(seed));
+      expect(adv.careerPath.some((s) => lore[s.profession])).toBe(false);
+    }
+  });
+
   it("czarodziej nie zmienia tradycji; elfy od zaawansowanego moga znac kolejne", () => {
     const magic = (p: string) =>
       gd.getProfession(p)!.levels.some((l) => [...l.skills, ...l.talents].some((n) => n.startsWith("Splatanie Magii")));

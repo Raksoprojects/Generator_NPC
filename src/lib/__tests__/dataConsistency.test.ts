@@ -122,7 +122,8 @@ describe("pozostale pliki generatora", () => {
   });
 
   it("talenty z profesji i archetypow maja opisy (poza brakujacymi w zrodlach)", () => {
-    const noSource = new Set(["Pamiętliwy", "Mistrzowska Magia Runiczna"]);
+    // Talenty wymienione w profesjach, ale nieopisane w swoich podrecznikach (Krasnoludy, Wysokie Elfy).
+    const noSource = new Set(["Pamiętliwy", "Mistrzowska Magia Runiczna", "Wyważony Cios", "Cios Odwetowy", "Dzieło Życia"]);
     const empty = gd.allTalentNames().filter((n) => !noSource.has(n) && !gd.getTalent(n)?.description?.trim());
     expect(empty).toEqual([]);
   });

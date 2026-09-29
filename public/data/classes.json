@@ -23,7 +23,10 @@
       "Kowal Run",
       "Artylerzysta",
       "Kartografka",
-      "Mag"
+      "Mag",
+      "Kapłan-Kowal Vaula",
+      "Tkacz Burzy",
+      "Mistrz Wiedzy Hoetha"
     ]
   },
   "Mieszczanie": {
@@ -50,7 +53,8 @@
       "Służąca",
       "Szlachcic",
       "Szpieg",
-      "Zwadźca"
+      "Zwadźca",
+      "Estetyk"
     ]
   },
   "Pospólstwo": {
@@ -80,7 +84,8 @@
       "Strażniczka Dróg",
       "Woźnica",
       "Ciura Obozowa",
-      "Elementalista"
+      "Elementalista",
+      "Wojownik Cienia"
     ]
   },
   "Wodniacy": {
@@ -93,7 +98,8 @@
       "Przemytniczka",
       "Przewoźnik",
       "Strażnik Rzeczny",
-      "Żeglarz"
+      "Żeglarz",
+      "Kupiec Poszukiwacz Przygód"
     ]
   },
   "Łotry": {
@@ -132,7 +138,9 @@
       "Lekki Kawalerzysta",
       "Specjalista Oblężniczy",
       "Pikinier",
-      "Kapłanka Bitewna Myrmidii"
+      "Kapłanka Bitewna Myrmidii",
+      "Straż Morska",
+      "Mistrz Miecza"
     ]
   }
 }

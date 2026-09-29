@@ -19,7 +19,9 @@
       "Rycerz Najemny": 1,
       "Rycerz": 1,
       "Kawalerzysta": 1,
-      "Zabójca": 1
+      "Zabójca": 1,
+      "Straż Morska": 2,
+      "Mistrz Miecza": 2
     },
     "keySkills": [
       "Broń Biała",
@@ -94,7 +96,9 @@
       "Banita": 1,
       "Strażniczka Dróg": 1,
       "Artylerzysta": 0.5,
-      "Żołnierz": 1
+      "Żołnierz": 1,
+      "Straż Morska": 2,
+      "Wojownik Cienia": 1
     },
     "keySkills": [
       "Broń Zasięgowa",
@@ -160,7 +164,8 @@
       "Mieszczka": 2,
       "Domokrążca": 2,
       "Rzemieślniczka": 1,
-      "Paser": 1
+      "Paser": 1,
+      "Kupiec Poszukiwacz Przygód": 2
     },
     "keySkills": [
       "Targowanie",
@@ -418,7 +423,8 @@
       "Aptekarka": 2,
       "Inżynier": 1,
       "Świecki Alchemik": 1,
-      "Kartografka": 1
+      "Kartografka": 1,
+      "Estetyk": 1
     },
     "keySkills": [
       "Badania Naukowe",
@@ -473,7 +479,10 @@
       "Magister Rewizor": 0.5,
       "Elementalista": 1,
       "Czarodziej": 0.01,
-      "Mag": 2
+      "Mag": 2,
+      "Kapłan-Kowal Vaula": 0.4,
+      "Tkacz Burzy": 0.3,
+      "Mistrz Wiedzy Hoetha": 0.4
     },
     "keySkills": [
       "Splatanie Magii",
@@ -605,7 +614,8 @@
       "Łowczyni": 3,
       "Posłaniec": 1,
       "Lekki Kawalerzysta": 1,
-      "Banita": 0.5
+      "Banita": 0.5,
+      "Wojownik Cienia": 3
     },
     "keySkills": [
       "Percepcja",
@@ -677,7 +687,10 @@
       "Mniszka": 2,
       "Kapłan Bitewny": 1,
       "Biczownik": 1,
-      "Kapłanka Bitewna Myrmidii": 0.5
+      "Kapłanka Bitewna Myrmidii": 0.5,
+      "Kapłan-Kowal Vaula": 2,
+      "Tkacz Burzy": 1.5,
+      "Mistrz Wiedzy Hoetha": 1
     },
     "keySkills": [
       "Modlitwa",
@@ -716,7 +729,8 @@
       "Czarownica!",
       "Magia Chaosu",
       "Błogosławieństwo",
-      "Inwokacja"
+      "Inwokacja",
+      "Wysoka Magia"
     ]
   },
   "Chłop": {
@@ -791,7 +805,8 @@
       "Doradca": 1,
       "Poseł": 1,
       "Zwadźca": 1,
-      "Namiestnik": 1
+      "Namiestnik": 1,
+      "Estetyk": 1
     },
     "keySkills": [
       "Broń Biała",
@@ -849,7 +864,10 @@
       "Doker": 1,
       "Pirat Rzeczny": 1,
       "Pilotka Rzeczna": 1,
-      "Strażnik Rzeczny": 1
+      "Strażnik Rzeczny": 1,
+      "Straż Morska": 2,
+      "Kupiec Poszukiwacz Przygód": 1,
+      "Tkacz Burzy": 0.2
     },
     "keySkills": [
       "Pływanie",

@@ -2039,5 +2039,116 @@
     "description": "Wykorzystujesz ruchy ciał niebieskich, sny i wróżby, by wzmocnić Qhaysh. Każdy poziom daje +1 PS do Testów Splatania Magii (Qhaysh) i pozwala utrzymać dodatkowe zaklęcie auryczne (dającą Ochronę), także zaklęć Kolorów.",
     "source": "Podręcznik Gracza: Wysokie Elfy",
     "page": 83
+  },
+  "Sztuki Walki": {
+    "max": {
+      "type": "characteristic",
+      "attr": "WW",
+      "attr_name": "Walki Wręcz"
+    },
+    "max_raw": "Bonus z Walki Wręcz",
+    "tests": "",
+    "description": "Ataki bez broni tracą Wadę Niegroźny. Za każdy kolejny poziom możesz walcząc bez broni korzystać z jednej Zalety: Przebijająca, Parująca, Dekoncentrująca, Szybka, Przekłuwająca, Precyzyjna albo Ogłuszająca — wybierasz ją na początku walki i każdej swojej Tury.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 68
+  },
+  "Taniec Miecza": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "Znasz starożytną tradycję Tańca Miecza (wymaga Dwuręcznego Miecza Hoetha albo rodowego zaczarowanego miecza) i możesz zapamiętywać jej techniki. Znasz Rytuał Oczyszczenia; kolejna technika kosztuje 100 PD za każdą już znaną.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 68
+  },
+  "Medytacja Cadai": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "Modlitwa",
+    "description": "Codzienna, co najmniej godzinna medytacja i Przeciętny (+20) Test Modlitwy pozwalają dostosować Stan Yenlui do Yenlui (Światło).",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 101
+  },
+  "Umysł Ponad Ciałem": {
+    "max": {
+      "type": "fixed",
+      "value": 3
+    },
+    "max_raw": "3",
+    "tests": "Modlitwa",
+    "description": "Ta technika medytacyjna pozwala elfiemu rzucającemu znosić cierpienie fizyczne, a nawet widzieć po trwałym oślepieniu. By skorzystać z tego Talentu, musisz spędzić co najmniej dwadzieścia minut w cichej kontemplacji, po czym zdać Wymagający (+0) Test Modlitwy. Jeśli go zdasz, zyskujesz następujące korzyści na 1k10 + PS k10 godzin. 1 poziom: Zyskujesz Cechę Stworzenia Bezbolesny i nie otrzymujesz Stanów wywołanych bólem. 2 poziomy: Zyskujesz boski wzrok. Możesz dostrzegać kształty przedmiotów lub stworzeń oczyma umysłu, lecz nie kolory, wyrazy twarzy ani drobne detale — z wyjątkiem przedmiotów wykutych. Testy Rzemiosła (Kowalstwo) wykonujesz bez kary za ślepotę i jesteś odporny na Stan Oślepienie, nawet z magicznych lub boskich źródeł. 3 poziomy: Możesz użyć Determinacji, by zignorować kary z Ran Krytycznych podczas Testów Rozszerzonych (takich jak Przedsięwzięcia Rzemieślnicze ).",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 101
+  },
+  "Oko Sztormu": {
+    "max": {
+      "type": "fixed",
+      "value": 3
+    },
+    "max_raw": "3",
+    "tests": "Modlitwa",
+    "description": "Ta medytacyjna technika poprawia skupienie i odporność elfiego rzucającego zaklęcia, a ci, którzy w pełni ją opanują, mogą wpływać na pogodę. Aby skorzystać z tego Talentu, musisz spędzić co najmniej dwadzieścia minut w cichym skupieniu, po czym zdać Wymagający (+0) Test Modlitwy. Jeśli ci się powiedzie, zyskujesz poniższe korzyści na 1k10 + PS k10 godzin. 1 poziom: Jesteś odporny na wszelkie rozproszenia, które normalnie przerwałyby Splatanie Magii. 2 poziomy: Usuwasz Stany Zmęczenia w połowie normalnego czasu ustalonego przez MG ( WFRP, strona 169). Dodatkowo możesz ignorować kary do Testów Splatania Magii i Rzucania Zaklęcia wynikające ze Stanów Zmęczenia. 3 poziomy: Wykonując rzut na Tabeli Pogody (zob. Morze Szponów, strona 106, lub **Zwinne Kroki, Lekkie Palce**, strona 114), możesz dodać lub odjąć 1 od wszystkich rzutów kością. Kapłan Mathlanna Kult Mathlanna to luźno zorganizowana hierarchia, a jego świątynie są często zaniedbane. Tkacze Burzy mają więc swobodę żeglowania po morzach w poszukiwaniu przygód. Rafowe świątynki Mathlanna znajdują się wszędzie tam, dokąd dotarły elfie żagle. Świątynki te często rzeźbi się na podobieństwo samego boga albo jednego z jego ulubionych morskich stworzeń. Główna świątynia Ulthuanu to wielowieżowa budowla z dolomitu i koralu, położona na Zmiennych Wyspach.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 105
+  },
+  "Azyl Umysłu": {
+    "max": {
+      "type": "fixed",
+      "value": 3
+    },
+    "max_raw": "3",
+    "tests": "Modlitwa",
+    "description": "Medytacyjne techniki Hoetha są wykorzystywane przez elfich rzucających zaklęcia, by chronić umysł przed zepsuciem i szaleństwem. Aby skorzystać z tego Talentu, musisz spędzić co najmniej dwadzieścia minut w cichym skupieniu, po czym zdać Wymagający (+0) Test Modlitwy. Jeśli ci się powiedzie, zyskujesz poniższe korzyści na 1k10 + PS k10 godzin. 1 poziom: Jesteś odporny na wszelkie punkty Zepsucia wynikające z rzucania zaklęć. 2 poziomy: Możesz dodać +1 PS do dowolnych wykonywanych Testów Badań Naukowych. 3 poziomy: Jesteś zwolniony z ujemnych modyfikatorów wynikających ze Stanów Yenlui (zob. strona 47).",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 109
+  },
+  "Krew Aenariona": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "Jesteś potomkiem Aenariona, pierwszego feniksowego króla: masz wyjątkowe przeznaczenie i dodatkowy Punkt Przeznaczenia. Jedni Elfowie cię podziwiają, inni uważają potomków Aenariona za z natury niebezpiecznych.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 51
+  },
+  "Wyważony Cios": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "",
+    "source": "Do uzupełnienia",
+    "note": "Talent z profesji w: Podręcznik Gracza: Wysokie Elfy — podręcznik nie podaje opisu."
+  },
+  "Cios Odwetowy": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "",
+    "source": "Do uzupełnienia",
+    "note": "Talent z profesji w: Podręcznik Gracza: Wysokie Elfy — podręcznik nie podaje opisu."
+  },
+  "Dzieło Życia": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "",
+    "source": "Do uzupełnienia",
+    "note": "Talent z profesji w: Podręcznik Gracza: Wysokie Elfy — podręcznik nie podaje opisu."
   }
 }
