@@ -35,15 +35,17 @@
     return out;
   })();
 
-  /** Wartosc listy "kto": "a:Archetyp" albo "c:Stworzenie". */
+  /** Wartosc listy "kto": "a:Archetyp", "c:Stworzenie" albo "g:Grupa stworzen". */
   function whoOf(row: GroupRow): string {
+    if (row.creatureGroup) return `g:${row.creatureGroup}`;
     return row.creature ? `c:${row.creature}` : `a:${row.archetype}`;
   }
 
   function setWho(row: GroupRow, value: string) {
     const [kind, name] = [value.slice(0, 1), value.slice(2)];
-    if (kind === "c") {
-      row.creature = name;
+    row.creatureGroup = kind === "g" ? name : undefined;
+    if (kind === "c" || kind === "g") {
+      row.creature = kind === "c" ? name : undefined;
       row.archetype = "";
       row.race = undefined;
     } else {
@@ -63,6 +65,7 @@
       for (let i = 0; i < count; i++) {
         const npc = generateNpc({
           creature: row.creature,
+          creatureGroup: row.creature ? undefined : row.creatureGroup,
           archetype: row.archetype || undefined,
           tier: row.tier,
           race: row.race || undefined,
@@ -70,7 +73,7 @@
           label: row.label || undefined
         });
         // Bestie bez imion numerujemy: Wilk 1, Wilk 2...
-        if (row.creature && npc.name === row.creature && count > 1) npc.name = `${row.creature} ${i + 1}`;
+        if (npc.creature && npc.name === npc.creature && count > 1) npc.name = `${npc.creature} ${i + 1}`;
         npc.group = groupName.trim() || undefined;
         out.push(npc);
       }
@@ -126,6 +129,12 @@
           <select value={whoOf(row)} onchange={(e) => setWho(row, (e.currentTarget as HTMLSelectElement).value)} aria-label="Archetyp albo stworzenie">
             <optgroup label="Archetypy">
               {#each gd.allArchetypeNames() as a (a)}<option value={`a:${a}`}>{a}</option>{/each}
+            </optgroup>
+            <optgroup label="Grupy stworzeń (każdy losowo z grupy)">
+              {#each Object.keys(creatureGroups) as g (g)}<option value={`g:${g}`}>{g}</option>{/each}
+              {#each gd.creatureGroupTree().filter((t) => t.subgroups.length) as t (t.group)}
+                <option value={`g:${t.group}`}>{t.group} (wszystkie)</option>
+              {/each}
             </optgroup>
             {#each Object.entries(creatureGroups) as [group, names] (group)}
               <optgroup label={`Stworzenia: ${group}`}>

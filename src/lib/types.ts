@@ -445,6 +445,8 @@ export interface GroupRow {
   archetype: string;
   /** Stworzenie z bestiariusza (zamiast rasy). */
   creature?: string;
+  /** Grupa stworzen - kazdy BN wiersza losowany z niej osobno ("Nieumarli", "Chaos › Zwierzoludzie"). */
+  creatureGroup?: string;
   tier: TierId;
   race?: string;
   commander?: boolean;
