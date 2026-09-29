@@ -157,18 +157,20 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
   profil z książki plus pasujące umiejętności** — bestie z podręcznika głównego
   nie mają w książce żadnych umiejętności, więc dostają je z rodziny (połowa
   „pasowania”, np. niedźwiedź Broń Biała (Bijatyka) +15, wilk +10). Liczy się
-  wyższa wartość: książka albo rodzina. Każdy wyższy poziom dodaje +5:
+  wyższa wartość: książka albo rodzina. Każdy wyższy poziom dodaje +10:
 
   | Poziom | Cechy (WW, S, Wt, I, Zw) | Umiejętności | Cechy Stworzeń z rodziny | Cechy „Opcjonalne” |
   |---|---|---|---|---|
   | Słaby — typowy osobnik | +0 | książka / rodzina | 0 | — |
-  | Średni — rosły osobnik | +5 | +5 | 1 | 25% szans |
-  | Zaawansowany — weteran stada | +10 | +10 | 1 | 50% |
-  | Doświadczony — przewodnik stada | +15 | +15 | 2 | 75% |
-  | Heroiczny — bestia z legend | +20 | +20 | 3 | 100% |
-  | Legendarny — mityczna bestia | +30 | +30 | 4 | 100% |
+  | Średni — rosły osobnik | +10 | +10 | 1 | 25% szans |
+  | Zaawansowany — weteran stada | +20 | +20 | 1 | 50% |
+  | Doświadczony — przewodnik stada | +30 | +30 | 2 | 75% |
+  | Heroiczny — bestia z legend | +40 | +40 | 3 | 100% |
+  | Legendarny — mityczna bestia | +60 | +60 | 4 | 100% |
 
-  Niedźwiedź (WW 35): Bijatyka około 50 u słabego, 60 u średniego, 70 u zaawansowanego.
+  Niedźwiedź (WW 35): Bijatyka około 50 u słabego, 70 u średniego, 90 u zaawansowanego.
+  Stworzenie z minimalnym poziomem (np. wampir od zaawansowanego) liczy tę tabelę od
+  swojego minimum.
 
 Pełna lista stworzeń (205, z poziomem „od”, rodziną i źródłem) oraz tradycji i
 linii krwi: [docs/LISTA_STWORZEN.md](docs/LISTA_STWORZEN.md).

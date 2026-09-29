@@ -2,8 +2,8 @@
   "settings": {
     "note": "System rozwoju stworzeń (bez profesji). Słaby = profil z książki + umiejętności rodziny (bestie z podręcznika nie mają umiejętności). Umiejętność = max(książka, pasowanie × tierFactor zaokr. do 5) + skillBonus; charAdvances do cech z charCodes; Cechy Stworzeń rodziny (traitCount) i szansa na cechę Opcjonalną.",
     "tierFactor": { "slaby": 0.5, "sredni": 0.5, "zaawansowany": 0.5, "doswiadczony": 0.5, "heroiczny": 0.5, "legendarny": 0.5 },
-    "skillBonus": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20, "legendarny": 30 },
-    "charAdvances": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20, "legendarny": 30 },
+    "skillBonus": { "slaby": 0, "sredni": 10, "zaawansowany": 20, "doswiadczony": 30, "heroiczny": 40, "legendarny": 60 },
+    "charAdvances": { "slaby": 0, "sredni": 10, "zaawansowany": 20, "doswiadczony": 30, "heroiczny": 40, "legendarny": 60 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
     "traitCount": { "slaby": 0, "sredni": 1, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3, "legendarny": 4 },
     "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1, "legendarny": 1 },

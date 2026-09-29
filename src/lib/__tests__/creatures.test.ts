@@ -84,14 +84,14 @@ describe("rozwoj bestii", () => {
     expect(weak.careerPath).toEqual([]);
     expect(top.heroProfiles).toEqual([]);
     const stealth = (n: Npc) => n.skills.find((s) => s.name === "Skradanie (Wieś)")!.advances;
-    // Ksiazka: Skradanie 75 przy Zw 55 = +20; rodzina Kot: 40 x 0.5 = 20. Kazdy poziom wyzej +5.
+    // Ksiazka: Skradanie 75 przy Zw 55 = +20; rodzina Kot: 40 x 0.5 = 20. Kazdy poziom wyzej +10.
     expect(stealth(weak)).toBe(20);
     expect(weak.traits).toEqual([]);
     expect(Object.values(weak.charAdvances).every((v) => v === 0)).toBe(true);
-    expect(stealth(mid)).toBe(25);
-    expect(mid.charAdvances.Zw).toBe(5);
+    expect(stealth(mid)).toBe(30);
+    expect(mid.charAdvances.Zw).toBe(10);
     expect(mid.traits.length).toBe(1);
-    expect(stealth(top)).toBe(35);
+    expect(stealth(top)).toBe(50);
     expect(top.traits.length).toBe(2);
   });
 
@@ -129,7 +129,17 @@ describe("rozwoj bestii", () => {
     expect(chosen.tier).toBe("doswiadczony");
     expect(Object.values(chosen.charAdvances).every((v) => v === 0)).toBe(true);
     const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
-    expect(lord.charAdvances.WW).toBe(5);
+    expect(lord.charAdvances.WW).toBe(10);
+  });
+
+  it("cecha Broń trafia najlepsza Bronia Biala, nie sama WW", () => {
+    for (let seed = 1; seed <= 10; seed++) {
+      const g = generateNpc({ creature: "Goblin", tier: "sredni" }, seedRng(seed));
+      const v = computeNpc(g);
+      const best = Math.max(...v.skills.filter((s) => s.name.startsWith("Broń Biała")).map((s) => s.total));
+      const weapon = v.weapons.find((w) => w.name === "Broń");
+      if (weapon && Number.isFinite(best)) expect(weapon.skill).toBe(best);
+    }
   });
 
   it("talenty z bloku stworzenia nie podwajaja premii do cech", () => {
