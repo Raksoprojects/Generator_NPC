@@ -107,8 +107,27 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    czy „broń (dowolna)” zamieniane są na konkretną broń pasującą do postaci
    (krasnolud — topór albo młot, elf — miecz, chłop — pałka albo topór). Brak
    broni? Dobierana jest wg najlepiej rozwiniętej umiejętności. Zestaw: do 2 broni
-   białych, tarcza i 1 zasięgowa.
-10. **Zaklęcia.** Magia Prosta: około Bonusu z Siły Woli zaklęć. Tradycja: Bonus z
+   białych, tarcza i 1 zasięgowa. Krasnoludy noszą zwykle własny oręż
+   (krasnoludzki topór, wielki młot, hakownica…, *Krasnoludy* s. 93–94).
+
+   **Jakość wykonania** (PG s. 291–293): słabi BN częściej mają broń i pancerz
+   z Wadami (Tandetny, Brzydki, Zawodny, Nieporęczny), wyżsi — z Zaletami
+   (Wytrzymały, Wyśmienity, Praktyczny, Poręczny). Zielonoskórzy, skaveny i
+   zwierzoludzie robią gorzej, krasnoludy lepiej, a elfie wyroby zawsze mają
+   Wytrzymały 1 i Wyśmienity 1. Bohaterowie krasnoludów noszą gromril (płyta
+   3 PP), elfów — ithilmar. Każda Zaleta i Wada broni, pancerza i wykonania jest
+   na karcie i ma opis po kliknięciu.
+10. **Przedmioty magiczne** — tylko istoty rozumne (smoki i bestie nie):
+    zaawansowany 1%, doświadczony 10% (czasem dwa), heroiczny 50% (do trzech),
+    legendarny co najmniej dwa. Losowane z bazy dopasowanej do postaci:
+    krasnoludy — runiczna broń, zbroja gromrilowa i talizmany (1–3 runy, jedna
+    mistrzowska), słudzy Chaosu — Broń Chaosu i demoniczna (właściwości wg boga),
+    wampiry — ich artefakty, elfy — zaklęte przedmioty i pancerz smoczy,
+    czarodzieje — Kamienie Mocy, kapłani — relikwie, gobliny i skaveny — własne;
+    dla wszystkich: przeklęte przedmioty z *Wiatrów Magii*, mikstury, zaklęta broń
+    i pancerz. Efekty (Obrażenia, premie do cech, PP, Żywotność) liczą się w
+    statystykach.
+11. **Zaklęcia.** Magia Prosta: około Bonusu z Siły Woli zaklęć. Tradycja: Bonus z
     Inteligencji + odchylenie zależne od poziomu, zawsze z jednym zaklęciem z
     górnej półki. Słabi czarujący znają tylko Magię Prostą.
 
@@ -122,14 +141,24 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
     | Legendarny | bez limitu | BInt +3…+7 |
 
     Elfy (Wysokie i Leśne) nie są związane jednym kolegium: ich czarodzieje mogą
-    znać kolejne tradycje — zaawansowany 60% na drugą i 10% na trzecią, heroiczny
-    do 6 tradycji, legendarny do wszystkich 8. Druga tradycja ma połowę zaklęć
-    głównej, trzecia jedną trzecią itd.
-11. **Mutacje.** 1% szans na mutację u każdego BN (70% fizyczne, 30% psychiczne).
+    znać kolejne tradycje (najwyżej tyle, ile wynosi Bonus z Siły Woli) —
+    zaawansowany 60% na drugą i 10% na trzecią, doświadczony zawsze dwie,
+    heroiczny zawsze dwie i 80% na trzecią (do 6), legendarny do wszystkich 8.
+    Druga tradycja ma połowę zaklęć głównej, trzecia jedną trzecią itd. Znający
+    obie łączone tradycje poznają też Elfie Zaklęcia Tajemne, a każdy elf — elfią
+    Magię Prostą Ishy.
+
+    Wysokie Elfy uczą się magii jako **Magowie** (*Wysokie Elfy*, s. 90): od
+    heroicznego mają Talent **Wysoka Magia** i zaklęcia Tradycji Wysokiej Magii
+    (16), legendarny dochodzi do 5. poziomu (Arcymag). Główna tradycja zawsze ma
+    najsilniejsze zaklęcia (1 u średniego, 3 u heroicznego, 4 u legendarnego).
+    Na karcie **najważniejsze zaklęcia** (najdroższe) są na górze, przy Splataniu
+    i Rzucaniu, a pozostałe na samym dole.
+12. **Mutacje.** 1% szans na mutację u każdego BN (70% fizyczne, 30% psychiczne).
     Powaga wg *Mutant's Handbook*: k100 (+10 za każdą posiadaną mutację, maks. +40)
     — 01–60 błaha, 61–100 pomniejsza, 101+ poważna; wiersz „rzuć na wyższą tabelę”
     przenosi rzut wyżej. Kości w efektach (np. Zwinność −1k10) rzucane są od razu.
-12. **Wyposażenie i pieniądze.** Rzuty w wyposażeniu (np. „3k10 szylingów”)
+13. **Wyposażenie i pieniądze.** Rzuty w wyposażeniu (np. „3k10 szylingów”)
     wykonywane są od razu; pieniądze wg Statusu.
 
 ## Stworzenia

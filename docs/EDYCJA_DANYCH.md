@@ -27,6 +27,7 @@ przy talentach, ale polskie znaki tak).
 | `profession_titles.json` | Formy `[męska, żeńska]` nazw profesji i tytułów poziomów (klucz tytułu: `"Profesja\|poziom"`) |
 | `vampires.json` | Wampiry: Linie Krwi (k100, modyfikatory cech, listy darów i słabości, tradycje), Dary Krwi, Słabości, liczba darów i Wiek wg poziomu |
 | `magic_items.json` | Przedmioty magiczne (szaty, kostur, mikstury, zwój) i premie do czarowania z talentów |
+| `treasures.json` | Przedmioty magiczne BN (runy, Broń Chaosu, artefakty, przeklęte przedmioty) i jakość wykonania broni/pancerza |
 | `talents.json`, `skills.json`, `professions.json`, `classes.json`, `races.json` | Dane gry przeniesione z karty postaci |
 
 ---
@@ -275,3 +276,35 @@ Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
 - `talents` — premie z talentów, np. `"Precyzyjne Inkantowanie": { "castSL": 1 }`.
 - `magicItemTrappings` — napisy w wyposażeniu zamieniane na wylosowany przedmiot.
 - Reguły tradycji (np. Ognia: +1 poziom Podpalenia) są w `spells.json` → `lores.<tradycja>.rule`.
+
+## Skarby BN i jakość wykonania (`treasures.json`)
+
+**Przedmioty magiczne** (tylko istoty rozumne — rasy i stworzenia cywilizowane):
+
+- `chances` — szanse na kolejne przedmioty na poziomie, np. `"heroiczny": [0.5, 0.2, 0.05]`
+  (pierwszy 50%, drugi — jeśli był pierwszy — 20%…). Legendarny ma `[1, 1, …]`.
+- `items[]` — szablony: `name`, `kind` (`weapon` — zaklina broń BN, `armour` — pancerz,
+  `item` — osobny przedmiot, `potion` — losowa mikstura z `magic_items.json`),
+  `description`, `source`, `page`, `weight`, `minTier`, `effects` (liczone w statystykach:
+  `damage`, `skill`, `chars` `{ "WW": 10 }`, `ap`, `wounds`, `qualities`).
+- Dopasowanie: `forRaces`, `forGroups` (grupa albo podgrupa stworzeń, np.
+  `"Chaos › Zwierzoludzie"`), `forTalents` (początek nazwy talentu, np. `"Znak Chaosu"`),
+  `forLores`, `forCasters`, `forBloodlines`, `needsSkill`. Pasujące szablony są
+  `fitWeight` razy bardziej prawdopodobne od ogólnych.
+- `replaces` — broń/pancerz, którym jest przedmiot (zastępuje broń tej samej grupy;
+  `extra: true` — dochodzi do ekwipunku), `runes` (`weapon` / `armour` / `talisman` —
+  losuje `runeCount` run, `masterRuneChance` na runę mistrzowską), `chaos: [1, 2]` — tyle
+  właściwości Broni Chaosu (zgodnych z bogiem BN), `material` — zbroja z gromrilu/ithilmaru.
+- `runes`, `chaosProperties` — opisy run i właściwości z efektami.
+
+**Jakość wykonania** (`craft`):
+
+- `tiers` — szansa na Wadę i Zaletę na poziomie BN oraz `maxQualities`.
+- `modifiers[]` — dla `races` / `groups` / `archetypes`: `flawMult`, `qualityMult`,
+  wagi `flaws` / `qualities`, `always` (Zalety, które przedmiot ma zawsze) i `label`
+  („robota zielonoskórych”).
+- `materials` — gromril i ithilmar: rasy, szansa na poziom, Zalety broni (`byName` —
+  tylko topory/młoty) i pancerza (`types`, `apBonus` — np. płyta z gromrilu +1 PP).
+
+W `weapons.json` → `raceVariants` rasa może dostać własne odmiany broni
+(`"Krasnolud": { "chance": 0.85, "weapons": { "Topór": "Krasnoludzki topór" } }`).
