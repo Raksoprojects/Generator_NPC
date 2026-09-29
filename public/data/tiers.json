@@ -233,14 +233,16 @@
           10,
           15
         ],
-        "min": 42
+        "min": 42,
+        "max": 54
       },
       "keyChars": {
         "bonus": [
           8,
           12
         ],
-        "min": 27
+        "min": 27,
+        "max": 37
       },
       "spells": {
         "maxCn": 99,
@@ -254,6 +256,51 @@
           0.5,
           0.3,
           0.15
+        ]
+      }
+    },
+    "legendarny": {
+      "label": "Legendarny",
+      "description": "Heroiczny++: dwie pełne ścieżki profesji, dwa talenty na poziom, profil Legendarnego Bohatera. Arcymagowie elfów, władcy demonów, bohaterowie opowieści.",
+      "randomWeight": 0.1,
+      "totalLevels": {
+        "7": 1
+      },
+      "maxCareerLevel": 4,
+      "requireLevel4": true,
+      "maxCareers": 2,
+      "talentsPerLevel": 2,
+      "extraTalentChance": 0.5,
+      "talentLevelUpChance": 0.9,
+      "heroProfile": "Legendarny Bohater",
+      "keySkills": {
+        "bonus": [
+          15,
+          20
+        ],
+        "min": 55
+      },
+      "keyChars": {
+        "bonus": [
+          12,
+          18
+        ],
+        "min": 38
+      },
+      "spells": {
+        "maxCn": 99,
+        "arcane": [
+          3,
+          7
+        ],
+        "extraLores": [
+          1,
+          0.9,
+          0.8,
+          0.65,
+          0.5,
+          0.35,
+          0.2
         ]
       }
     }

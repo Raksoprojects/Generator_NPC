@@ -42,12 +42,12 @@ describe("rzuty na cechy", () => {
 });
 
 describe("poziomy BN", () => {
-  it("tylko doswiadczeni i heroiczni osiagaja 4. poziom profesji", () => {
+  it("tylko doswiadczeni, heroiczni i legendarni osiagaja 4. poziom profesji", () => {
     for (const tier of TIER_IDS) {
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
         const top = maxLevel(npc);
-        if (tier === "doswiadczony" || tier === "heroiczny") expect(top).toBe(4);
+        if (tier === "doswiadczony" || tier === "heroiczny" || tier === "legendarny") expect(top).toBe(4);
         else expect(top).toBeLessThanOrEqual(3);
       }
     }
@@ -59,7 +59,8 @@ describe("poziomy BN", () => {
       sredni: [2, 2, 1],
       zaawansowany: [3, 4, 2],
       doswiadczony: [4, 5, 2],
-      heroiczny: [5, 6, 2]
+      heroiczny: [5, 6, 2],
+      legendarny: [7, 7, 2]
     };
     for (const tier of TIER_IDS) {
       const [min, max, careers] = expected[tier];
@@ -132,7 +133,7 @@ describe("rozwoj losowy", () => {
 
   it("najslabszy BN wyzszego poziomu jest lepszy w kluczowych rzeczach od najsilniejszego nizszego", () => {
     const s = gd.getSettings();
-    const tiers: TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny"];
+    const tiers = TIER_IDS;
     // Progi z tiers.json nie nachodza na siebie (cechy od doswiadczonego rozdziela profil bohatera).
     for (let i = 1; i < tiers.length; i++) {
       const lower = gd.getTier(tiers[i - 1])!;

@@ -322,7 +322,8 @@
           "sredni": [0.1],
           "zaawansowany": [0.3],
           "doswiadczony": [0.5, 0.2],
-          "heroiczny": [0.75, 0.4, 0.15]
+          "heroiczny": [0.75, 0.4, 0.15],
+          "legendarny": [0.9, 0.6, 0.3, 0.15]
         }
       },
       "Słudzy Chaosu": {
@@ -333,7 +334,8 @@
           "sredni": [],
           "zaawansowany": [0.05],
           "doswiadczony": [0.15],
-          "heroiczny": [0.3, 0.1]
+          "heroiczny": [0.3, 0.1],
+          "legendarny": [0.5, 0.2, 0.05]
         }
       }
     },

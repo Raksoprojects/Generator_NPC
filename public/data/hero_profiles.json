@@ -28,5 +28,11 @@
     "traits": ["+2 do Pancerza", "Mistrz", "Twardziel", "Tropiciel", "+2 do Broni"],
     "description": "Niezwykle potężny wódz lub boss — oś przygody albo jej ważny kamień milowy.",
     "source": "Bestiariusz 2.0"
+  },
+  "Legendarny Bohater": {
+    "modifiers": { "WW": 60, "US": 45, "S": 30, "Wt": 30, "I": 40, "Zw": 30, "Zr": 15, "Int": 30, "SW": 45, "Ogd": 40 },
+    "traits": ["+3 do Pancerza", "Mistrz", "Twardziel", "Tropiciel", "+3 do Broni"],
+    "description": "Postać z legend — ktoś, o kim śpiewa się pieśni i przed kim drżą królestwa. Finał kampanii, nie spotkanie po drodze.",
+    "source": "Generator (na wzór Bestiariusza 2.0)"
   }
 }

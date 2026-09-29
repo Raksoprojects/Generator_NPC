@@ -8,7 +8,8 @@
   "sredni": 4,
   "zaawansowany": 5,
   "doswiadczony": 6,
-  "heroiczny": 8
+  "heroiczny": 8,
+  "legendarny": 10
  },
  "bloodlineGiftWeight": 4,
  "ageByTier": {
@@ -16,7 +17,8 @@
   "sredni": 2,
   "zaawansowany": 3,
   "doswiadczony": 4,
-  "heroiczny": 5
+  "heroiczny": 5,
+  "legendarny": 5
  },
  "bloodlines": [
   {

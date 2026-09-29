@@ -124,9 +124,9 @@ export interface HeroProfile {
   source?: string;
 }
 
-export type TierId = "slaby" | "sredni" | "zaawansowany" | "doswiadczony" | "heroiczny";
+export type TierId = "slaby" | "sredni" | "zaawansowany" | "doswiadczony" | "heroiczny" | "legendarny";
 
-export const TIER_IDS: readonly TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny"];
+export const TIER_IDS: readonly TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny", "legendarny"];
 
 /** Poziom zaawansowania BN (tiers.json). */
 export interface TierDef {
@@ -298,7 +298,9 @@ export interface CreatureDef {
   name: string;
   source: string;
   page: number;
+  /** Grupa w generatorze (Chaos, Nieumarli, Wampiry...) i opcjonalna podgrupa (Zwierzoludzie...). */
   group: string;
+  subgroup?: string;
   family: string;
   unique?: boolean;
   /** Sz, WW ... Ogd, Żyw; null = stworzenie nie posiada cechy ("–"). */
@@ -332,6 +334,8 @@ export interface CreatureFamiliesData {
     traitCount: Record<TierId, number>;
     optionalChance: Record<TierId, number>;
     tierLabels: Record<TierId, string>;
+    /** Kolejnosc grup stworzen w generatorze (pozostale na koncu). */
+    groupOrder?: string[];
   };
   families: Record<string, CreatureFamily>;
   notCivilized: string[];

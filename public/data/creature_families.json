@@ -1,18 +1,20 @@
 {
   "settings": {
     "note": "System rozwoju stworzeń (bez profesji). Słaby = profil z książki + umiejętności rodziny (bestie z podręcznika nie mają umiejętności). Umiejętność = max(książka, pasowanie × tierFactor zaokr. do 5) + skillBonus; charAdvances do cech z charCodes; Cechy Stworzeń rodziny (traitCount) i szansa na cechę Opcjonalną.",
-    "tierFactor": { "slaby": 0.5, "sredni": 0.5, "zaawansowany": 0.5, "doswiadczony": 0.5, "heroiczny": 0.5 },
-    "skillBonus": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20 },
-    "charAdvances": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20 },
+    "tierFactor": { "slaby": 0.5, "sredni": 0.5, "zaawansowany": 0.5, "doswiadczony": 0.5, "heroiczny": 0.5, "legendarny": 0.5 },
+    "skillBonus": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20, "legendarny": 30 },
+    "charAdvances": { "slaby": 0, "sredni": 5, "zaawansowany": 10, "doswiadczony": 15, "heroiczny": 20, "legendarny": 30 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
-    "traitCount": { "slaby": 0, "sredni": 1, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3 },
-    "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1 },
+    "traitCount": { "slaby": 0, "sredni": 1, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3, "legendarny": 4 },
+    "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1, "legendarny": 1 },
+    "groupOrder": ["Zwierzęta", "Potwory", "Ludy", "Zielonoskórzy", "Skaveny", "Nieumarli", "Wampiry", "Chaos"],
     "tierLabels": {
       "slaby": "typowy osobnik (profil z książki + umiejętności)",
       "sredni": "rosły, silniejszy osobnik",
       "zaawansowany": "doświadczony łowca / weteran stada",
       "doswiadczony": "przewodnik stada / stary osobnik",
-      "heroiczny": "legendarna bestia"
+      "heroiczny": "bestia z legend",
+      "legendarny": "mityczna bestia — jedyna w swoim rodzaju"
     }
   },
   "families": {
