@@ -497,7 +497,10 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     // Wyposazenie tylko z obecnej profesji - poprzednia zostawila po sobie najwyzej wspomnienia.
     if (step.profession === npc.careerPath[npc.careerPath.length - 1].profession) {
       for (const raw of lvl.trappings) {
-        const item = rollDiceText(raw, rng, deterministic);
+        // "kreda albo dłuto", "koń wierzchowy albo mała łódź" - jedna z możliwości (poza nawiasami).
+        const options = raw.includes("(") ? [raw] : raw.split(/\s+albo\s+/);
+        const chosen = deterministic ? options[0] : (pick(options, rng) ?? raw);
+        const item = rollDiceText(chosen, rng, deterministic);
         if (!npc.trappings.includes(item)) npc.trappings.push(item);
       }
     }
