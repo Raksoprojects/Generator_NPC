@@ -60,14 +60,21 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    poniżej **9** jest przerzucany — wojownik nie bywa miernotą w WW.
 4. **Ścieżka profesji.** Liczba poziomów zależy od poziomu BN:
 
-   | Poziom BN | Poziomy profesji | Najwyższy poziom w profesji | Profil bohatera | Szansa na dodatkowy profil (losowanie) |
-   |---|---|---|---|---|
-   | Słaby | 1 (czasem 2) | 2 | — | — |
-   | Średni | 2 | 2 | — | Weteran 10% |
-   | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | — | Weteran 8%, Doborowy 5%, Pomniejszy Bohater 10% |
-   | Doświadczony | 4 (+ czasem 1 poziom poprzedniej profesji) | 4 | Pomniejszy Bohater | Doborowy 10% |
-   | Heroiczny | 5–6 (4. poziom + poprzednia profesja) | 4 | Wielki Bohater | — |
-   | Legendarny | 7 (4. poziom + 3 poziomy poprzedniej), 2 talenty na poziom | 4 | Legendarny Bohater | — |
+   | Poziom BN | Poziomy profesji | Najwyższy poziom | Rozwinięcia (rasy) | Profil bohatera (stworzenia) | Szansa na dodatkowy profil |
+   |---|---|---|---|---|---|
+   | Słaby | 1 (czasem 2) | 2 | ×1 | — | — |
+   | Średni | 2 | 2 | ×1 | — | Weteran 10% |
+   | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | ×1,2 | — | Weteran 8%, Doborowy 5% (stworzenia: też Pomniejszy Bohater 10%) |
+   | Doświadczony | 4 (+ czasem 1 poziom poprzedniej) | 4 | ×1,6 | Pomniejszy Bohater | Doborowy 10% |
+   | Heroiczny | 4–6 (często tylko jedna profesja), 2 talenty na poziom | 4 | ×2,5 | Wielki Bohater | — |
+   | Legendarny | 4–7 (5 w profesji z 5. poziomem), 2 talenty na poziom | 4–5 | ×3,5 | Legendarny Bohater | — |
+
+   **Rasy** (ludzie, elfy, krasnoludy, niziołki) rozwijają się w profesji
+   mocniej na wyższych poziomach (więcej rozwinięć za każdy poziom, więcej
+   talentów) i nie dostają automatycznie Pomniejszego, Wielkiego ani
+   Legendarnego Bohatera — te profile to szybka łatka dla **stworzeń** z gotowym
+   blokiem statystyk. Każdy profil można dodać ręcznie w edytorze. Wysoki
+   poziom częściej oznacza dłuższy rozwój w jednej profesji niż zmianę profesji.
 
    Dodatkowy profil to najwyżej jeden na BN i pojawia się tylko przy losowaniu
    (nie w trybie *Własny* i nie po odznaczeniu „Profil bohatera wg poziomu”).
@@ -78,7 +85,7 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    ani kapłańska (wyjątek: profesje renegatów, np. Czarownica).
 5. **Rozwój.** Każdy ukończony poziom profesji daje pełne **+5** do cech i
    umiejętności dostępnych na tym poziomie (narastająco). Obecny, nieukończony
-   poziom daje od +2 do +5. Talent z każdego poziomu dobierany wg preferencji
+   poziom daje od +2 do +5. U ras wyższe poziomy mnożą te wartości (tabela wyżej). Talent z każdego poziomu dobierany wg preferencji
    archetypu; czarujący zawsze biorą swoje talenty magiczne.
 6. **Premie archetypu.** 4 najważniejsze umiejętności i 2 najważniejsze cechy
    dostają premię zależną od poziomu BN, a ich łączne rozwinięcia trzymane są w
@@ -89,10 +96,10 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    |---|---|---|
    | Słaby | +1…+3 / do 13 | +0…+2 / do 12 |
    | Średni | +3…+8 / 15–18 | +2…+5 / 13–15 |
-   | Zaawansowany | +5…+10 / 20–30 | +3…+7 / 17–27 |
-   | Doświadczony | +8…+15 / 32–40 | +5…+10 / 20–35 + profil bohatera |
-   | Heroiczny | +10…+15 / 42–54 | +8…+12 / 27–37 + profil bohatera |
-   | Legendarny | +15…+20 / od 55 | +12…+18 / od 38 + profil bohatera |
+   | Zaawansowany | +5…+10 / 20–32 | +3…+7 / 17–28 |
+   | Doświadczony | +8…+15 / 34–48 | +6…+10 / 30–42 |
+   | Heroiczny | +10…+15 / 50–70 | +8…+12 / 44–62 |
+   | Legendarny | +15…+20 / od 72 | +12…+18 / od 64 |
 7. **Cechy opcjonalne.** Jeden rzut k100: **1** = trzy Cechy Stworzeń,
    **2–5** = dwie, **6–20** = jedna. Losowane z wagami archetypu.
 8. **Profile bohaterów** dają **stałe** premie, niezależne od rozwinięć. Siła i

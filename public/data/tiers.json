@@ -25,6 +25,11 @@
     "multiLoreRaces": [
       "Wysoki elf",
       "Leśny elf"
+    ],
+    "creatureOnlyProfiles": [
+      "Pomniejszy Bohater",
+      "Wielki Bohater",
+      "Legendarny Bohater"
     ]
   },
   "tiers": {
@@ -62,7 +67,8 @@
           0,
           0
         ]
-      }
+      },
+      "advanceMultiplier": 1
     },
     "sredni": {
       "label": "Średni",
@@ -106,7 +112,8 @@
           1
         ],
         "topSpells": 1
-      }
+      },
+      "advanceMultiplier": 1
     },
     "zaawansowany": {
       "label": "Zaawansowany",
@@ -142,7 +149,7 @@
           10
         ],
         "min": 20,
-        "max": 30
+        "max": 32
       },
       "keyChars": {
         "bonus": [
@@ -150,7 +157,7 @@
           7
         ],
         "min": 17,
-        "max": 27
+        "max": 28
       },
       "spells": {
         "maxCn": 9,
@@ -163,11 +170,12 @@
           0.1
         ],
         "topSpells": 1
-      }
+      },
+      "advanceMultiplier": 1.2
     },
     "doswiadczony": {
       "label": "Doświadczony",
-      "description": "Czwarty poziom profesji, dodatkowe talenty i ich poziomy, profil Pomniejszego Bohatera; przy losowaniu mała szansa na dodatkowy profil Doborowego.",
+      "description": "Czwarty poziom profesji (rzadko z poziomem poprzedniej), rozwinięcia ×1,6, dodatkowe talenty i ich poziomy. Stworzenia dostają profil Pomniejszego Bohatera; przy losowaniu mała szansa na profil Doborowego.",
       "randomWeight": 1,
       "totalLevels": {
         "4": 2,
@@ -177,8 +185,8 @@
       "requireLevel4": true,
       "maxCareers": 2,
       "talentsPerLevel": 1,
-      "extraTalentChance": 0.7,
-      "talentLevelUpChance": 0.6,
+      "extraTalentChance": 0.9,
+      "talentLevelUpChance": 0.7,
       "heroProfile": "Pomniejszy Bohater",
       "heroProfileChances": [
         {
@@ -191,16 +199,16 @@
           8,
           15
         ],
-        "min": 32,
-        "max": 40
+        "min": 34,
+        "max": 48
       },
       "keyChars": {
         "bonus": [
-          5,
+          6,
           10
         ],
-        "min": 20,
-        "max": 35
+        "min": 30,
+        "max": 42
       },
       "spells": {
         "maxCn": 12,
@@ -214,38 +222,40 @@
           0.1
         ],
         "topSpells": 2
-      }
+      },
+      "advanceMultiplier": 1.6
     },
     "heroiczny": {
       "label": "Heroiczny",
-      "description": "Zaawansowany++: czwarty poziom profesji i poprzednia profesja w tle, profil Wielkiego Bohatera.",
+      "description": "Czwarty poziom profesji (czasem z poprzednią), rozwinięcia ×2,5 i dwa talenty na poziom. Stworzenia dostają profil Wielkiego Bohatera.",
       "randomWeight": 0.3,
       "totalLevels": {
+        "4": 1,
         "5": 1,
         "6": 1
       },
       "maxCareerLevel": 4,
       "requireLevel4": true,
       "maxCareers": 2,
-      "talentsPerLevel": 1,
-      "extraTalentChance": 0.8,
-      "talentLevelUpChance": 0.7,
+      "talentsPerLevel": 2,
+      "extraTalentChance": 0.5,
+      "talentLevelUpChance": 0.8,
       "heroProfile": "Wielki Bohater",
       "keySkills": {
         "bonus": [
           10,
           15
         ],
-        "min": 42,
-        "max": 54
+        "min": 50,
+        "max": 70
       },
       "keyChars": {
         "bonus": [
           8,
           12
         ],
-        "min": 27,
-        "max": 37
+        "min": 44,
+        "max": 62
       },
       "spells": {
         "maxCn": 99,
@@ -261,20 +271,24 @@
           0.15
         ],
         "topSpells": 3
-      }
+      },
+      "advanceMultiplier": 2.5
     },
     "legendarny": {
       "label": "Legendarny",
-      "description": "Heroiczny++: dwie pełne ścieżki profesji (profesja z 5. poziomem, np. elfi Mag, dochodzi do 5.), dwa talenty na poziom, profil Legendarnego Bohatera. Arcymagowie elfów, władcy demonów, bohaterowie opowieści.",
+      "description": "Pełna profesja (5. poziom, jeśli ją ma, np. elfi Mag), czasem poprzednia; rozwinięcia ×3,5, dwa talenty na poziom. Stworzenia dostają profil Legendarnego Bohatera. Arcymagowie elfów, władcy demonów, bohaterowie opowieści.",
       "randomWeight": 0.1,
       "totalLevels": {
+        "4": 1,
+        "5": 1,
+        "6": 1,
         "7": 1
       },
       "maxCareerLevel": 4,
       "requireLevel4": true,
       "maxCareers": 2,
       "talentsPerLevel": 2,
-      "extraTalentChance": 0.5,
+      "extraTalentChance": 0.8,
       "talentLevelUpChance": 0.9,
       "heroProfile": "Legendarny Bohater",
       "keySkills": {
@@ -282,14 +296,14 @@
           15,
           20
         ],
-        "min": 55
+        "min": 72
       },
       "keyChars": {
         "bonus": [
           12,
           18
         ],
-        "min": 38
+        "min": 64
       },
       "spells": {
         "maxCn": 99,
@@ -308,7 +322,8 @@
         ],
         "topSpells": 4
       },
-      "allowLevel5": true
+      "allowLevel5": true,
+      "advanceMultiplier": 3.5
     }
   }
 }

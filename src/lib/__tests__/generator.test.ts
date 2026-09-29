@@ -60,8 +60,8 @@ describe("poziomy BN", () => {
       sredni: [2, 2, 1],
       zaawansowany: [3, 4, 2],
       doswiadczony: [4, 5, 2],
-      heroiczny: [5, 6, 2],
-      legendarny: [7, 8, 2]
+      heroiczny: [4, 6, 2],
+      legendarny: [4, 8, 2]
     };
     for (const tier of TIER_IDS) {
       const [min, max, careers] = expected[tier];
@@ -313,8 +313,10 @@ describe("ponowne losowanie", () => {
     expect(next.rolls).not.toEqual(npc.rolls);
   });
 
-  it("przebudowa rozwoju ustawia profil bohatera wg poziomu", () => {
-    const npc = generateNpc({ tier: "doswiadczony", archetype: "Wojownik" }, seedRng(4));
+  it("przebudowa rozwoju ustawia profil bohatera wg poziomu (stworzenia; rasy rozwijaja sie w profesji)", () => {
+    const human = generateNpc({ tier: "doswiadczony", archetype: "Wojownik", race: "Człowiek" }, seedRng(4));
+    expect(human.heroProfiles).not.toContain("Pomniejszy Bohater");
+    const npc = generateNpc({ tier: "doswiadczony", archetype: "Wojownik", creature: "Ork" }, seedRng(4));
     expect(npc.heroProfiles).toContain("Pomniejszy Bohater");
     const next = rebuildDevelopment({ ...npc, tier: "sredni" }, undefined, seedRng(4));
     expect(next.heroProfiles).not.toContain("Pomniejszy Bohater");
@@ -323,25 +325,29 @@ describe("ponowne losowanie", () => {
 });
 
 describe("szansa na profil bohatera", () => {
-  it("zaawansowany czasem jest Weteranem, Doborowym albo Pomniejszym Bohaterem, ale tylko przy losowaniu", () => {
+  it("zaawansowany czasem jest Weteranem, Doborowym (stworzenie - Pomniejszym Bohaterem), ale tylko przy losowaniu", () => {
     const seen: Record<string, number> = {};
+    const orc: Record<string, number> = {};
     for (let seed = 1; seed <= 600; seed++) {
-      const hp = generateNpc({ archetype: "Wojownik", tier: "zaawansowany" }, seedRng(seed)).heroProfiles;
+      const hp = generateNpc({ archetype: "Wojownik", tier: "zaawansowany", race: "Człowiek" }, seedRng(seed)).heroProfiles;
       expect(hp.length).toBeLessThanOrEqual(1);
       for (const h of hp) seen[h] = (seen[h] ?? 0) + 1;
+      for (const h of generateNpc({ archetype: "Wojownik", tier: "zaawansowany", creature: "Ork" }, seedRng(seed)).heroProfiles) orc[h] = (orc[h] ?? 0) + 1;
     }
     expect(seen["Weteran"]).toBeGreaterThan(20);
     expect(seen["Doborowy"]).toBeGreaterThan(10);
-    expect(seen["Pomniejszy Bohater"]).toBeGreaterThan(30);
-    expect(seen["Pomniejszy Bohater"]).toBeLessThan(100);
+    // U ras Pomniejszego Bohatera zastepuje mocniejszy rozwoj w profesji.
+    expect(seen["Pomniejszy Bohater"] ?? 0).toBe(0);
+    expect(orc["Pomniejszy Bohater"]).toBeGreaterThan(30);
+    expect(orc["Pomniejszy Bohater"]).toBeLessThan(100);
     let mid = 0;
     let exp = 0;
     for (let seed = 1; seed <= 300; seed++) {
       const m = generateNpc({ archetype: "Kupiec", tier: "sredni" }, seedRng(seed)).heroProfiles;
       if (m.includes("Weteran")) mid++;
       expect(m.every((h) => h === "Weteran")).toBe(true);
-      const d = generateNpc({ archetype: "Kupiec", tier: "doswiadczony" }, seedRng(seed)).heroProfiles;
-      expect(d).toContain("Pomniejszy Bohater");
+      const d = generateNpc({ archetype: "Kupiec", tier: "doswiadczony", race: "Człowiek" }, seedRng(seed)).heroProfiles;
+      expect(d).not.toContain("Pomniejszy Bohater");
       if (d.includes("Doborowy")) exp++;
     }
     expect(mid).toBeGreaterThan(10);

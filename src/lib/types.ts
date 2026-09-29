@@ -166,6 +166,8 @@ export interface TierDef {
   spells: { maxCn: number; arcane: [number, number]; extraLores?: number[]; topSpells?: number };
   /** Profesja z 5. poziomem (np. elfi Mag -> Arcymag) moze na nim dojsc do 5. poziomu. */
   allowLevel5?: boolean;
+  /** Mnoznik rozwiniec za poziom profesji u ras (stworzenia maja zamiast tego profile bohaterow). */
+  advanceMultiplier?: number;
 }
 
 /**
@@ -199,6 +201,8 @@ export interface GeneratorSettings {
   unlimitedTalentCap: number;
   /** Rasy, ktorych czarodzieje moga poznac kolejne tradycje tajemne (spells.extraLores). */
   multiLoreRaces?: string[];
+  /** Profile nakladane automatycznie tylko na stworzenia; rasy dostaja zamiast nich mocniejszy rozwoj (advanceMultiplier). */
+  creatureOnlyProfiles?: string[];
 }
 
 export interface TiersData {

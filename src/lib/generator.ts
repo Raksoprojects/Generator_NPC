@@ -403,10 +403,20 @@ function addSkill(npc: Npc, name: string, advances: number): void {
  * Rozwiniecia za jeden poziom profesji. Ukonczony poziom daje pelne +5;
  * poziom obecny (ostatni w sciezce, jeszcze w toku) moze dac mniej.
  */
-function advanceAmount(current: boolean, rng: Rng, deterministic: boolean): number {
+/**
+ * Rozwiniecia za poziom profesji. Mnoznik poziomu BN (tiers.json -> advanceMultiplier)
+ * zastepuje u ras profile bohaterow: heroiczny rozwija sie w profesji mocniej, niz nakazuje minimum.
+ */
+function advanceAmount(current: boolean, rng: Rng, deterministic: boolean, mult = 1): number {
   const { advancePerLevel, currentLevelMin } = gd.getSettings();
-  if (!current || deterministic) return advancePerLevel;
-  return randInt(Math.min(currentLevelMin, advancePerLevel), advancePerLevel, rng);
+  const full = Math.round(advancePerLevel * mult);
+  if (!current || deterministic) return full;
+  return randInt(Math.min(Math.round(currentLevelMin * mult), full), full, rng);
+}
+
+/** Profile bohaterow, ktore u ras zastepuje rozwoj profesji (zostaja dla stworzen i do recznego dodania). */
+function creatureOnlyProfile(profile: string, creature: boolean): boolean {
+  return !creature && !!gd.getSettings().creatureOnlyProfiles?.includes(profile);
 }
 
 /** Zamienia rzuty w tekscie na wyniki, np. "3k10 szylingów" -> "17 szylingów". */
@@ -462,12 +472,14 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     const lvl = prof?.levels.find((l) => l.level === step.level);
     if (!prof || !lvl) return;
     const current = index === npc.careerPath.length - 1;
+    // Stworzenia dostaja profile bohaterow, rasy - mocniejszy rozwoj w profesji.
+    const mult = npc.creature ? 1 : (tier?.advanceMultiplier ?? 1);
 
     for (const code of levelCharacteristics(step.profession, step.level, arch)) {
-      npc.charAdvances[code] += advanceAmount(current, rng, deterministic);
+      npc.charAdvances[code] += advanceAmount(current, rng, deterministic, mult);
     }
     for (const raw of levelSkills(step.profession, step.level)) {
-      addSkill(npc, resolveSkill(step.profession, raw), advanceAmount(current, rng, deterministic));
+      addSkill(npc, resolveSkill(step.profession, raw), advanceAmount(current, rng, deterministic, mult));
     }
 
     const chars = approxChars(npc);
@@ -619,17 +631,17 @@ export function isBeast(npc: Pick<Npc, "creature" | "archetype">): boolean {
   return !!npc.creature && !npc.archetype;
 }
 
-function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean, rng: Rng): string[] {
+function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean, rng: Rng, creature: boolean): string[] {
   const out = new Set<string>(spec.heroProfiles ?? []);
   const tier = gd.getTier(tierId);
   const autoOn = !beast && spec.autoHeroProfile !== false;
-  if (tier?.heroProfile && autoOn) out.add(tier.heroProfile);
+  if (tier?.heroProfile && autoOn && !creatureOnlyProfile(tier.heroProfile, creature)) out.add(tier.heroProfile);
   // Mala szansa na dodatkowy profil (Weteran, Doborowy, Pomniejszy Bohater) - tylko przy losowaniu.
   if (autoOn && !spec.deterministic && tier?.heroProfileChances?.length) {
     let roll = rng();
     for (const c of tier.heroProfileChances) {
       if (roll < c.chance) {
-        out.add(c.profile);
+        if (!creatureOnlyProfile(c.profile, creature)) out.add(c.profile);
         break;
       }
       roll -= c.chance;
@@ -747,7 +759,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     skills: [],
     talents: [],
     traits: [],
-    heroProfiles: heroProfilesFor(spec, tier, beast, rng),
+    heroProfiles: heroProfilesFor(spec, tier, beast, rng, !!creature),
     weapons: [],
     armour: [],
     spells: [],
@@ -808,6 +820,6 @@ export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, 
   for (const c of gd.getTier(next.tier)?.heroProfileChances ?? []) auto.delete(c.profile);
   next.heroProfiles = next.heroProfiles.filter((h) => !auto.has(h));
   const tierProfile = gd.getTier(next.tier)?.heroProfile;
-  if (tierProfile && !isBeast(next)) next.heroProfiles.unshift(tierProfile);
+  if (tierProfile && !isBeast(next) && !creatureOnlyProfile(tierProfile, !!next.creature)) next.heroProfiles.unshift(tierProfile);
   return next;
 }

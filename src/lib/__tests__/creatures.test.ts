@@ -197,10 +197,12 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("legendarny BN: dwie pelne profesje i profil Legendarnego Bohatera", () => {
+  it("legendarny BN: pelna profesja, rasa bez profilu (rozwoj x3,5), stworzenie z profilem Legendarnego Bohatera", () => {
     const hero = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek" }, seedRng(3));
-    expect(hero.careerPath).toHaveLength(7);
-    expect(hero.heroProfiles).toContain("Legendarny Bohater");
+    expect(Math.max(...hero.careerPath.map((s) => s.level))).toBe(4);
+    expect(hero.heroProfiles).not.toContain("Legendarny Bohater");
+    const orc = generateNpc({ archetype: "Wojownik", tier: "legendarny", creature: "Ork" }, seedRng(3));
+    expect(orc.heroProfiles).toContain("Legendarny Bohater");
     const heroic = generateNpc({ archetype: "Wojownik", tier: "heroiczny", race: "Człowiek", deterministic: true }, seedRng(3));
     const legend = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek", deterministic: true }, seedRng(3));
     expect(computeNpc(legend).chars.WW.total).toBeGreaterThan(computeNpc(heroic).chars.WW.total + 10);
