@@ -67,12 +67,15 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    | Zaawansowany | 3–4 (np. 2× Żołnierz + 2× Rycerz) | 3 | — | Weteran 8%, Doborowy 5%, Pomniejszy Bohater 10% |
    | Doświadczony | 4 (+ czasem 1 poziom poprzedniej profesji) | 4 | Pomniejszy Bohater | Doborowy 10% |
    | Heroiczny | 5–6 (4. poziom + poprzednia profesja) | 4 | Wielki Bohater | — |
+   | Legendarny | 7 (4. poziom + 3 poziomy poprzedniej), 2 talenty na poziom | 4 | Legendarny Bohater | — |
 
    Dodatkowy profil to najwyżej jeden na BN i pojawia się tylko przy losowaniu
    (nie w trybie *Własny* i nie po odznaczeniu „Profil bohatera wg poziomu”).
 
-   Tylko Doświadczeni i Heroiczni dochodzą do 4. poziomu. Pozostali, gdy mają
-   więcej poziomów, przechodzą do innej, powiązanej profesji.
+   Tylko Doświadczeni, Heroiczni i Legendarni dochodzą do 4. poziomu. Pozostali,
+   gdy mają więcej poziomów, przechodzą do innej, powiązanej profesji.
+   Czarodziej nie zmienia tradycji: przed profesją magiczną nie bywa inna magiczna
+   ani kapłańska (wyjątek: profesje renegatów, np. Czarownica).
 5. **Rozwój.** Każdy ukończony poziom profesji daje pełne **+5** do cech i
    umiejętności dostępnych na tym poziomie (narastająco). Obecny, nieukończony
    poziom daje od +2 do +5. Talent z każdego poziomu dobierany wg preferencji
@@ -88,7 +91,8 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    | Średni | +3…+8 / 15–18 | +2…+5 / 13–15 |
    | Zaawansowany | +5…+10 / 20–30 | +3…+7 / 17–27 |
    | Doświadczony | +8…+15 / 32–40 | +5…+10 / 20–35 + profil bohatera |
-   | Heroiczny | +10…+15 / od 42 | +8…+12 / od 27 + profil bohatera |
+   | Heroiczny | +10…+15 / 42–54 | +8…+12 / 27–37 + profil bohatera |
+   | Legendarny | +15…+20 / od 55 | +12…+18 / od 38 + profil bohatera |
 7. **Cechy opcjonalne.** Jeden rzut k100: **1** = trzy Cechy Stworzeń,
    **2–5** = dwie, **6–20** = jedna. Losowane z wagami archetypu.
 8. **Profile bohaterów** dają **stałe** premie, niezależne od rozwinięć. Siła i
@@ -96,7 +100,8 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
    priorytetów archetypu (złodziej dostaje +45 do Zwinności, a nie do WW).
    Od najsłabszego: *Weteran* (WW +10, bez cech), *Dowódca Oddziału*,
    *Doborowy* (WW +20, +1 do Broni — nazwa inna niż Cecha Stworzenia *Elitarny*,
-   żeby się nie myliły), *Pomniejszy Bohater*, *Wielki Bohater*. Każdy można
+   żeby się nie myliły), *Pomniejszy Bohater*, *Wielki Bohater*, *Legendarny
+   Bohater* (WW +60, +3 do Pancerza i Broni). Każdy można
    dodać albo zdjąć ręcznie w edytorze BN.
 9. **Broń i pancerz.** Broń i pancerz z wyposażenia profesji; ogólne „broń ręczna”
    czy „broń (dowolna)” zamieniane są na konkretną broń pasującą do postaci
@@ -114,6 +119,12 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
     | Zaawansowany | 9 | BInt −1…+3 |
     | Doświadczony | 12 | BInt +0…+4 |
     | Heroiczny | bez limitu | BInt +1…+5 |
+    | Legendarny | bez limitu | BInt +3…+7 |
+
+    Elfy (Wysokie i Leśne) nie są związane jednym kolegium: ich czarodzieje mogą
+    znać kolejne tradycje — zaawansowany 60% na drugą i 10% na trzecią, heroiczny
+    do 6 tradycji, legendarny do wszystkich 8. Druga tradycja ma połowę zaklęć
+    głównej, trzecia jedną trzecią itd.
 11. **Mutacje.** 1% szans na mutację u każdego BN (70% fizyczne, 30% psychiczne).
     Powaga wg *Mutant's Handbook*: k100 (+10 za każdą posiadaną mutację, maks. +40)
     — 01–60 błaha, 61–100 pomniejsza, 101+ poważna; wiersz „rzuć na wyższą tabelę”
@@ -123,6 +134,11 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
 
 ## Stworzenia
 
+- **Grupy.** Stworzenia są podzielone na grupy i podgrupy (np. *Chaos ›
+  Zwierzoludzie*, *Nieumarli › Duchy i widma*, *Potwory › Smoki i wielkie gady*,
+  osobno *Wampiry*). W trybie pół-losowym można wybrać samą grupę — wypadnie
+  typowe stworzenie z tej grupy, które występuje na wybranym poziomie. Przy
+  wampirze można wybrać Linię Krwi (albo zostawić losową).
 - **Cechy:** wartość z książki − 10 to baza, do której rzuca się 2k10 (jak dla
   ras). Cecha o wartości 5 lub mniej to po prostu 1k10; brak cechy zostaje „–”.
 - **Żywotność** liczona wzorem Rozmiaru z podręcznika (Twardziel, Rój) —
@@ -149,7 +165,8 @@ te same profesje, talenty, umiejętności i rasy, ta sama ciemna szata graficzna
   | Średni — rosły osobnik | +5 | +5 | 1 | 25% szans |
   | Zaawansowany — weteran stada | +10 | +10 | 1 | 50% |
   | Doświadczony — przewodnik stada | +15 | +15 | 2 | 75% |
-  | Heroiczny — legendarna bestia | +20 | +20 | 3 | 100% |
+  | Heroiczny — bestia z legend | +20 | +20 | 3 | 100% |
+  | Legendarny — mityczna bestia | +30 | +30 | 4 | 100% |
 
   Niedźwiedź (WW 35): Bijatyka około 50 u słabego, 60 u średniego, 70 u zaawansowanego.
 

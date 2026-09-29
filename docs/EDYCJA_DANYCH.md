@@ -13,7 +13,7 @@ przy talentach, ale polskie znaki tak).
 | Plik | Co zawiera |
 |---|---|
 | `archetypes.json` | Archetypy BN |
-| `tiers.json` | Poziomy BN (Słaby…Heroiczny) i ustawienia generatora |
+| `tiers.json` | Poziomy BN (Słaby…Legendarny) i ustawienia generatora |
 | `creature_traits.json` | Cechy Stworzeń (Duży, Zabijaka…) |
 | `hero_profiles.json` | Profile Bohaterów (Weteran, Dowódca Oddziału, Doborowy, Pomniejszy, Wielki) |
 | `specializations.json` | Listy specjalizacji dla „Dowolnych” (broń, język, bóstwo, szkoła magii) |
@@ -133,6 +133,8 @@ przy BN (np. „+1 do Pancerza”, „Mistrz”).
 ## Imiona (`names.json`) i grupy (`group_presets.json`)
 
 Imiona: listy `male`, `female`, `surnames` dla każdej rasy z `races.json`.
+Stworzenia cywilizowane biorą imiona z tabeli swojej podgrupy, a jeśli jej nie ma —
+grupy. Zamiast tabeli można wpisać nazwę innej, np. `"Krasnoludy Chaosu": "Krasnolud"`.
 
 Grupa:
 
@@ -146,7 +148,7 @@ Grupa:
 }
 ```
 
-Poziomy: `slaby`, `sredni`, `zaawansowany`, `doswiadczony`, `heroiczny`.
+Poziomy: `slaby`, `sredni`, `zaawansowany`, `doswiadczony`, `heroiczny`, `legendarny`.
 Opcjonalnie `"race": "Krasnolud"`.
 
 ---
@@ -157,7 +159,10 @@ Wartości cech wpisuj **dokładnie jak w książce** (`null` = „–”). Gener
 odejmie 10 i dorzuci 2k10 (albo 1k10 dla cech do 5). `traits` to cechy z książki
 (są już wliczone w statystyki), `optional` — cechy „Opcjonalne”, `abilities` —
 zasady specjalne. `family` wskazuje rodzinę z `creature_families.json`, `group`
-— grupę w listach (Zwierzęta, Potwory, Zielonoskórzy…).
+— grupę w listach (Zwierzęta, Potwory, Chaos, Wampiry…), a opcjonalne `subgroup` —
+podgrupę (np. `"group": "Chaos", "subgroup": "Zwierzoludzie"`). W generatorze można
+losować z całej grupy albo z podgrupy. Kolejność grup ustawia `settings.groupOrder`
+w `creature_families.json`; nowa grupa bez wpisu trafia na koniec.
 
 - `minTier` — najniższy poziom BN, na jakim stworzenie występuje (np. `"zaawansowany"`
   dla Wojownika Chaosu). Niższy poziom jest podnoszony, a rozwój bestii liczy się od
