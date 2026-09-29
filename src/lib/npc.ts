@@ -298,9 +298,9 @@ export function computeNpc(input: Npc): NpcView {
       const skill = ranged
         ? weaponSkill(skills, chars, true, a.name)
         : (() => {
-            // Wlasna grupa, Bijatyka, a dla broni z nazwy (np. "Broń Chaosu i tarcza") najlepsza Broń Biała.
+            // Wlasna grupa, Bijatyka, a dla broni ("Broń", "Broń Chaosu i tarcza") najlepsza Broń Biała.
             const melee = skills.filter((s) => s.name.startsWith("Broń Biała")).sort((x, y) => y.total - x.total);
-            const bodyPart = /^(Broń$|Ugryzienie|Ogon|Rogi|Macki|Pazury|Zmutowany|Kły|Szpony)/.test(a.name);
+            const bodyPart = /^(Ugryzienie|Ogon|Rogi|Macki|Pazury|Zmutowany|Kły|Szpony)/.test(a.name);
             const own =
               skills.find((s) => s.name === `Broń Biała (${a.name})`) ??
               (bodyPart ? skills.find((s) => s.name === "Broń Biała (Bijatyka)") : melee[0]) ??
