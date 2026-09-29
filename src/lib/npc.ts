@@ -71,6 +71,8 @@ export interface NpcView {
   armour: Record<Location, { ap: number; total: number }>;
   armourPenalties: string[];
   spells: SpellDef[];
+  /** Najdrozsze zaklecia spoza Magii Prostej - pokazywane na gorze, przy czarowaniu. */
+  keySpells: SpellDef[];
   mutations: { label: string; effect: string; kind: NpcMutation["kind"] }[];
   /** Cechy ksiazkowe stworzenia (bez zmian w statystykach). */
   creatureTraits: string[];
@@ -83,6 +85,9 @@ export interface NpcView {
   /** Czarowanie: Splatanie i Rzucanie z premiami PS, zmiana PZ, reguly tradycji. */
   casting: CastingView | null;
 }
+
+/** Ile najwazniejszych zaklec pokazujemy na gorze karty. */
+const KEY_SPELLS = 6;
 
 /** Cechy, w ktorych profil bohatera zawsze daje wartosc z Bestiariusza. */
 const FIXED_HERO_CHARS: readonly Attribute[] = ["S", "Wt"];
@@ -342,6 +347,10 @@ export function computeNpc(input: Npc): NpcView {
 
   const spells = npc.spells.map((n) => gd.getSpell(n)).filter(Boolean) as SpellDef[];
   spells.sort((a, b) => (a.lore === "Prosta" ? -1 : 0) - (b.lore === "Prosta" ? -1 : 0) || a.cn - b.cn || a.name.localeCompare(b.name, "pl"));
+  const keySpells = spells
+    .filter((s) => !s.lore.startsWith("Prosta"))
+    .sort((a, b) => b.cn - a.cn || a.name.localeCompare(b.name, "pl"))
+    .slice(0, KEY_SPELLS);
 
   const last = npc.careerPath[npc.careerPath.length - 1];
   const career = last ? { ...last, ...careerLevelInfo(last.profession, last.level, npc.sex) } : null;
@@ -354,6 +363,7 @@ export function computeNpc(input: Npc): NpcView {
     armour,
     armourPenalties,
     spells,
+    keySpells,
     mutations,
     creatureTraits: bookTraits,
     abilities: creature?.abilities ?? [],
@@ -413,7 +423,10 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
     const sl = (n: number) => (n ? ` (+${n} PS)` : "");
     lines.push(`Czarowanie: ${c.channel.name} ${c.channel.value}${sl(c.channel.sl)}, ${c.cast.name} ${c.cast.value}${sl(c.cast.sl)}${c.cnMod ? `, PZ ${c.cnMod}` : ""}`);
   }
-  if (view.spells.length) lines.push("Zaklęcia: " + view.spells.map((s) => `${s.name} (PZ ${effectiveCn(s, view.casting)})`).join(", "));
+  const spellText = (list: SpellDef[]) => list.map((s) => `${s.name} (PZ ${effectiveCn(s, view.casting)})`).join(", ");
+  const otherSpells = view.spells.filter((s) => !view.keySpells.includes(s));
+  if (view.keySpells.length) lines.push("Najważniejsze zaklęcia: " + spellText(view.keySpells));
+  if (otherSpells.length) lines.push((view.keySpells.length ? "Pozostałe zaklęcia: " : "Zaklęcia: ") + spellText(otherSpells));
   const traits = [...view.creatureTraits, ...npc.traits, ...view.heroTraits];
   if (traits.length) lines.push("Cechy Stworzeń: " + traits.join(", "));
   if (view.abilities.length) lines.push("Zdolności: " + view.abilities.map((a) => `${a.name} — ${a.description}`).join(" "));

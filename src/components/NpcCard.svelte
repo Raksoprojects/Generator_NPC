@@ -10,7 +10,7 @@
   import { findMagicItem } from "../lib/magicItems";
   import { armourLine, computeNpc, effectiveCn, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
-  import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type TierId } from "../lib/types";
+  import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type SpellDef, type TierId } from "../lib/types";
 
   let {
     npc = $bindable(),
@@ -31,6 +31,15 @@
     void app.dataVersion;
     return computeNpc(npc);
   });
+  /** Zaklecia poza najwazniejszymi - na dole karty. */
+  let otherSpells = $derived(view.spells.filter((s) => !view.keySpells.includes(s)));
+  /** Opis zaklecia z dolnej listy pokazujemy pod nia, nie w srodku karty. */
+  let bottomInfo = $derived(!!openInfo?.startsWith("s|") && otherSpells.some((s) => `s|${s.name}` === openInfo));
+
+  function spellCn(s: SpellDef): string {
+    const cn = effectiveCn(s, view.casting);
+    return cn !== s.cn ? `${cn} (z ${s.cn})` : `${cn}`;
+  }
 
   let creature = $derived(gd.getCreature(npc.creature));
   let beast = $derived(isBeast(npc));
@@ -370,6 +379,16 @@
         {#if c.channel.sources.length || c.cast.sources.length}
           <span class="text-dim small">{[...c.channel.sources, ...c.cast.sources].join(" · ")}</span>
         {/if}
+        {#if view.keySpells.length && !editing}
+          <span class="key-spells">
+            <span class="text-dim">Najważniejsze zaklęcia:</span>
+            {#each view.keySpells as s (s.name)}
+              <button class="item tap" onclick={() => toggleInfo(`s|${s.name}`)}>
+                {s.name} <span class="text-dim">PZ {spellCn(s)}</span>
+              </button>
+            {/each}
+          </span>
+        {/if}
       </div>
     {/if}
     <div class="armour" title="Redukcja obrażeń = Bonus z Wytrzymałości + Punkty Pancerza">
@@ -401,19 +420,6 @@
           {#each view.talents as t (t.name)}
             <button class="item tap" class:unknown={!t.known} onclick={() => toggleInfo(`t|${t.name}`)}>
               {t.name}{t.level > 1 ? ` ${t.level}` : ""}
-            </button>
-          {/each}
-        </p>
-      </section>
-    {/if}
-
-    {#if view.spells.length}
-      <section class="block">
-        <h4>Zaklęcia</h4>
-        <p class="list">
-          {#each view.spells as s (s.name)}
-            <button class="item tap" class:petty={s.lore === "Prosta"} onclick={() => toggleInfo(`s|${s.name}`)}>
-              {s.name} <span class="text-dim">PZ {effectiveCn(s, view.casting)}{effectiveCn(s, view.casting) !== s.cn ? ` (z ${s.cn})` : ""}</span>
             </button>
           {/each}
         </p>
@@ -454,7 +460,7 @@
       </section>
     {/if}
 
-    {#if openInfo}
+    {#if openInfo && !bottomInfo}
       <div class="info" role="note">
         <span><b>{openInfo.split("|")[1]}:</b> {infoText(openInfo)}</span>
         <button class="btn-sm ghost" onclick={() => (openInfo = null)} aria-label="Zamknij opis">✕</button>
@@ -472,6 +478,25 @@
               >{:else}{t}{/if}{/each}{#if npc.money}{npc.trappings.length ? " · " : ""}<b>{npc.money}</b>{/if}
         </p>
       </section>
+    {/if}
+
+    {#if otherSpells.length}
+      <section class="block">
+        <h4>{view.keySpells.length ? "Pozostałe zaklęcia" : "Zaklęcia"}</h4>
+        <p class="list">
+          {#each otherSpells as s (s.name)}
+            <button class="item tap" class:petty={s.lore.startsWith("Prosta")} onclick={() => toggleInfo(`s|${s.name}`)}>
+              {s.name} <span class="text-dim">PZ {spellCn(s)}</span>
+            </button>
+          {/each}
+        </p>
+      </section>
+      {#if openInfo && bottomInfo}
+        <div class="info" role="note">
+          <span><b>{openInfo.split("|")[1]}:</b> {infoText(openInfo)}</span>
+          <button class="btn-sm ghost" onclick={() => (openInfo = null)} aria-label="Zamknij opis">✕</button>
+        </div>
+      {/if}
     {/if}
 
     {#if npc.notes.trim()}
@@ -838,6 +863,14 @@
 
   .small {
     font-size: var(--fs-sm);
+  }
+
+  .key-spells {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
   }
 
   button.quality {
