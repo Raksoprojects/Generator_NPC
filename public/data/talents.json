@@ -2005,5 +2005,39 @@
     "tests": null,
     "source": "Grimuar (nieoficjalny), s. 20",
     "description": "Duch zwierzęcia z twojej wizji staje się twoim chowańcem — podąża za tobą i przynosi korzyści w zamian za przestrzeganie Nakazów Starej Wiary. Zwierzęta z gatunku chowańca reagują na ciebie obojętnie albo przyjaźnie. Druid musi mieć ten Talent, by rzucać zaklęcia."
+  },
+  "Błogosławiony przez Ishę": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "Tylko Elfy. Służyłeś jako nowicjusz Ishy i otrzymałeś błogosławieństwo wiecznej królowej na Ulthuanie (Asur) albo Ariel w Athel Loren (Asrai). Możesz nauczyć się Talentu Wysoka Magia.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 83
+  },
+  "Wysoka Magia": {
+    "max": {
+      "type": "none"
+    },
+    "max_raw": "brak",
+    "tests": "Splatanie Magii (Qhaysh)",
+    "description": "Wymaga Splatania Magii (Qhaysh) i Talentu Błogosławiony przez Ishę. Możesz czerpać z Wiatrów, które normalnie byłyby dla ciebie niedostępne — rzucając zaklęcia Tradycji Zwierząt, Śmierci, Ognia, Niebios, Życia, Światła, Metalu lub Cieni brak dostępu do Wiatru nie przeszkadza. Po udanym rzuceniu poziom Wysokiej Magii dolicza się do PS Przeciążania. Możesz uczyć się zaklęć Tradycji Wysokiej Magii.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 83,
+    "minTier": "heroiczny"
+  },
+  "Błogosławieństwo Lileath": {
+    "max": {
+      "type": "characteristic",
+      "attr": "I",
+      "attr_name": "Inicjatywy"
+    },
+    "max_raw": "Bonus z Inicjatywy",
+    "tests": "Splatanie Magii (Qhaysh)",
+    "description": "Wykorzystujesz ruchy ciał niebieskich, sny i wróżby, by wzmocnić Qhaysh. Każdy poziom daje +1 PS do Testów Splatania Magii (Qhaysh) i pozwala utrzymać dodatkowe zaklęcie auryczne (dającą Ochronę), także zaklęć Kolorów.",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 83
   }
 }

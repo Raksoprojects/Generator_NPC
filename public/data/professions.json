@@ -11170,5 +11170,142 @@
         ]
       }
     ]
+  },
+  "Mag": {
+    "races": [
+      "Wysoki elf"
+    ],
+    "characteristics_pending": false,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Nowicjusz",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Inteligencja",
+          "Siła Woli",
+          "Ogłada"
+        ],
+        "skills": [
+          "Sztuka (Kaligrafia albo Grawerowanie)",
+          "Splatanie Magii (Dowolny Kolor)",
+          "Charyzma",
+          "Plotkowanie",
+          "Leczenie",
+          "Język (Magiczny)",
+          "Wiedza (Magia)",
+          "Wiedza (Teologia)",
+          "Percepcja",
+          "Modlitwa"
+        ],
+        "talents": [
+          "Zmysł Magii",
+          "Rozpoznanie Artefaktu",
+          "Magia Prosta",
+          "Percepcja Magiczna"
+        ],
+        "trappings": [
+          "kreda albo dłuto",
+          "symbol religijny (Isha)",
+          "praktyczne szaty"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Mag-Uczeń",
+        "status": "Srebro 2",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Opanowanie",
+          "Zastraszanie",
+          "Język (Dowolny)",
+          "Wiedza (Dowolna)",
+          "Badania Naukowe"
+        ],
+        "talents": [
+          "Magia Tajemna (Dowolna Tradycja)",
+          "Zimna krew",
+          "Precyzyjne Inkantowanie",
+          "Nieugięty"
+        ],
+        "trappings": [
+          "grimuar",
+          "symbol religijny (Hoeth)"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Mag",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Walka Wręcz"
+        ],
+        "skills": [
+          "Splatanie Magii (Qhaysh)",
+          "Wycena",
+          "Broń Biała (Drzewcowa)",
+          "Jeździectwo (Konie)"
+        ],
+        "talents": [
+          "Błogosławiony przez Ishę",
+          "Dwie Bronie",
+          "Wysoka Magia",
+          "Błogosławieństwo Lileath"
+        ],
+        "trappings": [
+          "miecz",
+          "lekki koń bojowy",
+          "symbol religijny (Lileath)",
+          "laska Lileath",
+          "drogowskaz"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Wysoki Mag",
+        "status": "Złoto 3",
+        "characteristics": [
+          "Zwinność"
+        ],
+        "skills": [
+          "Wiedza (Dowolna)",
+          "Unik"
+        ],
+        "talents": [
+          "Ruchliwe dłonie",
+          "Żelazna Wola",
+          "Wykrywanie Magii",
+          "Groźny"
+        ],
+        "trappings": [
+          "magiczny przedmiot"
+        ]
+      },
+      {
+        "level": 5,
+        "title": "Arcymag",
+        "status": "Złoto 6",
+        "characteristics": [
+          "Zręczność"
+        ],
+        "skills": [
+          "Język (Dowolny)"
+        ],
+        "talents": [
+          "Zmysł Bitewny",
+          "Znawca (Magia)",
+          "Szósty Zmysł",
+          "Mag Bitewny"
+        ],
+        "trappings": [
+          "magiczny przedmiot"
+        ]
+      }
+    ],
+    "class": "Uczeni",
+    "source": "Podręcznik Gracza: Wysokie Elfy",
+    "page": 90
   }
 }

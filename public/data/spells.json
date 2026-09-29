@@ -113,6 +113,20 @@
   "Wielkiego Waaagh!": {
    "label": "Tradycja Wielkiego Waaagh! (orki)",
    "wind": null
+  },
+  "Prosta (Elfia)": {
+   "label": "Magia Prosta (elfia)",
+   "wind": null
+  },
+  "Elfie": {
+   "label": "Elfie Zaklęcia Tajemne",
+   "wind": null,
+   "rule": "Zaklęcia łączące dwa Wiatry — dostępne tylko, gdy czarujący zna obie Tradycje. Testy wykonujesz najsłabszym Splataniem Magii z tych Wiatrów, stosuje się mniej korzystne warunki; Atrybut Tradycji wybierasz z jednej z dwóch."
+  },
+  "Wysokiej Magii": {
+   "label": "Tradycja Wysokiej Magii",
+   "wind": "Qhaysh",
+   "rule": "Tylko z Talentem Wysoka Magia. Poziom Talentu dolicza się do PS Przeciążania; brak dostępu do danego Wiatru nie przeszkadza w rzucaniu zaklęć ośmiu Tradycji. Przeciążenie ponad Bonus z Siły Woli grozi Wypaleniem Magicznym (szansa w % = nadwyżka PS; dni bez czarowania = wynik, dublet — trwałe). Runy Cadai (do BSW) pozwalają przerzucić Splatanie, Rzucanie, Pecha, Zepsucie lub Wypalenie. Elf nie dostaje Piętna Magii — zamiast tego 1k10 dni Wypalenia."
   }
  },
  "spells": [
@@ -5868,6 +5882,400 @@
    "description": "Przyzywasz ogromne ilości Ghyranu, by przywrócić życie niedawno zabitych postaci, wciągając ich dusze z powrotem do świata śmiertelników. Cele, które zginęły w przeciągu ostatniej minuty, budzą się muszą wykonać Test z powodu zetknięcia się z Umiarkowanym Źródłem Spaczenia (WFRP, strona 182). Zaklęcie nie leczy Ran Krytycznych ani nie przywraca utraconych kończyn, a zdekapitowanych osób nie da się uratować.",
    "source": "Wiatry Magii",
    "page": 86
+  },
+  {
+   "name": "Błogosław Strzałę",
+   "lore": "Prosta (Elfia)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1 strzała",
+   "duration": "Bonus Siły Woli w rundach",
+   "description": "Przepełniasz niemagiczną strzałę magią. Strzała liczy się jako magiczna i zadaje +1 do Obrażeń.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 80
+  },
+  {
+   "name": "Ukojenie (Elfie)",
+   "lore": "Prosta (Elfia)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk przynosi spokój ducha. Cel usuwa wszelkie efekty Uprzedzenia, Wrogości, Strachu lub Szału Bojowego, jeśli zdasz Wymagający (+0) Test Ogłady.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 80
+  },
+  {
+   "name": "Zielony Palec",
+   "lore": "Prosta (Elfia)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "Obszar (Bonus Siły Woli w metrach)",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk rozprzestrzenia życie i bujność. Żywe rośliny z czasem osiągną swój maksymalny rozmiar i wydajność w naturalnym tempie, nawet jeśli warunki wzrostu są kiepskie. Martwe rośliny wracają do życia w ciągu doby, w stanie sprzed śmierci.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 80
+  },
+  {
+   "name": "Rozpoznaj Chorobę",
+   "lore": "Prosta (Elfia)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Kanalizujesz diagnostyczną mądrość Ishy. Nazwy i skutki wszelkich chorób trapiących osobę, roślinę lub zwierzę stają się ci znane.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 81
+  },
+  {
+   "name": "Usuń Brud",
+   "lore": "Prosta (Elfia)",
+   "cn": 0,
+   "range": "Dotyk",
+   "target": "1 lub Obszar (Bonus Siły Woli w metrach)",
+   "duration": "Natychmiastowy",
+   "description": "Twój dotyk sprawia, że brud po prostu odpada, pozostawiając przedmiot, osobę lub zwierzę nieskazitelnie czystym. Jeśli rzucasz je na powierzchnię, oczyszczasz obszar o średnicy równej Bonusowi Siły Woli w metrach.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 81
+  },
+  {
+   "name": "Objaw Magię",
+   "lore": "Prosta (Elfia)",
+   "cn": 0,
+   "range": "Ty",
+   "target": "Obszar (Bonus Siły Woli w metrach)",
+   "duration": "Bonus Siły Woli w rundach",
+   "description": "Sprawiasz, że magia staje się widoczna w twojej obecności. Magiczne przedmioty i istoty w zasięgu jarzą się na tyle mocno, by je dostrzec, nawet jeśli są ukryte. Czarodzieje nie liczą się jako istoty magiczne, chyba że znajdują się pod wpływem zaklęcia.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 81
+  },
+  {
+   "name": "Zaklęcie Rośliny",
+   "lore": "Elfie",
+   "cn": 4,
+   "range": "Dotyk",
+   "target": "1 roślina",
+   "duration": "Natychmiastowy",
+   "description": "Przepełniasz niemagiczną roślinę trwałą magiczną właściwością. Każda roślina może posiadać tylko jedno zaczarowanie, a zaczarowania można Rozproszyć. Wybierz jedną z poniższych: Wytrzymały: Odporna na kiepskie oświetlenie, suchą glebę i niesprzyjające warunki termiczne. Pożywna: Owoce, orzechy, korzenie lub liście ważą tylko połowę normalnego Obciążenia potrzebnego do zaspokojenia zapotrzebowania na pożywienie. Naczynie: Pomniejszy Demon, Pomniejszy Żywiołak lub dusza może zostać związana w roślinie, tak jak w Kamieniu Mocy.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 81,
+   "requires": [
+    "Życia",
+    "Metalu"
+   ],
+   "winds": [
+    "Ghyran",
+    "Chamon"
+   ]
+  },
+  {
+   "name": "Pomniejsze Wygnanie",
+   "lore": "Elfie",
+   "cn": 4,
+   "range": "Siła Woli w metrach",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Wygnasz Ducha, Widmo, Pomniejszego Demona lub Demoniczną Bestię. To zaklęcie nie działa na potężniejsze istoty, takie jak Zjawy czy Demony Większe. Jeśli wygrasz Przeciwstawny Test Siły Woli/Opanowania, cel zostaje odesłany z powrotem do krainy duchów lub Krainy Chaosu, z której pochodzi. Cel nie zostaje zniszczony i nie otrzymuje obrażeń. Wygnane cele mogą zostać ponownie przyzwane przez nekromantę lub demonologa.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 81,
+   "requires": [
+    "Światła",
+    "Śmierci"
+   ],
+   "winds": [
+    "Hysh",
+    "Shyish"
+   ]
+  },
+  {
+   "name": "Magiczny Alarm",
+   "lore": "Elfie",
+   "cn": 5,
+   "range": "Bonus Siły Woli w metrach",
+   "target": "Obszar (Bonus Inicjatywy w metrach)",
+   "duration": "Bonus Siły Woli w godzinach",
+   "description": "Wyznaczasz obszar magicznego nadzoru. Jeśli jakiekolwiek stworzenie lub duch Rozmiaru Znikomy lub większego wejdzie na strzeżony obszar, natychmiast się o tym dowiadujesz. Jeśli śpisz, od razu się budzisz. Możesz wykrywać zakłócenia z dowolnej odległości i znasz dokładną liczbę stworzeń, lecz nie ich rodzaj.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 82,
+   "requires": [
+    "Niebios",
+    "Cieni"
+   ],
+   "winds": [
+    "Azyr",
+    "Ulgu"
+   ]
+  },
+  {
+   "name": "Maskowanie Umysłu",
+   "lore": "Elfie",
+   "cn": 4,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Bonus Siły Woli w godzinach",
+   "description": "Maskujesz swoje myśli i emocje. Testy Intuicji wykonywane przeciw tobie są Bardzo Trudne (–30). Testy Czarowania zaklęć czytania w myślach lub wróżenia wymierzonych w ciebie są również Bardzo Trudne (–30). Można cię zmusić do mówienia (np. podczas przesłuchania), lecz nie można cię zmusić do mówienia prawdy.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 82,
+   "requires": [
+    "Śmierci",
+    "Cieni"
+   ],
+   "winds": [
+    "Shyish",
+    "Ulgu"
+   ]
+  },
+  {
+   "name": "Oczyść Ciało",
+   "lore": "Elfie",
+   "cn": 6,
+   "range": "Dotyk",
+   "target": "1",
+   "duration": "Natychmiastowy",
+   "description": "Usuwasz toksyny z ciała innej osoby, przesysając je do własnego ciała, a następnie wydalając je w Eter. Możesz wykonać Wymagający (+0) Test Odporności, by uleczyć cel z jednej choroby lub usunąć jedną truciznę. Jeśli oblejesz Test Fuszerką, sam zarażasz się chorobą lub trucizną.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 82,
+   "requires": [
+    "Życia",
+    "Światła"
+   ],
+   "winds": [
+    "Ghyran",
+    "Hysh"
+   ]
+  },
+  {
+   "name": "Rozmowa ze Zwierzęciem",
+   "lore": "Elfie",
+   "cn": 3,
+   "range": "Bonus Siły Woli w metrach",
+   "target": "1",
+   "duration": "Inteligencja w minutach",
+   "description": "Nawiązujesz werbalną komunikację z docelowym zwierzęciem. Język, którym mówicie, jest niezrozumiały dla wszystkich innych, choć postacie znające Anoqeyån mogą wykonać Przeciętny (+20) Test Języka (Magick), by zrozumieć wymianę zdań. Zwierzę nie jest uznawane za oczarowane. Jednak werbalna komunikacja pozwala skorzystać z Umiejętności Oczarowanie (normalnie wymagana byłaby Umiejętność Oswajanie Zwierząt ). Złożoność rozmowy zależy od wyniku Inteligencji zwierzęcia.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 82,
+   "requires": [
+    "Niebios",
+    "Zwierząt"
+   ],
+   "winds": [
+    "Azyr",
+    "Ghur"
+   ]
+  },
+  {
+   "name": "Żelazny Głos",
+   "lore": "Elfie",
+   "cn": 4,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Ogłada w minutach",
+   "description": "Twoje słowa magicznie przyciągają uwagę i szacunek. Normalna lub krzyczana mowa niesie się na potrójną naturalną odległość, nie da się jej stłumić przeszkodami ani innymi hałasami, i zapewnia +10 do Testów Zastraszania i Przewodzenia. Bonus ten można stracić wobec słuchaczy nieprzychylnie do ciebie nastawionych, jeśli zdadzą Problematyczny (–10) Test Percepcji, by zauważyć nienaturalne modulacje twojego głosu. Zaklęcie to nie działa na szept.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 82,
+   "requires": [
+    "Ognia",
+    "Metalu"
+   ],
+   "winds": [
+    "Aqshy",
+    "Chamon"
+   ]
+  },
+  {
+   "name": "Strefa Komfortu",
+   "lore": "Elfie",
+   "cn": 2,
+   "range": "Ty",
+   "target": "Ty",
+   "duration": "Bonus Siły Woli w godzinach",
+   "description": "Przyzywasz osobistą aurę chroniącą cię przed owadami i innymi utrapieniami. Stworzenia z Cechą Rozmiar ( Znikomy lub Mały ) oraz Cechą Rój nie mogą cię zaatakować. Jesteś też odporny na skutki Ekspozycji na Zimno i Gorąco ( WFRP, strona 181) i otrzymujesz –1 do Obrażeń od ataków opartych na zimnie lub gorącu.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 82,
+   "requires": [
+    "Ognia",
+    "Zwierząt"
+   ],
+   "winds": [
+    "Aqshy",
+    "Ghur"
+   ]
+  },
+  {
+   "name": "Apoteoza",
+   "lore": "Wysokiej Magii",
+   "cn": 4,
+   "range": "Liczba metrów równa połowie Siły Woli",
+   "target": "1",
+   "duration": "1 Runda",
+   "description": "Przepełniasz cel czystą magią, by go uleczyć i wzbudzić w nim strach. Cel odzyskuje tyle Żywotności, ile wynosi twój Bonus z Siły Woli, i tymczasowo zyskuje Cechę Stworzenia Strach 1.\nPrzeciążanie: Za każde +3 PS możesz zwiększyć liczbę uleczonej Żywotności o swój Bonus z Siły Woli. +6 PS — Cel leczy Ranę Krytyczną, jeśli zdasz Wymagający (+0) Test Ogłady. +10 PS — Wskrzeszasz cel z martwych z pełną Żywotnością. Głowę celu otacza wtedy aureola migoczącej mocy, lecz poza tym odzyskuje on normalny wygląd i zdolności. Po upływie liczby minut równej Bonusowi z Siły Woli cel umiera i nie można go już wskrzesić ponownie. Cel umiera również, jeśli Apoteoza zostanie Rozproszona. Zyskaj Yenlui (Mrok)",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 86
+  },
+  {
+   "name": "Arkanowe Rozkucie",
+   "lore": "Wysokiej Magii",
+   "cn": 9,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "1",
+   "duration": "Natychmiast",
+   "description": "Przyzywasz moce unicestwienia, by zranić opancerzonych wrogów i zniszczyć magiczne przedmioty. Cel otrzymuje 1 Obrażenie na ciało za każde 2 noszone Punkty Pancerza ( Przykład: Cel z 3 Punktami Pancerza na wszystkich sześciu Miejscach Trafień miałby łącznie 18 Punktów Pancerza, więc otrzymałby 9 Obrażeń ). Odejmuje się Bonus z Wytrzymałości, lecz Punkty Pancerza są ignorowane. Dodatkowo jeden z magicznych przedmiotów celu (wybrany losowo) zostaje zniszczony, jeśli zdasz Wymagający (+0) Test Splatania Magii.\nPrzeciążanie: Za każde +1 PS możesz, po zadaniu Obrażeń, zniszczyć 1 noszony Punkt Pancerza (wybrany losowo). +3 PS — Jeśli zdasz Przeciętny (+20) Test Zręczności, poznajesz wszystkie magiczne przedmioty noszone przez cel i możesz wybrać, który z nich zniszczyć, zamiast losować. +8 PS — Możesz zwiększyć Obrażenia zaklęcia do 1 Obrażenia za każdy Punkt Pancerza.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 86
+  },
+  {
+   "name": "Blask Finreira",
+   "lore": "Wysokiej Magii",
+   "cn": 11,
+   "range": "Rzucający",
+   "target": "Rzucający",
+   "duration": "Liczba Rund równa Bonusowi z Siły Woli",
+   "description": "Wznosisz się w powietrze na słupie białego światła, a twoje ciało otacza korona ochronnej energii. Zyskujesz Cechę Stworzenia Lot (Zwinność) ( WFRP, strona 339) oraz 5 Punktów Pancerza na wszystkich Miejscach Trafień. Magiczna bariera nie sumuje się z noszonym pancerzem — dla każdego Miejsca Trafienia stosuje się wyższą z dwóch wartości.\nPrzeciążanie: Przeciążenie tego zaklęcia może stworzyć Arkanowy Pomost (więcej informacji w Wiatrach Magii, strona 198), który zapewnia premię +1–5 PS (1k10 / 2) do Testów Rzucania Zaklęcia, przerzucaną na początku każdej Rundy, wszystkim rzucającym w promieniu tylu metrów, ile wynosi Bonus z Siły Woli. +5 PS — Natychmiast po rzuceniu tworzysz Rozdarcie Spaczenia w promieniu tylu metrów, ile wynosi Bonus z Siły Woli. Możesz otworzyć rozdarcie zarówno w litym terenie, jak i w powietrzu. Rozdarcia Spaczenia są niestabilne i liczą się jako Złowrogie Wpływy ( WFRP, strona 236). Tracisz –3 do Yenlui. +8 PS — Natychmiast po rzuceniu tworzysz Magiczny Portal w dowolnym miejscu w promieniu tylu metrów, ile wynosi Bonus z Siły Woli. Portal musisz otworzyć w litej cesze terenu. Jest on stabilniejszy niż Rozdarcie Spaczenia i może wzmacniać wyłącznie jedną kolorową Tradycję Magii (dowolnie wybraną przez ciebie) oraz zaklęcia Wysokiej Magii.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 86
+  },
+  {
+   "name": "Klątwa Przyciągania Strzał",
+   "lore": "Wysokiej Magii",
+   "cn": 5,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Umiejętności Strzeleckich)",
+   "duration": "Liczba Rund równa Bonusowi z Siły Woli",
+   "description": "Wypaczasz powietrze wokół wrogów migoczącą magią. Strzelcy mogą przerzucać wszelkie chybione ataki dystansowe wymierzone w objęte klątwą cele, ponieważ twoja klątwa kieruje strzały, bełty i kamienie w ich stronę. Klątwa działa na magiczną amunicję i machiny wojenne, lecz nie na magiczne pociski.\nPrzeciążanie: +4 PS — Tarcze noszone przez cele tracą swoje PP oraz Zaletę Obronna przy Opieraniu się atakom dystansowym, ponieważ pociski je omijają. Tarcz można wciąż używać do blokowania nadlatujących ataków. +6 PS — Jeśli zdasz Wymagający (+0) Test Umiejętności Strzeleckich, możesz wybierać Miejsca Trafień pocisków godzących w przeklęte cele, zamiast korzystać ze zwykłej losowej metody.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 86
+  },
+  {
+   "name": "Impas",
+   "lore": "Wysokiej Magii",
+   "cn": 5,
+   "range": "Liczba metrów równa połowie Wytrzymałości",
+   "target": "1 rzucający, zaklęcie lub przedmiot",
+   "duration": "Liczba minut równa Bonusowi z Siły Woli",
+   "description": "Wywołujesz brzęczący rezonans antymagii, by unicestwić wrogie czary. Jedno wybrane przez ciebie trwałe zaklęcie lub magiczny przedmiot zostaje tymczasowo zneutralizowany. Magiczna broń i pancerz nadal działają jak zwykłe przedmioty. Możesz zamiast tego wziąć na cel rzucającego i uczynić jedno z jego zaklęć tymczasowo bezużytecznym, o ile znasz to zaklęcie z wcześniejszego rzucenia (lub przeczytałeś grymuar celu).\nPrzeciążanie: +6 PS — Premia do Testów Splatania Magii i Rzucania Zaklęcia generowana przez Kamień Drogi, Krąg Ogamiczny, Kamień Stadny lub Węzeł Linii Ley zostaje zneutralizowana (zob. Wiatry Magii, strony 194–197). Arkanowych Pomostów nie można zneutralizować. Zyskaj Yenlui (Światło). +9 PS — Właściwość Arkanowego Pomostu pozwalająca kontrolować Magiczny Nawał zostaje zneutralizowana (zob. Burze Magii w Wiatrach Magii, strona 192). Zyskaj Yenlui (Światło).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 87
+  },
+  {
+   "name": "Wysysanie Magii",
+   "lore": "Wysokiej Magii",
+   "cn": 6,
+   "range": "Liczba metrów równa połowie Siły Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Siły Woli)",
+   "duration": "Natychmiast",
+   "description": "Wypędzasz magię ze świata, przyzywając eteryczny wir. Trwałe zaklęcia w Obszarze zostają natychmiast Rozproszone bez Wydłużonego Testu, a magia zgromadzona przez rzucających Splatających Magię przepada. Magiczne przedmioty i Cecha Stworzenia Ochrona pozostają nietknięte.\nPrzeciążanie: +5 PS — Możesz zwiększyć Obszar do liczby metrów równej Sile Woli. Problematyczny (– 10) Test Inteligencji pozwala wyłączyć spod działania zaklęcia sprzymierzone cele (w tym ciebie samego). +7 PS — Rozproszone zostają również trwałe Błogosławieństwa i Cuda. Zyskaj Yenlui (Światło). +10 PS — Magiczne przedmioty tracą swoje moce, a Cecha Stworzenia Ochrona zostaje zneutralizowana. Rzucający muszą zdać Wymagający (+0) Test Splatania Magii, w przeciwnym razie tracą całą zdolność rzucania zaklęć na 24 godziny.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 87
+  },
+  {
+   "name": "Ognista Konwokacja",
+   "lore": "Wysokiej Magii",
+   "cn": 10,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Siły Woli)",
+   "duration": "Liczba Rund równa Bonusowi z Siły Woli",
+   "description": "Przyzywasz nieustającą kanonadę ognia. Wszystkie stworzenia znajdujące się w Obszarze w chwili rzucenia zaklęcia otrzymują trafienie magicznym pociskiem o Obrażeniach +5 oraz Stan Podpalenie. W każdej kolejnej Rundzie otrzymują kolejne trafienie i kolejny poziom Podpalenia, nawet jeśli opuszczą pierwotny Obszar. Efekty można unieważnić przez całkowite zanurzenie w wodzie lub piasku.\nPrzeciążanie: +5 PS — Obrażenia wzrastają do +6 w drugiej Rundzie i nadal rosną o kolejne +1 w każdej następnej Rundzie. Zyskaj Yenlui (Mrok). +8 PS — Wymagający (+0) Test Walki Wręcz pozwala wyłączyć spod działania zaklęcia sprzymierzone cele.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 87
+  },
+  {
+   "name": "Fortuna Kołem się Toczy",
+   "lore": "Wysokiej Magii",
+   "cn": 6,
+   "range": "Liczba metrów równa Ogładzie",
+   "target": "1",
+   "duration": "Liczba Rund równa Bonusowi z Ogłady",
+   "description": "Przyzywasz niewidzialne duchy, by rozproszyć rzucającego, szarpiąc go i szturchając. Każdy dublet wyrzucony przez cel w Teście Splatania Magii lub Rzucania Zaklęcia powoduje Pecha, niezależnie od użytych Talentów, składników czy innych wzmocnień. Testy Rzucania Zaklęcia celu nie mogą wywołać Krytycznego rzucenia, a jego próby Rozproszenia automatycznie kończą się porażką, jeśli wypadnie dublet. Postacie z Talentem Drugi Wzrok mogą dostrzec te niewidzialne duchy jako złośliwe żywiołaki Qhaysh.\nPrzeciążanie: +4 PS — Niezwiązane z rzucaniem zaklęć Akcje celu automatycznie kończą się porażką za każdym razem, gdy wypadnie dublet, nawet jeśli test by się powiódł. +6 PS — Dublety celu w Testach Splatania Magii i Rzucania Zaklęcia rozstrzyga się na Tabeli Większych Pechów. Zyskaj Yenlui (Mrok).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 87
+  },
+  {
+   "name": "Urok Teclisa",
+   "lore": "Wysokiej Magii",
+   "cn": 7,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Inteligencji)",
+   "duration": "Liczba Rund równa Bonusowi z Inteligencji",
+   "description": "Przyzywasz iluzoryczny labirynt mgły i cieni. W każdej Rundzie cele muszą zdać Bardzo Bardzo Trudny (–30) Test Nawigacji albo nie mogą wykonać żadnej Akcji poza wędrowaniem w losowym kierunku w normalnym tempie marszu. Zaklęcie jest niewidoczne dla wszystkich innych, więc cele wyglądają po prostu na oszołomione. Jeśli cel nie zda 3 Testów, możesz kierować jego ruchem do końca czasu trwania zaklęcia, zdając Przeciętny (+20) Test Przywództwa. Za każdym razem, gdy chcesz zmienić kierunek ruchu celu, musisz zdać nowy Test Przywództwa.\nPrzeciążanie: +3 PS — Efekty zaklęcia utrzymują się przez liczbę godzin równą Bonusowi z Inteligencji u celów, które nie zdały trzech Testów Nawigacji. Zyskaj Yenlui (Mrok). +6 PS — Wymagający (+0) Test Zwinności pozwala wyłączyć spod działania zaklęcia sprzymierzone cele.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 88
+  },
+  {
+   "name": "Większe Wygnanie",
+   "lore": "Wysokiej Magii",
+   "cn": 14,
+   "range": "Rzucający",
+   "target": "Obszarowy (liczba metrów równa połowie Siły Woli)",
+   "duration": "1 Runda",
+   "description": "Emitujesz strumienie najczystszego Qhaysh, by wygnać zło i mrok. W każdej Rundzie stworzenia o Cesze Stworzenia Demoniczny i Ożywieniec znajdujące się w Obszarze otrzymują trafienie magicznym pociskiem o Obrażeniach +8 (lub +15, jeśli ich Rozmiar to Duży lub większy). Stworzenia z Cechą Niestabilny otrzymują podwójne Obrażenia. Demony zniszczone tym zaklęciem nie mogą zostać ponownie przywołane przez 1001 dni. Zniszczonych Ożywieńców nigdy nie można przywołać ponownie. Dodatkowo możesz podjąć darmową próbę Rozproszenia przeciwko każdemu zaklęciu Czarownictwa, Demonologii, Nekromancji, Mrocznej Magii lub Magii Chaosu znajdującemu się w Obszarze.\nPrzeciążanie: Za każde +1 PS możesz dodać premię +10 do swoich Testów Rozproszenia. +4 PS — Magiczne przedmioty o złych lub Chaotycznych zaklęciach przestają działać na czas trwania zaklęcia, jeśli zdasz Przeciętny (+20) Test Ogłady . +7 PS — Zwiększ Obrażenia do +15 (lub +30, jeśli cel ma Rozmiar Duży lub większy). Zyskaj Yenlui (Światło).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 88
+  },
+  {
+   "name": "Dłoń Chwały",
+   "lore": "Wysokiej Magii",
+   "cn": 4,
+   "range": "Rzucający",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Ogłady)",
+   "duration": "1 Runda",
+   "description": "Przywołujesz imiona legendarnych elfich bohaterów, by prowadzić i wzmacniać swoich sojuszników. Sprzymierzone postacie tymczasowo zyskują 3k10 do jednej z następujących Cech: Walka Wręcz, Umiejętności Strzeleckie, Siła, Wytrzymałość, Inicjatywa lub Zwinność. Wykonaj jeden rzut i zastosuj tę samą premię do wszystkich celów. Zamiast tego można zwiększyć Ruch objętych celów o 2. Żywotność pozostaje bez zmian, nawet jeśli Wytrzymałość wzrasta.\nPrzeciążanie: +3 PS — Sprzymierzone postacie w promieniu tylu metrów od ciebie, ile wynosi twój Bonus z Ogłady, usuwają wszystkie Stany Złamany. +6 PS — Zamiast zwykłych efektów zwiększ wszystkie cztery Cechy o 3k10 (wykonaj jeden rzut i zastosuj tę samą premię do każdej Cechy) oraz zwiększ Ruch o 2. +8 PS — Sprzymierzone postacie w promieniu tylu metrów od ciebie, ile wynosi twój Bonus z Ogłady, usuwają wszystkie Stany Złamany i Zmęczenie, leczą 1k10 Ran oraz zyskują Odporność na Psychologię ( WFRP, strona 340) na czas trwania zaklęcia. Zyskaj Yenlui (Światło).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 88
+  },
+  {
+   "name": "Niewidzialne Oko",
+   "lore": "Wysokiej Magii",
+   "cn": 4,
+   "range": "Liczba metrów równa Bonusowi z Inteligencji",
+   "target": "Specjalny",
+   "duration": "Liczba godzin równa Bonusowi z Inteligencji",
+   "description": "Tworzysz niewidzialną unoszącą się gałkę oczną, która porusza się na twój rozkaz. Oko ma Percepcję równą twojej Umiejętności Język (Magiczny), Talent Wyczulony Zmysł (Wzrok) oraz Cechę Stworzenia Lot 120. Widzisz oczami tej gałki, korzystając z jej zdolności zamiast swoich własnych, lecz póki zaklęcie trwa, twoje ciało pozostaje w transie. Oko nie może przenikać przez lite przedmioty. Jeśli niewidzialne oko zostanie wykryte, można je zniszczyć, zadając mu 3 Obrażenia. Jeśli inne stworzenie wejdzie z tobą w interakcję, podczas gdy korzystasz z tego zaklęcia, możesz zdecydować się skupić z powrotem na swoim fizycznym ciele. Niszczy to gałkę oczną, a ty otrzymujesz Stan Zaskoczenie.\nPrzeciążanie: +4 PS — Oko zyskuje Talenty Zmysł Magii, Drugi Wzrok i Widzenie w Ciemności. +8 PS — Zasięg zaklęcia zostaje zwiększony do liczby kilometrów równej Inteligencji.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 88
+  },
+  {
+   "name": "Tarcza Saphery",
+   "lore": "Wysokiej Magii",
+   "cn": 4,
+   "range": "Rzucający",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Siły Woli)",
+   "duration": "1 Runda",
+   "description": "Przyzywasz błyszczące ochronne pole wokół sojuszników. Sprzymierzone cele w Obszarze zyskują Cechę Stworzenia Ochrona 9+. Za każdym razem, gdy rzucisz kolejne zaklęcie Wysokiej Magii, wzmacniasz Cechę Ochrona o 1.\nPrzeciążanie: Za każde +3 PS możesz wzmocnić Cechę Ochrona o 1. +4 PS — Zmień Zasięg zaklęcia na liczbę metrów równą połowie Siły Woli.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 89
+  },
+  {
+   "name": "Zgaszenie Duszy",
+   "lore": "Wysokiej Magii",
+   "cn": 7,
+   "range": "Liczba metrów równa połowie Siły Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Siły Woli)",
+   "duration": "Natychmiast",
+   "description": "Ciskasz smugami białego światła we wrogów, wypędzając ich dusze w zaświaty. To magiczny pocisk o Obrażeniach +6. Cele zabite tym zaklęciem nie mogą powrócić jako Duchy, a ich dusz nie da się związać z liniami ley, Kamieniami Mocy, Drzewcami ani podobnymi naczyniami.\nPrzeciążanie: +3 PS — Ciała zabitych celów rozpadają się w pył. +7 PS — Kanalizujesz furię Khaine'a. Zasięg i Cel zostają podwojone, a Obrażenia wynoszą +11. Zyskaj Yenlui (Mrok).",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 89
+  },
+  {
+   "name": "Nawałnica",
+   "lore": "Wysokiej Magii",
+   "cn": 8,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Obszarowy (liczba metrów równa podwojonemu Bonusowi z Siły Woli)",
+   "duration": "1 Runda",
+   "description": "Przyzywasz z nieba wielobarwną burzę trzeszczącej energii. Nawałnica porusza się jak zaklęcie losowego wiru, z tą różnicą, że pomija kroki #1–2 i od razu przechodzi do przesunięcia o 2k10 metrów zgodnie z krokiem #3 (zob. Wiatry Magii, strona 21). W każdej Rundzie stworzenia w Obszarze otrzymują trafienie magicznym pociskiem o Obrażeniach +4 i muszą zdać Przeciętny (+20) Test Atletyki, w przeciwnym razie odejmują –20 od wartości Walki Wręcz i Umiejętności Strzeleckich na czas trwania nawałnicy. Latające cele zamiast tego otrzymują Obrażenia +5, a ich Testy Atletyki cierpią karę -1 PS.\nPrzeciążanie: +4 PS — Oprócz zwykłych efektów, stworzenia w Obszarze muszą zdać Wymagający (+0) Test Opanowania, aby się poruszyć. Latające cele, którym nie uda się ten Test, natychmiast spadają z prędkością 50 metrów na Rundę. Wszystkie Testy Umiejętności Strzeleckich wykonuje się z karą –30. +5 PS — Oprócz zwykłych efektów, w każdej Rundzie nawałnica zadaje trafienie magicznym pociskiem o Obrażeniach +15 budynkom i machinom wojennym znajdującym się w Obszarze. +8 PS — Wymagający (+0) Test Inicjatywy pozwala wyłączyć spod działania zaklęcia sprzymierzone cele.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 89
+  },
+  {
+   "name": "Krok Między Światami",
+   "lore": "Wysokiej Magii",
+   "cn": 7,
+   "range": "Liczba metrów równa Sile Woli",
+   "target": "Obszarowy (liczba metrów równa Bonusowi z Siły Woli)",
+   "duration": "1 Runda",
+   "description": "Otwierasz przed sojusznikami ścieżki między światami. Sprzymierzone cele zyskują Cechę Stworzenia Eteryczny, a ich wartości Ruchu zostają podwojone.\nPrzeciążanie: +5 PS — Czas trwania zaklęcia wydłuża się do liczby minut równej Bonusowi z Inteligencji, jeśli zdasz Ciężki (-20) Test Siły Woli. +8 PS — Cele znajdujące się przy odpowiednim geomantycznym węźle mogą przemierzyć Ścieżki Starożytnych, by dotrzeć do innego węzła. To ty decydujesz, do którego węzła trafiają. Nie ma ograniczenia co do pokonanego dystansu.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 89
   }
  ]
 }

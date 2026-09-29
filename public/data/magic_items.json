@@ -201,6 +201,16 @@
         "weight": 3
       },
       "description": "Zaklęcie zapisane na zwoju: rzuca je Akcją i Wymagającym (+0) Testem Języka (Magicznego) każdy, kto zna ten język (inni: Trudny (−20) Test). Zwój ulega zniszczeniu."
+    },
+    {
+      "name": "laska Lileath",
+      "matches": [
+        "laska lileath"
+      ],
+      "cnMod": -1,
+      "source": "Podręcznik Gracza: Wysokie Elfy",
+      "page": 85,
+      "description": "Laska zdobiona półksiężycami Lileath, nadawana w Białej Wieży Hoetha, gdy elf zostaje Magiem. −1 PZ zaklęć dowolnej kolorowej Tradycji i Tradycji Wysokiej Magii (min. 0). Wytwarzana przez kapłanów Vaula — trudno zdobyć następną."
     }
   ],
   "magicItemTrappings": [

@@ -472,7 +472,8 @@
       "Szamanka": 1,
       "Magister Rewizor": 0.5,
       "Elementalista": 1,
-      "Czarodziej": 0.01
+      "Czarodziej": 0.01,
+      "Mag": 2
     },
     "keySkills": [
       "Splatanie Magii",
@@ -491,7 +492,9 @@
       "Mag Bitewny": 2,
       "Żelazna Wola": 2,
       "Szósty Zmysł": 2,
-      "Wykrywanie Magii": 2
+      "Wykrywanie Magii": 2,
+      "Wysoka Magia": 5,
+      "Błogosławiony przez Ishę": 5
     },
     "traits": {
       "Uczony": 4,
@@ -518,7 +521,9 @@
       "Czarownica!",
       "Magia Chaosu",
       "Błogosławieństwo",
-      "Inwokacja"
+      "Inwokacja",
+      "Wysoka Magia",
+      "Błogosławiony przez Ishę"
     ]
   },
   "Czarownik": {

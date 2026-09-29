@@ -32,6 +32,11 @@ const LORE_FAMILY: Record<string, { petty?: string; common: string[] }> = {
 };
 const familyOf = (lore: string) => LORE_FAMILY[lore] ?? { common: ["Tajemna"] };
 
+/** Tradycja Wysokiej Magii (talent Wysoka Magia) i Elfie Zaklecia Tajemne laczace dwa Wiatry. */
+const HIGH_MAGIC = "Wysokiej Magii";
+const ELVEN_COMBINED = "Elfie";
+const isElf = (race: string) => /elf/i.test(race);
+
 /** Tradycja z opisu cechy "Rzucanie Czarów (…)" - moze zawierac alternatywy. */
 function loreFromTrait(spec: string, rng: Rng): string | undefined {
   const s = spec.toLowerCase();
@@ -67,6 +72,7 @@ export function casterLores(npc: Npc, rng: Rng): { petty: boolean; lores: string
   for (const t of npc.talents) {
     const { base, spec } = gd.splitSpec(t.name);
     if (base === "Magia Prosta") petty = true;
+    if (base === "Wysoka Magia") lores.add(HIGH_MAGIC);
     if ((base === "Magia Tajemna" || base === "Magia Chaosu") && spec) {
       const key = base === "Magia Chaosu" ? loreFromTrait(spec, rng) : gd.spellLoreKey(spec) ?? loreFromTrait(spec, rng);
       if (key) lores.add(key);
@@ -99,8 +105,10 @@ export function rollExtraLores(npc: Npc, rng: Rng, deterministic = false): void 
   }
   if (!known.size) return;
   const channel = Math.max(0, ...npc.skills.filter((s) => s.name.startsWith("Splatanie Magii")).map((s) => s.advances));
+  // Elf moze znac tyle tradycji, ile wynosi jego Bonus z Siły Woli (Wysokie Elfy, s. 79).
+  const cap = bonuses(npc).wp;
   for (const c of chances) {
-    if (!chance(c, rng)) break;
+    if (known.size >= cap || !chance(c, rng)) break;
     const lore = pick(colleges.filter((l) => !known.has(gd.spellLoreKey(l.lore) ?? l.lore)), rng);
     if (!lore) break;
     known.add(gd.spellLoreKey(lore.lore) ?? lore.lore);
@@ -132,6 +140,13 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const pettyPool = all.filter((s) => pettyLores.has(s.lore));
   const pettyCount = Math.max(1, wp + (deterministic ? 0 : randInt(-1, 1, rng)));
   out.push(...drawSpells(pettyPool, pettyCount, () => 1, rng, deterministic).map((s) => s.name));
+  // Elfy znaja tez Magie Prosta Ishy; Mag musi znac co najmniej cztery (Wysokie Elfy, s. 79-80).
+  if (!replacesPetty && isElf(npc.race)) {
+    const mage = npc.careerPath.some((s) => s.profession === "Mag");
+    const elven = all.filter((s) => s.lore === "Prosta (Elfia)");
+    out.push(...drawSpells(elven, mage ? 4 : 1 + (deterministic ? 0 : randInt(0, 1, rng)), () => 1, rng, deterministic).map((s) => s.name));
+    pettyLores.add("Prosta (Elfia)");
+  }
 
   const maxCn = tier?.spells.maxCn ?? 0;
   if (!lores.length || maxCn <= 0) return out;
@@ -146,23 +161,31 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   let count = Math.max(1, int + (deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng)));
   count = Math.min(count, arcanePool.length);
 
-  // Jedno zaklecie z gornej polki (najwyzsze PZ osiagalne na tym poziomie).
-  const topCn = Math.max(...arcanePool.map((s) => s.cn));
-  const topPool = arcanePool.filter((s) => s.cn >= Math.max(1, topCn - 3) && s.lore === lores[0]);
-  const top = drawSpells(topPool.length ? topPool : arcanePool, 1, (s) => s.cn, rng, deterministic);
-  out.push(...top.map((s) => s.name));
-
-  // Kolejne tradycje (elfy): druga dostaje polowe zaklec glownej, trzecia jedna trzecia.
+  // Najsilniejsze zaklecia glownej tradycji (gorna polka osiagalna na tym poziomie):
+  // 1 u sredniego, 3 u heroicznego, 4 u legendarnego (tiers.json -> spells.topSpells).
   const [mainLore, ...extraLores] = lores;
+  const mainPool = arcanePool.filter((s) => s.lore === mainLore);
+  const topCn = Math.max(...(mainPool.length ? mainPool : arcanePool).map((s) => s.cn));
+  const topPool = (mainPool.length ? mainPool : arcanePool).filter((s) => s.cn >= Math.max(1, topCn - 3));
+  const topCount = Math.min(tier?.spells.topSpells ?? 1, count);
+  out.push(...drawSpells(topPool, topCount, (s) => s.cn, rng, deterministic).map((s) => s.name));
+
+  // Kolejne tradycje (elfy, Wysoka Magia): druga dostaje polowe zaklec glownej, trzecia jedna trzecia.
   const rest = arcanePool.filter((s) => !out.includes(s.name) && !extraLores.includes(s.lore));
   const weight = (s: SpellDef) => (s.lore === mainLore ? 3 : 1);
-  out.push(...drawSpells(rest, count - 1, weight, rng, deterministic).map((s) => s.name));
+  out.push(...drawSpells(rest, count - topCount, weight, rng, deterministic).map((s) => s.name));
   const mainCount = out.filter((n) => gd.getSpell(n)?.lore === mainLore).length;
   extraLores.forEach((lore, i) => {
     const pool = arcanePool.filter((s) => s.lore === lore && !out.includes(s.name));
     const n = Math.max(1, Math.round(mainCount / (i + 2)));
     out.push(...drawSpells(pool, n, (s) => s.cn, rng, deterministic).map((s) => s.name));
   });
+
+  // Elfie Zaklecia Tajemne: tylko gdy BN zna obie laczone tradycje; kazde z polowa szans.
+  const combined = all.filter(
+    (s) => s.lore === ELVEN_COMBINED && s.cn <= maxCn && (s.requires ?? []).every((l) => loreSet.has(l))
+  );
+  for (const s of combined) if (deterministic || chance(0.5, rng)) out.push(s.name);
   return out;
 }
 

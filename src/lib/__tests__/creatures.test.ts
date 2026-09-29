@@ -239,6 +239,23 @@ describe("rozwoj bestii", () => {
     expect(generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Wysoki elf" }, seedRng(1)).careerPath.length).toBeGreaterThan(0);
   });
 
+  it("elfi Mag: Wysoka Magia dopiero od heroicznego, legendarny Arcymag na 5. poziomie", () => {
+    const has = (n: Npc, t: string) => n.talents.some((x) => x.name === t);
+    for (let seed = 1; seed <= 20; seed++) {
+      const adv = generateNpc({ archetype: "Czarodziej", tier: "zaawansowany", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      expect(has(adv, "Wysoka Magia")).toBe(false);
+      expect(adv.spells.some((s) => gd.getSpell(s)?.lore === "Wysokiej Magii")).toBe(false);
+      const hero = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      expect(has(hero, "Wysoka Magia")).toBe(true);
+      expect(hero.spells.some((s) => gd.getSpell(s)?.lore === "Wysokiej Magii")).toBe(true);
+      expect(hero.spells.some((s) => gd.getSpell(s)?.lore === "Prosta (Elfia)")).toBe(true);
+      // Doswiadczony i wyzszy elfi czarodziej zna co najmniej dwie tradycje kolorow.
+      expect(hero.talents.filter((t) => t.name.startsWith("Magia Tajemna")).length).toBeGreaterThanOrEqual(2);
+      const legend = generateNpc({ archetype: "Czarodziej", tier: "legendarny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      expect(legend.careerPath.at(-1)).toEqual({ profession: "Mag", level: 5 });
+    }
+  });
+
   it("czarodziej nie zmienia tradycji; elfy od zaawansowanego moga znac kolejne", () => {
     const magic = (p: string) =>
       gd.getProfession(p)!.levels.some((l) => [...l.skills, ...l.talents].some((n) => n.startsWith("Splatanie Magii")));

@@ -62,6 +62,8 @@ export interface Talent {
   adds_characteristic?: string;
   /** Talent zwieksza Zywotnosc o Bonus z Wytrzymalosci (Twardziel). */
   wounds_toughness_bonus?: boolean;
+  /** Najnizszy poziom BN, na ktorym generator daje ten talent (np. Wysoka Magia - heroiczny). */
+  minTier?: TierId;
   variants?: EntryVariants<Talent>;
 }
 
@@ -157,8 +159,13 @@ export interface TierDef {
   /** Premia kluczowych cech archetypu i laczne rozwiniecia min/max (bez profilu bohatera). */
   keyChars: KeyBonus;
   /** Zaklecia: najwyzszy PZ oraz odchylenie liczby zaklec tajemnych od Bonusu z Int. */
-  /** extraLores: szanse na kolejne tradycje (po kolei) dla ras z settings.multiLoreRaces. */
-  spells: { maxCn: number; arcane: [number, number]; extraLores?: number[] };
+  /**
+   * extraLores: szanse na kolejne tradycje (po kolei) dla ras z settings.multiLoreRaces.
+   * topSpells: ile najsilniejszych zaklec glownej tradycji BN zna na pewno.
+   */
+  spells: { maxCn: number; arcane: [number, number]; extraLores?: number[]; topSpells?: number };
+  /** Profesja z 5. poziomem (np. elfi Mag -> Arcymag) moze na nim dojsc do 5. poziomu. */
+  allowLevel5?: boolean;
 }
 
 /**
@@ -236,6 +243,9 @@ export interface SpellDef {
   description: string;
   source: string;
   page: number;
+  /** Elfie Zaklecia Tajemne: tradycje, ktore czarujacy musi znac wszystkie. */
+  requires?: string[];
+  winds?: string[];
 }
 
 export interface SpellsData {

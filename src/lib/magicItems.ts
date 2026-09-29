@@ -117,7 +117,7 @@ export function castingSummary(
     cast: { name: castSkill?.name ?? "Inteligencja", value: castSkill?.total ?? chars.Int.total, sl: 0, sources: [] },
     cnMod: 0,
     cnSources: [],
-    cnLores: [...loresOf(npc), "Tajemna"],
+    cnLores: [...loresOf(npc), "Tajemna", ...(npc.talents.some((t) => t.name === "Wysoka Magia") ? ["Wysokiej Magii"] : [])],
     lores: loreKeys
       .filter((k) => !k.startsWith("Prosta"))
       .map((k) => ({ key: k, label: gd.getSpellsData().lores[k]?.label ?? k, rule: gd.getSpellsData().lores[k]?.rule }))

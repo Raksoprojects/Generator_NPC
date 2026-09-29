@@ -229,6 +229,9 @@ export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId
     }
   }
 
+  // Legendarni moga dojsc do 5. poziomu, jesli profesja go ma (elfi Mag -> Arcymag).
+  if (tier.allowLevel5 && mainLevels === 4 && gd.getProfession(main)?.levels.some((l) => l.level === 5)) mainLevels = 5;
+
   const steps: CareerStep[] = [];
   if (prev) for (let l = 1; l <= prevLevels; l++) steps.push({ profession: prev, level: l });
   for (let l = 1; l <= mainLevels; l++) steps.push({ profession: main, level: l });
@@ -467,7 +470,11 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     }
 
     const chars = approxChars(npc);
-    const pool = lvl.talents.map((t) => resolveSpecName(t, npc.specChoices, arch, rng, deterministic));
+    // Talenty z minimalnym poziomem BN (np. Wysoka Magia od heroicznego) nizej nie wypadaja.
+    const tierIdx = TIER_IDS.indexOf(npc.tier);
+    const pool = lvl.talents
+      .filter((t) => TIER_IDS.indexOf(gd.getTalent(t)?.minTier ?? "slaby") <= tierIdx)
+      .map((t) => resolveSpecName(t, npc.specChoices, arch, rng, deterministic));
     let picks = tier?.talentsPerLevel ?? 1;
     if (!deterministic && tier && chance(tier.extraTalentChance, rng)) picks += 1;
     const available = [...pool];

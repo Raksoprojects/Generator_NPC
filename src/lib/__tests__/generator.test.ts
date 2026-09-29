@@ -47,7 +47,8 @@ describe("poziomy BN", () => {
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
         const top = maxLevel(npc);
-        if (tier === "doswiadczony" || tier === "heroiczny" || tier === "legendarny") expect(top).toBe(4);
+        if (tier === "legendarny") expect(top).toBeGreaterThanOrEqual(4);
+        else if (tier === "doswiadczony" || tier === "heroiczny") expect(top).toBe(4);
         else expect(top).toBeLessThanOrEqual(3);
       }
     }
@@ -60,7 +61,7 @@ describe("poziomy BN", () => {
       zaawansowany: [3, 4, 2],
       doswiadczony: [4, 5, 2],
       heroiczny: [5, 6, 2],
-      legendarny: [7, 7, 2]
+      legendarny: [7, 8, 2]
     };
     for (const tier of TIER_IDS) {
       const [min, max, careers] = expected[tier];
