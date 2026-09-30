@@ -28,6 +28,8 @@ export interface CharView {
   bonus: number;
   /** Stworzenie nie posiada tej cechy ("–"). */
   absent: boolean;
+  /** Skad biora sie modyfikatory (profil, talent, Cecha Stworzenia, mutacja, Linia Krwi, przedmiot). */
+  sources: { label: string; value: number; kind: "hero" | "talent" | "trait" | "mutation" | "item" }[];
 }
 
 export interface SkillView {
@@ -211,13 +213,17 @@ export function computeNpc(input: Npc): NpcView {
   const bookTraits = creature?.traits ?? [];
 
   const talentBonus: Partial<Record<Attribute, number>> = {};
+  const talentSources = Object.fromEntries(ATTRIBUTES.map((c) => [c, [] as CharView["sources"]])) as Record<Attribute, CharView["sources"]>;
   let hardy = 0;
   // Premie do cech z talentow bloku stworzenia (np. Urodzony Wojownik) sa juz wliczone w jego statystyki.
   const bookTalents = new Set((creature?.talents ?? []).map((t) => gd.normalize(t.replace(/\s+\d+$/, ""))));
   for (const t of npc.talents) {
     const def = gd.getTalent(t.name);
     const code = def?.adds_characteristic as Attribute | undefined;
-    if (code && !bookTalents.has(gd.normalize(t.name))) talentBonus[code] = (talentBonus[code] ?? 0) + 5;
+    if (code && !bookTalents.has(gd.normalize(t.name))) {
+      talentBonus[code] = (talentBonus[code] ?? 0) + 5;
+      talentSources[code].push({ label: `talent ${t.name}`, value: 5, kind: "talent" });
+    }
     if (def?.wounds_toughness_bonus) hardy += t.level;
   }
 
@@ -227,18 +233,22 @@ export function computeNpc(input: Npc): NpcView {
   let movement = creature ? (creature.stats.Sz ?? 4) : (race?.movement ?? 4);
   let extraAp = 0;
   let headAp = 0;
-  const addMods = (mods: Partial<Record<Attribute, number>> | undefined) => {
+  /** Zrodla modyfikatorow kazdej cechy - zeby na karcie bylo widac, skad np. −20 do Ogłady. */
+  const sources = Object.fromEntries(ATTRIBUTES.map((c) => [c, [] as CharView["sources"]])) as Record<Attribute, CharView["sources"]>;
+  const addMods = (mods: Partial<Record<Attribute, number>> | undefined, label: string, kind: CharView["sources"][number]["kind"]) => {
     for (const [code, v] of Object.entries(mods ?? {})) {
-      traitBonus[code as Attribute] = (traitBonus[code as Attribute] ?? 0) + (v ?? 0);
+      if (!v) continue;
+      traitBonus[code as Attribute] = (traitBonus[code as Attribute] ?? 0) + v;
+      sources[code as Attribute]?.push({ label, value: v, kind });
     }
   };
   // Przedmioty magiczne: runy, wlasciwosci Broni Chaosu, pierscienie.
   const magic = magicEffects(npc);
-  addMods(magic.chars);
+  addMods(magic.chars, "przedmioty magiczne", "item");
   for (const name of npc.traits) {
     const tr = gd.findCreatureTrait(name)?.trait;
     if (!tr) continue;
-    addMods(tr.modifiers);
+    addMods(tr.modifiers, name, "trait");
     for (const [skill, v] of Object.entries(tr.skills ?? {})) traitSkills[skill] = (traitSkills[skill] ?? 0) + v;
     movement += tr.movement ?? 0;
     if (/^Twardziel/.test(name)) hardy += 1;
@@ -248,7 +258,8 @@ export function computeNpc(input: Npc): NpcView {
   const mutations = npc.mutations.map((m) => {
     const row = mutationRow(m);
     const fx = mutationEffects(m, row);
-    addMods(fx.chars as Partial<Record<Attribute, number>>);
+    const kindLabel = m.kind === "bloodline" ? "Linia Krwi" : m.kind === "blood" ? "Dar Krwi" : m.kind === "gift" ? "Dar Chaosu" : m.kind === "weakness" ? "Słabość" : "mutacja";
+    addMods(fx.chars as Partial<Record<Attribute, number>>, `${kindLabel}: ${mutationLabel(m)}`, "mutation");
     for (const [skill, v] of Object.entries(fx.skills)) traitSkills[skill] = (traitSkills[skill] ?? 0) + v;
     for (const [code, cap] of Object.entries(row?.maxChar ?? {})) {
       charCaps[code as Attribute] = Math.min(charCaps[code as Attribute] ?? Infinity, cap ?? Infinity);
@@ -271,9 +282,18 @@ export function computeNpc(input: Npc): NpcView {
     const hero = heroModifier(npc, code);
     const talent = talentBonus[code] ?? 0;
     const trait = traitBonus[code] ?? 0;
-    const total = absent ? 0 : Math.max(0, Math.min(charCaps[code] ?? Infinity, base + roll + adv + hero + talent + trait));
+    const uncapped = base + roll + adv + hero + talent + trait;
+    const total = absent ? 0 : Math.max(0, Math.min(charCaps[code] ?? Infinity, uncapped));
     totals[code] = total;
-    chars[code] = { code, base, roll, advances: adv, hero, talent, trait, total, bonus: characteristicBonus(total), absent };
+    const src: CharView["sources"] = [
+      ...npc.heroProfiles
+        .map((h) => ({ label: `profil ${h}`, value: shapedHeroModifiers(h, npc.archetype)[code], kind: "hero" as const }))
+        .filter((s) => s.value),
+      ...talentSources[code],
+      ...sources[code]
+    ];
+    if (!absent && total < uncapped) src.push({ label: `mutacja ogranicza do ${charCaps[code]}`, value: total - uncapped, kind: "mutation" });
+    chars[code] = { code, base, roll, advances: adv, hero, talent, trait, total, bonus: characteristicBonus(total), absent, sources: src };
   }
 
   const skills: SkillView[] = npc.skills.map((s) => {

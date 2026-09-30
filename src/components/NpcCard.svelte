@@ -62,11 +62,18 @@
     const c = view.chars[code];
     if (c.absent) return `${ATTRIBUTE_NAMES[code]}: stworzenie nie posiada tej cechy`;
     const parts = [`baza ${c.base}`, `rzut ${c.roll}`, `rozw. ${c.advances}`];
-    if (c.hero) parts.push(`profil +${c.hero}`);
-    if (c.talent) parts.push(`talenty +${c.talent}`);
-    if (c.trait) parts.push(`cechy ${c.trait > 0 ? "+" : ""}${c.trait}`);
+    for (const s of c.sources) parts.push(`${s.label} ${signed(s.value)}`);
     return `${ATTRIBUTE_NAMES[code]}: ${parts.join(" + ")} = ${c.total}`;
   }
+
+  const signed = (v: number) => (v > 0 ? `+${v}` : `−${Math.abs(v)}`);
+
+  /** Modyfikatory z Cech Stworzen, mutacji, Linii Krwi i przedmiotow - widoczne pod tabela cech. */
+  let hiddenModifiers = $derived(
+    ATTRIBUTES.flatMap((code) =>
+      view.chars[code].absent ? [] : view.chars[code].sources.filter((s) => s.kind !== "hero" && s.kind !== "talent").map((s) => ({ code, ...s }))
+    )
+  );
 
   function snapshot(): Npc {
     return $state.snapshot(npc) as Npc;
@@ -352,6 +359,15 @@
       <span class="val">{view.movement}</span>
     </div>
   </div>
+  {#if hiddenModifiers.length}
+    <p class="char-mods small">
+      <span class="text-dim">Modyfikatory cech:</span>
+      {#each hiddenModifiers as m, i (i)}
+        <span class:neg={m.value < 0} class:pos={m.value > 0}>{m.code} {signed(m.value)}</span>
+        <span class="text-dim">({m.label}){i < hiddenModifiers.length - 1 ? "," : ""}</span>
+      {/each}
+    </p>
+  {/if}
 
   <!-- Walka: bron i redukcja obrazen -->
   <section class="combat">
@@ -903,6 +919,23 @@
 
   .small {
     font-size: var(--fs-sm);
+  }
+
+  .char-mods {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px var(--space-1);
+  }
+
+  .char-mods .neg {
+    color: var(--danger-strong);
+    font-weight: 600;
+  }
+
+  .char-mods .pos {
+    color: var(--success-strong);
+    font-weight: 600;
   }
 
   .armour-pieces,
