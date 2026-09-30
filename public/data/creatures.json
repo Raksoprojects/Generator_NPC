@@ -3381,7 +3381,7 @@
    "family": "Zwierzę roślinożerne"
   },
   {
-   "name": "Smukłoudy Jęzobicz (książę demonów Slaanesha)",
+   "name": "Książę demonów Slaanesha",
    "source": "Podręcznik podstawowy",
    "page": 336,
    "stats": {
@@ -3425,11 +3425,11 @@
    "group": "Chaos",
    "subgroup": "Demony",
    "family": "Demon",
-   "unique": true,
-   "minTier": "heroiczny"
+   "minTier": "heroiczny",
+   "note": "Profil z książki: Smukłoudy Jęzobicz (książę demonów Slaanesha)"
   },
   {
-   "name": "Fr'hough Żałobny Oddech (książę demonów Nurgla)",
+   "name": "Książę demonów Nurgle’a",
    "source": "Podręcznik podstawowy",
    "page": 336,
    "stats": {
@@ -3475,8 +3475,8 @@
    "group": "Chaos",
    "subgroup": "Demony",
    "family": "Demon",
-   "unique": true,
-   "minTier": "heroiczny"
+   "minTier": "heroiczny",
+   "note": "Profil z książki: Fr'hough Żałobny Oddech (książę demonów Nurgla)"
   },
   {
    "name": "Klanbrat",
