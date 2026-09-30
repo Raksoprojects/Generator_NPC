@@ -13,7 +13,7 @@ beforeAll(() => loadTestGameData());
 
 /** BN o cechach dokladnie jak w ksiazce (rzut = 10, a dla cech <= 5 rzut = wartosc). */
 function bookNpc(c: CreatureDef): Npc {
-  const npc = generateNpc({ creature: c.name, tier: "slaby", deterministic: true, randomTraits: false }, seedRng(1));
+  const npc = generateNpc({ creature: c.name, tier: "slaby", deterministic: true, randomTraits: false, noArchetype: true }, seedRng(1));
   for (const code of ATTRIBUTES) {
     const v = c.stats[code];
     const { die } = creatureBase(c, code);
@@ -185,6 +185,35 @@ describe("rozwoj bestii", () => {
       expect(TIER_IDS.indexOf(def.minTier ?? "slaby")).toBeLessThanOrEqual(TIER_IDS.indexOf("sredni"));
       const beastman = generateNpc({ creatureGroup: `Chaos${gd.GROUP_SEP}Zwierzoludzie` }, seedRng(seed));
       expect(gd.getCreature(beastman.creature)!.subgroup).toBe("Zwierzoludzie");
+    }
+  });
+
+  it("wampir rozwija sie jak czlowiek (archetyp z linii krwi), czaruje wg zamilowania linii", () => {
+    const spells: Record<string, number[]> = { Nekrarcha: [], Strigoi: [] };
+    for (let seed = 1; seed <= 20; seed++) {
+      for (const line of ["Nekrarcha", "Strigoi"]) {
+        const v = generateNpc({ creature: "Wampir", tier: "heroiczny", bloodline: line }, seedRng(seed));
+        expect(Object.keys(gd.getVampires()!.bloodlines.find((b) => b.name === line)!.archetypes!)).toContain(v.archetype);
+        expect(v.skills.some((s) => s.name === "Splatanie Magii (Dhar)")).toBe(true);
+        expect(v.skills.some((s) => s.name === "Język (Magiczny)")).toBe(true);
+        // Tradycje z wyborem sa rozstrzygniete, jak przy wyposazeniu.
+        for (const t of [...v.traits, ...computeNpc(v).creatureTraits]) expect(t, t).not.toMatch(/\s(albo|lub)\s/);
+        spells[line].push(v.spells.length);
+      }
+    }
+    const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+    expect(avg(spells.Nekrarcha)).toBeGreaterThan(avg(spells.Strigoi) * 1.5);
+  });
+
+  it("ogr moze miec tylko proste profesje; unikaty nie trafiaja do losowania z grupy", () => {
+    const allowed = Object.keys(gd.getCreature("Ogr")!.archetypes!);
+    for (let seed = 1; seed <= 30; seed++) {
+      const o = generateNpc({ creature: "Ogr", tier: "sredni" }, seedRng(seed));
+      if (o.archetype) expect(allowed).toContain(o.archetype);
+    }
+    expect(generateNpc({ creature: "Ogr", archetype: "Kapłan", tier: "sredni" }, seedRng(1)).archetype).toBe("");
+    for (let seed = 1; seed <= 40; seed++) {
+      expect(gd.getCreature(generateNpc({ creatureGroup: "Ludy" }, seedRng(seed)).creature)!.unique).toBeFalsy();
     }
   });
 

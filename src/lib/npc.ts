@@ -433,7 +433,7 @@ export function computeNpc(input: Npc): NpcView {
     spells,
     keySpells,
     mutations,
-    creatureTraits: bookTraits,
+    creatureTraits: bookTraits.map((t) => gd.resolvedBookTrait(npc.specChoices, t)),
     abilities: creature?.abilities ?? [],
     wounds,
     movement: Math.max(0, movement),

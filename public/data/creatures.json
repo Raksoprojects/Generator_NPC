@@ -3292,7 +3292,17 @@
    "trappings": [],
    "group": "Ludy",
    "family": "Humanoid",
-   "minTier": "sredni"
+   "minTier": "sredni",
+   "civilized": true,
+   "archetypes": {
+    "Wojownik": 3,
+    "Oprych": 3,
+    "Strażnik": 1,
+    "Zwiadowca": 1,
+    "Chłop": 1,
+    "Strzelec": 0.5
+   },
+   "archetypeChance": 0.5
   },
   {
    "name": "Niedźwiedź",
@@ -5034,7 +5044,9 @@
    "trappings": [],
    "group": "Wampiry",
    "family": "Nieumarły",
-   "minTier": "zaawansowany"
+   "minTier": "zaawansowany",
+   "civilized": true,
+   "archetypeChance": 1
   },
   {
    "name": "Duch",

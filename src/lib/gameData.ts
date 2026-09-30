@@ -402,6 +402,11 @@ export function getCreatures(): CreatureDef[] {
   return data().creatures.creatures;
 }
 
+/** Cecha z bloku stworzenia z rozstrzygnieta alternatywa ("Rzucanie Czarów (Śmierci albo Cieni)" -> wybrana). */
+export function resolvedBookTrait(choices: Record<string, string> | undefined, trait: string): string {
+  return choices?.[`cecha|${trait}`] ?? trait;
+}
+
 export const GROUP_SEP = " › ";
 
 /** "Chaos › Zwierzoludzie" albo samo "Zwierzęta". */
@@ -438,6 +443,7 @@ export function isCivilized(creature: string | undefined): boolean {
   const c = getCreature(creature);
   if (!c) return false;
   const fam = data().creatureFamilies;
+  if (c.civilized !== undefined) return c.civilized;
   return !!fam.families[c.family]?.civilized && !fam.notCivilized.includes(c.name);
 }
 

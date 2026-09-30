@@ -458,6 +458,12 @@ export interface CreatureDef {
   subgroup?: string;
   family: string;
   unique?: boolean;
+  /** Nadpisuje rodzine: istota rozumna, moze miec profesje (wampir, ogr). */
+  civilized?: boolean;
+  /** Dozwolone archetypy (z wagami przy losowaniu); brak = wszystkie. */
+  archetypes?: Record<string, number>;
+  /** Szansa, ze BN tego stworzenia bez wybranego archetypu dostanie profesje (wampir 1, ogr 0,5). */
+  archetypeChance?: number;
   /** Sz, WW ... Ogd, Żyw; null = stworzenie nie posiada cechy ("–"). */
   stats: Record<string, number | null>;
   skills: { name: string; value: number }[];
@@ -526,9 +532,19 @@ export interface VampiresData {
   giftsPerTier: Record<TierId, number>;
   bloodlineGiftWeight: number;
   ageByTier: Record<TierId, number>;
-  bloodlines: (MutationRow & { gifts: string[]; weaknesses: string[]; lores: string })[];
+  bloodlines: (MutationRow & {
+    gifts: string[];
+    weaknesses: string[];
+    lores: string;
+    /** Archetypy wg Preferowanych Profesji linii (z wagami). */
+    archetypes?: Record<string, number>;
+    /** Zamilowanie linii do czarow (Nekrarcha 3, Strigoi 0,5). */
+    magic?: number;
+  })[];
   gifts: (MutationRow & { limit?: string; recommended?: string })[];
   weaknesses: MutationRow[];
+  /** Rozwiniecia Splatania i Jezyka (Magicznego) wampira na poziomie, mnozone przez magic / 2. */
+  magicAdvances?: Partial<Record<TierId, number>>;
 }
 
 /** Formy [meska, zenska]: nazwy profesji i tytuly poziomow ("Profesja|poziom"). */

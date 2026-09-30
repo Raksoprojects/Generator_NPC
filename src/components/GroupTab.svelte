@@ -28,7 +28,7 @@
     const out: Record<string, string[]> = {};
     for (const { group, subgroups } of gd.creatureGroupTree()) {
       for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {
-        const names = gd.getCreatures().filter((c) => gd.creatureGroupKey(c) === key).map((c) => c.name);
+        const names = gd.getCreatures().filter((c) => gd.creatureGroupKey(c) === key && !c.unique).map((c) => c.name);
         if (names.length) out[key] = names.sort((a, b) => a.localeCompare(b, "pl"));
       }
     }
@@ -144,8 +144,8 @@
           </select>
           {#if row.creature && gd.isCivilized(row.creature)}
             <select bind:value={row.archetype} aria-label="Archetyp stworzenia">
-              <option value="">bez profesji</option>
-              {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
+              <option value="">profesja wg stworzenia</option>
+              {#each gd.allArchetypeNames().filter((a) => !gd.getCreature(row.creature)?.archetypes || a in gd.getCreature(row.creature)!.archetypes!) as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           {/if}
           <select bind:value={row.tier} aria-label="Poziom">

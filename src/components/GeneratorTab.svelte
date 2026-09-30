@@ -21,7 +21,8 @@
 
   /** Stworzenia wybranej grupy, pogrupowane wg podgrup (w kolejnosci drzewa grup). */
   let creatureGroups = $derived.by(() => {
-    const pool = creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.getCreatures();
+    // Unikatowe postacie (Olbrzym szpieg, nazwane bestie) nie trafiaja do generatora - tylko rodzaje stworzen.
+    const pool = (creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.getCreatures()).filter((c) => !c.unique);
     const out: Record<string, string[]> = {};
     for (const { group, subgroups } of groupTree) {
       for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {
@@ -38,6 +39,13 @@
   });
 
   let civilized = $derived(!!creature && gd.isCivilized(creature));
+  /** Stworzenie rozumne bez profesji - wartosc listy archetypow. */
+  const NO_CAREER = "-";
+  /** Archetypy dozwolone dla stworzenia (ogr: tylko proste profesje). */
+  let creatureArchetypes = $derived.by(() => {
+    const allowed = gd.getCreature(creature)?.archetypes;
+    return allowed ? archetypes.filter((a) => a in allowed) : archetypes;
+  });
   /** Najnizszy poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego); dla grupy - najnizszy w grupie. */
   let minTierIdx = $derived.by(() => {
     if (creature) return TIER_IDS.indexOf(gd.getCreature(creature)?.minTier ?? "slaby");
@@ -127,7 +135,8 @@
         creature: creature || (creatureGroup ? undefined : pick(typicalCreatures)),
         creatureGroup: creature ? undefined : creatureGroup || undefined,
         bloodline: showBloodline && bloodline ? bloodline : undefined,
-        archetype: civilized && archetype ? archetype : undefined,
+        archetype: civilized && archetype && archetype !== NO_CAREER ? archetype : undefined,
+        noArchetype: civilized && archetype === NO_CAREER,
         tier: (tier || undefined) as TierId | undefined,
         name: name.trim() || undefined,
         traits: chosenTraits,
@@ -224,8 +233,9 @@
         {#if civilized}
           <label>Archetyp (profesje)
             <select bind:value={archetype}>
-              <option value="">— bez profesji (jak bestia) —</option>
-              {#each archetypes as a (a)}<option value={a}>{a}</option>{/each}
+              <option value="">— losowo (wg stworzenia) —</option>
+              <option value={NO_CAREER}>— bez profesji (jak bestia) —</option>
+              {#each creatureArchetypes as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           </label>
         {/if}

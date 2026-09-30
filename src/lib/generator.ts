@@ -21,9 +21,9 @@ import { beastSkills, beastTraits, bookSkillsAndTalents, familyTraitWeights, rol
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
-import { pickSpells, rollExtraLores } from "./magic";
+import { pickSpells, resolveTraitChoice, rollExtraLores } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
-import { rollVampire } from "./vampires";
+import { addVampireMagic, isVampire, rollBloodline, rollVampire, vampireArchetype } from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
 import { rollCraft, rollTreasures } from "./treasures";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
@@ -38,6 +38,8 @@ export interface GenSpec {
   creatureGroup?: string;
   /** Linia Krwi wampira (brak = losowa z tabeli k100). */
   bloodline?: string;
+  /** Stworzenie rozumne bez profesji (jak bestia), nawet jesli zwykle ja ma. */
+  noArchetype?: boolean;
   race?: string;
   sex?: Sex;
   name?: string;
@@ -477,7 +479,8 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
   npc.skills = [];
   npc.talents = [];
   npc.trappings = [];
-  npc.specChoices = {};
+  // Wybory cech stworzenia ("cecha|...") naleza do cech, nie do rozwoju - zostaja.
+  npc.specChoices = Object.fromEntries(Object.entries(npc.specChoices ?? {}).filter(([k]) => k.startsWith("cecha|")));
 
   // Konkretne szkoly/bostwa z calej sciezki - zanim zaczniemy rozwiazywac "Dowolne".
   for (const step of npc.careerPath) {
@@ -711,7 +714,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.charAdvances = emptyAttrs();
     npc.skills = [];
     npc.talents = [];
-    npc.specChoices = {};
+    npc.specChoices = Object.fromEntries(Object.entries(npc.specChoices ?? {}).filter(([k]) => k.startsWith("cecha|")));
     bookSkillsAndTalents(npc, creature);
     beastSkills(npc, creature);
     npc.trappings = creature.trappings.map((t) => rollDiceText(t, rng, deterministic));
@@ -719,6 +722,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.armour = [];
     npc.craft = {};
     npc.money = "";
+    addVampireMagic(npc, rng, deterministic);
     return;
   }
   npc.careerPath = buildCareerPath({ professions }, npc.archetype, npc.tier, npc.race, rng);
@@ -733,6 +737,7 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
   resolveMagicTrappings(npc, rng, deterministic);
   equipNpc(npc, rng);
   rollCraft(npc, rng, deterministic);
+  addVampireMagic(npc, rng, deterministic);
 }
 
 /** Sekcja "cechyStworzen": cechy opcjonalne (15/5/1%), cechy poziomu bestii, mutacje. */
@@ -742,6 +747,12 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
   const vampire = rollVampire(npc, rng, deterministic, spec.bloodline);
   npc.traits = [...npc.traits, ...vampire.traits.filter((t) => !npc.traits.includes(t))];
+  // Cechy z wyborem ("Rzucanie Czarów (Śmierci albo Cieni)") - jedna opcja, jak przy wyposazeniu.
+  npc.traits = [...new Set(npc.traits.map((t) => resolveTraitChoice(t, rng, deterministic)))];
+  for (const t of creature?.traits ?? []) {
+    const r = resolveTraitChoice(t, rng, deterministic);
+    if (r !== t) npc.specChoices[`cecha|${t}`] = r;
+  }
   npc.mutations = [
     ...vampire.entries,
     ...rollNpcMutations(creature?.traits ?? [], rng, deterministic),
@@ -765,18 +776,31 @@ export function pickCreatureFromGroup(group: string, tier: TierId | undefined, r
   return pick(fits.length ? fits : all, rng)?.name;
 }
 
+/**
+ * Archetyp stworzenia: tylko rozumne; wybrany (jesli dozwolony), a bez wyboru - z szansa
+ * archetypeChance, wg wag stworzenia (ogr: proste profesje) albo linii krwi (wampir).
+ */
+function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: string | undefined, rng: Rng, det: boolean): string {
+  if (!gd.isCivilized(creature.name) || spec.noArchetype) return "";
+  const allowed = (a: string) => !!gd.getArchetype(a) && (!creature.archetypes || a in creature.archetypes);
+  if (spec.archetype) return allowed(spec.archetype) ? spec.archetype : "";
+  const p = creature.archetypeChance ?? 0;
+  if (!(det ? p >= 0.5 : chance(p, rng))) return "";
+  const pick = bloodline ? vampireArchetype(bloodline, rng, det) : creature.archetypes && weightedKey(creature.archetypes, rng);
+  return pick && allowed(pick) ? pick : "";
+}
+
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);
   const creature: CreatureDef | undefined = gd.getCreature(creatureName);
-  const civilized = creature ? gd.isCivilized(creature.name) : false;
-  const archetype = creature
-    ? (civilized && spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : "")
-    : pickArchetype(spec, rng);
+  const det = !!spec.deterministic;
+  // Wampir: Linia Krwi od razu - od niej zalezy archetyp (Preferowane Profesje).
+  const bloodline = creature && isVampire({ creature: creature.name }) ? rollBloodline(rng, det, spec.bloodline) : undefined;
+  const archetype = creature ? creatureArchetype(spec, creature, bloodline, rng, det) : pickArchetype(spec, rng);
   const tier = clampTier(pickTier(spec, rng), creature);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
-  const det = !!spec.deterministic;
   const beast = !!creature && !archetype;
 
   const npc: Npc = {
@@ -799,7 +823,8 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     weapons: [],
     armour: [],
     spells: [],
-    mutations: [],
+    // Linia Krwi znana juz przy rozwoju (magia wampira), cechy dolosuja reszte.
+    mutations: bloodline ? [{ kind: "bloodline", name: bloodline }] : [],
     trappings: [],
     money: "",
     notes: "",
@@ -809,7 +834,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   };
   npc.rolls = rollAttributes(npc, rng, det);
   develop(npc, spec.professions, rng, det);
-  rollFeatures(npc, spec, rng, det);
+  rollFeatures(npc, { ...spec, bloodline }, rng, det);
   // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
   rollTreasures(npc, rng, det);
   npc.spells = pickSpells(npc, rng, det);

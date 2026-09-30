@@ -65,6 +65,22 @@ function loreFromTrait(spec: string, rng: Rng): string | undefined {
   return pick(resolved, rng);
 }
 
+/**
+ * Cecha z wyborem ("Rzucanie Czarów (Śmierci albo Cieni)", "(Dowolna Tradycja)") -> jedna
+ * konkretna opcja, jak przy wyposazeniu. Pozostale cechy bez zmian.
+ */
+export function resolveTraitChoice(trait: string, rng: Rng, deterministic = false): string {
+  const m = /^(.*?)\((.+)\)(.*)$/.exec(trait);
+  if (!m) return trait;
+  const [, head, inner, tail] = m;
+  if (/^Rzucanie Czarów/.test(head) && /dowoln|różne/i.test(inner) && !/chaos/i.test(inner)) {
+    return `${head}(${deterministic ? COLLEGE_LORES[0] : pick(COLLEGE_LORES, rng)})${tail}`;
+  }
+  if (!/\s(albo|lub)\s/.test(inner)) return trait;
+  const options = inner.split(/,\s*|\s+albo\s+|\s+lub\s+/).filter(Boolean);
+  return `${head}(${deterministic ? options[0] : pick(options, rng)})${tail}`;
+}
+
 /** Czy BN czaruje i z jakich tradycji (z talentow oraz cech stworzenia). */
 export function casterLores(npc: Npc, rng: Rng): { petty: boolean; lores: string[] } {
   let petty = false;
@@ -82,7 +98,8 @@ export function casterLores(npc: Npc, rng: Rng): { petty: boolean; lores: string
     }
   }
   const creature = gd.getCreature(npc.creature);
-  for (const tr of [...(creature?.traits ?? []), ...npc.traits]) {
+  const book = (creature?.traits ?? []).map((t) => gd.resolvedBookTrait(npc.specChoices, t));
+  for (const tr of [...book, ...npc.traits]) {
     const m = /^Rzucanie Czarów \((.+)\)$/.exec(tr);
     if (!m) continue;
     petty = true;
@@ -141,7 +158,11 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const replacesPetty = lores.some((l) => familyOf(l).petty && !familyOf(l).common.includes("Tajemna"));
   const pettyLores = new Set([...(replacesPetty ? [] : ["Prosta"]), ...ownPetty]);
   const pettyPool = all.filter((s) => pettyLores.has(s.lore));
-  const pettyCount = Math.max(1, wp + (deterministic ? 0 : randInt(-1, 1, rng)));
+  let pettyCount = Math.max(1, wp + (deterministic ? 0 : randInt(-1, 1, rng)));
+  // Stworzenie czarujace z cechy: i proste czary zaleza od wprawy w Jezyku (Magicznym), nie od samej SW.
+  const incantationAdv = npc.skills.find((s) => s.name === "Język (Magiczny)")?.advances;
+  const traitCaster = !!npc.creature && !npc.talents.some((t) => /^Magia (Tajemna|Chaosu|Prosta)/.test(t.name));
+  if (traitCaster && incantationAdv !== undefined) pettyCount = 1 + Math.floor(incantationAdv / 8);
   out.push(...drawSpells(pettyPool, pettyCount, () => 1, rng, deterministic).map((s) => s.name));
   // Elfy znaja tez Magie Prosta Ishy; Mag musi znac co najmniej cztery (Wysokie Elfy, s. 79-80).
   if (!replacesPetty && isElf(npc.race)) {
@@ -162,6 +183,10 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   if (!arcanePool.length) return out;
   const [lo, hi] = tier?.spells.arcane ?? [0, 0];
   let count = Math.max(1, int + (deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng)));
+  // Stworzenie czarujace z cechy (wampir, szaman): zaklec tyle, ile pozwala wprawa w Jezyku (Magicznym).
+  const incantation = npc.skills.find((s) => s.name === "Język (Magiczny)");
+  const talentCaster = npc.talents.some((t) => /^Magia (Tajemna|Chaosu)/.test(t.name));
+  if (npc.creature && !talentCaster && incantation) count = 1 + Math.floor(incantation.advances / 6);
   count = Math.min(count, arcanePool.length);
 
   // Najsilniejsze zaklecia glownej tradycji (gorna polka osiagalna na tym poziomie):
