@@ -493,7 +493,7 @@
    "range": "Siła Woli metrów",
    "target": "Obszar (Premia z Siły Woli metrów)",
    "duration": "Premia z Siły Woli rund+",
-   "description": "Splatasz grube pasma Dharu, które pętają jednego lub więcej Demonów dowolnego rodzaju w Zasięgu. Wykonaj pojedynczy Test Splatania Magii (Dhar), któremu przeciwstawia się Siła Woli każdego celu. Jeśli wygrasz, Demon zyskuje specjalny Stan Utrata Przytomności na czas trwania zaklęcia: Demon jest unieruchomiony, ale poza tym w pełni świadomy tego, co dzieje się wokół niego i kto rzucił zaklęcie pętające. Demoniczny amulet (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Splatasz grube pasma Dharu, które pętają jednego lub więcej Demonów dowolnego rodzaju w Zasięgu. Wykonaj pojedynczy Test Splatania Magii (Dhar), któremu przeciwstawia się Siła Woli każdego celu. Jeśli wygrasz, Demon zyskuje specjalny Stan Utrata Przytomności na czas trwania zaklęcia: Demon jest unieruchomiony, ale poza tym w pełni świadomy tego, co dzieje się wokół niego i kto rzucił zaklęcie pętające.",
    "source": "Grimuar (nieoficjalny)",
    "page": 37
   },
@@ -592,7 +592,7 @@
    "range": "Dotyk",
    "target": "Specjalny",
    "duration": "Specjalny",
-   "description": "Przyzwawszy Demonicznego Rumaka i zapanowawszy nad nim, dotykasz teraz wierzchowca i przesycasz go Dharem. Rumak poniesie następnie swojego jeźdźca oraz jednego pasażera poza świat śmiertelników, ku rubieżom krainy Chaosu, pokonując ogromne odległości w zaledwie kilka minut. Choć jeźdźcy postrzegają podróż tylko mgliście, skutki oglądania takich okropności są wstrząsające. Jazda musi rozpocząć się w ciągu 2 Rund od rzucenia zaklęcia i trwa 1k10 minut. Na koniec każdej minuty obaj jeźdźcy muszą wykonać Wymagający (+0) Test Opanowania, inaczej zyskują +1 punkt Zepsucia Psychicznego. Na koniec jazdy jeźdźcy muszą też wykonać Wymagający (+0) Test Odporności na Umiarkowany Wpływ Zepsucia. Na szczęście szybkość i zręczność Rumaka chronią jeźdźców przed bliższym spotkaniem z innymi mieszkańcami tej krainy. Gdy jazda dobiegnie końca, Rumak i jego pasażerowie wpadają z powrotem do świata materialnego w obranym miejscu przeznaczenia, które musi znajdować się w promieniu 100 mil od początku podróży. Powiadają, że potężniejsza wersja tego zaklęcia prowadzi bliżej serca Krainy Chaosu, pokonując tym samym o wiele większe odległości w świecie materialnym. Z pewnością jednak takie zaklęcie nie istnieje, bo podróżowanie w ten sposób byłoby czystym szaleństwem. Inwokacja absolutnej mocy (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Przyzwawszy Demonicznego Rumaka i zapanowawszy nad nim, dotykasz teraz wierzchowca i przesycasz go Dharem. Rumak poniesie następnie swojego jeźdźca oraz jednego pasażera poza świat śmiertelników, ku rubieżom krainy Chaosu, pokonując ogromne odległości w zaledwie kilka minut. Choć jeźdźcy postrzegają podróż tylko mgliście, skutki oglądania takich okropności są wstrząsające. Jazda musi rozpocząć się w ciągu 2 Rund od rzucenia zaklęcia i trwa 1k10 minut. Na koniec każdej minuty obaj jeźdźcy muszą wykonać Wymagający (+0) Test Opanowania, inaczej zyskują +1 punkt Zepsucia Psychicznego. Na koniec jazdy jeźdźcy muszą też wykonać Wymagający (+0) Test Odporności na Umiarkowany Wpływ Zepsucia. Na szczęście szybkość i zręczność Rumaka chronią jeźdźców przed bliższym spotkaniem z innymi mieszkańcami tej krainy. Gdy jazda dobiegnie końca, Rumak i jego pasażerowie wpadają z powrotem do świata materialnego w obranym miejscu przeznaczenia, które musi znajdować się w promieniu 100 mil od początku podróży. Powiadają, że potężniejsza wersja tego zaklęcia prowadzi bliżej serca Krainy Chaosu, pokonując tym samym o wiele większe odległości w świecie materialnym. Z pewnością jednak takie zaklęcie nie istnieje, bo podróżowanie w ten sposób byłoby czystym szaleństwem.",
    "source": "Grimuar (nieoficjalny)",
    "page": 37
   },
@@ -603,7 +603,7 @@
    "range": "Ty",
    "target": "Obszar (Siła Woli metrów)",
    "duration": "Natychmiastowy",
-   "description": "Twoje czary destabilizują Dhar spajający wszystkie Demony w Obszarze. Wszystkie objęte działaniem cele z Cechą Stworzenia Demoniczny muszą zdać Trudny (-10) Test Siły Woli, inaczej otrzymują magiczny pocisk o Obrażeniach równych Twojej Premii z Siły Woli (ignorujący Punkty Zbroi). Przy Zdumiewającej Porażce (6+) cel zostaje wygnany z tego świata, o ile ma Cechę Stworzenia Niestabilny. Wzmocnienie: Za każde +2 PS możesz utrudnić Test Siły Woli o jeden stopień (czyli z Bardzo Trudnego na Beznadziejny). Bestialska transmogryfikacja wszechmocnego Tchara (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Twoje czary destabilizują Dhar spajający wszystkie Demony w Obszarze. Wszystkie objęte działaniem cele z Cechą Stworzenia Demoniczny muszą zdać Trudny (-10) Test Siły Woli, inaczej otrzymują magiczny pocisk o Obrażeniach równych Twojej Premii z Siły Woli (ignorujący Punkty Zbroi). Przy Zdumiewającej Porażce (6+) cel zostaje wygnany z tego świata, o ile ma Cechę Stworzenia Niestabilny. Wzmocnienie: Za każde +2 PS możesz utrudnić Test Siły Woli o jeden stopień (czyli z Bardzo Trudnego na Beznadziejny).",
    "source": "Grimuar (nieoficjalny)",
    "page": 37
   },
@@ -1373,7 +1373,7 @@
    "range": "Dotyk",
    "target": "1",
    "duration": "Natychmiastowy",
-   "description": "Twój dotyk zdziera ciało z żywych przeciwników; liczy się to jako magiczny pocisk o Obrażeniach +5, ignorujący Punkty Zbroi. Ponadto cel zyskuje PS Stanów Krwawienie (minimum 1). Stworzenia z Cechą Ożywieniec są odporne na to zaklęcie. Głód życia (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Twój dotyk zdziera ciało z żywych przeciwników; liczy się to jako magiczny pocisk o Obrażeniach +5, ignorujący Punkty Zbroi. Ponadto cel zyskuje PS Stanów Krwawienie (minimum 1). Stworzenia z Cechą Ożywieniec są odporne na to zaklęcie.",
    "source": "Grimuar (nieoficjalny)",
    "page": 39
   },
@@ -1395,7 +1395,7 @@
    "range": "Premia z Siły Woli metrów",
    "target": "1",
    "duration": "Premia z Siły Woli rund",
-   "description": "Obierasz za cel pojedyncze stworzenie z Cechą Stworzenia Ożywieniec, napełniając je mroczną, odmładzającą energią. Stworzenie zyskuje Cechę Regeneracja. (Dzięki uprzejmości Malcantheta z Discorda Ratcatcher.) Wzniesienie katapulty z kości (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Obierasz za cel pojedyncze stworzenie z Cechą Stworzenia Ożywieniec, napełniając je mroczną, odmładzającą energią. Stworzenie zyskuje Cechę Regeneracja.",
    "source": "Grimuar (nieoficjalny)",
    "page": 39
   },
@@ -3397,7 +3397,7 @@
    "range": "Premia z Siły Woli mil",
    "target": "Specjalny",
    "duration": "Do wschodu słońca",
-   "description": "Dmiesz w duchowy róg z nadprzyrodzoną siłą, przyzywając wszystkie zwykłe stworzenia w Zasięgu. Pod koniec Rundy z pomocą przybywa Ci naturalny kuzyn Twojego chowańca. Przyzwane stworzenie będzie miało Rozmiar Duży albo przybędzie jako Duża wataha/stado/rój mniejszych zwierząt. Jeśli Twoim chowańcem jest Niedźwiedź, przywołasz u swojego boku pojedynczego Dużego Niedźwiedzia. Jeśli Twoim chowańcem jest Gronostaj, przyzwiesz Duży Rój Gronostajów zwykłej wielkości. Stworzenie wyczuje Twoją potrzebę i będzie Cię bronić do śmierci, stojąc u Twego boku i czuwając nad Tobą, gdy śpisz. Stworzenie strzeże Cię, dopóki nie obudzisz się o kolejnym świcie. Wzmocnienie: Za +4 PS możesz wybrać zwierzę, które przybędzie Ci z pomocą — na przykład Dziki, Orły, Szczury, Wilki czy Zdziczałe Psy. Od MG zależy, czy możesz przyzwać pojedyncze Duże stworzenie, czy watahę/stado/rój mniejszych zwierząt. Uświęcenie świętego gaju (Rytuał) To zaklęcie jest rytuałem — szczegóły znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Dmiesz w duchowy róg z nadprzyrodzoną siłą, przyzywając wszystkie zwykłe stworzenia w Zasięgu. Pod koniec Rundy z pomocą przybywa Ci naturalny kuzyn Twojego chowańca. Przyzwane stworzenie będzie miało Rozmiar Duży albo przybędzie jako Duża wataha/stado/rój mniejszych zwierząt. Jeśli Twoim chowańcem jest Niedźwiedź, przywołasz u swojego boku pojedynczego Dużego Niedźwiedzia. Jeśli Twoim chowańcem jest Gronostaj, przyzwiesz Duży Rój Gronostajów zwykłej wielkości. Stworzenie wyczuje Twoją potrzebę i będzie Cię bronić do śmierci, stojąc u Twego boku i czuwając nad Tobą, gdy śpisz. Stworzenie strzeże Cię, dopóki nie obudzisz się o kolejnym świcie. Wzmocnienie: Za +4 PS możesz wybrać zwierzę, które przybędzie Ci z pomocą — na przykład Dziki, Orły, Szczury, Wilki czy Zdziczałe Psy. Od MG zależy, czy możesz przyzwać pojedyncze Duże stworzenie, czy watahę/stado/rój mniejszych zwierząt.",
    "source": "Grimuar (nieoficjalny)",
    "page": 24
   },
@@ -4486,7 +4486,7 @@
    "range": "Dotyk",
    "target": "1",
    "duration": "Premia z Siły Woli godzin",
-   "description": "Dotykasz jedno zmutowane stworzenie i kierujesz Dhar tak, by odmienił jego postać. Dopóki zaklęcie trwa, Twój cel traci jedną fizyczną Mutację. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec , ani na stworzenia pozbawione mutacji. Przemiana Kadona (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej. Wir Chaosu (Rytuał) To zaklęcie jest rytuałem — więcej szczegółów znajdziesz w rozdziale o Magii Rytualnej.",
+   "description": "Dotykasz jedno zmutowane stworzenie i kierujesz Dhar tak, by odmienił jego postać. Dopóki zaklęcie trwa, Twój cel traci jedną fizyczną Mutację. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec , ani na stworzenia pozbawione mutacji.",
    "source": "Grimuar (nieoficjalny)",
    "page": 32
   },
