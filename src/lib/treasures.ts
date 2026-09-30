@@ -234,28 +234,59 @@ function fits(npc: Npc, t: TreasureDef, owned: NpcMagicItem[]): boolean {
     if (owned.some((o) => o.base === "pancerz")) return false;
     if (t.replaces) return npc.armour.includes(t.replaces);
     if (!npc.armour.length) return false;
-    if (t.material && !npc.armour.some((a) => METAL.includes(getArmourDef(a)?.type ?? ""))) return false;
+    // Material i runy tylko na metalu (Prawo Formy).
+    if ((t.material || t.runes) && !npc.armour.some((a) => METAL.includes(getArmourDef(a)?.type ?? ""))) return false;
   }
   return true;
 }
 
-/** Runy przedmiotu: 1-3 wg poziomu, najwyzej jedna mistrzowska, zwykle moga sie powtarzac. */
-function rollRunes(npc: Npc, pool: RuneDef[], rng: Rng, deterministic: boolean): string[] {
-  const data = gd.getTreasures()!;
-  const [lo, hi] = data.runeCount[npc.tier] ?? [1, 1];
-  const count = deterministic ? hi : randInt(lo, hi, rng);
-  const out: string[] = [];
-  const master = pool.filter((r) => r.master);
-  if (master.length && (deterministic ? (data.masterRuneChance[npc.tier] ?? 0) >= 0.5 : chance(data.masterRuneChance[npc.tier] ?? 0, rng))) {
-    out.push((deterministic ? master[0] : pick(master, rng))!.name);
-  }
+/**
+ * Runy przedmiotu: 1-3 zwykle wg poziomu (moga sie powtarzac) i czasem jedna mistrzowska -
+ * razem najwyzej cztery (Prawo Trzech, Prawo Zazdrosci). Tymczasowy - jedna zwykla runa.
+ */
+function rollRunes(npc: Npc, pool: RuneDef[], rng: Rng, deterministic: boolean, temporary = false): string[] {
+  const data = gd.getTreasures()!.runic;
   const regular = pool.filter((r) => !r.master);
+  if (temporary) return regular.length ? [(deterministic ? regular[0] : pick(regular, rng))!.name] : [];
+  const [lo, hi] = data.regularCount[npc.tier] ?? [1, 1];
+  const count = Math.min(3, deterministic ? hi : randInt(lo, hi, rng));
+  const out: string[] = [];
   while (out.length < count && regular.length) {
-    const repeat = out.filter((n) => regular.some((r) => r.name === n));
-    const next = repeat.length && !deterministic && chance(0.35, rng) ? pick(repeat, rng)! : (deterministic ? regular[out.length % regular.length] : pick(regular, rng)!).name;
-    out.push(next);
+    const repeat = !deterministic && out.length > 0 && chance(0.35, rng);
+    out.push(repeat ? pick(out, rng)! : (deterministic ? regular[out.length % regular.length] : pick(regular, rng)!).name);
   }
+  const master = pool.filter((r) => r.master);
+  const p = data.masterChance[npc.tier] ?? 0;
+  if (master.length && (deterministic ? p >= 0.5 : chance(p, rng))) out.unshift((deterministic ? master[0] : pick(master, rng))!.name);
   return out;
+}
+
+/**
+ * Przedmioty runiczne, osobno od pozostalych: tymczasowe od sredniego poziomu (rzadko),
+ * trwale od zaawansowanego; krasnoludy znacznie czesciej, elfy rzadko, stworzenia wcale.
+ */
+function rollRunic(npc: Npc, rng: Rng, deterministic: boolean): void {
+  const data = gd.getTreasures()!;
+  if (npc.creature || !data.runic) return;
+  const mult = data.runic.raceMult[npc.race] ?? 1;
+  for (const temporary of [false, true]) {
+    const p = Math.min(1, ((temporary ? data.runic.temporary : data.runic.permanent)[npc.tier] ?? 0) * mult);
+    if (deterministic ? p < 0.5 : !chance(p, rng)) continue;
+    // Runa tymczasowa trafia na zwykly przedmiot, nie na zbroje z gromrilu.
+    const pool = data.items.filter((t) => t.runes && (!temporary || !t.material) && fits(npc, t, npc.magicItems!));
+    const t = deterministic ? [...pool].sort((a, b) => b.weight - a.weight)[0] : weightedPick(pool, (x) => x.weight, rng);
+    if (!t) continue;
+    const item: NpcMagicItem = { template: t.name, name: t.name };
+    const base = attach(npc, t, npc.magicItems!);
+    if (base) item.base = base;
+    item.runes = rollRunes(npc, data.runes[t.runes!], rng, deterministic, temporary);
+    if (t.kind === "weapon" && base) item.name = `runiczny ${base.toLowerCase()}`;
+    if (temporary) {
+      item.temporary = true;
+      item.name += " (runa tymczasowa)";
+    }
+    npc.magicItems!.push(item);
+  }
 }
 
 function rollChaosProperties(npc: Npc, range: [number, number], rng: Rng, deterministic: boolean): string[] {
@@ -333,7 +364,7 @@ export function rollTreasures(npc: Npc, rng: Rng, deterministic = false): void {
   if (!data || !isRational(npc)) return;
   for (const p of data.chances[npc.tier] ?? []) {
     if (deterministic ? p < 1 : !chance(p, rng)) break;
-    const pool = data.items.filter((t) => fits(npc, t, npc.magicItems!));
+    const pool = data.items.filter((t) => !t.runes && fits(npc, t, npc.magicItems!));
     const specific = (t: TreasureDef) => !!(t.forRaces || t.forGroups || t.forTalents || t.forLores || t.forBloodlines);
     const weight = (t: TreasureDef) => t.weight * (specific(t) ? data.fitWeight : 1);
     const t = deterministic ? [...pool].sort((a, b) => weight(b) - weight(a))[0] : weightedPick(pool, weight, rng);
@@ -346,14 +377,11 @@ export function rollTreasures(npc: Npc, rng: Rng, deterministic = false): void {
     }
     const base = attach(npc, t, npc.magicItems);
     if (base) item.base = base;
-    if (t.runes) {
-      item.runes = rollRunes(npc, data.runes[t.runes], rng, deterministic);
-      if (t.kind === "weapon" && base) item.name = `runiczny ${base.toLowerCase()}`;
-    }
     if (t.chaos) item.properties = rollChaosProperties(npc, t.chaos, rng, deterministic);
     if (t.daemon) item.daemon = rollDaemon(npc, rng, deterministic);
     npc.magicItems.push(item);
   }
+  rollRunic(npc, rng, deterministic);
 }
 
 // ---------------------------------------------------------------------------
@@ -416,6 +444,7 @@ export function describeMagicItem(item: NpcMagicItem): string {
   const t = findTreasure(item.template);
   const potion = t?.kind === "potion" ? gd.getMagicItems()?.items.find((i) => i.name === item.name) : undefined;
   const parts = [potion?.description ?? t?.description ?? ""];
+  if (item.temporary) parts[0] = gd.getTreasures()?.runic.temporaryNote ?? "";
   if (item.runes?.length) {
     const counts = new Map<string, number>();
     for (const r of item.runes) counts.set(r, (counts.get(r) ?? 0) + 1);
@@ -432,5 +461,5 @@ export function describeMagicItem(item: NpcMagicItem): string {
     if (d) parts.push(`Uwięziony demon — ${d.name}: ${d.benefit}`);
   }
   const src = potion ? `${potion.source ?? ""}${potion.page ? `, s. ${potion.page}` : ""}` : t ? `${t.source}${t.page ? `, s. ${t.page}` : ""}` : "";
-  return parts.filter(Boolean).join(" · ") + (src ? ` [${src}]` : "");
+  return parts.filter(Boolean).join("\n") + (src ? `\n[${src}]` : "");
 }

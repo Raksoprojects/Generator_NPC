@@ -14,9 +14,10 @@ const magicCount = (spec: Parameters<typeof generateNpc>[0], n = 200) => {
   let items = 0;
   let npcs = 0;
   for (let seed = 1; seed <= n; seed++) {
-    const npc = generateNpc(spec, seedRng(seed));
-    items += npc.magicItems?.length ?? 0;
-    if (npc.magicItems?.length) npcs++;
+    // Przedmioty runiczne maja osobne szanse (test nizej).
+    const general = (generateNpc(spec, seedRng(seed)).magicItems ?? []).filter((m) => !m.runes);
+    items += general.length;
+    if (general.length) npcs++;
   }
   return { items, npcs };
 };
@@ -53,15 +54,56 @@ describe("przedmioty magiczne", () => {
     expect(goblin.has("Pióro Płomiennego Feniksa")).toBe(false);
   });
 
-  it("runy: najwyzej trzy, jedna mistrzowska; Runa Rozłupywania dodaje Obrażenia", () => {
-    for (let seed = 1; seed <= 80; seed++) {
+  it("runy: najwyzej trzy zwykle i jedna mistrzowska, tylko pasujace; tymczasowa - jedna zwykla", () => {
+    const runes = gd.getTreasures()!.runes;
+    const kindOf = { weapon: "weapon", armour: "armour", item: "talisman" } as const;
+    let four = 0;
+    for (let seed = 1; seed <= 150; seed++) {
       const d = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Krasnolud" }, seedRng(seed));
       for (const m of d.magicItems ?? []) {
         if (!m.runes) continue;
-        expect(m.runes.length).toBeLessThanOrEqual(3);
-        expect(m.runes.filter((r) => findRune(r)?.master).length).toBeLessThanOrEqual(1);
+        const t = gd.getTreasures()!.items.find((x) => x.name === m.template)!;
+        const allowed = new Set(runes[kindOf[t.kind as keyof typeof kindOf]].map((r) => r.name));
+        for (const r of m.runes) expect(allowed.has(r), `${m.name}: ${r}`).toBe(true);
+        const master = m.runes.filter((r) => findRune(r)?.master).length;
+        expect(master).toBeLessThanOrEqual(1);
+        expect(m.runes.length - master).toBeLessThanOrEqual(3);
+        if (m.runes.length === 4) four++;
+        if (m.temporary) expect(m.runes.length === 1 && master === 0, m.name).toBe(true);
       }
     }
+    expect(four).toBeGreaterThan(0);
+  });
+
+  it("przedmioty runiczne: tymczasowe od sredniego, trwale od zaawansowanego, krasnoludy czesciej", () => {
+    const runic = (race: string, tier: TierId, n = 400) => {
+      let temporary = 0;
+      let permanent = 0;
+      for (let seed = 1; seed <= n; seed++) {
+        for (const m of generateNpc({ archetype: "Wojownik", tier, race }, seedRng(seed)).magicItems ?? []) {
+          if (!m.runes) continue;
+          if (m.temporary) temporary++;
+          else permanent++;
+        }
+      }
+      return { temporary, permanent };
+    };
+    expect(runic("Krasnolud", "slaby")).toEqual({ temporary: 0, permanent: 0 });
+    const avgDwarf = runic("Krasnolud", "sredni");
+    expect(avgDwarf.permanent).toBe(0);
+    expect(avgDwarf.temporary).toBeGreaterThan(0);
+    const human = runic("Człowiek", "doswiadczony");
+    const dwarf = runic("Krasnolud", "doswiadczony");
+    expect(human.permanent).toBeGreaterThan(0);
+    expect(dwarf.permanent).toBeGreaterThan(human.permanent * 1.5);
+    expect(dwarf.temporary).toBeGreaterThan(human.temporary * 1.5);
+    for (let seed = 1; seed <= 40; seed++) {
+      const goblin = generateNpc({ creature: "Goblin", tier: "legendarny" }, seedRng(seed));
+      expect((goblin.magicItems ?? []).some((m) => m.runes)).toBe(false);
+    }
+  });
+
+  it("Runa Rozłupywania dodaje Obrażenia", () => {
     const npc: Npc = generateNpc({ archetype: "Wojownik", tier: "sredni", race: "Krasnolud", deterministic: true }, seedRng(1));
     const weapon = npc.weapons.find((w) => !getWeaponDef(w)?.ranged && !getWeaponDef(w)?.def.shield)!;
     const before = computeNpc(npc).weapons.find((w) => w.name === weapon)!.damage!;

@@ -511,7 +511,7 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
     };
     lines.push("Pancerz: " + view.armourPieces.map(piece).join("; "));
   }
-  for (const m of view.magicItems) lines.push(`Przedmiot magiczny: ✦ ${m.name} — ${m.description}`);
+  for (const m of view.magicItems) lines.push(`Przedmiot magiczny: ✦ ${m.name} — ${m.description.replace(/\n/g, " · ")}`);
   if (view.skills.length) lines.push("Umiejętności: " + view.skills.map((s) => `${s.name} ${s.total}`).join(", "));
   if (view.talents.length) lines.push("Talenty: " + view.talents.map((t) => (t.level > 1 ? `${t.name} ${t.level}` : t.name)).join(", "));
   if (view.casting) {

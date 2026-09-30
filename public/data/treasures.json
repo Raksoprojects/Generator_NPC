@@ -22,28 +22,51 @@
    0.2
   ]
  },
- "runeCount": {
-  "zaawansowany": [
-   1,
-   1
-  ],
-  "doswiadczony": [
-   1,
-   2
-  ],
-  "heroiczny": [
-   2,
-   3
-  ],
-  "legendarny": [
-   3,
-   3
-  ]
- },
- "masterRuneChance": {
-  "doswiadczony": 0.1,
-  "heroiczny": 0.35,
-  "legendarny": 0.75
+ "runic": {
+  "note": "Przedmioty runiczne losowane osobno od pozostalych przedmiotow magicznych. Trwale: najwyzej 3 zwykle runy (Prawo Trzech) i 1 mistrzowska (Prawo Zazdrosci), Krasnoludy s. 125-126. Tymczasowe: jedna zwykla runa, ktora gasnie po pierwszym zadzialaniu (ksiega wspomina runy tymczasowe bez zasad - interpretacja domowa).",
+  "temporary": {
+   "sredni": 0.03,
+   "zaawansowany": 0.12,
+   "doswiadczony": 0.18,
+   "heroiczny": 0.22,
+   "legendarny": 0.25
+  },
+  "permanent": {
+   "zaawansowany": 0.02,
+   "doswiadczony": 0.05,
+   "heroiczny": 0.12,
+   "legendarny": 0.25
+  },
+  "raceMult": {
+   "Krasnolud": 2.3,
+   "Wysoki elf": 0.2,
+   "Leśny elf": 0.2
+  },
+  "regularCount": {
+   "zaawansowany": [
+    1,
+    1
+   ],
+   "doswiadczony": [
+    1,
+    2
+   ],
+   "heroiczny": [
+    1,
+    3
+   ],
+   "legendarny": [
+    2,
+    3
+   ]
+  },
+  "masterChance": {
+   "zaawansowany": 0.05,
+   "doswiadczony": 0.1,
+   "heroiczny": 0.35,
+   "legendarny": 0.6
+  },
+  "temporaryNote": "Runa tymczasowa — gaśnie, gdy raz zadziała (broń i pancerz: po jednej walce, talizman: po jednym użyciu), a przedmiot staje się zwykły."
  },
  "fitWeight": 3,
  "craft": {
@@ -1524,24 +1547,18 @@
    "kind": "weapon",
    "runes": "weapon",
    "weight": 8,
-   "forRaces": [
-    "Krasnolud"
-   ],
    "source": "Podręcznik Gracza: Krasnoludy",
    "page": 127,
-   "description": "Broń wykuta przez Runotwórcę — liczy się jako magiczna. Najwyżej trzy runy, w tym jedna mistrzowska (Prawo Trzech, Prawo Zazdrości)."
+   "description": "Broń wykuta przez Runotwórcę — liczy się jako magiczna. Najwyżej trzy zwykłe runy i jedna mistrzowska (Prawo Trzech, Prawo Zazdrości)."
   },
   {
    "name": "Runiczny talizman",
    "kind": "item",
    "runes": "talisman",
    "weight": 5,
-   "forRaces": [
-    "Krasnolud"
-   ],
    "source": "Podręcznik Gracza: Krasnoludy",
    "page": 129,
-   "description": "Pierścień, amulet albo pas z Runami Talizmanów — najwyżej trzy runy, w tym jedna mistrzowska."
+   "description": "Pierścień, amulet albo pas z Runami Talizmanów — najwyżej trzy zwykłe runy i jedna mistrzowska."
   },
   {
    "name": "Runiczna zbroja gromrilowa",
@@ -1555,7 +1572,16 @@
    ],
    "source": "Podręcznik Gracza: Krasnoludy",
    "page": 128,
-   "description": "Zbroja z gromrilu z Runami Zbroi (obejmują też hełm z gromrilu). Najwyżej trzy runy, w tym jedna mistrzowska."
+   "description": "Zbroja z gromrilu z Runami Zbroi (obejmują też hełm z gromrilu). Najwyżej trzy zwykłe runy i jedna mistrzowska."
+  },
+  {
+   "name": "Runiczny pancerz",
+   "kind": "armour",
+   "runes": "armour",
+   "weight": 4,
+   "source": "Podręcznik Gracza: Krasnoludy",
+   "page": 128,
+   "description": "Metalowy pancerz z Runami Zbroi — runy wykuwa się tylko na metalu, kamieniu albo klejnotach (Prawo Formy). Najwyżej trzy zwykłe runy i jedna mistrzowska."
   },
   {
    "name": "Pancerz smoczy",

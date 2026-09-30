@@ -413,10 +413,24 @@ export interface TreasureDef {
   effects?: ItemEffects;
 }
 
+/** Przedmioty runiczne - losowane osobno od pozostalych przedmiotow magicznych. */
+export interface RunicData {
+  /** Szansa na przedmiot z runa tymczasowa wg poziomu. */
+  temporary: Partial<Record<TierId, number>>;
+  /** Szansa na trwaly przedmiot runiczny wg poziomu. */
+  permanent: Partial<Record<TierId, number>>;
+  /** Mnoznik obu szans wg rasy (krasnoludy czesciej, elfy rzadko); stworzenia nie maja run. */
+  raceMult: Record<string, number>;
+  /** Zwykle runy trwalego przedmiotu (najwyzej 3 - Prawo Trzech). */
+  regularCount: Partial<Record<TierId, [number, number]>>;
+  /** Szansa na dodatkowa rune mistrzowska (najwyzej 1 - Prawo Zazdrosci). */
+  masterChance: Partial<Record<TierId, number>>;
+  temporaryNote: string;
+}
+
 export interface TreasuresData {
   chances: Record<TierId, number[]>;
-  runeCount: Partial<Record<TierId, [number, number]>>;
-  masterRuneChance: Partial<Record<TierId, number>>;
+  runic: RunicData;
   fitWeight: number;
   craft: CraftData;
   runes: Record<"weapon" | "armour" | "talisman", RuneDef[]>;
@@ -443,6 +457,8 @@ export interface NpcMagicItem {
   /** Bron albo "pancerz", na ktorej jest przedmiot. */
   base?: string;
   runes?: string[];
+  /** Runa tymczasowa - gasnie po pierwszym zadzialaniu. */
+  temporary?: boolean;
   properties?: string[];
   /** Demon uwieziony w broni demonicznej. */
   daemon?: string;

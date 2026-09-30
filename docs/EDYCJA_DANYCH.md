@@ -308,9 +308,15 @@ Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
   `fitWeight` razy bardziej prawdopodobne od ogólnych.
 - `replaces` — broń/pancerz, którym jest przedmiot (zastępuje broń tej samej grupy;
   `extra: true` — dochodzi do ekwipunku), `runes` (`weapon` / `armour` / `talisman` —
-  losuje `runeCount` run, `masterRuneChance` na runę mistrzowską), `chaos: [1, 2]` — tyle
+  szablon runiczny, patrz `runic`), `chaos: [1, 2]` — tyle
   właściwości Broni Chaosu (zgodnych z bogiem BN), `material` — zbroja z gromrilu/ithilmaru.
 - `runes`, `chaosProperties` — opisy run i właściwości z efektami.
+- `runic` — przedmioty runiczne, losowane osobno od reszty: `permanent` / `temporary` —
+  szansa na trwały przedmiot i na przedmiot z runą tymczasową wg poziomu, `raceMult` —
+  mnożnik szans wg rasy (Krasnolud 2,3; elfy 0,2; stworzenia nie mają run),
+  `regularCount` — zwykłe runy trwałego przedmiotu (najwyżej 3, Prawo Trzech),
+  `masterChance` — szansa na jedną runę mistrzowską ponad nie (Prawo Zazdrości),
+  `temporaryNote` — opis runy tymczasowej (jedna zwykła runa, gaśnie po pierwszym zadziałaniu).
 
 **Jakość wykonania** (`craft`):
 
