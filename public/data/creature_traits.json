@@ -97,8 +97,12 @@
       "Percepcja": 30
     },
     "randomPool": true,
-    "description": "Stworzenie nieustannie wypatruje zdobyczy albo zagrożenia. +10 Walki Wręcz i +30 do umiejętności Percepcja.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie nieustannie wypatruje czegoś, na co mogłoby zapolować, albo czegoś, co może polować na nie. Stworzenie otrzymuje +10 do umiejętności Walka Wręcz i +30 do umiejętności Percepcja.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie nieustannie wypatruje czegoś, na co mogłoby zapolować, albo czegoś, co może polować na nie. Stworzenie otrzymuje +10 do umiejętności Walka Wręcz i +30 do umiejętności Percepcja.",
+    "aliases": [
+      "Alert"
+    ]
   },
   "Zabijaka": {
     "modifiers": {
@@ -116,43 +120,75 @@
       "SW": 20
     },
     "randomPool": true,
-    "description": "Rozległa wiedza i wyjątkowa siła umysłu. +20 Inteligencji, +20 Siły Woli.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie zgromadziło rozległą wiedzę i wykazuje się wyjątkową siłą umysłu. Otrzymuje +20 do Siły Woli i +20 do Inteligencji.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie zgromadziło rozległą wiedzę i wykazuje się wyjątkową siłą umysłu. Otrzymuje +20 do Siły Woli i +20 do Inteligencji.",
+    "aliases": [
+      "Studious"
+    ]
   },
   "Czarujący": {
     "randomPool": false,
-    "description": "Bez wysiłku oczarowuje i uwodzi. Dodaje Bonus z Ogłady do PS testów Charyzmy związanych z przyciąganiem uwagi lub uwodzeniem.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie potrafi bez wysiłku oczarowywać i uwodzić swoje ofiary — w celach niecnych albo, być może, całkiem niewinnych. Może dodawać swój Bonus z Ogłady do PS testów Charyzmy związanych z przyciąganiem uwagi lub uwodzeniem.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie potrafi bez wysiłku oczarowywać i uwodzić swoje ofiary — w celach niecnych albo, być może, całkiem niewinnych. Może dodawać swój Bonus z Ogłady do PS testów Charyzmy związanych z przyciąganiem uwagi lub uwodzeniem.",
+    "aliases": [
+      "Alluring"
+    ]
   },
   "Treser Zwierząt (Poziom)": {
     "randomPool": false,
-    "description": "Kieruje stworzeniami z cechą Wyszkolenie. Poziom używany w testach kontroli takiego stworzenia; zwykle (Int + Zw) / 2.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie jest wyszkolone w kierowaniu innymi stworzeniami posiadającymi cechę Wyszkolenie. Używaj Poziomu we wszystkich testach związanych z kontrolowaniem takiego stworzenia. Poziom zazwyczaj oblicza się, dodając Inteligencję i Zwinność, a wynik dzieląc przez pół.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie jest wyszkolone w kierowaniu innymi stworzeniami posiadającymi cechę Wyszkolenie. Używaj Poziomu we wszystkich testach związanych z kontrolowaniem takiego stworzenia. Poziom zazwyczaj oblicza się, dodając Inteligencję i Zwinność, a wynik dzieląc przez pół.",
+    "aliases": [
+      "Animal Handler"
+    ]
   },
   "Mag (Poziom)": {
     "randomPool": false,
-    "description": "Dar manipulowania Wiatrami Magii. Poziom jako PS do wszystkich testów Splatania Magii i Języka (Magicznego); maksymalnie Bonus z Siły Woli.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie ma dar manipulowania Wiatrami Magii. Otrzymuje swój Poziom jako PS do wszystkich testów Splatania oraz Języka (Magicznego). Maksymalna wartość powinna być równa jego Bonusowi z Siły Woli.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie ma dar manipulowania Wiatrami Magii. Otrzymuje swój Poziom jako PS do wszystkich testów Splatania oraz Języka (Magicznego). Maksymalna wartość powinna być równa jego Bonusowi z Siły Woli.",
+    "aliases": [
+      "Magician"
+    ]
   },
   "Niedomaganie (Poziom)": {
     "randomPool": false,
-    "description": "Stare, chore lub ranne. Poziom = liczba stanów Zmęczenie, których nie można usunąć, dopóki źródło niedomagania nie zostanie wyleczone.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie jest stare, chore lub z innego powodu dalekie od pełni sił i zdrowia. Odzwierciedlają to stany Zmęczenie, których nie można usunąć, dopóki źródło niedomagania nie zostanie wyleczone. Lekką ranę lub drobną chorobę może odzwierciedlać pojedynczy stan; ropiejąca rana lub postępująca choroba to 2 lub 3 stany; a śmiertelna bądź wyniszczająca choroba lub rana może oznaczać 4 lub więcej stanów. Dokładna liczba stanów zależy od MG, ale powinna być dopasowana do profilu stworzenia (np. Smok ma znacznie wyższe wyjściowe cechy niż Skaven). Obniżenia w profilu skutkują odpowiednim obniżeniem maksymalnej Żywotności. Ta Cecha to jeden ze sposobów wprowadzania niebotycznie potężnych stworzeń przeciwko słabszym śmiałkom. Stworzenia z cechami Demoniczny, Eteryczny, Nieumarły lub Konstrukt nie mogą korzystać z tej Cechy — chyba że odzwierciedla ona niezaleczoną Ranę.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie jest stare, chore lub z innego powodu dalekie od pełni sił i zdrowia. Odzwierciedlają to stany Zmęczenie, których nie można usunąć, dopóki źródło niedomagania nie zostanie wyleczone. Lekką ranę lub drobną chorobę może odzwierciedlać pojedynczy stan; ropiejąca rana lub postępująca choroba to 2 lub 3 stany; a śmiertelna bądź wyniszczająca choroba lub rana może oznaczać 4 lub więcej stanów. Dokładna liczba stanów zależy od MG, ale powinna być dopasowana do profilu stworzenia (np. Smok ma znacznie wyższe wyjściowe cechy niż Skaven). Obniżenia w profilu skutkują odpowiednim obniżeniem maksymalnej Żywotności. Ta Cecha to jeden ze sposobów wprowadzania niebotycznie potężnych stworzeń przeciwko słabszym śmiałkom. Stworzenia z cechami Demoniczny, Eteryczny, Nieumarły lub Konstrukt nie mogą korzystać z tej Cechy — chyba że odzwierciedla ona niezaleczoną Ranę.",
+    "aliases": [
+      "Infirmity"
+    ]
   },
   "Nosiciel Zarazy (Typ)": {
     "randomPool": false,
-    "description": "Nosi wskazaną chorobę i przekazuje ją dotykiem. Test na zarażenie o 2 stopnie trudniejszy, Inkubacja „Natychmiastowa”.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie nosi w sobie wskazaną chorobę i może przekazać ją dotykiem. Dotknięta ofiara musi wykonać test na zarażenie, przy czym test jest o 2 stopnie trudniejszy niż zwykle. Jeżeli dojdzie do zarażenia, Inkubacja choroby zmienia się na „Natychmiastowa”.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie nosi w sobie wskazaną chorobę i może przekazać ją dotykiem. Dotknięta ofiara musi wykonać test na zarażenie, przy czym test jest o 2 stopnie trudniejszy niż zwykle. Jeżeli dojdzie do zarażenia, Inkubacja choroby zmienia się na „Natychmiastowa”.",
+    "aliases": [
+      "Blighted"
+    ]
   },
   "Sobowtór": {
     "randomPool": false,
-    "description": "Może przybrać postać człekokształtnej istoty Przeciętnego Rozmiaru (+5 PS w Rozszerzonym teście Percepcji, potem 2 rundy). Znajomi ofiary: Ciężki (−20) test Intuicji.",
-    "source": "Bestiariusz 2.0"
+    "description": "BN może przybrać postać dowolnego człekokształtnego stworzenia Przeciętnego Rozmiaru. Obserwując swój cel, musi osiągnąć +5 PS w Rozszerzonym teście Percepcji. Następnie przybranie postaci celu zajmuje mu 2 rundy. Ubranie i drobniejsze elementy wyposażenia celu również zostają odwzorowane; stają się częścią stworzenia i nie można ich zdjąć. Większe elementy wyposażenia, takie jak miecze i plecaki, nie są kopiowane. Kiedy osoby znające ofiarę spotkają przemienione stworzenie, wykonują Ciężki (–20%) Prosty test Intuicji. Jeżeli zdadzą, wiedzą, że coś jest nie tak. Jeżeli nie zdadzą, są przekonane, że stworzenie to ich znajomy.",
+    "source": "Bestiariusz 2.0",
+    "rules": "BN może przybrać postać dowolnego człekokształtnego stworzenia Przeciętnego Rozmiaru. Obserwując swój cel, musi osiągnąć +5 PS w Rozszerzonym teście Percepcji. Następnie przybranie postaci celu zajmuje mu 2 rundy. Ubranie i drobniejsze elementy wyposażenia celu również zostają odwzorowane; stają się częścią stworzenia i nie można ich zdjąć. Większe elementy wyposażenia, takie jak miecze i plecaki, nie są kopiowane. Kiedy osoby znające ofiarę spotkają przemienione stworzenie, wykonują Ciężki (–20%) Prosty test Intuicji. Jeżeli zdadzą, wiedzą, że coś jest nie tak. Jeżeli nie zdadzą, są przekonane, że stworzenie to ich znajomy.",
+    "aliases": [
+      "Doppelganger"
+    ]
   },
   "Zmiennokształtny (Stworzenie)": {
     "randomPool": false,
-    "description": "Zmienia się między zwykłą postacią a wskazanym Stworzeniem (1 pełna runda). Zachowuje Int, SW i Ogd, reszta profilu jak u Stworzenia.",
-    "source": "Bestiariusz 2.0"
+    "description": "Stworzenie może dowolnie zmieniać się między swoją zwykłą postacią a postacią wskazanego Stworzenia. Przemiana zajmuje jedną pełną rundę, podczas której nie jest możliwy ani Ruch, ani Akcja. Ubranie i pancerz spadną z niego lub zostaną rozdarte na strzępy. Kiedy księżyc Mannslieb jest w pełni, stworzenie musi zdać Przeciętny (+20) test Siły Woli o zmierzchu, by nie przemienić się samoistnie. Stworzenia, które nabyły tę Cechę poprzez likantropię, zdają ten test ze znacznie większym trudem — przynajmniej na początku, wedle uznania MG. Po przemianie stworzenie zachowuje swoje atrybuty umysłowe (Int, SW i Ogd), lecz reszta jego profilu staje się profilem wskazanego Stworzenia. Jeżeli stworzenie jest Likantropem (czyli zwierzołakiem), jest wrażliwe na posrebrzaną broń — patrz Unofficial Treasure & Artefacts (s. 32). Nie wiadomo, czy likantropia jest klątwą, chorobą, darem chaosu czy mutacją — niektórzy mogą wręcz postrzegać ją jako błogosławieństwo. Zwierzołaki otrzymują +60 do testów Oswajania wobec stworzeń spokrewnionych z ich zwierzęcą postacią.",
+    "source": "Bestiariusz 2.0",
+    "rules": "Stworzenie może dowolnie zmieniać się między swoją zwykłą postacią a postacią wskazanego Stworzenia. Przemiana zajmuje jedną pełną rundę, podczas której nie jest możliwy ani Ruch, ani Akcja. Ubranie i pancerz spadną z niego lub zostaną rozdarte na strzępy. Kiedy księżyc Mannslieb jest w pełni, stworzenie musi zdać Przeciętny (+20) test Siły Woli o zmierzchu, by nie przemienić się samoistnie. Stworzenia, które nabyły tę Cechę poprzez likantropię, zdają ten test ze znacznie większym trudem — przynajmniej na początku, wedle uznania MG. Po przemianie stworzenie zachowuje swoje atrybuty umysłowe (Int, SW i Ogd), lecz reszta jego profilu staje się profilem wskazanego Stworzenia. Jeżeli stworzenie jest Likantropem (czyli zwierzołakiem), jest wrażliwe na posrebrzaną broń — patrz Unofficial Treasure & Artefacts (s. 32). Nie wiadomo, czy likantropia jest klątwą, chorobą, darem chaosu czy mutacją — niektórzy mogą wręcz postrzegać ją jako błogosławieństwo. Zwierzołaki otrzymują +60 do testów Oswajania wobec stworzeń spokrewnionych z ich zwierzęcą postacią.",
+    "aliases": [
+      "Shapeshifter"
+    ]
   },
   "Atak Językiem +Obrażenia (Zasięg)": {
     "randomPool": false,
@@ -219,9 +255,13 @@
   },
   "Demoniczny (Próg)": {
     "randomPool": false,
-    "description": "Esencję stworzenia stanowi surowa magia, a w tym, co uchodzi za jej żyły, płynie paskudna posoka. Demoniczne stwory nie muszą zaspokajać normalnych potrzeb życiowych. Nie potrzebują jedzenia, wody ani powietrza. Wszystkie ataki stworzenia są Magiczne. Kiedy stworzenie zostanie trafione, rzuć 1k10.Jeśli wyrzuci tyle, ile wynosi próg, lub więcej, cios zostaje zignorowany, nawet jeśli jest to Trafienie Krytyczne. Za to jeśli Żywotność stworzenia zostanie zredukowana do 0, jego dusza natychmiast powraca do Królestw Chaosu. Stworzenie zostaje usunięte z rozgrywki.",
-    "source": "Podręcznik podstawowy",
-    "rules": "Esencję stworzenia stanowi surowa magia, a w tym, co uchodzi za jej żyły, płynie paskudna posoka. Demoniczne stwory nie muszą zaspokajać normalnych potrzeb życiowych. Nie potrzebują jedzenia, wody ani powietrza. Wszystkie ataki stworzenia są Magiczne. Kiedy stworzenie zostanie trafione, rzuć 1k10. Jeśli wyrzuci tyle, ile wynosi próg, lub więcej, cios zostaje zignorowany, nawet jeśli jest to Trafienie Krytyczne. Za to jeśli Żywotność stworzenia zostanie zredukowana do 0, jego dusza natychmiast powraca do Królestw Chaosu. Stworzenie zostaje usunięte z rozgrywki."
+    "description": "Esencją tego stworzenia jest czysta magia, a w tym, co uchodzi u niego za żyły, pulsuje plugawy ichor. Demoniczne stworzenia nie potrzebują zwykłych warunków do życia: jedzenia, wody, powietrza… Nie podlegają efektom Ekspozycji i są odporne na następujące stany: Zmęczenie, Zatrucie, Utrata przytomności. Aura Demona obdarza go w świecie śmiertelników szczególnymi mocami. Wszystkie jego ataki są Magiczne. Przyziemne ataki, które trafią Demona, ignorują swoje zalety broni i nie zadają minimum 1 punktu Obrażeń. Demony dysponują też Demonicznym rzutem ochronnym. Po otrzymaniu dowolnego nie-Magicznego ciosu rzuć 1k10: jeżeli stworzenie wyrzuci Poziom lub więcej, cios zostaje zignorowany — nawet jeżeli był Trafieniem Krytycznym. Jeżeli stworzenie zostanie sprowadzone do 0 punktów Żywotności, jego dusza natychmiast powraca do Królestwa Chaosu, usuwając je z gry.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "rules": "Esencją tego stworzenia jest czysta magia, a w tym, co uchodzi u niego za żyły, pulsuje plugawy ichor. Demoniczne stworzenia nie potrzebują zwykłych warunków do życia: jedzenia, wody, powietrza… Nie podlegają efektom Ekspozycji i są odporne na następujące stany: Zmęczenie, Zatrucie, Utrata przytomności. Aura Demona obdarza go w świecie śmiertelników szczególnymi mocami. Wszystkie jego ataki są Magiczne. Przyziemne ataki, które trafią Demona, ignorują swoje zalety broni i nie zadają minimum 1 punktu Obrażeń. Demony dysponują też Demonicznym rzutem ochronnym. Po otrzymaniu dowolnego nie-Magicznego ciosu rzuć 1k10: jeżeli stworzenie wyrzuci Poziom lub więcej, cios zostaje zignorowany — nawet jeżeli był Trafieniem Krytycznym. Jeżeli stworzenie zostanie sprowadzone do 0 punktów Żywotności, jego dusza natychmiast powraca do Królestwa Chaosu, usuwając je z gry.",
+    "coreRules": "Esencję stworzenia stanowi surowa magia, a w tym, co uchodzi za jej żyły, płynie paskudna posoka. Demoniczne stwory nie muszą zaspokajać normalnych potrzeb życiowych. Nie potrzebują jedzenia, wody ani powietrza. Wszystkie ataki stworzenia są Magiczne. Kiedy stworzenie zostanie trafione, rzuć 1k10. Jeśli wyrzuci tyle, ile wynosi próg, lub więcej, cios zostaje zignorowany, nawet jeśli jest to Trafienie Krytyczne. Za to jeśli Żywotność stworzenia zostanie zredukowana do 0, jego dusza natychmiast powraca do Królestw Chaosu. Stworzenie zostaje usunięte z rozgrywki.",
+    "aliases": [
+      "Daemonic"
+    ]
   },
   "Długi Krok": {
     "randomPool": false,
@@ -272,9 +312,14 @@
   },
   "Latanie (wartość)": {
     "randomPool": false,
-    "description": "Gdy stworzenie wykonuje Ruch, może przelecieć tyle metrów, ile wynosi podana wartość. Lecąc, ignoruje wszelkie przeszkody terenowe i inne oraz postaci. Pod koniec ruchu musi zdecydować, czy wyląduje, czy będzie kontynuować lot. Może w ramach tego ruchu wykonać Szarżę. Jeśli na początku swojej Tury leci, musi \"brać jako Ruch Latanie. Jeśli nie jest w stanie tego zrobić, MG decyduje, jak daleko stworzenie upadnie (patrz strona 166). Biorąc stworzenie na cel, zmierz odległość horyzontalną jak normalnie, a następnie zwiększ dystans 0 1 poziom. Zatem strzał na Dalekim zasięgu stanie się strzałem na Bardzo dalekim zasięgu. Natomiast jeśli był to Bardzo daleki zasięg, stworzenia nie można dosięgnąć strzałem. Lecąc, stworzenie dostaje karę -20 do wszystkich prób walki dystansowej, ponieważ nurkuje w powietrzu i zatacza kręgi.",
-    "source": "Podręcznik podstawowy",
-    "rules": "Gdy stworzenie wykonuje Ruch, może przelecieć tyle metrów, ile wynosi podana wartość. Lecąc, ignoruje wszelkie przeszkody terenowe i inne oraz postaci. Pod koniec ruchu musi zdecydować, czy wyląduje, czy będzie kontynuować lot. Może w ramach tego ruchu wykonać Szarżę. Jeśli na początku swojej Tury leci, musi wybrać jako Ruch Latanie. Jeśli nie jest w stanie tego zrobić, MG decyduje, jak daleko stworzenie upadnie (patrz strona 166). Biorąc stworzenie na cel, zmierz odległość horyzontalną jak normalnie, a następnie zwiększ dystans o 1 poziom. Zatem strzał na Dalekim zasięgu stanie się strzałem na Bardzo dalekim zasięgu. Natomiast jeśli był to Bardzo daleki zasięg, stworzenia nie można dosięgnąć strzałem. Lecąc, stworzenie dostaje karę -20 do wszystkich prób walki dystansowej, ponieważ nurkuje w powietrzu i zatacza kręgi."
+    "description": "W ramach swojego Ruchu stworzenie może przelecieć do Poziomu metrów. Podczas lotu ignoruje cały teren, przeszkody i postaci znajdujące się po drodze. Na końcu ruchu decyduje, czy ląduje, czy nadal leci. Może użyć tego ruchu do Szarży. Jeżeli rozpoczyna turę w locie, musi wybrać Lot jako swój Ruch. Jeżeli nie może tego zrobić, MG decyduje, jak daleko stworzenie spada (patrz strona 166). Mierząc do niego zasięg, odległość w poziomie licz normalnie, a następnie zwiększ zasięg o 1 stopień. Strzał z Dalekiego Zasięgu staje się więc strzałem z Ekstremalnego Zasięgu, a jeżeli był już z Ekstremalnego Zasięgu — w ogóle nie można go oddać. Podczas lotu stworzenie — jak i każdy, kto do niego strzela — otrzymuje karę -20 do wszystkich prób ataku bronią zasięgową, gdyż podczas szybowania i kołowania po niebie trudno o precyzję. Odległość w poziomie liczy się jednak jako Zasięg — na tym polega przewaga wysokości. Technicznie nie ma maksymalnego zasięgu, przyjmuje się jednak, że pociski wystrzelone spoza Ekstremalnego Zasięgu nie trafiają — chyba że są ciężką bronią (np. głazem) albo cel jest Ogromnego lub większego rozmiaru (np. zamek). Kiedy dwa latające stworzenia ostrzeliwują się nawzajem, traktuj niższe z nich tak, jakby stało na ziemi — wyższe zyskuje wtedy korzyść z przewagi wysokości. Dwa latające stworzenia na tej samej wysokości mierzą zasięg tak, jakby oba stały na ziemi.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "rules": "W ramach swojego Ruchu stworzenie może przelecieć do Poziomu metrów. Podczas lotu ignoruje cały teren, przeszkody i postaci znajdujące się po drodze. Na końcu ruchu decyduje, czy ląduje, czy nadal leci. Może użyć tego ruchu do Szarży. Jeżeli rozpoczyna turę w locie, musi wybrać Lot jako swój Ruch. Jeżeli nie może tego zrobić, MG decyduje, jak daleko stworzenie spada (patrz strona 166). Mierząc do niego zasięg, odległość w poziomie licz normalnie, a następnie zwiększ zasięg o 1 stopień. Strzał z Dalekiego Zasięgu staje się więc strzałem z Ekstremalnego Zasięgu, a jeżeli był już z Ekstremalnego Zasięgu — w ogóle nie można go oddać. Podczas lotu stworzenie — jak i każdy, kto do niego strzela — otrzymuje karę -20 do wszystkich prób ataku bronią zasięgową, gdyż podczas szybowania i kołowania po niebie trudno o precyzję. Odległość w poziomie liczy się jednak jako Zasięg — na tym polega przewaga wysokości. Technicznie nie ma maksymalnego zasięgu, przyjmuje się jednak, że pociski wystrzelone spoza Ekstremalnego Zasięgu nie trafiają — chyba że są ciężką bronią (np. głazem) albo cel jest Ogromnego lub większego rozmiaru (np. zamek). Kiedy dwa latające stworzenia ostrzeliwują się nawzajem, traktuj niższe z nich tak, jakby stało na ziemi — wyższe zyskuje wtedy korzyść z przewagi wysokości. Dwa latające stworzenia na tej samej wysokości mierzą zasięg tak, jakby oba stały na ziemi.",
+    "coreRules": "Gdy stworzenie wykonuje Ruch, może przelecieć tyle metrów, ile wynosi podana wartość. Lecąc, ignoruje wszelkie przeszkody terenowe i inne oraz postaci. Pod koniec ruchu musi zdecydować, czy wyląduje, czy będzie kontynuować lot. Może w ramach tego ruchu wykonać Szarżę. Jeśli na początku swojej Tury leci, musi wybrać jako Ruch Latanie. Jeśli nie jest w stanie tego zrobić, MG decyduje, jak daleko stworzenie upadnie (patrz strona 166). Biorąc stworzenie na cel, zmierz odległość horyzontalną jak normalnie, a następnie zwiększ dystans o 1 poziom. Zatem strzał na Dalekim zasięgu stanie się strzałem na Bardzo dalekim zasięgu. Natomiast jeśli był to Bardzo daleki zasięg, stworzenia nie można dosięgnąć strzałem. Lecąc, stworzenie dostaje karę -20 do wszystkich prób walki dystansowej, ponieważ nurkuje w powietrzu i zatacza kręgi.",
+    "aliases": [
+      "Flight",
+      "Lot"
+    ]
   },
   "Lęk (Obiekt)": {
     "randomPool": false,
@@ -284,9 +329,13 @@
   },
   "Lodowaty Uścisk": {
     "randomPool": false,
-    "description": "Dotyk stworzenia mrozi dusze wrogów. Kosztem 2 Przewag i swojej Akcji stworzenie może podjąć Test Przeciwstawny Walka Wręcz/ Broń Biała albo Unik. Jeśli wygra, jego cel traci punktów Zywotności, których nie zmniejszają Bonus z Wytrzymałości ani Punkty Pancerza. Ten atak jest Magiczny.",
-    "source": "Podręcznik podstawowy",
-    "rules": "Dotyk stworzenia mrozi dusze wrogów. Kosztem 2 Przewag i swojej Akcji stworzenie może podjąć Test Przeciwstawny Walka Wręcz/ Broń Biała albo Unik. Jeśli wygra, jego cel traci 1k10+PS punktów Żywotności, których nie zmniejszają Bonus z Wytrzymałości ani Punkty Pancerza. Ten atak jest Magiczny."
+    "description": "Dotyk stworzenia mrozi dusze jego wrogów. Za cenę 2 punktów Przewagi oraz swojej Akcji stworzenie może podjąć próbę Testu Przeciwstawnego Walki Wręcz (cecha lub umiejętność) albo Uniku; atak ten liczy się jako Magiczny. Jeżeli wygra, jego cel traci 1k10+PS punktów Żywotności bez modyfikacji o Bonus z Wytrzymałości czy Punkty Pancerza. Ponadto, jeżeli cel nie zda Wymagającego (+0) testu Opanowania, otrzymuje stan Zmęczenie, którego nie można usunąć aż do Dłuższego Odpoczynku. Jeżeli cel otrzyma w ten sposób więcej stanów Zmęczenie, niż wynosi jego Bonus z Siły Woli, stworzenie natychmiast nałoży na niego stan Powalony, a cel umrze z końcem rundy, gdy jego dusza wymknie się z ciała.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "rules": "Dotyk stworzenia mrozi dusze jego wrogów. Za cenę 2 punktów Przewagi oraz swojej Akcji stworzenie może podjąć próbę Testu Przeciwstawnego Walki Wręcz (cecha lub umiejętność) albo Uniku; atak ten liczy się jako Magiczny. Jeżeli wygra, jego cel traci 1k10+PS punktów Żywotności bez modyfikacji o Bonus z Wytrzymałości czy Punkty Pancerza. Ponadto, jeżeli cel nie zda Wymagającego (+0) testu Opanowania, otrzymuje stan Zmęczenie, którego nie można usunąć aż do Dłuższego Odpoczynku. Jeżeli cel otrzyma w ten sposób więcej stanów Zmęczenie, niż wynosi jego Bonus z Siły Woli, stworzenie natychmiast nałoży na niego stan Powalony, a cel umrze z końcem rundy, gdy jego dusza wymknie się z ciała.",
+    "coreRules": "Dotyk stworzenia mrozi dusze wrogów. Kosztem 2 Przewag i swojej Akcji stworzenie może podjąć Test Przeciwstawny Walka Wręcz/ Broń Biała albo Unik. Jeśli wygra, jego cel traci 1k10+PS punktów Żywotności, których nie zmniejszają Bonus z Wytrzymałości ani Punkty Pancerza. Ten atak jest Magiczny.",
+    "aliases": [
+      "Chill Grasp"
+    ]
   },
   "Macki (wartość)": {
     "randomPool": false,
@@ -296,9 +345,13 @@
   },
   "Magiczny": {
     "randomPool": false,
-    "description": "Stworzenie spowite jest magią. Wszystkie jego ataki liczą się jako Magiczne, co oznacza, że może ranić istoty wrażliwe tylko na ataki magiczne.",
-    "source": "Podręcznik podstawowy",
-    "rules": "Stworzenie spowite jest magią. Wszystkie jego ataki liczą się jako Magiczne, co oznacza, że może ranić istoty wrażliwe tylko na ataki magiczne."
+    "description": "Stworzenie jest spowite magią. Wszystkie jego ataki liczą się jako Magiczne, co oznacza, że może ranić stworzenia podatne jedynie na Magiczne ataki. Dotyczy to również stworzeń z cechą Eteryczny. Ponadto jego ataki ignorują rzut ochronny Demoniczny z cechy Demoniczny oraz cechę Ward stworzenia. Zaklęcia, Błogosławieństwa i Cuda również liczą się jako Magiczne ataki.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "rules": "Stworzenie jest spowite magią. Wszystkie jego ataki liczą się jako Magiczne, co oznacza, że może ranić stworzenia podatne jedynie na Magiczne ataki. Dotyczy to również stworzeń z cechą Eteryczny. Ponadto jego ataki ignorują rzut ochronny Demoniczny z cechy Demoniczny oraz cechę Ward stworzenia. Zaklęcia, Błogosławieństwa i Cuda również liczą się jako Magiczne ataki.",
+    "coreRules": "Stworzenie spowite jest magią. Wszystkie jego ataki liczą się jako Magiczne, co oznacza, że może ranić istoty wrażliwe tylko na ataki magiczne.",
+    "aliases": [
+      "Magical"
+    ]
   },
   "Mieszkaniec Lasu": {
     "randomPool": false,
@@ -335,9 +388,13 @@
   },
   "Niestabilny": {
     "randomPool": false,
-    "description": "Ciało stworzenia spaja plugawa magia, która staje się niestabilna w świecie materialnym. Gdy stworzenie kończy Rundę związane walką z przeciwnikiem o wyższej Przewadze, zostaje odepchnięte, a wiążąca go magia słabnie. Otrzymuje tyle Ran, ile wynosi różnica Przewag. Zatem jeśli stworzenie miało 1 Przewagę, a jego przeciwnik 3, stworzenie otrzyma 2 Rany. Jeśli stworzenie kiedykolwiek osiągnie O Ran, spajająca je magia rozprasza się i stwór „umiera\".",
-    "source": "Podręcznik podstawowy",
-    "rules": "Ciało stworzenia spaja plugawa magia, która staje się niestabilna w świecie materialnym. Gdy stworzenie kończy Rundę związane walką z przeciwnikiem o wyższej Przewadze, zostaje odepchnięte, a wiążąca go magia słabnie. Otrzymuje tyle Ran, ile wynosi różnica Przewag. Zatem jeśli stworzenie miało 1 Przewagę, a jego przeciwnik 3, stworzenie otrzyma 2 Rany. Jeśli stworzenie kiedykolwiek osiągnie 0 Ran, spajająca je magia rozprasza się i stwór „umiera”."
+    "description": "Cielesną powłokę stworzenia podtrzymują plugawe czary, które w materialnym świecie są z natury niestabilne — przypływają i odpływają w wirze bitwy. Na początku tury stworzenia rzuć 1k10 na niestabilność: jeżeli wypadnie 8, wymiary uległy przesunięciu i stworzenie musi wykonać Dramatyczny test Siły Woli, zmodyfikowany o Wirujące Wiatry dla Dhar (WFRP4, s. 238). Przy Sukcesie (2+) zyskuje darmowo 1 punkt Przewagi; przy Imponującym Sukcesie (4+) zyskuje 2 punkty Przewagi; a przy Zdumiewającym Sukcesie (6+) zyskuje 3 punkty Przewagi. Przy Sukcesie Krytycznym jego Poziom cechy Ward lub Demoniczny obniża się o 5 punktów (np. z 9+ na 4+) — albo stworzenie zyskuje taką cechę z Poziomem 6+ — aż do następnego okresu niestabilności. Przy Pechu lub Zdumiewającej Porażce (-6 lub gorzej) stworzenie zostaje odwołane z powrotem do Królestwa Chaosu i znika z gry. Za każdym razem, gdy stworzenie kończy rundę Związane walką z przeciwnikami o wyższej Przewadze, zostaje odepchnięte, a spajające je czary słabną. Traci tyle punktów Żywotności, ile wynosi różnica między jego własną Przewagą a najwyższą Przewagą przeciwnika, z którym walczy. Jeżeli więc stworzenie miało 1 punkt Przewagi, a jego przeciwnik 3 — stworzenie traci 2 punkty Żywotności. Jeżeli stworzenie kiedykolwiek osiągnie 0 punktów Żywotności, wykonuje Daremny (-50) test Siły Woli: jeżeli test się nie powiedzie, podtrzymujące je czary rozpadają się i stworzenie „ginie”. Jeżeli uzyska Sukces Krytyczny, więź z tym wymiarem umacnia się, a stworzenie natychmiast regeneruje 1k10 punktów Żywotności. Niestabilności można uniknąć, jeżeli stworzenia są kontrolowane przez potężnego Czarodzieja lub Czempiona, albo jeżeli pozostają w obrębie szczególnych miejsc, w których cecha Niestabilny nie działa (takich jak cmentarze, nawiedzone domy itp.). Takie miejsca będą wymienione w profilu stworzenia.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "rules": "Cielesną powłokę stworzenia podtrzymują plugawe czary, które w materialnym świecie są z natury niestabilne — przypływają i odpływają w wirze bitwy. Na początku tury stworzenia rzuć 1k10 na niestabilność: jeżeli wypadnie 8, wymiary uległy przesunięciu i stworzenie musi wykonać Dramatyczny test Siły Woli, zmodyfikowany o Wirujące Wiatry dla Dhar (WFRP4, s. 238). Przy Sukcesie (2+) zyskuje darmowo 1 punkt Przewagi; przy Imponującym Sukcesie (4+) zyskuje 2 punkty Przewagi; a przy Zdumiewającym Sukcesie (6+) zyskuje 3 punkty Przewagi. Przy Sukcesie Krytycznym jego Poziom cechy Ward lub Demoniczny obniża się o 5 punktów (np. z 9+ na 4+) — albo stworzenie zyskuje taką cechę z Poziomem 6+ — aż do następnego okresu niestabilności. Przy Pechu lub Zdumiewającej Porażce (-6 lub gorzej) stworzenie zostaje odwołane z powrotem do Królestwa Chaosu i znika z gry. Za każdym razem, gdy stworzenie kończy rundę Związane walką z przeciwnikami o wyższej Przewadze, zostaje odepchnięte, a spajające je czary słabną. Traci tyle punktów Żywotności, ile wynosi różnica między jego własną Przewagą a najwyższą Przewagą przeciwnika, z którym walczy. Jeżeli więc stworzenie miało 1 punkt Przewagi, a jego przeciwnik 3 — stworzenie traci 2 punkty Żywotności. Jeżeli stworzenie kiedykolwiek osiągnie 0 punktów Żywotności, wykonuje Daremny (-50) test Siły Woli: jeżeli test się nie powiedzie, podtrzymujące je czary rozpadają się i stworzenie „ginie”. Jeżeli uzyska Sukces Krytyczny, więź z tym wymiarem umacnia się, a stworzenie natychmiast regeneruje 1k10 punktów Żywotności. Niestabilności można uniknąć, jeżeli stworzenia są kontrolowane przez potężnego Czarodzieja lub Czempiona, albo jeżeli pozostają w obrębie szczególnych miejsc, w których cecha Niestabilny nie działa (takich jak cmentarze, nawiedzone domy itp.). Takie miejsca będą wymienione w profilu stworzenia.",
+    "coreRules": "Ciało stworzenia spaja plugawa magia, która staje się niestabilna w świecie materialnym. Gdy stworzenie kończy Rundę związane walką z przeciwnikiem o wyższej Przewadze, zostaje odepchnięte, a wiążąca go magia słabnie. Otrzymuje tyle Ran, ile wynosi różnica Przewag. Zatem jeśli stworzenie miało 1 Przewagę, a jego przeciwnik 3, stworzenie otrzyma 2 Rany. Jeśli stworzenie kiedykolwiek osiągnie 0 Ran, spajająca je magia rozprasza się i stwór „umiera”.",
+    "aliases": [
+      "Unstable"
+    ]
   },
   "Niewrażliwość (rodzaj)": {
     "randomPool": false,
@@ -364,9 +421,14 @@
   },
   "Ożywieniec": {
     "randomPool": false,
-    "description": "Ożywieńcy nie są ani Żywi, ani martwi, co oznacza, że nie potrzebują powietrza, jedzenia, wody... Ta cecha używana jest najcqściej wtedy, gdy czary, cuda i inne zdolności obejmują tylko Ożywiencow",
-    "source": "Podręcznik podstawowy",
-    "rules": "Ożywieńcy nie są ani żywi, ani martwi, co oznacza, że nie potrzebują powietrza, jedzenia, wody... Ta cecha używana jest najczęściej wtedy, gdy czary, cuda i inne zdolności obejmują tylko Ożywieńców."
+    "description": "Nieumarli nie są ani żywi, ani martwi — nie potrzebują więc zwykłych warunków do życia: powietrza, jedzenia, wody… Nie podlegają efektom Ekspozycji i są odporni na następujące stany: Krwawienie, Zmęczenie, Zatrucie, Oszołomiony, Utrata przytomności. Cecha ta znajduje zastosowanie przede wszystkim wtedy, gdy zaklęcia, cuda i inne zdolności oddziałują wyłącznie na Nieumarłych.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "rules": "Nieumarli nie są ani żywi, ani martwi — nie potrzebują więc zwykłych warunków do życia: powietrza, jedzenia, wody… Nie podlegają efektom Ekspozycji i są odporni na następujące stany: Krwawienie, Zmęczenie, Zatrucie, Oszołomiony, Utrata przytomności. Cecha ta znajduje zastosowanie przede wszystkim wtedy, gdy zaklęcia, cuda i inne zdolności oddziałują wyłącznie na Nieumarłych.",
+    "coreRules": "Ożywieńcy nie są ani żywi, ani martwi, co oznacza, że nie potrzebują powietrza, jedzenia, wody... Ta cecha używana jest najczęściej wtedy, gdy czary, cuda i inne zdolności obejmują tylko Ożywieńców.",
+    "aliases": [
+      "Nieumarły",
+      "Undead"
+    ]
   },
   "Pancerz (wartość)": {
     "randomPool": false,
@@ -405,8 +467,13 @@
   },
   "Rój": {
     "randomPool": false,
-    "description": "Roje to wielkie ilości tych samych stworów działających jak jeden. Rój liczy się jako jeden stwór, który ignoruje zasady efektów psychologicznych (patrz strona 190) i może ignorować zasady Związania walką, gdy \"konuje Ruch. Jeśli rój trafi przeciwnika, aktywuje zasadę Śmiertelny cios (nawet jeśli nie zabił przeciwnika — patrz strona 160). Wszyscy przeciwnicy Związani walką z rojem automatycznie otrzymują 1 Ranę pod koniec każdej Rundy, gdy rój opada na wszystko w pobliżu. Rój ma pięć razy więcej Zywotności niż normalny okaz danego stworzenia i dostaje +10 do Walki Wręcz. Wszelkie próby strzelania do roju mają premię +40 do trafienia. Rój ignoruje wszelkie zasady Rozmiaru stworzeń.",
-    "source": "Podręcznik podstawowy"
+    "description": "Roje to wielkie liczby tych samych stworzeń działających jak jedno. Choć roje składają się zazwyczaj ze stworzeń takich jak owady, szczury czy inne drobne szkodniki (na przykład Nurglingi), zasady Roju mogą też służyć do abstrakcyjnego przedstawienia większych grup jednostek o zbliżonych zdolnościach — na przykład regimentu żołnierzy. Rój porusza się tak, jakby był pojedynczą istotą o Rozmiarze wskazanym w nawiasie (WFRP4 s. 341). Na potrzeby gry minimalny rozmiar roju to Przeciętny — zajmuje on mniej więcej tyle miejsca, co Człowiek, Krasnolud albo Elf. W kategoriach bitewnych oznacza to pojedynczy kwadrat albo obszar 2x2 metry. Taką przestrzeń może zajmować około 5 Małych stworzeń, około 20 Niewielkich stworzonek albo tysiąc gryzących owadów. Nie ma górnej granicy rozmiaru roju: rój owadów może pokrywać całe mile terenu, choć takie zjawisko wykracza poza zakres cechy Rój.\nKorekta profilu Zależnie od rozmiaru roje otrzymują następujące poprawki do standardowego profilu. Roje Przeciętnego rozmiaru zyskują +10 do następujących atrybutów: Walka Wręcz, Siła, Wytrzymałość, Siła Woli — oraz -5 do Zwinności. Duże roje zyskują +20 i -10 Zwinności, Ogromne roje zyskują +30 i -15 Zwinności, a Monstrualne roje +40 i -20 Zwinności. Skoryguj Cechy ataków Roju o zwiększoną Siłę. Następnie oblicz Żywotność, stosując zasady rozmiaru i powyższe poprawki profilu.\nZasady walki Roju Wszystkie stworzenia w promieniu dwóch metrów (1 kwadratu) od Roju uznaje się za Związane z nim walką. Rój może ignorować zasady Związania walką podczas swojego Ruchu. Wszyscy przeciwnicy Związani walką z Przeciętnym Rojem automatycznie tracą 1 punkt Żywotności na koniec każdej rundy. Zwiększ tę wartość do 2 dla Dużego, 3 dla Ogromnego i 4 dla Monstrualnego roju. Rój może wykonywać ataki przeciwko wszystkim sąsiadującym stworzeniom. Jeżeli Rój posiada opcjonalne Cechy ataków (Ugryzienie, Róg, Ogon itd.), może w swojej turze wykonać po jednym z każdego z nich jako Darmowy Atak, bez wydawania Przewagi i bez zużywania Ruchu ani Akcji. Roje mają cechę Odporność na Psychologię (chyba że MG zdecyduje inaczej). Można czynić od tego pewne wyjątki — na przykład cechę Strachliwy (Ogień). Kiedy Rój trafia cel, uruchamia zasadę Morderczego Ciosu (Deathblow). Próby ostrzelania Roju otrzymują +40 do trafienia. Roje ignorują zasady Przewagi Liczebnej oraz zasady walki wynikające z cechy Rozmiar.\nZabicie Roju Kiedy Rój zostanie sprowadzony do 0 punktów Żywotności, nie ginie — jego pojedyncze osobniki zostają rozgromione, rozproszone lub rozpierzchają się na wszystkie strony.\nTyle maleńkich stworzonek Ogromne roje drobnych owadów, gryzoni czy gadów pojawiają się od czasu do czasu w całym szerokim świecie, siejąc wielkie zniszczenie, gdziekolwiek się pojawią. Poważniejsze plagi mogą oznaczać głód dla tysięcy ludzi. Roje żab, ropuch czy szczurów czasem przetaczają się przez wioski, wzbudzając wielki niepokój. Choć zwykle są zjawiskiem naturalnym, pojawienie się roju bywa też przypisywane plugawym czarom. Podczas gdy rój Małych lub większych stworzeń zbiera się jako grupa wielu osobników, roju Drobnych lub Niewielkich stworzonek — takich jak owady czy gady — nie można obrać za cel atakami Wręcz i Zasięgowymi ani Zaklęciami wymierzonymi w pojedynczy cel. Zwykłe ataki zabiją jedynie PS stworzonek — czyli PS x 10 owadów — zamiast odbierać punkty Żywotności. Takim rojom poważną krzywdę mogą wyrządzić jedynie ataki Obszarowe albo ataki żywiołów, takie jak ogień i woda.",
+    "source": "Bestiariusz 2.0 (zmieniona względem Podręcznika Głównego)",
+    "coreRules": "Roje to wielkie ilości tych samych stworów działających jak jeden. Rój liczy się jako jeden stwór, który ignoruje zasady efektów psychologicznych (patrz strona 190) i może ignorować zasady Związania walką, gdy \"konuje Ruch. Jeśli rój trafi przeciwnika, aktywuje zasadę Śmiertelny cios (nawet jeśli nie zabił przeciwnika — patrz strona 160). Wszyscy przeciwnicy Związani walką z rojem automatycznie otrzymują 1 Ranę pod koniec każdej Rundy, gdy rój opada na wszystko w pobliżu. Rój ma pięć razy więcej Zywotności niż normalny okaz danego stworzenia i dostaje +10 do Walki Wręcz. Wszelkie próby strzelania do roju mają premię +40 do trafienia. Rój ignoruje wszelkie zasady Rozmiaru stworzeń.",
+    "rules": "Roje to wielkie liczby tych samych stworzeń działających jak jedno. Choć roje składają się zazwyczaj ze stworzeń takich jak owady, szczury czy inne drobne szkodniki (na przykład Nurglingi), zasady Roju mogą też służyć do abstrakcyjnego przedstawienia większych grup jednostek o zbliżonych zdolnościach — na przykład regimentu żołnierzy. Rój porusza się tak, jakby był pojedynczą istotą o Rozmiarze wskazanym w nawiasie (WFRP4 s. 341). Na potrzeby gry minimalny rozmiar roju to Przeciętny — zajmuje on mniej więcej tyle miejsca, co Człowiek, Krasnolud albo Elf. W kategoriach bitewnych oznacza to pojedynczy kwadrat albo obszar 2x2 metry. Taką przestrzeń może zajmować około 5 Małych stworzeń, około 20 Niewielkich stworzonek albo tysiąc gryzących owadów. Nie ma górnej granicy rozmiaru roju: rój owadów może pokrywać całe mile terenu, choć takie zjawisko wykracza poza zakres cechy Rój.\nKorekta profilu Zależnie od rozmiaru roje otrzymują następujące poprawki do standardowego profilu. Roje Przeciętnego rozmiaru zyskują +10 do następujących atrybutów: Walka Wręcz, Siła, Wytrzymałość, Siła Woli — oraz -5 do Zwinności. Duże roje zyskują +20 i -10 Zwinności, Ogromne roje zyskują +30 i -15 Zwinności, a Monstrualne roje +40 i -20 Zwinności. Skoryguj Cechy ataków Roju o zwiększoną Siłę. Następnie oblicz Żywotność, stosując zasady rozmiaru i powyższe poprawki profilu.\nZasady walki Roju Wszystkie stworzenia w promieniu dwóch metrów (1 kwadratu) od Roju uznaje się za Związane z nim walką. Rój może ignorować zasady Związania walką podczas swojego Ruchu. Wszyscy przeciwnicy Związani walką z Przeciętnym Rojem automatycznie tracą 1 punkt Żywotności na koniec każdej rundy. Zwiększ tę wartość do 2 dla Dużego, 3 dla Ogromnego i 4 dla Monstrualnego roju. Rój może wykonywać ataki przeciwko wszystkim sąsiadującym stworzeniom. Jeżeli Rój posiada opcjonalne Cechy ataków (Ugryzienie, Róg, Ogon itd.), może w swojej turze wykonać po jednym z każdego z nich jako Darmowy Atak, bez wydawania Przewagi i bez zużywania Ruchu ani Akcji. Roje mają cechę Odporność na Psychologię (chyba że MG zdecyduje inaczej). Można czynić od tego pewne wyjątki — na przykład cechę Strachliwy (Ogień). Kiedy Rój trafia cel, uruchamia zasadę Morderczego Ciosu (Deathblow). Próby ostrzelania Roju otrzymują +40 do trafienia. Roje ignorują zasady Przewagi Liczebnej oraz zasady walki wynikające z cechy Rozmiar.\nZabicie Roju Kiedy Rój zostanie sprowadzony do 0 punktów Żywotności, nie ginie — jego pojedyncze osobniki zostają rozgromione, rozproszone lub rozpierzchają się na wszystkie strony.\nTyle maleńkich stworzonek Ogromne roje drobnych owadów, gryzoni czy gadów pojawiają się od czasu do czasu w całym szerokim świecie, siejąc wielkie zniszczenie, gdziekolwiek się pojawią. Poważniejsze plagi mogą oznaczać głód dla tysięcy ludzi. Roje żab, ropuch czy szczurów czasem przetaczają się przez wioski, wzbudzając wielki niepokój. Choć zwykle są zjawiskiem naturalnym, pojawienie się roju bywa też przypisywane plugawym czarom. Podczas gdy rój Małych lub większych stworzeń zbiera się jako grupa wielu osobników, roju Drobnych lub Niewielkich stworzonek — takich jak owady czy gady — nie można obrać za cel atakami Wręcz i Zasięgowymi ani Zaklęciami wymierzonymi w pojedynczy cel. Zwykłe ataki zabiją jedynie PS stworzonek — czyli PS x 10 owadów — zamiast odbierać punkty Żywotności. Takim rojom poważną krzywdę mogą wyrządzić jedynie ataki Obszarowe albo ataki żywiołów, takie jak ogień i woda.",
+    "aliases": [
+      "Swarm"
+    ]
   },
   "Rzucanie Czarów (różne)": {
     "randomPool": false,
@@ -582,9 +649,14 @@
   },
   "Zionięcie +Obrażenia (typ)": {
     "randomPool": false,
-    "description": "Stworzenie posługuje się zionięciem jako potężną bronią. W swojej Turze, kosztem 2 Przewag, może aktywować Zionięcie jako Darmowy Atak. Wybierz 1 cel, który stworzenie widzi w promieniu 20 + Bonus z Wytrzymałości metrów. Trafione zostają wszystkie postacie wokół tego celu w promieniu tylu metrów, ile wynosi Bonus z Siły, podobnie jak wszystkie postacie znajdujące się między stworzeniem a celem. Przeprowadź Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym cełom). Każdy cel, który przegrał Test, otrzymuje trafienie zadające wskazaną wartość Obrażeń. Co więcej, jeśli przy Cesze Stworzenia wmieniony jest jeden z opisanych niżej typów zionięcia, zastosuj wskazane zasady. • Dym: Obszar wypełnia się dymem, który zasłania pole widzenia na tyle Rund, ile wynosi Bonus z Wytrzymałości. • Elektryczność: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Oszołomienie. • Kwas: Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń. • Ogień: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Podpalenie. • Trucizna: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Zatrucie. • Zimno: Cele dostają jeden Stan Oszołomiony za każde pełne 5 odniesionych Ran (minimalnie l). Stworzenie jest odporne na własne Zionięcie. Ten atak jest Magiczny.",
-    "source": "Podręcznik podstawowy",
-    "rules": "Stworzenie posługuje się zionięciem jako potężną bronią. W swojej Turze, kosztem 2 Przewag, może aktywować Zionięcie jako Darmowy Atak. Wybierz 1 cel, który stworzenie widzi w promieniu 20 + Bonus z Wytrzymałości metrów. Trafione zostają wszystkie postacie wokół tego celu w promieniu tylu metrów, ile wynosi Bonus z Siły, podobnie jak wszystkie postacie znajdujące się między stworzeniem a celem. Przeprowadź Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym celom). Każdy cel, który przegrał Test, otrzymuje trafienie zadające wskazaną wartość Obrażeń. Co więcej, jeśli przy Cesze Stworzenia wymieniony jest jeden z opisanych niżej typów zionięcia, zastosuj wskazane zasady. • Dym: Obszar wypełnia się dymem, który zasłania pole widzenia na tyle Rund, ile wynosi Bonus z Wytrzymałości. • Elektryczność: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Oszołomienie. • Kwas: Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń. • Ogień: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Podpalenie. • Trucizna: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Zatrucie. • Zimno: Cele dostają jeden Stan Oszołomiony za każde pełne 5 odniesionych Ran (minimalnie 1). Stworzenie jest odporne na własne Zionięcie. Ten atak jest Magiczny."
+    "description": "Stworzenie posługuje się zionięciem jako potężną bronią. W swojej Turze, kosztem 2 Przewag, może aktywować Zionięcie jako Darmowy Atak. Wybierz 1 cel, który stworzenie widzi w promieniu 20 + Bonus z Wytrzymałości metrów. Trafione zostają wszystkie postacie wokół tego celu w promieniu tylu metrów, ile wynosi Bonus z Siły, podobnie jak wszystkie postacie znajdujące się między stworzeniem a celem. Przeprowadź Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym celom). Każdy cel, który przegrał Test, otrzymuje trafienie zadające wskazaną wartość Obrażeń. Co więcej, jeśli przy Cesze Stworzenia wymieniony jest jeden z opisanych niżej typów zionięcia, zastosuj wskazane zasady. • Dym: Obszar wypełnia się dymem, który zasłania pole widzenia na tyle Rund, ile wynosi Bonus z Wytrzymałości. • Elektryczność: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Oszołomienie. • Kwas: Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń. • Ogień: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Podpalenie. • Trucizna: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Zatrucie. • Zimno: Cele dostają jeden Stan Oszołomiony za każde pełne 5 odniesionych Ran (minimalnie 1). Stworzenie jest odporne na własne Zionięcie. Ten atak jest Magiczny.\nBestiariusz 2.0: Zasada ta działa dokładnie tak jak Cecha Stworzenia Zianie (s. 338), z następującymi dodatkowymi zasadami: Zaraza: Wszelkie zadane w ten sposób utraty punktów Żywotności ignorują Pancerz. Cel musi zdać test Odporności albo nabawić się Ropiejącej Rany. Para: Wszelkie zadane w ten sposób utraty punktów Żywotności ignorują Punkty Pancerza oraz Bonus z Wytrzymałości. Obszar wypełnia się parą na 1k10 rund, nakładając +1 stan Oślepienie na czas jej utrzymywania się.",
+    "source": "Podręcznik podstawowy + Bestiariusz 2.0",
+    "rules": "Stworzenie posługuje się zionięciem jako potężną bronią. W swojej Turze, kosztem 2 Przewag, może aktywować Zionięcie jako Darmowy Atak. Wybierz 1 cel, który stworzenie widzi w promieniu 20 + Bonus z Wytrzymałości metrów. Trafione zostają wszystkie postacie wokół tego celu w promieniu tylu metrów, ile wynosi Bonus z Siły, podobnie jak wszystkie postacie znajdujące się między stworzeniem a celem. Przeprowadź Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym celom). Każdy cel, który przegrał Test, otrzymuje trafienie zadające wskazaną wartość Obrażeń. Co więcej, jeśli przy Cesze Stworzenia wymieniony jest jeden z opisanych niżej typów zionięcia, zastosuj wskazane zasady. • Dym: Obszar wypełnia się dymem, który zasłania pole widzenia na tyle Rund, ile wynosi Bonus z Wytrzymałości. • Elektryczność: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Oszołomienie. • Kwas: Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń. • Ogień: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Podpalenie. • Trucizna: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Zatrucie. • Zimno: Cele dostają jeden Stan Oszołomiony za każde pełne 5 odniesionych Ran (minimalnie 1). Stworzenie jest odporne na własne Zionięcie. Ten atak jest Magiczny.\nBestiariusz 2.0: Zasada ta działa dokładnie tak jak Cecha Stworzenia Zianie (s. 338), z następującymi dodatkowymi zasadami: Zaraza: Wszelkie zadane w ten sposób utraty punktów Żywotności ignorują Pancerz. Cel musi zdać test Odporności albo nabawić się Ropiejącej Rany. Para: Wszelkie zadane w ten sposób utraty punktów Żywotności ignorują Punkty Pancerza oraz Bonus z Wytrzymałości. Obszar wypełnia się parą na 1k10 rund, nakładając +1 stan Oślepienie na czas jej utrzymywania się.",
+    "coreRules": "Stworzenie posługuje się zionięciem jako potężną bronią. W swojej Turze, kosztem 2 Przewag, może aktywować Zionięcie jako Darmowy Atak. Wybierz 1 cel, który stworzenie widzi w promieniu 20 + Bonus z Wytrzymałości metrów. Trafione zostają wszystkie postacie wokół tego celu w promieniu tylu metrów, ile wynosi Bonus z Siły, podobnie jak wszystkie postacie znajdujące się między stworzeniem a celem. Przeprowadź Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym celom). Każdy cel, który przegrał Test, otrzymuje trafienie zadające wskazaną wartość Obrażeń. Co więcej, jeśli przy Cesze Stworzenia wymieniony jest jeden z opisanych niżej typów zionięcia, zastosuj wskazane zasady. • Dym: Obszar wypełnia się dymem, który zasłania pole widzenia na tyle Rund, ile wynosi Bonus z Wytrzymałości. • Elektryczność: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Oszołomienie. • Kwas: Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń. • Ogień: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Podpalenie. • Trucizna: Obrażenia ignorują Punkty Pancerza. Cele otrzymują Stan Zatrucie. • Zimno: Cele dostają jeden Stan Oszołomiony za każde pełne 5 odniesionych Ran (minimalnie 1). Stworzenie jest odporne na własne Zionięcie. Ten atak jest Magiczny.",
+    "aliases": [
+      "Breath",
+      "Zianie"
+    ]
   },
   "Zwierzęcy": {
     "randomPool": false,
@@ -645,8 +717,14 @@
   },
   "Bezmyślny": {
     "randomPool": false,
-    "description": "Stworzenie nie ma własnej woli ani rozumu: ignoruje zasady Psychologii i nie da się go przekonać ani zastraszyć.",
-    "source": "Warriors of Chaos (brak definicji w źródłach — opis roboczy)"
+    "description": "Stworzenie jest bezrozumne — kieruje nim wyłącznie prymitywny instynkt albo magiczny przymus. Nie posiada Inicjatywy, Inteligencji, Siły Woli ani Ogłady i nigdy ich nie testuje. Do obliczania Żywotności używa swojego Bonusu z Siły wszędzie tam, gdzie wymagany jest Bonus z Siły Woli. Ponieważ nie ma cechy Inicjatywa, w każdej rundzie działa zawsze jako ostatnie.",
+    "source": "Bestiariusz 2.0",
+    "coreRules": "Stworzenie nie ma własnej woli ani rozumu: ignoruje zasady Psychologii i nie da się go przekonać ani zastraszyć.",
+    "rules": "Stworzenie jest bezrozumne — kieruje nim wyłącznie prymitywny instynkt albo magiczny przymus. Nie posiada Inicjatywy, Inteligencji, Siły Woli ani Ogłady i nigdy ich nie testuje. Do obliczania Żywotności używa swojego Bonusu z Siły wszędzie tam, gdzie wymagany jest Bonus z Siły Woli. Ponieważ nie ma cechy Inicjatywa, w każdej rundzie działa zawsze jako ostatnie.",
+    "aliases": [
+      "Bezrozumny",
+      "Mindless"
+    ]
   },
   "Pochłonięcie": {
     "randomPool": false,
@@ -677,5 +755,185 @@
     "randomPool": false,
     "description": "Cecha widm z dodatku Wampiry (brak definicji w źródle) — zwykle traktowana jak Ochrona przed zwykłymi atakami.",
     "source": "Wampiry (nieoficjalny)"
+  },
+  "Płonący": {
+    "randomPool": false,
+    "description": "To stworzenie jest ulepione z żywego ognia! Każdy jego udany atak zadaje dodatkowo +1 stan Podpalenie.",
+    "rules": "To stworzenie jest ulepione z żywego ognia! Każdy jego udany atak zadaje dodatkowo +1 stan Podpalenie.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Ablaze"
+    ]
+  },
+  "Absorpcja": {
+    "randomPool": false,
+    "description": "Pod koniec rundy, jeżeli stworzenie ma wyższą Przewagę niż wszyscy związani z nim walką przeciwnicy, pochłania jednego przeciwnika o równym lub mniejszym Rozmiarze. Pochłonięta ofiara otrzymuje tyle stanów Pochwycenie, ile wynosi Bonus z Siły stworzenia, i jest traktowana, jakby znajdowała się w Zapasach. Pod koniec każdej rundy pochłonięta ofiara traci tyle punktów Żywotności, ile wynosi Bonus z Siły stworzenia; Punkty Pancerza ani Bonus z Wytrzymałości nie zmniejszają tej straty. Tyle samo punktów Żywotności stworzenie „uzdrawia” sobie. Jeżeli pochłonięta ofiara zginie, stworzenie wycofuje się, by przez kilka następnych dni trawić uwięzione w sobie zwłoki. Każdy atak, który trafi stworzenie, zadaje równą ilość Obrażeń pochłoniętej ofierze.",
+    "rules": "Pod koniec rundy, jeżeli stworzenie ma wyższą Przewagę niż wszyscy związani z nim walką przeciwnicy, pochłania jednego przeciwnika o równym lub mniejszym Rozmiarze. Pochłonięta ofiara otrzymuje tyle stanów Pochwycenie, ile wynosi Bonus z Siły stworzenia, i jest traktowana, jakby znajdowała się w Zapasach. Pod koniec każdej rundy pochłonięta ofiara traci tyle punktów Żywotności, ile wynosi Bonus z Siły stworzenia; Punkty Pancerza ani Bonus z Wytrzymałości nie zmniejszają tej straty. Tyle samo punktów Żywotności stworzenie „uzdrawia” sobie. Jeżeli pochłonięta ofiara zginie, stworzenie wycofuje się, by przez kilka następnych dni trawić uwięzione w sobie zwłoki. Każdy atak, który trafi stworzenie, zadaje równą ilość Obrażeń pochłoniętej ofierze.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Absorb"
+    ]
+  },
+  "Amorficzny": {
+    "randomPool": false,
+    "description": "Stworzenie jest bezkształtną, galaretowatą masą. Wszelkie utracone punkty Żywotności z Obrażeń innych niż od ognia, zimna lub magii zmniejsza o połowę. Ignoruje wszystkie Rany Krytyczne i można je zniszczyć jedynie sprowadzając do 0 punktów Żywotności skrajnym zimnem, ogniem lub magią. Jeżeli zostanie sprowadzone do 0 punktów Żywotności w jakikolwiek inny sposób, zapada w uśpienie na 1k10 rund, po czym regeneruje +1 punkt Żywotności. Amorficzne stworzenia stronią od skrajnych źródeł gorąca i zimna.",
+    "rules": "Stworzenie jest bezkształtną, galaretowatą masą. Wszelkie utracone punkty Żywotności z Obrażeń innych niż od ognia, zimna lub magii zmniejsza o połowę. Ignoruje wszystkie Rany Krytyczne i można je zniszczyć jedynie sprowadzając do 0 punktów Żywotności skrajnym zimnem, ogniem lub magią. Jeżeli zostanie sprowadzone do 0 punktów Żywotności w jakikolwiek inny sposób, zapada w uśpienie na 1k10 rund, po czym regeneruje +1 punkt Żywotności. Amorficzne stworzenia stronią od skrajnych źródeł gorąca i zimna.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Amorphous"
+    ]
+  },
+  "Wojownik": {
+    "randomPool": false,
+    "description": "Stworzenie jest z natury silne i agresywne albo zostało wyszkolone do walki. Otrzymuje +10 do Walki Wręcz, Siły i Inicjatywy.",
+    "rules": "Stworzenie jest z natury silne i agresywne albo zostało wyszkolone do walki. Otrzymuje +10 do Walki Wręcz, Siły i Inicjatywy.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Fighter"
+    ]
+  },
+  "Łatwopalny": {
+    "randomPool": false,
+    "description": "Czy to owinięte bandażami i płótnem, czy oblane oliwą, czy też szczególnie podatne na ogień z przyczyn magicznych bądź przyziemnych (jak choćby roślinna materia) — łatwopalne stworzenie otrzymuje maksymalną ilość obrażeń ze stanów Podpalenie i nie może usunąć żadnego stanu Podpalenie bez użycia wody.",
+    "rules": "Czy to owinięte bandażami i płótnem, czy oblane oliwą, czy też szczególnie podatne na ogień z przyczyn magicznych bądź przyziemnych (jak choćby roślinna materia) — łatwopalne stworzenie otrzymuje maksymalną ilość obrażeń ze stanów Podpalenie i nie może usunąć żadnego stanu Podpalenie bez użycia wody.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Flammable"
+    ]
+  },
+  "Złodziej Ciał": {
+    "randomPool": false,
+    "description": "Stworzenie — które musi posiadać cechę Demoniczny — może nosić skórę każdego zabitego przez siebie Człowieka. Co więcej, potrafi wcielić się w Postać noszonego ciała, z niesamowitą wprawą naśladując głos i maniery ofiary. Przygotowanie skóry zajmuje 1k10 rund, po czym można ją zakładać i zdejmować do woli, co zajmuje 1 rundę. Raz przygotowana skóra gnije tylko wtedy, gdy stworzenie umrze — ale można ją niszczyć zwykłymi środkami. Jeżeli stworzenie sobie tego życzy, może wyrwać się z noszonej skóry w przerażający sposób, zyskując na 1 rundę cechę Groza 1 — niszczy to jednak skórę, której nie da się już użyć ponownie. Osoby znające odgrywaną Postać mogą podjąć Daremny (–40) test Intuicji, by wyczuć, że coś jest nie w porządku — choć nie będą wiedziały, co dokładnie.",
+    "rules": "Stworzenie — które musi posiadać cechę Demoniczny — może nosić skórę każdego zabitego przez siebie Człowieka. Co więcej, potrafi wcielić się w Postać noszonego ciała, z niesamowitą wprawą naśladując głos i maniery ofiary. Przygotowanie skóry zajmuje 1k10 rund, po czym można ją zakładać i zdejmować do woli, co zajmuje 1 rundę. Raz przygotowana skóra gnije tylko wtedy, gdy stworzenie umrze — ale można ją niszczyć zwykłymi środkami. Jeżeli stworzenie sobie tego życzy, może wyrwać się z noszonej skóry w przerażający sposób, zyskując na 1 rundę cechę Groza 1 — niszczy to jednak skórę, której nie da się już użyć ponownie. Osoby znające odgrywaną Postać mogą podjąć Daremny (–40) test Intuicji, by wyczuć, że coś jest nie w porządku — choć nie będą wiedziały, co dokładnie.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Fleshthief"
+    ]
+  },
+  "Iluzja": {
+    "randomPool": false,
+    "description": "Stworzenie potrafi uformować w swojej linii wzroku iluzję naśladującą przedmiot lub żywą istotę; rozmiar iluzji jest ograniczony do 1–6 stóp. Mowy ani dźwięków nie da się odtworzyć. Kilka stworzeń może połączyć swoje sztuczki, by konstruować bardziej wymyślne iluzje. Stworzenie z talentem Zmysł Magii może dostrzec iluzję po zdaniu Trudnego (-10) testu Percepcji.",
+    "rules": "Stworzenie potrafi uformować w swojej linii wzroku iluzję naśladującą przedmiot lub żywą istotę; rozmiar iluzji jest ograniczony do 1–6 stóp. Mowy ani dźwięków nie da się odtworzyć. Kilka stworzeń może połączyć swoje sztuczki, by konstruować bardziej wymyślne iluzje. Stworzenie z talentem Zmysł Magii może dostrzec iluzję po zdaniu Trudnego (-10) testu Percepcji.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Illusion"
+    ]
+  },
+  "Odporność (Zwykłe Ataki)": {
+    "randomPool": false,
+    "description": "Stworzenie jest odporne na obrażenia — w tym Rany Krytyczne — od wszelkiej zwykłej broni. Nie dotyczy to obrażeń od Zaklęć, broni Posrebrzanej lub Magicznej ani od stworzeń z cechą Magiczny.",
+    "rules": "Stworzenie jest odporne na obrażenia — w tym Rany Krytyczne — od wszelkiej zwykłej broni. Nie dotyczy to obrażeń od Zaklęć, broni Posrebrzanej lub Magicznej ani od stworzeń z cechą Magiczny.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Immunity (Mundane Attacks)"
+    ]
+  },
+  "Pijawka": {
+    "randomPool": false,
+    "description": "Stworzenie żywi się krwią zranionych zwierząt. Kiedy uzyska udane Trafienie, przyczepia się do trafionej lokacji i od tej pory zadaje 1 utracony punkt Żywotności na rundę (ignorując modyfikatory). Stworzenie można oderwać udanym Przeciwstawnym testem Siły, ale wiąże się to z dodatkową utratą 1 punktu Żywotności i stanem +1 Krwawienie. Praktyczniejszą metodą jest przyłożenie do stworzenia ognia lub oliwy — wówczas odpadnie samo po oblanym teście Siły Woli.",
+    "rules": "Stworzenie żywi się krwią zranionych zwierząt. Kiedy uzyska udane Trafienie, przyczepia się do trafionej lokacji i od tej pory zadaje 1 utracony punkt Żywotności na rundę (ignorując modyfikatory). Stworzenie można oderwać udanym Przeciwstawnym testem Siły, ale wiąże się to z dodatkową utratą 1 punktu Żywotności i stanem +1 Krwawienie. Praktyczniejszą metodą jest przyłożenie do stworzenia ognia lub oliwy — wówczas odpadnie samo po oblanym teście Siły Woli.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Leech"
+    ]
+  },
+  "Aura Obłędu": {
+    "randomPool": false,
+    "description": "Na początku każdej rundy każda Postać w promieniu 20 metrów od stworzenia musi wykonać Przeciętny (+20) test Opanowania. Jeżeli test się nie powiedzie, rzuć w tabeli Pełzającego Obłędu. Przy Pechu Postać otrzymuje dodatkowo +1 Punkt Spaczenia (Umysł) — a co więcej, jeżeli Postać ulegnie spaczeniu, automatycznie skutkuje to Spaczeniem Umysłu. Tam, gdzie to istotne, efekty Aury Obłędu kumulują się.\n1k10 Pełzający Obłęd\n1-2 Tylko ostrożnie: W swojej następnej turze możesz wykonać albo Ruch, albo Akcję — nie obie rzeczy naraz. Potem ci przechodzi.\n3-4 Co tu się dzieje? Otrzymujesz stan Zaskoczenie.\n5-6 Mój plan działa! W swojej turze musisz wykonać te same działania, które podjąłeś w poprzedniej rundzie. Jeżeli z jakiegoś powodu nie możesz, musisz zrobić wszystko, by przygotować się do wykonania tych działań w następnej turze. Czas trwania: 1k10 rund. Kto powiedział, że mam paranoję? Zyskujesz talent Animozja (losowa Postać). Czas trwania: Trwały. Do mnie mówisz? Zyskujesz talent Nienawiść (losowa Postać). Czas trwania: Trwały. Zabij to! Zabij! Zabij! Zyskujesz talent Szał Bojowy. Czas trwania: Trwały.\n10 Tik, tik: Otrzymujesz jeden obłęd lub Spaczenie Umysłu. Czas trwania: Trwały.\nTrwały: Efekty te utrzymują się przez 1k10 minus Bonus z Siły Woli godzin (minimum 1 godzina). Po tym czasie wykonaj Przeciętny (+20) test Opanowania. Jeżeli się nie powiedzie, efekt staje się trwały. Trudność testu może się różnić, jeżeli Postać była wystawiona na działanie aury przez ograniczony bądź przedłużony czas — decyduje MG. Gracz może wydać punkt Bohaterstwa, by trwale pozbyć się długotrwałych efektów Aury Obłędu — choć wspomnienia przerażających stworzeń nigdy nie bledną. Postać może wydać 1 punkt Determinacji, by przez 1 rundę ignorować negatywne konsekwencje Aury Obłędu.",
+    "rules": "Na początku każdej rundy każda Postać w promieniu 20 metrów od stworzenia musi wykonać Przeciętny (+20) test Opanowania. Jeżeli test się nie powiedzie, rzuć w tabeli Pełzającego Obłędu. Przy Pechu Postać otrzymuje dodatkowo +1 Punkt Spaczenia (Umysł) — a co więcej, jeżeli Postać ulegnie spaczeniu, automatycznie skutkuje to Spaczeniem Umysłu. Tam, gdzie to istotne, efekty Aury Obłędu kumulują się.\n1k10 Pełzający Obłęd\n1-2 Tylko ostrożnie: W swojej następnej turze możesz wykonać albo Ruch, albo Akcję — nie obie rzeczy naraz. Potem ci przechodzi.\n3-4 Co tu się dzieje? Otrzymujesz stan Zaskoczenie.\n5-6 Mój plan działa! W swojej turze musisz wykonać te same działania, które podjąłeś w poprzedniej rundzie. Jeżeli z jakiegoś powodu nie możesz, musisz zrobić wszystko, by przygotować się do wykonania tych działań w następnej turze. Czas trwania: 1k10 rund. Kto powiedział, że mam paranoję? Zyskujesz talent Animozja (losowa Postać). Czas trwania: Trwały. Do mnie mówisz? Zyskujesz talent Nienawiść (losowa Postać). Czas trwania: Trwały. Zabij to! Zabij! Zabij! Zyskujesz talent Szał Bojowy. Czas trwania: Trwały.\n10 Tik, tik: Otrzymujesz jeden obłęd lub Spaczenie Umysłu. Czas trwania: Trwały.\nTrwały: Efekty te utrzymują się przez 1k10 minus Bonus z Siły Woli godzin (minimum 1 godzina). Po tym czasie wykonaj Przeciętny (+20) test Opanowania. Jeżeli się nie powiedzie, efekt staje się trwały. Trudność testu może się różnić, jeżeli Postać była wystawiona na działanie aury przez ograniczony bądź przedłużony czas — decyduje MG. Gracz może wydać punkt Bohaterstwa, by trwale pozbyć się długotrwałych efektów Aury Obłędu — choć wspomnienia przerażających stworzeń nigdy nie bledną. Postać może wydać 1 punkt Determinacji, by przez 1 rundę ignorować negatywne konsekwencje Aury Obłędu.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Maddening Aura"
+    ]
+  },
+  "Znak Tzeentcha": {
+    "randomPool": false,
+    "description": "Tzeentch, Pan Przemian, naznaczył to stworzenie fizycznym Stworzenie otrzymuje 1k10/3 Mutacji (zaokrąglając w górę), na przemian Umysłowych i Fizycznych. Stworzenie zyskuje umiejętność Etykieta (Wyznawcy Tzeentcha) i podlega Animozji wobec jawnych wyznawców Nurgla. Stworzenie samo jest również celem Animozji ze strony wyznawców Nurgla, dopóki Znak Tzeentcha jest widoczny. Dodatkowo stworzenie może wykupywać następujące Talenty tak, jakby były Rozwinięciami Profesji, za normalny koszt PD: Dostrojenie do Aethyru, Magia Tajemna (dowolna), Magia Chaosu (Tzeentcha), Szybkie Ręce, Instynktowna Dykcja, Zmysł Magiczny, Magia Prosta, Zmysł Magii, Mag Bojowy oraz Wiedźma!.",
+    "rules": "Tzeentch, Pan Przemian, naznaczył to stworzenie fizycznym Stworzenie otrzymuje 1k10/3 Mutacji (zaokrąglając w górę), na przemian Umysłowych i Fizycznych. Stworzenie zyskuje umiejętność Etykieta (Wyznawcy Tzeentcha) i podlega Animozji wobec jawnych wyznawców Nurgla. Stworzenie samo jest również celem Animozji ze strony wyznawców Nurgla, dopóki Znak Tzeentcha jest widoczny. Dodatkowo stworzenie może wykupywać następujące Talenty tak, jakby były Rozwinięciami Profesji, za normalny koszt PD: Dostrojenie do Aethyru, Magia Tajemna (dowolna), Magia Chaosu (Tzeentcha), Szybkie Ręce, Instynktowna Dykcja, Zmysł Magiczny, Magia Prosta, Zmysł Magii, Mag Bojowy oraz Wiedźma!.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Mark of Tzeentch"
+    ]
+  },
+  "Broń Naturalna": {
+    "randomPool": false,
+    "description": "Stworzenia z tą Cechą podchodzą do walki inaczej niż większość dwunożnych przeciwników. Uznaje się, że mają Przeciętny Zasięg broni. Naturalne ataki zyskują następujące zalety: Ugryzienie zyskuje Przebijającą; Pazur zyskuje Sieczną; Róg zyskuje Nadziewającą; a ataki Kopnięciem i Stratowaniem zyskują Ogłuszającą. Zalety te przepadają, jeżeli stworzenie jest mniejsze od swojego celu.",
+    "rules": "Stworzenia z tą Cechą podchodzą do walki inaczej niż większość dwunożnych przeciwników. Uznaje się, że mają Przeciętny Zasięg broni. Naturalne ataki zyskują następujące zalety: Ugryzienie zyskuje Przebijającą; Pazur zyskuje Sieczną; Róg zyskuje Nadziewającą; a ataki Kopnięciem i Stratowaniem zyskują Ogłuszającą. Zalety te przepadają, jeżeli stworzenie jest mniejsze od swojego celu.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Natural Weapons"
+    ]
+  },
+  "Paraliż (Czas trwania)": {
+    "randomPool": false,
+    "description": "Stworzeniu trafionemu paraliżującym atakiem przysługuje Przeciwstawny test Siły Woli, by mu się oprzeć. Porażka oznacza, że postać cierpi efekty stanu Utrata przytomności — pozostaje jednak w pełni przytomna i świadoma tego, co się dzieje. Paraliż trwa PS z Testu Przeciwstawnego rund, minut lub godzin — zależnie od Czasu trwania podanego przy stworzeniu.",
+    "rules": "Stworzeniu trafionemu paraliżującym atakiem przysługuje Przeciwstawny test Siły Woli, by mu się oprzeć. Porażka oznacza, że postać cierpi efekty stanu Utrata przytomności — pozostaje jednak w pełni przytomna i świadoma tego, co się dzieje. Paraliż trwa PS z Testu Przeciwstawnego rund, minut lub godzin — zależnie od Czasu trwania podanego przy stworzeniu.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Paralysis"
+    ]
+  },
+  "Człapiący": {
+    "randomPool": false,
+    "description": "Stworzenie jest albo tak masywne, albo tak niefortunnie zbudowane, że szybki ruch nie wchodzi w grę. Nie może poruszać się szybciej niż swoim tempem Marszu.",
+    "rules": "Stworzenie jest albo tak masywne, albo tak niefortunnie zbudowane, że szybki ruch nie wchodzi w grę. Nie może poruszać się szybciej niż swoim tempem Marszu.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Shambling"
+    ]
+  },
+  "Rozdzielenie": {
+    "randomPool": false,
+    "description": "Jeżeli stworzenie otrzyma Ranę Krytyczną albo straci wszystkie punkty Żywotności, rozdziela się na pół, a jego miejsce zajmują dwa Błękitne Horrory, które wydzierają się z pierwotnego stworzenia w tryskającym wirze skrzącej się, magicznej energii. Oba Błękitne Horrory są nietknięte.",
+    "rules": "Jeżeli stworzenie otrzyma Ranę Krytyczną albo straci wszystkie punkty Żywotności, rozdziela się na pół, a jego miejsce zajmują dwa Błękitne Horrory, które wydzierają się z pierwotnego stworzenia w tryskającym wirze skrzącej się, magicznej energii. Oba Błękitne Horrory są nietknięte.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Split"
+    ]
+  },
+  "Ponowne Rozdzielenie": {
+    "randomPool": false,
+    "description": "Jeżeli stworzenie otrzyma Ranę Krytyczną albo straci wszystkie punkty Żywotności, rozdziela się na pół, a jego miejsce zajmują dwa mniejsze Siarkowe Horrory, wybuchające płomieniami z rozpadającego się truchła martwego Błękitnego Horroru. Siarkowe Horrory poruszają się jak jedno i wyłaniają się bez ran.",
+    "rules": "Jeżeli stworzenie otrzyma Ranę Krytyczną albo straci wszystkie punkty Żywotności, rozdziela się na pół, a jego miejsce zajmują dwa mniejsze Siarkowe Horrory, wybuchające płomieniami z rozpadającego się truchła martwego Błękitnego Horroru. Siarkowe Horrory poruszają się jak jedno i wyłaniają się bez ran.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Split Again"
+    ]
+  },
+  "Uparty": {
+    "randomPool": false,
+    "description": "Ta Cecha przydaje się zazwyczaj krnąbrnym wierzchowcom i stworzeniom. Stworzenie otrzymuje +20 do Siły Woli i wymaga Przeciwstawnego testu Jeździectwa lub Powożenia/Siły Woli za każdym razem, gdy jeździec albo woźnica chce je okiełznać. Jeżeli test się nie powiedzie, zwierzę staje w miejscu jak wryte i odmawia dalszej drogi. Można je skłonić do ruszenia naprzód udanym Przeciwstawnym testem Jeździectwa lub Powożenia/Siły Woli albo Przeciwstawnym testem Oswajania/Siły Woli, jeżeli ktoś prowadzi je za uzdę. W obu przypadkach nie porusza się szybciej niż połową tempa Marszu.",
+    "rules": "Ta Cecha przydaje się zazwyczaj krnąbrnym wierzchowcom i stworzeniom. Stworzenie otrzymuje +20 do Siły Woli i wymaga Przeciwstawnego testu Jeździectwa lub Powożenia/Siły Woli za każdym razem, gdy jeździec albo woźnica chce je okiełznać. Jeżeli test się nie powiedzie, zwierzę staje w miejscu jak wryte i odmawia dalszej drogi. Można je skłonić do ruszenia naprzód udanym Przeciwstawnym testem Jeździectwa lub Powożenia/Siły Woli albo Przeciwstawnym testem Oswajania/Siły Woli, jeżeli ktoś prowadzi je za uzdę. W obu przypadkach nie porusza się szybciej niż połową tempa Marszu.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Stubborn"
+    ]
+  },
+  "Połknięcie": {
+    "randomPool": false,
+    "description": "Kiedy stworzenie zada Obrażenia swoim głównym atakiem celowi równego lub mniejszego rozmiaru, próbuje jednocześnie połknąć bądź pochłonąć ofiarę Przeciwstawnym testem Siły. Jeżeli stworzenie wygra, ofiara otrzymuje stan Pochwycenie, zyskując +1 stan za każde 2 PS. Raz Pochwycona ofiara — o ile się nie wyrwie — może zostać połykana dalej: stworzenie używa swojej Akcji na kolejny Przeciwstawny test Siły. Jeżeli liczba stanów Pochwycenie ofiary przekroczy jej Bonus z Siły albo połykające stworzenie wygra Przeciwstawny test Siły o 6 lub więcej PS, ofiara zostaje połknięta bądź pochłonięta w całości — i wkrótce będzie martwa.",
+    "rules": "Kiedy stworzenie zada Obrażenia swoim głównym atakiem celowi równego lub mniejszego rozmiaru, próbuje jednocześnie połknąć bądź pochłonąć ofiarę Przeciwstawnym testem Siły. Jeżeli stworzenie wygra, ofiara otrzymuje stan Pochwycenie, zyskując +1 stan za każde 2 PS. Raz Pochwycona ofiara — o ile się nie wyrwie — może zostać połykana dalej: stworzenie używa swojej Akcji na kolejny Przeciwstawny test Siły. Jeżeli liczba stanów Pochwycenie ofiary przekroczy jej Bonus z Siły albo połykające stworzenie wygra Przeciwstawny test Siły o 6 lub więcej PS, ofiara zostaje połknięta bądź pochłonięta w całości — i wkrótce będzie martwa.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Swallow"
+    ]
+  },
+  "Ogień Tzeentcha": {
+    "randomPool": false,
+    "description": "Stworzenie jest spowite ogniem Tzeentcha, który raz po raz bucha z jego palców, paszcz albo płonących oczu. Wszystkie stworzenia tego samego rodzaju w pobliżu (np. wszystkie Różowe Horrory albo wszystkie Błękitne Horrory) łączą swoją moc. Jeden Horror zostaje wybrany na ognisko mocy (rzucającego) i może rzucić 1 Zaklęcie Tzeentcha: Różowe Horrory rzucają zaklęcie Różowy Ogień Tzeentcha, pozostałe stworzenia rzucają zaklęcie Błękitny Ogień Tzeentcha. Każde kolejne wspierające stworzenie dodaje +1 PS — do maksymalnie +9 PS — jako Akcję Darmową. Jeżeli grupa dziewięciu (lub wielokrotności dziewięciu) stworzeń posiada cechę Ogień Tzeentcha, wszystkie stworzenia łączą swoje siły i zamiast tego rzucają zaklęcie Ognista Burza Tzeentcha.",
+    "rules": "Stworzenie jest spowite ogniem Tzeentcha, który raz po raz bucha z jego palców, paszcz albo płonących oczu. Wszystkie stworzenia tego samego rodzaju w pobliżu (np. wszystkie Różowe Horrory albo wszystkie Błękitne Horrory) łączą swoją moc. Jeden Horror zostaje wybrany na ognisko mocy (rzucającego) i może rzucić 1 Zaklęcie Tzeentcha: Różowe Horrory rzucają zaklęcie Różowy Ogień Tzeentcha, pozostałe stworzenia rzucają zaklęcie Błękitny Ogień Tzeentcha. Każde kolejne wspierające stworzenie dodaje +1 PS — do maksymalnie +9 PS — jako Akcję Darmową. Jeżeli grupa dziewięciu (lub wielokrotności dziewięciu) stworzeń posiada cechę Ogień Tzeentcha, wszystkie stworzenia łączą swoje siły i zamiast tego rzucają zaklęcie Ognista Burza Tzeentcha.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Tzeentch's Fire"
+    ]
+  },
+  "Broń ze Spaczenia": {
+    "randomPool": false,
+    "description": "Spaczeń to materia Chaosu, która przybrała namacalną postać — a jego obecność jest głęboko plugawiąca. Broń wykonana ze spaczenia lub go wykorzystująca często mutuje i deprawuje swoje cele. Atak taką bronią ma cechy Spaczenie (Umiarkowane) oraz Magiczny.",
+    "rules": "Spaczeń to materia Chaosu, która przybrała namacalną postać — a jego obecność jest głęboko plugawiąca. Broń wykonana ze spaczenia lub go wykorzystująca często mutuje i deprawuje swoje cele. Atak taką bronią ma cechy Spaczenie (Umiarkowane) oraz Magiczny.",
+    "source": "Bestiariusz 2.0",
+    "aliases": [
+      "Warpstone Weapon"
+    ]
   }
 }
