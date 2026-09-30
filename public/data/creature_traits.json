@@ -251,7 +251,7 @@
     "randomPool": false,
     "description": "stworzenie nie jest całkiem pozbawione samoświadomości (a zatem nie ma cechy Zwierzęcy), jest głupie.Jeśli znajduje się w pobliżu dowolnych sojuszników, którzy nie mają cechy Giupi, stwór prowadzony jest przez sojuszników i nic się nie dzieje. W innym przypadku stwór musi zdać Łatwy (+40) Test na początku każdej Rundy, inaczxj staje się bardzo zdewrientowany.Jeśli coś takiego nastąpi, stwór zacznie się ślinić, może usiądzie w miejscu albo będzie dłubał w nosie. Niewiele z niego pożytku i w tej Turze ff•aci Ruch oraz Akcję.",
     "source": "Podręcznik podstawowy",
-    "rules": "Chociaż stworzenie nie jest całkiem pozbawione samoświadomości (a zatem nie ma cechy Zwierzęcy), jest głupie. Jeśli znajduje się w pobliżu dowolnych sojuszników, którzy nie mają cechy Głupi, stwór prowadzony jest przez sojuszników i nic się nie dzieje. W innym przypadku stwór musi zdać Łatwy (+40) Test Inteligencji na początku każdej Rundy, inaczej staje się bardzo zdezorientowany. Jeśli coś takiego nastąpi, stwór zacznie się ślinić, może usiądzie w miejscu albo będzie dłubał w nosie. Niewiele z niego pożytku i w tej Turze traci Ruch oraz Akcję. ===== STRONA 340 ===== Groza (wartość) Stworzenie w sposób nadnaturalny wzbudza mrożącą krew w żyłach Grozę w innych istotach. Poziom Grozy równy jest podanej wartości. Patrz: strona 190."
+    "rules": "Chociaż stworzenie nie jest całkiem pozbawione samoświadomości (a zatem nie ma cechy Zwierzęcy), jest głupie. Jeśli znajduje się w pobliżu dowolnych sojuszników, którzy nie mają cechy Głupi, stwór prowadzony jest przez sojuszników i nic się nie dzieje. W innym przypadku stwór musi zdać Łatwy (+40) Test Inteligencji na początku każdej Rundy, inaczej staje się bardzo zdezorientowany. Jeśli coś takiego nastąpi, stwór zacznie się ślinić, może usiądzie w miejscu albo będzie dłubał w nosie. Niewiele z niego pożytku i w tej Turze traci Ruch oraz Akcję."
   },
   "Groza (wartość)": {
     "randomPool": false,
@@ -343,7 +343,7 @@
     "randomPool": false,
     "description": "Stworzenie jest całkowicie niewrażliwe na określonego rodzaju Obrażenia, takie jak od trucizny, magii lub elektryczności. Wszelkie Obrażenia tego rodzaju, włącznie z Ranami Krytycznymi, są ignorowane.",
     "source": "Podręcznik podstawowy",
-    "rules": "Stworzenie jest całkowicie niewrażliwe na określonego rodzaju Obrażenia, takie jak od trucizny, magii lub elektryczności. Wszelkie Obrażenia tego rodzaju, włącznie z Ranami Krytycznymi, są ignorowane. ===== STRONA 341 ===== Niewrażliwość na Psychologię Stworzenie jest odważne, nadzwyczajnie głupie albo po prostu dało się ponieść chwili. Dzięki temu zupełnie się nie boi. Ignoruje zasady Psychologii. Patrz: strona 190."
+    "rules": "Stworzenie jest całkowicie niewrażliwe na określonego rodzaju Obrażenia, takie jak od trucizny, magii lub elektryczności. Wszelkie Obrażenia tego rodzaju, włącznie z Ranami Krytycznymi, są ignorowane."
   },
   "Niewrażliwość na Psychologię": {
     "randomPool": false,
@@ -466,7 +466,7 @@
     "randomPool": false,
     "description": "Stworzenie dysponuje bronią dystansową. Broń zadaje podane Obrażenia, a jej zasięg w metrach podany jest w nawiasie.",
     "source": "Podręcznik podstawowy",
-    "rules": "Stworzenie dysponuje bronią dystansową. Broń zadaje podane Obrażenia, a jej zasięg w metrach podany jest w nawiasie. ===== STRONA 343 ===== Szał Bojowy Stworzenie może wpadać w Szał Bojowy. Patrz: strona 190."
+    "rules": "Stworzenie dysponuje bronią dystansową. Broń zadaje podane Obrażenia, a jej zasięg w metrach podany jest w nawiasie."
   },
   "Szał Bojowy": {
     "randomPool": false,
@@ -537,7 +537,7 @@
     "randomPool": false,
     "description": "Stworzenie potrafi bez wysiłku wspinać się po pionowych powierzchniach, a nawet poruszać się po suficie, gotowe opaść na niczego niespodziewającą się ofiarę. Porusza się z pełną Szybkością po dowolnej odpowiedniej powierzchni i automatycznie przechodzi wszystkie Testy Wspinaczki.",
     "source": "Podręcznik podstawowy",
-    "rules": "Stworzenie potrafi bez wysiłku wspinać się po pionowych powierzchniach, a nawet poruszać się po suficie, gotowe opaść na niczego niespodziewającą się ofiarę. Porusza się z pełną Szybkością po dowolnej odpowiedniej powierzchni i automatycznie przechodzi wszystkie Testy Wspinaczki. ===== STRONA 344 ===== Wymiot Stworzenie potrafi wyrzucać z siebie strumień żrących wymiocin, pokrywając przeciwników cuchnącym, na wpół strawionym śluzem. W swojej Turze, wydając 3 Przewagi, stworzenie może wykonać Wymiot jako Darmowy Atak. Stworzenie wybiera 1 cel, który widzi w promieniu tylu metrów, ile wynosi jego Bonus z Wytrzymałości, i wymiotuje. Trafione zostają także wszystkie cele w promieniu dwóch metrów od tego celu. Stworzenie przeprowadza Test Przeciwstawny Umiejętności Strzeleckie/Unik przeciwko wszystkim objętym efektem celom (jeden rzut stwora przeciwko wszystkim poszczególnym celom). Test jest zazwyczaj Łatwy (+40) dla wymiotującego stwora ze względu na bliski dystans oraz Wymagający (+0) dla przeciwników. Wszystkie cele, które przegrały, otrzymują trafienie z Obrażeniami równymi tyle, ile wynosi Bonus z Wytrzymałości +4 stwora, oraz dostają Stan Oszołomiony. Noszony przez objęte efektem postaci pancerze oraz wszelka broń dostają 1 punkt Uszkodzeń od kwasowych wymiocin.",
+    "rules": "Stworzenie potrafi bez wysiłku wspinać się po pionowych powierzchniach, a nawet poruszać się po suficie, gotowe opaść na niczego niespodziewającą się ofiarę. Porusza się z pełną Szybkością po dowolnej odpowiedniej powierzchni i automatycznie przechodzi wszystkie Testy Wspinaczki.",
     "aliases": [
       "Wallcrawler"
     ]

@@ -1241,7 +1241,7 @@
    "range": "Ty",
    "target": "Ty",
    "duration": "Premia z Siły Woli rund",
-   "description": "Rechoczesz maniakalnie i podskakujesz dookoła, trzaskając energią. Zyskujesz Cechę Stworzenia Dekoncentrujący. Liczysz się też jako dodatkowe stworzenie przy ustalaniu Przewagi Liczebnej. Podstępne dźganie Patrz WFRP4 Starter Set Adventure Book, s. 36.",
+   "description": "Rechoczesz maniakalnie i podskakujesz dookoła, trzaskając energią. Zyskujesz Cechę Stworzenia Dekoncentrujący. Liczysz się też jako dodatkowe stworzenie przy ustalaniu Przewagi Liczebnej.",
    "source": "Grimuar (nieoficjalny)",
    "page": 51
   },
@@ -1285,7 +1285,7 @@
    "range": "Siła Woli metrów",
    "target": "Premia z Ogłady Wrogów",
    "duration": "Premia z Siły Woli rund",
-   "description": "Skupiasz złość wszystkich zielonoskórych sojuszników w zasięgu na obranych wrogach, przemieniając ją w paskudną klątwę. Wszystkie cele natychmiast zyskują Cechę Stworzenia Lęk (Zielonoskórzy). Pobliscy zielonoskórzy sojusznicy wykorzystają swoją Turę, by zaszarżować na jeden z celów, nawet jeśli musieliby wycofać się z walki. Każdy Zielonoskóry atakujący obranego wroga zyskuje +1 Przewagi na początku swojej Tury. Swędząca udręka Patrz WFRP4 Starter Set Adventure Book, s. 36.",
+   "description": "Skupiasz złość wszystkich zielonoskórych sojuszników w zasięgu na obranych wrogach, przemieniając ją w paskudną klątwę. Wszystkie cele natychmiast zyskują Cechę Stworzenia Lęk (Zielonoskórzy). Pobliscy zielonoskórzy sojusznicy wykorzystają swoją Turę, by zaszarżować na jeden z celów, nawet jeśli musieliby wycofać się z walki. Każdy Zielonoskóry atakujący obranego wroga zyskuje +1 Przewagi na początku swojej Tury.",
    "source": "Grimuar (nieoficjalny)",
    "page": 50
   },
@@ -2176,7 +2176,7 @@
    "range": "Siła Woli metrów",
    "target": "Obszar (Premia z Siły Woli metrów)",
    "duration": "Premia z Siły Woli rund",
-   "description": "Przyzywasz ohydnie cuchnący podmuch zimna, który przenika wszelkie ubrania i zbroje, a towarzyszą mu upiorne jęki, obłąkańczy śmiech oraz inne dźwięki śmierci i majaczenia. Chmura posiada Cechę Stworzenia Groza (1). Wszystkie żywe stworzenia w Obszarze muszą wykonać Test zarażenia Zgnilizną Nurgla. Poświęcając swoją Akcję w każdej Rundzie, możesz spróbować zdać Przeciętny (+20) Test Splatania Magii, by przesunąć chmurę o odległość do swojego tempa marszu. W przeciwnym razie wiatr przesunie się o 1k10 metrów w losowym kierunku (użyj tabeli Rozrzutu z WFRP4 s. 163). Wzmocnienie: Za każde +2 PS możesz utrudnić Test zarażenia o jeden stopień (czyli z Przeciętnego na Wymagający). Za każde +3 PS możesz dodać 1 do poziomu Grozy chmury. Odsłonięcie wewnętrznego piękna Patrz Rough Nights and Hard Days, s. 52.",
+   "description": "Przyzywasz ohydnie cuchnący podmuch zimna, który przenika wszelkie ubrania i zbroje, a towarzyszą mu upiorne jęki, obłąkańczy śmiech oraz inne dźwięki śmierci i majaczenia. Chmura posiada Cechę Stworzenia Groza (1). Wszystkie żywe stworzenia w Obszarze muszą wykonać Test zarażenia Zgnilizną Nurgla. Poświęcając swoją Akcję w każdej Rundzie, możesz spróbować zdać Przeciętny (+20) Test Splatania Magii, by przesunąć chmurę o odległość do swojego tempa marszu. W przeciwnym razie wiatr przesunie się o 1k10 metrów w losowym kierunku (użyj tabeli Rozrzutu z WFRP4 s. 163). Wzmocnienie: Za każde +2 PS możesz utrudnić Test zarażenia o jeden stopień (czyli z Przeciętnego na Wymagający). Za każde +3 PS możesz dodać 1 do poziomu Grozy chmury.",
    "source": "Grimuar (nieoficjalny)",
    "page": 33
   },
@@ -2891,7 +2891,7 @@
    "range": "Dotyk",
    "target": "Specjalny",
    "duration": "Premia z Siły Woli dni",
-   "description": "Dotykasz pojedynczych drzwi, wrót, skrzyni albo podobnego przedmiotu lub konstrukcji i czynisz je fizycznie twardszymi oraz odporniejszymi na uszkodzenia. Zwiększ Premię z Wytrzymałości przedmiotu o 1, a jego Żywotność o 2. Patrz Enemy in Shadows",
+   "description": "Dotykasz pojedynczych drzwi, wrót, skrzyni albo podobnego przedmiotu lub konstrukcji i czynisz je fizycznie twardszymi oraz odporniejszymi na uszkodzenia. Zwiększ Premię z Wytrzymałości przedmiotu o 1, a jego Żywotność o 2.",
    "source": "Grimuar (nieoficjalny)",
    "page": 9
   },
@@ -3056,7 +3056,7 @@
    "range": "Dotyk",
    "target": "1",
    "duration": "Natychmiastowy",
-   "description": "Twój dotyk usuwa z celu stan Zatrucie. Ukojenie Patrz Nieoficjalny Grimuar, s. 8.",
+   "description": "Twój dotyk usuwa z celu stan Zatrucie.",
    "source": "Grimuar (nieoficjalny)",
    "page": 22
   },
@@ -3628,7 +3628,7 @@
    "range": "Ty",
    "target": "Ty",
    "duration": "Premia z Siły Woli godzin",
-   "description": "Twój duch opuszcza ciało, które traci 1k10 punktów Żywotności i zyskuje Stan Utrata Przytomności, niemożliwy do usunięcia, dopóki dusza doń nie wróci. Musisz połączyć się ze swoim ciałem, zanim zaklęcie się skończy, inaczej ciało w końcu umrze, a Ty na zawsze pozostaniesz błąkającym się duchem. W postaci ducha zyskujesz Cechy Stworzenia Eteryczny oraz Latanie (Siła Woli). Nie możesz mówić i jesteś niewidzialny dla każdego, kto nie ma Talentu Percepcja Magiczna; posiadający go musi zdać Przeciętny (+20) Test Percepcji, by Cię dostrzec. Nie możesz atakować innych, a oni nie mogą atakować Ciebie inaczej niż środkami magicznymi. Jeśli zetkniesz się z żywym ciałem, możesz spróbować zdać Wymagający (+0) Test Splatania Magii, by przywołać uroki Slaanesha. Jeśli Test się powiedzie, zdołasz pobudzić zmysły swojej ofiary, choć ta nie może Cię zobaczyć, poczuć, powąchać, posmakować ani usłyszeć. W ten sposób możesz wysysać jej duszę i wzmacniać własną. Za każdą godzinę, którą spędzisz, rozkoszując śpiącą ofiarę, traci ona 1k10 punktów Żywotności i zyskuje 1 punkt Zepsucia Psychicznego z powodu bólu i rozkoszy. Jeśli ofiara nie śpi, przysługuje jej Łączony Test Odporności/Opanowania, by oprzeć się odpowiednio utracie Żywotności i zyskaniu Zepsucia. Jeśli obie strony Testu się powiodą albo jeden z Testów będzie Krytyczny, ofiara Cię odpycha i nie możesz już próbować jej uwieść. Przytomna ofiara, na którą działają Twoje uroki, może normalnie zajmować się swoimi sprawami, ale będzie odczuwać dziwne doznania i wydawać się osobliwa dla postronnych. Gdy wrócisz do swojego ciała, zsumuj w jeden wynik wszystkie punkty Żywotności i punkty Zepsucia, które spowodowałeś. Odzyskujesz tyle punktów Żywotności, co może wynieść Cię ponad Twoje maksimum. Zachowujesz tę nadwyżkę Żywotności, dopóki jej w jakiś sposób nie stracisz. Nigdy jednak nie możesz mieć więcej punktów Żywotności, niż wynosi Twoja cecha Siła Woli. Uwaga: Zamieściłem to zaklęcie — na razie — ponieważ jest klimatyczne i pasuje do realiów świata. Zadbaj jednak o wyczucie wobec reakcji swoich Graczy na taki materiał. Ważniejsze jest, by wszyscy dobrze się bawili, niż by kogokolwiek urazić kontrowersyjnością mrocznej i niebezpiecznej treści.",
+   "description": "Twój duch opuszcza ciało, które traci 1k10 punktów Żywotności i zyskuje Stan Utrata Przytomności, niemożliwy do usunięcia, dopóki dusza doń nie wróci. Musisz połączyć się ze swoim ciałem, zanim zaklęcie się skończy, inaczej ciało w końcu umrze, a Ty na zawsze pozostaniesz błąkającym się duchem. W postaci ducha zyskujesz Cechy Stworzenia Eteryczny oraz Latanie (Siła Woli). Nie możesz mówić i jesteś niewidzialny dla każdego, kto nie ma Talentu Percepcja Magiczna; posiadający go musi zdać Przeciętny (+20) Test Percepcji, by Cię dostrzec. Nie możesz atakować innych, a oni nie mogą atakować Ciebie inaczej niż środkami magicznymi. Jeśli zetkniesz się z żywym ciałem, możesz spróbować zdać Wymagający (+0) Test Splatania Magii, by przywołać uroki Slaanesha. Jeśli Test się powiedzie, zdołasz pobudzić zmysły swojej ofiary, choć ta nie może Cię zobaczyć, poczuć, powąchać, posmakować ani usłyszeć. W ten sposób możesz wysysać jej duszę i wzmacniać własną. Za każdą godzinę, którą spędzisz, rozkoszując śpiącą ofiarę, traci ona 1k10 punktów Żywotności i zyskuje 1 punkt Zepsucia Psychicznego z powodu bólu i rozkoszy. Jeśli ofiara nie śpi, przysługuje jej Łączony Test Odporności/Opanowania, by oprzeć się odpowiednio utracie Żywotności i zyskaniu Zepsucia. Jeśli obie strony Testu się powiodą albo jeden z Testów będzie Krytyczny, ofiara Cię odpycha i nie możesz już próbować jej uwieść. Przytomna ofiara, na którą działają Twoje uroki, może normalnie zajmować się swoimi sprawami, ale będzie odczuwać dziwne doznania i wydawać się osobliwa dla postronnych. Gdy wrócisz do swojego ciała, zsumuj w jeden wynik wszystkie punkty Żywotności i punkty Zepsucia, które spowodowałeś. Odzyskujesz tyle punktów Żywotności, co może wynieść Cię ponad Twoje maksimum. Zachowujesz tę nadwyżkę Żywotności, dopóki jej w jakiś sposób nie stracisz. Nigdy jednak nie możesz mieć więcej punktów Żywotności, niż wynosi Twoja cecha Siła Woli.",
    "source": "Grimuar (nieoficjalny)",
    "page": 35
   },
@@ -3639,7 +3639,7 @@
    "range": "Ty",
    "target": "Ty",
    "duration": "Premia z Siły Woli minut",
-   "description": "Stajesz się tak lekki jak kawałek drewna balsa, dzięki czemu możesz stąpać po powierzchni cieczy — wody, ścieków czy oleju — jakby były stałym gruntem. Piszczenie Poziom Zaklęcia: 12 Zasięg: Ty Cel: Obszar (Siła Woli metrów) Czas: Premia z Siły Woli godzin Uwalniasz sieć obłędu ze Spaczenia, wypaczając umysły wszystkich w Obszarze. Wszystkie humanoidy niebędące Skavenami w zasięgu muszą zdać Wymagający (+0) Test Opanowania, inaczej stoczą się do poziomu bezmyślnej, szczuropodobnej hordy, instynktownie pomagającej wszystkim Skavenom, a Tobie w szczególności. Gromadzą się wokół Ciebie jako przyboczni, wykonują Twoje proste polecenia i atakują Twoich wrogów rękami oraz zębami. Cele tracą zdolność mowy i porozumiewają się gestami i szczurzym piskiem, od którego zaklęcie wzięło swoją nazwę. Gdy zaklęcie się kończy, cele rozpierzchają się i uciekają, wracając do normalnego stanu w ciągu 1k10 minut. Zyskują Stan Zmęczenie i muszą wykonać Test na Zepsucie (Poważne).",
+   "description": "Stajesz się tak lekki jak kawałek drewna balsa, dzięki czemu możesz stąpać po powierzchni cieczy — wody, ścieków czy oleju — jakby były stałym gruntem.",
    "source": "Grimuar (nieoficjalny)",
    "page": 42
   },
@@ -4508,7 +4508,7 @@
    "range": "Siła Woli metrów",
    "target": "Obszar (Premia z Siły Woli metrów)",
    "duration": "Premia z Siły Woli rund",
-   "description": "Przemieniasz Dhar w mrożącą dusze wichurę, która przenika wszystkie cele chłodem do szpiku kości. Każdy objęty Obszarem traci 1k10 + Premia z Siły Woli punktów Żywotności, zmodyfikowanych przez Premię z Wytrzymałości (minimum 1). Za każde pełne 5 utraconych punktów Żywotności cel zyskuje +1 Stan Oszołomienie. Efekty te działają w każdej Rundzie, dopóki zaklęcie trwa. Możesz poświęcić swoją Akcję, by zdać Przeciętny (+20) Test Splatania Magii i przesunąć wicher o 1k10+2 metry w wybranym przez siebie kierunku. Wzmocnienie: Za każde +2 PS możesz zwiększyć Obrażenia o +1. Demoniczne oblicze Patrz Enemy in Shadows Companion, s. 79.",
+   "description": "Przemieniasz Dhar w mrożącą dusze wichurę, która przenika wszystkie cele chłodem do szpiku kości. Każdy objęty Obszarem traci 1k10 + Premia z Siły Woli punktów Żywotności, zmodyfikowanych przez Premię z Wytrzymałości (minimum 1). Za każde pełne 5 utraconych punktów Żywotności cel zyskuje +1 Stan Oszołomienie. Efekty te działają w każdej Rundzie, dopóki zaklęcie trwa. Możesz poświęcić swoją Akcję, by zdać Przeciętny (+20) Test Splatania Magii i przesunąć wicher o 1k10+2 metry w wybranym przez siebie kierunku. Wzmocnienie: Za każde +2 PS możesz zwiększyć Obrażenia o +1.",
    "source": "Grimuar (nieoficjalny)",
    "page": 31
   },
@@ -4519,7 +4519,7 @@
    "range": "Siła Woli metrów",
    "target": "1",
    "duration": "Natychmiastowy",
-   "description": "Przyzywasz z Eteru wrzący pocisk Dharu i ciskasz nim w swój cel. Liczy się to jako magiczny pocisk o Obrażeniach +5, który ignoruje Punkty Zbroi. Magia zadaje też potworny ból: Twój cel musi zdać Wymagający (+0) Test Odporności, inaczej zyskuje Stan Powalenie i 1 Stan Oszołomienie. Za każde +2 PS możesz utrudnić Test Odporności o jeden stopień (czyli z Wymagającego na Trudny) albo dodać +1 Stan Oszołomienie. Stworzenie z Cechą Nie Czuje Bólu automatycznie zdaje Test Odporności. Plugawy posłaniec Patrz Enemy in Shadows Companion, s. 80. Radosne oblicze Patrz Enemy in Shadows Companion, s. 80.",
+   "description": "Przyzywasz z Eteru wrzący pocisk Dharu i ciskasz nim w swój cel. Liczy się to jako magiczny pocisk o Obrażeniach +5, który ignoruje Punkty Zbroi. Magia zadaje też potworny ból: Twój cel musi zdać Wymagający (+0) Test Odporności, inaczej zyskuje Stan Powalenie i 1 Stan Oszołomienie. Za każde +2 PS możesz utrudnić Test Odporności o jeden stopień (czyli z Wymagającego na Trudny) albo dodać +1 Stan Oszołomienie. Stworzenie z Cechą Nie Czuje Bólu automatycznie zdaje Test Odporności.",
    "source": "Grimuar (nieoficjalny)",
    "page": 32
   },
@@ -4552,7 +4552,7 @@
    "range": "Siła Woli metrów",
    "target": "Obszar (Premia z Siły Woli metrów)",
    "duration": "Natychmiastowy",
-   "description": "Rzucasz na swój cel mroczne klątwy, a Twoja magia rozcina jego ciało niezliczonymi drobnymi ranami i szramami. Każdy w Obszarze zyskuje 1 + PS Stanów Krwawienie. Wszystkie cele muszą zdać Bardzo Trudny (-30) Test Odporności, inaczej zyskują 2 Stany Oszołomienie. Gdy wszystkie Stany Oszołomienie zostaną usunięte, każdy cel musi zdać Wymagający (+0) Test Opanowania , inaczej z powodu przeżytej traumy otrzymuje 1 punkt Zepsucia Psychicznego. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec. Obsesja Patrz Enemy in Shadows Companion, s. 80. Moc Chaosu Patrz Enemy in Shadows Companion, s. 80. Rozdarcie Eteru Patrz Enemy in Shadows Companion, s. 80-81. Niewolnik ciemności Patrz Enemy in Shadows Companion, s. 81.",
+   "description": "Rzucasz na swój cel mroczne klątwy, a Twoja magia rozcina jego ciało niezliczonymi drobnymi ranami i szramami. Każdy w Obszarze zyskuje 1 + PS Stanów Krwawienie. Wszystkie cele muszą zdać Bardzo Trudny (-30) Test Odporności, inaczej zyskują 2 Stany Oszołomienie. Gdy wszystkie Stany Oszołomienie zostaną usunięte, każdy cel musi zdać Wymagający (+0) Test Opanowania , inaczej z powodu przeżytej traumy otrzymuje 1 punkt Zepsucia Psychicznego. Zaklęcie to nie działa na stworzenia z Cechami Stworzenia Konstrukt, Demoniczny lub Ożywieniec.",
    "source": "Grimuar (nieoficjalny)",
    "page": 32
   },
@@ -4563,7 +4563,7 @@
    "range": "Specjalny",
    "target": "Obszar (Premia z Siły Woli metrów)",
    "duration": "Premia z Siły Woli rund",
-   "description": "Przywołujesz wirujący wokół Ciebie odmęt mieczy, które tną na oślep w poszukiwaniu krwi. Poświęcając swoją Akcję, możesz przesunąć tnące miecze w dowolnym kierunku o maksymalnie PS+1 metrów, zdając Wymagający (+0) Test Splatania Magii. Na koniec Twojej Tury burza mieczy wykonuje dwa Darmowe Ataki przeciwko wszystkim stworzeniom objętym Obszarem, z wyjątkiem Ciebie. Zamiast Umiejętności Broń Biała użyj swojej Umiejętności Splatania Magii. Magiczne miecze zadają Obrażenia równe Premii z Siły Woli+4 i przy udanym trafieniu nakładają +1 Stan Krwawienie . Wybuch zepsucia Patrz Enemy in Shadows Companion, s. 79. Pocisk zepsucia Patrz Enemy in Shadows Companion, s. 79.",
+   "description": "Przywołujesz wirujący wokół Ciebie odmęt mieczy, które tną na oślep w poszukiwaniu krwi. Poświęcając swoją Akcję, możesz przesunąć tnące miecze w dowolnym kierunku o maksymalnie PS+1 metrów, zdając Wymagający (+0) Test Splatania Magii. Na koniec Twojej Tury burza mieczy wykonuje dwa Darmowe Ataki przeciwko wszystkim stworzeniom objętym Obszarem, z wyjątkiem Ciebie. Zamiast Umiejętności Broń Biała użyj swojej Umiejętności Splatania Magii. Magiczne miecze zadają Obrażenia równe Premii z Siły Woli+4 i przy udanym trafieniu nakładają +1 Stan Krwawienie .",
    "source": "Grimuar (nieoficjalny)",
    "page": 31
   },
@@ -4585,7 +4585,7 @@
    "range": "Dotyk",
    "target": "1",
    "duration": "Premia z Inteligencji dni",
-   "description": "Gdy dotykasz swojego celu, przepływa przez Ciebie wola Tzeentcha, zsyłając drobną i uciążliwą widoczną mutację wedle Twojego wyboru. Cel wykonuje Łączony Wymagający (+0) Test Opanowania/Odporności. Jeśli nie zda Testu Opanowania, zyskuje punkt Zepsucia Psychicznego. Jeśli nie zda Testu Odporności, dotyka go wybrana mutacja. „Drobna” mutacja może być czymkolwiek — od trzeciego oka na czole, przez powiększone uszy, po dodatkowe palce u dłoni. Czymkolwiek by nie była, da premię +10 do jednej odpowiedniej Umiejętności lub Cechy, wedle uznania MG (przykłady znajdziesz w Tabeli Zepsucia Fizycznego ). Naznaczy jednak także cel jako stworzenie Chaosu, obniżając jego Ogładę o -30 w niektórych kręgach towarzyskich i być może zwracając uwagę Łowców Czarownic oraz rozwścieczonego motłochu. Błękitny ogień Tzeentcha Patrz Enemy in Shadows Companion, s. 82. Pocisk przemiany Patrz Enemy in Shadows Companion, s. 82. Dar Tzeentcha Patrz Enemy in Shadows Companion, s. 81. Uwaga: Zaklęcie to bywa też nazywane Podarunkiem Tzeentcha. Klątwa Tzeentcha Patrz Enemy in Shadows Companion, s. 82.",
+   "description": "Gdy dotykasz swojego celu, przepływa przez Ciebie wola Tzeentcha, zsyłając drobną i uciążliwą widoczną mutację wedle Twojego wyboru. Cel wykonuje Łączony Wymagający (+0) Test Opanowania/Odporności. Jeśli nie zda Testu Opanowania, zyskuje punkt Zepsucia Psychicznego. Jeśli nie zda Testu Odporności, dotyka go wybrana mutacja. „Drobna” mutacja może być czymkolwiek — od trzeciego oka na czole, przez powiększone uszy, po dodatkowe palce u dłoni. Czymkolwiek by nie była, da premię +10 do jednej odpowiedniej Umiejętności lub Cechy, wedle uznania MG (przykłady znajdziesz w Tabeli Zepsucia Fizycznego ). Naznaczy jednak także cel jako stworzenie Chaosu, obniżając jego Ogładę o -30 w niektórych kręgach towarzyskich i być może zwracając uwagę Łowców Czarownic oraz rozwścieczonego motłochu.",
    "source": "Grimuar (nieoficjalny)",
    "page": 36
   },
@@ -4607,7 +4607,7 @@
    "range": "Ty",
    "target": "Obszar (Premia z Inteligencji metrów)",
    "duration": "Inteligencja minut",
-   "description": "Dhar wylewa się z Ciebie, odmieniając wygląd otaczającego Cię obszaru. Przerażająca iluzja przemieszcza się wraz z Tobą. Drzewa wyginają się i wykrzywiają, kora układa się w szydercze lub wykrzywione grymasem twarze, w kamieniarce zdają się formować chwytające dłonie, a martwe przedmioty wyglądają, jakby przepełniał je złowrogi zamiar. Każdy, kto nie ma Talentu Percepcja Magiczna, a zobaczy obrany za cel obszar, musi zdać Wymagający (+0) Test Opanowania , inaczej podlega działaniu Grozy (1 + PS). Nieudany Test powoduje też liczbę punktów Zepsucia równą Twojej Premii z Siły Woli. Ci, którzy mają Percepcję Magiczną, mogą zdać Trudny (-10) Test Percepcji,by pojąć, że to iluzja, choć nie przejrzą przez nią. Różowy ogień Tzeentcha Patrz Enemy in Shadows Companion, s. 83. Purpurowa dłoń Patrz Enemy in Shadows Companion, s. 81. Wyczucie nici losu Patrz Enemy in Shadows Companion, s. 83. Przemiana Tzeentcha Patrz Enemy in Shadows Companion, s. 83.",
+   "description": "Dhar wylewa się z Ciebie, odmieniając wygląd otaczającego Cię obszaru. Przerażająca iluzja przemieszcza się wraz z Tobą. Drzewa wyginają się i wykrzywiają, kora układa się w szydercze lub wykrzywione grymasem twarze, w kamieniarce zdają się formować chwytające dłonie, a martwe przedmioty wyglądają, jakby przepełniał je złowrogi zamiar. Każdy, kto nie ma Talentu Percepcja Magiczna, a zobaczy obrany za cel obszar, musi zdać Wymagający (+0) Test Opanowania , inaczej podlega działaniu Grozy (1 + PS). Nieudany Test powoduje też liczbę punktów Zepsucia równą Twojej Premii z Siły Woli. Ci, którzy mają Percepcję Magiczną, mogą zdać Trudny (-10) Test Percepcji,by pojąć, że to iluzja, choć nie przejrzą przez nią.",
    "source": "Grimuar (nieoficjalny)",
    "page": 36
   },
@@ -4618,7 +4618,7 @@
    "range": "Premia z Inteligencji metrów",
    "target": "Specjalny",
    "duration": "Premia z Siły Woli minut",
-   "description": "Kierujesz kapryśną władzę Tzeentcha nad magią na pojedynczy magiczny artefakt w Zasięgu. Wykonaj Test Przeciwstawny Splatania Magii/Siły Woli przeciwko wybranemu przedmiotowi (patrz Unof­ficial Treasure & Artefacts). Jeśli wygrasz albo przedmiot nie ma wartości Siły Woli, traci on całą swoją magię i na czas trwania zaklęcia staje się zwykłym przedmiotem. Jeśli wygrasz o 6+ PS, efekt jest trwały. Odsysasz też część mocy magicznej dla siebie, by wykorzystać ją w zaklęciu w następnej Rundzie, tak jakbyś ją Splótł. Jest jej tyle, ile wyniósł PS Testu Przeciwstawnego. Jeśli przegrasz Test, przedmiot pozostaje nietknięty, a Ty zyskujesz PS punktów Zepsucia. Migotliwe płomienie kapryśnego losu Patrz Enemy in Shadows Companion, s. 82. Władca fortuny Patrz Enemy in Shadows Companion, s. 82. Ogień umysłu Patrz Enemy in Shadows Companion, s. 83.",
+   "description": "Kierujesz kapryśną władzę Tzeentcha nad magią na pojedynczy magiczny artefakt w Zasięgu. Wykonaj Test Przeciwstawny Splatania Magii/Siły Woli przeciwko wybranemu przedmiotowi (patrz Unof­ficial Treasure & Artefacts). Jeśli wygrasz albo przedmiot nie ma wartości Siły Woli, traci on całą swoją magię i na czas trwania zaklęcia staje się zwykłym przedmiotem. Jeśli wygrasz o 6+ PS, efekt jest trwały. Odsysasz też część mocy magicznej dla siebie, by wykorzystać ją w zaklęciu w następnej Rundzie, tak jakbyś ją Splótł. Jest jej tyle, ile wyniósł PS Testu Przeciwstawnego. Jeśli przegrasz Test, przedmiot pozostaje nietknięty, a Ty zyskujesz PS punktów Zepsucia.",
    "source": "Grimuar (nieoficjalny)",
    "page": 36
   },
@@ -6541,7 +6541,7 @@
    "range": "Rzucający",
    "target": "Specjalny",
    "duration": "Liczba minut równa Bonusowi z Siły Woli",
-   "description": "Nawiązujesz kontakt dalekiego zasięgu ze Zwierzęcym Kompanem (o ile go posiadasz). To zaklęcie zwiększa normalny 4-metrowy zasięg Telepatii Zwierzęcej i Cech Kompana (zob. Archiwa Imperium, tom III, strony 81– 82) do liczby mil równej Sile Woli. Kompani nie mogą przez tę więź dalekiego zasięgu wspomagać rzucania zaklęć. Mistrzowie Wiedzy korzystają z tego zaklęcia w połączeniu z Cechami Posłaniec i Dzielenie Zmysłów swego Kompana, by prowadzić zaawansowany rekonesans i łączność. Tygiel Światła PZ: 6 Zasięg: Dotyk Cel: 1 miecz Czas trwania: Liczba minut równa Bonusowi z Inteligencji Ofiara: Wydłużony Problematyczny (–10) Test Badań Naukowych do łącznej wartości 10 PS Przepełniasz miecz esencją Hoetha. Miecz liczy się jako magiczny i zyskuje Zaletę Szybka. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem +3 PS — Miecz może otrzymać Zaletę Obronna albo Precyzyjna. +5 PS — Miecz zyskuje własny umysł. Władający nim zyskuje po 1 poziomie w każdym z następujących Talentów: Zmysł Bitewny, Cios Odruchowy i Riposta. +7 PS — Jeśli zaklęcie zostanie rzucone podczas kucia miecza, nadane Zalety stają się trwałe. Dozwolona jest tylko jedna próba na miecz.",
+   "description": "Nawiązujesz kontakt dalekiego zasięgu ze Zwierzęcym Kompanem (o ile go posiadasz). To zaklęcie zwiększa normalny 4-metrowy zasięg Telepatii Zwierzęcej i Cech Kompana (zob. Archiwa Imperium, tom III, strony 81– 82) do liczby mil równej Sile Woli. Kompani nie mogą przez tę więź dalekiego zasięgu wspomagać rzucania zaklęć. Mistrzowie Wiedzy korzystają z tego zaklęcia w połączeniu z Cechami Posłaniec i Dzielenie Zmysłów swego Kompana, by prowadzić zaawansowany rekonesans i łączność.",
    "source": "Podręcznik Gracza: Wysokie Elfy",
    "page": 110
   },
@@ -6599,6 +6599,28 @@
    "description": "Ofiara: Wydłużony Trudny (–20) Test Badań Naukowych do łącznej wartości 20 PS Przywołujesz mistyczny język pierwotny, który istniał przed przybyciem Prastarych. Możesz porozumiewać się na podstawowym poziomie z dowolnym śmiertelnym stworzeniem lub zwierzęciem. Przekazanie lub zrozumienie zaawansowanych pojęć może wymagać Testu Inteligencji jednej lub obu stron. Wymiana zdań brzmi dla postronnych jak bełkot, chyba że znają Anoqeyån — wtedy Przeciętny (+20) Test Języka ( Magiczny) pozwala im pojąć jej ogólny sens. Nadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem. +2 PS — Umożliwia zaawansowaną komunikację z pradawnymi gatunkami sprzed Prastarych, takimi jak Smoki, Wielkie Orły, Fimirowie i większość zwierząt. +4 PS — Umożliwia podstawową komunikację z dowolnym duchem, żywiołakiem lub Demonem.",
    "source": "Podręcznik Gracza: Wysokie Elfy",
    "page": 111
+  },
+  {
+   "name": "Piszczenie",
+   "lore": "Spaczenia",
+   "cn": 12,
+   "range": "Ty",
+   "target": "Obszar (Siła Woli metrów)",
+   "duration": "Premia z Siły Woli godzin",
+   "description": "Uwalniasz sieć obłędu ze Spaczenia, wypaczając umysły wszystkich w Obszarze. Wszystkie humanoidy niebędące Skavenami w zasięgu muszą zdać Wymagający (+0) Test Opanowania, inaczej stoczą się do poziomu bezmyślnej, szczuropodobnej hordy, instynktownie pomagającej wszystkim Skavenom, a Tobie w szczególności. Gromadzą się wokół Ciebie jako przyboczni, wykonują Twoje proste polecenia i atakują Twoich wrogów rękami oraz zębami. Cele tracą zdolność mowy i porozumiewają się gestami i szczurzym piskiem, od którego zaklęcie wzięło swoją nazwę. Gdy zaklęcie się kończy, cele rozpierzchają się i uciekają, wracając do normalnego stanu w ciągu 1k10 minut. Zyskują Stan Zmęczenie i muszą wykonać Test na Zepsucie (Poważne).",
+   "source": "Grimuar (nieoficjalny)",
+   "page": 42
+  },
+  {
+   "name": "Tygiel Światła",
+   "lore": "Hoetha",
+   "cn": 6,
+   "range": "Dotyk",
+   "target": "1 miecz",
+   "duration": "Liczba minut równa Bonusowi z Inteligencji",
+   "description": "Ofiara: Wydłużony Problematyczny (–10) Test Badań Naukowych do łącznej wartości 10 PS Przepełniasz miecz esencją Hoetha. Miecz liczy się jako magiczny i zyskuje Zaletę Szybka.\nNadczarowanie: Aby skorzystać z opcji Nadczarowania tego zaklęcia, twój Stan Yenlui musi być Światłem +3 PS — Miecz może otrzymać Zaletę Obronna albo Precyzyjna. +5 PS — Miecz zyskuje własny umysł. Władający nim zyskuje po 1 poziomie w każdym z następujących Talentów: Zmysł Bitewny, Cios Odruchowy i Riposta. +7 PS — Jeśli zaklęcie zostanie rzucone podczas kucia miecza, nadane Zalety stają się trwałe. Dozwolona jest tylko jedna próba na miecz.",
+   "source": "Podręcznik Gracza: Wysokie Elfy",
+   "page": 110
   }
  ]
 }
