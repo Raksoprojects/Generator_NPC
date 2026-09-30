@@ -4,6 +4,7 @@ import { findMagicItem } from "../magicItems";
 import { seedRng } from "../dice";
 import * as gd from "../gameData";
 import { generateNpc, isBeast } from "../generator";
+import { isDirectSpell } from "../magic";
 import { computeNpc } from "../npc";
 import { ATTRIBUTES, type Attribute } from "../rules";
 import { TIER_IDS, type CreatureDef, type Npc, type TierId } from "../types";
@@ -188,21 +189,66 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("wampir rozwija sie jak czlowiek (archetyp z linii krwi), czaruje wg zamilowania linii", () => {
-    const spells: Record<string, number[]> = { Nekrarcha: [], Strigoi: [] };
-    for (let seed = 1; seed <= 20; seed++) {
-      for (const line of ["Nekrarcha", "Strigoi"]) {
-        const v = generateNpc({ creature: "Wampir", tier: "heroiczny", bloodline: line }, seedRng(seed));
-        expect(Object.keys(gd.getVampires()!.bloodlines.find((b) => b.name === line)!.archetypes!)).toContain(v.archetype);
-        expect(v.skills.some((s) => s.name === "Splatanie Magii (Dhar)")).toBe(true);
-        expect(v.skills.some((s) => s.name === "Język (Magiczny)")).toBe(true);
-        // Tradycje z wyborem sa rozstrzygniete, jak przy wyposazeniu.
-        for (const t of [...v.traits, ...computeNpc(v).creatureTraits]) expect(t, t).not.toMatch(/\s(albo|lub)\s/);
-        spells[line].push(v.spells.length);
+  it("wampir rozwija sie jak czlowiek (archetyp z linii krwi), czaruje wg linii", () => {
+    const casters: Record<string, number> = {};
+    const adv = (v: ReturnType<typeof generateNpc>, name: string) => v.skills.find((s) => s.name === name)?.advances ?? 0;
+    for (let seed = 1; seed <= 40; seed++) {
+      for (const line of ["Nekrarcha", "Lahmianin", "Krwawy Smok", "Strigoi"]) {
+        for (const tier of ["zaawansowany", "doswiadczony", "heroiczny"] as const) {
+          const v = generateNpc({ creature: "Wampir", tier, bloodline: line }, seedRng(seed));
+          const def = gd.getVampires()!.bloodlines.find((b) => b.name === line)!;
+          expect(Object.keys(def.archetypes!)).toContain(v.archetype);
+          // Tradycje z wyborem sa rozstrzygniete, jak przy wyposazeniu.
+          for (const t of [...v.traits, ...computeNpc(v).creatureTraits]) expect(t, t).not.toMatch(/\s(albo|lub)\s/);
+          const caster = v.traits.some((t) => t.startsWith("Rzucanie Czarów"));
+          if (!caster) {
+            // Bez cechy - najwyzej Magia Prosta z profesji (np. Świecki Alchemik), jak u czlowieka.
+            for (const s of v.spells) expect(gd.getSpell(s)!.lore, `${line} ${tier}: ${s}`).toMatch(/^Prosta/);
+            continue;
+          }
+          casters[`${line}|${tier}`] = (casters[`${line}|${tier}`] ?? 0) + 1;
+          expect(adv(v, "Język (Magiczny)")).toBeGreaterThanOrEqual(def.casting?.minAdvances ?? 1);
+          expect(v.skills.some((s) => s.name.startsWith("Splatanie Magii"))).toBe(true);
+          if (line === "Krwawy Smok") expect(v.spells.length).toBeLessThanOrEqual(3);
+          if (line === "Strigoi") {
+            for (const s of v.spells) {
+              const spell = gd.getSpell(s)!;
+              expect(["Zwierząt", "Nekromancji", "Tajemna"], s).toContain(spell.lore);
+              expect(isDirectSpell(spell), s).toBe(true);
+            }
+          }
+        }
       }
     }
-    const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
-    expect(avg(spells.Nekrarcha)).toBeGreaterThan(avg(spells.Strigoi) * 1.5);
+    expect(casters["Nekrarcha|zaawansowany"]).toBe(40);
+    expect(casters["Lahmianin|doswiadczony"]).toBeGreaterThan(10);
+    expect(casters["Lahmianin|doswiadczony"]).toBeLessThan(40);
+    expect(casters["Krwawy Smok|doswiadczony"]).toBeUndefined();
+    expect(casters["Krwawy Smok|heroiczny"]).toBeGreaterThan(0);
+    expect(casters["Strigoi|zaawansowany"]).toBeUndefined();
+  });
+
+  it("Strigoi: proste profesje, bez zwyklego pancerza", () => {
+    const allowed = gd.getVampires()!.bloodlines.find((b) => b.name === "Strigoi")!.professions!;
+    for (let seed = 1; seed <= 40; seed++) {
+      const v = generateNpc({ creature: "Wampir", tier: "doswiadczony", bloodline: "Strigoi" }, seedRng(seed));
+      for (const step of v.careerPath) expect(allowed, step.profession).toContain(step.profession);
+      expect(v.armour).toEqual([]);
+    }
+  });
+
+  it("demony i inne stworzenia czarujace z cechy maja Splatanie Magii i Jezyk (Magiczny)", () => {
+    for (let seed = 1; seed <= 10; seed++) {
+      const horror = generateNpc({ creature: "Różowy Horror Tzeentcha", tier: "zaawansowany" }, seedRng(seed));
+      expect(horror.skills.some((s) => s.name === "Splatanie Magii (Dhar)")).toBe(true);
+      expect(horror.skills.some((s) => s.name === "Język (Magiczny)")).toBe(true);
+      const lammasu = generateNpc({ creature: "Lammasu", tier: "heroiczny" }, seedRng(seed));
+      const channel = lammasu.skills.filter((s) => s.name.startsWith("Splatanie Magii"));
+      // Wiatr z wyboru w ksiazce zgodny z wylosowana tradycja.
+      const lore = computeNpc(lammasu).creatureTraits.find((t) => t.startsWith("Rzucanie Czarów"))!;
+      const wind = gd.getSpellsData().lores[/\((.+)\)/.exec(lore)![1]]?.wind;
+      expect(channel.map((s) => s.name)).toEqual([`Splatanie Magii (${wind})`]);
+    }
   });
 
   it("ogr moze miec tylko proste profesje; unikaty nie trafiaja do losowania z grupy", () => {

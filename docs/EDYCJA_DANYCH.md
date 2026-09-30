@@ -98,6 +98,7 @@ Nowy archetyp = nowy klucz w pliku. Pojawi się od razu we wszystkich listach.
 | `advanceMultiplier` | Mnożnik rozwinięć za poziom profesji u ras (np. heroiczny 2,5 — ukończony poziom daje +12/13 zamiast +5). Stworzenia go nie używają — mają profile bohaterów. |
 | `allowLevel5` | Profesja z 5. poziomem (elfi Mag, kapłani elfów) może na nim dojść do 5. |
 | `spells.topSpells` | Ile najsilniejszych zaklęć głównej tradycji BN zna na pewno. |
+| `spells.casterAdvances` | Rozwinięcia Splatania Magii (wiatr tradycji) i Języka (Magicznego) stworzeń czarujących z cechy Rzucanie Czarów (demony, szamani); wampiry liczą je wg Linii Krwi. |
 | `spells.extraLores` | Szanse na kolejne tradycje dla ras z `multiLoreRaces`, po kolei, np. `[0.5, 0.15]` = 50% na drugą, a jeśli wypadła — 15% na trzecią. Druga tradycja ma połowę zaklęć głównej, trzecia jedną trzecią. |
 
 ---
@@ -277,6 +278,14 @@ Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
 - `bloodlines` — Linia Krwi: `min`/`max` (k100), `modifiers` (względem von Carsteinów),
   `gifts` (lista darów linii), `weaknesses` (6 Słabości), `lores` (tradycje, np.
   `"Zwierząt albo Cieni, Nekromancja"` — każda grupa po przecinku to jedna tradycja).
+- `archetypes` — archetypy linii z wagami (Preferowane Profesje), `professions` — jedyne
+  dozwolone profesje (Strigoi: proste, dzikie), `noArmour: true` — bez zwykłego pancerza
+  (magiczny dopiero od heroicznego).
+- `casting` — czarowanie linii: `chance` (szansa wg poziomu; brak poziomu = nie czaruje),
+  `minAdvances` (co najmniej tyle rozwinięć Splatania i Języka (Magicznego)), `maxArcane` /
+  `maxPetty` (najwięcej zaklęć), `lores` (tradycje zamiast `lores` linii), `direct: true`
+  (tylko zaklęcia bezpośrednie: zadające Obrażenia albo proste czary na siebie, PZ do 8).
+  Rozwinięcia rosną z `magicAdvances` poziomu × `magic` / 2.
 - `giftsPerTier`, `ageByTier` — liczba Darów Krwi i Wiek wg poziomu BN;
   `bloodlineGiftWeight` — o ile częściej losowane są dary z listy linii niż „dowolne”.
 - `gifts`, `weaknesses` — opisy (pokazywane po kliknięciu 🩸 / ⚠ na karcie).
@@ -316,7 +325,8 @@ Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
   mnożnik szans wg rasy (Krasnolud 2,3; elfy 0,2; stworzenia nie mają run),
   `regularCount` — zwykłe runy trwałego przedmiotu (najwyżej 3, Prawo Trzech),
   `masterChance` — szansa na jedną runę mistrzowską ponad nie (Prawo Zazdrości),
-  `temporaryNote` — opis runy tymczasowej (jedna zwykła runa, gaśnie po pierwszym zadziałaniu).
+  `temporaryCount` — liczba run tymczasowych (1–3, nigdy mistrzowskie), `temporaryNote` —
+  opis run tymczasowych (każda gaśnie po pierwszym zadziałaniu).
 
 **Jakość wykonania** (`craft`):
 

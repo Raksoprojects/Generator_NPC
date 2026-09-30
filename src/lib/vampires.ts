@@ -6,9 +6,9 @@
  * linii, a Splatanie i Jezyk (Magiczny) ma tym wyzsze, im linia bardziej sklonna do czarow.
  */
 
-import { pick, randInt, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
+import { chance, pick, randInt, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import * as gd from "./gameData";
-import type { Npc, NpcMutation, VampiresData } from "./types";
+import { TIER_IDS, type Npc, type NpcMutation, type VampiresData } from "./types";
 
 export function isVampire(npc: Pick<Npc, "creature">): boolean {
   return !!npc.creature && !!gd.getVampires()?.creatures.includes(npc.creature);
@@ -78,23 +78,50 @@ export function rollVampire(
   for (const g of chosen) entries.push({ kind: "blood", name: g });
 
   const traits = [`Wiek (${data.ageByTier[npc.tier] ?? 3})`, "Klątwa Nocy"];
-  for (const lore of loreChoices(line.lores, rng, deterministic)) traits.push(`Rzucanie Czarów (${lore})`);
+  // Nie kazdy wampir czaruje: Nekrarcha zawsze, Lahmianka i von Carstein czesto, Krwawy Smok
+  // dopiero od heroicznego, Strigoi rzadko od doswiadczonego (vampires.json -> casting).
+  const p = line.casting ? (line.casting.chance[npc.tier] ?? 0) : 1;
+  if (deterministic ? p >= 0.5 : chance(p, rng)) {
+    for (const lore of loreChoices(line.casting?.lores ?? line.lores, rng, deterministic)) traits.push(`Rzucanie Czarów (${lore})`);
+  }
   return { entries, traits };
 }
 
 /**
- * Wampir zna podstawy Dhar: Splatanie Magii (Dhar) i Jezyk (Magiczny). Rozwiniecia rosna
- * z poziomem i zamilowaniem linii do czarow - Nekrarcha jest mistrzem, Strigoi ledwie czaruje.
+ * Rozwiniecia Splatania i Jezyka (Magicznego) czarujacego wampira: rosna z poziomem
+ * i zamilowaniem linii do czarow, nie mniej niz minAdvances linii.
  */
-export function addVampireMagic(npc: Npc, rng: Rng, deterministic = false): void {
+export function vampireCasterAdvances(npc: Npc, rng: Rng, deterministic = false): number | undefined {
   const data = gd.getVampires();
   const line = npcBloodline(npc);
-  if (!data || !line || !isVampire(npc)) return;
+  if (!data || !line || !isVampire(npc)) return undefined;
   const base = (data.magicAdvances?.[npc.tier] ?? 10) * ((line.magic ?? 1) / 2);
-  for (const name of ["Splatanie Magii (Dhar)", "Język (Magiczny)"]) {
-    const value = Math.max(1, Math.round(base + (deterministic ? 0 : randInt(-2, 2, rng))));
-    const owned = npc.skills.find((s) => s.name === name);
-    if (owned) owned.advances = Math.max(owned.advances, value);
-    else npc.skills.push({ name, advances: value });
-  }
+  const value = Math.round(base + (deterministic ? 0 : randInt(-2, 2, rng)));
+  return Math.max(1, line.casting?.minAdvances ?? 0, value);
+}
+
+/** Zasady czarowania linii wampira (limity zaklec, tylko bezposrednie). */
+export function vampireCasting(npc: Npc) {
+  return isVampire(npc) ? npcBloodline(npc)?.casting : undefined;
+}
+
+/** Profesje dozwolone linii (Strigoi: proste, dzikie); brak = wszystkie. */
+export function vampireProfessions(npc: Npc): string[] | undefined {
+  return isVampire(npc) ? npcBloodline(npc)?.professions : undefined;
+}
+
+/**
+ * Linia bez pancerza (Strigoi to dzikie bestie): zdejmuje zwykly pancerz; magiczny
+ * zostaje tylko od heroicznego poziomu.
+ */
+export function stripVampireArmour(npc: Npc): void {
+  if (!isVampire(npc) || !npcBloodline(npc)?.noArmour) return;
+  const heroic = TIER_IDS.indexOf(npc.tier) >= TIER_IDS.indexOf("heroiczny");
+  const items = npc.magicItems ?? [];
+  const isArmourItem = (base?: string) => base === "pancerz" || (!!base && npc.armour.includes(base));
+  if (!heroic) npc.magicItems = items.filter((m) => !isArmourItem(m.base));
+  const kept = heroic ? items.filter((m) => isArmourItem(m.base)) : [];
+  const keep = new Set(kept.some((m) => m.base === "pancerz") ? npc.armour : kept.map((m) => m.base));
+  for (const a of npc.armour) if (!keep.has(a) && npc.craft) delete npc.craft[a];
+  npc.armour = npc.armour.filter((a) => keep.has(a));
 }

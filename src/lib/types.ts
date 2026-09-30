@@ -169,7 +169,8 @@ export interface TierDef {
    * extraLores: szanse na kolejne tradycje (po kolei) dla ras z settings.multiLoreRaces.
    * topSpells: ile najsilniejszych zaklec glownej tradycji BN zna na pewno.
    */
-  spells: { maxCn: number; arcane: [number, number]; extraLores?: number[]; topSpells?: number };
+  /** casterAdvances: rozwiniecia Splatania i Jezyka (Magicznego) stworzen czarujacych z cechy Rzucanie Czarow. */
+  spells: { maxCn: number; arcane: [number, number]; extraLores?: number[]; topSpells?: number; casterAdvances?: number };
   /** Profesja z 5. poziomem (np. elfi Mag -> Arcymag) moze na nim dojsc do 5. poziomu. */
   allowLevel5?: boolean;
   /** Mnoznik rozwiniec za poziom profesji u ras (stworzenia maja zamiast tego profile bohaterow). */
@@ -425,6 +426,8 @@ export interface RunicData {
   regularCount: Partial<Record<TierId, [number, number]>>;
   /** Szansa na dodatkowa rune mistrzowska (najwyzej 1 - Prawo Zazdrosci). */
   masterChance: Partial<Record<TierId, number>>;
+  /** Liczba run tymczasowych (najwyzej 3, bez mistrzowskich). */
+  temporaryCount: Partial<Record<TierId, [number, number]>>;
   temporaryNote: string;
 }
 
@@ -556,11 +559,30 @@ export interface VampiresData {
     archetypes?: Record<string, number>;
     /** Zamilowanie linii do czarow (Nekrarcha 3, Strigoi 0,5). */
     magic?: number;
+    casting?: VampireCasting;
+    /** Jedyne dozwolone profesje (Strigoi: proste, dzikie). */
+    professions?: string[];
+    /** Bez pancerza - poza magicznym od heroicznego (Strigoi). */
+    noArmour?: boolean;
   })[];
   gifts: (MutationRow & { limit?: string; recommended?: string })[];
   weaknesses: MutationRow[];
   /** Rozwiniecia Splatania i Jezyka (Magicznego) wampira na poziomie, mnozone przez magic / 2. */
   magicAdvances?: Partial<Record<TierId, number>>;
+}
+
+/** Czarowanie wampirow danej Linii Krwi. */
+export interface VampireCasting {
+  /** Szansa, ze wampir czaruje, wg poziomu (brak poziomu = wcale). */
+  chance: Partial<Record<TierId, number>>;
+  /** Co najmniej tyle rozwiniec Splatania i Jezyka (Magicznego). */
+  minAdvances?: number;
+  maxArcane?: number;
+  maxPetty?: number;
+  /** Tradycje zamiast tradycji linii (np. "Zwierząt albo Nekromancja"). */
+  lores?: string;
+  /** Tylko zaklecia bezposrednie: zadajace Obrazenia albo rzucane na siebie. */
+  direct?: boolean;
 }
 
 /** Formy [meska, zenska]: nazwy profesji i tytuly poziomow ("Profesja|poziom"). */

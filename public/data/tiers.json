@@ -76,7 +76,8 @@
         "arcane": [
           0,
           0
-        ]
+        ],
+        "casterAdvances": 10
       },
       "advanceMultiplier": 1
     },
@@ -121,7 +122,8 @@
           -2,
           1
         ],
-        "topSpells": 1
+        "topSpells": 1,
+        "casterAdvances": 15
       },
       "advanceMultiplier": 1
     },
@@ -179,7 +181,8 @@
           0.6,
           0.1
         ],
-        "topSpells": 1
+        "topSpells": 1,
+        "casterAdvances": 20
       },
       "advanceMultiplier": 1.2
     },
@@ -231,7 +234,8 @@
           0.35,
           0.1
         ],
-        "topSpells": 2
+        "topSpells": 2,
+        "casterAdvances": 25
       },
       "advanceMultiplier": 1.6
     },
@@ -280,7 +284,8 @@
           0.3,
           0.15
         ],
-        "topSpells": 3
+        "topSpells": 3,
+        "casterAdvances": 30
       },
       "advanceMultiplier": 2.5
     },
@@ -330,7 +335,8 @@
           0.35,
           0.2
         ],
-        "topSpells": 4
+        "topSpells": 4,
+        "casterAdvances": 40
       },
       "allowLevel5": true,
       "advanceMultiplier": 3.5

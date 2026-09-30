@@ -54,7 +54,16 @@
     "Wojownik": 4,
     "Szlachcic": 1
    },
-   "magic": 0.5
+   "magic": 0.5,
+   "casting": {
+    "chance": {
+     "heroiczny": 0.35,
+     "legendarny": 0.5
+    },
+    "minAdvances": 10,
+    "maxArcane": 2,
+    "maxPetty": 1
+   }
   },
   {
    "min": 16,
@@ -92,7 +101,16 @@
     "Uczony": 1,
     "Zwiadowca": 1
    },
-   "magic": 2
+   "magic": 2,
+   "casting": {
+    "chance": {
+     "zaawansowany": 0.5,
+     "doswiadczony": 0.6,
+     "heroiczny": 0.7,
+     "legendarny": 0.8
+    },
+    "minAdvances": 15
+   }
   },
   {
    "min": 41,
@@ -131,7 +149,16 @@
     "Szlachcic": 1,
     "Złodziej": 1
    },
-   "magic": 3
+   "magic": 3,
+   "casting": {
+    "chance": {
+     "zaawansowany": 1,
+     "doswiadczony": 1,
+     "heroiczny": 1,
+     "legendarny": 1
+    },
+    "minAdvances": 15
+   }
   },
   {
    "min": 51,
@@ -167,13 +194,39 @@
    ],
    "lores": "Zwierząt, Nekromancja",
    "archetypes": {
-    "Zwiadowca": 2,
-    "Wojownik": 2,
-    "Złodziej": 1,
-    "Oprych": 1,
-    "Uczony": 0.5
+    "Zwiadowca": 3,
+    "Oprych": 2,
+    "Wojownik": 1.5,
+    "Złodziej": 1.5
    },
-   "magic": 0.5
+   "magic": 0.5,
+   "casting": {
+    "chance": {
+     "doswiadczony": 0.1,
+     "heroiczny": 0.15,
+     "legendarny": 0.25
+    },
+    "lores": "Zwierząt albo Nekromancja",
+    "maxArcane": 3,
+    "maxPetty": 0,
+    "direct": true
+   },
+   "professions": [
+    "Banita",
+    "Zwiadowca",
+    "Łowczyni",
+    "Łowczyni Nagród",
+    "Hiena Cmentarna",
+    "Żebrak",
+    "Złodziej",
+    "Przemytniczka",
+    "Szczurołap",
+    "Oprych",
+    "Rekietierka",
+    "Gladiator",
+    "Żołnierz"
+   ],
+   "noArmour": true
   },
   {
    "min": 66,
@@ -207,7 +260,16 @@
     "Wojownik": 2,
     "Uczony": 1
    },
-   "magic": 2
+   "magic": 2,
+   "casting": {
+    "chance": {
+     "zaawansowany": 0.5,
+     "doswiadczony": 0.6,
+     "heroiczny": 0.7,
+     "legendarny": 0.8
+    },
+    "minAdvances": 15
+   }
   },
   {
    "min": 91,
@@ -251,7 +313,16 @@
     "Oprych": 1,
     "Wojownik": 1
    },
-   "magic": 1.5
+   "magic": 1.5,
+   "casting": {
+    "chance": {
+     "zaawansowany": 0.3,
+     "doswiadczony": 0.4,
+     "heroiczny": 0.5,
+     "legendarny": 0.6
+    },
+    "minAdvances": 10
+   }
   }
  ],
  "gifts": [
@@ -1093,5 +1164,6 @@
   "doswiadczony": 15,
   "heroiczny": 20,
   "legendarny": 30
- }
+ },
+ "casting_note": "casting: chance - szansa, ze wampir tej linii czaruje (wg poziomu; brak poziomu = 0), minAdvances - co najmniej tyle rozwiniec Splatania i Jezyka (Magicznego), maxArcane/maxPetty - najwiecej zaklec, lores - zamiast tradycji linii, direct - tylko zaklecia bezposrednie (obrazenia albo na siebie). professions - jedyne dozwolone profesje, noArmour - bez pancerza (poza magicznym od heroicznego)."
 }

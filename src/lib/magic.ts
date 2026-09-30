@@ -12,6 +12,7 @@ import { chance, pick, randInt, weightedPick, type Rng } from "./dice";
 import * as gd from "./gameData";
 import { computeNpc } from "./npc";
 import type { Npc, SpellDef } from "./types";
+import { vampireCasterAdvances, vampireCasting } from "./vampires";
 
 const CHAOS_LORES = ["Nurgla", "Slaanesha", "Tzeentcha"];
 const COLLEGE_LORES = ["Ognia", "Metalu", "Życia", "Niebios", "Cieni", "Śmierci", "Światła", "Zwierząt"];
@@ -109,6 +110,57 @@ export function casterLores(npc: Npc, rng: Rng): { petty: boolean; lores: string
   return { petty, lores: [...lores] };
 }
 
+/** Tradycje z cech "Rzucanie Czarów (…)" stworzenia (ksiazkowych po wyborze i wylosowanych). */
+function traitLores(npc: Npc): string[] {
+  const creature = gd.getCreature(npc.creature);
+  const traits = [...(creature?.traits ?? []).map((t) => gd.resolvedBookTrait(npc.specChoices, t)), ...npc.traits];
+  const out = new Set<string>();
+  for (const tr of traits) {
+    const m = /^Rzucanie Czarów \((.+)\)$/.exec(tr);
+    const key = m && loreFromTrait(m[1], () => 0);
+    if (key) out.add(key);
+  }
+  return [...out];
+}
+
+/** Splatanie Magii wiatru tradycji; tradycje bez jednego wiatru (Czarownictwo, Waaagh!) - bez specjalizacji. */
+const channelSkill = (lore: string) => {
+  const wind = gd.getSpellsData().lores[lore]?.wind;
+  return wind ? `Splatanie Magii (${wind})` : "Splatanie Magii";
+};
+
+/**
+ * Stworzenie czarujace z cechy Rzucanie Czarow (demon, wampir, szaman) potrzebuje
+ * Splatania Magii i Jezyka (Magicznego): wampir wg Linii Krwi, reszta wg poziomu
+ * (tiers.json -> spells.casterAdvances). Umiejetnosc z ksiazki z wyborem wiatru
+ * ("Splatanie Magii (Aqshy, Shyish albo Ulgu)") dostaje wiatr wylosowanej tradycji.
+ */
+export function addCasterSkills(npc: Npc, rng: Rng, deterministic = false): void {
+  if (!npc.creature) return;
+  const lores = traitLores(npc);
+  if (!lores.length) return;
+  const channels = [...new Set(lores.map(channelSkill))];
+  for (const s of npc.skills) {
+    if (!/^Splatanie Magii \(.*(,| albo | lub )/.test(s.name)) continue;
+    const options = s.name.slice(s.name.indexOf("(") + 1, -1).split(/,\s*|\s+albo\s+|\s+lub\s+/);
+    const hit = channels.find((c) => options.some((o) => c === `Splatanie Magii (${o})`));
+    s.name = hit ?? `Splatanie Magii (${options[0]})`;
+  }
+  const vampire = vampireCasterAdvances(npc, rng, deterministic);
+  const base = gd.getTier(npc.tier)?.spells.casterAdvances ?? 15;
+  const value = vampire ?? Math.max(1, base + (deterministic ? 0 : randInt(-3, 3, rng)));
+  for (const name of [...channels, "Język (Magiczny)"]) {
+    const owned = npc.skills.find((s) => s.name === name);
+    if (owned) owned.advances = Math.max(owned.advances, value);
+    else npc.skills.push({ name, advances: value });
+  }
+}
+
+/** Zaklecie bezposrednie: zadaje Obrazenia (magiczny pocisk) albo jest prostym czarem na siebie (PZ do 8). */
+export function isDirectSpell(s: SpellDef): boolean {
+  return /magiczn\w* pocisk|Obrażeni/i.test(s.description) || (/^(ty|rzucający)$/i.test(s.target.trim()) && s.cn <= 8);
+}
+
 /**
  * Elfy nie sa zwiazane jednym kolegium: od zaawansowanego ich czarodzieje moga
  * poznac kolejne tradycje (tiers.json -> spells.extraLores, settings.multiLoreRaces).
@@ -163,6 +215,9 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const incantationAdv = npc.skills.find((s) => s.name === "Język (Magiczny)")?.advances;
   const traitCaster = !!npc.creature && !npc.talents.some((t) => /^Magia (Tajemna|Chaosu|Prosta)/.test(t.name));
   if (traitCaster && incantationAdv !== undefined) pettyCount = 1 + Math.floor(incantationAdv / 8);
+  // Linie slabo czarujace (Krwawy Smok, Strigoi) znaja mniej zaklec.
+  const vc = vampireCasting(npc);
+  if (vc?.maxPetty !== undefined) pettyCount = Math.min(pettyCount, vc.maxPetty);
   out.push(...drawSpells(pettyPool, pettyCount, () => 1, rng, deterministic).map((s) => s.name));
   // Elfy znaja tez Magie Prosta Ishy; Mag musi znac co najmniej cztery (Wysokie Elfy, s. 79-80).
   if (!replacesPetty && isElf(npc.race)) {
@@ -178,7 +233,12 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const loreSet = new Set(lores);
   const common = new Set(lores.flatMap((l) => familyOf(l).common));
   const arcanePool = all.filter(
-    (s) => !pettyLores.has(s.lore) && (loreSet.has(s.lore) || common.has(s.lore)) && s.cn <= maxCn && !out.includes(s.name)
+    (s) =>
+      !pettyLores.has(s.lore) &&
+      (loreSet.has(s.lore) || common.has(s.lore)) &&
+      s.cn <= maxCn &&
+      !out.includes(s.name) &&
+      (!vc?.direct || isDirectSpell(s))
   );
   if (!arcanePool.length) return out;
   const [lo, hi] = tier?.spells.arcane ?? [0, 0];
@@ -187,6 +247,7 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const incantation = npc.skills.find((s) => s.name === "Język (Magiczny)");
   const talentCaster = npc.talents.some((t) => /^Magia (Tajemna|Chaosu)/.test(t.name));
   if (npc.creature && !talentCaster && incantation) count = 1 + Math.floor(incantation.advances / 6);
+  if (vc?.maxArcane !== undefined) count = Math.min(count, vc.maxArcane);
   count = Math.min(count, arcanePool.length);
 
   // Najsilniejsze zaklecia glownej tradycji (gorna polka osiagalna na tym poziomie):
@@ -195,7 +256,8 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const mainPool = arcanePool.filter((s) => s.lore === mainLore);
   const topCn = Math.max(...(mainPool.length ? mainPool : arcanePool).map((s) => s.cn));
   const topPool = (mainPool.length ? mainPool : arcanePool).filter((s) => s.cn >= Math.max(1, topCn - 3));
-  const topCount = Math.min(tier?.spells.topSpells ?? 1, count);
+  // Linie slabo czarujace (limit zaklec) nie maja pewnych zaklec z gornej polki.
+  const topCount = vc?.maxArcane !== undefined ? 0 : Math.min(tier?.spells.topSpells ?? 1, count);
   out.push(...drawSpells(topPool, topCount, (s) => s.cn, rng, deterministic).map((s) => s.name));
 
   // Kolejne tradycje (elfy, Wysoka Magia): druga dostaje polowe zaklec glownej, trzecia jedna trzecia.
@@ -205,7 +267,9 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   const mainCount = out.filter((n) => gd.getSpell(n)?.lore === mainLore).length;
   extraLores.forEach((lore, i) => {
     const pool = arcanePool.filter((s) => s.lore === lore && !out.includes(s.name));
-    const n = Math.max(1, Math.round(mainCount / (i + 2)));
+    // Limit linii wampira obejmuje wszystkie tradycje razem.
+    const room = vc?.maxArcane !== undefined ? vc.maxArcane - out.filter((n) => arcanePool.some((s) => s.name === n)).length : Infinity;
+    const n = Math.min(room, Math.max(1, Math.round(mainCount / (i + 2))));
     out.push(...drawSpells(pool, n, (s) => s.cn, rng, deterministic).map((s) => s.name));
   });
 

@@ -21,9 +21,9 @@ import { beastSkills, beastTraits, bookSkillsAndTalents, familyTraitWeights, rol
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
-import { pickSpells, resolveTraitChoice, rollExtraLores } from "./magic";
+import { addCasterSkills, pickSpells, resolveTraitChoice, rollExtraLores } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
-import { addVampireMagic, isVampire, rollBloodline, rollVampire, vampireArchetype } from "./vampires";
+import { isVampire, rollBloodline, rollVampire, stripVampireArmour, vampireArchetype, vampireProfessions } from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
 import { rollCraft, rollTreasures } from "./treasures";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
@@ -40,6 +40,8 @@ export interface GenSpec {
   bloodline?: string;
   /** Stworzenie rozumne bez profesji (jak bestia), nawet jesli zwykle ja ma. */
   noArchetype?: boolean;
+  /** Jedyne dozwolone profesje (np. Strigoi - proste, dzikie). */
+  onlyProfessions?: string[];
   race?: string;
   sex?: Sex;
   name?: string;
@@ -179,7 +181,7 @@ function careerSwitchOk(prev: string, main: string): boolean {
 }
 
 /** Druga (wczesniejsza) profesja: inna niz glowna, preferowana ta sama klasa. */
-function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rng): string | undefined {
+function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rng, only?: string[]): string | undefined {
   const mainClass = gd.getProfession(main)?.class;
   const cands = professionCandidates(arch, race, true);
   delete cands[main];
@@ -190,7 +192,8 @@ function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rn
   }
   if (Object.keys(weights).length) return weightedKey(weights, rng);
   // Archetyp nie ma drugiej profesji dla tej rasy - dowolna z tej samej klasy.
-  const usable = (p: string) => p !== main && raceOk(p, race) && careerSwitchOk(p, main) && firstLevel(p) === 1;
+  const usable = (p: string) =>
+    p !== main && raceOk(p, race) && careerSwitchOk(p, main) && firstLevel(p) === 1 && (!only?.length || only.includes(p));
   const sameClass = gd.allProfessionNames().filter((p) => gd.getProfession(p)?.class === mainClass && usable(p));
   if (sameClass.length) return pick(sameClass, rng);
   // Np. elf czarodziej: jego klasa to same profesje magiczne - wczesniej byl kimkolwiek innym.
@@ -233,8 +236,15 @@ function advancedCareerPath(main: string, tier: TierDef): CareerStep[] {
   return steps;
 }
 
+/** Archetyp ograniczony do dozwolonych profesji; gdy zadna nie zostaje - same dozwolone. */
+function restrictArchetype(arch: Archetype | undefined, only: string[] | undefined): Archetype | undefined {
+  if (!arch || !only?.length) return arch;
+  const kept = Object.fromEntries(Object.entries(arch.professions).filter(([p]) => only.includes(p)));
+  return { ...arch, professions: Object.keys(kept).length ? kept : Object.fromEntries(only.map((p) => [p, 1])) };
+}
+
 export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId, race: string, rng: Rng): CareerStep[] {
-  const arch = gd.getArchetype(archetype);
+  const arch = restrictArchetype(gd.getArchetype(archetype), spec.onlyProfessions);
   const tier = gd.getTier(tierId);
   if (!arch || !tier) return [];
   const chosen = (spec.professions ?? []).filter((p) => gd.getProfession(p));
@@ -256,7 +266,7 @@ export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId
   let [prevLevels, mainLevels] = splitLevels(tier, total, chosen.length > 1, rng);
   let prev: string | undefined;
   if (prevLevels > 0) {
-    prev = chosen.length > 1 ? chosen[chosen.length - 2] : pickPreviousCareer(arch, race, main, rng);
+    prev = chosen.length > 1 ? chosen[chosen.length - 2] : pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions);
     if (!prev) {
       mainLevels = Math.min(total, tier.maxCareerLevel);
       prevLevels = 0;
@@ -722,10 +732,9 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.armour = [];
     npc.craft = {};
     npc.money = "";
-    addVampireMagic(npc, rng, deterministic);
     return;
   }
-  npc.careerPath = buildCareerPath({ professions }, npc.archetype, npc.tier, npc.race, rng);
+  npc.careerPath = buildCareerPath({ professions, onlyProfessions: vampireProfessions(npc) }, npc.archetype, npc.tier, npc.race, rng);
   developCareer(npc, rng, deterministic);
   // Rzadkie talenty rasy (Krew Aenariona) - tylko przy losowaniu.
   for (const rt of gd.getSettings().raceTalents ?? []) {
@@ -737,7 +746,16 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
   resolveMagicTrappings(npc, rng, deterministic);
   equipNpc(npc, rng);
   rollCraft(npc, rng, deterministic);
-  addVampireMagic(npc, rng, deterministic);
+}
+
+/**
+ * Po cechach i skarbach: Splatanie i Jezyk (Magiczny) stworzen czarujacych z cechy,
+ * pancerz Strigoi (tylko magiczny od heroicznego), na koniec zaklecia.
+ */
+function finish(npc: Npc, rng: Rng, deterministic: boolean): void {
+  addCasterSkills(npc, rng, deterministic);
+  stripVampireArmour(npc);
+  npc.spells = pickSpells(npc, rng, deterministic);
 }
 
 /** Sekcja "cechyStworzen": cechy opcjonalne (15/5/1%), cechy poziomu bestii, mutacje. */
@@ -745,6 +763,8 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   const creature = gd.getCreature(npc.creature);
   npc.traits = rollTraits(spec, npc, rng);
   if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
+  // Czy wampir czaruje, rozstrzyga Linia Krwi - nie opcjonalna cecha z ksiazki.
+  if (isVampire(npc)) npc.traits = npc.traits.filter((t) => !t.startsWith("Rzucanie Czarów"));
   const vampire = rollVampire(npc, rng, deterministic, spec.bloodline);
   npc.traits = [...npc.traits, ...vampire.traits.filter((t) => !npc.traits.includes(t))];
   // Cechy z wyborem ("Rzucanie Czarów (Śmierci albo Cieni)") - jedna opcja, jak przy wyposazeniu.
@@ -837,7 +857,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   rollFeatures(npc, { ...spec, bloodline }, rng, det);
   // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
   rollTreasures(npc, rng, det);
-  npc.spells = pickSpells(npc, rng, det);
+  finish(npc, rng, det);
   return npc;
 }
 
@@ -862,7 +882,7 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
   const bloodline = npc.mutations?.find((m) => m.kind === "bloodline")?.name;
   if (unlocked("cechyStworzen")) rollFeatures(next, { bloodline }, rng, false);
   if (unlocked("rozwoj")) rollTreasures(next, rng);
-  if (unlocked("rozwoj") || unlocked("cechyStworzen")) next.spells = pickSpells(next, rng);
+  if (unlocked("rozwoj") || unlocked("cechyStworzen")) finish(next, rng, false);
   return next;
 }
 
@@ -875,7 +895,7 @@ export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, 
   next.tier = clampTier(next.tier, gd.getCreature(next.creature));
   develop(next, professions, rng, false);
   rollTreasures(next, rng);
-  next.spells = pickSpells(next, rng);
+  finish(next, rng, false);
   const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);
   // Profil, ktory nowy poziom moze wylosowac (np. zaawansowany Pomniejszy Bohater), zostaje.
   for (const c of gd.getTier(next.tier)?.heroProfileChances ?? []) auto.delete(c.profile);
