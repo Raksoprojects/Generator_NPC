@@ -2230,9 +2230,9 @@
           "Zastawianie Pułapek"
         ],
         "talents": [
-          "Mistrzowska Magia Runiczna (Wszystkie formy)",
+          "Magia Run Mistrzowskich (Wszystkie formy)",
           "Niestrudzony",
-          "Pamiętliwy",
+          "Długa Pamięć",
           "Wyczulony Zmysł (Dotyk)"
         ],
         "trappings": [
@@ -11456,7 +11456,7 @@
         ],
         "talents": [
           "Wyczulony Zmysł (Dowolny)",
-          "Wyważony Cios",
+          "Finta",
           "Rozbrojenie",
           "Sztuki Walki"
         ],
@@ -11509,7 +11509,7 @@
         ],
         "talents": [
           "Mistrz Walki",
-          "Cios Odwetowy",
+          "Odwrócenie Szans",
           "Percepcja Magiczna",
           "Silny Cios"
         ],
@@ -11868,7 +11868,7 @@
           "Hulaka",
           "Rozpoznanie Artefaktu",
           "Towarzyski",
-          "Arcydzieło (Dowolne)"
+          "Mistrz Rzemiosła (Dowolne)"
         ],
         "trappings": [
           "olejki eteryczne",
@@ -11890,7 +11890,7 @@
         "talents": [
           "Przekonujący",
           "Święte Wizje",
-          "Dzieło Życia",
+          "Arcydzieło",
           "Czysta Dusza"
         ],
         "trappings": [
@@ -11951,7 +11951,7 @@
           "Intuicja"
         ],
         "talents": [
-          "Arcydzieło (Kowalstwo)",
+          "Mistrz Rzemiosła (Kowalstwo)",
           "Umysł Ponad Ciałem",
           "Mocne Plecy",
           "Wytrwały"
@@ -11972,7 +11972,7 @@
         ],
         "talents": [
           "Święte Wizje",
-          "Dzieło Życia",
+          "Arcydzieło",
           "Szósty Zmysł",
           "Odporność Psychiczna"
         ],

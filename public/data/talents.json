@@ -341,9 +341,10 @@
       "attr_name": "Inicjatywy"
     },
     "max_raw": "Bonus z Inicjatywy",
-    "tests": "Broń Zasięgowa, kiedy strzelasz z broni z Wadą Załoga",
-    "description": "Umiesz zarządzać załogą maszyn oblężniczych i artylerii. Możesz wykonać Wymagający (+0) Test Dowodzenia, by pomóc załodze obsługującej broń z Wadą Załoga, znajdującej się w zasięgu twojego głosu. Jeśli ci się uda, członkowie załogi mogą przy oddawaniu strzału wykorzystać twoją odpowiednią Umiejętność Broń Zasięgowa.",
-    "source": "Pod Bronią"
+    "tests": "",
+    "description": "Testy: Testy Broni Zasięgowej przy strzelaniu z broni z Wadą Obsługiwana Masz wprawę w kierowaniu obsługą machin oblężniczych i artylerii. Jako Akcję możesz wykonać Wymagający (+0) Test Dowodzenia, by pomóc obsłudze broni z Wadą Obsługiwana znajdującej się w zasięgu głosu. Jeśli ci się powiedzie, przy następnym strzale z tej broni obsługa może użyć twojej Umiejętności Broń Zasięgowa.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
   },
   "Dwie Bronie": {
     "max": {
@@ -530,14 +531,13 @@
   },
   "Magia Runiczna": {
     "max": {
-      "type": "characteristic",
-      "attr": "Int + SW",
-      "attr_name": "Inteligencji + Siła Woli"
+      "type": "special"
     },
-    "max_raw": "Bonus z Inteligencji + Siły Woli",
-    "tests": "Kowalstwo Run",
-    "description": "Dostałeś dostęp do sekretu Magicznych Run Krasnoludzkich. Wybierz Runę (127 - 131 str). Nie możesz wybrać Mistrzowskiej Runy. Jeżeli Talent prezuje konkretną formę (np. Runy Ochrony) muszisz wybrać runę z danej listy. Możesz użyć Zajęcia Wykucie Run, by wyryć wybraną Runę w przedmiocie.",
-    "source": "Podręcznik gracza Krasnoluda"
+    "max_raw": "Bonus z Inteligencji + Bonus z Siły Woli",
+    "tests": "",
+    "description": "Testy: Runotwórstwo Zostałeś wprowadzony w sekretne tajemne tradycje Krasnoludów i posiadłeś wiedzę o tworzeniu magicznych run. Wybierz runę ze stron 127–131. Nie możesz wybrać runy mistrzowskiej. Jeśli twój Talent określa formę albo formy run (np. Runy Ochronne), musisz wybrać runę ze wskazanych list. Jeśli zaś Talent wskazuje konkretną runę (np. Runę Kamienia), musisz wybrać właśnie ją. Możesz użyć Przedsięwzięcia Wykuwanie Runy, by wyryć wybraną runę na przedmiocie. Za każdym razem, gdy kupujesz ten Talent, poznajesz nową runę, którą potrafisz wykuć.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 81
   },
   "Magia Tajemna (Tradycja)": {
     "max": {
@@ -717,9 +717,10 @@
       "attr_name": "Wytrzymałości"
     },
     "max_raw": "Bonus z Wytrzymałości",
-    "tests": null,
-    "description": "Wytrzymujesz trudy z godnym podziwu uporem. Kiedy liczysz kary wynikające ze Stanu Zmęczenie możesz zignorować jeden Poziom Zmęczenia za każde wykupienie Talentu.",
-    "source": "Podręcznik gracza Krasnoluda"
+    "tests": "",
+    "description": "Znosisz ciężkie brzemiona, męczące wędrówki i przerywany sen z godnym podziwu hartem, nie pozwalając, by takie trudy przytępiły ci umysł albo osłabiły siłę w walce. Gdy nakładasz na siebie kary wynikające ze Stanu Zmęczenie, możesz zignorować 1 wystąpienie tego Stanu, plus 1 dodatkowe za każdy poziom Niestrudzonego. Na przykład Bohater z 4 Stanami Zmęczenie i 2 poziomami Niestrudzonego zignoruje działanie 3 Stanów Zmęczenie i otrzyma tylko karę –10 do wszystkich Testów.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 82
   },
   "Nieubłagany": {
     "max": {
@@ -1885,15 +1886,6 @@
     "description": "Jesteś sprawnym przekupniem i znasz sposoby na dobicie targu. Kiedy używasz Umiejętności Targowanie, obniżasz lub podwyższasz cenę o dodatkowe 10%. Uwaga: MG ma prawo do limitowania zmniejszania cen, by pokazać, że kupiec nie sprzeda przedmiotu poniżej poniesionych przez siebie kosztów.",
     "source": "Podręcznik podstawowy"
   },
-  "Pamiętliwy": {
-    "max": {
-      "type": "none"
-    },
-    "max_raw": null,
-    "tests": null,
-    "description": "",
-    "source": "Do uzupełnienia (brak w dostarczonych źródłach)"
-  },
   "Zręczne Palce": {
     "max": {
       "type": "fixed",
@@ -1915,15 +1907,6 @@
     "tests": null,
     "description": "W opisach profesji jako „Przemawianie” – to Talent Mówca. Jesteś umiejętnym oratorem i wiesz, jak urabiać tłumy. Poniższa tabela wskazuje, ile osób ulegnie twojemu wpływowi, gdy wykonasz Test Charyzmy (patrz strona 119) podczas przemawiania. Liczba wykupień Talentu Liczba przekonanych 1 zwykła x5 2 zwykła x10 3 zwykła x20 4 zwykła x50 5 zwykła x100 6 zwykła x200 7 zwykła x500 8 zwykła x1000 9 wszyscy, którzy słyszą twój słowiczy głos",
     "source": "Podręcznik podstawowy (Mówca)"
-  },
-  "Mistrzowska Magia Runiczna": {
-    "max": {
-      "type": "none"
-    },
-    "max_raw": null,
-    "tests": null,
-    "description": "",
-    "source": "Do uzupełnienia (brak w dostarczonych źródłach)"
   },
   "Kantor": {
     "max": {
@@ -2118,37 +2101,196 @@
     "source": "Podręcznik Gracza: Wysokie Elfy",
     "page": 51
   },
-  "Wyważony Cios": {
+  "Uraz Przodków": {
     "max": {
-      "type": "fixed",
-      "value": 1
+      "type": "characteristic",
+      "attr": "SW",
+      "attr_name": "Siły Woli"
     },
-    "max_raw": "1",
+    "max_raw": "Bonus z Siły Woli",
     "tests": "",
-    "description": "",
-    "source": "Do uzupełnienia",
-    "note": "Talent z profesji w: Podręcznik Gracza: Wysokie Elfy — podręcznik nie podaje opisu."
+    "description": "W Wielkiej Księdze Urazów są wpisy — zwłaszcza te przeciw Orkom, Goblinom i Skavenom — tak ciężkie, że pomścić je może wyłącznie wytępienie całego ich rodzaju. Odziedziczyłeś jeden z tych legendarnych urazów i choć nie masz szans doczekać jego zaspokojenia, z radością robisz swoje. Wybierz kulturę albo stronnictwo będące celem twojego Urazu Przodków (np. Orki, Gobliny, Skaveny, Trolle, demony Khorne’a itd.). Wpisz je do swojej Księgi Uraz jako cel zemsty, zgodnie z zasadami ze strony 33. Nosisz wobec tej grupy Krwawy Uraz, którego nigdy nie da się zaspokoić. Za każdym razem jednak, gdy odniesiesz nad nią znaczące zwycięstwo — niszcząc jej dzieła, odbierając coś skradzionego albo zabijając wielu jej przedstawicieli — otrzymujesz 50 PD.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
   },
-  "Cios Odwetowy": {
+  "Obuchowiec": {
     "max": {
-      "type": "fixed",
-      "value": 1
+      "type": "characteristic",
+      "attr": "S",
+      "attr_name": "Siły"
     },
-    "max_raw": "1",
+    "max_raw": "Bonus z Siły",
     "tests": "",
-    "description": "",
-    "source": "Do uzupełnienia",
-    "note": "Talent z profesji w: Podręcznik Gracza: Wysokie Elfy — podręcznik nie podaje opisu."
+    "description": "Testy: Testy Siły przy aktywowaniu Cechy Oręża Tłukąca. Potężniejszych wrogów zmuszasz do uległości brutalnymi uderzeniami młota w głowę, przez co są zupełnie bezbronni, gdy ich dobijasz. Gdy wygrasz Test Sporny, by aktywować Cechę Tłukąca, nakładasz dodatkowy Stan Oszołomiony za każdy poziom Obuchowca.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
   },
-  "Dzieło Życia": {
+  "Burzyciel": {
+    "max": {
+      "type": "characteristic",
+      "attr": "S",
+      "attr_name": "Siły"
+    },
+    "max_raw": "Bonus z Siły",
+    "tests": "",
+    "description": "Testy: Broń Biała przy niszczeniu przedmiotów nieożywionych bronią z Cechą Rąbiąca Osłona ani zbroja nie chronią przed cięciem twojego topora. Gdy aktywujesz Cechę Rąbiąca w ramach ataku, zadajesz +1 dodatkowych Obrażeń trafionej zbroi albo tarczy za każdy poziom Burzyciela. Ponadto gdy atakujesz wroga w osłonie bronią z Cechą Rąbiąca, twarda osłona liczy się jak średnia, średnia jak miękka, a miękka nie daje żadnej ochrony.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Smoczy Wydech": {
+    "max": {
+      "type": "special"
+    },
+    "max_raw": "Bonus z Umiejętności Strzeleckich",
+    "tests": "",
+    "description": "Niektóre plemiona Goblinów nazywają krasnoludzką broń palną „smoczymi wydechami” — od wściekłego ryku i wybuchu dymu przy wystrzale. Wykorzystujesz ten psychologiczny efekt, by rozproszyć i przygwoździć przeciwników ogniem zaporowym. Gdy strzelasz z broni z Cechą Prochowa, wzięci na cel wrogowie, którym nie powiedzie się Test Opanowania, otrzymują dodatkowy Stan Załamany za każdy poziom Smoczego Wydechu.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Okopanie": {
+    "max": {
+      "type": "characteristic",
+      "attr": "Int",
+      "attr_name": "Inteligencji"
+    },
+    "max_raw": "Bonus z Inteligencji",
+    "tests": "",
+    "description": "Testy: Rzemiosło przy budowaniu osłon Wykorzystujesz każdy dostępny teren, by osłonić siebie i sojuszników przed ostrzałem. Gdy jesteś w miękkiej osłonie, ataki wymierzone w ciebie są Bardzo Trudne (–20) zamiast Trudnych (–10). Gdy jesteś w średniej osłonie, ataki są Ekstremalnie Trudne (–30) zamiast Bardzo Trudnych (– 20).",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Ogień Kuźni": {
     "max": {
       "type": "fixed",
       "value": 1
     },
     "max_raw": "1",
     "tests": "",
-    "description": "",
-    "source": "Do uzupełnienia",
-    "note": "Talent z profesji w: Podręcznik Gracza: Wysokie Elfy — podręcznik nie podaje opisu."
+    "description": "Jesteś żywym ogniwem runicznej mocy i roztaczasz aurę bitewnej furii, która nasyca pobliski oręż żarem kuźni. Gdy jesteś Związany Walką, każda broń biała w rękach twoich albo sojusznika w promieniu Bonusu z Siły Woli w metrach zyskuje Cechę Przebijająca. Jeśli broń już jest Przebijająca, jej ataki ignorują dodatkowo 1 punkt niemetalowej zbroi.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Chwalebny Kres": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "Twoja żądza krwi jest tak silna, że przełamuje naturalny odruch ciała, by po urazie odpocząć. Gdy otrzymasz Stan Nieprzytomny, możesz przerwać kolejność Tur i wykonać natychmiastowy atak Bronią Białą jako Darmową Akcję, zanim zostaniesz wyłączony z walki. Gdy otrzymasz Stan Oszołomiony, możesz wydać punkt Szczęścia, by wykonać natychmiastowy atak Bronią Białą jako Darmową Akcję. Swoją kolejną Turę rozgrywasz normalnie, co oznacza, że nie możesz wykonać Akcji, jeśli wciąż jesteś Oszołomiony.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Harpunnik": {
+    "max": {
+      "type": "special"
+    },
+    "max_raw": "Bonus z Umiejętności Strzeleckich",
+    "tests": "",
+    "description": "Jako doświadczony kusznik razisz cel z precyzją, przebijając go bełtami w wyjątkowo bolesnych miejscach. Gdy zadasz Trafienie Krytyczne bronią kuszową, możesz zwiększyć wynik rzutu w tabeli Trafień Krytycznych o +10 za każdy poziom Harpunnika, maksymalnie do 00. Ponadto bełty tkwiące w ciele celu za sprawą Cechy Nadziewająca obniżają jego Ruch",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Gwardia Królewska": {
+    "max": {
+      "type": "fixed",
+      "value": 3
+    },
+    "max_raw": "3",
+    "tests": "",
+    "description": "Jesteś zaprzysiężony bronić życia swojego pana i każdego, kogo ten wskaże jako objętego twoją ochroną. Jeśli oznacza to poświęcenie własnego życia, by osłonić powierzoną ci osobę, jesteś na to gotów. Każdy atak wroga wymierzony w sojusznika znajdującego się w promieniu 2 metrów od ciebie otrzymuje modyfikator –10 za każdy poziom Gwardii Królewskiej. Talent nie działa na ataki wymierzone w ciebie ani wtedy, gdy cierpisz na jakikolwiek Stan.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Płynna Forteca": {
+    "max": {
+      "type": "characteristic",
+      "attr": "Wt",
+      "attr_name": "Wytrzymałości"
+    },
+    "max_raw": "Bonus z Wytrzymałości",
+    "tests": "",
+    "description": "Testy: Mocna Głowa Wiele Krasnoludów twierdzi, że dobre piwo uspokaja nerwy i poprawia sprawność bojową krzepkiego wojownika. Mimo to rozważny wojak uważa, by nie uzależnić się od trunku — inaczej dopadnie go „gorączka piwna”. Po wypiciu alkoholu zyskujesz +10 do Siły i Wytrzymałości. Daje to natychmiastową premię do Testu Mocnej Głowy na wypicie trunku, a korzyść działa niezależnie od tego, czy Test się powiedzie. Zachowujesz ją, dopóki od ostatniego kielicha nie minie godzina — kolejne picie może przedłużyć efekt, ale nie zwiększa premii do Cech ponad +10.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Długa Pamięć": {
+    "max": {
+      "type": "characteristic",
+      "attr": "Int",
+      "attr_name": "Inteligencji"
+    },
+    "max_raw": "Bonus z Inteligencji",
+    "tests": "",
+    "description": "Testy: Testy Inteligencji na przypomnienie sobie Nigdy nie zapominasz twarzy — ani obietnicy. W przeciwieństwie do elfiej techniki Wieża Pamięci ( Podręcznik Główny WFRP ), którą Krasnoludy uważają za błahą i wadliwą, korzystasz z pamięci zmysłowej, wiążąc szczegóły z realnymi miejscami, w których je zaobserwowałeś, przez przywołanie konkretnego wrażenia, smaku albo zapachu z tamtego miejsca. Przypominając sobie ważne wydarzenia, w których brałeś udział wcześniej w kampanii, pamiętasz bezbłędnie porę, datę, miejsce i widoczne twarze wszystkich obecnych oraz dokładnie to, co obiecali powiedzieć lub zrobić. Przy ważnym wydarzeniu, którego byłeś świadkiem przed rozpoczęciem kampanii, może być potrzebny Test Inteligencji, o trudności zależnej od upływu czasu — Łatwy (+40) dla wydarzeń sprzed kilku miesięcy, Bardzo Trudny (–20) dla sprzed stulecia.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 80
+  },
+  "Wzgarda dla Magii": {
+    "max": {
+      "type": "characteristic",
+      "attr": "SW",
+      "attr_name": "Siły Woli"
+    },
+    "max_raw": "Bonus z Siły Woli",
+    "tests": "",
+    "description": "Testy: Testy Siły Woli przy używaniu Odporności na Magię ( Podręcznika Głównego WFRP ) Uziemiasz wrogie czary własnym ciałem, odmawiając poddania się ich kapryśnym zaklęciom. Możesz Odwrócić każdy Test, który musisz wykonać w ramach działania czaru, a także Testy rozpraszania magii przy pomocy Odporności na Magię ( Podręcznik Główny WFRP ).",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 81
+  },
+  "Magia Run Mistrzowskich": {
+    "max": {
+      "type": "characteristic",
+      "attr": "SW",
+      "attr_name": "Siły Woli"
+    },
+    "max_raw": "Bonus z Siły Woli",
+    "tests": "",
+    "description": "Testy: Runotwórstwo Poznałeś sekretne obrzędy tworzenia runy mistrzowskiej… lecz to, czy starczy ci umiejętności, by ją wykuć, dopiero się okaże. Wybierz runę mistrzowską ze stron 127–131. Jeśli twój Talent określa formę albo formy run (np. Runy Ochronne), musisz wybrać runę mistrzowską ze wskazanych list. Możesz użyć Przedsięwzięcia Wykuwanie Runy, by wyryć wybraną runę mistrzowską na przedmiocie. Za każdym razem, gdy kupujesz ten Talent, poznajesz nową runę mistrzowską, którą potrafisz wykuć. Pełne zasady runotwórstwa znajdziesz na stronie 121. Ponadto przy pierwszym zdobyciu tego Talentu poznajesz także wszystkie trzy Runy Zagłady (s. 132).",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 81
+  },
+  "Odszczepieniec": {
+    "max": {
+      "type": "special"
+    },
+    "max_raw": "Bonus ze Zwinności",
+    "tests": "",
+    "description": "Testy: Testy Żeglarstwa (Machiny Latające) przy szybkim i ryzykownym lataniu. Jesteś doświadczonym, choć lekkomyślnym lotnikiem, który stawia na szybkość i miażdżącą siłę ognia. Nie otrzymujesz kary –20 do ataków Bronią Zasięgową, korzystając z Cechy Stworzenia Latanie.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 81
+  },
+  "Krótki Lont": {
+    "max": {
+      "type": "characteristic",
+      "attr": "Int",
+      "attr_name": "Inteligencji"
+    },
+    "max_raw": "Bonus z Inteligencji",
+    "tests": "",
+    "description": "Odmierzasz czas swoim ładunkom tak, by wybuchały w najlepszym momencie, rozsiewając odłamki najdalej, jak się da. Używając broni wybuchowej z Cechą Wybuchowa, zwiększ jej Wartość o +1 za każdy poziom Krótkiego Lontu.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 82
+  },
+  "Podkopywacz": {
+    "max": {
+      "type": "special"
+    },
+    "max_raw": "Bonus ze Zwinności",
+    "tests": "",
+    "description": "Testy: Rzadko masz nad wrogiem przewagę wzrostu, ale nauczyłeś się to nadrabiać, atakując z nieoczekiwanej strony. Nie otrzymujesz kar za atakowanie, gdy masz Stan Powalony albo w inny sposób znajdujesz się poniżej celu. Wrogowie nie otrzymują premii do ataków na ciebie, gdy masz Stan Powalony. Zyskujesz dodatkowe +20 do trafienia Zaskoczonych wrogów, gdy wyłaniasz się z tunelu, dołu albo innej ukrytej pozycji pod nimi.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 82
+  },
+  "Wir Śmierci": {
+    "max": {
+      "type": "fixed",
+      "value": 1
+    },
+    "max_raw": "1",
+    "tests": "",
+    "description": "Atakujesz zamaszyście, bez wyboru celu, w furii, przedzierając się przez całe szyki wrogich wojowników. Jako Akcję możesz wydać 1 punkt Szczęścia, by wykonać atak Bronią Białą przeciw wszystkim stworzeniom Związanym z tobą Walką. MG wybiera jednego wroga, który przeciwstawi się temu Testowi. Jeśli atak się powiedzie, zadajesz te same Obrażenia w to samo Miejsce Trafienia wszystkim Związanym Walką stworzeniom, licząc je normalnie. Przy atakach Wiru Śmierci nie stosuje się Trafień Krytycznych, choć Rany Krytyczne przypadają normalnie wrogom sprowadzonym do 0 Żywotności. W ramach Wiru Śmierci nie możesz aktywować żadnych innych opcji ataku specjalnego. Jeśli jednak Bohater z Talentem Dwie Bronie ( Podręcznik Główny WFRP ) trzyma w Wirze Śmierci dwie bronie, może Odwrócić Test ataku Bronią Białą.",
+    "source": "Podręcznik Gracza: Krasnoludy",
+    "page": 82
   }
 }

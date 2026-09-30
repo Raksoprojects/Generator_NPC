@@ -228,24 +228,23 @@ pochodzą z tekstu PDF-ów (*Wiatry Magii*, podręcznik podstawowy); trzy zaklę
 
 ---
 
-## Talenty do uzupełnienia
+## Talenty z innych przekładów
 
-W `talents.json` są 4 talenty bez opisu i limitu. Znajdziesz je, szukając
-`"source": "Do uzupełnienia"`:
+Dodatki i starsze karty używają czasem innych nazw talentów niż podręcznik główny.
+Podmieniono je w `professions.json` na oficjalne odpowiedniki:
 
-| Talent | Gdzie występuje | Uwaga |
-|---|---|---|
-| Pamiętliwy | Kowal Run 3 | talent z Podręcznika gracza Krasnoluda |
-| Mistrzowska Magia Runiczna | Kowal Run 3 | talent z Podręcznika gracza Krasnoluda |
-| Zręczne Palce | Zielarka 2, Złodziej 3 | możliwe, że to inna nazwa talentu *Ruchliwe Dłonie* — do sprawdzenia w podręczniku |
-| Przemawianie | Zarządca 2 | możliwe, że to inna nazwa talentu *Mówca* — do sprawdzenia w podręczniku |
-| Wyważony Cios | Mistrz Miecza 1 | *Wysokie Elfy* wymieniają go w profesji, ale nie opisują |
-| Cios Odwetowy | Mistrz Miecza 3 | jw. |
-| Dzieło Życia | Estetyk 4, Kapłan-Kowal Vaula 5 | jw. |
+| W źródle | Oficjalnie | Gdzie | Pewność |
+|---|---|---|---|
+| Zręczne Palce | Zręczny | Zielarka 2, Złodziej 3 | alias w `talents.json` |
+| Przemawianie | Mówca | Zarządca 2 | alias w `talents.json` |
+| Pamiętliwy | Długa Pamięć (*Krasnoludy* s. 80) | Kowal Run 3 | średnia |
+| Mistrzowska Magia Runiczna | Magia Run Mistrzowskich (*Krasnoludy* s. 80) | Kowal Run 3 | wysoka |
+| Dzieło Życia | Arcydzieło (Magnum Opus) | Estetyk 4, Kapłan-Kowal Vaula 5 | wysoka |
+| Arcydzieło (X) w *Wysokich Elfach* | Mistrz Rzemiosła (X) (Master Craftsman) | Estetyk 3, Kapłan-Kowal Vaula 4 | wysoka |
+| Cios Odwetowy | Odwrócenie Szans (Reversal) | Mistrz Miecza 3 | średnia |
+| Wyważony Cios | Finta | Mistrz Miecza 1 | niska — do sprawdzenia |
 
-Uzupełnij pola `max`, `max_raw`, `tests`, `description` i `source` (schemat jak
-w innych talentach). Jeśli okaże się, że to inna nazwa istniejącego talentu,
-popraw nazwę w `professions.json` i usuń pusty wpis.
+Jeśli znajdziesz lepszy odpowiednik, popraw nazwę w `professions.json`.
 
 ### Profesje zaawansowane i kapłani elfów
 
