@@ -1,5 +1,8 @@
 <script lang="ts">
   import Autocomplete from "./Autocomplete.svelte";
+  import Modal from "./Modal.svelte";
+  import RichText from "./RichText.svelte";
+  import { spellBook } from "../lib/magic";
   import { app } from "../lib/app.svelte";
   import { allArmourNames, allWeaponNames, qualityDescription } from "../lib/equipment";
   import { copyText, downloadText, safeFileName } from "../lib/files";
@@ -257,41 +260,91 @@
       .join(" ALBO ");
   }
 
-  function infoText(key: string): string {
+  interface InfoBody {
+    meta?: [string, string][];
+    text: string;
+    source?: string;
+  }
+
+  const where = (source?: string, page?: number | string) => (source ? `${source}${page ? `, s. ${page}` : ""}` : "");
+
+  function spellMeta(s: SpellDef): [string, string][] {
+    return [
+      ["PZ", spellCn(s)],
+      ["Zasięg", s.range],
+      ["Cel", s.target],
+      ["Czas trwania", s.duration],
+      ["Tradycja", gd.getSpellsData().lores[s.lore]?.label ?? s.lore]
+    ];
+  }
+
+  function infoBody(key: string): InfoBody {
     const [kind, name] = key.split("|");
     if (kind === "t") {
       const t = gd.getTalent(name);
-      if (!t) return "Talent spoza bazy.";
-      const max = t.max_raw ? ` Maksimum: ${t.max_raw}.` : "";
-      const tests = t.tests ? ` Testy: ${t.tests}.` : "";
-      return `${t.description ?? "Brak opisu."}${max}${tests}`;
+      if (!t) return { text: "Talent spoza bazy." };
+      const meta: [string, string][] = [];
+      if (t.max_raw) meta.push(["Maksimum", t.max_raw]);
+      if (t.tests) meta.push(["Testy", t.tests]);
+      return { meta, text: t.description ?? "Brak opisu." };
     }
-    if (kind === "c") return traitText(name);
-    if (kind === "p") return gd.getHeroProfile(name)?.description ?? "";
-    if (kind === "q") return qualityText(name);
-    if (kind === "x") return view.magicItems.find((m) => m.name === name)?.description ?? "";
+    if (kind === "c") return { text: traitText(name) };
+    if (kind === "p") return { text: gd.getHeroProfile(name)?.description ?? "" };
+    if (kind === "q") return { text: qualityText(name).split(" ALBO ").join("\nALBO\n") };
+    if (kind === "x") return { text: view.magicItems.find((m) => m.name === name)?.description ?? "" };
     if (kind === "g") {
       const mat = gd.getTreasures()?.craft.materials[name];
-      return mat ? `${mat.description} (${mat.source}, s. ${mat.page})` : "";
+      return mat ? { text: mat.description, source: where(mat.source, mat.page) } : { text: "" };
     }
-    if (kind === "a") return view.abilities.find((a) => a.name === name)?.description ?? "";
-    if (kind === "m") return view.mutations.find((m) => m.label === name)?.effect ?? "";
-    if (kind === "l") return `${gd.getSpellsData().lores[name]?.label ?? name}: ${gd.getSpellsData().lores[name]?.rule ?? ""}`;
+    if (kind === "a") return { text: view.abilities.find((a) => a.name === name)?.description ?? "" };
+    if (kind === "m") return { text: view.mutations.find((m) => m.label === name)?.effect ?? "" };
+    if (kind === "l") return { text: gd.getSpellsData().lores[name]?.rule ?? "" };
     if (kind === "i") {
       const item = findMagicItem(name);
       const scroll = /^zwój z zaklęciem: (.+)$/.exec(name);
       const spell = scroll ? gd.getSpell(scroll[1]) : undefined;
-      const base = item ? `${item.description}${item.source ? ` (${item.source}, s. ${item.page})` : ""}` : "";
-      return spell ? `${base} Zaklęcie: ${spell.name} — PZ ${spell.cn}, ${spell.range}, ${spell.target}, ${spell.duration}. ${spell.description}` : base;
+      const base = item?.description ?? "";
+      if (!spell) return { text: base, source: where(item?.source, item?.page) };
+      return { meta: spellMeta(spell), text: `${base}\n${spell.description}`.trim(), source: where(spell.source, spell.page) };
     }
     if (kind === "s") {
       const s = gd.getSpell(name);
-      if (!s) return "";
-      return `PZ ${s.cn} · Zasięg: ${s.range} · Cel: ${s.target} · Czas: ${s.duration}. ${s.description} (${s.source}, s. ${s.page})`;
+      return s ? { meta: spellMeta(s), text: s.description, source: where(s.source, s.page) } : { text: "" };
     }
-    return "";
+    return { text: "" };
+  }
+
+  function infoTitle(key: string): string {
+    const [kind, name] = key.split("|");
+    return kind === "l" ? (gd.getSpellsData().lores[name]?.label ?? name) : name;
+  }
+
+  // --- Ksiega zaklec: wszystkie zaklecia tradycji BN ---
+
+  let bookOpen = $state(false);
+  let bookLore = $state("");
+  let bookSpell = $state<string | null>(null);
+  let book = $derived(bookOpen ? spellBook(npc) : []);
+  let bookGroup = $derived(book.find((g) => g.lore === bookLore) ?? book[0]);
+  let knownSpells = $derived(new Set(npc.spells));
+
+  function openBook() {
+    bookOpen = true;
+    bookSpell = null;
+    bookLore = "";
   }
 </script>
+
+{#snippet infoPanel(key: string)}
+  {@const body = infoBody(key)}
+  <div class="info" role="note">
+    <div class="info-body">
+      <b class="info-title">{infoTitle(key)}</b>
+      <RichText meta={body.meta} text={body.text} source={body.source} />
+    </div>
+    <button class="btn-sm ghost" onclick={() => (openInfo = null)} aria-label="Zamknij opis">✕</button>
+  </div>
+{/snippet}
 
 <article class="npc panel" class:editing>
   <header class="head">
@@ -517,10 +570,7 @@
     {/if}
 
     {#if openInfo && !bottomInfo}
-      <div class="info" role="note">
-        <span><b>{openInfo.split("|")[1]}:</b> {infoText(openInfo)}</span>
-        <button class="btn-sm ghost" onclick={() => (openInfo = null)} aria-label="Zamknij opis">✕</button>
-      </div>
+      {@render infoPanel(openInfo)}
     {/if}
 
     {#if npc.trappings.length || npc.money}
@@ -536,23 +586,75 @@
       </section>
     {/if}
 
-    {#if otherSpells.length}
+    {#if otherSpells.length || view.casting}
       <section class="block">
-        <h4>{view.keySpells.length ? "Pozostałe zaklęcia" : "Zaklęcia"}</h4>
-        <p class="list">
-          {#each otherSpells as s (s.name)}
-            <button class="item tap" class:petty={s.lore.startsWith("Prosta")} onclick={() => toggleInfo(`s|${s.name}`)}>
-              {s.name} <span class="text-dim">PZ {spellCn(s)}</span>
-            </button>
-          {/each}
-        </p>
+        <div class="block-head">
+          <h4>{view.keySpells.length ? "Pozostałe zaklęcia" : "Zaklęcia"}</h4>
+          {#if view.casting}
+            <button class="btn-sm ghost" onclick={openBook}>📖 Wszystkie zaklęcia tradycji</button>
+          {/if}
+        </div>
+        {#if otherSpells.length}
+          <p class="list">
+            {#each otherSpells as s (s.name)}
+              <button class="item tap" class:petty={s.lore.startsWith("Prosta")} onclick={() => toggleInfo(`s|${s.name}`)}>
+                {s.name} <span class="text-dim">PZ {spellCn(s)}</span>
+              </button>
+            {/each}
+          </p>
+        {/if}
       </section>
       {#if openInfo && bottomInfo}
-        <div class="info" role="note">
-          <span><b>{openInfo.split("|")[1]}:</b> {infoText(openInfo)}</span>
-          <button class="btn-sm ghost" onclick={() => (openInfo = null)} aria-label="Zamknij opis">✕</button>
-        </div>
+        {@render infoPanel(openInfo)}
       {/if}
+    {/if}
+
+    {#if bookOpen}
+      <Modal title="Zaklęcia — {npc.name}" onClose={() => (bookOpen = false)}>
+          {#if book.length}
+            <nav class="book-tabs">
+              {#each book as g (g.lore)}
+                <button class="chip tap" class:active={g === bookGroup} onclick={() => ((bookLore = g.lore), (bookSpell = null))}>
+                  {g.label} <span class="text-dim">{g.spells.filter((s) => knownSpells.has(s.name)).length}/{g.spells.length}</span>
+                </button>
+              {/each}
+            </nav>
+            {#if bookGroup}
+              <p class="text-dim small book-note">
+                {#if bookGroup.allKnown}
+                  Cecha Rzucanie Czarów — stworzenie zna wszystkie zaklęcia tej tradycji; ★ to zaklęcia, po które sięga najchętniej.
+                {:else}
+                  ★ — zaklęcia znane postaci; pozostałe może poznać, rozwijając się w tej tradycji.
+                {/if}
+                {#if gd.getSpellsData().lores[bookGroup.lore]?.rule}
+                  <button class="item tap" onclick={() => (bookSpell = bookSpell === `l|${bookGroup.lore}` ? null : `l|${bookGroup.lore}`)}>Zasada tradycji</button>
+                {/if}
+              </p>
+              {#if bookSpell === `l|${bookGroup.lore}`}
+                <div class="book-detail"><RichText text={gd.getSpellsData().lores[bookGroup.lore]?.rule ?? ""} /></div>
+              {/if}
+              <ul class="book-list">
+                {#each bookGroup.spells as s (s.name)}
+                  {@const open = bookSpell === s.name}
+                  <li class:known={knownSpells.has(s.name) || bookGroup.allKnown}>
+                    <button class="book-row tap" class:open onclick={() => (bookSpell = open ? null : s.name)} aria-expanded={open}>
+                      <span class="star">{knownSpells.has(s.name) ? "★" : ""}</span>
+                      <span class="book-name">{s.name}</span>
+                      <span class="text-dim small">PZ {spellCn(s)} · {s.range} · {s.duration}</span>
+                    </button>
+                    {#if open}
+                      <div class="book-detail">
+                        <RichText meta={spellMeta(s).slice(1, 4)} text={s.description} source={where(s.source, s.page)} />
+                      </div>
+                    {/if}
+                  </li>
+                {/each}
+              </ul>
+            {/if}
+          {:else}
+            <p class="text-dim">Brak zaklęć w bazie dla tradycji tej postaci.</p>
+          {/if}
+      </Modal>
     {/if}
 
     {#if npc.notes.trim()}
@@ -1070,6 +1172,86 @@
     padding: var(--space-2) var(--space-3);
     border-left: 3px solid var(--accent);
     background: var(--bg-panel-2);
+    font-size: var(--fs-sm);
+  }
+
+  .info-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+    max-width: 72ch;
+  }
+
+  .info-title {
+    color: var(--accent-strong);
+  }
+
+  .block-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .book-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .chip.active {
+    border-color: var(--accent);
+    color: var(--accent-strong);
+    background: var(--bg-panel-2);
+  }
+
+  .book-note {
+    margin: 0;
+  }
+
+  .book-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .book-list li {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .book-row {
+    display: grid;
+    grid-template-columns: 1.2em auto 1fr;
+    align-items: baseline;
+    gap: var(--space-2);
+    width: 100%;
+    min-height: auto;
+    padding: var(--space-2) 0;
+    background: transparent;
+    border: none;
+    text-align: left;
+    color: var(--text-muted);
+  }
+
+  .book-list li.known .book-row {
+    color: var(--text);
+  }
+
+  .book-row .star {
+    color: var(--accent-strong);
+  }
+
+  .book-row.open .book-name {
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+
+  .book-detail {
+    padding: 0 0 var(--space-3) calc(1.2em + var(--space-2));
     font-size: var(--fs-sm);
   }
 

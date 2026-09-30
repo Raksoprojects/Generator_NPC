@@ -217,6 +217,50 @@ export function pickSpells(npc: Npc, rng: Rng, deterministic = false): string[] 
   return out;
 }
 
+export interface SpellBookLore {
+  lore: string;
+  label: string;
+  /** Cecha Rzucanie Czarów: stworzenie zna wszystkie zaklecia tej tradycji. */
+  allKnown: boolean;
+  spells: SpellDef[];
+}
+
+/** Wszystkie zaklecia tradycji BN do przegladania: tradycje glowne, ich wspolne zaklecia i Magia Prosta. */
+export function spellBook(npc: Npc): SpellBookLore[] {
+  const { petty, lores } = casterLores(npc, () => 0);
+  const data = gd.getSpellsData();
+  const creature = gd.getCreature(npc.creature);
+  const traitLores = new Set<string>();
+  for (const tr of [...(creature?.traits ?? []).map((t) => gd.resolvedBookTrait(npc.specChoices, t)), ...npc.traits]) {
+    const m = /^Rzucanie Czarów \((.+)\)$/.exec(tr);
+    const key = m && loreFromTrait(m[1], () => 0);
+    if (key) traitLores.add(key);
+  }
+  const known = npc.spells.map((n) => gd.getSpell(n)?.lore).filter(Boolean) as string[];
+  const replacesPetty = lores.some((l) => familyOf(l).petty && !familyOf(l).common.includes("Tajemna"));
+  const order = [
+    ...lores,
+    ...(lores.some((l) => isElf(npc.race) || l === HIGH_MAGIC) ? [ELVEN_COMBINED] : []),
+    ...lores.flatMap((l) => familyOf(l).common),
+    ...(petty && !replacesPetty ? ["Prosta"] : []),
+    ...lores.map((l) => familyOf(l).petty ?? ""),
+    ...(petty && isElf(npc.race) ? ["Prosta (Elfia)"] : []),
+    ...known,
+  ];
+  const loreSet = new Set(lores);
+  return [...new Set(order)]
+    .filter(Boolean)
+    .map((lore) => ({
+      lore,
+      label: data.lores[lore]?.label ?? lore,
+      allKnown: traitLores.has(lore),
+      spells: data.spells
+        .filter((s) => s.lore === lore && (lore !== ELVEN_COMBINED || (s.requires ?? []).every((l) => loreSet.has(l))))
+        .sort((a, b) => a.cn - b.cn || a.name.localeCompare(b.name, "pl")),
+    }))
+    .filter((g) => g.spells.length);
+}
+
 function drawSpells(pool: SpellDef[], count: number, weight: (s: SpellDef) => number, rng: Rng, deterministic: boolean): SpellDef[] {
   const left = [...pool];
   const out: SpellDef[] = [];
