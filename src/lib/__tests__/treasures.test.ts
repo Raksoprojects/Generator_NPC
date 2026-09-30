@@ -69,7 +69,7 @@ describe("przedmioty magiczne", () => {
         expect(master).toBeLessThanOrEqual(1);
         expect(m.runes.length - master).toBeLessThanOrEqual(3);
         if (m.runes.length === 4) four++;
-        if (m.temporary) expect(m.runes.length === 1 && master === 0, m.name).toBe(true);
+        if (m.temporary) expect(master, m.name).toBe(0);
       }
     }
     expect(four).toBeGreaterThan(0);

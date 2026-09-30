@@ -23,7 +23,7 @@
   ]
  },
  "runic": {
-  "note": "Przedmioty runiczne losowane osobno od pozostalych przedmiotow magicznych. Trwale: najwyzej 3 zwykle runy (Prawo Trzech) i 1 mistrzowska (Prawo Zazdrosci), Krasnoludy s. 125-126. Tymczasowe: jedna zwykla runa, ktora gasnie po pierwszym zadzialaniu (ksiega wspomina runy tymczasowe bez zasad - interpretacja domowa).",
+  "note": "Przedmioty runiczne losowane osobno od pozostalych przedmiotow magicznych. Trwale: najwyzej 3 zwykle runy (Prawo Trzech) i 1 mistrzowska (Prawo Zazdrosci), Krasnoludy s. 125-126. Tymczasowe: 1-3 zwykle runy (nigdy mistrzowskie), kazda gasnie po pierwszym zadzialaniu (ksiega wspomina runy tymczasowe bez zasad - interpretacja domowa).",
   "temporary": {
    "sredni": 0.03,
    "zaawansowany": 0.12,
@@ -66,7 +66,29 @@
    "heroiczny": 0.35,
    "legendarny": 0.6
   },
-  "temporaryNote": "Runa tymczasowa — gaśnie, gdy raz zadziała (broń i pancerz: po jednej walce, talizman: po jednym użyciu), a przedmiot staje się zwykły."
+  "temporaryNote": "Runy tymczasowe — każda gaśnie, gdy raz zadziała (broń i pancerz: po jednej walce, talizman: po jednym użyciu). Run mistrzowskich nie wykuwa się jako tymczasowych.",
+  "temporaryCount": {
+   "sredni": [
+    1,
+    1
+   ],
+   "zaawansowany": [
+    1,
+    2
+   ],
+   "doswiadczony": [
+    1,
+    2
+   ],
+   "heroiczny": [
+    1,
+    3
+   ],
+   "legendarny": [
+    1,
+    3
+   ]
+  }
  },
  "fitWeight": 3,
  "craft": {

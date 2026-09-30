@@ -242,19 +242,19 @@ function fits(npc: Npc, t: TreasureDef, owned: NpcMagicItem[]): boolean {
 
 /**
  * Runy przedmiotu: 1-3 zwykle wg poziomu (moga sie powtarzac) i czasem jedna mistrzowska -
- * razem najwyzej cztery (Prawo Trzech, Prawo Zazdrosci). Tymczasowy - jedna zwykla runa.
+ * razem najwyzej cztery (Prawo Trzech, Prawo Zazdrosci). Tymczasowe - 1-3 zwykle, bez mistrzowskiej.
  */
 function rollRunes(npc: Npc, pool: RuneDef[], rng: Rng, deterministic: boolean, temporary = false): string[] {
   const data = gd.getTreasures()!.runic;
   const regular = pool.filter((r) => !r.master);
-  if (temporary) return regular.length ? [(deterministic ? regular[0] : pick(regular, rng))!.name] : [];
-  const [lo, hi] = data.regularCount[npc.tier] ?? [1, 1];
+  const [lo, hi] = (temporary ? data.temporaryCount : data.regularCount)[npc.tier] ?? [1, 1];
   const count = Math.min(3, deterministic ? hi : randInt(lo, hi, rng));
   const out: string[] = [];
   while (out.length < count && regular.length) {
     const repeat = !deterministic && out.length > 0 && chance(0.35, rng);
     out.push(repeat ? pick(out, rng)! : (deterministic ? regular[out.length % regular.length] : pick(regular, rng)!).name);
   }
+  if (temporary) return out;
   const master = pool.filter((r) => r.master);
   const p = data.masterChance[npc.tier] ?? 0;
   if (master.length && (deterministic ? p >= 0.5 : chance(p, rng))) out.unshift((deterministic ? master[0] : pick(master, rng))!.name);
@@ -283,7 +283,7 @@ function rollRunic(npc: Npc, rng: Rng, deterministic: boolean): void {
     if (t.kind === "weapon" && base) item.name = `runiczny ${base.toLowerCase()}`;
     if (temporary) {
       item.temporary = true;
-      item.name += " (runa tymczasowa)";
+      item.name += item.runes.length > 1 ? " (runy tymczasowe)" : " (runa tymczasowa)";
     }
     npc.magicItems!.push(item);
   }
