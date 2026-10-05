@@ -1,0 +1,2630 @@
+{
+ "note": "Łupy i znaleziska wg WFRP4 Unofficial Treasure & Artefacts 1.0 (nieoficjalne, Chris MacLean) — Random Treasure Table i Item Tables. Zapis 'szansa:kości' (np. '25:1k10' = 25% na 1k10); same kości = zawsze. Kości k10 i k100 wybuchają (maksimum — rzuć jeszcze raz i dodaj). Poziom lokacji mnoży wartości (pieniądze, wycena) jak Tier w źródle, a szanse na przedmioty magiczne rosną o połowę za każdy poziom ponad pierwszy. Lokacje z grupy 'Dodane' są autorskie.",
+ "levels": [
+  {
+   "level": 1,
+   "label": "biedna"
+  },
+  {
+   "level": 2,
+   "label": "skromna"
+  },
+  {
+   "level": 3,
+   "label": "zamożna"
+  },
+  {
+   "level": 4,
+   "label": "bogata"
+  },
+  {
+   "level": 5,
+   "label": "legendarna"
+  }
+ ],
+ "coinByStatus": {
+  "brąz": "p",
+  "srebro": "s",
+  "złoto": "zk"
+ },
+ "locations": [
+  {
+   "id": "chata",
+   "name": "Chata",
+   "group": "Domostwa",
+   "status": "brąz",
+   "description": "Chałupa, chata albo lepianka chłopa.",
+   "money": {
+    "p": "50:1k10",
+    "s": "10:1k5",
+    "zk": "1:1"
+   },
+   "domestic": "10:1k5",
+   "gems": null,
+   "art": null,
+   "cloth": "10:1",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": null,
+   "extra": [
+    [
+     "jedzenie",
+     "75:1k5"
+    ],
+    [
+     "narzedzia",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "50:1k5"
+    ]
+   ]
+  },
+  {
+   "id": "dom",
+   "name": "Dom",
+   "group": "Domostwa",
+   "status": "srebro",
+   "description": "Dom mieszczanina: drobnego kupca, sklepikarza, rzemieślnika albo uczonego.",
+   "money": {
+    "p": "6k10",
+    "s": "2k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "1k10",
+   "gems": "5:1k5",
+   "art": "10:1k2",
+   "cloth": "25:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "1:1",
+   "extra": [
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "odziez",
+     "50:1k5"
+    ],
+    [
+     "ksiazki",
+     "25:1"
+    ]
+   ]
+  },
+  {
+   "id": "posiadlosc",
+   "name": "Posiadłość",
+   "group": "Domostwa",
+   "status": "złoto",
+   "description": "Rezydencja albo drugi dom najbogatszych: zamożnych kupców, ziemiaństwa, arystokracji.",
+   "money": {
+    "p": "2k100",
+    "s": "1k100",
+    "zk": "1k100"
+   },
+   "domestic": "2k10",
+   "gems": "90:1k10",
+   "art": "75:1k10",
+   "cloth": "1k10",
+   "scrolls": "5:1",
+   "grimoire": null,
+   "magic": "5:1",
+   "extra": [
+    [
+     "odziez",
+     "1k5"
+    ],
+    [
+     "ksiazki",
+     "50:1k2"
+    ],
+    [
+     "jedzenie",
+     "1k5"
+    ]
+   ]
+  },
+  {
+   "id": "dom_czarodzieja",
+   "name": "Dom czarodzieja",
+   "group": "Domostwa",
+   "status": "złoto",
+   "description": "Siedziba albo wieża uznanego czarodzieja — zwykle kryje jakiś osobisty skarb.",
+   "money": {
+    "p": "3k10",
+    "s": "75:5k10",
+    "zk": "50:3k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "75:1k5",
+   "art": "75:1k2",
+   "cloth": "25:1k5",
+   "scrolls": "75:1k5",
+   "grimoire": "75:1",
+   "magic": "25:1k5",
+   "extra": [
+    [
+     "ksiazki",
+     "1k5"
+    ],
+    [
+     "ziola",
+     "1k5"
+    ]
+   ]
+  },
+  {
+   "id": "warsztat",
+   "name": "Warsztat",
+   "group": "Domostwa",
+   "status": "srebro",
+   "description": "Warsztat — przedmioty związane z rzemiosłem i rzeczy oddane na przechowanie.",
+   "money": {
+    "p": "75:1k100",
+    "s": "50:3k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "10:1k5",
+   "gems": "5:1k5",
+   "art": "1:1",
+   "cloth": "25:1k2",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": null,
+   "extra": [
+    [
+     "narzedzia",
+     "1k5"
+    ],
+    [
+     "pojemniki",
+     "50:1k2"
+    ]
+   ]
+  },
+  {
+   "id": "kapliczka",
+   "name": "Kapliczka",
+   "group": "Świątynie",
+   "status": "brąz",
+   "description": "Mała kapliczka pomniejszego boga albo dawno zmarłego miejscowego bohatera.",
+   "money": {
+    "p": "1k100",
+    "s": "50:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": null,
+   "gems": "25:1",
+   "art": "75:1",
+   "cloth": "5:1",
+   "scrolls": "5:1",
+   "grimoire": null,
+   "magic": "5:1",
+   "extra": []
+  },
+  {
+   "id": "swiatynia",
+   "name": "Świątynia",
+   "group": "Świątynie",
+   "status": "złoto",
+   "description": "Świątynia — od złotych świeczników po skrzynkę na datki.",
+   "money": {
+    "p": "5k100",
+    "s": "75:1k100",
+    "zk": "50:5k10"
+   },
+   "domestic": "25:1k10",
+   "gems": "75:1k5",
+   "art": "50:1k5",
+   "cloth": "1k10",
+   "scrolls": "1k5",
+   "grimoire": "50:1k2",
+   "magic": "50:1k2",
+   "extra": [
+    [
+     "ksiazki",
+     "50:1k2"
+    ],
+    [
+     "odziez",
+     "25:1k2"
+    ]
+   ]
+  },
+  {
+   "id": "maly_potwor",
+   "name": "Legowisko małego potwora",
+   "group": "Legowiska",
+   "status": "srebro",
+   "description": "Istoty człekokształtne lubiące błyskotki: gobliny, fimirowie i im podobni.",
+   "money": {
+    "p": "50:1k10",
+    "s": "15:2k10",
+    "zk": "15:1k5"
+   },
+   "domestic": null,
+   "gems": "15:1",
+   "art": null,
+   "cloth": null,
+   "scrolls": "5:1",
+   "grimoire": "1:1",
+   "magic": "1:1",
+   "extra": [
+    [
+     "rozne",
+     "50:1k5"
+    ],
+    [
+     "pojemniki",
+     "25:1k2"
+    ]
+   ]
+  },
+  {
+   "id": "duzy_potwor",
+   "name": "Legowisko dużego potwora",
+   "group": "Legowiska",
+   "status": "złoto",
+   "description": "Wielkie potwory gromadzące skarby w sekretnych leżach.",
+   "money": {
+    "p": "75:2k100",
+    "s": "50:1k100",
+    "zk": "25:1k100"
+   },
+   "domestic": "5:1k10",
+   "gems": "75:1k10",
+   "art": null,
+   "cloth": null,
+   "scrolls": "25:1k5",
+   "grimoire": "25:1k2",
+   "magic": "25:1k2",
+   "extra": [
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "odziez",
+     "25:1k5"
+    ]
+   ]
+  },
+  {
+   "id": "skrzynia_otwarta",
+   "name": "Otwarta skrzynia",
+   "group": "Skrzynie",
+   "status": "srebro",
+   "description": "Zwykła skrzynia w leżu albo twierdzy — bez zabezpieczeń.",
+   "money": {
+    "p": "25:1k100",
+    "s": "25:1k10",
+    "zk": "5:1k10"
+   },
+   "domestic": "5:1",
+   "gems": "5:1",
+   "art": null,
+   "cloth": "5:1",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": null,
+   "extra": []
+  },
+  {
+   "id": "skrzynia_zamknieta",
+   "name": "Zabezpieczona skrzynia",
+   "group": "Skrzynie",
+   "status": "złoto",
+   "description": "Skrzynia z zamkiem, pułapką albo strażą.",
+   "money": {
+    "p": "5k10",
+    "s": "3k10",
+    "zk": "50:2k10"
+   },
+   "domestic": "10:1",
+   "gems": "15:1k10",
+   "art": "5:1",
+   "cloth": "15:1",
+   "scrolls": "15:1",
+   "grimoire": "1:1",
+   "magic": "10:1",
+   "extra": []
+  },
+  {
+   "id": "skarbiec",
+   "name": "Skarbiec",
+   "group": "Skrzynie",
+   "status": "złoto",
+   "description": "Skarbiec zamku albo banku — pułapki, zamki, żołnierze. I może demon czy dwa.",
+   "money": {
+    "p": "5k100",
+    "s": "4k100",
+    "zk": "3k100"
+   },
+   "domestic": null,
+   "gems": "1k100",
+   "art": "1k10",
+   "cloth": "25:1",
+   "scrolls": "50:1k10",
+   "grimoire": "10:1k5",
+   "magic": "10:1k5",
+   "extra": []
+  },
+  {
+   "id": "chlop",
+   "name": "Chłop",
+   "group": "Ciała",
+   "status": "brąz",
+   "description": "Żebrak, wieśniak, robotnik — większość mieszkańców Starego Świata.",
+   "money": {
+    "p": "15:1k10",
+    "s": "5:1k2",
+    "zk": null
+   },
+   "domestic": null,
+   "gems": null,
+   "art": null,
+   "cloth": "1:1",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": null,
+   "extra": [
+    [
+     "rozne",
+     "25:1"
+    ]
+   ]
+  },
+  {
+   "id": "mieszczanin",
+   "name": "Mieszczanin",
+   "group": "Ciała",
+   "status": "srebro",
+   "description": "Dość zamożny przedstawiciel stanu średniego: sklepikarz, drobny kupiec.",
+   "money": {
+    "p": "75:1k10",
+    "s": "75:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": null,
+   "gems": "1:1",
+   "art": null,
+   "cloth": "5:1",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": null,
+   "extra": [
+    [
+     "rozne",
+     "25:1"
+    ],
+    [
+     "odziez",
+     "25:1"
+    ]
+   ]
+  },
+  {
+   "id": "szlachcic",
+   "name": "Szlachcic",
+   "group": "Ciała",
+   "status": "złoto",
+   "description": "Arystokrata albo bogacz lubiący obnosić się z majątkiem.",
+   "money": {
+    "p": "1k100",
+    "s": "2k10",
+    "zk": "1k10"
+   },
+   "domestic": null,
+   "gems": "50:1k2",
+   "art": "5:1",
+   "cloth": "1k5",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": "1:1",
+   "extra": [
+    [
+     "odziez",
+     "50:1"
+    ]
+   ]
+  },
+  {
+   "id": "czarodziej",
+   "name": "Czarodziej",
+   "group": "Ciała",
+   "status": "złoto",
+   "description": "Ekscentryczny albo potężny czarujący — może nosić rzadki przedmiot.",
+   "money": {
+    "p": "25:2k10",
+    "s": "50:2k10",
+    "zk": "50:1k10"
+   },
+   "domestic": null,
+   "gems": "5:1",
+   "art": null,
+   "cloth": "1:1",
+   "scrolls": "35:1",
+   "grimoire": "50:1",
+   "magic": "25:1",
+   "extra": [
+    [
+     "ziola",
+     "50:1k2"
+    ]
+   ]
+  },
+  {
+   "id": "oboz_bandytow",
+   "name": "Obóz bandytów",
+   "group": "Dodane",
+   "status": "srebro",
+   "description": "Kryjówka bandy z traktu: łupy z napadów, broń i zapasy.",
+   "money": {
+    "p": "75:3k10",
+    "s": "50:2k10",
+    "zk": "15:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "15:1k5",
+   "art": "10:1",
+   "cloth": "25:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "jedzenie",
+     "1k5"
+    ],
+    [
+     "pojemniki",
+     "1k2"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "bron",
+     "1k5"
+    ],
+    [
+     "pancerz",
+     "50:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "krypta",
+   "name": "Krypta albo kurhan",
+   "group": "Dodane",
+   "status": "złoto",
+   "description": "Grobowiec możnego albo dawny kurhan — dary grobowe, ale też klątwy i nieumarli.",
+   "money": {
+    "p": "25:1k100",
+    "s": "25:2k10",
+    "zk": "50:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "50:1k5",
+   "art": "50:1k2",
+   "cloth": "10:1k2",
+   "scrolls": "10:1",
+   "grimoire": "1:1",
+   "magic": "15:1",
+   "extra": [
+    [
+     "bron",
+     "25:1k2"
+    ],
+    [
+     "pancerz",
+     "15:1"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "oboz_zwierzoludzi",
+   "name": "Obóz zwierzoludzi",
+   "group": "Dodane",
+   "status": "brąz",
+   "description": "Zbieranina łupów z napadów na wsie — sporo zniszczone albo splugawione.",
+   "money": {
+    "p": "25:2k10",
+    "s": "10:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": "15:1k5",
+   "gems": "10:1k2",
+   "art": "5:1",
+   "cloth": "10:1k2",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "odziez",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "kanaly",
+   "name": "Kanały i nora skavenów",
+   "group": "Dodane",
+   "status": "srebro",
+   "description": "Śmieci, przemyt i to, co ciągną do nor skaveny.",
+   "money": {
+    "p": "50:1k100",
+    "s": "25:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": "10:1k5",
+   "gems": "10:1k2",
+   "art": null,
+   "cloth": "10:1",
+   "scrolls": "2:1",
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "narzedzia",
+     "25:1k2"
+    ],
+    [
+     "ziola",
+     "15:1"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "pole_bitwy",
+   "name": "Pole bitwy",
+   "group": "Dodane",
+   "status": "srebro",
+   "description": "Pobojowisko po potyczce — broń i pancerze poległych (część z Wadami), sakiewki, chorągwie.",
+   "money": {
+    "p": "50:1k100",
+    "s": "50:1k10",
+    "zk": "10:1k5"
+   },
+   "domestic": null,
+   "gems": "5:1",
+   "art": null,
+   "cloth": "15:1k2",
+   "scrolls": "2:1",
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "pojemniki",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "50:1k5"
+    ],
+    [
+     "bron",
+     "2k10"
+    ],
+    [
+     "pancerz",
+     "1k10"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "wrak",
+   "name": "Wrak statku albo barki",
+   "group": "Dodane",
+   "status": "srebro",
+   "description": "Rozbita łódź rzeczna albo statek — ładunek, kufry pasażerów, rzeczy załogi.",
+   "money": {
+    "p": "50:2k10",
+    "s": "50:2k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "15:1k5",
+   "art": "10:1",
+   "cloth": "25:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "pojemniki",
+     "1k5"
+    ],
+    [
+     "jedzenie",
+     "50:1k5"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ]
+   ],
+   "added": true
+  }
+ ],
+ "tables": {
+  "pojemniki": {
+   "label": "Pojemniki",
+   "rows": [
+    {
+     "min": 1,
+     "max": 10,
+     "name": "plecak"
+    },
+    {
+     "min": 11,
+     "max": 15,
+     "name": "beczka"
+    },
+    {
+     "min": 16,
+     "max": 20,
+     "name": "beczułka"
+    },
+    {
+     "min": 21,
+     "max": 30,
+     "name": "butelka"
+    },
+    {
+     "min": 31,
+     "max": 35,
+     "name": "dzban"
+    },
+    {
+     "min": 36,
+     "max": 40,
+     "name": "kufel cynowy"
+    },
+    {
+     "min": 41,
+     "max": 50,
+     "name": "sakiewka"
+    },
+    {
+     "min": 51,
+     "max": 60,
+     "name": "trzos"
+    },
+    {
+     "min": 61,
+     "max": 65,
+     "name": "worek"
+    },
+    {
+     "min": 66,
+     "max": 70,
+     "name": "duży worek"
+    },
+    {
+     "min": 71,
+     "max": 75,
+     "name": "juki"
+    },
+    {
+     "min": 76,
+     "max": 85,
+     "name": "torba na ramię"
+    },
+    {
+     "min": 86,
+     "max": 90,
+     "name": "tuba na zwoje"
+    },
+    {
+     "min": 91,
+     "max": 100,
+     "name": "bukłak"
+    }
+   ]
+  },
+  "jedzenie": {
+   "label": "Jedzenie i napitki",
+   "rows": [
+    {
+     "min": 1,
+     "max": 10,
+     "name": "pół litra piwa"
+    },
+    {
+     "min": 11,
+     "max": 15,
+     "name": "beczułka piwa"
+    },
+    {
+     "min": 16,
+     "max": 20,
+     "name": "pół litra Piwa Bugmana"
+    },
+    {
+     "min": 21,
+     "max": 25,
+     "name": "żywność na dzień"
+    },
+    {
+     "min": 26,
+     "max": 30,
+     "name": "imperialne śniadanie"
+    },
+    {
+     "min": 31,
+     "max": 40,
+     "name": "ciepły posiłek z gospody"
+    },
+    {
+     "min": 41,
+     "max": 50,
+     "name": "prowiant na 1 dzień"
+    },
+    {
+     "min": 51,
+     "max": 60,
+     "name": "prowiant na tydzień"
+    },
+    {
+     "min": 61,
+     "max": 70,
+     "name": "pasztecik Rumstera"
+    },
+    {
+     "min": 71,
+     "max": 75,
+     "name": "pół litra mocnego trunku"
+    },
+    {
+     "min": 76,
+     "max": 80,
+     "name": "butelka wina"
+    },
+    {
+     "min": 81,
+     "max": 85,
+     "name": "butelka dobrego wina"
+    },
+    {
+     "min": 86,
+     "max": 90,
+     "name": "butelka rzadkiego wina"
+    },
+    {
+     "min": 91,
+     "max": 100,
+     "name": "kielich wina lub mocnego trunku"
+    }
+   ]
+  },
+  "ksiazki": {
+   "label": "Księgi i dokumenty",
+   "rows": [
+    {
+     "min": 1,
+     "max": 5,
+     "name": "księga, aptekarstwo"
+    },
+    {
+     "min": 6,
+     "max": 10,
+     "name": "księga, sztuka"
+    },
+    {
+     "min": 11,
+     "max": 15,
+     "name": "księga, kryptografia"
+    },
+    {
+     "min": 16,
+     "max": 20,
+     "name": "księga, inżynieria"
+    },
+    {
+     "min": 21,
+     "max": 25,
+     "name": "księga iluminowana"
+    },
+    {
+     "min": 26,
+     "max": 30,
+     "name": "księga, prawo"
+    },
+    {
+     "min": 31,
+     "max": 50,
+     "name": "księga, literatura"
+    },
+    {
+     "min": 51,
+     "max": 55,
+     "name": "księga, magia"
+    },
+    {
+     "min": 56,
+     "max": 60,
+     "name": "księga, medycyna"
+    },
+    {
+     "min": 61,
+     "max": 75,
+     "name": "książka drukowana"
+    },
+    {
+     "min": 76,
+     "max": 85,
+     "name": "księga, religia"
+    },
+    {
+     "min": 86,
+     "max": 90,
+     "name": "dokument prawny"
+    },
+    {
+     "min": 91,
+     "max": 95,
+     "name": "mapa"
+    },
+    {
+     "min": 96,
+     "max": 100,
+     "name": "arkusze pergaminu (12)"
+    }
+   ]
+  },
+  "przebrania": {
+   "label": "Protezy i przebrania",
+   "rows": [
+    {
+     "min": 1,
+     "max": 10,
+     "name": "kostium"
+    },
+    {
+     "min": 11,
+     "max": 20,
+     "name": "zestaw do charakteryzacji"
+    },
+    {
+     "min": 21,
+     "max": 30,
+     "name": "przepaska na oko"
+    },
+    {
+     "min": 31,
+     "max": 40,
+     "name": "puder do twarzy"
+    },
+    {
+     "min": 41,
+     "max": 50,
+     "name": "szklane oko"
+    },
+    {
+     "min": 51,
+     "max": 60,
+     "name": "drewniana noga"
+    },
+    {
+     "min": 61,
+     "max": 70,
+     "name": "pozłacany nos"
+    },
+    {
+     "min": 71,
+     "max": 75,
+     "name": "hak"
+    },
+    {
+     "min": 76,
+     "max": 80,
+     "name": "cud inżynierii (proteza)"
+    },
+    {
+     "min": 81,
+     "max": 85,
+     "name": "maska teatralna"
+    },
+    {
+     "min": 86,
+     "max": 90,
+     "name": "maska wojenna"
+    },
+    {
+     "min": 91,
+     "max": 100,
+     "name": "drewniane zęby"
+    }
+   ]
+  },
+  "narzedzia": {
+   "label": "Narzędzia",
+   "rows": [
+    {
+     "min": 1,
+     "max": 2,
+     "name": "liczydło"
+    },
+    {
+     "min": 3,
+     "max": 5,
+     "name": "sidła na zwierzęta"
+    },
+    {
+     "min": 6,
+     "max": 7,
+     "name": "bosak"
+    },
+    {
+     "min": 8,
+     "max": 9,
+     "name": "miotła"
+    },
+    {
+     "min": 10,
+     "max": 11,
+     "name": "wiadro"
+    },
+    {
+     "min": 12,
+     "max": 13,
+     "name": "dłuto"
+    },
+    {
+     "min": 14,
+     "max": 15,
+     "name": "spinacze do bielizny (12)"
+    },
+    {
+     "min": 16,
+     "max": 17,
+     "name": "grzebień"
+    },
+    {
+     "min": 18,
+     "max": 20,
+     "name": "łom"
+    },
+    {
+     "min": 21,
+     "max": 22,
+     "name": "narzędzie do czyszczenia uszu"
+    },
+    {
+     "min": 23,
+     "max": 24,
+     "name": "okulary"
+    },
+    {
+     "min": 25,
+     "max": 26,
+     "name": "haczyki na ryby (12)"
+    },
+    {
+     "min": 27,
+     "max": 28,
+     "name": "żyłka (szpula)"
+    },
+    {
+     "min": 29,
+     "max": 30,
+     "name": "wędka"
+    },
+    {
+     "min": 31,
+     "max": 32,
+     "name": "szczotka do podłogi"
+    },
+    {
+     "min": 33,
+     "max": 34,
+     "name": "młotek sędziego"
+    },
+    {
+     "min": 35,
+     "max": 36,
+     "name": "młotek"
+    },
+    {
+     "min": 37,
+     "max": 38,
+     "name": "lusterko ręczne"
+    },
+    {
+     "min": 39,
+     "max": 40,
+     "name": "motyka"
+    },
+    {
+     "min": 41,
+     "max": 44,
+     "name": "klucz"
+    },
+    {
+     "min": 45,
+     "max": 48,
+     "name": "nóż"
+    },
+    {
+     "min": 49,
+     "max": 50,
+     "name": "wytrychy"
+    },
+    {
+     "min": 51,
+     "max": 52,
+     "name": "lupa"
+    },
+    {
+     "min": 53,
+     "max": 54,
+     "name": "kajdany"
+    },
+    {
+     "min": 55,
+     "max": 56,
+     "name": "monokl"
+    },
+    {
+     "min": 57,
+     "max": 58,
+     "name": "mop"
+    },
+    {
+     "min": 59,
+     "max": 60,
+     "name": "gwoździe (12)"
+    },
+    {
+     "min": 61,
+     "max": 62,
+     "name": "mapy nawigacyjne"
+    },
+    {
+     "min": 63,
+     "max": 64,
+     "name": "pędzel do malowania"
+    },
+    {
+     "min": 65,
+     "max": 66,
+     "name": "moździerz z tłuczkiem"
+    },
+    {
+     "min": 67,
+     "max": 68,
+     "name": "kilof"
+    },
+    {
+     "min": 69,
+     "max": 70,
+     "name": "drąg (3 metry)"
+    },
+    {
+     "min": 71,
+     "max": 72,
+     "name": "pióro do pisania"
+    },
+    {
+     "min": 73,
+     "max": 74,
+     "name": "grabie"
+    },
+    {
+     "min": 75,
+     "max": 76,
+     "name": "soczewki do czytania"
+    },
+    {
+     "min": 77,
+     "max": 78,
+     "name": "piła"
+    },
+    {
+     "min": 79,
+     "max": 80,
+     "name": "sierp"
+    },
+    {
+     "min": 81,
+     "max": 82,
+     "name": "wnyki z drutu"
+    },
+    {
+     "min": 83,
+     "max": 84,
+     "name": "szpadel"
+    },
+    {
+     "min": 85,
+     "max": 87,
+     "name": "kołek"
+    },
+    {
+     "min": 88,
+     "max": 89,
+     "name": "grawerowana pieczęć"
+    },
+    {
+     "min": 90,
+     "max": 91,
+     "name": "stalowe szczypce"
+    },
+    {
+     "min": 92,
+     "max": 93,
+     "name": "teleskop"
+    },
+    {
+     "min": 94,
+     "max": 96,
+     "name": "narzędzia pracy"
+    },
+    {
+     "min": 97,
+     "max": 98,
+     "name": "pinceta"
+    },
+    {
+     "min": 99,
+     "max": 100,
+     "name": "zestaw do pisania"
+    }
+   ]
+  },
+  "ziola": {
+   "label": "Zioła, leki i narkotyki",
+   "rows": [
+    {
+     "min": 1,
+     "max": 2,
+     "name": "korzeń żmii"
+    },
+    {
+     "min": 3,
+     "max": 4,
+     "name": "alfunas"
+    },
+    {
+     "min": 5,
+     "max": 8,
+     "name": "niebieski liść z Avermanni"
+    },
+    {
+     "min": 9,
+     "max": 10,
+     "name": "zestaw na zatrucia"
+    },
+    {
+     "min": 11,
+     "max": 15,
+     "name": "bandaż"
+    },
+    {
+     "min": 16,
+     "max": 17,
+     "name": "czarny lotos"
+    },
+    {
+     "min": 18,
+     "max": 20,
+     "name": "czyste szmaty (12 pasków)"
+    },
+    {
+     "min": 21,
+     "max": 22,
+     "name": "kula"
+    },
+    {
+     "min": 23,
+     "max": 24,
+     "name": "tonik na trawienie"
+    },
+    {
+     "min": 25,
+     "max": 26,
+     "name": "ziemny korzeń"
+    },
+    {
+     "min": 27,
+     "max": 28,
+     "name": "fakstoryl"
+    },
+    {
+     "min": 29,
+     "max": 30,
+     "name": "polowy zestaw medyczny (12)"
+    },
+    {
+     "min": 31,
+     "max": 32,
+     "name": "gesundheit"
+    },
+    {
+     "min": 33,
+     "max": 34,
+     "name": "głóg"
+    },
+    {
+     "min": 35,
+     "max": 36,
+     "name": "mikstura lecznicza"
+    },
+    {
+     "min": 37,
+     "max": 38,
+     "name": "kataplazm leczniczy"
+    },
+    {
+     "min": 39,
+     "max": 40,
+     "name": "sercobój"
+    },
+    {
+     "min": 41,
+     "max": 42,
+     "name": "maść ziołowa"
+    },
+    {
+     "min": 43,
+     "max": 44,
+     "name": "juck"
+    },
+    {
+     "min": 45,
+     "max": 46,
+     "name": "przywrotnik"
+    },
+    {
+     "min": 47,
+     "max": 48,
+     "name": "mydło ługowe (kostka)"
+    },
+    {
+     "min": 49,
+     "max": 50,
+     "name": "Grzybki Szalonego Kapelusznika"
+    },
+    {
+     "min": 51,
+     "max": 52,
+     "name": "liść maga"
+    },
+    {
+     "min": 53,
+     "max": 54,
+     "name": "korzeń mandragory"
+    },
+    {
+     "min": 55,
+     "max": 58,
+     "name": "narzędzia medyczne"
+    },
+    {
+     "min": 59,
+     "max": 60,
+     "name": "spirytus leczniczy"
+    },
+    {
+     "min": 61,
+     "max": 62,
+     "name": "księżycowy kwiat"
+    },
+    {
+     "min": 63,
+     "max": 64,
+     "name": "igła z nicią"
+    },
+    {
+     "min": 65,
+     "max": 66,
+     "name": "tonik na nerwy"
+    },
+    {
+     "min": 67,
+     "max": 68,
+     "name": "nocny cień"
+    },
+    {
+     "min": 69,
+     "max": 70,
+     "name": "wołowy liść"
+    },
+    {
+     "min": 71,
+     "max": 72,
+     "name": "Rozkosz Ranalda"
+    },
+    {
+     "min": 73,
+     "max": 74,
+     "name": "salwort"
+    },
+    {
+     "min": 75,
+     "max": 76,
+     "name": "sigmafoil"
+    },
+    {
+     "min": 77,
+     "max": 78,
+     "name": "czaroziel"
+    },
+    {
+     "min": 79,
+     "max": 80,
+     "name": "pajęczy liść"
+    },
+    {
+     "min": 81,
+     "max": 82,
+     "name": "pluja"
+    },
+    {
+     "min": 83,
+     "max": 84,
+     "name": "tarabet"
+    },
+    {
+     "min": 85,
+     "max": 86,
+     "name": "waleriana"
+    },
+    {
+     "min": 87,
+     "max": 88,
+     "name": "vanera"
+    },
+    {
+     "min": 89,
+     "max": 90,
+     "name": "ocet"
+    },
+    {
+     "min": 91,
+     "max": 92,
+     "name": "eliksir żywotności"
+    },
+    {
+     "min": 93,
+     "max": 94,
+     "name": "dziwnokorzeń"
+    },
+    {
+     "min": 95,
+     "max": 96,
+     "name": "kora wierzby"
+    },
+    {
+     "min": 97,
+     "max": 98,
+     "name": "krwawnik"
+    },
+    {
+     "min": 99,
+     "max": 100,
+     "name": "drżączka"
+    }
+   ]
+  },
+  "odziez": {
+   "label": "Odzież i dodatki",
+   "rows": [
+    {
+     "min": 1,
+     "max": 5,
+     "name": "amulet albo błyskotka"
+    },
+    {
+     "min": 6,
+     "max": 7,
+     "name": "skóra zwierzęcia"
+    },
+    {
+     "min": 8,
+     "max": 10,
+     "name": "pas"
+    },
+    {
+     "min": 11,
+     "max": 15,
+     "name": "buty"
+    },
+    {
+     "min": 16,
+     "max": 17,
+     "name": "bryczesy"
+    },
+    {
+     "min": 18,
+     "max": 20,
+     "name": "peleryna"
+    },
+    {
+     "min": 21,
+     "max": 24,
+     "name": "płaszcz"
+    },
+    {
+     "min": 25,
+     "max": 26,
+     "name": "wytworne ubranie"
+    },
+    {
+     "min": 27,
+     "max": 30,
+     "name": "praktyczne ubranie"
+    },
+    {
+     "min": 31,
+     "max": 33,
+     "name": "ubranie podróżne"
+    },
+    {
+     "min": 34,
+     "max": 36,
+     "name": "kubrak"
+    },
+    {
+     "min": 37,
+     "max": 38,
+     "name": "strój dworski"
+    },
+    {
+     "min": 39,
+     "max": 40,
+     "name": "wytworna suknia"
+    },
+    {
+     "min": 41,
+     "max": 42,
+     "name": "futro"
+    },
+    {
+     "min": 43,
+     "max": 44,
+     "name": "futrzana etola"
+    },
+    {
+     "min": 45,
+     "max": 46,
+     "name": "wytworne rękawiczki"
+    },
+    {
+     "min": 47,
+     "max": 50,
+     "name": "praktyczne rękawiczki"
+    },
+    {
+     "min": 51,
+     "max": 52,
+     "name": "futrzane rękawice"
+    },
+    {
+     "min": 53,
+     "max": 55,
+     "name": "chustka"
+    },
+    {
+     "min": 56,
+     "max": 57,
+     "name": "strojny kapelusz"
+    },
+    {
+     "min": 58,
+     "max": 60,
+     "name": "praktyczny kapelusz"
+    },
+    {
+     "min": 61,
+     "max": 62,
+     "name": "kaptur"
+    },
+    {
+     "min": 63,
+     "max": 66,
+     "name": "biżuteria"
+    },
+    {
+     "min": 67,
+     "max": 68,
+     "name": "maska (teatralna albo wojenna)"
+    },
+    {
+     "min": 69,
+     "max": 70,
+     "name": "chusta na szyję"
+    },
+    {
+     "min": 71,
+     "max": 75,
+     "name": "perfumy"
+    },
+    {
+     "min": 76,
+     "max": 77,
+     "name": "zapinki (6)"
+    },
+    {
+     "min": 78,
+     "max": 80,
+     "name": "symbol religijny"
+    },
+    {
+     "min": 81,
+     "max": 82,
+     "name": "wysokie buty z ostrogami"
+    },
+    {
+     "min": 83,
+     "max": 84,
+     "name": "szata"
+    },
+    {
+     "min": 85,
+     "max": 86,
+     "name": "szal"
+    },
+    {
+     "min": 87,
+     "max": 88,
+     "name": "berło"
+    },
+    {
+     "min": 89,
+     "max": 90,
+     "name": "chusta"
+    },
+    {
+     "min": 91,
+     "max": 92,
+     "name": "trzewiki"
+    },
+    {
+     "min": 93,
+     "max": 94,
+     "name": "sygnet"
+    },
+    {
+     "min": 95,
+     "max": 96,
+     "name": "tatuaż"
+    },
+    {
+     "min": 97,
+     "max": 98,
+     "name": "mundur"
+    },
+    {
+     "min": 99,
+     "max": 100,
+     "name": "laska"
+    }
+   ]
+  },
+  "rozne": {
+   "label": "Różne",
+   "rows": [
+    {
+     "min": 1,
+     "max": 2,
+     "name": "piłka"
+    },
+    {
+     "min": 3,
+     "max": 4,
+     "name": "pałeczka"
+    },
+    {
+     "min": 5,
+     "max": 6,
+     "name": "posłanie"
+    },
+    {
+     "min": 7,
+     "max": 8,
+     "name": "dzwoneczek"
+    },
+    {
+     "min": 9,
+     "max": 10,
+     "name": "koc"
+    },
+    {
+     "min": 11,
+     "max": 12,
+     "name": "miska"
+    },
+    {
+     "min": 13,
+     "max": 14,
+     "name": "świece (12)"
+    },
+    {
+     "min": 15,
+     "max": 16,
+     "name": "płócienna płachta"
+    },
+    {
+     "min": 17,
+     "max": 18,
+     "name": "łańcuch (1 metr)"
+    },
+    {
+     "min": 19,
+     "max": 20,
+     "name": "kreda"
+    },
+    {
+     "min": 21,
+     "max": 22,
+     "name": "węgiel do rysowania"
+    },
+    {
+     "min": 23,
+     "max": 24,
+     "name": "trąbka pocztowa"
+    },
+    {
+     "min": 25,
+     "max": 26,
+     "name": "garnek"
+    },
+    {
+     "min": 27,
+     "max": 28,
+     "name": "kubek"
+    },
+    {
+     "min": 29,
+     "max": 30,
+     "name": "zwykłe sztućce"
+    },
+    {
+     "min": 31,
+     "max": 32,
+     "name": "wysadzane klejnotami sztućce (komplet)"
+    },
+    {
+     "min": 33,
+     "max": 34,
+     "name": "lampa Davricha"
+    },
+    {
+     "min": 35,
+     "max": 36,
+     "name": "talia kart"
+    },
+    {
+     "min": 37,
+     "max": 38,
+     "name": "kości do gry"
+    },
+    {
+     "min": 39,
+     "max": 40,
+     "name": "lalka"
+    },
+    {
+     "min": 41,
+     "max": 42,
+     "name": "kotwiczka z liną"
+    },
+    {
+     "min": 43,
+     "max": 44,
+     "name": "czajnik"
+    },
+    {
+     "min": 45,
+     "max": 46,
+     "name": "drewno na opał"
+    },
+    {
+     "min": 47,
+     "max": 48,
+     "name": "olej do lamp"
+    },
+    {
+     "min": 49,
+     "max": 50,
+     "name": "latarnia"
+    },
+    {
+     "min": 51,
+     "max": 52,
+     "name": "latarnia sztormowa"
+    },
+    {
+     "min": 53,
+     "max": 55,
+     "name": "pościel"
+    },
+    {
+     "min": 56,
+     "max": 58,
+     "name": "zapałki"
+    },
+    {
+     "min": 59,
+     "max": 60,
+     "name": "materac z pierza"
+    },
+    {
+     "min": 61,
+     "max": 62,
+     "name": "menażka"
+    },
+    {
+     "min": 63,
+     "max": 64,
+     "name": "drumla"
+    },
+    {
+     "min": 65,
+     "max": 66,
+     "name": "instrument muzyczny"
+    },
+    {
+     "min": 67,
+     "max": 68,
+     "name": "patelnia"
+    },
+    {
+     "min": 69,
+     "max": 72,
+     "name": "fajka i tytoń"
+    },
+    {
+     "min": 73,
+     "max": 74,
+     "name": "afisz"
+    },
+    {
+     "min": 75,
+     "max": 76,
+     "name": "talerz"
+    },
+    {
+     "min": 77,
+     "max": 78,
+     "name": "kaganek"
+    },
+    {
+     "min": 79,
+     "max": 80,
+     "name": "szmaty"
+    },
+    {
+     "min": 81,
+     "max": 82,
+     "name": "lina (10 metrów)"
+    },
+    {
+     "min": 83,
+     "max": 84,
+     "name": "dywan"
+    },
+    {
+     "min": 85,
+     "max": 86,
+     "name": "sznurek (10 metrów)"
+    },
+    {
+     "min": 87,
+     "max": 88,
+     "name": "gobelin"
+    },
+    {
+     "min": 89,
+     "max": 90,
+     "name": "namiot"
+    },
+    {
+     "min": 91,
+     "max": 93,
+     "name": "hubka i krzesiwo"
+    },
+    {
+     "min": 94,
+     "max": 98,
+     "name": "pochodnie (12)"
+    },
+    {
+     "min": 99,
+     "max": 100,
+     "name": "gwizdek"
+    }
+   ]
+  },
+  "domowe": {
+   "label": "Sprzęty domowe",
+   "valueDice": "1k10",
+   "rows": [
+    {
+     "min": 1,
+     "max": 10,
+     "name": "kandelabr ze świecami"
+    },
+    {
+     "min": 11,
+     "max": 20,
+     "name": "kubki i kieliszki"
+    },
+    {
+     "min": 21,
+     "max": 30,
+     "name": "sztućce"
+    },
+    {
+     "min": 31,
+     "max": 40,
+     "name": "puchary"
+    },
+    {
+     "min": 41,
+     "max": 50,
+     "name": "latarnia z oliwą"
+    },
+    {
+     "min": 51,
+     "max": 60,
+     "name": "fajka i tytoń"
+    },
+    {
+     "min": 61,
+     "max": 70,
+     "name": "talerze i misy"
+    },
+    {
+     "min": 71,
+     "max": 80,
+     "name": "zastawa do herbaty"
+    },
+    {
+     "min": 81,
+     "max": 90,
+     "name": "wino i trunki"
+    },
+    {
+     "min": 91,
+     "max": 100,
+     "name": "inny przedmiot"
+    }
+   ]
+  },
+  "kamienie": {
+   "label": "Kamienie szlachetne",
+   "valueDice": "2k10",
+   "byStatus": {
+    "brąz": [
+     {
+      "min": 1,
+      "max": 10,
+      "name": "bursztyn"
+     },
+     {
+      "min": 11,
+      "max": 20,
+      "name": "agat"
+     },
+     {
+      "min": 21,
+      "max": 30,
+      "name": "hematyt"
+     },
+     {
+      "min": 31,
+      "max": 40,
+      "name": "lapis lazuli"
+     },
+     {
+      "min": 41,
+      "max": 50,
+      "name": "malachit"
+     },
+     {
+      "min": 51,
+      "max": 60,
+      "name": "rodochrozyt"
+     },
+     {
+      "min": 61,
+      "max": 70,
+      "name": "obsydian"
+     },
+     {
+      "min": 71,
+      "max": 80,
+      "name": "kwarc"
+     },
+     {
+      "min": 81,
+      "max": 90,
+      "name": "tygrysie oko"
+     },
+     {
+      "min": 91,
+      "max": 100,
+      "name": "turkus"
+     }
+    ],
+    "srebro": [
+     {
+      "min": 1,
+      "max": 10,
+      "name": "ametyst"
+     },
+     {
+      "min": 11,
+      "max": 20,
+      "name": "akwamaryna"
+     },
+     {
+      "min": 21,
+      "max": 30,
+      "name": "heliotrop"
+     },
+     {
+      "min": 31,
+      "max": 40,
+      "name": "cytryn"
+     },
+     {
+      "min": 41,
+      "max": 50,
+      "name": "jaspis"
+     },
+     {
+      "min": 51,
+      "max": 60,
+      "name": "kamień księżycowy"
+     },
+     {
+      "min": 61,
+      "max": 70,
+      "name": "onyks"
+     },
+     {
+      "min": 71,
+      "max": 80,
+      "name": "perydot"
+     },
+     {
+      "min": 81,
+      "max": 90,
+      "name": "topaz"
+     },
+     {
+      "min": 91,
+      "max": 100,
+      "name": "cyrkon"
+     }
+    ],
+    "złoto": [
+     {
+      "min": 1,
+      "max": 10,
+      "name": "beryl"
+     },
+     {
+      "min": 11,
+      "max": 20,
+      "name": "diament"
+     },
+     {
+      "min": 21,
+      "max": 30,
+      "name": "szmaragd"
+     },
+     {
+      "min": 31,
+      "max": 40,
+      "name": "granat"
+     },
+     {
+      "min": 41,
+      "max": 50,
+      "name": "jadeit"
+     },
+     {
+      "min": 51,
+      "max": 60,
+      "name": "opal"
+     },
+     {
+      "min": 61,
+      "max": 70,
+      "name": "perła"
+     },
+     {
+      "min": 71,
+      "max": 80,
+      "name": "rubin"
+     },
+     {
+      "min": 81,
+      "max": 90,
+      "name": "szafir"
+     },
+     {
+      "min": 91,
+      "max": 100,
+      "name": "spinel"
+     }
+    ]
+   }
+  },
+  "bizuteria": {
+   "label": "Biżuteria",
+   "valueDice": "2k10",
+   "rows": [
+    {
+     "min": 1,
+     "max": 5,
+     "name": "amulet"
+    },
+    {
+     "min": 6,
+     "max": 9,
+     "name": "naramiennik"
+    },
+    {
+     "min": 10,
+     "max": 14,
+     "name": "bransoleta"
+    },
+    {
+     "min": 15,
+     "max": 18,
+     "name": "brosza"
+    },
+    {
+     "min": 19,
+     "max": 22,
+     "name": "łańcuszek"
+    },
+    {
+     "min": 23,
+     "max": 25,
+     "name": "obroża na szyję"
+    },
+    {
+     "min": 26,
+     "max": 29,
+     "name": "diadem"
+    },
+    {
+     "min": 30,
+     "max": 33,
+     "name": "spinki do mankietów"
+    },
+    {
+     "min": 34,
+     "max": 42,
+     "name": "kolczyki"
+    },
+    {
+     "min": 43,
+     "max": 46,
+     "name": "spinka do włosów"
+    },
+    {
+     "min": 47,
+     "max": 50,
+     "name": "szpilka do kapelusza"
+    },
+    {
+     "min": 51,
+     "max": 55,
+     "name": "medalik"
+    },
+    {
+     "min": 56,
+     "max": 60,
+     "name": "medalion"
+    },
+    {
+     "min": 61,
+     "max": 65,
+     "name": "naszyjnik"
+    },
+    {
+     "min": 66,
+     "max": 69,
+     "name": "wisior"
+    },
+    {
+     "min": 70,
+     "max": 73,
+     "name": "zegarek kieszonkowy"
+    },
+    {
+     "min": 74,
+     "max": 77,
+     "name": "różaniec"
+    },
+    {
+     "min": 78,
+     "max": 82,
+     "name": "ozdobny pierścień"
+    },
+    {
+     "min": 83,
+     "max": 86,
+     "name": "pierścionek zaręczynowy"
+    },
+    {
+     "min": 87,
+     "max": 90,
+     "name": "obrączka"
+    },
+    {
+     "min": 91,
+     "max": 95,
+     "name": "sygnet"
+    },
+    {
+     "min": 96,
+     "max": 100,
+     "name": "torques"
+    }
+   ]
+  },
+  "sztuka": {
+   "label": "Dzieła sztuki",
+   "valueDice": "1k10*5",
+   "rows": [
+    {
+     "min": 1,
+     "max": 3,
+     "name": "liczydło"
+    },
+    {
+     "min": 4,
+     "max": 6,
+     "name": "rzeźbione smocze jajo"
+    },
+    {
+     "min": 7,
+     "max": 9,
+     "name": "broń ceremonialna"
+    },
+    {
+     "min": 10,
+     "max": 12,
+     "name": "kielich"
+    },
+    {
+     "min": 13,
+     "max": 15,
+     "name": "maska kostiumowa"
+    },
+    {
+     "min": 16,
+     "max": 18,
+     "name": "korona (fałszywa albo prawdziwa)"
+    },
+    {
+     "min": 19,
+     "max": 21,
+     "name": "ozdobny grzebień"
+    },
+    {
+     "min": 22,
+     "max": 24,
+     "name": "lalka"
+    },
+    {
+     "min": 25,
+     "max": 27,
+     "name": "grawerowane kości do gry"
+    },
+    {
+     "min": 28,
+     "max": 30,
+     "name": "figurka"
+    },
+    {
+     "min": 31,
+     "max": 33,
+     "name": "piersiówka"
+    },
+    {
+     "min": 34,
+     "max": 36,
+     "name": "flet"
+    },
+    {
+     "min": 37,
+     "max": 39,
+     "name": "portret w ramie"
+    },
+    {
+     "min": 40,
+     "max": 42,
+     "name": "plansza z pionkami"
+    },
+    {
+     "min": 43,
+     "max": 45,
+     "name": "zabawkowa harfa"
+    },
+    {
+     "min": 46,
+     "max": 48,
+     "name": "bożek"
+    },
+    {
+     "min": 49,
+     "max": 51,
+     "name": "instrument"
+    },
+    {
+     "min": 52,
+     "max": 54,
+     "name": "róg do picia z kości słoniowej"
+    },
+    {
+     "min": 55,
+     "max": 57,
+     "name": "szkatułka na biżuterię"
+    },
+    {
+     "min": 58,
+     "max": 60,
+     "name": "wielki posąg"
+    },
+    {
+     "min": 61,
+     "max": 63,
+     "name": "nóż do listów"
+    },
+    {
+     "min": 64,
+     "max": 66,
+     "name": "miniaturowy sarkofag"
+    },
+    {
+     "min": 67,
+     "max": 69,
+     "name": "pozytywka"
+    },
+    {
+     "min": 70,
+     "max": 72,
+     "name": "planetarium"
+    },
+    {
+     "min": 73,
+     "max": 75,
+     "name": "obraz"
+    },
+    {
+     "min": 76,
+     "max": 78,
+     "name": "przycisk do papieru"
+    },
+    {
+     "min": 79,
+     "max": 81,
+     "name": "cynowy kufel"
+    },
+    {
+     "min": 82,
+     "max": 84,
+     "name": "berło"
+    },
+    {
+     "min": 85,
+     "max": 87,
+     "name": "lusterko"
+    },
+    {
+     "min": 88,
+     "max": 90,
+     "name": "statuetka"
+    },
+    {
+     "min": 91,
+     "max": 93,
+     "name": "wazon"
+    },
+    {
+     "min": 94,
+     "max": 96,
+     "name": "maska wojenna"
+    },
+    {
+     "min": 97,
+     "max": 99,
+     "name": "rzeźba w drewnie"
+    },
+    {
+     "min": 100,
+     "max": 100,
+     "name": "inny przedmiot"
+    }
+   ]
+  },
+  "tkaniny": {
+   "label": "Ubrania, futra i tkaniny",
+   "valueDice": "1k10",
+   "rows": [
+    {
+     "min": 1,
+     "max": 3,
+     "name": "skóra zwierzęcia"
+    },
+    {
+     "min": 4,
+     "max": 6,
+     "name": "pas"
+    },
+    {
+     "min": 7,
+     "max": 9,
+     "name": "koce"
+    },
+    {
+     "min": 10,
+     "max": 12,
+     "name": "buty i trzewiki"
+    },
+    {
+     "min": 13,
+     "max": 15,
+     "name": "peleryna"
+    },
+    {
+     "min": 16,
+     "max": 18,
+     "name": "płaszcz"
+    },
+    {
+     "min": 19,
+     "max": 21,
+     "name": "wytworne ubranie"
+    },
+    {
+     "min": 22,
+     "max": 24,
+     "name": "praktyczne ubranie"
+    },
+    {
+     "min": 25,
+     "max": 27,
+     "name": "ubranie podróżne"
+    },
+    {
+     "min": 28,
+     "max": 30,
+     "name": "kubrak"
+    },
+    {
+     "min": 31,
+     "max": 33,
+     "name": "kostium"
+    },
+    {
+     "min": 34,
+     "max": 36,
+     "name": "strój dworski"
+    },
+    {
+     "min": 37,
+     "max": 39,
+     "name": "wytworne zasłony"
+    },
+    {
+     "min": 40,
+     "max": 42,
+     "name": "haft"
+    },
+    {
+     "min": 43,
+     "max": 45,
+     "name": "futro"
+    },
+    {
+     "min": 46,
+     "max": 48,
+     "name": "futrzana etola"
+    },
+    {
+     "min": 49,
+     "max": 51,
+     "name": "wytworne rękawiczki"
+    },
+    {
+     "min": 52,
+     "max": 54,
+     "name": "praktyczne rękawiczki"
+    },
+    {
+     "min": 55,
+     "max": 57,
+     "name": "jedwabna chustka"
+    },
+    {
+     "min": 58,
+     "max": 60,
+     "name": "strojny kapelusz"
+    },
+    {
+     "min": 61,
+     "max": 63,
+     "name": "praktyczny kapelusz"
+    },
+    {
+     "min": 64,
+     "max": 66,
+     "name": "wytworna pościel"
+    },
+    {
+     "min": 67,
+     "max": 69,
+     "name": "zwykła pościel"
+    },
+    {
+     "min": 70,
+     "max": 72,
+     "name": "sakiewka"
+    },
+    {
+     "min": 73,
+     "max": 75,
+     "name": "trzos"
+    },
+    {
+     "min": 76,
+     "max": 78,
+     "name": "szaty"
+    },
+    {
+     "min": 79,
+     "max": 81,
+     "name": "wytworny dywan"
+    },
+    {
+     "min": 82,
+     "max": 84,
+     "name": "tkany dywanik"
+    },
+    {
+     "min": 85,
+     "max": 87,
+     "name": "szal"
+    },
+    {
+     "min": 88,
+     "max": 90,
+     "name": "gobelin"
+    },
+    {
+     "min": 91,
+     "max": 93,
+     "name": "mundur"
+    },
+    {
+     "min": 94,
+     "max": 96,
+     "name": "laska"
+    },
+    {
+     "min": 97,
+     "max": 99,
+     "name": "makata"
+    },
+    {
+     "min": 100,
+     "max": 100,
+     "name": "inny przedmiot"
+    }
+   ]
+  }
+ },
+ "weaponFlaws": [
+  {
+   "min": 1,
+   "max": 10,
+   "name": "Nieporęczny"
+  },
+  {
+   "min": 11,
+   "max": 25,
+   "name": "Niebezpieczna"
+  },
+  {
+   "min": 26,
+   "max": 35,
+   "name": "Nieprecyzyjna"
+  },
+  {
+   "min": 36,
+   "max": 50,
+   "name": "Tandetny"
+  },
+  {
+   "min": 51,
+   "max": 60,
+   "name": "Powolna"
+  },
+  {
+   "min": 61,
+   "max": 70,
+   "name": "Brzydki"
+  },
+  {
+   "min": 71,
+   "max": 80,
+   "name": "Tępa"
+  },
+  {
+   "min": 81,
+   "max": 95,
+   "name": "Zawodny"
+  },
+  {
+   "min": 96,
+   "max": 100,
+   "name": "rzuć dwa razy"
+  }
+ ],
+ "armourFlaws": [
+  {
+   "min": 1,
+   "max": 15,
+   "name": "Nieporęczny"
+  },
+  {
+   "min": 16,
+   "max": 30,
+   "name": "Częściowy"
+  },
+  {
+   "min": 31,
+   "max": 50,
+   "name": "Tandetny"
+  },
+  {
+   "min": 51,
+   "max": 65,
+   "name": "Brzydki"
+  },
+  {
+   "min": 66,
+   "max": 80,
+   "name": "Zawodny"
+  },
+  {
+   "min": 81,
+   "max": 95,
+   "name": "Wrażliwe punkty"
+  },
+  {
+   "min": 96,
+   "max": 100,
+   "name": "rzuć dwa razy"
+  }
+ ]
+}

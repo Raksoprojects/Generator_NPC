@@ -33,7 +33,9 @@ import type {
   Talent,
   TierDef,
   TierId,
-  TiersData
+  TiersData,
+  ArtefactsData,
+  LootData
 } from "./types";
 
 type ProfessionsData = Record<string, Profession>;
@@ -65,6 +67,9 @@ export interface GameData {
   /** Przedmioty magiczne i premie do czarowania. */
   magicItems?: MagicItemsData;
   treasures?: TreasuresData;
+  /** Generator przedmiotow magicznych (Treasure & Artefacts) i lupow wg lokacji. */
+  artefacts?: ArtefactsData;
+  loot?: LootData;
   /** Opcjonalna nakladka profesji dla zasad domowych. */
   professionsDomowe?: ProfessionsData;
 }
@@ -96,7 +101,9 @@ const FILES = {
   professionTitles: "profession_titles.json",
   vampires: "vampires.json",
   magicItems: "magic_items.json",
-  treasures: "treasures.json"
+  treasures: "treasures.json",
+  artefacts: "artefacts.json",
+  loot: "loot.json"
 } as const;
 
 /** Wstrzykuje dane bezposrednio (testy). */
@@ -467,6 +474,14 @@ export function professionTitle(profession: string, level: number, sex: Sex | un
 
 export function getMagicItems(): MagicItemsData | undefined {
   return data().magicItems;
+}
+
+export function getArtefacts(): ArtefactsData | undefined {
+  return data().artefacts;
+}
+
+export function getLoot(): LootData | undefined {
+  return data().loot;
 }
 
 export function getTreasures(): TreasuresData | undefined {

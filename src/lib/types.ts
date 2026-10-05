@@ -367,6 +367,166 @@ export interface ItemEffects {
   qualities?: string[];
 }
 
+// ---------------------------------------------------------------------------
+// Generator przedmiotow magicznych i lupow (artefacts.json, loot.json)
+// ---------------------------------------------------------------------------
+
+/** Wiersz tabeli k100 (min-max) z opcjonalnymi zasadami dla generatora. */
+export interface TableRow {
+  min: number;
+  max: number;
+  name: string;
+  text?: string;
+  cursed?: boolean;
+  /** Przeklety wynik: rzuc jeszcze raz w tej tabeli, by ustalic moc. */
+  reroll?: boolean;
+  /** Wyniki, przy ktorych przeklety przedmiot ma tez dobroczynna moc (mikstury 99-100). */
+  rerollOn?: number[];
+  /** Dodatkowe rzuty generatora: species, attack, spell, powerStone... */
+  rolls?: string[];
+  runes?: "weapon" | "armour" | "talisman";
+  noWp?: boolean;
+  wp?: string | number;
+  effects?: ItemEffects;
+  duration?: string;
+  ingredients?: string;
+  noEffect?: boolean;
+  twice?: boolean;
+  thrice?: boolean;
+  flaw?: boolean;
+  major?: boolean;
+  permanentMinor?: boolean;
+  lores?: string[];
+  lore?: string;
+  count?: number | string;
+  wpDice?: string;
+  ap?: number;
+  qualities?: string[];
+  column?: string;
+  dice?: string;
+  value?: number;
+  damage?: number;
+  /** Podtabela k10 rodzaju broni: [od, do, nazwa]. */
+  d10?: [number, number, string][];
+  ranged?: boolean;
+  special?: "silver" | "runes" | "chaos" | "daemon";
+  klauser?: number;
+  regular?: number;
+  master?: number;
+  death?: boolean;
+  melee?: boolean;
+  thrown?: boolean;
+}
+
+export interface WeaponAbility {
+  name: string;
+  text: string;
+  melee?: [number, number];
+  ranged?: [number, number];
+  cursed?: boolean;
+  rolls?: string[];
+  effects?: ItemEffects;
+}
+
+export interface RenownedItem {
+  name: string;
+  wp: number | null;
+  value: string;
+  enc: number;
+  availability: string;
+  text: string;
+}
+
+export interface ArtefactCategory {
+  name: string;
+  wp?: string;
+  limit?: string;
+  intro?: string;
+  /** Rzut w ogolnej tabeli Zalet i Wad przedmiotow magicznych. */
+  itemQualities?: boolean;
+  items?: TableRow[];
+  // Amunicja
+  kinds?: TableRow[];
+  columns?: Record<string, TableRow[]>;
+  powers?: Record<string, { text: string; cursed?: boolean; rolls?: string[] }>;
+  // Pancerze
+  pieces?: TableRow[];
+  enchantmentCount?: TableRow[];
+  protection?: TableRow[];
+  enchantments?: TableRow[];
+  wizardry?: TableRow[];
+  // Bronie
+  types?: TableRow[];
+  abilityCount?: TableRow[];
+  abilities?: WeaponAbility[];
+  might?: TableRow[];
+  silver?: string;
+  chaos?: string;
+  daemon?: string;
+  renowned?: RenownedItem[];
+}
+
+export interface ArtefactsData {
+  note: string;
+  source: string;
+  categoryTable: TableRow[];
+  categories: Record<string, ArtefactCategory>;
+  tables: {
+    characteristic: string[];
+    species: TableRow[];
+    attackProtection: TableRow[];
+    spellLore: TableRow[];
+    powerStones: TableRow[];
+    blessings: TableRow[];
+    qualities: { qualities: TableRow[]; flaws: TableRow[] };
+    weaponQualities: { qualities: TableRow[]; flaws: TableRow[] };
+    charArmour: TableRow[];
+    charWeapon: TableRow[];
+    minorCurses: TableRow[];
+    majorCurses: TableRow[];
+  };
+  klauser: { intro: string; armour: TableRow[]; weapon: TableRow[]; death: TableRow[] };
+  runeCount: TableRow[];
+}
+
+/** Lokacja w tabeli lupow; pola "szansa:kosci" ("25:1k10") albo same kosci; null = brak. */
+export interface LootLocation {
+  id: string;
+  name: string;
+  group: string;
+  status: "brąz" | "srebro" | "złoto";
+  description: string;
+  money: { p: string | null; s: string | null; zk: string | null };
+  domestic: string | null;
+  gems: string | null;
+  art: string | null;
+  cloth: string | null;
+  scrolls: string | null;
+  grimoire: string | null;
+  magic: string | null;
+  /** Dodatkowe tabele przedmiotow: [klucz tabeli, "szansa:kosci"]; "bron"/"pancerz" - z Wadami. */
+  extra: [string, string][];
+  added?: boolean;
+}
+
+export interface LootTable {
+  label: string;
+  /** Wartosc sztuki w monetach Statusu lokacji ("2k10", "1k10*5"). */
+  valueDice?: string;
+  rows?: TableRow[];
+  byStatus?: Record<string, TableRow[]>;
+}
+
+export interface LootData {
+  note: string;
+  levels: { level: number; label: string }[];
+  coinByStatus: Record<string, "p" | "s" | "zk">;
+  locations: LootLocation[];
+  tables: Record<string, LootTable>;
+  weaponFlaws: TableRow[];
+  armourFlaws: TableRow[];
+}
+
 export interface RuneDef {
   name: string;
   sl: number;

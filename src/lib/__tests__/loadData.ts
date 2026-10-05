@@ -33,6 +33,8 @@ export function loadTestGameData(): void {
     professionTitles: readJson("profession_titles.json"),
     vampires: readJson("vampires.json"),
     magicItems: readJson("magic_items.json"),
-    treasures: readJson("treasures.json")
+    treasures: readJson("treasures.json"),
+    artefacts: readJson("artefacts.json"),
+    loot: readJson("loot.json")
   } as GameData);
 }
