@@ -28,6 +28,8 @@ przy talentach, ale polskie znaki tak).
 | `vampires.json` | Wampiry: Linie Krwi (k100, modyfikatory cech, listy darów i słabości, tradycje), Dary Krwi, Słabości, liczba darów i Wiek wg poziomu |
 | `magic_items.json` | Przedmioty magiczne (szaty, kostur, mikstury, zwój) i premie do czarowania z talentów |
 | `treasures.json` | Przedmioty magiczne BN (runy, Broń Chaosu, artefakty, przeklęte przedmioty) i jakość wykonania broni/pancerza |
+| `artefacts.json` | Zakładka „Przedmioty”: tabele nieoficjalnego kompendium *Treasure & Artefacts* (kategorie, pozycje, klątwy, runy Klausera, przedmioty sławne) |
+| `loot.json` | Zakładka „Łupy”: lokacje z tabelą pieniędzy, kosztowności i przedmiotów oraz tabele przedmiotów codziennych |
 | `talents.json`, `skills.json`, `professions.json`, `classes.json`, `races.json` | Dane gry przeniesione z karty postaci |
 
 ---
@@ -345,3 +347,41 @@ Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
 
 W `weapons.json` → `raceVariants` rasa może dostać własne odmiany broni
 (`"Krasnolud": { "chance": 0.85, "weapons": { "Topór": "Krasnoludzki topór" } }`).
+
+## Przedmioty magiczne (`artefacts.json`) i łupy (`loot.json`)
+
+Oba pliki powstały z nieoficjalnego kompendium *WFRP4 Unofficial Treasure & Artefacts 1.0*
+(przełożone na polski, nazwy Talentów, Cech i Stanów — z podręcznika podstawowego).
+
+**`artefacts.json`**
+
+- `categoryTable` — k100 kategorii (amulety, pierścienie, bronie…), `categories.<klucz>` — kategoria:
+  `wp` (Siła Woli w kościach, np. `"2k10+30"`), `limit`, `intro`, `itemQualities` (rzut w ogólnej
+  tabeli Zalet i Wad) i `items` — wiersze k100 (`min`, `max`, `name`, `text`).
+- Pola wiersza: `cursed` (przeklęty), `reroll` (przeklęty — moc z ponownego rzutu), `wp` / `noWp`,
+  `runes` (`weapon` / `armour` / `talisman` — runy krasnoludzkie z `treasures.json`), `effects`,
+  `duration` i `ingredients` (mikstury) oraz `rolls` — dodatkowe rzuty generatora:
+  `species`, `attack`, `characteristic`, `charArmour`, `charWeapon`, `powerStone`, `spell`
+  (albo `spell:Ognia`), `spells`, `scrollSpells`, `grimoire`, `blessing`, `ward`, `might`,
+  `accuracy`, `wizardry`, `skullCharm`. Zaklęcia losują się z `spells.json`.
+- Pancerze (`pieces`, `enchantmentCount`, `protection`, `enchantments`) i bronie (`types` z podtabelą
+  k10, `abilityCount`, `abilities` z kolumnami `melee` / `ranged`, `might`) mają własne tabele.
+- `tables` — wspólne: rodzaje istot, ochrona przed atakami, tradycje zaklęć, Kamienie Mocy,
+  Błogosławieństwa, Zalety i Wady, drobne i poważne klątwy. `klauser` — runy Klausera,
+  `runeCount` — liczba run (krasnoludzkich najwyżej 3 zwykłe i 1 mistrzowska).
+- Kategoria „Z podręczników” w zakładce bierze szablony z `treasures.json` i przedmioty z
+  `magic_items.json` (bez zwojów).
+
+**`loot.json`**
+
+- `locations[]` — `id`, `name`, `group`, `status` (brąz / srebro / złoto — waluta wyceny),
+  `description`, `money` (`p`, `s`, `zk`), `domestic`, `gems`, `art`, `cloth`, `scrolls`,
+  `grimoire`, `magic` — zapis `"szansa:kości"` (`"25:1k10"` = 25% na 1k10), same kości = zawsze,
+  `null` = nic. `extra` — dodatkowe tabele przedmiotów: `[klucz tabeli, "szansa:kości"]`;
+  `bron` i `pancerz` losują sprzęt z `weapons.json`, w połowie z Wadami. `added: true` —
+  lokacja dodana w generatorze (nie ma jej w źródle).
+- `levels` — poziomy miejsca 1–5: mnożą pieniądze i wycenę kosztowności (jak Tier w źródle),
+  a szanse na przedmioty magiczne rosną o połowę za każdy poziom ponad pierwszy.
+- `tables` — przedmioty codzienne (`pojemniki`, `jedzenie`, `ksiazki`, `narzedzia`, `ziola`,
+  `odziez`, `rozne`…) i kosztowności z wyceną `valueDice` (`kamienie` wg statusu, `bizuteria`,
+  `sztuka`, `domowe`, `tkaniny`). Kości k10 i k100 wybuchają przy maksimum.
