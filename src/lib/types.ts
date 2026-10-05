@@ -564,11 +564,24 @@ export interface VampiresData {
     professions?: string[];
     /** Bez pancerza - poza magicznym od heroicznego (Strigoi). */
     noArmour?: boolean;
+    turning?: VampireTurning;
   })[];
   gifts: (MutationRow & { limit?: string; recommended?: string })[];
   weaknesses: MutationRow[];
   /** Rozwiniecia Splatania i Jezyka (Magicznego) wampira na poziomie, mnozone przez magic / 2. */
   magicAdvances?: Partial<Record<TierId, number>>;
+}
+
+/** Przemiana czlowieka w wampira tej Linii Krwi (Krwawy Pocałunek). */
+export interface VampireTurning {
+  /** Premie do Cech wzgledem czlowieka. */
+  modifiers: Partial<Record<"WW" | "US" | "S" | "Wt" | "I" | "Zw" | "Zr" | "Int" | "SW" | "Ogd", number>>;
+  movement: number;
+  /** 12 Umiejetnosci Rasowych linii: 3 dostaja +5, 3 kolejne +3. */
+  skills: string[];
+  /** 5 Talentow linii; "A lub B" - jeden z nich, "losowy" - z Tabeli Losowych Talentow. */
+  talents: string[];
+  trappings: string[];
 }
 
 /** Czarowanie wampirow danej Linii Krwi. */
@@ -715,6 +728,8 @@ export interface Npc {
   race: string;
   /** Stworzenie z bestiariusza - baza cech to wartosci z ksiazki minus 10. */
   creature?: string;
+  /** Wampir przemieniony z czlowieka: cechy czlowieka + premie Linii Krwi zamiast profilu z bestiariusza. */
+  turned?: boolean;
   /** Archetyp; pusty dla bestii bez profesji. */
   archetype: string;
   tier: TierId;

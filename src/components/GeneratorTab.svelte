@@ -13,6 +13,8 @@
   /** Grupa albo podgrupa stworzen ("Chaos › Zwierzoludzie"); pusta = wszystkie. */
   let creatureGroup = $state("");
   let bloodline = $state("");
+  /** Wampir: profil z bestiariusza albo przemiana czlowieka (profesje za zycia + premie Linii Krwi). */
+  let vampireMethod = $state<"profil" | "przemiana">("profil");
 
   const groupTree = gd.creatureGroupTree();
   const bloodlines = gd.getVampires()?.bloodlines.map((b) => b.name) ?? [];
@@ -135,6 +137,7 @@
         creature: creature || (creatureGroup ? undefined : pick(typicalCreatures)),
         creatureGroup: creature ? undefined : creatureGroup || undefined,
         bloodline: showBloodline && bloodline ? bloodline : undefined,
+        turned: showBloodline && vampireMethod === "przemiana",
         archetype: civilized && archetype && archetype !== NO_CAREER ? archetype : undefined,
         noArchetype: civilized && archetype === NO_CAREER,
         tier: (tier || undefined) as TierId | undefined,
@@ -227,6 +230,12 @@
             <select bind:value={bloodline}>
               <option value="">— losowa —</option>
               {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
+            </select>
+          </label>
+          <label>Sposób tworzenia
+            <select bind:value={vampireMethod}>
+              <option value="profil">profil z bestiariusza</option>
+              <option value="przemiana">przemiana człowieka</option>
             </select>
           </label>
         {/if}

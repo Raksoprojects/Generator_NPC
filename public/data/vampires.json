@@ -27,6 +27,8 @@
    "name": "Krwawy Smok",
    "effect": "Upadli rycerze Abhorasha — straszliwi wojownicy o rycerskim kodeksie, dążący do uwolnienia się od Głodu. Preferowane tradycje: Zwierząt albo Cieni, Nekromancja.",
    "modifiers": {
+    "WW": 15,
+    "S": 10,
     "Ogd": -10
    },
    "gifts": [
@@ -63,6 +65,46 @@
     "minAdvances": 10,
     "maxArcane": 2,
     "maxPetty": 1
+   },
+   "turning": {
+    "modifiers": {
+     "WW": 30,
+     "S": 20,
+     "Wt": 20,
+     "I": 10,
+     "Zw": 20,
+     "Zr": 10,
+     "SW": 20
+    },
+    "movement": 2,
+    "skills": [
+     "Charyzma",
+     "Opanowanie",
+     "Unik",
+     "Występy (Aktorstwo)",
+     "Zastraszanie",
+     "Język (Dowolny)",
+     "Język (Bretoński)",
+     "Wiedza (Heraldyka)",
+     "Broń Biała (Podstawowa)",
+     "Percepcja",
+     "Jeździectwo (Konie)",
+     "Skradanie (Wieś)"
+    ],
+    "talents": [
+     "Wyczulony Zmysł (Dowolny)",
+     "Wyczucie Kierunku",
+     "Obieżyświat",
+     "Doświadczony Wędrowiec (Wybrany Teren)",
+     "Bardzo Silny lub Urodzony Wojownik"
+    ],
+    "trappings": [
+     "płaszcz",
+     "ubranie",
+     "sztylet",
+     "broń ręczna",
+     "sakiewka"
+    ]
    }
   },
   {
@@ -110,6 +152,47 @@
      "legendarny": 0.8
     },
     "minAdvances": 15
+   },
+   "turning": {
+    "modifiers": {
+     "WW": 20,
+     "S": 10,
+     "Wt": 10,
+     "I": 30,
+     "Zw": 20,
+     "SW": 20,
+     "Ogd": 20
+    },
+    "movement": 2,
+    "skills": [
+     "Charyzma",
+     "Unik",
+     "Plotkowanie",
+     "Targowanie",
+     "Zastraszanie",
+     "Intuicja",
+     "Język (Dowolny)",
+     "Dowodzenie",
+     "Wiedza (Historia)",
+     "Broń Biała (Podstawowa)",
+     "Percepcja",
+     "Skradanie (Miasto)"
+    ],
+    "talents": [
+     "Wyczulony Zmysł (Dowolny)",
+     "Ulicznik lub Cień",
+     "Atrakcyjny lub Słuch Absolutny",
+     "Mistrz Charakteryzacji",
+     "Charyzmatyczny"
+    ],
+    "trappings": [
+     "sztylet",
+     "wytworne ubranie",
+     "kapelusz",
+     "kaptur albo maska",
+     "sakiewka",
+     "torba"
+    ]
    }
   },
   {
@@ -158,6 +241,46 @@
      "legendarny": 1
     },
     "minAdvances": 15
+   },
+   "turning": {
+    "modifiers": {
+     "WW": 10,
+     "S": 20,
+     "Wt": 20,
+     "I": 20,
+     "Zr": 20,
+     "Int": 30,
+     "SW": 30,
+     "Ogd": -20
+    },
+    "movement": 2,
+    "skills": [
+     "Splatanie Magii (Dhar)",
+     "Odporność",
+     "Zastraszanie",
+     "Język (Dowolny)",
+     "Język (Magiczny)",
+     "Wiedza (Alchemia)",
+     "Wiedza (Nekromancja)",
+     "Wiedza (Nauka)",
+     "Broń Biała (Podstawowa)",
+     "Percepcja",
+     "Zwinne Palce",
+     "Skradanie (Wieś)"
+    ],
+    "talents": [
+     "Wyczulony Zmysł (Dowolny)",
+     "Straszny lub Szósty Zmysł",
+     "Poliglota lub Znawca (Magia)",
+     "Percepcja Magiczna",
+     "Czytanie/Pisanie"
+    ],
+    "trappings": [
+     "płaszcz",
+     "sztylet",
+     "wytworne ubranie",
+     "torba z przyborami do pisania i k10 arkuszami pergaminu"
+    ]
    }
   },
   {
@@ -226,7 +349,49 @@
     "Gladiator",
     "Żołnierz"
    ],
-   "noArmour": true
+   "noArmour": true,
+   "turning": {
+    "modifiers": {
+     "WW": 20,
+     "S": 30,
+     "Wt": 20,
+     "I": 20,
+     "Zw": 30,
+     "Zr": 10,
+     "SW": 20,
+     "Ogd": -20
+    },
+    "movement": 2,
+    "skills": [
+     "Atletyka",
+     "Oswajanie",
+     "Wspinaczka",
+     "Unik",
+     "Odporność",
+     "Zastraszanie",
+     "Broń Biała (Podstawowa)",
+     "Broń Biała (Bijatyka)",
+     "Sztuka Przetrwania",
+     "Percepcja",
+     "Skradanie (Wieś)",
+     "Tropienie"
+    ],
+    "talents": [
+     "Wyczulony Zmysł (Dowolny)",
+     "Oburęczność lub Doświadczony Wędrowiec (Wybrany Teren)",
+     "Twardziel",
+     "Tragarz lub Silne Nogi",
+     "Bardzo Silny"
+    ],
+    "trappings": [
+     "płaszcz",
+     "sztylet",
+     "broń ręczna",
+     "kaptur albo maska",
+     "znoszone ubranie",
+     "torba"
+    ]
+   }
   },
   {
    "min": 66,
@@ -269,6 +434,47 @@
      "legendarny": 0.8
     },
     "minAdvances": 15
+   },
+   "turning": {
+    "modifiers": {
+     "WW": 25,
+     "S": 20,
+     "Wt": 10,
+     "I": 20,
+     "Zw": 20,
+     "Zr": 10,
+     "SW": 20,
+     "Ogd": 10
+    },
+    "movement": 2,
+    "skills": [
+     "Charyzma",
+     "Unik",
+     "Plotkowanie",
+     "Targowanie",
+     "Zastraszanie",
+     "Dowodzenie",
+     "Język (Dowolny)",
+     "Wiedza (Heraldyka)",
+     "Wiedza (Polityka)",
+     "Broń Biała (Podstawowa)",
+     "Percepcja",
+     "Skradanie (Wieś)"
+    ],
+    "talents": [
+     "Wyczulony Zmysł (Dowolny)",
+     "Żyłka Handlowa lub Intrygant",
+     "Błękitna Krew",
+     "Czytanie/Pisanie",
+     "Błyskotliwość lub Urodzony Wojownik"
+    ],
+    "trappings": [
+     "płaszcz",
+     "sztylet",
+     "wytworne ubranie",
+     "broń ręczna",
+     "sakiewka"
+    ]
    }
   },
   {
@@ -277,7 +483,7 @@
    "name": "Niezależny",
    "effect": "Wyrzutki bez linii albo z pomniejszych rodów — zaradni i nieufni wobec wszelkich rozkazów. Preferowane tradycje: Śmierci albo Cieni, Nekromancja albo Czarownictwo.",
    "modifiers": {
-    "WW": -20,
+    "WW": -10,
     "S": -10,
     "Wt": -10,
     "I": -10,
@@ -322,6 +528,47 @@
      "legendarny": 0.6
     },
     "minAdvances": 10
+   },
+   "turning": {
+    "modifiers": {
+     "WW": 10,
+     "S": 10,
+     "Wt": 10,
+     "I": 10,
+     "Zw": 10,
+     "Zr": 10,
+     "SW": 20
+    },
+    "movement": 1,
+    "skills": [
+     "Charyzma",
+     "Unik",
+     "Odporność",
+     "Plotkowanie",
+     "Targowanie",
+     "Zastraszanie",
+     "Język (Dowolny)",
+     "Broń Biała (Podstawowa)",
+     "Nawigacja",
+     "Sztuka Przetrwania",
+     "Percepcja",
+     "Skradanie (Dowolne)"
+    ],
+    "talents": [
+     "Wyczulony Zmysł (Dowolny)",
+     "Ulicznik lub Obieżyświat",
+     "Błyskotliwość lub Charyzmatyczny",
+     "losowy",
+     "losowy"
+    ],
+    "trappings": [
+     "płaszcz",
+     "sztylet",
+     "broń ręczna",
+     "kaptur albo maska",
+     "znoszone ubranie",
+     "torba"
+    ]
    }
   }
  ],
@@ -1162,8 +1409,9 @@
   "sredni": 6,
   "zaawansowany": 10,
   "doswiadczony": 15,
-  "heroiczny": 20,
-  "legendarny": 30
+  "heroiczny": 25,
+  "legendarny": 40
  },
- "casting_note": "casting: chance - szansa, ze wampir tej linii czaruje (wg poziomu; brak poziomu = 0), minAdvances - co najmniej tyle rozwiniec Splatania i Jezyka (Magicznego), maxArcane/maxPetty - najwiecej zaklec, lores - zamiast tradycji linii, direct - tylko zaklecia bezposrednie (obrazenia albo na siebie). professions - jedyne dozwolone profesje, noArmour - bez pancerza (poza magicznym od heroicznego)."
+ "casting_note": "casting: chance - szansa, ze wampir tej linii czaruje (wg poziomu; brak poziomu = 0), minAdvances - co najmniej tyle rozwiniec Splatania i Jezyka (Magicznego), maxArcane/maxPetty - najwiecej zaklec, lores - zamiast tradycji linii, direct - tylko zaklecia bezposrednie (obrazenia albo na siebie). professions - jedyne dozwolone profesje, noArmour - bez pancerza (poza magicznym od heroicznego).",
+ "turning_note": "turning - przemiana czlowieka w wampira (Krwawy Pocałunek): modifiers - premie do Cech wzgledem czlowieka (zasada domowa), movement - premia do Szybkosci, skills - 12 Umiejetnosci Rasowych linii (3 x +5, 3 x +3), talents - 5 Talentow linii ('A lub B' = jeden z nich, 'losowy' = z Tabeli Losowych Talentow), trappings - wyposazenie linii."
 }

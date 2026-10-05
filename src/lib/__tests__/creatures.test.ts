@@ -228,6 +228,31 @@ describe("rozwoj bestii", () => {
     expect(casters["Strigoi|zaawansowany"]).toBeUndefined();
   });
 
+  it("przemiana czlowieka: cechy czlowieka + premie Linii Krwi, Umiejetnosci i Talenty linii", () => {
+    for (const line of gd.getVampires()!.bloodlines) {
+      const turned = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: line.name, turned: true, deterministic: true }, seedRng(1));
+      expect(turned.turned).toBe(true);
+      expect(turned.archetype).not.toBe("");
+      expect(turned.careerPath.length).toBeGreaterThan(0);
+      const view = computeNpc(turned);
+      for (const code of ATTRIBUTES) {
+        if (code === "Sz") continue;
+        const bonus = (line.turning!.modifiers as Record<string, number>)[code] ?? 0;
+        const c = view.chars[code];
+        // Baza czlowieka (20) + rzut + rozwiniecia + premia przemiany.
+        expect(c.base, `${line.name} ${code}`).toBe(20);
+        expect(c.sources.some((s) => s.label.startsWith("przemiana") && s.value === bonus) || bonus === 0, `${line.name} ${code}`).toBe(true);
+      }
+      // Dary Krwi moga dodac Szybkosci.
+      expect(view.movement).toBeGreaterThanOrEqual(4 + line.turning!.movement);
+      const owned = new Set(turned.skills.map((s) => gd.splitSpec(s.name).base));
+      expect(line.turning!.skills.filter((s) => owned.has(gd.splitSpec(s).base)).length).toBeGreaterThanOrEqual(6);
+      expect(turned.heroProfiles).toEqual([]);
+    }
+    const book = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: "Von Carstein", deterministic: true }, seedRng(1));
+    expect(book.turned).toBeUndefined();
+  });
+
   it("Strigoi: proste profesje, bez zwyklego pancerza", () => {
     const allowed = gd.getVampires()!.bloodlines.find((b) => b.name === "Strigoi")!.professions!;
     for (let seed = 1; seed <= 40; seed++) {

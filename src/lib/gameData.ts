@@ -281,6 +281,11 @@ export function getRace(name: string): RaceDef | undefined {
   return data().races.races[name];
 }
 
+/** Tabela Losowych Talentow (k100) z podrecznika podstawowego. */
+export function randomTalentsTable(): { min: number; max: number; name: string }[] {
+  return data().races.randomTalentsTable;
+}
+
 export function getClasses(): ClassesData {
   return data().classes;
 }

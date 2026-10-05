@@ -41,7 +41,7 @@ przy talentach, ale polskie znaki tak).
   "professions": { "Żołnierz": 4, "Ochroniarz": 2, "Rycerz": 1 },
   "keySkills": ["Broń Biała", "Odporność", "Opanowanie", "Unik"],
   "talents": { "Urodzony Wojownik": 5, "Silny Cios": 4 },
-  "traits": { "Zabijaka": 4, "Elitarny": 3, "Uczony": 0.2 },
+  "traits": { "Zabijaka": 3, "Elitarny": 2, "Uczony": 0.2 },
   "specializations": {
     "Broń Biała": { "Podstawowa": 5, "Dwuręczna": 2, "Drzewcowa": 2 }
   }
@@ -286,6 +286,12 @@ Pole nieobecne w wariancie = wartość bazowa (*Pod Bronią*).
   `maxPetty` (najwięcej zaklęć), `lores` (tradycje zamiast `lores` linii), `direct: true`
   (tylko zaklęcia bezpośrednie: zadające Obrażenia albo proste czary na siebie, PZ do 8).
   Rozwinięcia rosną z `magicAdvances` poziomu × `magic` / 2.
+- `turning` — przemiana człowieka (w generatorze „Sposób tworzenia: przemiana człowieka”):
+  `modifiers` (premie do Cech względem człowieka), `movement` (premia do Szybkości),
+  `skills` (12 Umiejętności Rasowych linii — 3 dostają +5, 3 kolejne +3), `talents`
+  (5 Talentów; „A lub B” — jeden z nich, „losowy” — z Tabeli Losowych Talentów),
+  `trappings`. Przemieniony wampir ma rzuty i cechy bazowe człowieka, profesje za życia
+  (jak człowiek, z mnożnikiem rozwinięć poziomu) i nie dostaje profili bohaterów stworzeń.
 - `giftsPerTier`, `ageByTier` — liczba Darów Krwi i Wiek wg poziomu BN;
   `bloodlineGiftWeight` — o ile częściej losowane są dary z listy linii niż „dowolne”.
 - `gifts`, `weaknesses` — opisy (pokazywane po kliknięciu 🩸 / ⚠ na karcie).

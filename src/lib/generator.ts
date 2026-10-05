@@ -23,7 +23,7 @@ import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
 import { addCasterSkills, pickSpells, resolveTraitChoice, rollExtraLores } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
-import { isVampire, rollBloodline, rollVampire, stripVampireArmour, vampireArchetype, vampireProfessions } from "./vampires";
+import { findBloodline, isVampire, npcBloodline, rollBloodline, rollVampire, stripVampireArmour, vampireArchetype, vampireProfessions } from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
 import { rollCraft, rollTreasures } from "./treasures";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
@@ -42,6 +42,8 @@ export interface GenSpec {
   noArchetype?: boolean;
   /** Jedyne dozwolone profesje (np. Strigoi - proste, dzikie). */
   onlyProfessions?: string[];
+  /** Wampir przemieniony z czlowieka (profesje za zycia + premie Linii Krwi) zamiast profilu z bestiariusza. */
+  turned?: boolean;
   race?: string;
   sex?: Sex;
   name?: string;
@@ -516,8 +518,8 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     const lvl = prof?.levels.find((l) => l.level === step.level);
     if (!prof || !lvl) return;
     const current = index === npc.careerPath.length - 1;
-    // Stworzenia dostaja profile bohaterow, rasy - mocniejszy rozwoj w profesji.
-    const mult = npc.creature ? 1 : (tier?.advanceMultiplier ?? 1);
+    // Stworzenia dostaja profile bohaterow, rasy (i przemienieni ludzie) - mocniejszy rozwoj w profesji.
+    const mult = npc.creature && !npc.turned ? 1 : (tier?.advanceMultiplier ?? 1);
 
     for (const code of levelCharacteristics(step.profession, step.level, arch)) {
       npc.charAdvances[code] += advanceAmount(current, rng, deterministic, mult);
@@ -708,7 +710,8 @@ export function newId(): string {
 function rollAttributes(npc: Npc, rng: Rng, deterministic = false): Record<Attribute, number> {
   const arch = gd.getArchetype(npc.archetype);
   const creature = gd.getCreature(npc.creature);
-  return creature
+  // Przemieniony wampir rodzil sie czlowiekiem - rzuty jak czlowiek.
+  return creature && !npc.turned
     ? rollCreature(creature, arch?.characteristics ?? [], rng, deterministic)
     : rollCharacteristics(arch, rng, deterministic);
 }
@@ -742,10 +745,48 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     if (chance(rt.archetypes?.[npc.archetype] ?? rt.chance, rng)) npc.talents.push({ name: rt.talent, level: 1 });
   }
   rollExtraLores(npc, rng, deterministic);
-  if (creature) bookSkillsAndTalents(npc, creature);
+  if (npc.turned) applyTurning(npc, rng, deterministic);
+  else if (creature) bookSkillsAndTalents(npc, creature);
   resolveMagicTrappings(npc, rng, deterministic);
   equipNpc(npc, rng);
   rollCraft(npc, rng, deterministic);
+}
+
+/**
+ * Krwawy Pocałunek: czlowiek po profesjach za zycia dostaje Umiejetnosci Rasowe Linii Krwi
+ * (3 x +5, 3 x +3 z dwunastu), jej 5 Talentow i wyposazenie (vampires.json -> turning).
+ * Premie do Cech i Szybkosci liczy computeNpc.
+ */
+function applyTurning(npc: Npc, rng: Rng, deterministic: boolean): void {
+  const turning = npcBloodline(npc)?.turning;
+  if (!turning) return;
+  const arch = gd.getArchetype(npc.archetype);
+  const skills = deterministic ? [...turning.skills] : shuffle([...turning.skills], rng);
+  skills.slice(0, 6).forEach((raw, i) => addSkill(npc, resolveSpecName(raw, npc.specChoices, arch, rng, deterministic), i < 3 ? 5 : 3));
+  const chars = approxChars(npc);
+  for (const raw of turning.talents) {
+    let name = raw;
+    if (raw === "losowy") {
+      const roll = deterministic ? 50 : rollK100(rng);
+      name = gd.randomTalentsTable().find((r) => roll >= r.min && roll <= r.max)?.name ?? "";
+    } else if (raw.includes(" lub ")) {
+      const options = raw.split(" lub ");
+      name = deterministic ? options[0] : pick(options, rng)!;
+    }
+    if (name) gainTalent(npc, resolveSpecName(name, npc.specChoices, arch, rng, deterministic), chars);
+  }
+  for (const t of turning.trappings) {
+    const item = rollDiceText(t, rng, deterministic);
+    if (!npc.trappings.includes(item)) npc.trappings.push(item);
+  }
+}
+
+function shuffle<T>(list: T[], rng: Rng): T[] {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
 }
 
 /**
@@ -817,7 +858,10 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const det = !!spec.deterministic;
   // Wampir: Linia Krwi od razu - od niej zalezy archetyp (Preferowane Profesje).
   const bloodline = creature && isVampire({ creature: creature.name }) ? rollBloodline(rng, det, spec.bloodline) : undefined;
-  const archetype = creature ? creatureArchetype(spec, creature, bloodline, rng, det) : pickArchetype(spec, rng);
+  // Przemiana: wampir zawsze przeszedl za zycia przez profesje (archetyp wg Linii Krwi).
+  const turned = !!bloodline && !!spec.turned && !!findBloodline(bloodline)?.turning;
+  let archetype = creature ? creatureArchetype({ ...spec, noArchetype: spec.noArchetype && !turned }, creature, bloodline, rng, det) : pickArchetype(spec, rng);
+  if (turned && !archetype) archetype = vampireArchetype(bloodline, rng, det) ?? "Wojownik";
   const tier = clampTier(pickTier(spec, rng), creature);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
@@ -826,10 +870,11 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const npc: Npc = {
     id: newId(),
     version: 1,
-    name: spec.name?.trim() || (beast ? creature!.name : pickName(race, sex, rng)),
+    name: spec.name?.trim() || (beast ? creature!.name : pickName(turned ? "Człowiek" : race, sex, rng)),
     sex,
     race,
     creature: creature?.name,
+    ...(turned ? { turned: true } : {}),
     archetype,
     tier,
     label: spec.label,
@@ -839,7 +884,8 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     skills: [],
     talents: [],
     traits: [],
-    heroProfiles: heroProfilesFor(spec, tier, beast, rng, !!creature),
+    // Przemieniony rozwija sie jak czlowiek (profesje), bez profili bohaterow stworzen.
+    heroProfiles: heroProfilesFor(spec, tier, beast, rng, !!creature && !turned),
     weapons: [],
     armour: [],
     spells: [],
@@ -901,6 +947,6 @@ export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, 
   for (const c of gd.getTier(next.tier)?.heroProfileChances ?? []) auto.delete(c.profile);
   next.heroProfiles = next.heroProfiles.filter((h) => !auto.has(h));
   const tierProfile = gd.getTier(next.tier)?.heroProfile;
-  if (tierProfile && !isBeast(next) && !creatureOnlyProfile(tierProfile, !!next.creature)) next.heroProfiles.unshift(tierProfile);
+  if (tierProfile && !isBeast(next) && !creatureOnlyProfile(tierProfile, !!next.creature && !next.turned)) next.heroProfiles.unshift(tierProfile);
   return next;
 }

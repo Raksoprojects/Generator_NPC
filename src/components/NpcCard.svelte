@@ -363,6 +363,7 @@
       <p class="meta">
         {#if creature}
           <b>{creature.name}</b> <span class="text-dim">({gd.creatureGroupKey(creature)})</span>
+          {#if npc.turned}<span class="text-dim" title="Wampir przemieniony z człowieka: cechy człowieka, profesje za życia i premie Linii Krwi"> · przemieniony człowiek, {npc.sex === "K" ? "kobieta" : "mężczyzna"}</span>{/if}
           {#if npc.archetype} · {npc.archetype}{/if}
         {:else}
           {npc.race} · {npc.sex === "K" ? "kobieta" : "mężczyzna"} · <b>{npc.archetype}</b>

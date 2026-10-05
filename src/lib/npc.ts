@@ -13,6 +13,7 @@ import * as gd from "./gameData";
 import { castingSummary, type CastingView } from "./magicItems";
 import { describeMagicItem, magicEffects, materialApBonus, materialOf } from "./treasures";
 import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from "./mutations";
+import { findBloodline } from "./vampires";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
 import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
 
@@ -230,7 +231,10 @@ export function computeNpc(input: Npc): NpcView {
   // Wylosowane Cechy Stworzen i mutacje zmieniaja cechy; ksiazkowe juz sa w profilu.
   const traitBonus: Partial<Record<Attribute, number>> = {};
   const traitSkills: Record<string, number> = {};
-  let movement = creature ? (creature.stats.Sz ?? 4) : (race?.movement ?? 4);
+  // Wampir przemieniony z czlowieka: cechy czlowieka, a Linia Krwi daje premie przemiany.
+  const human = npc.turned ? gd.getRace("Człowiek") : undefined;
+  const bookProfile = creature && !npc.turned ? creature : undefined;
+  let movement = bookProfile ? (bookProfile.stats.Sz ?? 4) : ((human ?? race)?.movement ?? 4);
   let extraAp = 0;
   let headAp = 0;
   /** Zrodla modyfikatorow kazdej cechy - zeby na karcie bylo widac, skad np. −20 do Ogłady. */
@@ -259,7 +263,11 @@ export function computeNpc(input: Npc): NpcView {
     const row = mutationRow(m);
     const fx = mutationEffects(m, row);
     const kindLabel = m.kind === "bloodline" ? "Linia Krwi" : m.kind === "blood" ? "Dar Krwi" : m.kind === "gift" ? "Dar Chaosu" : m.kind === "weakness" ? "Słabość" : "mutacja";
-    addMods(fx.chars as Partial<Record<Attribute, number>>, `${kindLabel}: ${mutationLabel(m)}`, "mutation");
+    const turning = npc.turned && m.kind === "bloodline" ? findBloodline(m.name)?.turning : undefined;
+    if (turning) {
+      addMods(turning.modifiers as Partial<Record<Attribute, number>>, `przemiana: ${mutationLabel(m)}`, "mutation");
+      movement += turning.movement;
+    } else addMods(fx.chars as Partial<Record<Attribute, number>>, `${kindLabel}: ${mutationLabel(m)}`, "mutation");
     for (const [skill, v] of Object.entries(fx.skills)) traitSkills[skill] = (traitSkills[skill] ?? 0) + v;
     for (const [code, cap] of Object.entries(row?.maxChar ?? {})) {
       charCaps[code as Attribute] = Math.min(charCaps[code as Attribute] ?? Infinity, cap ?? Infinity);
@@ -274,9 +282,9 @@ export function computeNpc(input: Npc): NpcView {
   const chars = {} as Record<Attribute, CharView>;
   const totals = {} as Record<Attribute, number>;
   for (const code of ATTRIBUTES) {
-    const cb = creature ? creatureBase(creature, code) : null;
+    const cb = bookProfile ? creatureBase(bookProfile, code) : null;
     const absent = !!cb && cb.die === null;
-    const base = cb ? cb.base : (race?.characteristics[code] ?? 20);
+    const base = cb ? cb.base : ((human ?? race)?.characteristics[code] ?? 20);
     const roll = absent ? 0 : (npc.rolls[code] ?? 0);
     const adv = npc.charAdvances[code] ?? 0;
     const hero = heroModifier(npc, code);
