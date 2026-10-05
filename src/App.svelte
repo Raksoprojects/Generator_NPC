@@ -2,6 +2,8 @@
   import GeneratorTab from "./components/GeneratorTab.svelte";
   import GroupTab from "./components/GroupTab.svelte";
   import LibraryTab from "./components/LibraryTab.svelte";
+  import LootTab from "./components/LootTab.svelte";
+  import MagicTab from "./components/MagicTab.svelte";
   import { app, RULESET_LABELS } from "./lib/app.svelte";
   import { uiScale } from "./lib/uiScale";
   import type { Ruleset } from "./lib/types";
@@ -9,6 +11,8 @@
   const tabs = [
     { id: "generator", label: "Generator" },
     { id: "grupa", label: "Grupa" },
+    { id: "przedmioty", label: "Przedmioty" },
+    { id: "lupy", label: "Łupy" },
     { id: "zapisane", label: "Zapisane" }
   ] as const;
 
@@ -81,6 +85,8 @@
       <!-- Zakładki zostają zamontowane, by nie tracić wygenerowanych BN przy przełączaniu. -->
       <div hidden={activeTab !== "generator"}><GeneratorTab /></div>
       <div hidden={activeTab !== "grupa"}><GroupTab /></div>
+      <div hidden={activeTab !== "przedmioty"}><MagicTab /></div>
+      <div hidden={activeTab !== "lupy"}><LootTab /></div>
       <div hidden={activeTab !== "zapisane"}><LibraryTab /></div>
     {/if}
   </main>
