@@ -935,5 +935,77 @@
     "aliases": [
       "Warpstone Weapon"
     ]
+  },
+  "Słaby": {
+    "modifiers": {
+      "S": -10,
+      "Wt": -10
+    },
+    "randomPool": true,
+    "negative": true,
+    "description": "Stworzenie jest słabsze niż typowy przedstawiciel gatunku. Dostaje −10 do Siły i Wytrzymałości.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
+  },
+  "Chorowity": {
+    "modifiers": {
+      "Wt": -10,
+      "SW": -10
+    },
+    "randomPool": true,
+    "negative": true,
+    "description": "Stworzenie jest schorowane i łatwo się poddaje. Dostaje −10 do Wytrzymałości i Siły Woli.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
+  },
+  "Powolny": {
+    "modifiers": {
+      "Zw": -10
+    },
+    "movement": -1,
+    "randomPool": true,
+    "negative": true,
+    "description": "Stworzenie porusza się ociężale. Dostaje −10 do Zwinności i −1 do Szybkości.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
+  },
+  "Tępy": {
+    "modifiers": {
+      "I": -10,
+      "Int": -20
+    },
+    "randomPool": true,
+    "negative": true,
+    "description": "Stworzenie jest wyjątkowo tępe. Dostaje −20 do Inteligencji i −10 do Inicjatywy.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
+  },
+  "Niezdarny": {
+    "modifiers": {
+      "WW": -10,
+      "US": -10,
+      "Zr": -10
+    },
+    "randomPool": true,
+    "negative": true,
+    "description": "Stworzenie jest niezdarne. Dostaje −10 do Walki Wręcz, Umiejętności Strzeleckich i Zręczności.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
+  },
+  "Tchórzliwy": {
+    "modifiers": {
+      "SW": -20,
+      "WW": -10
+    },
+    "randomPool": true,
+    "negative": true,
+    "description": "Stworzenie łatwo traci ducha. Dostaje −20 do Siły Woli i −10 do Walki Wręcz.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
+  },
+  "Niedorosły": {
+    "modifiers": {
+      "WW": -10,
+      "S": -10,
+      "Wt": -10
+    },
+    "randomPool": true,
+    "negative": true,
+    "description": "Młody, jeszcze nie w pełni wyrośnięty osobnik. Dostaje −10 do Walki Wręcz, Siły i Wytrzymałości.",
+    "source": "Generator (zasada domowa) — negatywne odpowiedniki Cech Stworzeń z podręcznika"
   }
 }
