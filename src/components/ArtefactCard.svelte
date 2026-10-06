@@ -12,11 +12,14 @@
     artefact,
     onreroll,
     onremove,
-    compact = false
+    compact = false,
+    saveable = true
   }: {
     artefact: Artefact;
     onreroll?: () => void;
     onremove?: () => void;
+    /** Przycisk "Zapisz" - do zakladki zapisanych przedmiotow i lupow. */
+    saveable?: boolean;
     /** Zwiniety do naglowka (np. na liscie lupow) - rozwija sie po kliknieciu. */
     compact?: boolean;
   } = $props();
@@ -26,6 +29,15 @@
   let spellOpen = $state<string | null>(null);
 
   const describe = (q: string) => craftDescription(q) ?? qualityDescription(q.replace(/\s+\d+$/, "")) ?? "";
+
+  /** Przedmiot, ktory juz zapisano (po ponownym losowaniu przycisk wraca). */
+  let savedFor = $state<Artefact | null>(null);
+
+  function save() {
+    app.saveTreasure({ kind: "artefact", name: artefact.name, artefact });
+    savedFor = artefact;
+    app.notify(`Zapisano: ${artefact.name}`);
+  }
 
   async function copy() {
     const ok = await copyText(artefactToText(artefact));
@@ -42,6 +54,9 @@
     </button>
     <div class="actions">
       {#if onreroll}<button class="btn-sm ghost" onclick={onreroll} title="Wylosuj ponownie z tymi samymi ustawieniami">🎲</button>{/if}
+      {#if saveable}
+        <button class="btn-sm" class:success={savedFor === artefact} onclick={save} disabled={savedFor === artefact} title="Zapisz w zakładce zapisanych skarbów">{savedFor === artefact ? "Zapisano" : "Zapisz"}</button>
+      {/if}
       <button class="btn-sm ghost" onclick={copy} title="Kopiuj opis">Kopiuj</button>
       {#if onremove}<button class="btn-sm ghost" onclick={onremove} aria-label="Usuń">✕</button>{/if}
     </div>

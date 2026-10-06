@@ -4,6 +4,7 @@
   import LibraryTab from "./components/LibraryTab.svelte";
   import LootTab from "./components/LootTab.svelte";
   import MagicTab from "./components/MagicTab.svelte";
+  import TreasuresTab from "./components/TreasuresTab.svelte";
   import { app, RULESET_LABELS } from "./lib/app.svelte";
   import { uiScale } from "./lib/uiScale";
   import type { Ruleset } from "./lib/types";
@@ -11,10 +12,13 @@
   const tabs = [
     { id: "generator", label: "Generator" },
     { id: "grupa", label: "Grupa" },
+    { id: "zapisane", label: "Zapisani BN" },
+    // Prawa strona paska: skarby.
     { id: "przedmioty", label: "Przedmioty" },
     { id: "lupy", label: "Łupy" },
-    { id: "zapisane", label: "Zapisane" }
+    { id: "skarby", label: "Zapisane skarby" }
   ] as const;
+  const RIGHT_START = "przedmioty";
 
   const rulesets: Ruleset[] = ["pod_bronia", "domowe"];
 
@@ -61,10 +65,14 @@
 
   <nav class="tab-bar" aria-label="Sekcje">
     {#each tabs as tab (tab.id)}
+      {#if tab.id === RIGHT_START}<span class="tab-spacer" aria-hidden="true"></span>{/if}
       <button class="tab" class:active={activeTab === tab.id} aria-pressed={activeTab === tab.id} onclick={() => (activeTab = tab.id)}>
         {tab.label}
         {#if tab.id === "zapisane" && app.library.length}
           <span class="badge">{app.library.length}</span>
+        {/if}
+        {#if tab.id === "skarby" && app.treasures.length}
+          <span class="badge">{app.treasures.length}</span>
         {/if}
       </button>
     {/each}
@@ -87,6 +95,7 @@
       <div hidden={activeTab !== "grupa"}><GroupTab /></div>
       <div hidden={activeTab !== "przedmioty"}><MagicTab /></div>
       <div hidden={activeTab !== "lupy"}><LootTab /></div>
+      <div hidden={activeTab !== "skarby"}><TreasuresTab /></div>
       <div hidden={activeTab !== "zapisane"}><LibraryTab /></div>
     {/if}
   </main>
@@ -207,7 +216,13 @@
 
   .tab-bar {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-2);
+  }
+
+  /* BN po lewej, przedmioty i lupy po prawej. */
+  .tab-spacer {
+    flex: 1;
   }
 
   .tab {
@@ -279,8 +294,13 @@
     }
 
     .tab-bar .tab {
-      flex: 1;
+      flex: 1 1 30%;
       padding: var(--space-2);
+    }
+
+    .tab-spacer {
+      flex-basis: 100%;
+      height: 0;
     }
   }
 </style>

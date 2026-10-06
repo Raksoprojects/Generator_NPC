@@ -1,9 +1,7 @@
 <script lang="ts">
-  import ArtefactCard from "./ArtefactCard.svelte";
-  import { app } from "../lib/app.svelte";
+  import LootCard from "./LootCard.svelte";
   import { rollArtefact } from "../lib/artefacts";
-  import { copyText } from "../lib/files";
-  import { formatPence, lootLevels, lootLocations, lootToText, rollLoot, type LootOptions, type LootResult } from "../lib/loot";
+  import { lootLevels, lootLocations, rollLoot, type LootOptions, type LootResult } from "../lib/loot";
 
   type Mode = "losowy" | "polLosowy" | "wlasny";
   const MODES: { id: Mode; label: string; hint: string }[] = [
@@ -72,13 +70,6 @@
     });
   }
 
-  async function copy(r: LootResult) {
-    const ok = await copyText(lootToText(r));
-    app.notify(ok ? "Skopiowano łup." : "Nie udało się skopiować.");
-  }
-
-  const coins = (r: LootResult) =>
-    [r.money.zk && `${r.money.zk} zk`, r.money.s && `${r.money.s} s`, r.money.p && `${r.money.p} p`].filter(Boolean) as string[];
 </script>
 
 <section class="tab">
@@ -136,48 +127,12 @@
   </div>
 
   {#each results as e (e.id)}
-    {@const r = e.loot}
-    <article class="loot panel">
-      <header class="head">
-        <div>
-          <h3>{r.location.name} <span class="text-dim small">· {STATUS_LABEL[r.location.status]} · poziom {r.level}: {r.levelLabel}</span></h3>
-          <p class="text-dim small">{r.location.description}</p>
-        </div>
-        <div class="actions">
-          <button class="btn-sm ghost" onclick={() => reroll(e.id)} title="Wylosuj ponownie to samo miejsce">🎲</button>
-          <button class="btn-sm ghost" onclick={() => copy(r)}>Kopiuj</button>
-          <button class="btn-sm ghost" onclick={() => (results = results.filter((x) => x.id !== e.id))} aria-label="Usuń">✕</button>
-        </div>
-      </header>
-
-      {#if coins(r).length}
-        <p class="row"><span class="lbl">Pieniądze:</span> {#each coins(r) as c (c)}<span class="chip accent">{c}</span>{/each}</p>
-      {/if}
-      {#each r.sections as s (s.label)}
-        <div class="section">
-          <span class="lbl">{s.label}:</span>
-          <ul>
-            {#each s.items as i, k (k)}
-              <li>{i.name}{#if i.value}<span class="text-dim">{" — "}{i.value}</span>{/if}{#if i.note}<span class="chip warning flaw">{i.note}</span>{/if}</li>
-            {/each}
-          </ul>
-        </div>
-      {/each}
-      {#if !coins(r).length && !r.sections.length && !r.artefacts.length}
-        <p class="text-dim">Nic wartościowego — ktoś był tu przed bohaterami.</p>
-      {/if}
-      {#if r.totalPence}
-        <p class="row"><span class="lbl">Łączna wartość pieniędzy i kosztowności:</span> <b>{formatPence(r.totalPence)}</b></p>
-      {/if}
-      {#if r.artefacts.length}
-        <div class="magic">
-          <span class="lbl">Przedmioty magiczne (kliknij, by rozwinąć):</span>
-          {#each r.artefacts as a, k (k)}
-            <ArtefactCard artefact={a} compact onreroll={() => rerollArtefact(e.id, k)} />
-          {/each}
-        </div>
-      {/if}
-    </article>
+    <LootCard
+      loot={e.loot}
+      onreroll={() => reroll(e.id)}
+      onremove={() => (results = results.filter((x) => x.id !== e.id))}
+      onrerollArtefact={(k) => rerollArtefact(e.id, k)}
+    />
   {:else}
     <p class="text-dim empty">Wybierz metodę i kliknij „Losuj łup”.</p>
   {/each}
@@ -255,71 +210,6 @@
   .generate {
     font-size: var(--fs-base);
     padding: var(--space-2) var(--space-4);
-  }
-
-  .loot {
-    padding: var(--space-3) var(--space-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--space-2);
-  }
-
-  .head h3 {
-    font-size: var(--fs-lg);
-    color: var(--accent-strong);
-  }
-
-  .head p {
-    margin: 2px 0 0;
-  }
-
-  .actions {
-    display: flex;
-    gap: var(--space-1);
-    flex-shrink: 0;
-  }
-
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-1) var(--space-2);
-    margin: 0;
-  }
-
-  .lbl {
-    color: var(--text-muted);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-  }
-
-  .section ul {
-    margin: 2px 0 0;
-    padding-left: 1.2em;
-    columns: 2 calc(220px * var(--ui-scale));
-    column-gap: var(--space-4);
-  }
-
-  .section li {
-    break-inside: avoid;
-  }
-
-  .flaw {
-    margin-left: var(--space-1);
-    padding: 0 var(--space-1);
-  }
-
-  .magic {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
   }
 
   .empty {

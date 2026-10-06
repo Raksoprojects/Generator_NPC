@@ -5,7 +5,8 @@
  */
 
 import * as gd from "./gameData";
-import { loadLibrary, loadSettings, saveLibrary, saveSettings } from "./library";
+import { newId } from "./generator";
+import { loadLibrary, loadSettings, loadTreasures, saveLibrary, saveSettings, saveTreasures, type SavedTreasure } from "./library";
 import type { Npc, Ruleset } from "./types";
 
 export const RULESET_LABELS: Record<Ruleset, string> = {
@@ -20,6 +21,8 @@ class AppState {
   /** Zmienia sie po przelaczeniu zasad - widoki licza wartosci od nowa. */
   dataVersion = $state(0);
   library = $state<Npc[]>([]);
+  /** Zapisane przedmioty magiczne i lupy. */
+  treasures = $state<SavedTreasure[]>([]);
   toast = $state("");
   private toastTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -30,6 +33,7 @@ class AppState {
       await gd.loadGameData(import.meta.env.BASE_URL, ruleset);
       this.ruleset = ruleset;
       this.library = loadLibrary();
+      this.treasures = loadTreasures();
       this.ready = true;
     } catch (e) {
       this.loadError = e instanceof Error ? e.message : String(e);
@@ -70,6 +74,30 @@ class AppState {
       else this.library.push(copy);
     }
     this.persist();
+  }
+
+  /** Zapisuje przedmiot magiczny albo lup w osobnej bibliotece; zwraca id wpisu. */
+  saveTreasure(entry: Omit<SavedTreasure, "id" | "savedAt">): string {
+    const id = newId();
+    this.treasures = [...this.treasures, { ...($state.snapshot(entry) as typeof entry), id, savedAt: new Date().toISOString() }];
+    this.persistTreasures();
+    return id;
+  }
+
+  removeTreasure(id: string): void {
+    this.treasures = this.treasures.filter((t) => t.id !== id);
+    this.persistTreasures();
+  }
+
+  replaceTreasures(list: SavedTreasure[]): void {
+    this.treasures = list;
+    this.persistTreasures();
+  }
+
+  private persistTreasures(): void {
+    if (!saveTreasures($state.snapshot(this.treasures) as SavedTreasure[])) {
+      this.notify("Nie udało się zapisać skarbów w przeglądarce — wyeksportuj je do pliku JSON.");
+    }
   }
 
   removeNpc(id: string): void {
