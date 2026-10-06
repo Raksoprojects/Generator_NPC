@@ -124,10 +124,17 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("stworzenie z minimalnym poziomem nie wystepuje nizej, a na minimalnym ma profil z ksiazki", () => {
-    expect(generateNpc({ creature: "Wojownik Chaosu", tier: "slaby" }, seedRng(1)).tier).toBe("zaawansowany");
-    const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "sredni", deterministic: true }, seedRng(1));
-    expect(chosen.tier).toBe("doswiadczony");
+  it("bestia ponizej minimum jest osłabiona (cechy negatywne), na minimum ma profil z ksiazki", () => {
+    const negative = (n: Npc) => n.traits.filter((t) => gd.getCreatureTraits()[t]?.negative);
+    const weak = generateNpc({ creature: "Wojownik Chaosu", tier: "slaby" }, seedRng(1));
+    expect(weak.tier).toBe("slaby");
+    expect(negative(weak)).toHaveLength(2);
+    // Poziom losowy (nie wybrany) - nie schodzi ponizej minimum.
+    for (let seed = 1; seed <= 20; seed++) {
+      const r = generateNpc({ creature: "Wojownik Chaosu" }, seedRng(seed));
+      expect(TIER_IDS.indexOf(r.tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));
+    }
+    const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "doswiadczony", deterministic: true }, seedRng(1));
     expect(Object.values(chosen.charAdvances).every((v) => v === 0)).toBe(true);
     const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
     expect(lord.charAdvances.WW).toBe(10);
@@ -182,8 +189,10 @@ describe("rozwoj bestii", () => {
       const undead = generateNpc({ creatureGroup: "Nieumarli", tier: "sredni" }, seedRng(seed));
       const def = gd.getCreature(undead.creature)!;
       expect(def.group).toBe("Nieumarli");
-      // Na srednim nie wypada nic, co wystepuje dopiero od zaawansowanego.
-      expect(TIER_IDS.indexOf(def.minTier ?? "slaby")).toBeLessThanOrEqual(TIER_IDS.indexOf("sredni"));
+      // Silniejsze stworzenie (od zaawansowanego) na srednim wypada rzadko i zawsze osłabione.
+      if (TIER_IDS.indexOf(def.minTier ?? "slaby") > TIER_IDS.indexOf("sredni")) {
+        expect(undead.traits.some((t) => gd.getCreatureTraits()[t]?.negative), undead.creature).toBe(true);
+      }
       const beastman = generateNpc({ creatureGroup: `Chaos${gd.GROUP_SEP}Zwierzoludzie` }, seedRng(seed));
       expect(gd.getCreature(beastman.creature)!.subgroup).toBe("Zwierzoludzie");
     }
@@ -297,12 +306,12 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("legendarny BN: pelna profesja, rasa bez profilu (rozwoj x3,5), stworzenie z profilem Legendarnego Bohatera", () => {
+  it("legenda: ostatnia profesja na 4. poziomie, bez profili bohaterow (takze stworzenia z profesja)", () => {
     const hero = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek" }, seedRng(3));
     expect(Math.max(...hero.careerPath.map((s) => s.level))).toBe(4);
-    expect(hero.heroProfiles).not.toContain("Legendarny Bohater");
+    expect(hero.heroProfiles).toEqual([]);
     const orc = generateNpc({ archetype: "Wojownik", tier: "legendarny", creature: "Ork" }, seedRng(3));
-    expect(orc.heroProfiles).toContain("Legendarny Bohater");
+    expect(orc.heroProfiles).toEqual([]);
     const heroic = generateNpc({ archetype: "Wojownik", tier: "heroiczny", race: "Człowiek", deterministic: true }, seedRng(3));
     const legend = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek", deterministic: true }, seedRng(3));
     expect(computeNpc(legend).chars.WW.total).toBeGreaterThan(computeNpc(heroic).chars.WW.total + 10);
@@ -341,7 +350,7 @@ describe("rozwoj bestii", () => {
     expect(generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Wysoki elf" }, seedRng(1)).careerPath.length).toBeGreaterThan(0);
   });
 
-  it("elfi Mag: Wysoka Magia dopiero od heroicznego, legendarny Arcymag na 5. poziomie", () => {
+  it("elfi Mag: Wysoka Magia dopiero od heroicznego, herosowy Arcymag na 5. poziomie", () => {
     const has = (n: Npc, t: string) => n.talents.some((x) => x.name === t);
     for (let seed = 1; seed <= 20; seed++) {
       const adv = generateNpc({ archetype: "Czarodziej", tier: "zaawansowany", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
@@ -353,7 +362,7 @@ describe("rozwoj bestii", () => {
       expect(hero.spells.some((s) => gd.getSpell(s)?.lore === "Prosta (Elfia)")).toBe(true);
       // Doswiadczony i wyzszy elfi czarodziej zna co najmniej dwie tradycje kolorow.
       expect(hero.talents.filter((t) => t.name.startsWith("Magia Tajemna")).length).toBeGreaterThanOrEqual(2);
-      const legend = generateNpc({ archetype: "Czarodziej", tier: "legendarny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      const legend = generateNpc({ archetype: "Czarodziej", tier: "heros", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
       expect(legend.careerPath.at(-1)).toEqual({ profession: "Mag", level: 5 });
     }
   });
@@ -364,8 +373,10 @@ describe("rozwoj bestii", () => {
       const hero = generateNpc({ archetype: "Kapłan", tier: "heroiczny", race: "Wysoki elf" }, seedRng(seed));
       const last = hero.careerPath.at(-1)!;
       if (lore[last.profession]) {
-        expect(hero.careerPath.slice(0, 2)).toEqual([{ profession: "Mag", level: 1 }, { profession: "Mag", level: 2 }]);
-        expect(hero.careerPath[2]).toEqual({ profession: last.profession, level: 3 });
+        // Wczesniej moga byc inne profesje, ale tuz przed kaplanem - Mag 1-2.
+        const mag = hero.careerPath.findIndex((s) => s.profession === "Mag");
+        expect(hero.careerPath.slice(mag, mag + 2)).toEqual([{ profession: "Mag", level: 1 }, { profession: "Mag", level: 2 }]);
+        expect(hero.careerPath[mag + 2]).toEqual({ profession: last.profession, level: 3 });
         expect(hero.spells.some((s) => gd.getSpell(s)?.lore === lore[last.profession]), last.profession).toBe(true);
       }
       const adv = generateNpc({ archetype: "Kapłan", tier: "zaawansowany", race: "Wysoki elf" }, seedRng(seed));
@@ -433,7 +444,8 @@ describe("rozwoj bestii", () => {
 
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {
     const orc = generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "sredni" }, seedRng(3));
-    expect(orc.careerPath.length).toBe(2);
+    // Zwykly: 2. poziom profesji, czasem wczesniej 1 poziom innej.
+    expect(orc.careerPath.at(-1)?.level).toBe(2);
     expect(orc.weapons.length).toBeGreaterThan(0);
     expect(gd.isCivilized("Ork")).toBe(true);
     expect(gd.isCivilized("Wilk")).toBe(false);

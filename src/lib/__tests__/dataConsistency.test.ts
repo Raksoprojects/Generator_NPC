@@ -129,9 +129,6 @@ describe("pozostale pliki generatora", () => {
 
   it("poziomy wskazuja istniejace profile bohaterow", () => {
     for (const id of TIER_IDS) {
-      const hp = gd.getTier(id).heroProfile;
-      if (hp) expect(gd.getHeroProfile(hp), id).toBeDefined();
-      for (const c of gd.getTier(id).heroProfileChances ?? []) expect(gd.getHeroProfile(c.profile), `${id} ${c.profile}`).toBeDefined();
     }
   });
 

@@ -108,6 +108,8 @@ export interface RacesData {
 
 /** Cecha Stworzenia (creature_traits.json). */
 export interface CreatureTrait {
+  /** Cecha negatywna (Slaby, Chorowity...) - dla stworzen ponizej ich minimalnego poziomu. */
+  negative?: boolean;
   /** Modyfikatory cech (kod -> wartosc). */
   modifiers?: Partial<Record<Attribute, number>>;
   /** Premie do umiejetnosci (nazwa -> wartosc), np. Czujny: Percepcja +30. */
@@ -132,9 +134,9 @@ export interface HeroProfile {
   source?: string;
 }
 
-export type TierId = "slaby" | "sredni" | "zaawansowany" | "doswiadczony" | "heroiczny" | "legendarny";
+export type TierId = "slaby" | "sredni" | "zaawansowany" | "doswiadczony" | "heroiczny" | "legendarny" | "heros";
 
-export const TIER_IDS: readonly TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny", "legendarny"];
+export const TIER_IDS: readonly TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny", "legendarny", "heros"];
 
 /** Poziom zaawansowania BN (tiers.json). */
 export interface TierDef {
@@ -148,17 +150,16 @@ export interface TierDef {
   maxCareerLevel: number;
   /** Czy glowna profesja musi dojsc do 4. poziomu. */
   requireLevel4?: boolean;
+  /** Najnizszy poziom ostatniej profesji (Ekspert: co najmniej 3.). */
+  minMainLevel?: number;
   /** Maksymalna liczba profesji w sciezce. */
   maxCareers: number;
   talentsPerLevel: number;
   extraTalentChance: number;
   talentLevelUpChance: number;
-  /** Profil bohatera nakladany automatycznie (lub null). */
-  heroProfile: string | null;
-  /**
-   * Dodatkowy profil przy losowaniu - najwyzej jeden, szanse sie wykluczaja
-   * (np. zaawansowany: Weteran 10%, Doborowy 5%, Pomniejszy Bohater 10%).
-   */
+  /** Szansa, ze profesja z 5. poziomem (Arcymag) dojdzie do niego (Ekspert 0,5%, Legenda 50%, Heros zawsze). */
+  level5Chance?: number;
+  /** Mala losowa szansa na profil bohatera (Weteran, Doborowy, Pomniejszy/Wielki Bohater) - wykluczajace sie. */
   heroProfileChances?: { profile: string; chance: number }[];
   /** Premia kluczowych umiejetnosci archetypu i laczne rozwiniecia min/max. */
   keySkills: KeyBonus;
@@ -173,7 +174,10 @@ export interface TierDef {
   spells: { maxCn: number; arcane: [number, number]; extraLores?: number[]; topSpells?: number; casterAdvances?: number };
   /** Profesja z 5. poziomem (np. elfi Mag -> Arcymag) moze na nim dojsc do 5. poziomu. */
   allowLevel5?: boolean;
-  /** Mnoznik rozwiniec za poziom profesji u ras (stworzenia maja zamiast tego profile bohaterow). */
+  /**
+   * Mnoznik rozwiniec za poziom profesji (+5 x mnoznik). Domyslnie 1 - poziom BN roznicuje
+   * liczba poziomow profesji i premie archetypu; zostaje jako pokretlo, gdyby postacie wyszly za slabe.
+   */
   advanceMultiplier?: number;
 }
 
@@ -189,8 +193,6 @@ export interface KeyBonus {
 }
 
 export interface GeneratorSettings {
-  /** Minimalny wynik 2k10 w kluczowych cechach archetypu (nizszy = przerzut). */
-  minKeyRoll: number;
   /** Rozwiniecia za kazdy ukonczony poziom profesji (minimum na poziom). */
   advancePerLevel: number;
   /** Najmniejsze rozwiniecie za obecny, nieukonczony poziom profesji. */
@@ -208,8 +210,6 @@ export interface GeneratorSettings {
   unlimitedTalentCap: number;
   /** Rasy, ktorych czarodzieje moga poznac kolejne tradycje tajemne (spells.extraLores). */
   multiLoreRaces?: string[];
-  /** Profile nakladane automatycznie tylko na stworzenia; rasy dostaja zamiast nich mocniejszy rozwoj (advanceMultiplier). */
-  creatureOnlyProfiles?: string[];
   /** Rzadkie talenty rasy (np. Krew Aenariona u Wysokich Elfow: 1%, u szlachty 5%). */
   raceTalents?: { race: string; talent: string; chance: number; archetypes?: Record<string, number> }[];
 }
@@ -850,6 +850,8 @@ export type Sex = "M" | "K";
 export interface CareerStep {
   profession: string;
   level: number;
+  /** Dodatkowe rozwiniecia na poziomie juz przebytym (poziom BN ponad sciezke profesji) - nie pokazywane na sciezce. */
+  extra?: boolean;
 }
 
 export interface NpcSkill {

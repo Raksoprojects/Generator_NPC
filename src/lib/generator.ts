@@ -57,8 +57,6 @@ export interface GenSpec {
   randomTraits?: boolean;
   /** Dodatkowe profile bohaterow. */
   heroProfiles?: string[];
-  /** Czy nalozyc profil bohatera wynikajacy z poziomu BN. Domyslnie tak. */
-  autoHeroProfile?: boolean;
   /** Dodaje profil Dowodcy Oddzialu. */
   commander?: boolean;
   label?: string;
@@ -122,22 +120,27 @@ export function pickName(race: string, sex: Sex, rng: Rng): string {
 // ---------------------------------------------------------------------------
 
 /**
- * Rzuty 2k10 na wszystkie cechy. W kluczowych cechach archetypu wynik ponizej
- * minKeyRoll jest przerzucany (wojownik nie bywa miernota w WW).
+ * Rzuty 2k10 na wszystkie cechy; najwyzsze trafiaja do kluczowych cech archetypu.
  */
 export function rollCharacteristics(archetype: Archetype | undefined, rng: Rng, deterministic = false): Record<Attribute, number> {
-  const min = gd.getSettings().minKeyRoll;
-  const key = new Set(archetype?.characteristics ?? []);
+  return assignRolls([...ATTRIBUTES], archetype?.characteristics ?? [], rng, deterministic);
+}
+
+/**
+ * Rzuty 2k10 dla podanych cech: najwyzsze trafiaja do cech kluczowych archetypu (w ich kolejnosci),
+ * reszta losowo. Bez minimum rzutu - zdarzaja sie i slabsi, i silniejsi BN.
+ */
+export function assignRolls(codes: Attribute[], keys: Attribute[], rng: Rng, deterministic = false): Record<Attribute, number> {
   const out = {} as Record<Attribute, number>;
-  for (const code of ATTRIBUTES) {
-    if (deterministic) {
-      out[code] = key.has(code) ? Math.max(11, min) : 11;
-      continue;
-    }
-    let roll = roll2k10(rng);
-    for (let i = 0; key.has(code) && roll < min && i < 50; i++) roll = roll2k10(rng);
-    out[code] = key.has(code) ? Math.max(roll, min) : roll;
+  if (deterministic) {
+    for (const c of codes) out[c] = 11;
+    return out;
   }
+  const rolls = codes.map(() => roll2k10(rng)).sort((a, b) => b - a);
+  const keyCodes = keys.filter((k) => codes.includes(k));
+  keyCodes.forEach((k, i) => (out[k] = rolls[i]));
+  const rest = rolls.slice(keyCodes.length);
+  for (const c of codes.filter((c) => !keyCodes.includes(c))) out[c] = rest.splice(Math.floor(rng() * rest.length), 1)[0];
   return out;
 }
 
@@ -183,43 +186,35 @@ function careerSwitchOk(prev: string, main: string): boolean {
 }
 
 /** Druga (wczesniejsza) profesja: inna niz glowna, preferowana ta sama klasa. */
-function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rng, only?: string[]): string | undefined {
+function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rng, only?: string[], taken: string[] = []): string | undefined {
   const mainClass = gd.getProfession(main)?.class;
   const cands = professionCandidates(arch, race, true);
   delete cands[main];
+  for (const t of taken) delete cands[t];
   const weights: Record<string, number> = {};
   for (const [name, w] of Object.entries(cands)) {
     if (!raceOk(name, race) || !careerSwitchOk(name, main) || firstLevel(name) > 1) continue;
     weights[name] = w * (gd.getProfession(name)?.class === mainClass ? 2 : 1);
   }
   if (Object.keys(weights).length) return weightedKey(weights, rng);
-  // Archetyp nie ma drugiej profesji dla tej rasy - dowolna z tej samej klasy.
+  // Archetyp nie ma kolejnej profesji dla tej rasy - dowolna z tej samej klasy.
   const usable = (p: string) =>
-    p !== main && raceOk(p, race) && careerSwitchOk(p, main) && firstLevel(p) === 1 && (!only?.length || only.includes(p));
+    p !== main && !taken.includes(p) && raceOk(p, race) && careerSwitchOk(p, main) && firstLevel(p) === 1 && (!only?.length || only.includes(p));
   const sameClass = gd.allProfessionNames().filter((p) => gd.getProfession(p)?.class === mainClass && usable(p));
   if (sameClass.length) return pick(sameClass, rng);
   // Np. elf czarodziej: jego klasa to same profesje magiczne - wczesniej byl kimkolwiek innym.
   return pick(gd.allProfessionNames().filter(usable), rng);
 }
 
-/** Podzial laczniej liczby poziomow na [poprzednia, glowna] profesje. */
-function splitLevels(tier: TierDef, total: number, forceTwo: boolean, rng: Rng): [number, number] {
-  if (tier.requireLevel4) return [Math.min(Math.max(0, total - 4), 3), 4];
-  const maxL = tier.maxCareerLevel;
-  const canSingle = total <= maxL;
-  const canSplit = tier.maxCareers > 1 && total >= 2;
-  if (canSingle && (!canSplit || (!forceTwo && chance(0.5, rng)))) return [0, total];
-  if (!canSplit) return [0, Math.min(total, maxL)];
-  // Glowna (obecna) profesja dostaje co najmniej polowe poziomow.
-  const mainMin = Math.max(Math.ceil(total / 2), total - maxL);
-  const mainMax = Math.min(maxL, total - 1);
-  const main = randInt(mainMin, mainMax, rng);
-  return [total - main, main];
+/** Najwyzszy poziom profesji, jaki BN moze osiagnac (5 tylko tam, gdzie poziom ma na to szanse). */
+function topCareerLevel(tier: TierDef): number {
+  return tier.level5Chance ? 5 : tier.maxCareerLevel;
 }
 
-/** Najwyzszy poziom profesji, jaki BN osiaga na tym poziomie (5 tylko u legendarnych z profesja 5-poziomowa). */
-function topCareerLevel(tier: TierDef): number {
-  return tier.allowLevel5 ? 5 : tier.maxCareerLevel;
+/** 4. poziom profesji z 5. poziomem (elfi Mag -> Arcymag) przechodzi na 5. z szansa poziomu BN. */
+function maybeLevel5(profession: string, level: number, tier: TierDef, rng: Rng): number {
+  const has5 = gd.getProfession(profession)?.levels.some((l) => l.level === 5);
+  return level === 4 && has5 && chance(tier.level5Chance ?? 0, rng) ? 5 : level;
 }
 
 const firstLevel = (profession: string) => Math.min(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
@@ -228,10 +223,10 @@ const firstLevel = (profession: string) => Math.min(...(gd.getProfession(profess
  * Profesja zaawansowana (elfi kaplani, poziomy 3-5): najpierw profesja wejsciowa
  * (Mag 1-2), potem kaplan od 3. poziomu do najwyzszego osiagalnego.
  */
-function advancedCareerPath(main: string, tier: TierDef): CareerStep[] {
+function advancedCareerPath(main: string, tier: TierDef, rng: Rng): CareerStep[] {
   const def = gd.getProfession(main)!;
   const first = firstLevel(main);
-  const top = Math.max(first, Math.min(Math.max(...def.levels.map((l) => l.level)), topCareerLevel(tier)));
+  const top = maybeLevel5(main, Math.max(first, Math.min(Math.max(...def.levels.map((l) => l.level)), tier.maxCareerLevel)), tier, rng);
   const steps: CareerStep[] = [];
   if (def.entry) for (let l = 1; l <= def.entry.level; l++) steps.push({ profession: def.entry.from, level: l });
   for (let l = first; l <= top; l++) steps.push({ profession: main, level: l });
@@ -264,24 +259,39 @@ export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId
   const fallback = entries.length ? Object.fromEntries(entries.map((p) => [p, 1])) : professionCandidates(arch, race);
   const main = chosen[chosen.length - 1] ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
   if (!main) return [];
-  if (firstLevel(main) > 1) return advancedCareerPath(main, tier);
-  let [prevLevels, mainLevels] = splitLevels(tier, total, chosen.length > 1, rng);
-  let prev: string | undefined;
-  if (prevLevels > 0) {
-    prev = chosen.length > 1 ? chosen[chosen.length - 2] : pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions);
-    if (!prev) {
-      mainLevels = Math.min(total, tier.maxCareerLevel);
-      prevLevels = 0;
+  let steps: CareerStep[] = [];
+  if (firstLevel(main) > 1) {
+    // Profesja zaawansowana ma stala sciezke (Mag 1-2, kaplan od 3.).
+    steps = advancedCareerPath(main, tier, rng);
+  } else {
+    // Ostatnia profesja: 4. poziom (Legenda, Heros) albo minMainLevel..maxCareerLevel, nie wiecej niz budzet.
+    const lo = Math.min(tier.minMainLevel ?? 1, tier.maxCareerLevel);
+    let top = tier.requireLevel4 ? Math.min(4, tier.maxCareerLevel) : randInt(lo, tier.maxCareerLevel, rng);
+    top = maybeLevel5(main, Math.max(1, Math.min(top, total)), tier, rng);
+    // Wczesniejsze profesje (podane recznie albo wylosowane), kazda najwyzej do poziomu ostatniej.
+    let budget = total - top;
+    const manual = chosen.slice(0, -1);
+    // Profesje podane recznie - tylko one; inaczej 0..maxCareers-1 wczesniejszych.
+    const count = chosen.length ? manual.length : budget > 0 ? randInt(0, tier.maxCareers - 1, rng) : 0;
+    const taken: string[] = [];
+    for (let i = 0; i < count && (budget > 0 || i < manual.length); i++) {
+      const prof = manual[i] ?? pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions, taken);
+      if (!prof) break;
+      taken.push(prof);
+      const n = Math.max(1, Math.min(top, budget, randInt(1, top, rng)));
+      for (let l = 1; l <= n; l++) steps.push({ profession: prof, level: l });
+      budget -= n;
     }
+    for (let l = 1; l <= top; l++) steps.push({ profession: main, level: l });
   }
-
-  // Legendarni moga dojsc do 5. poziomu, jesli profesja go ma (elfi Mag -> Arcymag).
-  if (tier.allowLevel5 && mainLevels === 4 && gd.getProfession(main)?.levels.some((l) => l.level === 5)) mainLevels = 5;
-
-  const steps: CareerStep[] = [];
-  if (prev) for (let l = 1; l <= prevLevels; l++) steps.push({ profession: prev, level: l });
-  for (let l = 1; l <= mainLevels; l++) steps.push({ profession: main, level: l });
-  return steps;
+  // Reszta poziomow BN to dodatkowe rozwiniecia na przebytych poziomach ostatniej profesji
+  // (Legenda moze byc samym Zolnierzem - ma wtedy rozwiniecia, jakby przeszla wiecej profesji).
+  const mainSteps = steps.filter((s) => s.profession === main);
+  const extras: CareerStep[] = [];
+  for (let i = steps.length; i < total && mainSteps.length; i++) {
+    extras.push({ ...mainSteps[Math.floor(rng() * mainSteps.length)], extra: true });
+  }
+  return [...steps.slice(0, -1), ...extras, steps[steps.length - 1]];
 }
 
 // ---------------------------------------------------------------------------
@@ -459,10 +469,7 @@ function advanceAmount(current: boolean, rng: Rng, deterministic: boolean, mult 
   return randInt(Math.min(Math.round(currentLevelMin * mult), full), full, rng);
 }
 
-/** Profile bohaterow, ktore u ras zastepuje rozwoj profesji (zostaja dla stworzen i do recznego dodania). */
-function creatureOnlyProfile(profile: string, creature: boolean): boolean {
-  return !creature && !!gd.getSettings().creatureOnlyProfiles?.includes(profile);
-}
+
 
 /** Zamienia rzuty w tekscie na wyniki, np. "3k10 szylingów" -> "17 szylingów". */
 export function rollDiceText(text: string, rng: Rng, deterministic = false): string {
@@ -677,17 +684,19 @@ export function isBeast(npc: Pick<Npc, "creature" | "archetype">): boolean {
   return !!npc.creature && !npc.archetype;
 }
 
-function heroProfilesFor(spec: GenSpec, tierId: TierId, beast: boolean, rng: Rng, creature: boolean): string[] {
-  const out = new Set<string>(spec.heroProfiles ?? []);
-  const tier = gd.getTier(tierId);
-  const autoOn = !beast && spec.autoHeroProfile !== false;
-  if (tier?.heroProfile && autoOn && !creatureOnlyProfile(tier.heroProfile, creature)) out.add(tier.heroProfile);
-  // Mala szansa na dodatkowy profil (Weteran, Doborowy, Pomniejszy Bohater) - tylko przy losowaniu.
-  if (autoOn && !spec.deterministic && tier?.heroProfileChances?.length) {
+/**
+ * Profile bohaterow (Weteran, Doborowy, Pomniejszy i Wielki Bohater, Dowodca Oddzialu): z wyboru albo
+ * z malej szansy poziomu (tiers.json -> heroProfileChances). Poziom BN rozwija postac przez profesje.
+ */
+function heroProfilesFor(spec: GenSpec, tierId: TierId, rng: Rng): string[] {
+  const out = new Set<string>((spec.heroProfiles ?? []).filter((h) => gd.getHeroProfile(h)));
+  // Mala losowa szansa (najwyzej kilka procent) na wyjatkowa jednostke - tylko przy losowaniu.
+  const chances = gd.getTier(tierId)?.heroProfileChances ?? [];
+  if (!spec.deterministic && !out.size && chances.length) {
     let roll = rng();
-    for (const c of tier.heroProfileChances) {
+    for (const c of chances) {
       if (roll < c.chance) {
-        if (!creatureOnlyProfile(c.profile, creature)) out.add(c.profile);
+        if (gd.getHeroProfile(c.profile)) out.add(c.profile);
         break;
       }
       roll -= c.chance;
@@ -833,7 +842,8 @@ export function clampTier(tier: TierId, creature: CreatureDef | undefined): Tier
  */
 export function pickCreatureFromGroup(group: string, tier: TierId | undefined, rng: Rng): string | undefined {
   const all = gd.creaturesInGroup(group).filter((c) => !c.unique);
-  const fits = tier ? all.filter((c) => TIER_IDS.indexOf(c.minTier ?? "slaby") <= TIER_IDS.indexOf(tier)) : all;
+  // Zwykle stworzenia pasujace do poziomu; czasem (15%) silniejsze, osłabione do tego poziomu.
+  const fits = tier && !chance(0.15, rng) ? all.filter((c) => TIER_IDS.indexOf(c.minTier ?? "slaby") <= TIER_IDS.indexOf(tier)) : all;
   return pick(fits.length ? fits : all, rng)?.name;
 }
 
@@ -862,7 +872,9 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const turned = !!bloodline && !!spec.turned && !!findBloodline(bloodline)?.turning;
   let archetype = creature ? creatureArchetype({ ...spec, noArchetype: spec.noArchetype && !turned }, creature, bloodline, rng, det) : pickArchetype(spec, rng);
   if (turned && !archetype) archetype = vampireArchetype(bloodline, rng, det) ?? "Wojownik";
-  const tier = clampTier(pickTier(spec, rng), creature);
+  // Bestia moze wystapic ponizej swojego minimum, gdy poziom wybrano recznie (dostaje wtedy cechy negatywne).
+  const beastSpec = !!creature && !archetype;
+  const tier = beastSpec && spec.tier ? pickTier(spec, rng) : clampTier(pickTier(spec, rng), creature);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
   const beast = !!creature && !archetype;
@@ -884,8 +896,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     skills: [],
     talents: [],
     traits: [],
-    // Przemieniony rozwija sie jak czlowiek (profesje), bez profili bohaterow stworzen.
-    heroProfiles: heroProfilesFor(spec, tier, beast, rng, !!creature && !turned),
+    heroProfiles: heroProfilesFor(spec, tier, rng),
     weapons: [],
     armour: [],
     spells: [],
@@ -938,15 +949,9 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
  */
 export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng): Npc {
   const next: Npc = structuredClone(npc);
-  next.tier = clampTier(next.tier, gd.getCreature(next.creature));
+  if (!isBeast(next)) next.tier = clampTier(next.tier, gd.getCreature(next.creature));
   develop(next, professions, rng, false);
   rollTreasures(next, rng);
   finish(next, rng, false);
-  const auto = new Set(TIER_IDS.map((t) => gd.getTier(t)?.heroProfile).filter(Boolean) as string[]);
-  // Profil, ktory nowy poziom moze wylosowac (np. zaawansowany Pomniejszy Bohater), zostaje.
-  for (const c of gd.getTier(next.tier)?.heroProfileChances ?? []) auto.delete(c.profile);
-  next.heroProfiles = next.heroProfiles.filter((h) => !auto.has(h));
-  const tierProfile = gd.getTier(next.tier)?.heroProfile;
-  if (tierProfile && !isBeast(next) && !creatureOnlyProfile(tierProfile, !!next.creature && !next.turned)) next.heroProfiles.unshift(tierProfile);
   return next;
 }

@@ -1,6 +1,5 @@
 {
   "settings": {
-    "minKeyRoll": 9,
     "advancePerLevel": 5,
     "currentLevelMin": 2,
     "keySkillCount": 4,
@@ -26,11 +25,6 @@
       "Wysoki elf",
       "Leśny elf"
     ],
-    "creatureOnlyProfiles": [
-      "Pomniejszy Bohater",
-      "Wielki Bohater",
-      "Legendarny Bohater"
-    ],
     "raceTalents": [
       {
         "race": "Wysoki elf",
@@ -44,8 +38,8 @@
   },
   "tiers": {
     "slaby": {
-      "label": "Słaby",
-      "description": "Pierwszy (czasem drugi) poziom profesji, do +5 w cechach i umiejętnościach profesji, jeden pasujący talent.",
+      "label": "Nowicjusz",
+      "description": "Pierwszy (czasem drugi) poziom jednej profesji.",
       "randomWeight": 4,
       "totalLevels": {
         "1": 3,
@@ -56,7 +50,6 @@
       "talentsPerLevel": 1,
       "extraTalentChance": 0,
       "talentLevelUpChance": 0,
-      "heroProfile": null,
       "keySkills": {
         "bonus": [
           1,
@@ -79,27 +72,21 @@
         ],
         "casterAdvances": 10
       },
-      "advanceMultiplier": 1
+      "minMainLevel": 1
     },
     "sredni": {
-      "label": "Średni",
-      "description": "Typowy przedstawiciel: drugi poziom profesji, około +10, kilka talentów najbardziej pasujących do archetypu; przy losowaniu mała szansa na profil Weterana.",
+      "label": "Zwykły",
+      "description": "Typowy przedstawiciel fachu: 2. poziom profesji; czasem jeden poziom więcej (wcześniejsza profesja albo dodatkowe rozwinięcia).",
       "randomWeight": 4,
       "totalLevels": {
-        "2": 1
+        "2": 3,
+        "3": 1
       },
       "maxCareerLevel": 2,
-      "maxCareers": 1,
+      "maxCareers": 2,
       "talentsPerLevel": 1,
       "extraTalentChance": 0.5,
       "talentLevelUpChance": 0.3,
-      "heroProfile": null,
-      "heroProfileChances": [
-        {
-          "profile": "Weteran",
-          "chance": 0.1
-        }
-      ],
       "keySkills": {
         "bonus": [
           3,
@@ -125,11 +112,17 @@
         "topSpells": 1,
         "casterAdvances": 15
       },
-      "advanceMultiplier": 1
+      "minMainLevel": 2,
+      "heroProfileChances": [
+        {
+          "profile": "Weteran",
+          "chance": 0.03
+        }
+      ]
     },
     "zaawansowany": {
-      "label": "Zaawansowany",
-      "description": "3–4 poziomy profesji (np. 2 poziomy Żołnierza i 2 Rycerza), około +15, więcej talentów i ich poziomów; przy losowaniu mała szansa na profil Weterana, Doborowego albo Pomniejszego Bohatera.",
+      "label": "Niezwykły",
+      "description": "3–4 poziomy rozwoju, do dwóch profesji; ostatnia na 2.–3. poziomie.",
       "randomWeight": 2,
       "totalLevels": {
         "3": 1,
@@ -140,21 +133,6 @@
       "talentsPerLevel": 1,
       "extraTalentChance": 0.5,
       "talentLevelUpChance": 0.5,
-      "heroProfile": null,
-      "heroProfileChances": [
-        {
-          "profile": "Weteran",
-          "chance": 0.08
-        },
-        {
-          "profile": "Doborowy",
-          "chance": 0.05
-        },
-        {
-          "profile": "Pomniejszy Bohater",
-          "chance": 0.1
-        }
-      ],
       "keySkills": {
         "bonus": [
           5,
@@ -184,29 +162,31 @@
         "topSpells": 1,
         "casterAdvances": 20
       },
-      "advanceMultiplier": 1.2
+      "minMainLevel": 2,
+      "heroProfileChances": [
+        {
+          "profile": "Weteran",
+          "chance": 0.04
+        },
+        {
+          "profile": "Doborowy",
+          "chance": 0.01
+        }
+      ]
     },
     "doswiadczony": {
-      "label": "Doświadczony",
-      "description": "Czwarty poziom profesji (rzadko z poziomem poprzedniej), rozwinięcia ×1,6, dodatkowe talenty i ich poziomy. Stworzenia dostają profil Pomniejszego Bohatera; przy losowaniu mała szansa na profil Doborowego.",
+      "label": "Zaawansowany",
+      "description": "4–5 poziomów rozwoju; ostatnia profesja na 3. albo 4. poziomie.",
       "randomWeight": 1,
       "totalLevels": {
         "4": 2,
         "5": 1
       },
       "maxCareerLevel": 4,
-      "requireLevel4": true,
       "maxCareers": 2,
       "talentsPerLevel": 1,
       "extraTalentChance": 0.9,
       "talentLevelUpChance": 0.7,
-      "heroProfile": "Pomniejszy Bohater",
-      "heroProfileChances": [
-        {
-          "profile": "Doborowy",
-          "chance": 0.1
-        }
-      ],
       "keySkills": {
         "bonus": [
           8,
@@ -237,24 +217,36 @@
         "topSpells": 2,
         "casterAdvances": 25
       },
-      "advanceMultiplier": 1.6
+      "minMainLevel": 3,
+      "heroProfileChances": [
+        {
+          "profile": "Weteran",
+          "chance": 0.02
+        },
+        {
+          "profile": "Doborowy",
+          "chance": 0.02
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.01
+        }
+      ]
     },
     "heroiczny": {
-      "label": "Heroiczny",
-      "description": "Czwarty poziom profesji (czasem z poprzednią), rozwinięcia ×2,5 i dwa talenty na poziom. Stworzenia dostają profil Wielkiego Bohatera.",
+      "label": "Ekspert",
+      "description": "6–8 poziomów rozwoju, do trzech profesji (albo jedna z dodatkowymi rozwinięciami); ostatnia na 3.–4. poziomie, dwa talenty na poziom.",
       "randomWeight": 0.3,
       "totalLevels": {
-        "4": 1,
-        "5": 1,
-        "6": 1
+        "6": 1,
+        "7": 2,
+        "8": 1
       },
       "maxCareerLevel": 4,
-      "requireLevel4": true,
-      "maxCareers": 2,
+      "maxCareers": 3,
       "talentsPerLevel": 2,
       "extraTalentChance": 0.5,
       "talentLevelUpChance": 0.8,
-      "heroProfile": "Wielki Bohater",
       "keySkills": {
         "bonus": [
           10,
@@ -287,38 +279,52 @@
         "topSpells": 3,
         "casterAdvances": 30
       },
-      "advanceMultiplier": 2.5
+      "minMainLevel": 3,
+      "level5Chance": 0.005,
+      "heroProfileChances": [
+        {
+          "profile": "Doborowy",
+          "chance": 0.02
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.02
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.01
+        }
+      ]
     },
     "legendarny": {
-      "label": "Legendarny",
-      "description": "Pełna profesja (5. poziom, jeśli ją ma, np. elfi Mag), czasem poprzednia; rozwinięcia ×3,5, dwa talenty na poziom. Stworzenia dostają profil Legendarnego Bohatera. Arcymagowie elfów, władcy demonów, bohaterowie opowieści.",
+      "label": "Legenda",
+      "description": "8–10 poziomów rozwoju, do trzech profesji; ostatnia na 4. poziomie, a jeśli profesja ma 5. (np. Arcymag) — połowa szans na niego.",
       "randomWeight": 0.1,
       "totalLevels": {
-        "4": 1,
-        "5": 1,
-        "6": 1,
-        "7": 1
+        "8": 1,
+        "9": 2,
+        "10": 1
       },
       "maxCareerLevel": 4,
-      "requireLevel4": true,
-      "maxCareers": 2,
+      "maxCareers": 3,
       "talentsPerLevel": 2,
       "extraTalentChance": 0.8,
       "talentLevelUpChance": 0.9,
-      "heroProfile": "Legendarny Bohater",
       "keySkills": {
         "bonus": [
           15,
           20
         ],
-        "min": 72
+        "min": 72,
+        "max": 88
       },
       "keyChars": {
         "bonus": [
           12,
           18
         ],
-        "min": 64
+        "min": 64,
+        "max": 78
       },
       "spells": {
         "maxCn": 99,
@@ -338,8 +344,80 @@
         "topSpells": 4,
         "casterAdvances": 40
       },
-      "allowLevel5": true,
-      "advanceMultiplier": 3.5
+      "minMainLevel": 4,
+      "requireLevel4": true,
+      "level5Chance": 0.5,
+      "heroProfileChances": [
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.03
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.02
+        }
+      ]
+    },
+    "heros": {
+      "label": "Heros",
+      "description": "10–13 poziomów rozwoju, do czterech profesji; ostatnia na 4. poziomie albo na 5., jeśli profesja go ma. Wybrańcy bogów, półbogowie, najstarsze wampiry, książęta demonów.",
+      "randomWeight": 0.03,
+      "totalLevels": {
+        "10": 1,
+        "11": 2,
+        "12": 2,
+        "13": 1
+      },
+      "maxCareerLevel": 4,
+      "maxCareers": 4,
+      "talentsPerLevel": 2,
+      "extraTalentChance": 1,
+      "talentLevelUpChance": 1,
+      "keySkills": {
+        "bonus": [
+          20,
+          25
+        ],
+        "min": 90
+      },
+      "keyChars": {
+        "bonus": [
+          15,
+          22
+        ],
+        "min": 80
+      },
+      "spells": {
+        "maxCn": 99,
+        "arcane": [
+          5,
+          9
+        ],
+        "extraLores": [
+          1,
+          1,
+          1,
+          0.8,
+          0.65,
+          0.5,
+          0.35
+        ],
+        "topSpells": 5,
+        "casterAdvances": 55
+      },
+      "minMainLevel": 4,
+      "requireLevel4": true,
+      "level5Chance": 1,
+      "heroProfileChances": [
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.02
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.03
+        }
+      ]
     }
   }
 }

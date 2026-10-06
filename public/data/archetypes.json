@@ -75,7 +75,8 @@
       "zaawansowany": "ciezki",
       "doswiadczony": "ciezki",
       "heroiczny": "pelna_plyta",
-      "legendarny": "pelna_plyta"
+      "legendarny": "pelna_plyta",
+      "heros": "pelna_plyta"
     }
   },
   "Strzelec": {
@@ -146,7 +147,8 @@
       "zaawansowany": "lekki",
       "doswiadczony": "sredni",
       "heroiczny": "sredni",
-      "legendarny": "sredni"
+      "legendarny": "sredni",
+      "heros": "sredni"
     }
   },
   "Kupiec": {
@@ -273,7 +275,8 @@
       "zaawansowany": "lekki",
       "doswiadczony": "lekki",
       "heroiczny": "lekki",
-      "legendarny": "lekki"
+      "legendarny": "lekki",
+      "heros": "lekki"
     }
   },
   "Strażnik": {
@@ -338,7 +341,8 @@
       "zaawansowany": "sredni",
       "doswiadczony": "sredni",
       "heroiczny": "ciezki",
-      "legendarny": "ciezki"
+      "legendarny": "ciezki",
+      "heros": "ciezki"
     }
   },
   "Oprych": {
@@ -403,7 +407,8 @@
       "zaawansowany": "sredni",
       "doswiadczony": "sredni",
       "heroiczny": "ciezki",
-      "legendarny": "ciezki"
+      "legendarny": "ciezki",
+      "heros": "ciezki"
     }
   },
   "Uczony": {
@@ -669,7 +674,8 @@
       "zaawansowany": "lekki",
       "doswiadczony": "lekki",
       "heroiczny": "sredni",
-      "legendarny": "sredni"
+      "legendarny": "sredni",
+      "heros": "sredni"
     }
   },
   "Kapłan": {
@@ -902,7 +908,8 @@
       "zaawansowany": "lekki",
       "doswiadczony": "lekki",
       "heroiczny": "lekki",
-      "legendarny": "lekki"
+      "legendarny": "lekki",
+      "heros": "lekki"
     }
   }
 }

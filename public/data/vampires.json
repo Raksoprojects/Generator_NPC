@@ -9,7 +9,8 @@
   "zaawansowany": 5,
   "doswiadczony": 6,
   "heroiczny": 8,
-  "legendarny": 10
+  "legendarny": 10,
+  "heros": 12
  },
  "bloodlineGiftWeight": 4,
  "ageByTier": {
@@ -18,7 +19,8 @@
   "zaawansowany": 3,
   "doswiadczony": 4,
   "heroiczny": 5,
-  "legendarny": 5
+  "legendarny": 5,
+  "heros": 6
  },
  "bloodlines": [
   {
@@ -60,7 +62,8 @@
    "casting": {
     "chance": {
      "heroiczny": 0.35,
-     "legendarny": 0.5
+     "legendarny": 0.5,
+     "heros": 0.65
     },
     "minAdvances": 10,
     "maxArcane": 2,
@@ -149,7 +152,8 @@
      "zaawansowany": 0.5,
      "doswiadczony": 0.6,
      "heroiczny": 0.7,
-     "legendarny": 0.8
+     "legendarny": 0.8,
+     "heros": 0.9
     },
     "minAdvances": 15
    },
@@ -238,7 +242,8 @@
      "zaawansowany": 1,
      "doswiadczony": 1,
      "heroiczny": 1,
-     "legendarny": 1
+     "legendarny": 1,
+     "heros": 1
     },
     "minAdvances": 15
    },
@@ -327,7 +332,8 @@
     "chance": {
      "doswiadczony": 0.1,
      "heroiczny": 0.15,
-     "legendarny": 0.25
+     "legendarny": 0.25,
+     "heros": 0.35
     },
     "lores": "Zwierząt albo Nekromancja",
     "maxArcane": 3,
@@ -431,7 +437,8 @@
      "zaawansowany": 0.5,
      "doswiadczony": 0.6,
      "heroiczny": 0.7,
-     "legendarny": 0.8
+     "legendarny": 0.8,
+     "heros": 0.9
     },
     "minAdvances": 15
    },
@@ -525,7 +532,8 @@
      "zaawansowany": 0.3,
      "doswiadczony": 0.4,
      "heroiczny": 0.5,
-     "legendarny": 0.6
+     "legendarny": 0.6,
+     "heros": 0.7
     },
     "minAdvances": 10
    },
@@ -1410,7 +1418,8 @@
   "zaawansowany": 10,
   "doswiadczony": 15,
   "heroiczny": 25,
-  "legendarny": 40
+  "legendarny": 40,
+  "heros": 55
  },
  "casting_note": "casting: chance - szansa, ze wampir tej linii czaruje (wg poziomu; brak poziomu = 0), minAdvances - co najmniej tyle rozwiniec Splatania i Jezyka (Magicznego), maxArcane/maxPetty - najwiecej zaklec, lores - zamiast tradycji linii, direct - tylko zaklecia bezposrednie (obrazenia albo na siebie). professions - jedyne dozwolone profesje, noArmour - bez pancerza (poza magicznym od heroicznego).",
  "turning_note": "turning - przemiana czlowieka w wampira (Krwawy Pocałunek): modifiers - premie do Cech wzgledem czlowieka (zasada domowa), movement - premia do Szybkosci, skills - 12 Umiejetnosci Rasowych linii (3 x +5, 3 x +3), talents - 5 Talentow linii ('A lub B' = jeden z nich, 'losowy' = z Tabeli Losowych Talentow), trappings - wyposazenie linii."

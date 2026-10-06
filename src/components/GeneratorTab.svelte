@@ -60,9 +60,6 @@
     creature ? isVampireName(creature) : !!creatureGroup && gd.creaturesInGroup(creatureGroup).some((c) => isVampireName(c.name))
   );
 
-  $effect(() => {
-    if (kind === "stworzenia" && tier && TIER_IDS.indexOf(tier) < minTierIdx) tier = TIER_IDS[minTierIdx];
-  });
 
   const MODES: { id: Mode; label: string; hint: string }[] = [
     { id: "losowy", label: "Losowy", hint: "Wszystko losowe — jedno kliknięcie." },
@@ -83,7 +80,15 @@
   let chosenTraits = $state<string[]>([]);
   let randomTraits = $state(true);
   let commander = $state(false);
-  let autoHero = $state(true);
+  /** Wyjatkowa jednostka: profil bohatera z Bestiariusza 2.0 ponad rozwoj z profesji. */
+  let exceptional = $state("");
+
+  /** Bestia (bez profesji) moze wystapic ponizej swojego minimum - osłabiona, z cechami negatywnymi. */
+  let beastMode = $derived(!!creature && (!civilized || archetype === NO_CAREER));
+
+  $effect(() => {
+    if (kind === "stworzenia" && !beastMode && tier && TIER_IDS.indexOf(tier) < minTierIdx) tier = TIER_IDS[minTierIdx];
+  });
 
   let npc = $state<Npc | null>(null);
   let history = $state<Npc[]>([]);
@@ -145,7 +150,7 @@
         traits: chosenTraits,
         randomTraits,
         commander,
-        autoHeroProfile: autoHero,
+        heroProfiles: exceptional ? [exceptional] : [],
         deterministic: mode === "wlasny"
       };
     }
@@ -161,7 +166,7 @@
       traits: chosenTraits,
       randomTraits,
       commander,
-      autoHeroProfile: autoHero,
+      heroProfiles: exceptional ? [exceptional] : [],
       deterministic: mode === "wlasny"
     };
   }
@@ -183,7 +188,7 @@
     chosenTraits = [];
     randomTraits = true;
     commander = false;
-    autoHero = true;
+    exceptional = "";
   }
 </script>
 
@@ -252,7 +257,7 @@
           <select bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each TIER_IDS as t, i (t)}
-              <option value={t} disabled={i < minTierIdx}>{gd.getTier(t).label}{!civilized || !archetype
+              <option value={t} disabled={i < minTierIdx && !beastMode}>{gd.getTier(t).label}{beastMode && i < minTierIdx ? ` — osłabiony (${minTierIdx - i} ${minTierIdx - i === 1 ? "cecha negatywna" : "cechy negatywne"})` : !civilized || !archetype
                   ? ` — ${gd.getCreatureFamilies().settings.tierLabels[TIER_IDS[Math.max(0, i - minTierIdx)]]}`
                   : ""}</option>
             {/each}
@@ -341,7 +346,7 @@
 
       <div class="checks">
         <label class="check"><input type="checkbox" bind:checked={randomTraits} /> Dolosuj cechy opcjonalne (15% / 5% / 1%)</label>
-        <label class="check"><input type="checkbox" bind:checked={autoHero} /> Profil bohatera wg poziomu</label>
+        <label class="check" title="Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji">Wyjątkowa jednostka<select bind:value={exceptional}><option value="">— losowo (mała szansa) —</option><option value="Weteran">Weteran</option><option value="Doborowy">Doborowy</option><option value="Pomniejszy Bohater">Pomniejszy Bohater</option><option value="Wielki Bohater">Wielki Bohater</option></select></label>
         <label class="check"><input type="checkbox" bind:checked={commander} /> {COMMANDER_PROFILE}</label>
         <button class="btn-sm ghost" onclick={resetForm}>Wyczyść</button>
       </div>

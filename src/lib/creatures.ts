@@ -30,19 +30,20 @@ export function creatureBase(creature: CreatureDef, code: Attribute): { base: nu
 
 /** Rzuty na cechy stworzenia (minimum kluczowych cech archetypu dla cywilizowanych). */
 export function rollCreature(creature: CreatureDef, keyChars: Attribute[], rng: Rng, deterministic = false): Record<Attribute, number> {
-  const min = gd.getSettings().minKeyRoll;
   const out = {} as Record<Attribute, number>;
+  const twoDice: Attribute[] = [];
   for (const code of ATTRIBUTES) {
     const { die } = creatureBase(creature, code);
     if (!die) out[code] = 0;
     else if (die === "1k10") out[code] = deterministic ? 5 : rollDie(10, rng);
-    else if (deterministic) out[code] = keyChars.includes(code) ? Math.max(11, min) : 11;
-    else {
-      let r = roll2k10(rng);
-      for (let i = 0; keyChars.includes(code) && r < min && i < 50; i++) r = roll2k10(rng);
-      out[code] = r;
-    }
+    else twoDice.push(code);
   }
+  // Cechy 2k10: najwyzsze rzuty do cech kluczowych archetypu, reszta losowo (jak u ras).
+  const rolls = twoDice.map(() => (deterministic ? 11 : roll2k10(rng))).sort((a, b) => b - a);
+  const keys = keyChars.filter((k) => twoDice.includes(k));
+  keys.forEach((k, i) => (out[k] = rolls[i]));
+  const rest = rolls.slice(keys.length);
+  for (const c of twoDice.filter((c) => !keys.includes(c))) out[c] = rest.splice(deterministic ? 0 : Math.floor(rng() * rest.length), 1)[0];
   return out;
 }
 
@@ -207,6 +208,16 @@ export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, determini
     for (const t of npc.traits) delete weights[t];
     const t = deterministic ? Object.entries(weights).sort((a, b) => b[1] - a[1])[0]?.[0] : weightedKey(weights, rng);
     if (t) npc.traits.push(t);
+  }
+
+  // Bestia ponizej swojego minimalnego poziomu (np. olbrzym na Nowicjuszu): mlody, chory albo slaby
+  // osobnik - jedna cecha negatywna (Slaby, Chorowity...) za kazdy poziom ponizej minimum.
+  const below = TIER_IDS.indexOf(creature.minTier ?? "slaby") - TIER_IDS.indexOf(npc.tier);
+  const negative = Object.entries(gd.getCreatureTraits()).filter(([n, t]) => t.negative && !npc.traits.includes(n)).map(([n]) => n);
+  for (let i = 0; i < below && negative.length; i++) {
+    const n = deterministic ? negative[0] : negative[randInt(0, negative.length - 1, rng)];
+    npc.traits.push(n);
+    negative.splice(negative.indexOf(n), 1);
   }
 
   const optional = usableOptional(creature).filter((o) => !npc.traits.includes(o));

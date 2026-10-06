@@ -26,12 +26,14 @@ function maxLevel(npc: ReturnType<typeof generateNpc>): number {
 }
 
 describe("rzuty na cechy", () => {
-  it("kluczowe cechy archetypu nigdy nie spadaja ponizej minimum", () => {
-    const min = gd.getSettings().minKeyRoll;
+  it("najwyzsze rzuty trafiaja do kluczowych cech archetypu (w ich kolejnosci)", () => {
+    const keys = gd.getArchetype("Wojownik")!.characteristics;
     for (const seed of SEEDS) {
       const npc = generateNpc({ archetype: "Wojownik" }, seedRng(seed));
-      for (const code of gd.getArchetype("Wojownik")!.characteristics) {
-        expect(npc.rolls[code]).toBeGreaterThanOrEqual(min);
+      const others = ATTRIBUTES.filter((c) => !keys.includes(c)).map((c) => npc.rolls[c]);
+      for (let i = 0; i < keys.length; i++) {
+        if (i > 0) expect(npc.rolls[keys[i]]).toBeLessThanOrEqual(npc.rolls[keys[i - 1]]);
+        for (const o of others) expect(npc.rolls[keys[i]]).toBeGreaterThanOrEqual(o);
       }
       for (const code of ATTRIBUTES) {
         expect(npc.rolls[code]).toBeGreaterThanOrEqual(2);
@@ -42,13 +44,14 @@ describe("rzuty na cechy", () => {
 });
 
 describe("poziomy BN", () => {
-  it("tylko doswiadczeni, heroiczni i legendarni osiagaja 4. poziom profesji", () => {
+  it("tylko doswiadczeni i wyzsi osiagaja 4. poziom profesji", () => {
     for (const tier of TIER_IDS) {
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
         const top = maxLevel(npc);
-        if (tier === "legendarny") expect(top).toBeGreaterThanOrEqual(4);
-        else if (tier === "doswiadczony" || tier === "heroiczny") expect(top).toBe(4);
+        if (tier === "legendarny" || tier === "heros") expect(top).toBeGreaterThanOrEqual(4);
+        else if (tier === "doswiadczony") expect(top).toBeGreaterThanOrEqual(3);
+        else if (tier === "heroiczny") expect(top).toBeGreaterThanOrEqual(3);
         else expect(top).toBeLessThanOrEqual(3);
       }
     }
@@ -57,17 +60,18 @@ describe("poziomy BN", () => {
   it("liczba poziomow i profesji zgadza sie z definicja poziomu", () => {
     const expected: Record<TierId, [number, number, number]> = {
       slaby: [1, 2, 1],
-      sredni: [2, 2, 1],
+      sredni: [2, 3, 2],
       zaawansowany: [3, 4, 2],
       doswiadczony: [4, 5, 2],
-      heroiczny: [4, 6, 2],
-      legendarny: [4, 8, 2]
+      heroiczny: [6, 8, 3],
+      legendarny: [8, 10, 3],
+      heros: [10, 14, 4]
     };
     for (const tier of TIER_IDS) {
       const [min, max, careers] = expected[tier];
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
-        expect(npc.careerPath.length).toBeGreaterThanOrEqual(min);
+        expect(npc.careerPath.length, `${tier} ${npc.race} ${JSON.stringify(npc.careerPath)}`).toBeGreaterThanOrEqual(min);
         expect(npc.careerPath.length).toBeLessThanOrEqual(max);
         expect(new Set(npc.careerPath.map((s) => s.profession)).size).toBeLessThanOrEqual(careers);
       }
@@ -114,10 +118,12 @@ describe("rozwoj losowy", () => {
     for (const seed of SEEDS) {
       const npc = generateNpc({ archetype: "Kupiec", tier: "sredni", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
       // Kupiec 1: Zw, SW, Ogd; poziom 2 dodaje Int. Zw nie jest cecha kluczowa Kupca (Ogd, SW).
+      // Zwykly czasem ma 3. poziom rozwoju - jako dodatkowe rozwiniecia na przebytym poziomie.
+      const extra = npc.careerPath.filter((s) => s.extra).length;
       expect(npc.charAdvances.Zw).toBeGreaterThanOrEqual(5 + 2);
-      expect(npc.charAdvances.Zw).toBeLessThanOrEqual(10);
+      expect(npc.charAdvances.Zw).toBeLessThanOrEqual(10 + 5 * extra);
       expect(npc.charAdvances.Int).toBeGreaterThanOrEqual(2);
-      expect(npc.charAdvances.Int).toBeLessThanOrEqual(5);
+      expect(npc.charAdvances.Int).toBeLessThanOrEqual(5 + 5 * extra);
     }
   });
 
@@ -140,9 +146,7 @@ describe("rozwoj losowy", () => {
       const lower = gd.getTier(tiers[i - 1])!;
       const upper = gd.getTier(tiers[i])!;
       expect(upper.keySkills.min ?? 0, `${tiers[i]} umiejetnosci`).toBeGreaterThan(lower.keySkills.max ?? Infinity);
-      if (upper.heroProfile === lower.heroProfile) {
-        expect(upper.keyChars.min ?? 0, `${tiers[i]} cechy`).toBeGreaterThan(lower.keyChars.max ?? Infinity);
-      }
+      expect(upper.keyChars.min ?? 0, `${tiers[i]} cechy`).toBeGreaterThan(lower.keyChars.max ?? Infinity);
     }
     for (const archName of gd.allArchetypeNames()) {
       const arch = gd.getArchetype(archName)!;
@@ -156,10 +160,7 @@ describe("rozwoj losowy", () => {
         for (let seed = 1; seed <= 25; seed++) {
           const npc = generateNpc({ archetype: archName, tier, race: "Człowiek" }, seedRng(seed));
           const v = computeNpc(npc);
-          // Profile z szansy poziomu (Weteran, Doborowy...) to swiadomy wyjatek - liczymy tylko staly profil poziomu.
-          const own = gd.getTier(tier)!.heroProfile;
-          const ownHero = (c: (typeof ATTRIBUTES)[number]) => (own ? shapedHeroModifiers(own, archName)[c] : 0);
-          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c] + ownHero(c));
+          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c]);
           for (const k of arch.keySkills.slice(0, s.keySkillCount)) {
             note(k, Math.max(0, ...npc.skills.filter((x) => x.name === k || x.name.startsWith(`${k} (`)).map((x) => x.advances)));
           }
@@ -313,49 +314,70 @@ describe("ponowne losowanie", () => {
     expect(next.rolls).not.toEqual(npc.rolls);
   });
 
-  it("przebudowa rozwoju ustawia profil bohatera wg poziomu (stworzenia; rasy rozwijaja sie w profesji)", () => {
-    const human = generateNpc({ tier: "doswiadczony", archetype: "Wojownik", race: "Człowiek" }, seedRng(4));
-    expect(human.heroProfiles).not.toContain("Pomniejszy Bohater");
-    const npc = generateNpc({ tier: "doswiadczony", archetype: "Wojownik", creature: "Ork" }, seedRng(4));
-    expect(npc.heroProfiles).toContain("Pomniejszy Bohater");
+  it("przebudowa rozwoju zachowuje wybrany profil bohatera i nowy poziom", () => {
+    const npc = generateNpc({ tier: "doswiadczony", archetype: "Wojownik", creature: "Ork", heroProfiles: ["Pomniejszy Bohater"] }, seedRng(4));
+    expect(npc.heroProfiles).toEqual(["Pomniejszy Bohater"]);
     const next = rebuildDevelopment({ ...npc, tier: "sredni" }, undefined, seedRng(4));
-    expect(next.heroProfiles).not.toContain("Pomniejszy Bohater");
+    expect(next.heroProfiles).toEqual(["Pomniejszy Bohater"]);
     expect(Math.max(...next.careerPath.map((s) => s.level))).toBeLessThanOrEqual(2);
   });
 });
 
-describe("szansa na profil bohatera", () => {
-  it("zaawansowany czasem jest Weteranem, Doborowym (stworzenie - Pomniejszym Bohaterem), ale tylko przy losowaniu", () => {
-    const seen: Record<string, number> = {};
-    const orc: Record<string, number> = {};
-    for (let seed = 1; seed <= 600; seed++) {
-      const hp = generateNpc({ archetype: "Wojownik", tier: "zaawansowany", race: "Człowiek" }, seedRng(seed)).heroProfiles;
-      expect(hp.length).toBeLessThanOrEqual(1);
-      for (const h of hp) seen[h] = (seen[h] ?? 0) + 1;
-      for (const h of generateNpc({ archetype: "Wojownik", tier: "zaawansowany", creature: "Ork" }, seedRng(seed)).heroProfiles) orc[h] = (orc[h] ?? 0) + 1;
+describe("profile bohaterow i sciezki profesji", () => {
+  it("profile bohaterow: z wyboru albo z malej szansy poziomu (najwyzej kilka procent)", () => {
+    for (const tier of TIER_IDS) {
+      let any = 0;
+      for (let seed = 1; seed <= 300; seed++) {
+        const hp = generateNpc({ archetype: "Wojownik", tier, race: "Człowiek" }, seedRng(seed)).heroProfiles;
+        expect(hp.length).toBeLessThanOrEqual(1);
+        if (hp.length) any++;
+      }
+      expect(any / 300, tier).toBeLessThanOrEqual(0.09);
+      for (let seed = 1; seed <= 20; seed++) {
+        expect(generateNpc({ archetype: "Wojownik", tier, deterministic: true }, seedRng(seed)).heroProfiles).toEqual([]);
+      }
     }
-    expect(seen["Weteran"]).toBeGreaterThan(20);
-    expect(seen["Doborowy"]).toBeGreaterThan(10);
-    // U ras Pomniejszego Bohatera zastepuje mocniejszy rozwoj w profesji.
-    expect(seen["Pomniejszy Bohater"] ?? 0).toBe(0);
-    expect(orc["Pomniejszy Bohater"]).toBeGreaterThan(30);
-    expect(orc["Pomniejszy Bohater"]).toBeLessThan(100);
-    let mid = 0;
-    let exp = 0;
-    for (let seed = 1; seed <= 300; seed++) {
-      const m = generateNpc({ archetype: "Kupiec", tier: "sredni" }, seedRng(seed)).heroProfiles;
-      if (m.includes("Weteran")) mid++;
-      expect(m.every((h) => h === "Weteran")).toBe(true);
-      const d = generateNpc({ archetype: "Kupiec", tier: "doswiadczony", race: "Człowiek" }, seedRng(seed)).heroProfiles;
-      expect(d).not.toContain("Pomniejszy Bohater");
-      if (d.includes("Doborowy")) exp++;
+    const chosen = generateNpc({ archetype: "Wojownik", tier: "zaawansowany", heroProfiles: ["Wielki Bohater"], commander: true }, seedRng(1));
+    expect(chosen.heroProfiles.sort()).toEqual(["Dowódca Oddziału", "Wielki Bohater"]);
+  });
+
+  it("legenda: Arcymag (5. poziom) w okolo polowie przypadkow, ekspert prawie nigdy; dodatkowe rozwiniecia liczone", () => {
+    let legend5 = 0;
+    let expert5 = 0;
+    for (let seed = 1; seed <= 100; seed++) {
+      const l = generateNpc({ archetype: "Czarodziej", tier: "legendarny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      if (l.careerPath.at(-1)!.level === 5) legend5++;
+      const e = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      if (e.careerPath.at(-1)!.level === 5) expert5++;
+      // Sama jedna profesja na Legendzie - reszta poziomow to dodatkowe rozwiniecia.
+      expect(l.careerPath.length).toBeGreaterThanOrEqual(8);
+      expect(new Set(l.careerPath.map((s) => s.profession)).size).toBe(1);
     }
-    expect(mid).toBeGreaterThan(10);
-    expect(exp).toBeGreaterThan(10);
-    for (let seed = 1; seed <= 50; seed++) {
-      expect(generateNpc({ archetype: "Wojownik", tier: "zaawansowany", deterministic: true }, seedRng(seed)).heroProfiles).toEqual([]);
-      expect(generateNpc({ archetype: "Wojownik", tier: "zaawansowany", autoHeroProfile: false }, seedRng(seed)).heroProfiles).toEqual([]);
+    expect(legend5).toBeGreaterThan(30);
+    expect(legend5).toBeLessThan(70);
+    expect(expert5).toBeLessThanOrEqual(3);
+  });
+
+  it("ostatnia profesja ma zawsze najwyzszy poziom; liczba profesji wg poziomu BN", () => {
+    const maxCareers: Record<string, number> = {};
+    for (let seed = 1; seed <= 120; seed++) {
+      for (const tier of TIER_IDS) {
+        const npc = generateNpc({ tier, race: "Człowiek" }, seedRng(seed));
+        const byProf = new Map<string, number>();
+        for (const s of npc.careerPath) byProf.set(s.profession, Math.max(byProf.get(s.profession) ?? 0, s.level));
+        const last = npc.careerPath[npc.careerPath.length - 1];
+        for (const [, lvl] of byProf) expect(lvl, `${tier}: ${JSON.stringify(npc.careerPath)}`).toBeLessThanOrEqual(last.level);
+        maxCareers[tier] = Math.max(maxCareers[tier] ?? 0, byProf.size);
+        expect(byProf.size).toBeLessThanOrEqual(gd.getTier(tier).maxCareers);
+        if (tier === "heroiczny") expect(last.level).toBeGreaterThanOrEqual(3);
+        if (tier === "legendarny") expect(last.level).toBe(4);
+        if (tier === "heros") expect(last.level).toBeGreaterThanOrEqual(4);
+      }
     }
+    expect(maxCareers.sredni).toBe(2);
+    expect(maxCareers.heroiczny).toBe(3);
+    expect(maxCareers.legendarny).toBe(3);
+    expect(maxCareers.heros).toBe(4);
   });
 });
 

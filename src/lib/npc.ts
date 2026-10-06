@@ -181,7 +181,8 @@ export function normalizeNpc(npc: Npc): Npc {
   npc.spells ??= [];
   npc.mutations ??= [];
   npc.traits ??= [];
-  npc.heroProfiles ??= [];
+  // Profile usuniete z danych (Weteran, Doborowy, Legendarny Bohater) nie dzialaja w starych zapisach.
+  npc.heroProfiles = (npc.heroProfiles ?? []).filter((h) => gd.getHeroProfile(h));
   npc.archetype ??= "";
   return npc;
 }
@@ -474,7 +475,11 @@ export function computeNpc(input: Npc): NpcView {
 
 /** "Rekrut → Żołnierz → Giermek" - tytuly kolejnych poziomow sciezki. */
 export function careerPathText(npc: Npc): string {
-  return npc.careerPath.map((s) => careerLevelInfo(s.profession, s.level, npc.sex).title).join(" → ");
+  const real = npc.careerPath.filter((s) => !s.extra);
+  const extra = npc.careerPath.length - real.length;
+  const path = real.map((s) => careerLevelInfo(s.profession, s.level, npc.sex).title).join(" → ");
+  // Poziom BN ponad sciezke profesji - dodatkowe rozwiniecia na przebytych poziomach.
+  return extra ? `${path} (+${extra} ${extra === 1 ? "poziom" : extra < 5 ? "poziomy" : "poziomów"} doświadczenia)` : path;
 }
 
 /** "Miecz (+8/52)" - bron w formacie bloku statystyk. */
