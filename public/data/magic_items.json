@@ -3,7 +3,11 @@
   "talents": {
     "Precyzyjne Inkantowanie": {
       "castSL": 1,
-      "note": "+1 PS do udanych Testów Rzucania Zaklęć"
+      "note": "+1 PS do udanych Testów Języka (Magicznego) za każdy poziom (zasada domowa)"
+    },
+    "Zmysł Magii": {
+      "channelSL": 1,
+      "note": "+1 PS do udanych Testów Splatania Magii za każdy poziom (zasada domowa)"
     }
   },
   "items": [

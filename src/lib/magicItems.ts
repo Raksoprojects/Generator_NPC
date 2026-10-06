@@ -136,8 +136,10 @@ export function castingSummary(
   for (const t of npc.talents) {
     const bonus = data?.talents[gd.resolveTalentKey(t.name) ?? t.name];
     if (!bonus) continue;
-    if (bonus.castSL) (view.cast.sl += bonus.castSL), view.cast.sources.push(`+${bonus.castSL} ${t.name}${bonus.note ? ` (${bonus.note})` : ""}`);
-    if (bonus.channelSL) (view.channel.sl += bonus.channelSL), view.channel.sources.push(`+${bonus.channelSL} ${t.name}`);
+    // Premia za kazdy poziom talentu (Zmysl Magii 2 = +2 PS).
+    const lvl = Math.max(1, t.level);
+    if (bonus.castSL) (view.cast.sl += bonus.castSL * lvl), view.cast.sources.push(`+${bonus.castSL * lvl} ${t.name}${lvl > 1 ? ` ${lvl}` : ""}`);
+    if (bonus.channelSL) (view.channel.sl += bonus.channelSL * lvl), view.channel.sources.push(`+${bonus.channelSL * lvl} ${t.name}${lvl > 1 ? ` ${lvl}` : ""}`);
   }
   return view;
 }
