@@ -1,10 +1,11 @@
 <script lang="ts">
   import NpcCard from "./NpcCard.svelte";
   import { app } from "../lib/app.svelte";
-  import { copyText } from "../lib/files";
+  import { copyText, downloadText, pickFile } from "../lib/files";
   import * as gd from "../lib/gameData";
   import { generateNpc, racesForArchetype } from "../lib/generator";
-  import { computeNpc, npcToText } from "../lib/npc";
+  import { groupsToJson, parseGroupsJson, type SavedGroup } from "../lib/library";
+  import { computeNpc, normalizeNpc, npcToText } from "../lib/npc";
   import { TIER_IDS, type GroupRow, type Npc } from "../lib/types";
 
   const presets = gd.getGroupPresets();
@@ -15,6 +16,11 @@
   let rows = $state<GroupRow[]>(structuredClone(presets[presetNames[0]]?.rows ?? []));
   let members = $state<Npc[]>([]);
   let collapsed = $state<Record<string, boolean>>({});
+  /** Id zapisanej grupy, ktora jest teraz na ekranie (zapis ja aktualizuje). */
+  let savedId = $state<string | undefined>(undefined);
+  let chosenSaved = $state("");
+
+  let savedGroups = $derived([...app.groups].sort((a, b) => a.name.localeCompare(b.name, "pl")));
 
   function loadPreset() {
     const p = presets[presetName];
@@ -80,6 +86,56 @@
     }
     members = out;
     collapsed = {};
+    // Nowe losowanie to nowa grupa - zapis nie nadpisze wczytanej.
+    savedId = undefined;
+  }
+
+  function saveGroup() {
+    const name = groupName.trim() || "Grupa";
+    for (const m of members) m.group = name;
+    savedId = app.saveGroup({ id: savedId, name, rows, members });
+    chosenSaved = savedId;
+    app.notify(`Zapisano grupę „${name}” (${members.length} BN).`);
+  }
+
+  function saveGroupAsNew() {
+    savedId = undefined;
+    saveGroup();
+  }
+
+  function loadSaved() {
+    const g = app.groups.find((x) => x.id === chosenSaved);
+    if (!g) return;
+    const copy = $state.snapshot(g) as SavedGroup;
+    groupName = copy.name;
+    rows = copy.rows.length ? copy.rows : rows;
+    members = copy.members.map((m) => normalizeNpc(m));
+    collapsed = Object.fromEntries(members.map((m) => [m.id, true]));
+    savedId = copy.id;
+  }
+
+  function removeSaved() {
+    const g = app.groups.find((x) => x.id === chosenSaved);
+    if (!g || !confirm(`Usunąć zapisaną grupę „${g.name}”? BN zapisani osobno w bibliotece zostają.`)) return;
+    app.removeGroup(g.id);
+    if (savedId === g.id) savedId = undefined;
+    chosenSaved = "";
+  }
+
+  function exportGroups() {
+    const stamp = new Date().toISOString().slice(0, 10);
+    downloadText(`grupy_bn_${stamp}.json`, groupsToJson($state.snapshot(app.groups) as SavedGroup[]));
+  }
+
+  async function importGroups() {
+    const file = await pickFile(".json,application/json");
+    if (!file) return;
+    try {
+      const { added, updated } = app.mergeGroups(parseGroupsJson(await file.text()));
+      app.notify(`Import grup: dodano ${added}, zaktualizowano ${updated}.`);
+    } catch (e) {
+      app.notify(`Błąd importu: ${e instanceof Error ? e.message : String(e)}`);
+    }
   }
 
   function summary(npc: Npc): string {
@@ -115,6 +171,19 @@
       </label>
       <button class="btn-sm" onclick={loadPreset}>Wczytaj</button>
       <span class="text-dim hint">{presets[presetName]?.description}</span>
+    </div>
+
+    <div class="preset-row">
+      <label>Zapisane grupy
+        <select bind:value={chosenSaved}>
+          <option value="">{savedGroups.length ? "— wybierz —" : "— brak —"}</option>
+          {#each savedGroups as g (g.id)}<option value={g.id}>{g.name} ({g.members.length} BN)</option>{/each}
+        </select>
+      </label>
+      <button class="btn-sm" onclick={loadSaved} disabled={!chosenSaved}>Wczytaj</button>
+      <button class="btn-sm ghost" onclick={removeSaved} disabled={!chosenSaved}>Usuń</button>
+      <button class="btn-sm ghost" onclick={exportGroups} disabled={!app.groups.length}>Eksportuj grupy</button>
+      <button class="btn-sm ghost" onclick={importGroups}>Importuj grupy</button>
     </div>
 
     <label class="group-name">Nazwa grupy
@@ -178,7 +247,9 @@
         <button class="btn-sm ghost" onclick={() => toggleAll(true)}>Zwiń</button>
         <button class="btn-sm ghost" onclick={() => toggleAll(false)}>Rozwiń</button>
         <button class="btn-sm" onclick={copyAll}>Kopiuj wszystko</button>
-        <button class="btn-sm success" onclick={saveAll}>Zapisz wszystkich</button>
+        <button class="btn-sm success" onclick={saveGroup} title="Cała grupa jako jeden wpis — do wczytania później w całości">{savedId ? "Zapisz zmiany grupy" : "Zapisz grupę"}</button>
+        {#if savedId}<button class="btn-sm" onclick={saveGroupAsNew}>Zapisz jako nową</button>{/if}
+        <button class="btn-sm" onclick={saveAll} title="Każdy BN osobno w bibliotece">Zapisz wszystkich do biblioteki</button>
       </div>
     </div>
 
