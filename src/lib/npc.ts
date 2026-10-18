@@ -182,7 +182,9 @@ export function normalizeNpc(npc: Npc): Npc {
   npc.mutations ??= [];
   npc.traits ??= [];
   // Profile usuniete z danych (Weteran, Doborowy, Legendarny Bohater) nie dzialaja w starych zapisach.
-  npc.heroProfiles = (npc.heroProfiles ?? []).filter((h) => gd.getHeroProfile(h));
+  // Przypisanie tylko przy zmianie - normalizeNpc dziala tez wewnatrz $derived (karta BN), gdzie mutacja stanu jest zabroniona.
+  npc.heroProfiles ??= [];
+  if (npc.heroProfiles.some((h) => !gd.getHeroProfile(h))) npc.heroProfiles = npc.heroProfiles.filter((h) => gd.getHeroProfile(h));
   npc.archetype ??= "";
   return npc;
 }
