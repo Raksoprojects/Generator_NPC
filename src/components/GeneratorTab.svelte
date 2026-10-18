@@ -82,6 +82,14 @@
   let commander = $state(false);
   /** Wyjatkowa jednostka: profil bohatera z Bestiariusza 2.0 ponad rozwoj z profesji. */
   let exceptional = $state("");
+  /** PD podane recznie: zamiast budzetu poziomu albo dodane do niego. */
+  let xpValue = $state<number | null>(null);
+  let xpMode = $state<"zamiast" | "dodaj">("dodaj");
+  let xpSpec = $derived.by((): Pick<GenSpec, "xp" | "xpBonus"> => {
+    const v = Number(xpValue);
+    if (xpValue == null || !Number.isFinite(v) || v <= 0) return {};
+    return xpMode === "zamiast" ? { xp: Math.round(v) } : { xpBonus: Math.round(v) };
+  });
 
   /** Bestia (bez profesji) moze wystapic ponizej swojego minimum - osłabiona, z cechami negatywnymi. */
   let beastMode = $derived(!!creature && (!civilized || archetype === NO_CAREER));
@@ -151,6 +159,7 @@
         randomTraits,
         commander,
         heroProfiles: exceptional ? [exceptional] : [],
+        ...(civilized && archetype !== NO_CAREER ? xpSpec : {}),
         deterministic: mode === "wlasny"
       };
     }
@@ -167,6 +176,7 @@
       randomTraits,
       commander,
       heroProfiles: exceptional ? [exceptional] : [],
+      ...xpSpec,
       deterministic: mode === "wlasny"
     };
   }
@@ -189,8 +199,22 @@
     randomTraits = true;
     commander = false;
     exceptional = "";
+    xpValue = null;
+    xpMode = "dodaj";
   }
 </script>
+
+{#snippet xpField()}
+  <label title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
+    <span class="xp-row">
+      <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpValue} />
+      <select bind:value={xpMode} aria-label="Sposób użycia PD">
+        <option value="dodaj">dodaj do poziomu</option>
+        <option value="zamiast">zamiast poziomu</option>
+      </select>
+    </span>
+  </label>
+{/snippet}
 
 <section class="tab">
   <div class="panel controls">
@@ -263,6 +287,7 @@
             {/each}
           </select>
         </label>
+        {#if civilized && archetype !== NO_CAREER}{@render xpField()}{/if}
         <label>Imię
           <input type="text" placeholder="nazwa stworzenia" bind:value={name} />
         </label>
@@ -290,6 +315,7 @@
             {#each TIER_IDS as t (t)}<option value={t}>{gd.getTier(t).label}</option>{/each}
           </select>
         </label>
+        {@render xpField()}
         <label>Rasa
           <select bind:value={race}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
@@ -372,6 +398,13 @@
 </section>
 
 <style>
+  .xp-row {
+    display: flex;
+    gap: 0.3rem;
+  }
+  .xp-row input {
+    width: 6.5rem;
+  }
   .tab {
     display: flex;
     flex-direction: column;

@@ -127,7 +127,13 @@
     const careers = [...new Set(npc.careerPath.map((s) => s.profession))];
     mainProfession = careers[careers.length - 1] ?? "";
     prevProfession = careers.length > 1 ? careers[0] : "";
+    xpEdit = npc.xpSpec?.budget ?? npc.xpSpec?.bonus ?? null;
+    xpEditMode = npc.xpSpec?.budget != null ? "zamiast" : "dodaj";
   });
+
+  /** PD podane recznie przy przebudowie: zamiast budzetu poziomu albo dodane do niego. */
+  let xpEdit = $state<number | null>(null);
+  let xpEditMode = $state<"zamiast" | "dodaj">("dodaj");
 
   let professionOptions = $derived(
     gd.allProfessionNames().filter((p) => gd.professionAllowsRace(p, creature ? "Człowiek" : npc.race))
@@ -135,7 +141,11 @@
 
   function rebuild() {
     const profs = [prevProfession, mainProfession].filter(Boolean);
-    npc = rebuildDevelopment(snapshot(), profs.length ? profs : undefined);
+    const next = snapshot();
+    const v = Math.round(Number(xpEdit));
+    if (xpEdit == null || !Number.isFinite(v) || v <= 0) delete next.xpSpec;
+    else next.xpSpec = xpEditMode === "zamiast" ? { budget: v } : { bonus: v };
+    npc = rebuildDevelopment(next, profs.length ? profs : undefined);
   }
 
   // --- Edycja: umiejetnosci, talenty, bron, zaklecia, cechy ---
@@ -369,6 +379,7 @@
           {npc.race} · {npc.sex === "K" ? "kobieta" : "mężczyzna"} · <b>{npc.archetype}</b>
         {/if}
         · {tierLabel}
+        {#if npc.xp}<span class="text-dim" title="PD wydane ponad tworzenie postaci"> · {npc.xp.spent} PD</span>{/if}
         {#if npc.group}<span class="text-dim"> · {npc.group}</span>{/if}
       </p>
       {#if view.career}
@@ -713,6 +724,15 @@
               {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
             </select>
           </label>
+          <label title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
+            <span class="xp-row">
+              <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpEdit} />
+              <select bind:value={xpEditMode} aria-label="Sposób użycia PD">
+                <option value="dodaj">dodaj do poziomu</option>
+                <option value="zamiast">zamiast poziomu</option>
+              </select>
+            </span>
+          </label>
           <label>Profesja poprzednia
             <select bind:value={prevProfession}>
               <option value="">— brak / losowo —</option>
@@ -876,6 +896,13 @@
 </article>
 
 <style>
+  .xp-row {
+    display: flex;
+    gap: 0.3rem;
+  }
+  .xp-row input {
+    width: 6.5rem;
+  }
   .npc {
     display: flex;
     flex-direction: column;
