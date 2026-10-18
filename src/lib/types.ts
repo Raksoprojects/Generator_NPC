@@ -144,27 +144,14 @@ export interface TierDef {
   description: string;
   /** Waga przy calkowicie losowym wyborze poziomu. */
   randomWeight: number;
-  /** Laczna liczba poziomow profesji -> waga. */
-  totalLevels: Record<string, number>;
-  /** Najwyzszy poziom, jaki BN moze osiagnac w jednej profesji. */
-  maxCareerLevel: number;
-  /** Czy glowna profesja musi dojsc do 4. poziomu. */
-  requireLevel4?: boolean;
-  /** Najnizszy poziom ostatniej profesji (Ekspert: co najmniej 3.). */
-  minMainLevel?: number;
+  /** Budzet PD [od, do] - PD ponad rozwiniecia z tworzenia postaci (PG s. 47-49). */
+  xp: [number, number];
   /** Maksymalna liczba profesji w sciezce. */
   maxCareers: number;
-  talentsPerLevel: number;
-  extraTalentChance: number;
-  talentLevelUpChance: number;
   /** Szansa, ze profesja z 5. poziomem (Arcymag) dojdzie do niego (Ekspert 0,5%, Legenda 50%, Heros zawsze). */
   level5Chance?: number;
   /** Mala losowa szansa na profil bohatera (Weteran, Doborowy, Pomniejszy/Wielki Bohater) - wykluczajace sie. */
   heroProfileChances?: { profile: string; chance: number }[];
-  /** Premia kluczowych umiejetnosci archetypu i laczne rozwiniecia min/max. */
-  keySkills: KeyBonus;
-  /** Premia kluczowych cech archetypu i laczne rozwiniecia min/max (bez profilu bohatera). */
-  keyChars: KeyBonus;
   /** Zaklecia: najwyzszy PZ oraz odchylenie liczby zaklec tajemnych od Bonusu z Int. */
   /**
    * extraLores: szanse na kolejne tradycje (po kolei) dla ras z settings.multiLoreRaces.
@@ -172,13 +159,6 @@ export interface TierDef {
    */
   /** casterAdvances: rozwiniecia Splatania i Jezyka (Magicznego) stworzen czarujacych z cechy Rzucanie Czarow. */
   spells: { maxCn: number; arcane: [number, number]; extraLores?: number[]; topSpells?: number; casterAdvances?: number };
-  /** Profesja z 5. poziomem (np. elfi Mag -> Arcymag) moze na nim dojsc do 5. poziomu. */
-  allowLevel5?: boolean;
-  /**
-   * Mnoznik rozwiniec za poziom profesji (+5 x mnoznik). Domyslnie 1 - poziom BN roznicuje
-   * liczba poziomow profesji i premie archetypu; zostaje jako pokretlo, gdyby postacie wyszly za slabe.
-   */
-  advanceMultiplier?: number;
 }
 
 /**
@@ -890,6 +870,10 @@ export interface Npc {
   race: string;
   /** Stworzenie z bestiariusza - baza cech to wartosci z ksiazki minus 10. */
   creature?: string;
+  /** Budzet PD BN i ile z niego wydano na rozwoj (ponad tworzenie postaci). */
+  xp?: { budget: number; spent: number };
+  /** PD podane recznie: budget - zamiast budzetu poziomu, bonus - dodane do niego. */
+  xpSpec?: { budget?: number; bonus?: number };
   /** Wampir przemieniony z czlowieka: cechy czlowieka + premie Linii Krwi zamiast profilu z bestiariusza. */
   turned?: boolean;
   /** Archetyp; pusty dla bestii bez profesji. */

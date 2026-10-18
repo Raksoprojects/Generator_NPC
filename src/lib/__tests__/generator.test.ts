@@ -52,28 +52,64 @@ describe("poziomy BN", () => {
         if (tier === "legendarny" || tier === "heros") expect(top).toBeGreaterThanOrEqual(4);
         else if (tier === "doswiadczony") expect(top).toBeGreaterThanOrEqual(3);
         else if (tier === "heroiczny") expect(top).toBeGreaterThanOrEqual(3);
+        // Niezwykly przy gornej granicy PD (ok. 5000) bywa juz na 4. poziomie.
+        else if (tier === "zaawansowany") expect(top).toBeLessThanOrEqual(4);
         else expect(top).toBeLessThanOrEqual(3);
       }
     }
   });
 
-  it("liczba poziomow i profesji zgadza sie z definicja poziomu", () => {
-    const expected: Record<TierId, [number, number, number]> = {
-      slaby: [1, 2, 1],
-      sredni: [2, 3, 2],
-      zaawansowany: [3, 4, 2],
-      doswiadczony: [4, 5, 2],
-      heroiczny: [6, 8, 3],
-      legendarny: [8, 10, 3],
-      heros: [10, 14, 4]
-    };
+  it("budzet PD z zakresu poziomu BN, wydane nie wiecej niz budzet", () => {
     for (const tier of TIER_IDS) {
-      const [min, max, careers] = expected[tier];
+      const [lo, hi] = gd.getTier(tier).xp;
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
-        expect(npc.careerPath.length, `${tier} ${npc.race} ${JSON.stringify(npc.careerPath)}`).toBeGreaterThanOrEqual(min);
-        expect(npc.careerPath.length).toBeLessThanOrEqual(max);
-        expect(new Set(npc.careerPath.map((s) => s.profession)).size).toBeLessThanOrEqual(careers);
+        expect(npc.xp!.budget, tier).toBeGreaterThanOrEqual(lo);
+        expect(npc.xp!.budget, tier).toBeLessThanOrEqual(hi);
+        expect(npc.xp!.spent, tier).toBeLessThanOrEqual(npc.xp!.budget);
+        // Reszta PD to najwyzej koszt jednego rozwiniecia, ktorego juz nie starczylo.
+        expect(npc.xp!.budget - npc.xp!.spent, tier).toBeLessThan(600);
+        expect(new Set(npc.careerPath.map((s) => s.profession)).size).toBeLessThanOrEqual(gd.getTier(tier).maxCareers);
+      }
+    }
+  });
+
+  it("PD podane recznie: zamiast budzetu poziomu (poziom wg PD) albo dodane do niego", () => {
+    const a = generateNpc({ archetype: "Szlachcic", race: "Człowiek", xp: 3000 }, seedRng(1));
+    expect(a.tier).toBe("zaawansowany");
+    expect(a.xp!.budget).toBe(3000);
+    const b = generateNpc({ archetype: "Szlachcic", race: "Człowiek", tier: "sredni", xpBonus: 500 }, seedRng(1));
+    expect(b.xp!.budget).toBeGreaterThanOrEqual(1500);
+    expect(b.xp!.budget).toBeLessThanOrEqual(2400);
+    // Przebudowa zachowuje recznie podane PD.
+    expect(rebuildDevelopment(a, undefined, seedRng(2)).xp!.budget).toBe(3000);
+    // Zwykly z 1500 PD jest na 2. poziomie profesji.
+    let second = 0;
+    for (const seed of SEEDS) {
+      if (generateNpc({ tier: "sredni", race: "Człowiek", xp: 1500 }, seedRng(seed)).careerPath.at(-1)!.level >= 2) second++;
+    }
+    expect(second / SEEDS.length).toBeGreaterThan(0.85);
+  });
+
+  it("przed kazdym awansem poziom jest skompletowany (Cechy i Umiejetnosci na 5 x poziom, Talent)", () => {
+    for (const tier of TIER_IDS) {
+      for (const seed of SEEDS.slice(0, 20)) {
+        const npc = generateNpc({ tier, race: "Człowiek" }, seedRng(seed));
+        const arch = gd.getArchetype(npc.archetype);
+        for (const step of npc.careerPath.slice(0, -1)) {
+          const req = 5 * step.level;
+          const label = `${tier} ${seed} ${step.profession} ${step.level}`;
+          for (const c of levelCharacteristics(step.profession, step.level, arch)) expect(npc.charAdvances[c], label).toBeGreaterThanOrEqual(req);
+          const lvls = gd.getProfession(step.profession)!.levels.filter((l) => l.level <= step.level);
+          const bases = new Set(lvls.flatMap((l) => l.skills.map((s) => gd.splitSpec(s.replace(/\+$/, "").trim()).base)));
+          const done = npc.skills.filter((s) => s.advances >= req && bases.has(gd.splitSpec(s.name).base)).length;
+          expect(done, label).toBeGreaterThanOrEqual(Math.min(8, bases.size));
+          const talents = gd.getProfession(step.profession)!.levels.find((l) => l.level === step.level)!.talents;
+          if (talents.length) {
+            const tb = new Set(talents.map((t) => gd.splitSpec(t).base));
+            expect(npc.talents.some((t) => tb.has(gd.splitSpec(t.name).base)), label).toBe(true);
+          }
+        }
       }
     }
   });
@@ -95,14 +131,20 @@ describe("poziomy BN", () => {
 });
 
 describe("rozwoj w trybie wlasnym (deterministycznym)", () => {
-  it("slaby na 1. poziomie ma +5 w cechach profesji (plus premia archetypu)", () => {
+  it("tworzenie postaci: Umiejetnosci i Talenty rasowe, rozwiniecia 1. poziomu profesji", () => {
     const npc = generateNpc(
       { archetype: "Wojownik", tier: "slaby", race: "Człowiek", professions: ["Żołnierz"], deterministic: true },
       seedRng(1)
     );
-    // Deterministycznie: 1 lub 2 poziomy wg wag, ale zawsze kumulatywnie po 5.
-    const levels = npc.careerPath.length;
-    expect(npc.charAdvances.Wt).toBe(5 * levels);
+    const race = gd.getRace("Człowiek")!;
+    const raceBases = new Set(race.skills.map((s) => gd.splitSpec(s).base));
+    // 3 Umiejetnosci rasowe po +5 i 3 po +3 (PG s. 35).
+    expect(npc.skills.filter((s) => raceBases.has(gd.splitSpec(s.name).base) && s.advances >= 3).length).toBeGreaterThanOrEqual(6);
+    for (const rt of race.talents.filter((t) => t.type === "fixed")) {
+      expect(npc.talents.some((t) => gd.splitSpec(t.name).base === gd.splitSpec(rt.name).base), rt.name).toBe(true);
+    }
+    const chars = levelCharacteristics("Żołnierz", 1, gd.getArchetype("Wojownik"));
+    expect(chars.reduce((n, c) => n + npc.charAdvances[c], 0)).toBeGreaterThanOrEqual(5);
     expect(npc.traits).toEqual([]);
   });
 
@@ -114,68 +156,38 @@ describe("rozwoj w trybie wlasnym (deterministycznym)", () => {
 });
 
 describe("rozwoj losowy", () => {
-  it("ukonczone poziomy daja pelne +5, obecny od 2 do 5", () => {
+  it("priorytety archetypu: Umiejetnosci pierwszorzedne rozwijane mocniej niz zwykle", () => {
+    let key = 0;
+    let normal = 0;
     for (const seed of SEEDS) {
-      const npc = generateNpc({ archetype: "Kupiec", tier: "sredni", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
-      // Kupiec 1: Zw, SW, Ogd; poziom 2 dodaje Int. Zw nie jest cecha kluczowa Kupca (Ogd, SW).
-      // Zwykly czasem ma 3. poziom rozwoju - jako dodatkowe rozwiniecia na przebytym poziomie.
-      const extra = npc.careerPath.filter((s) => s.extra).length;
-      expect(npc.charAdvances.Zw).toBeGreaterThanOrEqual(5 + 2);
-      expect(npc.charAdvances.Zw).toBeLessThanOrEqual(10 + 5 * extra);
-      expect(npc.charAdvances.Int).toBeGreaterThanOrEqual(2);
-      expect(npc.charAdvances.Int).toBeLessThanOrEqual(5 + 5 * extra);
+      const npc = generateNpc({ archetype: "Kupiec", tier: "zaawansowany", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
+      const arch = gd.getArchetype("Kupiec")!;
+      const isKey = (n: string) => arch.keySkills.slice(0, 5).some((k) => n === k || n.startsWith(`${k} (`));
+      const ks = npc.skills.filter((s) => isKey(s.name));
+      const ns = npc.skills.filter((s) => !isKey(s.name));
+      key += ks.reduce((n, s) => n + s.advances, 0) / Math.max(1, ks.length);
+      normal += ns.reduce((n, s) => n + s.advances, 0) / Math.max(1, ns.length);
     }
+    expect(key).toBeGreaterThan(normal * 1.5);
   });
 
-  it("premia archetypu zalezy od poziomu BN (sredni: umiejetnosci 15-18, cechy 13-15)", () => {
-    for (const seed of SEEDS) {
-      const npc = generateNpc({ archetype: "Kupiec", tier: "sredni", race: "Człowiek", professions: ["Kupiec"] }, seedRng(seed));
-      expect(npc.charAdvances.Ogd).toBeGreaterThanOrEqual(13);
-      expect(npc.charAdvances.Ogd).toBeLessThanOrEqual(15);
-      const barter = npc.skills.find((s) => s.name === "Targowanie")!;
-      expect(barter.advances).toBeGreaterThanOrEqual(15);
-      expect(barter.advances).toBeLessThanOrEqual(18);
-    }
-  });
-
-  it("najslabszy BN wyzszego poziomu jest lepszy w kluczowych rzeczach od najsilniejszego nizszego", () => {
-    const s = gd.getSettings();
-    const tiers = TIER_IDS;
-    // Progi z tiers.json nie nachodza na siebie (cechy od doswiadczonego rozdziela profil bohatera).
-    for (let i = 1; i < tiers.length; i++) {
-      const lower = gd.getTier(tiers[i - 1])!;
-      const upper = gd.getTier(tiers[i])!;
-      expect(upper.keySkills.min ?? 0, `${tiers[i]} umiejetnosci`).toBeGreaterThan(lower.keySkills.max ?? Infinity);
-      expect(upper.keyChars.min ?? 0, `${tiers[i]} cechy`).toBeGreaterThan(lower.keyChars.max ?? Infinity);
-    }
+  it("wyzszy poziom BN ma srednio wiecej rozwiniec w kluczowych Cechach i Umiejetnosciach", () => {
     for (const archName of gd.allArchetypeNames()) {
       const arch = gd.getArchetype(archName)!;
-      // Dla kazdej kluczowej cechy i umiejetnosci: [najmniej, najwiecej] rozwiniec na poziomie.
-      const range = (tier: TierId) => {
-        const out: Record<string, [number, number]> = {};
-        const note = (key: string, value: number) => {
-          const [lo, hi] = out[key] ?? [Infinity, -Infinity];
-          out[key] = [Math.min(lo, value), Math.max(hi, value)];
-        };
-        for (let seed = 1; seed <= 25; seed++) {
+      const mean = (tier: TierId) => {
+        let sum = 0;
+        for (let seed = 1; seed <= 15; seed++) {
           const npc = generateNpc({ archetype: archName, tier, race: "Człowiek" }, seedRng(seed));
-          const v = computeNpc(npc);
-          for (const c of arch.characteristics.slice(0, s.keyCharCount)) note(c, npc.charAdvances[c]);
-          for (const k of arch.keySkills.slice(0, s.keySkillCount)) {
-            note(k, Math.max(0, ...npc.skills.filter((x) => x.name === k || x.name.startsWith(`${k} (`)).map((x) => x.advances)));
-          }
+          sum += npc.charAdvances[arch.characteristics[0]];
+          const k = arch.keySkills[0];
+          sum += Math.max(0, ...npc.skills.filter((x) => x.name === k || x.name.startsWith(`${k} (`)).map((x) => x.advances));
         }
-        return out;
+        return sum / 15;
       };
-      const ranges = tiers.map(range);
-      for (let i = 1; i < tiers.length; i++) {
-        for (const [key, [lo]] of Object.entries(ranges[i])) {
-          expect(lo, `${archName} ${tiers[i]} ${key}`).toBeGreaterThan(ranges[i - 1][key][1]);
-        }
-      }
+      const means = TIER_IDS.map(mean);
+      for (let i = 1; i < means.length; i++) expect(means[i], `${archName} ${TIER_IDS[i]}`).toBeGreaterThan(means[i - 1]);
     }
   });
-
   it("rzuty w wyposazeniu sa wykonywane", () => {
     const rng = seedRng(3);
     for (let i = 0; i < 20; i++) {
@@ -341,7 +353,7 @@ describe("profile bohaterow i sciezki profesji", () => {
     expect(chosen.heroProfiles.sort()).toEqual(["Dowódca Oddziału", "Wielki Bohater"]);
   });
 
-  it("legenda: Arcymag (5. poziom) w okolo polowie przypadkow, ekspert prawie nigdy; dodatkowe rozwiniecia liczone", () => {
+  it("legenda: Arcymag (5. poziom) w okolo polowie przypadkow, ekspert prawie nigdy", () => {
     let legend5 = 0;
     let expert5 = 0;
     for (let seed = 1; seed <= 100; seed++) {
@@ -349,9 +361,6 @@ describe("profile bohaterow i sciezki profesji", () => {
       if (l.careerPath.at(-1)!.level === 5) legend5++;
       const e = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
       if (e.careerPath.at(-1)!.level === 5) expert5++;
-      // Sama jedna profesja na Legendzie - reszta poziomow to dodatkowe rozwiniecia.
-      expect(l.careerPath.length).toBeGreaterThanOrEqual(8);
-      expect(new Set(l.careerPath.map((s) => s.profession)).size).toBe(1);
     }
     expect(legend5).toBeGreaterThan(30);
     expect(legend5).toBeLessThan(70);
@@ -394,6 +403,7 @@ describe("tytuly wg plci", () => {
 
   it("tytul i nazwa profesji zgadzaja sie z plcia BN", () => {
     const npc = generateNpc({ archetype: "Czarodziej", tier: "sredni", sex: "M", race: "Człowiek", professions: ["Druidka"] }, seedRng(1));
+    npc.careerPath = [{ profession: "Druidka", level: 1 }, { profession: "Druidka", level: 2 }];
     const view = computeNpc(npc);
     expect(view.career!.professionName).toBe("Druid");
     expect(view.careerPathText).toBe("Uczeń Druida → Druid");

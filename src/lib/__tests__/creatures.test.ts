@@ -211,8 +211,13 @@ describe("rozwoj bestii", () => {
           for (const t of [...v.traits, ...computeNpc(v).creatureTraits]) expect(t, t).not.toMatch(/\s(albo|lub)\s/);
           const caster = v.traits.some((t) => t.startsWith("Rzucanie Czarów"));
           if (!caster) {
-            // Bez cechy - najwyzej Magia Prosta z profesji (np. Świecki Alchemik), jak u czlowieka.
-            for (const s of v.spells) expect(gd.getSpell(s)!.lore, `${line} ${tier}: ${s}`).toMatch(/^Prosta/);
+            // Bez cechy - tylko magia z Talentow profesji, jak u czlowieka (np. Świecki Alchemik:
+            // Magia Prosta na 3. poziomie, Magia Tajemna (Metalu) na 4. - Wiatry Magii s. 38).
+            const lores = v.talents.map((t) => /^Magia Tajemna \((.+)\)$/.exec(t.name)?.[1]).filter(Boolean);
+            for (const s of v.spells) {
+              const lore = gd.getSpell(s)!.lore;
+              if (!/^Prosta/.test(lore)) expect([...lores, "Tajemna"], `${line} ${tier}: ${s}`).toContain(lore);
+            }
             continue;
           }
           casters[`${line}|${tier}`] = (casters[`${line}|${tier}`] ?? 0) + 1;
@@ -423,16 +428,23 @@ describe("rozwoj bestii", () => {
     }
     expect(staff).toBeGreaterThan(0);
     // Czarodziej od 3. poziomu zawsze ma wylosowany przedmiot magiczny (poza kosturem i szatami).
+    let wizards = 0;
     for (let seed = 1; seed <= 40; seed++) {
       const w = generateNpc({ archetype: "Czarodziej", tier: "doswiadczony", race: "Człowiek" }, seedRng(seed));
+      const last = w.careerPath.at(-1)!;
+      const levels = gd.getProfession(last.profession)!.levels.filter((l) => l.level <= last.level);
+      // Archetyp Czarodzieja obejmuje tez nie-magow (np. Aptekarz) - bez przedmiotu magicznego w profesji.
+      if (!levels.some((l) => l.trappings.some((t) => /^(przedmiot magiczny|magiczny przedmiot)$/i.test(t)))) continue;
+      wizards++;
       // Kto ma kostur z profesji, ten musi wylosowac cos innego.
-      const hasStaff = gd.getProfession(w.careerPath.at(-1)!.profession)!.levels.some((l) => l.trappings.includes("kostur"));
+      const hasStaff = gd.getProfession(last.profession)!.levels.some((l) => l.trappings.includes("kostur"));
       const extra = w.trappings.filter((t) => {
         const item = findMagicItem(t);
         return (item && !item.group && !(hasStaff && item.name === "umagiczniony kostur")) || t.startsWith("zwój z zaklęciem");
       });
       expect(extra.length, `${seed}: ${w.careerPath.at(-1)?.profession} ${w.trappings.join(", ")}`).toBeGreaterThan(0);
     }
+    expect(wizards).toBeGreaterThan(20);
     const npc = generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Człowiek", professions: ["Piromanta"], deterministic: true }, seedRng(1));
     npc.trappings = ["zwykłe szaty", "umagiczniony kostur"];
     npc.talents = [...npc.talents, { name: "Precyzyjne Inkantowanie", level: 1 }];

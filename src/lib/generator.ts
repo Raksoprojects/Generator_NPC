@@ -18,6 +18,7 @@
  */
 
 import { beastSkills, beastTraits, bookSkillsAndTalents, familyTraitWeights, rollCreature } from "./creatures";
+import { advanceCost, CAREER_STEP_COST, CLASS_CHANGE_EXTRA, levelRequirement, nextAdvanceCost, talentCost } from "./xp";
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
@@ -27,7 +28,7 @@ import { findBloodline, isVampire, npcBloodline, rollBloodline, rollVampire, str
 import { resolveMagicTrappings } from "./magicItems";
 import { rollCraft, rollTreasures } from "./treasures";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
-import type { Archetype, CareerStep, CreatureDef, KeyBonus, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
+import type { Archetype, CareerStep, CreatureDef, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
 import { TIER_IDS } from "./types";
 
 /** Parametry generowania. Brak pola = wartosc losowa. */
@@ -49,6 +50,10 @@ export interface GenSpec {
   name?: string;
   archetype?: string;
   tier?: TierId;
+  /** PD do wydania zamiast budzetu poziomu (bez poziomu - poziom wg PD). */
+  xp?: number;
+  /** PD dodane do budzetu poziomu. */
+  xpBonus?: number;
   /** Profesje sciezki w kolejnosci (ostatnia = obecna). */
   professions?: string[];
   /** Cechy Stworzen wybrane recznie. */
@@ -180,9 +185,11 @@ const DIVINE = ["Błogosławieństwo", "Cud"];
 /**
  * Czarodziej nie zmienia tradycji ani nie bywa wczesniej kaplanem: przed profesja
  * magiczna moze byc inna magiczna tylko, gdy obecna jest profesja renegata (np. Czarownica).
+ * Nie-mag nie bywa wczesniej magiem - inaczej mialby czary bez tradycji w obecnej profesji.
  */
 function careerSwitchOk(prev: string, main: string): boolean {
-  return !careerHas(main, ARCANE) || !careerHas(prev, [...ARCANE, ...DIVINE]) || !!gd.getProfession(main)?.renegade;
+  if (!careerHas(main, ARCANE)) return !careerHas(prev, ARCANE);
+  return !careerHas(prev, [...ARCANE, ...DIVINE]) || !!gd.getProfession(main)?.renegade;
 }
 
 /** Druga (wczesniejsza) profesja: inna niz glowna, preferowana ta sama klasa. */
@@ -206,10 +213,6 @@ function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rn
   return pick(gd.allProfessionNames().filter(usable), rng);
 }
 
-/** Najwyzszy poziom profesji, jaki BN moze osiagnac (5 tylko tam, gdzie poziom ma na to szanse). */
-function topCareerLevel(tier: TierDef): number {
-  return tier.level5Chance ? 5 : tier.maxCareerLevel;
-}
 
 /** 4. poziom profesji z 5. poziomem (elfi Mag -> Arcymag) przechodzi na 5. z szansa poziomu BN. */
 function maybeLevel5(profession: string, level: number, tier: TierDef, rng: Rng): number {
@@ -219,19 +222,6 @@ function maybeLevel5(profession: string, level: number, tier: TierDef, rng: Rng)
 
 const firstLevel = (profession: string) => Math.min(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
 
-/**
- * Profesja zaawansowana (elfi kaplani, poziomy 3-5): najpierw profesja wejsciowa
- * (Mag 1-2), potem kaplan od 3. poziomu do najwyzszego osiagalnego.
- */
-function advancedCareerPath(main: string, tier: TierDef, rng: Rng): CareerStep[] {
-  const def = gd.getProfession(main)!;
-  const first = firstLevel(main);
-  const top = maybeLevel5(main, Math.max(first, Math.min(Math.max(...def.levels.map((l) => l.level)), tier.maxCareerLevel)), tier, rng);
-  const steps: CareerStep[] = [];
-  if (def.entry) for (let l = 1; l <= def.entry.level; l++) steps.push({ profession: def.entry.from, level: l });
-  for (let l = first; l <= top; l++) steps.push({ profession: main, level: l });
-  return steps;
-}
 
 /** Archetyp ograniczony do dozwolonych profesji; gdy zadna nie zostaje - same dozwolone. */
 function restrictArchetype(arch: Archetype | undefined, only: string[] | undefined): Archetype | undefined {
@@ -240,18 +230,28 @@ function restrictArchetype(arch: Archetype | undefined, only: string[] | undefin
   return { ...arch, professions: Object.keys(kept).length ? kept : Object.fromEntries(only.map((p) => [p, 1])) };
 }
 
-export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId, race: string, rng: Rng): CareerStep[] {
+/** Krok planu sciezki: profesja, poziom startowy i docelowy. Ostatni krok - profesja glowna. */
+export interface CareerPlanStep {
+  profession: string;
+  start: number;
+  target: number;
+}
+
+const maxLevelOf = (profession: string) => Math.max(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
+
+/**
+ * Plan profesji BN: 0..maxCareers-1 wczesniejszych (cel 1.-3. poziom) i glowna (cel 4., a 5. z szansa
+ * poziomu BN). Ile z planu BN faktycznie przejdzie, rozstrzyga budzet PD (developByXp).
+ */
+export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId, race: string, rng: Rng): CareerPlanStep[] {
   const arch = restrictArchetype(gd.getArchetype(archetype), spec.onlyProfessions);
   const tier = gd.getTier(tierId);
   if (!arch || !tier) return [];
   const chosen = (spec.professions ?? []).filter((p) => gd.getProfession(p));
-  const total = Number(weightedKey(tier.totalLevels, rng) ?? 1);
 
   // Profesje zaczynajace sie od wyzszego poziomu (kaplani) tylko tam, gdzie da sie do nich dojsc.
   const minOk = (p: string) => TIER_IDS.indexOf(gd.getProfession(p)?.minTier ?? "slaby") <= TIER_IDS.indexOf(tierId);
-  const candidates = Object.fromEntries(
-    Object.entries(professionCandidates(arch, race)).filter(([p]) => firstLevel(p) <= topCareerLevel(tier) && minOk(p))
-  );
+  const candidates = Object.fromEntries(Object.entries(professionCandidates(arch, race)).filter(([p]) => minOk(p)));
   // Nic nie zostalo (np. elfi kaplan na nizszym poziomie) - profesja wejsciowa kaplanow (Mag).
   const entries = Object.keys(professionCandidates(arch, race))
     .map((p) => gd.getProfession(p)?.entry?.from)
@@ -259,39 +259,28 @@ export function buildCareerPath(spec: GenSpec, archetype: string, tierId: TierId
   const fallback = entries.length ? Object.fromEntries(entries.map((p) => [p, 1])) : professionCandidates(arch, race);
   const main = chosen[chosen.length - 1] ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
   if (!main) return [];
-  let steps: CareerStep[] = [];
-  if (firstLevel(main) > 1) {
-    // Profesja zaawansowana ma stala sciezke (Mag 1-2, kaplan od 3.).
-    steps = advancedCareerPath(main, tier, rng);
-  } else {
-    // Ostatnia profesja: 4. poziom (Legenda, Heros) albo minMainLevel..maxCareerLevel, nie wiecej niz budzet.
-    const lo = Math.min(tier.minMainLevel ?? 1, tier.maxCareerLevel);
-    let top = tier.requireLevel4 ? Math.min(4, tier.maxCareerLevel) : randInt(lo, tier.maxCareerLevel, rng);
-    top = maybeLevel5(main, Math.max(1, Math.min(top, total)), tier, rng);
-    // Wczesniejsze profesje (podane recznie albo wylosowane), kazda najwyzej do poziomu ostatniej.
-    let budget = total - top;
-    const manual = chosen.slice(0, -1);
-    // Profesje podane recznie - tylko one; inaczej 0..maxCareers-1 wczesniejszych.
-    const count = chosen.length ? manual.length : budget > 0 ? randInt(0, tier.maxCareers - 1, rng) : 0;
-    const taken: string[] = [];
-    for (let i = 0; i < count && (budget > 0 || i < manual.length); i++) {
-      const prof = manual[i] ?? pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions, taken);
-      if (!prof) break;
-      taken.push(prof);
-      const n = Math.max(1, Math.min(top, budget, randInt(1, top, rng)));
-      for (let l = 1; l <= n; l++) steps.push({ profession: prof, level: l });
-      budget -= n;
-    }
-    for (let l = 1; l <= top; l++) steps.push({ profession: main, level: l });
+  const mainTarget = maybeLevel5(main, Math.min(4, maxLevelOf(main)), tier, rng);
+
+  const def = gd.getProfession(main)!;
+  // Profesja zaawansowana (elfi kaplani): najpierw profesja wejsciowa (Mag 1-2), potem kaplan od 3. poziomu.
+  if (firstLevel(main) > 1 && def.entry) {
+    return [
+      { profession: def.entry.from, start: 1, target: def.entry.level },
+      { profession: main, start: firstLevel(main), target: Math.max(firstLevel(main), mainTarget) }
+    ];
   }
-  // Reszta poziomow BN to dodatkowe rozwiniecia na przebytych poziomach ostatniej profesji
-  // (Legenda moze byc samym Zolnierzem - ma wtedy rozwiniecia, jakby przeszla wiecej profesji).
-  const mainSteps = steps.filter((s) => s.profession === main);
-  const extras: CareerStep[] = [];
-  for (let i = steps.length; i < total && mainSteps.length; i++) {
-    extras.push({ ...mainSteps[Math.floor(rng() * mainSteps.length)], extra: true });
+  const manual = chosen.slice(0, -1);
+  const count = chosen.length ? manual.length : randInt(0, Math.max(0, tier.maxCareers - 1), rng);
+  const plan: CareerPlanStep[] = [];
+  const taken: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const prof = manual[i] ?? pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions, taken);
+    if (!prof) break;
+    taken.push(prof);
+    plan.push({ profession: prof, start: 1, target: Math.min(maxLevelOf(prof), randInt(1, 3, rng)) });
   }
-  return [...steps.slice(0, -1), ...extras, steps[steps.length - 1]];
+  plan.push({ profession: main, start: firstLevel(main), target: mainTarget });
+  return plan;
 }
 
 // ---------------------------------------------------------------------------
@@ -412,11 +401,6 @@ function matchesKey(name: string, key: string): boolean {
   return n === k || gd.normalize(gd.splitSpec(name).base) === k;
 }
 
-function talentWeight(arch: Archetype | undefined, name: string): number {
-  if (!arch) return 1;
-  for (const [key, w] of Object.entries(arch.talents)) if (matchesKey(name, key)) return w;
-  return 1;
-}
 
 function approxChars(npc: Npc): Record<Attribute, number> {
   const race = gd.getRace(npc.race);
@@ -454,23 +438,6 @@ function addSkill(npc: Npc, name: string, advances: number): void {
   else npc.skills.push({ name, advances });
 }
 
-/**
- * Rozwiniecia za jeden poziom profesji. Ukonczony poziom daje pelne +5;
- * poziom obecny (ostatni w sciezce, jeszcze w toku) moze dac mniej.
- */
-/**
- * Rozwiniecia za poziom profesji. Mnoznik poziomu BN (tiers.json -> advanceMultiplier)
- * zastepuje u ras profile bohaterow: heroiczny rozwija sie w profesji mocniej, niz nakazuje minimum.
- */
-function advanceAmount(current: boolean, rng: Rng, deterministic: boolean, mult = 1): number {
-  const { advancePerLevel, currentLevelMin } = gd.getSettings();
-  const full = Math.round(advancePerLevel * mult);
-  if (!current || deterministic) return full;
-  return randInt(Math.min(Math.round(currentLevelMin * mult), full), full, rng);
-}
-
-
-
 /** Zamienia rzuty w tekscie na wyniki, np. "3k10 szylingów" -> "17 szylingów". */
 export function rollDiceText(text: string, rng: Rng, deterministic = false): string {
   return text.replace(/(\d*)\s?[kK](\d+)/g, (_, count: string, sides: string) => {
@@ -487,24 +454,298 @@ function emptyAttrs(): Record<Attribute, number> {
   return Object.fromEntries(ATTRIBUTES.map((c) => [c, 0])) as Record<Attribute, number>;
 }
 
+// ---------------------------------------------------------------------------
+// Etap 4c: rozwoj za PD (podrecznik s. 36-37 i 47-49)
+// ---------------------------------------------------------------------------
+
+/** Waga rozwoju: 1 cecha kluczowa i 2 drugorzedne; 2 umiejetnosci pierwszorzedne i 3 drugorzedne; 3 kluczowe talenty. */
+const PRIMARY = 3;
+const SECONDARY = 2;
+const NORMAL = 1;
+
+function charPriority(arch: Archetype | undefined, code: Attribute): number {
+  const i = arch?.characteristics.indexOf(code) ?? -1;
+  return i === 0 ? PRIMARY : i === 1 || i === 2 ? SECONDARY : NORMAL;
+}
+
+function skillPriority(arch: Archetype | undefined, name: string): number {
+  const i = (arch?.keySkills ?? []).findIndex((k) => matchesKey(name, k));
+  return i < 0 ? NORMAL : i < 2 ? PRIMARY : i < 5 ? SECONDARY : NORMAL;
+}
+
+function talentPriority(arch: Archetype | undefined, name: string): number {
+  if (!arch) return NORMAL;
+  const ranked = Object.entries(arch.talents).sort((a, b) => b[1] - a[1]);
+  const i = ranked.findIndex(([k]) => matchesKey(name, k));
+  return i < 0 ? NORMAL : i < 3 ? PRIMARY : SECONDARY;
+}
+
+interface Candidate {
+  kind: "char" | "skill" | "talent";
+  name: string;
+  cost: number;
+  weight: number;
+}
+
+/** Wydawanie PD na rozwoj BN - wylacznie w ramach dostepnych profesji (bez rozwoju poza profesja). */
+class XpDeveloper {
+  spent = 0;
+  private resolved = new Map<string, string>();
+
+  constructor(
+    readonly npc: Npc,
+    readonly arch: Archetype | undefined,
+    readonly budget: number,
+    readonly rng: Rng,
+    readonly det: boolean
+  ) {}
+
+  get left(): number {
+    return this.budget - this.spent;
+  }
+
+  /** "Dowolne" rozwiazujemy raz na profesje, by rozwiniecia sie kumulowaly. */
+  resolve(profession: string, raw: string): string {
+    const key = `${profession}|${raw}`;
+    if (!this.resolved.has(key)) this.resolved.set(key, resolveSpecName(raw, this.npc.specChoices, this.arch, this.rng, this.det));
+    return this.resolved.get(key)!;
+  }
+
+  chars(profession: string, level: number): Attribute[] {
+    return levelCharacteristics(profession, level, this.arch);
+  }
+
+  skills(profession: string, level: number): string[] {
+    return [...new Set(levelSkills(profession, level).map((s) => this.resolve(profession, s)))];
+  }
+
+  /** Talenty sa dostepne tylko na poziomie, przy ktorym je wymieniono (PG s. 48). */
+  talents(profession: string, level: number): string[] {
+    const tierIdx = TIER_IDS.indexOf(this.npc.tier);
+    const lvl = gd.getProfession(profession)?.levels.find((l) => l.level === level);
+    return (lvl?.talents ?? [])
+      .filter((t) => TIER_IDS.indexOf(gd.getTalent(t)?.minTier ?? "slaby") <= tierIdx)
+      .map((t) => this.resolve(profession, t));
+  }
+
+  skillAdv(name: string): number {
+    return this.npc.skills.find((s) => s.name === name)?.advances ?? 0;
+  }
+
+  talentLevel(name: string): number {
+    return this.npc.talents.find((t) => t.name === name)?.level ?? 0;
+  }
+
+  private caps = new Map<string, number>();
+
+  /** Maksimum Talentu (zalezne od Cech) - liczone raz na kazde 5 rozwiniec Cech. */
+  canGrowTalent(name: string): boolean {
+    const key = `${name}|${Object.values(this.npc.charAdvances).map((v) => Math.floor(v / 5)).join(",")}`;
+    if (!this.caps.has(key)) this.caps.set(key, talentCap(name, approxChars(this.npc)));
+    return this.talentLevel(name) < this.caps.get(key)!;
+  }
+
+  pick<T>(items: T[], weight: (x: T) => number): T | undefined {
+    if (!items.length) return undefined;
+    if (this.det) return [...items].sort((a, b) => weight(b) - weight(a))[0];
+    return weightedPick(items, weight, this.rng);
+  }
+
+  buyChar(code: Attribute, pay = true): void {
+    if (pay) this.spent += nextAdvanceCost("char", this.npc.charAdvances[code]);
+    this.npc.charAdvances[code] += 1;
+  }
+
+  buySkill(name: string, pay = true): void {
+    if (pay) this.spent += nextAdvanceCost("skill", this.skillAdv(name));
+    addSkill(this.npc, name, 1);
+  }
+
+  buyTalent(name: string, pay = true): boolean {
+    const cost = talentCost(this.talentLevel(name));
+    if (!this.canGrowTalent(name)) return false;
+    if (pay) this.spent += cost;
+    gainTalent(this.npc, name, approxChars(this.npc));
+    return true;
+  }
+
+  /** Talenty tozsamosci archetypu (np. Magia Prosta czarodzieja) - kupowane, gdy tylko sa dostepne. */
+  buyRequired(profession: string, level: number, pay = true): void {
+    for (const t of this.talents(profession, level)) {
+      if (!this.arch?.requiredTalents?.some((r) => matchesKey(t, r)) || this.talentLevel(t) > 0) continue;
+      if (pay && talentCost(0) > this.left) continue;
+      this.buyTalent(t, pay);
+    }
+  }
+
+  /**
+   * Czego brakuje do skompletowania poziomu: Cechy poziomu na 5 x poziom, 8 Umiejetnosci
+   * (najtansze do dociagniecia, przy rownym koszcie - wazniejsze) i 1 Talent z poziomu.
+   */
+  needs(profession: string, level: number): { cost: number; chars: [Attribute, number][]; skills: [string, number][]; talent?: string } {
+    const req = levelRequirement(level);
+    const chars: [Attribute, number][] = [];
+    let cost = 0;
+    for (const code of this.chars(profession, level)) {
+      const have = this.npc.charAdvances[code];
+      if (have < req) {
+        chars.push([code, req - have]);
+        cost += advanceCost("char", have, req);
+      }
+    }
+    const skillCosts = this.skills(profession, level)
+      .map((s) => ({ s, c: advanceCost("skill", this.skillAdv(s), Math.max(req, this.skillAdv(s))) }))
+      .sort((x, y) => x.c - y.c || skillPriority(this.arch, y.s) - skillPriority(this.arch, x.s))
+      .slice(0, 8);
+    const skills: [string, number][] = [];
+    for (const { s, c } of skillCosts) {
+      if (c > 0) {
+        skills.push([s, req - this.skillAdv(s)]);
+        cost += c;
+      }
+    }
+    const pool = this.talents(profession, level);
+    let talent: string | undefined;
+    if (pool.length && !pool.some((t) => this.talentLevel(t) > 0)) {
+      talent = this.pick(pool.filter((t) => this.canGrowTalent(t)), (t) => talentPriority(this.arch, t) ** 2);
+      if (talent) cost += talentCost(0);
+    }
+    return { cost, chars, skills, talent };
+  }
+
+  applyNeeds(n: ReturnType<XpDeveloper["needs"]>): void {
+    for (const [code, k] of n.chars) for (let i = 0; i < k; i++) this.buyChar(code);
+    for (const [s, k] of n.skills) for (let i = 0; i < k; i++) this.buySkill(s);
+    if (n.talent) this.buyTalent(n.talent);
+  }
+
+  /** Swobodny rozwoj w obecnej profesji: waga = priorytet^2 / koszt; nizsze poziomy BN rzadziej kupuja talenty. */
+  spendFree(profession: string, level: number): void {
+    const chars = this.chars(profession, level);
+    const skills = this.skills(profession, level);
+    const talents = this.talents(profession, level);
+    const talentFactor = TIER_IDS.indexOf(this.npc.tier) < TIER_IDS.indexOf("doswiadczony") ? 0.5 : 1;
+    for (let guard = 0; guard < 5000; guard++) {
+      const cands: Candidate[] = [];
+      for (const code of chars) {
+        const cost = nextAdvanceCost("char", this.npc.charAdvances[code]);
+        if (cost <= this.left) cands.push({ kind: "char", name: code, cost, weight: charPriority(this.arch, code) ** 2 / cost });
+      }
+      for (const s of skills) {
+        const cost = nextAdvanceCost("skill", this.skillAdv(s));
+        if (cost <= this.left) cands.push({ kind: "skill", name: s, cost, weight: skillPriority(this.arch, s) ** 2 / cost });
+      }
+      for (const t of talents) {
+        const cost = talentCost(this.talentLevel(t));
+        if (cost <= this.left && this.canGrowTalent(t)) {
+          cands.push({ kind: "talent", name: t, cost, weight: (talentPriority(this.arch, t) ** 2 * talentFactor) / cost });
+        }
+      }
+      const c = this.pick(cands, (x) => x.weight);
+      if (!c) return;
+      if (c.kind === "talent") {
+        this.buyTalent(c.name);
+        continue;
+      }
+      // Przy duzym zapasie PD kupujemy od razu do konca przedzialu kosztu (koszt w przedziale jest staly).
+      const owned = c.kind === "char" ? this.npc.charAdvances[c.name as Attribute] : this.skillAdv(c.name);
+      const inBracket = 5 - (owned % 5);
+      const n = this.left > 20 * c.cost ? Math.min(inBracket, Math.floor(this.left / c.cost)) : 1;
+      for (let i = 0; i < n; i++) {
+        if (c.kind === "char") this.buyChar(c.name as Attribute);
+        else this.buySkill(c.name);
+      }
+    }
+  }
+}
+
 /**
- * Przeprowadza BN przez sciezke profesji: rozwiniecia cech i umiejetnosci,
- * talenty, wyposazenie, pieniadze oraz premie kluczowe archetypu.
+ * Tworzenie postaci (PG s. 33-37): 3 Umiejetnosci rasowe +5 i 3 +3, Talenty rasowe (stale, do
+ * wyboru i z Tabeli Losowych Talentow), a z 1. poziomu profesji 5 rozwiniec jej Cech,
+ * 40 rozwiniec jej 8 Umiejetnosci (najwyzej 10 w jednej) i 1 Talent. Bez kosztu PD.
  */
-export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
+function creationStart(dev: XpDeveloper, profession: string, species: boolean): void {
+  const { npc, arch } = dev;
+  if (species) {
+    const race = gd.getRace(npc.turned ? "Człowiek" : npc.race);
+    const pool = [...new Set((race?.skills ?? []).map((s) => resolveSpecName(s, npc.specChoices, arch, dev.rng, dev.det)))];
+    for (const amount of [5, 5, 5, 3, 3, 3]) {
+      const s = dev.pick(pool, (x) => skillPriority(arch, x) ** 2);
+      if (!s) break;
+      pool.splice(pool.indexOf(s), 1);
+      addSkill(npc, s, amount);
+    }
+    const chars = approxChars(npc);
+    for (const rt of race?.talents ?? []) {
+      if (rt.type === "fixed") gainTalent(npc, resolveSpecName(rt.name, npc.specChoices, arch, dev.rng, dev.det), chars);
+      else if (rt.type === "choice") {
+        const t = dev.pick(rt.options, (x) => talentPriority(arch, x) ** 2);
+        if (t) gainTalent(npc, resolveSpecName(t, npc.specChoices, arch, dev.rng, dev.det), chars);
+      } else if (rt.type === "random") {
+        for (let i = 0; i < (rt.count ?? 1); i++) {
+          for (let tries = 0; tries < 20; tries++) {
+            const roll = dev.det ? 50 + i * 17 + tries : rollK100(dev.rng);
+            const name = gd.randomTalentsTable().find((r) => roll >= r.min && roll <= r.max)?.name;
+            const resolved = name && resolveSpecName(name, npc.specChoices, arch, dev.rng, dev.det);
+            if (resolved && !npc.talents.some((t) => t.name === resolved)) {
+              gainTalent(npc, resolved, chars);
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+  const chars = dev.chars(profession, 1);
+  for (let i = 0; i < 5 && chars.length; i++) dev.buyChar(dev.pick(chars, (c) => charPriority(arch, c) ** 2)!, false);
+  const skills = dev.skills(profession, 1);
+  const career = new Map<string, number>();
+  for (let i = 0; i < 40 && skills.length; i++) {
+    const open = skills.filter((s) => (career.get(s) ?? 0) < 10);
+    const s = dev.pick(open, (x) => skillPriority(arch, x) ** 2);
+    if (!s) break;
+    career.set(s, (career.get(s) ?? 0) + 1);
+    dev.buySkill(s, false);
+  }
+  const required = dev.talents(profession, 1).filter((t) => arch?.requiredTalents?.some((r) => matchesKey(t, r)));
+  const free = required[0] ?? dev.pick(dev.talents(profession, 1), (t) => talentPriority(arch, t) ** 2);
+  if (free) dev.buyTalent(free, false);
+  dev.buyRequired(profession, 1);
+}
+
+/** Poziom BN dla podanej liczby PD: najwyzszy, ktorego zakres zaczyna sie nie wyzej. */
+export function tierForXp(xp: number): TierId {
+  return [...TIER_IDS].reverse().find((t) => (gd.getTier(t)?.xp?.[0] ?? 0) <= xp) ?? "slaby";
+}
+
+/** Budzet PD poziomu BN (tiers.json -> xp) - PD ponad rozwiniecia z tworzenia postaci. */
+function xpBudget(tier: TierDef | undefined, rng: Rng, deterministic: boolean): number {
+  const [lo, hi] = tier?.xp ?? [0, 0];
+  return deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng);
+}
+
+/**
+ * Rozwoj BN za PD wg zasad podrecznika: tworzenie postaci, potem kompletowanie poziomow
+ * (minima Cech, 8 Umiejetnosci, 1 Talent) i awans za 100 PD (+100 przy zmianie Klasy).
+ * Awans tylko, gdy starczy PD na skompletowanie poziomu; zmiana profesji tylko, gdy nowa
+ * profesja zdazy dojsc do obecnego poziomu (ostatnia profesja zawsze najwyzej). Reszta PD -
+ * swobodny rozwoj w obecnej profesji wg priorytetow archetypu.
+ */
+export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, deterministic = false, fixedBudget?: number): void {
   const arch = gd.getArchetype(npc.archetype);
   const tier = gd.getTier(npc.tier);
   npc.charAdvances = emptyAttrs();
   npc.skills = [];
   npc.talents = [];
   npc.trappings = [];
+  npc.careerPath = [];
   // Wybory cech stworzenia ("cecha|...") naleza do cech, nie do rozwoju - zostaja.
   npc.specChoices = Object.fromEntries(Object.entries(npc.specChoices ?? {}).filter(([k]) => k.startsWith("cecha|")));
+  if (!plan.length) return;
 
-  // Konkretne szkoly/bostwa z calej sciezki - zanim zaczniemy rozwiazywac "Dowolne".
-  for (const step of npc.careerPath) {
+  // Konkretne szkoly/bostwa z calego planu - zanim zaczniemy rozwiazywac "Dowolne".
+  for (const step of plan) {
     for (const lvl of gd.getProfession(step.profession)?.levels ?? []) {
-      if (lvl.level > step.level) continue;
       for (const n of [...lvl.skills, ...lvl.talents]) {
         const { base, spec } = gd.splitSpec(n);
         if (spec && !gd.isOpenSpec(spec) && !gd.specAlternatives(spec)) registerConcrete(base, spec, npc.specChoices);
@@ -512,117 +753,78 @@ export function developCareer(npc: Npc, rng: Rng, deterministic = false): void {
     }
   }
 
-  // Umiejetnosci "Dowolne" rozwiazujemy raz na profesje, by rozwiniecia sie kumulowaly.
-  const resolvedSkills = new Map<string, string>();
-  const resolveSkill = (profession: string, raw: string) => {
-    const key = `${profession}|${raw}`;
-    if (!resolvedSkills.has(key)) resolvedSkills.set(key, resolveSpecName(raw, npc.specChoices, arch, rng, deterministic));
-    return resolvedSkills.get(key)!;
-  };
+  const budget = fixedBudget ?? npc.xpSpec?.budget ?? xpBudget(tier, rng, deterministic) + (npc.xpSpec?.bonus ?? 0);
+  const dev = new XpDeveloper(npc, arch, budget, rng, deterministic);
+  creationStart(dev, plan[0].profession, !npc.creature || !!npc.turned);
 
-  npc.careerPath.forEach((step, index) => {
-    const prof = gd.getProfession(step.profession);
-    const lvl = prof?.levels.find((l) => l.level === step.level);
-    if (!prof || !lvl) return;
-    const current = index === npc.careerPath.length - 1;
-    // Stworzenia dostaja profile bohaterow, rasy (i przemienieni ludzie) - mocniejszy rozwoj w profesji.
-    const mult = npc.creature && !npc.turned ? 1 : (tier?.advanceMultiplier ?? 1);
-
-    for (const code of levelCharacteristics(step.profession, step.level, arch)) {
-      npc.charAdvances[code] += advanceAmount(current, rng, deterministic, mult);
+  const steps: CareerStep[] = [{ profession: plan[0].profession, level: plan[0].start }];
+  let ci = 0;
+  let prof = plan[0].profession;
+  let level = plan[0].start;
+  // Poziom, do ktorego obecna profesja musi dojsc (po zmianie profesji - poziom poprzedniej).
+  let mustReach = 0;
+  for (let guard = 0; guard < 40; guard++) {
+    const step = plan[ci];
+    const lastStep = ci === plan.length - 1;
+    let next: { profession: string; level: number; cost: number; switching: boolean } | undefined;
+    if (level < step.target && level < maxLevelOf(prof)) next = { profession: prof, level: level + 1, cost: CAREER_STEP_COST, switching: false };
+    else if (!lastStep) {
+      const n = plan[ci + 1];
+      const otherClass = gd.getProfession(n.profession)?.class !== gd.getProfession(prof)?.class;
+      next = { profession: n.profession, level: n.start, cost: CAREER_STEP_COST + (otherClass ? CLASS_CHANGE_EXTRA : 0), switching: true };
     }
-    for (const raw of levelSkills(step.profession, step.level)) {
-      addSkill(npc, resolveSkill(step.profession, raw), advanceAmount(current, rng, deterministic, mult));
+    if (!next) break;
+    const need = dev.needs(prof, level);
+    // Po awansie trzeba miec za co pracowac na nowym poziomie; przy zmianie profesji - dojsc do obecnego poziomu.
+    let reserve: number;
+    if (next.switching) {
+      const reach = Math.max(level, next.level);
+      reserve = dev.needs(next.profession, reach).cost + (CAREER_STEP_COST + talentCost(0)) * Math.max(0, reach - next.level);
+    } else {
+      // Rezerwa: 1/4 tego, co nowy poziom dokłada do obecnego (Zwykly z 1500 PD jest na 2. poziomie).
+      reserve = level + 1 <= mustReach ? 0 : Math.round(Math.max(0, dev.needs(next.profession, next.level).cost - need.cost) / 4);
     }
-
-    const chars = approxChars(npc);
-    // Talenty z minimalnym poziomem BN (np. Wysoka Magia od heroicznego) nizej nie wypadaja.
-    const tierIdx = TIER_IDS.indexOf(npc.tier);
-    const pool = lvl.talents
-      .filter((t) => TIER_IDS.indexOf(gd.getTalent(t)?.minTier ?? "slaby") <= tierIdx)
-      .map((t) => resolveSpecName(t, npc.specChoices, arch, rng, deterministic));
-    let picks = tier?.talentsPerLevel ?? 1;
-    if (!deterministic && tier && chance(tier.extraTalentChance, rng)) picks += 1;
-    const available = [...pool];
-    // Talenty tozsamosci archetypu (np. Magia Prosta u czarodzieja) - zawsze.
-    for (const t of pool) {
-      if (arch?.requiredTalents?.some((r) => matchesKey(t, r))) {
-        gainTalent(npc, t, chars);
-        available.splice(available.indexOf(t), 1);
+    if (need.cost + next.cost + reserve > dev.left) {
+      if (next.switching && plan[ci + 1].start <= 1) {
+        // Na zmiane profesji nie starczy PD - bez tej wczesniejszej profesji, od nowa (ostatnia profesja to zawsze glowna).
+        developByXp(npc, plan.filter((_, i) => i !== ci), rng, deterministic, budget);
+        return;
       }
-    }
-    for (let i = 0; i < picks && available.length; i++) {
-      const choice = deterministic
-        ? [...available].sort((a, b) => talentWeight(arch, b) - talentWeight(arch, a))[0]
-        : weightedPick(available, (t) => talentWeight(arch, t), rng);
-      if (!choice) break;
-      available.splice(available.indexOf(choice), 1);
-      if (!gainTalent(npc, choice, chars)) i--;
-    }
-
-    // Wyposazenie tylko z obecnej profesji - poprzednia zostawila po sobie najwyzej wspomnienia.
-    if (step.profession === npc.careerPath[npc.careerPath.length - 1].profession) {
-      for (const raw of lvl.trappings) {
-        // "kreda albo dłuto", "koń wierzchowy albo mała łódź" - jedna z możliwości (poza nawiasami).
-        const options = raw.includes("(") ? [raw] : raw.split(/\s+albo\s+/);
-        const chosen = deterministic ? options[0] : (pick(options, rng) ?? raw);
-        const item = rollDiceText(chosen, rng, deterministic);
-        if (!npc.trappings.includes(item)) npc.trappings.push(item);
+      if (next.switching && level < maxLevelOf(prof)) {
+        // Profesja zaawansowana (np. elfi kaplan od 3. poziomu) - zostaje w obecnej i rozwija ja dalej.
+        plan = [...plan.slice(0, ci), { ...step, target: Math.min(4, maxLevelOf(prof)) }];
+        continue;
       }
+      break;
     }
-  });
+    dev.applyNeeds(need);
+    dev.spent += next.cost;
+    if (next.switching) {
+      ci++;
+      mustReach = level;
+    }
+    prof = next.profession;
+    level = next.level;
+    steps.push({ profession: prof, level });
+    dev.buyRequired(prof, level);
+  }
+  dev.spendFree(prof, level);
+  npc.careerPath = steps;
+  npc.xp = { budget, spent: dev.spent };
 
-  applyArchetypeBonuses(npc, arch, rng, deterministic);
-
-  // Poziomy talentow: szansa na kolejny poziom za kazdy poziom profesji ponad pierwszy.
-  if (tier && !deterministic) {
-    const chars = approxChars(npc);
-    for (let i = 1; i < npc.careerPath.length; i++) {
-      if (!chance(tier.talentLevelUpChance, rng)) continue;
-      const growable = npc.talents.filter((t) => t.level < talentCap(t.name, chars));
-      const t = weightedPick(growable, (x) => talentWeight(arch, x.name), rng);
-      if (t) t.level += 1;
+  // Wyposazenie z obecnej profesji (jej poziomow do obecnego wlacznie).
+  for (const lvl of gd.getProfession(prof)?.levels ?? []) {
+    if (lvl.level > level) continue;
+    for (const raw of lvl.trappings) {
+      // "kreda albo dłuto", "koń wierzchowy albo mała łódź" - jedna z możliwości (poza nawiasami).
+      const options = raw.includes("(") ? [raw] : raw.split(/\s+albo\s+/);
+      const chosen = deterministic ? options[0] : (pick(options, rng) ?? raw);
+      const item = rollDiceText(chosen, rng, deterministic);
+      if (!npc.trappings.includes(item)) npc.trappings.push(item);
     }
   }
-
-  const last = npc.careerPath[npc.careerPath.length - 1];
-  npc.money = last ? rollMoney(gd.getProfession(last.profession)?.levels.find((l) => l.level === last.level)?.status ?? "", rng, deterministic) : "";
-}
-
-/**
- * Premie archetypu ponad rozwoj z profesji: kilka najwazniejszych umiejetnosci
- * (domyslnie 4) i cech (domyslnie 2). Wysokosc premii i progi zalezne od
- * poziomu BN (tiers.json: keySkills, keyChars) - np. sredni +3..+8 i razem
- * 15..18 rozwiniec, zaawansowany +5..+10 i razem 20..30. Progi nie nachodza
- * na siebie: najslabszy zaawansowany jest lepszy od najsilniejszego sredniego.
- */
-function applyArchetypeBonuses(npc: Npc, arch: Archetype | undefined, rng: Rng, deterministic: boolean): void {
-  const tier = gd.getTier(npc.tier);
-  if (!arch || !tier) return;
-  const s = gd.getSettings();
-  const roll = ([lo, hi]: [number, number]) => (deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng));
-  const clamp = (v: number, band: KeyBonus) => Math.min(band.max ?? Infinity, Math.max(band.min ?? 0, v));
-
-  arch.keySkills.slice(0, s.keySkillCount).forEach((key) => {
-    const bonus = roll(tier.keySkills.bonus);
-    const owned = npc.skills.filter((sk) => matchesKey(sk.name, key));
-    if (owned.length) {
-      // Najbardziej rozwinieta pasujaca umiejetnosc dostaje premie (np. jedna bron).
-      const best = owned.sort((a, b) => b.advances - a.advances)[0];
-      best.advances = clamp(best.advances + bonus, tier.keySkills);
-    } else {
-      const value = clamp(bonus, tier.keySkills);
-      if (value <= 0) return;
-      const name = gd.splitSpec(key).spec === null && gd.getSpecializations().options[key]
-        ? resolveSpecName(`${key} (Dowolna)`, npc.specChoices, arch, rng, deterministic)
-        : key;
-      addSkill(npc, name, value);
-    }
-  });
-
-  arch.characteristics.slice(0, s.keyCharCount).forEach((code) => {
-    npc.charAdvances[code] = clamp(npc.charAdvances[code] + roll(tier.keyChars.bonus), tier.keyChars);
-  });
+  const last = gd.getProfession(prof)?.levels.find((l) => l.level === level);
+  npc.money = rollMoney(last?.status ?? "", rng, deterministic);
 }
 
 /** Pieniadze wg Statusu: Braz = 2k10 x poziom pensow, Srebro = 1k10 x poziom szylingow, Zloto = poziom koron. */
@@ -746,8 +948,8 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.money = "";
     return;
   }
-  npc.careerPath = buildCareerPath({ professions, onlyProfessions: vampireProfessions(npc) }, npc.archetype, npc.tier, npc.race, rng);
-  developCareer(npc, rng, deterministic);
+  const plan = buildCareerPlan({ professions, onlyProfessions: vampireProfessions(npc) }, npc.archetype, npc.tier, npc.race, rng);
+  developByXp(npc, plan, rng, deterministic);
   // Rzadkie talenty rasy (Krew Aenariona) - tylko przy losowaniu.
   for (const rt of gd.getSettings().raceTalents ?? []) {
     if (deterministic || creature || rt.race !== npc.race || npc.talents.some((t) => t.name === rt.talent)) continue;
@@ -863,6 +1065,7 @@ function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: stri
 
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
+  if (spec.xp != null && !spec.tier) spec = { ...spec, tier: tierForXp(spec.xp) };
   const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);
   const creature: CreatureDef | undefined = gd.getCreature(creatureName);
   const det = !!spec.deterministic;
@@ -890,6 +1093,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     archetype,
     tier,
     label: spec.label,
+    ...(spec.xp != null || spec.xpBonus ? { xpSpec: { budget: spec.xp ?? undefined, bonus: spec.xpBonus || undefined } } : {}),
     careerPath: [],
     rolls: emptyAttrs(),
     charAdvances: emptyAttrs(),
