@@ -6,7 +6,18 @@
 
 import * as gd from "./gameData";
 import { newId } from "./generator";
-import { loadLibrary, loadSettings, loadTreasures, saveLibrary, saveSettings, saveTreasures, type SavedTreasure } from "./library";
+import {
+  loadGroups,
+  loadLibrary,
+  loadSettings,
+  loadTreasures,
+  saveGroups,
+  saveLibrary,
+  saveSettings,
+  saveTreasures,
+  type SavedGroup,
+  type SavedTreasure
+} from "./library";
 import type { Npc, Ruleset } from "./types";
 
 export const RULESET_LABELS: Record<Ruleset, string> = {
@@ -23,6 +34,8 @@ class AppState {
   library = $state<Npc[]>([]);
   /** Zapisane przedmioty magiczne i lupy. */
   treasures = $state<SavedTreasure[]>([]);
+  /** Zapisane grupy BN (cala grupa jako jeden wpis). */
+  groups = $state<SavedGroup[]>([]);
   toast = $state("");
   private toastTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -34,6 +47,7 @@ class AppState {
       this.ruleset = ruleset;
       this.library = loadLibrary();
       this.treasures = loadTreasures();
+      this.groups = loadGroups();
       this.ready = true;
     } catch (e) {
       this.loadError = e instanceof Error ? e.message : String(e);
@@ -97,6 +111,47 @@ class AppState {
   private persistTreasures(): void {
     if (!saveTreasures($state.snapshot(this.treasures) as SavedTreasure[])) {
       this.notify("Nie udało się zapisać skarbów w przeglądarce — wyeksportuj je do pliku JSON.");
+    }
+  }
+
+  /** Zapisuje grupe (ten sam id = aktualizacja); zwraca id wpisu. */
+  saveGroup(entry: Omit<SavedGroup, "id" | "savedAt"> & { id?: string }): string {
+    const copy = $state.snapshot(entry) as typeof entry;
+    const id = copy.id ?? newId();
+    const saved: SavedGroup = { ...copy, id, savedAt: new Date().toISOString() };
+    const i = this.groups.findIndex((g) => g.id === id);
+    if (i >= 0) this.groups[i] = saved;
+    else this.groups.push(saved);
+    this.persistGroups();
+    return id;
+  }
+
+  removeGroup(id: string): void {
+    this.groups = this.groups.filter((g) => g.id !== id);
+    this.persistGroups();
+  }
+
+  /** Import grup: ten sam id nadpisuje, nowe sa dopisywane. */
+  mergeGroups(incoming: SavedGroup[]): { added: number; updated: number } {
+    let added = 0;
+    let updated = 0;
+    for (const g of incoming) {
+      const i = this.groups.findIndex((x) => x.id === g.id);
+      if (i >= 0) {
+        this.groups[i] = g;
+        updated++;
+      } else {
+        this.groups.push(g);
+        added++;
+      }
+    }
+    this.persistGroups();
+    return { added, updated };
+  }
+
+  private persistGroups(): void {
+    if (!saveGroups($state.snapshot(this.groups) as SavedGroup[])) {
+      this.notify("Nie udało się zapisać grup w przeglądarce — wyeksportuj je do pliku JSON.");
     }
   }
 

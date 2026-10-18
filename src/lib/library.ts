@@ -6,7 +6,7 @@
 
 import type { Artefact } from "./artefacts";
 import type { LootResult } from "./loot";
-import type { Npc } from "./types";
+import type { GroupRow, Npc } from "./types";
 
 const LIBRARY_KEY = "wfrp4e-bn:library";
 const SETTINGS_KEY = "wfrp4e-bn:settings";
@@ -98,6 +98,64 @@ export function parseTreasuresJson(text: string): SavedTreasure[] {
   const list = Array.isArray(parsed) ? parsed : parsed?.treasures;
   if (!Array.isArray(list)) throw new Error("To nie jest plik zapisanych przedmiotów i łupów.");
   return list.filter(isTreasure);
+}
+
+// ---------------------------------------------------------------------------
+// Zapisane grupy BN (cala grupa jako jeden wpis, osobno od biblioteki)
+// ---------------------------------------------------------------------------
+
+const GROUPS_KEY = "wfrp4e-bn:groups";
+
+export interface SavedGroup {
+  id: string;
+  name: string;
+  savedAt: string;
+  /** Wiersze definicji grupy (do ponownego losowania). */
+  rows: GroupRow[];
+  members: Npc[];
+}
+
+export interface GroupsFile {
+  format: "wfrp4e-bn-groups";
+  version: 1;
+  exportedAt: string;
+  groups: SavedGroup[];
+}
+
+const isGroup = (g: unknown): g is SavedGroup =>
+  !!g && typeof g === "object" && typeof (g as SavedGroup).id === "string" && Array.isArray((g as SavedGroup).members);
+
+export function loadGroups(): SavedGroup[] {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(GROUPS_KEY) ?? "[]");
+    return Array.isArray(parsed) ? parsed.filter(isGroup).map((g) => ({ ...g, rows: g.rows ?? [], members: g.members.filter(isNpc) })) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveGroups(list: SavedGroup[]): boolean {
+  try {
+    localStorage.setItem(GROUPS_KEY, JSON.stringify(list));
+    return true;
+  } catch (e) {
+    console.warn("Zapis grup nieudany:", e);
+    return false;
+  }
+}
+
+export function groupsToJson(list: SavedGroup[]): string {
+  const file: GroupsFile = { format: "wfrp4e-bn-groups", version: 1, exportedAt: new Date().toISOString(), groups: list };
+  return JSON.stringify(file, null, 2);
+}
+
+/** Plik eksportu grup, sama tablica grup albo pojedyncza grupa. */
+export function parseGroupsJson(text: string): SavedGroup[] {
+  const parsed = JSON.parse(text);
+  const list: unknown[] = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.groups) ? parsed.groups : [parsed];
+  const groups = list.filter(isGroup).map((g) => ({ ...g, rows: g.rows ?? [], members: g.members.filter(isNpc) }));
+  if (!groups.length) throw new Error("To nie jest plik zapisanych grup.");
+  return groups;
 }
 
 export function loadSettings(): AppSettings {

@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { seedRng } from "../dice";
 import { generateNpc } from "../generator";
-import { libraryToJson, mergeLibrary, parseNpcJson } from "../library";
+import { groupsToJson, libraryToJson, mergeLibrary, parseGroupsJson, parseNpcJson, type SavedGroup } from "../library";
 import { loadTestGameData } from "./loadData";
 
 beforeAll(() => loadTestGameData());
@@ -27,5 +27,22 @@ describe("biblioteka BN", () => {
     expect(added).toBe(1);
     expect(updated).toBe(1);
     expect(merged.find((n) => n.id === a.id)?.name).toBe("Nowe Imię");
+  });
+});
+
+describe("zapisane grupy", () => {
+  it("eksport i import grupy zachowuje nazwe, wiersze i wszystkich czlonkow", () => {
+    const group: SavedGroup = {
+      id: "g1",
+      name: "Banda z traktu",
+      savedAt: "2026-10-18T00:00:00.000Z",
+      rows: [{ count: 2, archetype: "Wojownik", tier: "slaby" }],
+      members: [generateNpc({ archetype: "Wojownik" }, seedRng(1)), generateNpc({ archetype: "Wojownik" }, seedRng(2))]
+    };
+    expect(parseGroupsJson(groupsToJson([group]))).toEqual([group]);
+    // Pojedyncza grupa tez sie wczytuje; smieci w czlonkach sa pomijane.
+    const single = parseGroupsJson(JSON.stringify({ ...group, members: [...group.members, { foo: 1 }] }));
+    expect(single[0].members).toHaveLength(2);
+    expect(() => parseGroupsJson(JSON.stringify({ foo: 1 }))).toThrow();
   });
 });
