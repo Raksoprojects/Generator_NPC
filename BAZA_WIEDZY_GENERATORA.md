@@ -18,7 +18,7 @@ Oficjalne polskie nazwy Talentów, Cech i Umiejętności pochodzą z podręcznik
 ## 1. Poziomy zaawansowania (7)
 
 Każdy BN ma poziom zaawansowania. Od niego zależą:
-- liczba poziomów profesji i siła rozwoju;
+- budżet PD, a z niego poziomy profesji i siła rozwoju;
 - talenty;
 - rozwój bestii;
 - magia;
@@ -40,48 +40,48 @@ W danych poziomy mają stałe identyfikatory, a nazwy wyświetlane to:
 
 | Parametr | Nowicjusz | Zwykły | Niezwykły | Zaawansowany | Ekspert | Legenda | Heros |
 |---|---|---|---|---|---|---|---|
-| Łączna liczba poziomów rozwoju (waga losowania) | 1 (×3), 2 (×1) | 2 (×3), 3 (×1) | 3, 4 | 4 (×2), 5 (×1) | 6, 7 (×2), 8 | 8, 9 (×2), 10 | 10, 11 (×2), 12 (×2), 13 |
+| Budżet PD ponad tworzenie postaci [dom] | 200–800 | 1000–1900 | 2200–5000 | 5500–10000 | 12500–32000 | 40000–80000 | 100000–150000 |
 | Maks. liczba profesji (losowo 1…maks.) | 1 | 2 | 2 | 2 | 3 | 3 | 4 |
-| Poziom ostatniej profesji | 1–2 | 2 | 2–3 | 3–4 | 3–4 | 4 | 4 |
+| Poziom ostatniej profesji (wynik budżetu) | 1 | 2 | 3 (czasem 2 albo 4) | 4 | 4 | 4 | 4 |
 | Szansa na 5. poziom (jeśli profesja go ma, np. Arcymag) | — | — | — | — | 0,5% | 50% | 100% |
 | Losowy profil bohatera (wykluczające się) | — | Weteran 3% | Weteran 4%, Doborowy 1% | Weteran 2%, Doborowy 2%, Pomniejszy 1% | Doborowy 2%, Pomniejszy 2%, Wielki 1% | Pomniejszy 3%, Wielki 2% | Pomniejszy 2%, Wielki 3% |
-| Talenty na poziom profesji | 1 | 1 | 1 | 1 | 2 | 2 | 2 |
-| Szansa na dodatkowy talent na poziom | 0% | 50% | 50% | 90% | 50% | 80% | 100% |
-| Szansa na wzrost poziomu talentu (za każdy poziom profesji ponad 1.) | 0% | 30% | 50% | 70% | 80% | 90% | 100% |
-| Premia do 4 kluczowych umiejętności archetypu (łączne rozwinięcia min–maks.) | +1…+3 (do 13) | +3…+8 (15–18) | +5…+10 (20–32) | +8…+15 (34–48) | +10…+15 (50–70) | +15…+20 (72–88) | +20…+25 (od 90) |
-| Premia do 2 kluczowych cech archetypu (łączne rozwinięcia min–maks.) | +0…+2 (do 12) | +2…+5 (13–15) | +3…+7 (17–28) | +6…+10 (30–42) | +8…+12 (44–62) | +12…+18 (64–78) | +15…+22 (od 80) |
+| Waga talentów przy swobodnym rozwoju | ½ | ½ | ½ | 1 | 1 | 1 | 1 |
 | Waga przy losowaniu poziomu | 4 | 4 | 2 | 1 | 0,3 | 0,1 | 0,03 |
 
-**Zasady rozwoju [PG + dom]**
-- Każdy ukończony poziom profesji daje **+5** do cech i umiejętności tego poziomu. Poziom bieżący (ostatni w ścieżce) daje +2…+5. Rozwinięcia się kumulują (Żołnierz 1–4: WW z 1. poziomu dostaje 4 × 5).
-- **Ostatnia (obecna) profesja ma zawsze najwyższy poziom.** Żołnierz 2 + Rycerz 2 jest w porządku, Żołnierz 1 + Rycerz 3 też. Żołnierz 3 + Rycerz 1 jest niedozwolony.
-- **Poziomy rozwoju ≠ poziomy profesji.** Poziom BN wyznacza liczbę poziomów rozwoju. Tyle, ile nie pokrywa ścieżka profesji, to **dodatkowe rozwinięcia** na przebytych poziomach ostatniej profesji (+5 do cech i umiejętności losowego przebytego poziomu plus talent z jego puli). Legenda może więc być samym Żołnierzem 4 — z rozwinięciami jak za 8–10 poziomów. Na karcie: „Żołnierz 4 (+5 poziomów doświadczenia)”.
-- Liczba wcześniejszych profesji jest losowana od 0 do maksimum; każda ma 1 poziom … poziom ostatniej.
-- Czarodziej nie zmienia tradycji i nie był wcześniej kapłanem. Wyjątek to profesje renegatów (Czarownica).
-- **Profesje zaawansowane** (elfi kapłani od 3. poziomu): Mag 1–2, potem kapłan od 3. Pozostałe poziomy BN idą na wcześniejsze profesje.
-- Jeśli profesje podano ręcznie, generator używa tylko ich.
-- **Premie archetypu** to dodatkowe rozwinięcia tylko dla 4 kluczowych umiejętności i 2 kluczowych cech archetypu. Losowa premia jest dodawana, a wynik przycinany do zakresu poziomu. Pozostałe cechy i umiejętności rosną wyłącznie z profesji — wojownik nie staje się mądry, jego Inteligencja to 20 + 2k10, chyba że któraś profesja ją rozwija.
-- Progi premii nie nachodzą na siebie: najsłabszy BN wyższego poziomu ma w kluczowych rzeczach więcej niż najsilniejszy niższego.
-- **Mnożnik rozwinięć** (pole `advanceMultiplier`, domyślnie 1) mnożył +5 za poziom profesji. Został wyłączony, a poziom różnicują teraz liczba poziomów profesji i premie archetypu. Zostaje jako pokrętło, gdyby postacie wyszły za słabe.
-- **Profile bohaterów** nie wynikają z poziomu. Dostępne: Weteran i Doborowy (generator), Pomniejszy i Wielki Bohater [B2.0], Dowódca Oddziału. Nadawane ręcznie („Wyjątkowa jednostka”) albo z małej szansy poziomu (tabela wyżej, najwyżej 5% łącznie). Legendarny Bohater usunięty.
+**Zasady rozwoju za PD [PG s. 33–37 i 47–49, dom]**
+1. **Tworzenie postaci [PG]** (bez kosztu PD): 3 umiejętności rasowe +5 i 3 +3; talenty rasowe (stałe, do wyboru, z Tabeli Losowych Talentów); z 1. poziomu pierwszej profesji 5 rozwinięć jej cech, 40 rozwinięć jej 8 umiejętności (najwyżej 10 w jednej) i 1 talent.
+2. **Budżet PD** losowany z zakresu poziomu BN, ponad rozwinięcia z tworzenia postaci [dom].
+3. **Koszty [PG]:** cechy 25/30/40/50/70/90/120/150/190/230/280/330/390/450/520 PD, umiejętności 10/15/20/30/40/60/80/110/140/180/220/270/320/380/440 PD (za rozwinięcie, w przedziałach po 5); talent 100 PD × (posiadane poziomy + 1). Rozwój tylko w profesji — bez rozwoju poza profesją (×2) i bez talentów spoza profesji. Talenty tylko z poziomu, na którym je wymieniono.
+4. **Awans [PG]:** przed awansem poziom N jest skompletowany — wszystkie cechy poziomu na 5 × N, 8 umiejętności na 5 × N, 1 talent z poziomu. Awans albo nowa profesja: 100 PD, profesja z innej klasy +100 PD.
+5. Generator awansuje, gdy po skompletowaniu i awansie zostaje zapas PD: 1/4 tego, co nowy poziom dokłada do wymagań (Zwykły z 1500 PD jest na 2. poziomie). Zmiana profesji tylko, gdy nowa zdąży dojść do obecnego poziomu; inaczej wcześniejsza profesja odpada i BN rozwija się od nowa tylko w głównej.
+6. **Ostatnia (obecna) profesja ma zawsze najwyższy poziom.** Żołnierz 2 + Rycerz 2 jest w porządku, Żołnierz 1 + Rycerz 3 też. Żołnierz 3 + Rycerz 1 jest niedozwolony.
+7. **Swobodny rozwój:** resztę PD wydaje się w obecnej profesji (cechy, umiejętności, talenty dostępne do obecnego poziomu). Waga zakupu = priorytet² / koszt, więc tanie umiejętności idą częściej niż drogie cechy, dopóki cecha nie stanie się tańsza.
+8. **Priorytety archetypu:** cechy — 1 kluczowa (×3), 2 drugorzędne (×2), reszta ×1; umiejętności — 2 pierwszorzędne (×3), 3 drugorzędne (×2), reszta ×1; talenty — 3 kluczowe wg wag archetypu (×3), pozostałe archetypu ×2, reszta ×1. Wymagane talenty archetypu (np. Magia Tajemna czarodzieja) kupuje się od razu, gdy są dostępne.
+9. Liczba wcześniejszych profesji jest losowana od 0 do maksimum; każda ma docelowo 1–3 poziom, główna 4 (albo 5 wg szansy).
+10. Czarodziej nie zmienia tradycji i nie był wcześniej kapłanem. Wyjątek to profesje renegatów (Czarownica). Nie-mag nie był wcześniej magiem. Magia z talentów profesji jest dozwolona (Świecki Alchemik 4: Magia Tajemna (Metalu), Wiatry Magii s. 38).
+11. **Profesje zaawansowane** (elfi kapłani od 3. poziomu): Mag 1–2, potem kapłan od 3.
+12. Jeśli profesje podano ręcznie, generator używa tylko ich.
+13. **Profile bohaterów** nie wynikają z poziomu. Dostępne: Weteran i Doborowy (generator), Pomniejszy i Wielki Bohater [B2.0], Dowódca Oddziału. Nadawane ręcznie („Wyjątkowa jednostka”) albo z małej szansy poziomu (tabela wyżej, najwyżej 5% łącznie). Legendarny Bohater usunięty.
+14. Na karcie BN widać wydane PD.
+15. **PD ręcznie** (generator i edycja karty): „dodaj do poziomu” dokłada PD do budżetu poziomu, „zamiast poziomu” ustala budżet. Bez wybranego poziomu BN dostaje poziom wg PD (najwyższy, którego zakres zaczyna się nie wyżej). Przebudowa rozwoju zachowuje podane PD.
 
 **Przykładowe wartości** (człowiek, średnia z 40 losowań, w nawiasie zakres):
 
-| Poziom | Poziomy / profesje | Wojownik: WW | Broń Biała | Unik | Wt | Int | Czarodziej: Splatanie | Język (Magiczny) | Zaklęcia |
-|---|---|---|---|---|---|---|---|---|---|
-| Nowicjusz | 1 / 1 | 42 | 48 | 39 | 36 | 31 | 48 | 48 | 4 |
-| Zwykły | 2 / 1–2 | 53 | 68 | 50 | 39 | 31 | 65 | 65 | 7 |
-| Niezwykły | 3 / 1–2 | 58 | 80 | 62 | 40 | 31 | 77 | 78 | 12 |
-| Zaawansowany | 4 / 1–2 | 69 | 105 | 79 | 44 | 32 | 99 | 101 | 14 |
-| Ekspert | 7 / 2–3 | 83 | 135 | 100 | 50 | 32 | 130 | 134 | 17 |
-| Legenda | 9 / 2–3 | 105 | 178 | 130 | 56 | 32 | 172 | 177 | 23 |
-| Heros | 11 / 3–4 | 119 | 210 | 158 | 63 | 33 | 205 | 210 | 28 |
+| Poziom | Poziom ostatniej profesji / profesje | Wojownik: WW | Broń Biała | Unik | Wt | Int | Czarodziej: Splatanie | Język (Magiczny) | Zaklęcia | Szlachcic: Dowodzenie | Charyzma |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Nowicjusz | 1 / 1 | 47 (38–64) | 63 (51–80) | 29 | 32 | 30 | 56 | 55 | 4 | 54 | 47 |
+| Zwykły | 2 / 1–2 | 50 (35–77) | 67 (50–100) | 37 | 35 | 30 | 54 | 54 | 7 | 59 | 49 |
+| Niezwykły | 3 (2–4) / 1–2 | 56 (46–79) | 76 (62–97) | 50 | 37 | 31 | 73 | 70 | 11 | 73 | 69 |
+| Zaawansowany | 4 / 1–2 | 65 (52–100) | 91 (68–131) | 60 | 42 | 30 | 87 | 83 | 13 | 88 | 84 |
+| Ekspert | 4 / 1–3 | 82 (62–133) | 127 (102–184) | 76 | 48 | 33 | 124 | 113 | 16 | 124 | 119 |
+| Legenda | 4 / 1–3 | 104 (80–159) | 169 (139–225) | 93 | 56 | 34 | 165 | 150 | 22 | 160 | 152 |
+| Heros | 4 / 1–4 | 122 (97–184) | 208 (178–272) | 111 | 63 | 37 | 203 | 181 | 25 | 199 | 185 |
 
 Splatanie i Rzucanie mają też premie PS (rozdział 4), których tabela nie zawiera.
 
 ### 1.2 Bestie (stworzenia bez profesji)
 
-Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia. Poziom liczy się od minimalnego poziomu stworzenia: Wybraniec Chaosu występuje od Zaawansowanego, więc na Zaawansowanym ma profil z książki. Bestie nie dostają premii archetypu.
+Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia. Poziom liczy się od minimalnego poziomu stworzenia: Wybraniec Chaosu występuje od Zaawansowanego, więc na Zaawansowanym ma profil z książki. Bestie nie rozwijają się za PD.
 
 **Bestia poniżej swojego minimum [dom]** (np. olbrzym na Nowicjuszu, gdy poziom wybrano ręcznie, albo 15% losowań z grupy): profil z książki i **jedna cecha negatywna za każdy poziom poniżej minimum**. Cechy negatywne (zasada domowa — podręcznik ich nie ma) są też w zwykłej puli losowanych Cech Stworzeń:
 
@@ -163,8 +163,8 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
    | Wysoki / Leśny elf | 30 | 30 | 20 | 20 | 40 | 30 | 30 | 30 | 30 | 20 | 5 |
 
    Rzuca się 2k10 dla wszystkich cech, a najwyższe wyniki przypisuje do kluczowych cech archetypu (w ich kolejności); resztę losowo [dom]. Nie ma minimum rzutu, więc trafiają się i słabsi, i silniejsi BN. Stworzenia tak samo dla cech 2k10.
-4. **Ścieżka profesji** (liczba profesji i poziomów wg tabeli 1.1, ostatnia profesja najwyżej). Rozwinięcia cech i umiejętności z każdego poziomu oraz talenty z puli poziomu (wagi archetypu). Specjalizacje „dowolne” rozwiązuje się raz na profesję.
-5. **Premie archetypu** do 4 kluczowych umiejętności i 2 cech (tabela 1.1).
+4. **Plan profesji** (liczba profesji wg tabeli 1.1, ostatnia profesja najwyżej). Specjalizacje „dowolne” rozwiązuje się raz na profesję.
+5. **Tworzenie postaci i rozwój za PD** (zasady 1.1): umiejętności i talenty rasowe, 1. poziom profesji, potem kompletowanie poziomów, awanse i swobodny rozwój wg priorytetów archetypu.
 6. **Rzadkie talenty rasowe [dom]:** np. Krew Aenariona u wysokich elfów — 1%, Szlachcic 5%.
 7. **Cechy opcjonalne (Cechy Stworzeń) [dom]:** rzut k100 — 1: trzy cechy, 2–5: dwie, 6–20: jedna, 21+: brak. Wybór wg wag archetypu.
 8. **Wyposażenie** z bieżącej profesji. Broń i pancerz wg archetypu i poziomu. Do tego zalety/wady wykonania i materiał (tabela 1.4).
