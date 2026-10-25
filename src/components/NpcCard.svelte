@@ -14,6 +14,7 @@
   import { craftDescription } from "../lib/treasures";
   import { armourLine, computeNpc, effectiveCn, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
+  import { personaLines, rollPersona } from "../lib/persona";
   import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type SpellDef, type TierId } from "../lib/types";
 
   let {
@@ -85,7 +86,7 @@
   // --- Akcje ---
 
   const LOCKS: { id: NpcSection; label: string }[] = [
-    { id: "tozsamosc", label: "Imię" },
+    { id: "tozsamosc", label: "Imię i osobowość" },
     { id: "rzuty", label: "Rzuty" },
     { id: "rozwoj", label: "Rozwój" },
     { id: "cechyStworzen", label: "Cechy i mutacje" }
@@ -97,6 +98,26 @@
 
   function reroll() {
     npc = rerollNpc(snapshot());
+  }
+
+  /** Losuje od nowa osobowosc i wyglad (takze dla BN zapisanych przed ich wprowadzeniem). */
+  function newPersona() {
+    npc.persona = rollPersona(snapshot());
+  }
+
+  let persona = $derived(personaLines(npc.persona));
+  const personaText = (key: keyof NonNullable<Npc["persona"]>) => {
+    const v = npc.persona?.[key];
+    return Array.isArray(v) ? v.join(", ") : v == null ? "" : String(v);
+  };
+  function setPersona(key: keyof NonNullable<Npc["persona"]>, value: string) {
+    const p = { ...(npc.persona ?? {}) } as Record<string, unknown>;
+    const v = value.trim();
+    if (!v) delete p[key];
+    else if (key === "traits") p[key] = v.split(/\s*,\s*/).filter(Boolean);
+    else if (key === "age" || key === "height") p[key] = Number(v) || undefined;
+    else p[key] = v;
+    npc.persona = p as Npc["persona"];
   }
 
   function newName() {
@@ -434,6 +455,21 @@
     </p>
   {/if}
 
+  <!-- Najwazniejsze testy: walka, obrona, odpornosc i najlepsze umiejetnosci -->
+  {#if view.keyStats.defence.length || view.keyStats.best.length}
+    <p class="key-stats">
+      {#each view.keyStats.defence as k (k.name)}
+        <span class="key-stat" class:untrained={k.untrained} title={k.untrained ? "Umiejętność podstawowa bez rozwinięć — test na samej cesze (PG s. 117)" : undefined}>{k.name} <b>{k.value}</b></span>
+      {/each}
+      {#if view.keyStats.best.length}
+        <span class="text-dim sep">najlepsze:</span>
+        {#each view.keyStats.best as k (k.name)}
+          <span class="key-stat best">{k.name} <b>{k.value}</b></span>
+        {/each}
+      {/if}
+    </p>
+  {/if}
+
   <!-- Walka: bron i redukcja obrazen -->
   <section class="combat">
     {#each view.weapons as w (w.name)}
@@ -520,6 +556,7 @@
     {/if}
   </section>
 
+
   {#if !editing}
     <section class="block">
       <h4>Umiejętności</h4>
@@ -585,18 +622,6 @@
       {@render infoPanel(openInfo)}
     {/if}
 
-    {#if npc.trappings.length || npc.money}
-      <section class="block">
-        <h4>Wyposażenie</h4>
-        <p class="plain">
-          {#each npc.trappings as t, i (i)}{#if i}{", "}{/if}{#if findMagicItem(t) || t.startsWith("zwój z zaklęciem")}<button
-                class="item tap magic"
-                title={findMagicItem(t)?.description}
-                onclick={() => toggleInfo(`i|${t}`)}>✦ {t}</button
-              >{:else}{t}{/if}{/each}{#if npc.money}{npc.trappings.length ? " · " : ""}<b>{npc.money}</b>{/if}
-        </p>
-      </section>
-    {/if}
 
     {#if otherSpells.length || view.casting}
       <section class="block">
@@ -619,6 +644,33 @@
       {#if openInfo && bottomInfo}
         {@render infoPanel(openInfo)}
       {/if}
+    {/if}
+
+    {#if persona.length || !beast}
+      <section class="block persona">
+        <div class="block-head">
+          <h4>Osobowość i wygląd</h4>
+          {#if !beast}<button class="btn-sm ghost" title="Wylosuj osobowość i wygląd od nowa" onclick={newPersona}>🎲</button>{/if}
+        </div>
+        {#each persona as l (l.label)}
+          <p class="persona-line"><span class="text-dim">{l.label}:</span> {l.text}</p>
+        {:else}
+          <p class="text-dim">Brak — kliknij 🎲, by wylosować.</p>
+        {/each}
+      </section>
+    {/if}
+
+    {#if npc.trappings.length || npc.money}
+      <section class="block">
+        <h4>Wyposażenie</h4>
+        <p class="plain">
+          {#each npc.trappings as t, i (i)}{#if i}{", "}{/if}{#if findMagicItem(t) || t.startsWith("zwój z zaklęciem")}<button
+                class="item tap magic"
+                title={findMagicItem(t)?.description}
+                onclick={() => toggleInfo(`i|${t}`)}>✦ {t}</button
+              >{:else}{t}{/if}{/each}{#if npc.money}{npc.trappings.length ? " · " : ""}<b>{npc.money}</b>{/if}
+        </p>
+      </section>
     {/if}
 
     {#if bookOpen}
@@ -874,6 +926,21 @@
         <textarea rows="3" bind:value={npc.notes}></textarea>
       </label>
     </section>
+    {#if !beast}
+      <section class="block edit-grid">
+        <h4 class="wide">Osobowość i wygląd <button class="btn-sm ghost" title="Wylosuj od nowa" onclick={newPersona}>🎲</button></h4>
+        <label>Motywacja <input type="text" value={personaText("motivation")} onchange={(e) => setPersona("motivation", e.currentTarget.value)} /></label>
+        <label>Cechy charakteru <input type="text" placeholder="po przecinku" value={personaText("traits")} onchange={(e) => setPersona("traits", e.currentTarget.value)} /></label>
+        <label>Wiek <input type="number" min="0" value={personaText("age")} onchange={(e) => setPersona("age", e.currentTarget.value)} /></label>
+        <label>Wzrost (cm) <input type="number" min="0" value={personaText("height")} onchange={(e) => setPersona("height", e.currentTarget.value)} /></label>
+        <label>Oczy <input type="text" value={personaText("eyes")} onchange={(e) => setPersona("eyes", e.currentTarget.value)} /></label>
+        <label>Włosy <input type="text" value={personaText("hair")} onchange={(e) => setPersona("hair", e.currentTarget.value)} /></label>
+        <label class="wide">Znak szczególny <input type="text" value={personaText("feature")} onchange={(e) => setPersona("feature", e.currentTarget.value)} /></label>
+        <label class="wide">Manieryzm / dziwactwo <input type="text" value={personaText("mannerism")} onchange={(e) => setPersona("mannerism", e.currentTarget.value)} /></label>
+        <label class="wide">Potrzeba (chce…) <input type="text" value={personaText("need")} onchange={(e) => setPersona("need", e.currentTarget.value)} /></label>
+        <label class="wide">Skąd zna BG <input type="text" value={personaText("acquaintance")} onchange={(e) => setPersona("acquaintance", e.currentTarget.value)} /></label>
+      </section>
+    {/if}
   {/if}
 
   <footer class="foot">
@@ -1049,6 +1116,34 @@
 
   .small {
     font-size: var(--fs-sm);
+  }
+
+  .key-stats {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+    padding: var(--space-1) var(--space-3);
+    border-left: 3px solid var(--accent);
+    background: var(--bg-panel-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .key-stat b {
+    color: var(--accent);
+  }
+
+  .key-stat.untrained b {
+    color: var(--text-muted);
+  }
+
+  .key-stats .sep {
+    font-size: var(--fs-sm);
+  }
+
+  .persona-line {
+    margin: 0;
   }
 
   .char-mods {
