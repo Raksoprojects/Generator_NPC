@@ -856,6 +856,58 @@ export interface NpcMutation {
 }
 
 /** Sekcje BN, ktore mozna zablokowac przed ponownym losowaniem. */
+/** Osobowosc i wyglad BN: Motywacja, potrzeba i powiazanie z BG (EMG), wyglad (PG s. 39-40), reszta [dom]. */
+export interface NpcPersona {
+  motivation?: string;
+  /** Cechy charakteru (forma wg plci). */
+  traits?: string[];
+  mannerism?: string;
+  /** Znak szczegolny wygladu. */
+  feature?: string;
+  need?: string;
+  /** Skad BN zna BG (opcjonalny zaczep fabularny). */
+  acquaintance?: string;
+  age?: number;
+  height?: number;
+  eyes?: string;
+  hair?: string;
+}
+
+export interface PersonalityData {
+  motivations: { name: string; hint: string; deity?: boolean }[];
+  motivationWeights: Record<string, Record<string, number>>;
+  deities: Record<string, string[]>;
+  needs: { text: string; dark?: boolean }[];
+  acquaintances: string[];
+  appearance: Record<
+    string,
+    {
+      age: { base: number; dice: string; tierYears: number };
+      height: { base: number; dice: number; explode?: boolean };
+      eyesTwice?: boolean;
+      eyes: string[];
+      hair: string[];
+    }
+  >;
+  colorBands: number[];
+  traits: [string, string][];
+  mannerisms: PersonaEntry[];
+  features: PersonaEntry[];
+  accents: string[];
+  scarPlaces: string[];
+  tattoos: string[];
+  birthmarks: string[];
+  smells: string[];
+  pets: string[];
+}
+
+export interface PersonaEntry {
+  text: string;
+  sex?: Sex;
+  races?: string[];
+  notRaces?: string[];
+}
+
 export type NpcSection = "tozsamosc" | "rzuty" | "rozwoj" | "cechyStworzen";
 
 export const NPC_SECTIONS: readonly NpcSection[] = ["tozsamosc", "rzuty", "rozwoj", "cechyStworzen"];
@@ -905,6 +957,8 @@ export interface Npc {
   /** Zaklecia (nazwy z spells.json). */
   spells: string[];
   mutations: NpcMutation[];
+  /** Osobowosc i wyglad (personality.json); brak u bestii. */
+  persona?: NpcPersona;
   trappings: string[];
   money: string;
   notes: string;

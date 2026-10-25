@@ -35,6 +35,7 @@ export function loadTestGameData(): void {
     magicItems: readJson("magic_items.json"),
     treasures: readJson("treasures.json"),
     artefacts: readJson("artefacts.json"),
-    loot: readJson("loot.json")
+    loot: readJson("loot.json"),
+    personality: readJson("personality.json")
   } as GameData);
 }

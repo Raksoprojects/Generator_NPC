@@ -14,6 +14,7 @@ import { castingSummary, type CastingView } from "./magicItems";
 import { describeMagicItem, magicEffects, materialApBonus, materialOf } from "./treasures";
 import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from "./mutations";
 import { findBloodline } from "./vampires";
+import { personaLines } from "./persona";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
 import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
 
@@ -89,8 +90,18 @@ export interface MagicItemView {
   description: string;
 }
 
+/** Wartosc na gorze karty: walka, Unik, Odpornosc, Opanowanie, najlepsze umiejetnosci. */
+export interface KeyStat {
+  name: string;
+  value: number;
+  /** Umiejetnosc podstawowa bez rozwiniec - test na samej cesze. */
+  untrained?: boolean;
+}
+
 export interface NpcView {
   chars: Record<Attribute, CharView>;
+  /** Najwazniejsze testy BN (walka, obrona, odpornosc) i najlepsze umiejetnosci. */
+  keyStats: { defence: KeyStat[]; best: KeyStat[] };
   skills: SkillView[];
   talents: TalentView[];
   weapons: WeaponView[];
@@ -449,11 +460,14 @@ export function computeNpc(input: Npc): NpcView {
     .sort((a, b) => b.cn - a.cn || a.name.localeCompare(b.name, "pl"))
     .slice(0, KEY_SPELLS);
 
+  const keyStats = keyStatsOf(skills, chars);
+
   const last = npc.careerPath[npc.careerPath.length - 1];
   const career = last ? { ...last, ...careerLevelInfo(last.profession, last.level, npc.sex) } : null;
 
   return {
     chars,
+    keyStats,
     skills,
     talents,
     weapons,
@@ -473,6 +487,33 @@ export function computeNpc(input: Npc): NpcView {
     careerPathText: careerPathText(npc),
     casting: castingSummary(npc, skills, chars)
   };
+}
+
+/**
+ * Walka (najlepsza Broń Biała, bez niej WW), Strzelanie (najlepsza Broń Zasięgowa), Unik,
+ * Odporność i Opanowanie - umiejetnosci podstawowe bez rozwiniec testuje sie na samej cesze (PG s. 117) -
+ * oraz 4 najlepsze pozostale umiejetnosci.
+ */
+function keyStatsOf(skills: SkillView[], chars: Record<Attribute, CharView>): NpcView["keyStats"] {
+  const best = (prefix: string) => skills.filter((s) => s.name.startsWith(prefix)).sort((a, b) => b.total - a.total)[0];
+  const defence: KeyStat[] = [];
+  const melee = best("Broń Biała");
+  if (melee) defence.push({ name: melee.name, value: melee.total });
+  else if (!chars.WW.absent) defence.push({ name: "Broń Biała (Podstawowa)", value: chars.WW.total, untrained: true });
+  const ranged = best("Broń Zasięgowa");
+  if (ranged) defence.push({ name: ranged.name, value: ranged.total });
+  for (const [name, code] of [["Unik", "Zw"], ["Odporność", "Wt"], ["Opanowanie", "SW"]] as const) {
+    const own = skills.find((s) => s.name === name);
+    if (own) defence.push({ name, value: own.total });
+    else if (!chars[code].absent) defence.push({ name, value: chars[code].total, untrained: true });
+  }
+  const shown = new Set(defence.map((d) => d.name));
+  const top = skills
+    .filter((s) => !shown.has(s.name))
+    .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name, "pl"))
+    .slice(0, 4)
+    .map((s) => ({ name: s.name, value: s.total }));
+  return { defence, best: top };
 }
 
 /** "Rekrut → Żołnierz → Giermek" - tytuly kolejnych poziomow sciezki. */
@@ -510,6 +551,8 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   }
   const stat = (c: Attribute) => (view.chars[c].absent ? "–" : String(view.chars[c].total));
   lines.push(ATTRIBUTES.map((c) => `${c} ${stat(c)}`).join(" | ") + ` | Żyw ${view.wounds} | Sz ${view.movement}`);
+  const key = (k: KeyStat) => `${k.name} ${k.value}`;
+  lines.push(`Kluczowe: ${[...view.keyStats.defence, ...view.keyStats.best].map(key).join(", ")}`);
   for (const w of view.weapons) {
     const extra = [
       w.craftLabel ?? "",
@@ -545,6 +588,7 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   if (npc.heroProfiles.length) lines.push("Profil: " + npc.heroProfiles.join(", "));
   if (npc.trappings.length) lines.push("Wyposażenie: " + npc.trappings.join(", "));
   if (npc.money) lines.push("Pieniądze: " + npc.money);
+  for (const l of personaLines(npc.persona)) lines.push(`${l.label}: ${l.text}`);
   if (npc.notes.trim()) lines.push("Notatki: " + npc.notes.trim());
   return lines.join("\n");
 }

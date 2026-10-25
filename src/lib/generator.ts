@@ -26,6 +26,7 @@ import { addCasterSkills, pickSpells, resolveTraitChoice, rollExtraLores } from 
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
 import { findBloodline, isVampire, npcBloodline, rollBloodline, rollVampire, stripVampireArmour, vampireArchetype, vampireProfessions } from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
+import { rollPersona } from "./persona";
 import { rollCraft, rollTreasures } from "./treasures";
 import { ATTRIBUTES, characteristicBonus, characteristicToCode, type Attribute } from "./rules";
 import type { Archetype, CareerStep, CreatureDef, Npc, NpcSection, Sex, TierDef, TierId } from "./types";
@@ -1119,6 +1120,8 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
   rollTreasures(npc, rng, det);
   finish(npc, rng, det);
+  // Po rozwoju: Motywacja Wiara bierze bostwo z talentow profesji.
+  npc.persona = rollPersona(npc, rng);
   return npc;
 }
 
@@ -1144,6 +1147,8 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
   if (unlocked("cechyStworzen")) rollFeatures(next, { bloodline }, rng, false);
   if (unlocked("rozwoj")) rollTreasures(next, rng);
   if (unlocked("rozwoj") || unlocked("cechyStworzen")) finish(next, rng, false);
+  // Osobowosc i wyglad naleza do tozsamosci (blokada "Imię").
+  if (unlocked("tozsamosc")) next.persona = rollPersona(next, rng);
   return next;
 }
 

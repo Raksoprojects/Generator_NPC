@@ -14,6 +14,7 @@ import type {
   MutationsData,
   ProfessionTitlesData,
   Sex,
+  PersonalityData,
   VampiresData,
   MagicItemsData,
   TreasuresData,
@@ -70,6 +71,8 @@ export interface GameData {
   /** Generator przedmiotow magicznych (Treasure & Artefacts) i lupow wg lokacji. */
   artefacts?: ArtefactsData;
   loot?: LootData;
+  /** Osobowosc i wyglad BN. */
+  personality?: PersonalityData;
   /** Opcjonalna nakladka profesji dla zasad domowych. */
   professionsDomowe?: ProfessionsData;
 }
@@ -103,7 +106,8 @@ const FILES = {
   magicItems: "magic_items.json",
   treasures: "treasures.json",
   artefacts: "artefacts.json",
-  loot: "loot.json"
+  loot: "loot.json",
+  personality: "personality.json"
 } as const;
 
 /** Wstrzykuje dane bezposrednio (testy). */
@@ -486,6 +490,10 @@ export function getLoot(): LootData | undefined {
 
 export function getTreasures(): TreasuresData | undefined {
   return data().treasures;
+}
+
+export function getPersonality(): PersonalityData | undefined {
+  return data().personality;
 }
 
 export function getVampires(): VampiresData | undefined {
