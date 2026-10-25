@@ -205,7 +205,7 @@
 </script>
 
 {#snippet xpField()}
-  <label title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
+  <label class="xp-field" title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
     <span class="xp-row">
       <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpValue} />
       <select bind:value={xpMode} aria-label="Sposób użycia PD">
@@ -398,12 +398,20 @@
 </section>
 
 <style>
+  .xp-field {
+    grid-column: span 2;
+  }
   .xp-row {
     display: flex;
     gap: 0.3rem;
   }
   .xp-row input {
     width: 6.5rem;
+    flex: none;
+  }
+  .xp-row select {
+    flex: 1;
+    min-width: 0;
   }
   .tab {
     display: flex;
