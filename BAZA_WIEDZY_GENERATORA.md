@@ -172,6 +172,14 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
 10. **Zaklęcia**, jeśli BN czaruje (rozdział 4).
 11. **Żywotność [PG]:** BS + 2×BWt + BSW. Niziołki nie liczą BS. Talent Twardziel dodaje BWt za poziom.
 12. **Pieniądze wg Statusu [PG]:** Brąz = 2k10 × poziom pensów, Srebro = 1k10 × poziom szylingów, Złoto = poziom w koronach.
+13. **Osobowość i wygląd** (`personality.json`, rasy rozumne, przemienione wampiry i stworzenia z profesją; bestie nie):
+    - **Motywacja [EMG s. 11–13]:** jedna z 30 Motywacji; wagi wg archetypu [dom] (np. Kapłan: Wiara, Kupiec: Bogactwo). Wiara dostaje bóstwo z talentu profesji (Błogosławieństwo/Inwokacja), inaczej losowe wg rasy.
+    - **Potrzeba [EMG s. 19–23, kolumna „Dlaczego”]:** 50 celów BN; mroczne (pakt z demonem, zdrada) z wagą 0,4.
+    - **Skąd zna BG [EMG s. 23–25]:** 50 powiązań z tabeli „Skąd my się znamy?” — zaczep fabularny.
+    - **Wygląd [PG s. 39–40]:** wiek startowy rasy (człowiek 15+k10, krasnolud 15+10k10, niziołek 15+5k10, elf 30+10k10), wzrost (człowiek 150+4k10 z dorzucaniem przy „10”, krasnolud 130+2k10, niziołek 95+2k10, elf 180+3k10), kolor oczu i włosów 2k10 (elfy: dwa rzuty na oczy). [dom]: wiek rośnie z poziomem BN (lata × indeks poziomu, ×3 u krasnoludów, ×5/3 u niziołków, ×7 u elfów); po średnim wieku rośnie szansa na siwe włosy (elfy nie siwieją).
+    - **Cechy charakteru, manieryzm, znak szczególny [dom]:** EMG s. 16 każe korzystać z list spoza podręcznika. Dwie cechy z różnych par przeciwieństw (forma wg płci), jeden manieryzm/dziwactwo, jeden znak szczególny (brody, wąsy, łysina tylko u mężczyzn; bez ospy i odstających uszu u elfów).
+    - Blokada „Imię i osobowość” chroni je przy ponownym losowaniu. Na karcie: 🎲 losuje od nowa, edycja pozwala wpisać własne.
+14. **Karta BN — kolejność:** cechy; linia kluczowych testów (najlepsza Broń Biała albo WW, najlepsza Broń Zasięgowa, Unik, Odporność, Opanowanie — bez rozwinięć test na samej cesze [PG s. 117] — i 4 najlepsze umiejętności); walka (broń z Zaletami i Wadami, pancerz, redukcja obrażeń); umiejętności, talenty, cechy, zaklęcia; osobowość i wygląd; na końcu wyposażenie z pieniędzmi.
 
 ---
 
