@@ -422,3 +422,59 @@ describe("pieniadze", () => {
     expect(rollMoney("Brąz 2", seedRng(1), true)).toBe("22 p");
   });
 });
+
+describe("dokladna sciezka (edycja poglebiona)", () => {
+  it("sciezka z poziomami jest realizowana w calosci, takze ponad budzet - brak widac jako spent > budget", () => {
+    const path = [{ profession: "Żołnierz", level: 2 }, { profession: "Rycerz", level: 3 }];
+    let deficit = 0;
+    for (let seed = 1; seed <= 10; seed++) {
+      const npc = generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "slaby", path }, seedRng(seed));
+      const steps = npc.careerPath.map((s) => `${s.profession} ${s.level}`);
+      expect(steps).toContain("Żołnierz 2");
+      expect(npc.careerPath.at(-1)).toEqual({ profession: "Rycerz", level: 3 });
+      // Kazdy przebyty poziom skompletowany (cechy na 5 x poziom).
+      const arch = gd.getArchetype("Wojownik");
+      for (const step of npc.careerPath.slice(0, -1)) {
+        for (const c of levelCharacteristics(step.profession, step.level, arch)) expect(npc.charAdvances[c]).toBeGreaterThanOrEqual(5 * step.level);
+      }
+      if (npc.xp!.spent > npc.xp!.budget) deficit++;
+    }
+    // Nowicjusz (200-800 PD) nie stac na Rycerza 3 - zawsze brak PD.
+    expect(deficit).toBe(10);
+  });
+
+  it("ostatnia profesja bez poziomu - poziom wg PD; bez sciezki zachowanie bez zmian", () => {
+    const npc = generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "doswiadczony", path: [{ profession: "Żołnierz", level: 1 }, { profession: "Rycerz", level: null }] }, seedRng(3));
+    expect(npc.careerPath[0]).toEqual({ profession: "Żołnierz", level: 1 });
+    expect(npc.careerPath.at(-1)!.profession).toBe("Rycerz");
+    expect(npc.xp!.spent).toBeLessThanOrEqual(npc.xp!.budget);
+    const plain = generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "slaby", professions: ["Rycerz"] }, seedRng(3));
+    expect(plain.xp!.spent).toBeLessThanOrEqual(plain.xp!.budget);
+  });
+
+  it("przebudowa ze sciezka odtwarza ja dokladnie", () => {
+    const npc = generateNpc({ archetype: "Uczony", race: "Człowiek", tier: "zaawansowany" }, seedRng(5));
+    const rebuilt = rebuildDevelopment(npc, undefined, seedRng(6), [{ profession: "Uczony", level: 4 }]);
+    expect(rebuilt.careerPath.at(-1)).toEqual({ profession: "Uczony", level: 4 });
+  });
+
+  it("ogr jak rasa: zawsze z profesja, dowolny archetyp", () => {
+    const ogre = generateNpc({ creature: "Ogr", asRace: true, archetype: "Uczony", tier: "sredni" }, seedRng(2));
+    expect(ogre.archetype).toBe("Uczony");
+    expect(ogre.careerPath.length).toBeGreaterThan(0);
+    const any = generateNpc({ creature: "Ogr", asRace: true, tier: "sredni" }, seedRng(7));
+    expect(any.archetype).not.toBe("");
+    expect(gd.raceLikeCreatures()).toContain("Ogr");
+    // Poziom ustawiony recznie nie jest podnoszony do minimum ogra (Zwykły).
+    expect(generateNpc({ creature: "Ogr", asRace: true, archetype: "Wojownik", tier: "slaby" }, seedRng(1)).tier).toBe("slaby");
+  });
+
+  it("zrodlo profesji i Percepcja w linii kluczowych", () => {
+    expect(gd.professionSourceFull("Świecki Alchemik")).toBe("Wiatry Magii, s. 38");
+    expect(gd.withSource("Żołnierz", gd.getProfession("Żołnierz")?.source)).toBe("Żołnierz (Podstawka)");
+    const v = computeNpc(generateNpc({ archetype: "Wojownik", race: "Człowiek" }, seedRng(1)));
+    expect(v.keyStats.defence.map((k) => k.name)).toContain("Percepcja");
+    expect(v.career!.source).toMatch(/s\. \d+/);
+    expect(v.careerSteps.length).toBeGreaterThan(0);
+  });
+});

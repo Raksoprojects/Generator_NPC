@@ -236,6 +236,36 @@ export function specAlternatives(spec: string | null): string[] | null {
 // Akcesory
 // ---------------------------------------------------------------------------
 
+/** Krotka nazwa zrodla do list wyboru ("Podstawka", "PG: Wysokie Elfy", "Grimuar, nieof."). */
+export function sourceShort(source: string | undefined | null): string {
+  const s = (source ?? "").trim().replace(/,\s*s\.\s*\d+$/, "");
+  if (!s) return "";
+  if (/^Podręcznik podstawowy/i.test(s)) return "Podstawka";
+  const pg = /^Podręcznik Gracza:\s*(.+)$/i.exec(s);
+  if (pg) return `PG: ${pg[1]}`;
+  const dwarf = /^Podręcznik gracza (\S+)/i.exec(s);
+  if (dwarf) return `PG: ${dwarf[1]}`;
+  return s.replace(/\s*\(nieoficjalny\)/i, ", nieof.");
+}
+
+/** Nazwa z dopiskiem zrodla w nawiasie, np. "Świecki Alchemik (Wiatry Magii)". */
+export function withSource(name: string, source: string | undefined | null): string {
+  const s = sourceShort(source);
+  return s ? `${name} (${s})` : name;
+}
+
+/** Zrodlo profesji ze strona, np. "Wiatry Magii, s. 38". */
+export function professionSourceFull(name: string): string {
+  const p = getProfession(name);
+  if (!p?.source) return "";
+  return p.page && !/s\.\s*\d+/.test(p.source) ? `${p.source}, s. ${p.page}` : p.source;
+}
+
+/** Stworzenia wybierane jak rasa w "Ludzie i rasy" (ogr). */
+export function raceLikeCreatures(): string[] {
+  return getCreatures().filter((c) => c.asRace).map((c) => c.name);
+}
+
 export function getProfession(name: string): Profession | undefined {
   if (professions[name]) return professions[name];
   const target = normalize(name);

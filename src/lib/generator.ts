@@ -68,6 +68,20 @@ export interface GenSpec {
   label?: string;
   /** Tryb "wlasny": srednie rzuty, bez losowych odchylen i cech opcjonalnych. */
   deterministic?: boolean;
+  /**
+   * Dokladna sciezka (edycja poglebiona): profesje po kolei z poziomem docelowym; brak poziomu
+   * w ostatniej - program dobiera sam. Sciezka jest realizowana nawet ponad budzet PD (npc.xp.spent
+   * > budget), a karta proponuje dodanie brakujacych PD albo zmiane sciezki.
+   */
+  path?: PathStep[];
+  /** Stworzenie wybrane jak rasa (ogr): zawsze z archetypem, dowolny archetyp. */
+  asRace?: boolean;
+}
+
+/** Krok sciezki podanej recznie. Pusta profesja w ostatnim kroku - wg archetypu. */
+export interface PathStep {
+  profession: string;
+  level?: number | null;
 }
 
 export const COMMANDER_PROFILE = "Dowódca Oddziału";
@@ -236,6 +250,8 @@ export interface CareerPlanStep {
   profession: string;
   start: number;
   target: number;
+  /** Poziom docelowy podany recznie - osiagany nawet ponad budzet PD. */
+  fixed?: boolean;
 }
 
 const maxLevelOf = (profession: string) => Math.max(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
@@ -281,6 +297,39 @@ export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId
     plan.push({ profession: prof, start: 1, target: Math.min(maxLevelOf(prof), randInt(1, 3, rng)) });
   }
   plan.push({ profession: main, start: firstLevel(main), target: mainTarget });
+  return plan;
+}
+
+/**
+ * Plan z dokladnej sciezki: kazdy krok od pierwszego poziomu profesji do podanego (bez poziomu:
+ * wczesniejsze 1.-3., ostatnia 4. albo 5. wg szansy poziomu BN). Profesja zaawansowana (elfi kaplan)
+ * bez profesji wejsciowej przed soba dostaje ja automatycznie.
+ */
+export function buildExactPlan(path: PathStep[], archetype: string, tierId: TierId, race: string, rng: Rng): CareerPlanStep[] {
+  const tier = gd.getTier(tierId);
+  const steps = path.filter((s, i) => gd.getProfession(s.profession) || (i === path.length - 1 && !s.profession));
+  if (!steps.length || !tier) return [];
+  const last = steps[steps.length - 1];
+  if (!last.profession) {
+    const arch = gd.getArchetype(archetype);
+    const cands = arch ? professionCandidates(arch, race) : {};
+    const main = weightedKey(cands, rng);
+    if (!main) return [];
+    steps[steps.length - 1] = { ...last, profession: main };
+  }
+  const plan: CareerPlanStep[] = [];
+  steps.forEach((s, i) => {
+    const def = gd.getProfession(s.profession)!;
+    const start = firstLevel(s.profession);
+    const max = maxLevelOf(s.profession);
+    if (start > 1 && def.entry && plan[plan.length - 1]?.profession !== def.entry.from) {
+      plan.push({ profession: def.entry.from, start: 1, target: def.entry.level, fixed: true });
+    }
+    const isLast = i === steps.length - 1;
+    const auto = isLast ? maybeLevel5(s.profession, Math.min(4, max), tier, rng) : Math.min(max, randInt(1, 3, rng));
+    const target = Math.max(start, Math.min(max, s.level ?? auto));
+    plan.push({ profession: s.profession, start, target, fixed: s.level != null });
+  });
   return plan;
 }
 
@@ -498,7 +547,9 @@ class XpDeveloper {
     readonly arch: Archetype | undefined,
     readonly budget: number,
     readonly rng: Rng,
-    readonly det: boolean
+    readonly det: boolean,
+    /** Dokladna sciezka: wymagane Talenty archetypu kupowane takze na kredyt PD. */
+    readonly allowDebt = false
   ) {}
 
   get left(): number {
@@ -574,7 +625,7 @@ class XpDeveloper {
   buyRequired(profession: string, level: number, pay = true): void {
     for (const t of this.talents(profession, level)) {
       if (!this.arch?.requiredTalents?.some((r) => matchesKey(t, r)) || this.talentLevel(t) > 0) continue;
-      if (pay && talentCost(0) > this.left) continue;
+      if (pay && !this.allowDebt && talentCost(0) > this.left) continue;
       this.buyTalent(t, pay);
     }
   }
@@ -732,7 +783,12 @@ function xpBudget(tier: TierDef | undefined, rng: Rng, deterministic: boolean): 
  * profesja zdazy dojsc do obecnego poziomu (ostatnia profesja zawsze najwyzej). Reszta PD -
  * swobodny rozwoj w obecnej profesji wg priorytetow archetypu.
  */
-export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, deterministic = false, fixedBudget?: number): void {
+/**
+ * exact = dokladna sciezka podana recznie: zadnej profesji z planu nie pomijamy, a poziomy z `fixed`
+ * (i dojscie do poziomu poprzedniej profesji) osiagamy nawet ponad budzet - brak PD widac jako
+ * npc.xp.spent > npc.xp.budget.
+ */
+export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, deterministic = false, fixedBudget?: number, exact = false): void {
   const arch = gd.getArchetype(npc.archetype);
   const tier = gd.getTier(npc.tier);
   npc.charAdvances = emptyAttrs();
@@ -755,7 +811,7 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
   }
 
   const budget = fixedBudget ?? npc.xpSpec?.budget ?? xpBudget(tier, rng, deterministic) + (npc.xpSpec?.bonus ?? 0);
-  const dev = new XpDeveloper(npc, arch, budget, rng, deterministic);
+  const dev = new XpDeveloper(npc, arch, budget, rng, deterministic, exact);
   creationStart(dev, plan[0].profession, !npc.creature || !!npc.turned);
 
   const steps: CareerStep[] = [{ profession: plan[0].profession, level: plan[0].start }];
@@ -785,7 +841,9 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
       // Rezerwa: 1/4 tego, co nowy poziom dokłada do obecnego (Zwykly z 1500 PD jest na 2. poziomie).
       reserve = level + 1 <= mustReach ? 0 : Math.round(Math.max(0, dev.needs(next.profession, next.level).cost - need.cost) / 4);
     }
-    if (need.cost + next.cost + reserve > dev.left) {
+    // Dokladna sciezka: zmiana profesji i poziomy podane recznie zawsze, takze na kredyt PD.
+    const forced = exact && (next.switching || step.fixed || level + 1 <= mustReach);
+    if (!forced && need.cost + next.cost + reserve > dev.left) {
       if (next.switching && plan[ci + 1].start <= 1) {
         // Na zmiane profesji nie starczy PD - bez tej wczesniejszej profesji, od nowa (ostatnia profesja to zawsze glowna).
         developByXp(npc, plan.filter((_, i) => i !== ci), rng, deterministic, budget);
@@ -932,7 +990,7 @@ function rollAttributes(npc: Npc, rng: Rng, deterministic = false): Record<Attri
  * Sekcja "rozwoj": sciezka profesji (ludzie, stworzenia cywilizowane) albo
  * rozwoj bestii, a do tego bron i pancerz.
  */
-function develop(npc: Npc, professions: string[] | undefined, rng: Rng, deterministic: boolean): void {
+function develop(npc: Npc, professions: string[] | undefined, rng: Rng, deterministic: boolean, path?: PathStep[]): void {
   const creature = gd.getCreature(npc.creature);
   if (creature && isBeast(npc)) {
     npc.careerPath = [];
@@ -949,8 +1007,11 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.money = "";
     return;
   }
-  const plan = buildCareerPlan({ professions, onlyProfessions: vampireProfessions(npc) }, npc.archetype, npc.tier, npc.race, rng);
-  developByXp(npc, plan, rng, deterministic);
+  const exact = !!path?.some((s) => s.profession || s.level != null);
+  const plan = exact
+    ? buildExactPlan(path!, npc.archetype, npc.tier, npc.race, rng)
+    : buildCareerPlan({ professions, onlyProfessions: vampireProfessions(npc) }, npc.archetype, npc.tier, npc.race, rng);
+  developByXp(npc, plan, rng, deterministic, undefined, exact);
   // Rzadkie talenty rasy (Krew Aenariona) - tylko przy losowaniu.
   for (const rt of gd.getSettings().raceTalents ?? []) {
     if (deterministic || creature || rt.race !== npc.race || npc.talents.some((t) => t.name === rt.talent)) continue;
@@ -1075,10 +1136,15 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   // Przemiana: wampir zawsze przeszedl za zycia przez profesje (archetyp wg Linii Krwi).
   const turned = !!bloodline && !!spec.turned && !!findBloodline(bloodline)?.turning;
   let archetype = creature ? creatureArchetype({ ...spec, noArchetype: spec.noArchetype && !turned }, creature, bloodline, rng, det) : pickArchetype(spec, rng);
+  // Ogr wybrany jak rasa: zawsze z profesja, dowolny archetyp (bez wyboru - wg wag stworzenia).
+  if (creature?.asRace && spec.asRace && !archetype) {
+    archetype = spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : (creature.archetypes && weightedKey(creature.archetypes, rng)) || pickArchetype(spec, rng);
+  }
   if (turned && !archetype) archetype = vampireArchetype(bloodline, rng, det) ?? "Wojownik";
   // Bestia moze wystapic ponizej swojego minimum, gdy poziom wybrano recznie (dostaje wtedy cechy negatywne).
   const beastSpec = !!creature && !archetype;
-  const tier = beastSpec && spec.tier ? pickTier(spec, rng) : clampTier(pickTier(spec, rng), creature);
+  // Ogr wybrany jak rasa z poziomem ustawionym recznie - bez podnoszenia do minimum stworzenia.
+  const tier = (beastSpec || (creature?.asRace && archetype)) && spec.tier ? pickTier(spec, rng) : clampTier(pickTier(spec, rng), creature);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
   const beast = !!creature && !archetype;
@@ -1115,7 +1181,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     createdAt: new Date().toISOString()
   };
   npc.rolls = rollAttributes(npc, rng, det);
-  develop(npc, spec.professions, rng, det);
+  develop(npc, spec.professions, rng, det, spec.path);
   rollFeatures(npc, { ...spec, bloodline }, rng, det);
   // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
   rollTreasures(npc, rng, det);
@@ -1156,10 +1222,10 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
  * Buduje od nowa rozwoj BN po zmianie rasy, archetypu, poziomu lub profesji
  * w edytorze. Rzuty, imie i cechy stworzen zostaja.
  */
-export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng): Npc {
+export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng, path?: PathStep[]): Npc {
   const next: Npc = structuredClone(npc);
-  if (!isBeast(next)) next.tier = clampTier(next.tier, gd.getCreature(next.creature));
-  develop(next, professions, rng, false);
+  if (!isBeast(next) && !gd.getCreature(next.creature)?.asRace) next.tier = clampTier(next.tier, gd.getCreature(next.creature));
+  develop(next, professions, rng, false, path);
   rollTreasures(next, rng);
   finish(next, rng, false);
   return next;

@@ -619,6 +619,8 @@ export interface CreatureDef {
   unique?: boolean;
   /** Nadpisuje rodzine: istota rozumna, moze miec profesje (wampir, ogr). */
   civilized?: boolean;
+  /** Wybierana jak rasa ("Ludzie i rasy"): zawsze z archetypem, dowolny archetyp i profesje ludzi (ogr). */
+  asRace?: boolean;
   /** Dozwolone archetypy (z wagami przy losowaniu); brak = wszystkie. */
   archetypes?: Record<string, number>;
   /** Szansa, ze BN tego stworzenia bez wybranego archetypu dostanie profesje (wampir 1, ogr 0,5). */

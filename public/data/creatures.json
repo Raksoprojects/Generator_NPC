@@ -3257,6 +3257,7 @@
   },
   {
    "name": "Ogr",
+   "asRace": true,
    "source": "Podręcznik podstawowy",
    "page": 312,
    "stats": {
