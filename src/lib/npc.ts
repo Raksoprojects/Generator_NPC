@@ -120,8 +120,10 @@ export interface NpcView {
   wounds: number;
   movement: number;
   heroTraits: string[];
-  career: { profession: string; level: number; title: string; status: string; professionName: string } | null;
+  career: { profession: string; level: number; title: string; status: string; professionName: string; source: string } | null;
   careerPathText: string;
+  /** Kolejne poziomy sciezki: tytul, a po najechaniu - profesja i poziom. */
+  careerSteps: { title: string; professionName: string; level: number }[];
   /** Czarowanie: Splatanie i Rzucanie z premiami PS, zmiana PZ, reguly tradycji. */
   casting: CastingView | null;
 }
@@ -463,7 +465,13 @@ export function computeNpc(input: Npc): NpcView {
   const keyStats = keyStatsOf(skills, chars);
 
   const last = npc.careerPath[npc.careerPath.length - 1];
-  const career = last ? { ...last, ...careerLevelInfo(last.profession, last.level, npc.sex) } : null;
+  const career = last ? { ...last, ...careerLevelInfo(last.profession, last.level, npc.sex), source: gd.professionSourceFull(last.profession) } : null;
+  const careerSteps = npc.careerPath
+    .filter((s) => !s.extra)
+    .map((s) => {
+      const info = careerLevelInfo(s.profession, s.level, npc.sex);
+      return { title: info.title, professionName: info.professionName, level: s.level };
+    });
 
   return {
     chars,
@@ -485,13 +493,14 @@ export function computeNpc(input: Npc): NpcView {
     heroTraits,
     career,
     careerPathText: careerPathText(npc),
+    careerSteps,
     casting: castingSummary(npc, skills, chars)
   };
 }
 
 /**
  * Walka (najlepsza Broń Biała, bez niej WW), Strzelanie (najlepsza Broń Zasięgowa), Unik,
- * Odporność i Opanowanie - umiejetnosci podstawowe bez rozwiniec testuje sie na samej cesze (PG s. 117) -
+ * Odporność, Opanowanie i Percepcja - umiejetnosci podstawowe bez rozwiniec testuje sie na samej cesze (PG s. 117) -
  * oraz 4 najlepsze pozostale umiejetnosci.
  */
 function keyStatsOf(skills: SkillView[], chars: Record<Attribute, CharView>): NpcView["keyStats"] {
@@ -502,7 +511,7 @@ function keyStatsOf(skills: SkillView[], chars: Record<Attribute, CharView>): Np
   else if (!chars.WW.absent) defence.push({ name: "Broń Biała (Podstawowa)", value: chars.WW.total, untrained: true });
   const ranged = best("Broń Zasięgowa");
   if (ranged) defence.push({ name: ranged.name, value: ranged.total });
-  for (const [name, code] of [["Unik", "Zw"], ["Odporność", "Wt"], ["Opanowanie", "SW"]] as const) {
+  for (const [name, code] of [["Unik", "Zw"], ["Odporność", "Wt"], ["Opanowanie", "SW"], ["Percepcja", "I"]] as const) {
     const own = skills.find((s) => s.name === name);
     if (own) defence.push({ name, value: own.total });
     else if (!chars[code].absent) defence.push({ name, value: chars[code].total, untrained: true });
@@ -546,13 +555,14 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   const title = npc.label ? `${npc.name} (${npc.label})` : npc.name;
   lines.push(`${title} — ${npc.race}${npc.archetype ? `, ${npc.archetype}` : ""} (${tier})`);
   if (view.career) {
-    lines.push(`Profesja: ${view.career.title} (${view.career.professionName} ${view.career.level}, ${view.career.status})`);
+    lines.push(`Profesja: ${view.career.title} (${view.career.professionName} ${view.career.level}, ${view.career.status})${view.career.source ? ` — ${view.career.source}` : ""}`);
     if (npc.careerPath.length > 1) lines.push(`Ścieżka: ${view.careerPathText}`);
   }
   const stat = (c: Attribute) => (view.chars[c].absent ? "–" : String(view.chars[c].total));
   lines.push(ATTRIBUTES.map((c) => `${c} ${stat(c)}`).join(" | ") + ` | Żyw ${view.wounds} | Sz ${view.movement}`);
   const key = (k: KeyStat) => `${k.name} ${k.value}`;
-  lines.push(`Kluczowe: ${[...view.keyStats.defence, ...view.keyStats.best].map(key).join(", ")}`);
+  lines.push(`Kluczowe: ${view.keyStats.defence.map(key).join(", ")}`);
+  if (view.keyStats.best.length) lines.push(`Najlepsze umiejętności: ${view.keyStats.best.map(key).join(", ")}`);
   for (const w of view.weapons) {
     const extra = [
       w.craftLabel ?? "",
