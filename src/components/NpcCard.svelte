@@ -1,5 +1,6 @@
 <script lang="ts">
   import Autocomplete from "./Autocomplete.svelte";
+  import PathEditor from "./PathEditor.svelte";
   import Modal from "./Modal.svelte";
   import RichText from "./RichText.svelte";
   import { spellBook } from "../lib/magic";
@@ -7,7 +8,7 @@
   import { allArmourNames, allWeaponNames, qualityDescription } from "../lib/equipment";
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
-  import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc } from "../lib/generator";
+  import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc, type PathStep } from "../lib/generator";
   import { beastTier } from "../lib/creatures";
   import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { findMagicItem } from "../lib/magicItems";
@@ -140,14 +141,22 @@
 
   // --- Edycja: przebudowa rozwoju ---
 
-  let mainProfession = $state("");
-  let prevProfession = $state("");
+  /** Sciezka do edycji: kolejne profesje z osiagnietym poziomem (przebudowa odtwarza ja dokladnie). */
+  let path = $state<PathStep[]>([{ profession: "", level: null }]);
+
+  function currentPath(): PathStep[] {
+    const out: PathStep[] = [];
+    for (const s of npc.careerPath.filter((x) => !x.extra)) {
+      const last = out[out.length - 1];
+      if (last?.profession === s.profession) last.level = Math.max(last.level ?? 0, s.level);
+      else out.push({ profession: s.profession, level: s.level });
+    }
+    return out.length ? out : [{ profession: "", level: null }];
+  }
 
   $effect(() => {
     if (!editing) return;
-    const careers = [...new Set(npc.careerPath.map((s) => s.profession))];
-    mainProfession = careers[careers.length - 1] ?? "";
-    prevProfession = careers.length > 1 ? careers[0] : "";
+    path = currentPath();
     xpEdit = npc.xpSpec?.budget ?? npc.xpSpec?.bonus ?? null;
     xpEditMode = npc.xpSpec?.budget != null ? "zamiast" : "dodaj";
   });
@@ -161,12 +170,31 @@
   );
 
   function rebuild() {
-    const profs = [prevProfession, mainProfession].filter(Boolean);
     const next = snapshot();
     const v = Math.round(Number(xpEdit));
     if (xpEdit == null || !Number.isFinite(v) || v <= 0) delete next.xpSpec;
     else next.xpSpec = xpEditMode === "zamiast" ? { budget: v } : { bonus: v };
-    npc = rebuildDevelopment(next, profs.length ? profs : undefined);
+    const steps = $state.snapshot(path) as PathStep[];
+    const main = steps[steps.length - 1]?.profession;
+    // Poziom w ktoryms kroku albo kilka krokow - dokladna sciezka; sama obecna profesja bez poziomu - jak dotad.
+    const exact = steps.some((s) => s.level != null) || (steps.length > 1 && steps.some((s) => s.profession));
+    npc = exact ? rebuildDevelopment(next, undefined, undefined, steps) : rebuildDevelopment(next, main ? [main] : undefined);
+  }
+
+  /** Sciezka podana recznie kosztuje wiecej niz budzet PD. */
+  let xpDeficit = $derived(npc.xp && npc.xp.spent > npc.xp.budget ? npc.xp.spent - npc.xp.budget : 0);
+
+  /** Budzet = tyle, ile sciezka faktycznie kosztowala (BN jest juz rozwiniety - nic sie nie przelicza). */
+  function addMissingXp() {
+    if (!npc.xp) return;
+    npc.xpSpec = { budget: npc.xp.spent };
+    npc.xp = { ...npc.xp, budget: npc.xp.spent };
+  }
+
+  /** Te same profesje, ale poziomy wg posiadanych PD (zwykle reguly generatora). */
+  function fitPathToXp() {
+    const profs = [...new Set(npc.careerPath.map((s) => s.profession))];
+    npc = rebuildDevelopment(snapshot(), profs.length ? profs : undefined);
   }
 
   // --- Edycja: umiejetnosci, talenty, bron, zaklecia, cechy ---
@@ -407,9 +435,12 @@
         <p class="career">
           <b>{view.career.title}</b>
           <span class="text-dim">({view.career.professionName} {view.career.level}{view.career.status ? `, ${view.career.status}` : ""})</span>
+          {#if view.career.source}<span class="text-dim small source">· {view.career.source}</span>{/if}
         </p>
         {#if npc.careerPath.length > 1}
-          <p class="path text-dim">{view.careerPathText}</p>
+          <p class="path text-dim">
+            {#each view.careerSteps as s, i (i)}{#if i}{" → "}{/if}<span class="step" title="{s.professionName}, poziom {s.level}">{s.title}</span>{/each}
+          </p>
         {/if}
       {/if}
     </div>
@@ -455,19 +486,34 @@
     </p>
   {/if}
 
-  <!-- Najwazniejsze testy: walka, obrona, odpornosc i najlepsze umiejetnosci -->
+  {#if xpDeficit}
+    <div class="xp-deficit" role="alert">
+      <span>Ścieżka kosztuje <b>{npc.xp?.spent} PD</b>, a budżet to {npc.xp?.budget} PD — brakuje <b>{xpDeficit} PD</b>.</span>
+      <span class="actions">
+        <button class="btn-sm primary" onclick={addMissingXp} title="Ustaw budżet na koszt ścieżki (minimum potrzebnego doświadczenia)">Dodaj brakujące PD</button>
+        <button class="btn-sm" onclick={fitPathToXp} title="Te same profesje, poziomy wg posiadanych PD">Dopasuj ścieżkę do PD</button>
+        <button class="btn-sm ghost" onclick={() => (editing = true)}>Zmień ścieżkę</button>
+      </span>
+    </div>
+  {/if}
+
+  <!-- Najwazniejsze testy: walka, obrona, odpornosc; w drugiej linii najlepsze umiejetnosci -->
   {#if view.keyStats.defence.length || view.keyStats.best.length}
-    <p class="key-stats">
-      {#each view.keyStats.defence as k (k.name)}
-        <span class="key-stat" class:untrained={k.untrained} title={k.untrained ? "Umiejętność podstawowa bez rozwinięć — test na samej cesze (PG s. 117)" : undefined}>{k.name} <b>{k.value}</b></span>
-      {/each}
-      {#if view.keyStats.best.length}
-        <span class="text-dim sep">najlepsze:</span>
-        {#each view.keyStats.best as k (k.name)}
-          <span class="key-stat best">{k.name} <b>{k.value}</b></span>
+    <div class="key-stats">
+      <p class="key-line">
+        {#each view.keyStats.defence as k (k.name)}
+          <span class="key-stat" class:untrained={k.untrained} title={k.untrained ? "Umiejętność podstawowa bez rozwinięć — test na samej cesze (PG s. 117)" : undefined}>{k.name} <b>{k.value}</b></span>
         {/each}
+      </p>
+      {#if view.keyStats.best.length}
+        <p class="key-line">
+          <span class="text-dim sep">najlepsze:</span>
+          {#each view.keyStats.best as k (k.name)}
+            <span class="key-stat best">{k.name} <b>{k.value}</b></span>
+          {/each}
+        </p>
       {/if}
-    </p>
+    </div>
   {/if}
 
   <!-- Walka: bron i redukcja obrazen -->
@@ -770,12 +816,6 @@
           </select>
         </label>
         {#if !beast}
-          <label>Profesja obecna
-            <select bind:value={mainProfession}>
-              <option value="">— losowo —</option>
-              {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
-            </select>
-          </label>
           <label title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
             <span class="xp-row">
               <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpEdit} />
@@ -785,14 +825,14 @@
               </select>
             </span>
           </label>
-          <label>Profesja poprzednia
-            <select bind:value={prevProfession}>
-              <option value="">— brak / losowo —</option>
-              {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
-            </select>
-          </label>
         {/if}
       </div>
+      {#if !beast}
+        <div class="path-edit">
+          <span class="text-dim">Ścieżka profesji</span>
+          <PathEditor bind:path professions={professionOptions} sex={npc.sex} />
+        </div>
+      {/if}
       <div class="row">
         <button class="btn-sm primary" onclick={rebuild}>Przebuduj rozwój</button>
         <span class="hint text-dim">Nowe rozwinięcia, umiejętności, talenty, broń i zaklęcia. Rzuty, imię i cechy stworzeń zostają.</span>
@@ -1118,12 +1158,48 @@
     font-size: var(--fs-sm);
   }
 
-  .key-stats {
+  .xp-deficit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-sm);
+    background: var(--bg-panel-2);
+  }
+
+  .xp-deficit .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .path .step {
+    cursor: help;
+  }
+
+  .path-edit {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+  }
+
+  .key-line {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: var(--space-1) var(--space-3);
+  }
+
+  .key-stats {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     padding: var(--space-1) var(--space-3);
     border-left: 3px solid var(--accent);
     background: var(--bg-panel-2);

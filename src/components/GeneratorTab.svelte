@@ -2,7 +2,8 @@
   import NpcCard from "./NpcCard.svelte";
   import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
-  import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec } from "../lib/generator";
+  import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
+  import PathEditor from "./PathEditor.svelte";
   import { TIER_IDS, type Npc, type Sex, type TierId } from "../lib/types";
 
   type Mode = "losowy" | "polLosowy" | "wlasny";
@@ -75,8 +76,11 @@
   let race = $state("");
   let sex = $state<Sex | "">("");
   let name = $state("");
-  let mainProfession = $state("");
-  let prevProfession = $state("");
+  /** Sciezka profesji: kroki po kolei, ostatni = obecna; poziom null = auto. */
+  let path = $state<PathStep[]>([{ profession: "", level: null }]);
+  /** Ogr i inne stworzenia wybierane jak rasa. */
+  const raceLike = gd.raceLikeCreatures();
+  let raceIsCreature = $derived(raceLike.includes(race));
   let chosenTraits = $state<string[]>([]);
   let randomTraits = $state(true);
   let commander = $state(false);
@@ -121,23 +125,27 @@
     if (!archetype) archetype = archetypes[0];
     if (!tier) tier = "slaby";
     if (!sex) sex = "M";
-    if (!race || !racesForArchetype(archetype).includes(race)) race = racesForArchetype(archetype)[0] ?? "Człowiek";
+    if (!race || (!racesForArchetype(archetype).includes(race) && !raceLike.includes(race))) race = racesForArchetype(archetype)[0] ?? "Człowiek";
     randomTraits = false;
   });
 
   let allowedRaces = $derived(archetype ? racesForArchetype(archetype) : gd.allRaceNames());
 
+  /** Ogr korzysta z profesji ludzi. */
+  let professionRace = $derived(raceIsCreature ? "Człowiek" : race);
+
   let professionOptions = $derived.by(() => {
     const arch = archetype ? gd.getArchetype(archetype) : undefined;
     const names = arch ? Object.keys(arch.professions) : gd.allProfessionNames();
-    return names.filter((p) => gd.getProfession(p) && (!race || gd.professionAllowsRace(p, race)));
+    return names.filter((p) => gd.getProfession(p) && (!professionRace || gd.professionAllowsRace(p, professionRace)));
   });
 
   let allProfessions = $derived(
-    gd.allProfessionNames().filter((p) => !race || gd.professionAllowsRace(p, race))
+    gd.allProfessionNames().filter((p) => !professionRace || gd.professionAllowsRace(p, professionRace))
   );
 
-  let tierAllowsTwo = $derived(!tier || (gd.getTier(tier as TierId)?.maxCareers ?? 1) > 1);
+  /** Najpierw profesje archetypu, potem pozostale. */
+  let pathOptions = $derived([...professionOptions, ...allProfessions.filter((p) => !professionOptions.includes(p))]);
 
   function toggleTrait(t: string) {
     chosenTraits = chosenTraits.includes(t) ? chosenTraits.filter((x) => x !== t) : [...chosenTraits, t];
@@ -164,14 +172,18 @@
       };
     }
     if (mode === "losowy") return {};
-    const professions = [prevProfession, mainProfession].filter(Boolean);
+    // Poziom podany w ktoryms kroku albo kilka krokow - dokladna sciezka; sama obecna profesja - jak dotad.
+    const chosen = path.filter((s) => s.profession);
+    const main = path[path.length - 1]?.profession;
+    const exact = path.some((s) => s.level != null) || (path.length > 1 && chosen.length > 0);
     return {
       archetype: archetype || undefined,
       tier: (tier || undefined) as TierId | undefined,
-      race: race || undefined,
+      ...(raceIsCreature ? { creature: race, asRace: true } : { race: race || undefined }),
       sex: (sex || undefined) as Sex | undefined,
       name: name.trim() || undefined,
-      professions: mainProfession ? professions : undefined,
+      professions: !exact && main ? [main] : undefined,
+      path: exact ? $state.snapshot(path) : undefined,
       traits: chosenTraits,
       randomTraits,
       commander,
@@ -194,7 +206,8 @@
 
   function resetForm() {
     archetype = tier = race = sex = creature = creatureGroup = bloodline = "";
-    name = mainProfession = prevProfession = "";
+    name = "";
+    path = [{ profession: "", level: null }];
     chosenTraits = [];
     randomTraits = true;
     commander = false;
@@ -320,6 +333,11 @@
           <select bind:value={race}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each gd.allRaceNames() as r (r)}<option value={r} disabled={!allowedRaces.includes(r)}>{r}</option>{/each}
+            {#if raceLike.length}
+              <optgroup label="Inne rasy (ze Stworzeń)">
+                {#each raceLike as r (r)}<option value={r}>{r}</option>{/each}
+              </optgroup>
+            {/if}
           </select>
         </label>
         <label>Płeć
@@ -332,25 +350,10 @@
         <label>Imię
           <input type="text" placeholder="losowe" bind:value={name} />
         </label>
-        <label>Profesja obecna
-          <select bind:value={mainProfession}>
-            <option value="">— wg archetypu —</option>
-            {#each professionOptions as p (p)}<option value={p}>{p}</option>{/each}
-            {#if professionOptions.length < allProfessions.length}
-              <optgroup label="Inne profesje">
-                {#each allProfessions.filter((p) => !professionOptions.includes(p)) as p (p)}<option value={p}>{p}</option>{/each}
-              </optgroup>
-            {/if}
-          </select>
-        </label>
-        {#if tierAllowsTwo}
-          <label>Profesja poprzednia
-            <select bind:value={prevProfession} disabled={!mainProfession}>
-              <option value="">— losowo, jeśli potrzebna —</option>
-              {#each allProfessions as p (p)}<option value={p}>{p}</option>{/each}
-            </select>
-          </label>
-        {/if}
+      </div>
+      <div class="path-box">
+        <span class="lbl">Ścieżka profesji</span>
+        <PathEditor bind:path professions={pathOptions} sex={(sex || "M") as Sex} />
       </div>
     {/if}
 
@@ -398,6 +401,15 @@
 </section>
 
 <style>
+  .path-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .path-box .lbl {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
   .xp-field {
     grid-column: span 2;
   }
