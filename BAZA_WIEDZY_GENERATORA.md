@@ -164,6 +164,9 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
 
    Rzuca się 2k10 dla wszystkich cech, a najwyższe wyniki przypisuje do kluczowych cech archetypu (w ich kolejności); resztę losowo [dom]. Nie ma minimum rzutu, więc trafiają się i słabsi, i silniejsi BN. Stworzenia tak samo dla cech 2k10.
 4. **Plan profesji** (liczba profesji wg tabeli 1.1, ostatnia profesja najwyżej). Specjalizacje „dowolne” rozwiązuje się raz na profesję.
+   - **Dokładna ścieżka (edycja pogłębiona):** w generatorze (tryb pół-losowy i własny) i w edycji karty podaje się profesje po kolei z poziomem docelowym; „auto” = program dobiera sam wg PD, pusta obecna profesja = wg archetypu. Podana ścieżka jest realizowana w całości (każdy poziom skompletowany wg zasad, awanse 100/200 PD), nawet ponad budżet. Brak PD karta pokazuje jako ramkę z wyborem: **Dodaj brakujące PD** (budżet = koszt ścieżki, BN się nie zmienia), **Dopasuj ścieżkę do PD** (te same profesje, poziomy wg budżetu) albo **Zmień ścieżkę**. Bez podanych poziomów (sama obecna profesja) — zachowanie jak dotąd.
+   - **Ogr jak rasa:** do wyboru w „Ludzie i rasy” (pole `asRace` w creatures.json): zawsze z profesją, dowolny archetyp, profesje ludzi, poziom ustawiony ręcznie nie jest podnoszony do minimum stworzenia.
+   - Profesje na listach wyboru mają dopisek źródła (Podstawka, Wiatry Magii, PG: Wysokie Elfy…), a obecna profesja na karcie — źródło ze stroną. Po najechaniu na tytuł w ścieżce awansu karta pokazuje profesję i poziom.
 5. **Tworzenie postaci i rozwój za PD** (zasady 1.1): umiejętności i talenty rasowe, 1. poziom profesji, potem kompletowanie poziomów, awanse i swobodny rozwój wg priorytetów archetypu.
 6. **Rzadkie talenty rasowe [dom]:** np. Krew Aenariona u wysokich elfów — 1%, Szlachcic 5%.
 7. **Cechy opcjonalne (Cechy Stworzeń) [dom]:** rzut k100 — 1: trzy cechy, 2–5: dwie, 6–20: jedna, 21+: brak. Wybór wg wag archetypu.
@@ -179,7 +182,7 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
     - **Wygląd [PG s. 39–40]:** wiek startowy rasy (człowiek 15+k10, krasnolud 15+10k10, niziołek 15+5k10, elf 30+10k10), wzrost (człowiek 150+4k10 z dorzucaniem przy „10”, krasnolud 130+2k10, niziołek 95+2k10, elf 180+3k10), kolor oczu i włosów 2k10 (elfy: dwa rzuty na oczy). [dom]: wiek rośnie z poziomem BN (lata × indeks poziomu, ×3 u krasnoludów, ×5/3 u niziołków, ×7 u elfów); po średnim wieku rośnie szansa na siwe włosy (elfy nie siwieją).
     - **Cechy charakteru, manieryzm, znak szczególny [dom]:** EMG s. 16 każe korzystać z list spoza podręcznika. Dwie cechy z różnych par przeciwieństw (forma wg płci), jeden manieryzm/dziwactwo, jeden znak szczególny (brody, wąsy, łysina tylko u mężczyzn; bez ospy i odstających uszu u elfów).
     - Blokada „Imię i osobowość” chroni je przy ponownym losowaniu. Na karcie: 🎲 losuje od nowa, edycja pozwala wpisać własne.
-14. **Karta BN — kolejność:** cechy; linia kluczowych testów (najlepsza Broń Biała albo WW, najlepsza Broń Zasięgowa, Unik, Odporność, Opanowanie — bez rozwinięć test na samej cesze [PG s. 117] — i 4 najlepsze umiejętności); walka (broń z Zaletami i Wadami, pancerz, redukcja obrażeń); umiejętności, talenty, cechy, zaklęcia; osobowość i wygląd; na końcu wyposażenie z pieniędzmi.
+14. **Karta BN — kolejność:** cechy; linia kluczowych testów (najlepsza Broń Biała albo WW, najlepsza Broń Zasięgowa, Unik, Odporność, Opanowanie, Percepcja — bez rozwinięć test na samej cesze [PG s. 117]; w drugiej linii 4 najlepsze pozostałe umiejętności); walka (broń z Zaletami i Wadami, pancerz, redukcja obrażeń); umiejętności, talenty, cechy, zaklęcia; osobowość i wygląd; na końcu wyposażenie z pieniędzmi.
 
 ---
 
