@@ -298,7 +298,7 @@ describe("rozwoj bestii", () => {
     }
     expect(generateNpc({ creature: "Ogr", archetype: "Kapłan", tier: "sredni" }, seedRng(1)).archetype).toBe("");
     for (let seed = 1; seed <= 40; seed++) {
-      expect(gd.getCreature(generateNpc({ creatureGroup: "Ludy" }, seedRng(seed)).creature)!.unique).toBeFalsy();
+      expect(gd.getCreature(generateNpc({ creatureGroup: "Potwory" }, seedRng(seed)).creature)!.unique).toBeFalsy();
     }
   });
 

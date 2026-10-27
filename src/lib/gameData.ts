@@ -448,6 +448,11 @@ export function getCreatures(): CreatureDef[] {
   return data().creatures.creatures;
 }
 
+/** Stworzenia do wyboru w Stworzeniach - bez ras ze Stworzen (ogr jest tylko w Ludzie i rasy). */
+export function bestiaryCreatures(): CreatureDef[] {
+  return getCreatures().filter((c) => !c.asRace);
+}
+
 /** Cecha z bloku stworzenia z rozstrzygnieta alternatywa ("Rzucanie Czarów (Śmierci albo Cieni)" -> wybrana). */
 export function resolvedBookTrait(choices: Record<string, string> | undefined, trait: string): string {
   return choices?.[`cecha|${trait}`] ?? trait;
@@ -460,10 +465,10 @@ export function creatureGroupKey(c: CreatureDef): string {
   return c.subgroup ? `${c.group}${GROUP_SEP}${c.subgroup}` : c.group;
 }
 
-/** Grupy stworzen z podgrupami, w kolejnosci settings.groupOrder (reszta wg pliku). */
+/** Grupy stworzen z podgrupami, w kolejnosci settings.groupOrder (reszta wg pliku); grupy z samymi unikatami pomijane. */
 export function creatureGroupTree(): { group: string; subgroups: string[] }[] {
   const tree = new Map<string, Set<string>>();
-  for (const c of getCreatures()) {
+  for (const c of bestiaryCreatures().filter((x) => !x.unique)) {
     const subs = tree.get(c.group) ?? new Set<string>();
     if (c.subgroup) subs.add(c.subgroup);
     tree.set(c.group, subs);
@@ -477,7 +482,7 @@ export function creatureGroupTree(): { group: string; subgroups: string[] }[] {
 
 /** Stworzenia grupy ("Chaos") albo podgrupy ("Chaos › Zwierzoludzie"). */
 export function creaturesInGroup(key: string): CreatureDef[] {
-  return getCreatures().filter((c) => c.group === key || creatureGroupKey(c) === key);
+  return bestiaryCreatures().filter((c) => c.group === key || creatureGroupKey(c) === key);
 }
 
 export function getCreatureFamilies(): CreatureFamiliesData {

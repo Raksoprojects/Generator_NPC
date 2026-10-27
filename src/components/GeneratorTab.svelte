@@ -20,12 +20,12 @@
   const groupTree = gd.creatureGroupTree();
   const bloodlines = gd.getVampires()?.bloodlines.map((b) => b.name) ?? [];
   const isVampireName = (name: string) => !!gd.getVampires()?.creatures.includes(name);
-  const typicalCreatures = gd.getCreatures().filter((c) => !c.unique).map((c) => c.name);
+  const typicalCreatures = gd.bestiaryCreatures().filter((c) => !c.unique).map((c) => c.name);
 
   /** Stworzenia wybranej grupy, pogrupowane wg podgrup (w kolejnosci drzewa grup). */
   let creatureGroups = $derived.by(() => {
     // Unikatowe postacie (Olbrzym szpieg, nazwane bestie) nie trafiaja do generatora - tylko rodzaje stworzen.
-    const pool = (creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.getCreatures()).filter((c) => !c.unique);
+    const pool = (creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.bestiaryCreatures()).filter((c) => !c.unique);
     const out: Record<string, string[]> = {};
     for (const { group, subgroups } of groupTree) {
       for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {

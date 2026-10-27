@@ -465,6 +465,7 @@ describe("dokladna sciezka (edycja poglebiona)", () => {
     const any = generateNpc({ creature: "Ogr", asRace: true, tier: "sredni" }, seedRng(7));
     expect(any.archetype).not.toBe("");
     expect(gd.raceLikeCreatures()).toContain("Ogr");
+    expect(gd.bestiaryCreatures().some((c) => c.name === "Ogr")).toBe(false);
     // Poziom ustawiony recznie nie jest podnoszony do minimum ogra (Zwykły).
     expect(generateNpc({ creature: "Ogr", asRace: true, archetype: "Wojownik", tier: "slaby" }, seedRng(1)).tier).toBe("slaby");
   });

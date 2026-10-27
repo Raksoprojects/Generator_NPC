@@ -34,7 +34,7 @@
     const out: Record<string, string[]> = {};
     for (const { group, subgroups } of gd.creatureGroupTree()) {
       for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {
-        const names = gd.getCreatures().filter((c) => gd.creatureGroupKey(c) === key && !c.unique).map((c) => c.name);
+        const names = gd.bestiaryCreatures().filter((c) => gd.creatureGroupKey(c) === key && !c.unique).map((c) => c.name);
         if (names.length) out[key] = names.sort((a, b) => a.localeCompare(b, "pl"));
       }
     }
