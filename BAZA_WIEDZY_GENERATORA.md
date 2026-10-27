@@ -165,7 +165,7 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
    Rzuca się 2k10 dla wszystkich cech, a najwyższe wyniki przypisuje do kluczowych cech archetypu (w ich kolejności); resztę losowo [dom]. Nie ma minimum rzutu, więc trafiają się i słabsi, i silniejsi BN. Stworzenia tak samo dla cech 2k10.
 4. **Plan profesji** (liczba profesji wg tabeli 1.1, ostatnia profesja najwyżej). Specjalizacje „dowolne” rozwiązuje się raz na profesję.
    - **Dokładna ścieżka (edycja pogłębiona):** w generatorze (tryb pół-losowy i własny) i w edycji karty podaje się profesje po kolei z poziomem docelowym; „auto” = program dobiera sam wg PD, pusta obecna profesja = wg archetypu. Podana ścieżka jest realizowana w całości (każdy poziom skompletowany wg zasad, awanse 100/200 PD), nawet ponad budżet. Brak PD karta pokazuje jako ramkę z wyborem: **Dodaj brakujące PD** (budżet = koszt ścieżki, BN się nie zmienia), **Dopasuj ścieżkę do PD** (te same profesje, poziomy wg budżetu) albo **Zmień ścieżkę**. Bez podanych poziomów (sama obecna profesja) — zachowanie jak dotąd.
-   - **Ogr jak rasa:** do wyboru w „Ludzie i rasy” (pole `asRace` w creatures.json): zawsze z profesją, dowolny archetyp, profesje ludzi, poziom ustawiony ręcznie nie jest podnoszony do minimum stworzenia.
+   - **Ogr jak rasa:** do wyboru w „Ludzie i rasy” (pole `asRace` w creatures.json): zawsze z profesją, dowolny archetyp, profesje ludzi, poziom ustawiony ręcznie nie jest podnoszony do minimum stworzenia. Nie występuje w zakładce Stworzenia ani w losowaniu z grup stworzeń (grupa Ludy, w której został sam unikat, znika z listy).
    - Profesje na listach wyboru mają dopisek źródła (Podstawka, Wiatry Magii, PG: Wysokie Elfy…), a obecna profesja na karcie — źródło ze stroną. Po najechaniu na tytuł w ścieżce awansu karta pokazuje profesję i poziom.
 5. **Tworzenie postaci i rozwój za PD** (zasady 1.1): umiejętności i talenty rasowe, 1. poziom profesji, potem kompletowanie poziomów, awanse i swobodny rozwój wg priorytetów archetypu.
 6. **Rzadkie talenty rasowe [dom]:** np. Krew Aenariona u wysokich elfów — 1%, Szlachcic 5%.
@@ -189,7 +189,7 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
 ## 3. Stworzenia
 
 - **Bestie** (bez archetypu) rozwijają się wg tabeli 1.2.
-- **Stworzenia rozumne** (cywilizowane: gobliny, orki, zwierzoludzie, wampiry, ogry…) mogą mieć archetyp i przechodzić profesje dostępne dla ludzi.
+- **Stworzenia rozumne** (cywilizowane: gobliny, orki, zwierzoludzie, wampiry…) mogą mieć archetyp i przechodzić profesje dostępne dla ludzi.
   - Ogry dostają profesję w ~50% przypadków i tylko proste: Wojownik 3, Oprych 3, Strażnik 1, Zwiadowca 1, Chłop 1, Strzelec 0,5.
   - Wampiry mają profesję zawsze — wg linii krwi (rozdział 5).
 - Stworzenia z profesją rozwijają się dokładnie jak rasy (tabela 1.1), bez profili bohaterów — chyba że są wyjątkową jednostką.
