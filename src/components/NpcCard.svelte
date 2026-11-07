@@ -12,11 +12,23 @@
   import { beastTier } from "../lib/creatures";
   import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { findMagicItem } from "../lib/magicItems";
-  import { craftDescription } from "../lib/treasures";
+  import {
+    chaosPropertyNames,
+    craftDescription,
+    createMagicItem,
+    daemonNames,
+    editableQualities,
+    findTreasure,
+    potionNames,
+    rerollMagicItem,
+    runesFor,
+    toggleCraft,
+    treasureTemplates
+  } from "../lib/treasures";
   import { armourLine, computeNpc, effectiveCn, normalizeNpc, npcToText, weaponLabel } from "../lib/npc";
   import { ATTRIBUTES, ATTRIBUTE_NAMES } from "../lib/rules";
-  import { personaLines, rollPersona } from "../lib/persona";
-  import { TIER_IDS, type MutationSeverity, type Npc, type NpcMutation, type NpcSection, type SpellDef, type TierId } from "../lib/types";
+  import { personaLines, regenderPersona, rerollPersonaPart, rollPersona, type PersonaPart } from "../lib/persona";
+  import { TIER_IDS, type MutationSeverity, type Npc, type NpcMagicItem, type NpcMutation, type NpcSection, type Sex, type SpellDef, type TierId } from "../lib/types";
 
   let {
     npc = $bindable(),
@@ -123,6 +135,20 @@
 
   function newName() {
     npc.name = pickName(npc.race, npc.sex, Math.random);
+  }
+
+  /** Jedna czesc osobowosci od nowa (motywacja, cechy, wyglad...). */
+  function newPersonaPart(part: PersonaPart) {
+    npc.persona = rerollPersonaPart(snapshot(), part);
+  }
+
+  /** Zmiana plci: nowe imie i formy osobowosci dla nowej plci (tytuly profesji licza sie same). */
+  function setSex(sex: Sex) {
+    const from = npc.sex;
+    if (sex === from) return;
+    npc.sex = sex;
+    npc.name = pickName(npc.race, sex, Math.random);
+    npc.persona = regenderPersona(snapshot(), from);
   }
 
   function save() {
@@ -250,6 +276,97 @@
     if (!name || npc[list].includes(name)) return;
     npc[list] = [...npc[list], name];
     reset();
+  }
+
+  // --- Edycja: bron, pancerz i przedmioty magiczne ---
+
+  const craftOptions = editableQualities();
+  const craftNames = [...craftOptions.qualities, ...craftOptions.flaws];
+  /** Wpisywana Zaleta/Wada dla kazdej broni/pancerza (klucz: nazwa przedmiotu). */
+  let newCraft = $state<Record<string, string>>({});
+  const weaponTemplates = treasureTemplates(["weapon"]);
+  const armourTemplates = treasureTemplates(["armour"]);
+  const otherTemplates = treasureTemplates(["item", "potion"]);
+  const potions = potionNames();
+  const chaosProps = chaosPropertyNames();
+  const daemons = daemonNames();
+  let newItemTemplate = $state("");
+
+  /** Zaklecie na tym elemencie; pancerz - takze zaklecie calego pancerza. */
+  const magicOn = (base: string, armour = false) => (npc.magicItems ?? []).find((m) => m.base === base || (armour && m.base === "pancerz"));
+
+  function addCraft(item: string) {
+    const name = (newCraft[item] ?? "").trim();
+    if (!name) return;
+    toggleCraft(npc, item, name, true);
+    newCraft[item] = "";
+  }
+
+  /** Inna bron/pancerz w miejsce obecnego - jakosc wykonania i zaklecie przechodza na nowy. */
+  function swapItem(list: "weapons" | "armour", i: number, to: string) {
+    const from = npc[list][i];
+    if (!to || to === from) return;
+    npc[list][i] = to;
+    if (npc.craft?.[from] && !npc[list].includes(from)) {
+      npc.craft[to] = npc.craft[from];
+      delete npc.craft[from];
+    }
+    for (const m of npc.magicItems ?? []) if (m.base === from) m.base = to;
+  }
+
+  function removeItem(list: "weapons" | "armour", i: number) {
+    const name = npc[list][i];
+    npc[list].splice(i, 1);
+    if (npc[list].includes(name)) return;
+    if (npc.craft) delete npc.craft[name];
+    npc.magicItems = (npc.magicItems ?? []).filter((m) => m.base !== name);
+  }
+
+  /** Zaklina wskazana bron/pancerz wybranym szablonem (zastepuje dotychczasowe zaklecie). */
+  function enchant(base: string, template: string, armour = false) {
+    if (!template) return;
+    const next = snapshot();
+    next.magicItems = (next.magicItems ?? []).filter((m) => m.base !== base && !(armour && m.base === "pancerz"));
+    const item = createMagicItem(next, template, base, Math.random);
+    if (!item) return;
+    next.magicItems.push(item);
+    npc.weapons = next.weapons;
+    npc.craft = next.craft;
+    npc.magicItems = next.magicItems;
+    // Zbroja z gromrilu itp. - material na metalowych elementach.
+    npc.armour = next.armour;
+  }
+
+  function disenchant(base: string, armour = false) {
+    const m = magicOn(base, armour);
+    npc.magicItems = (npc.magicItems ?? []).filter((x) => x !== m);
+  }
+
+  function addMagicItem() {
+    if (!newItemTemplate) return;
+    const next = snapshot();
+    const item = createMagicItem(next, newItemTemplate, undefined, Math.random);
+    if (item) {
+      npc.magicItems = [...(next.magicItems ?? []), item];
+      npc.weapons = next.weapons;
+      npc.craft = next.craft;
+    }
+    newItemTemplate = "";
+  }
+
+  function updateItem(i: number, patch: Partial<NpcMagicItem>) {
+    const items = [...(npc.magicItems ?? [])];
+    const next = { ...items[i], ...patch };
+    for (const k of ["runes", "properties"] as const) if (next[k] && !next[k]!.length) delete next[k];
+    if (!next.daemon) delete next.daemon;
+    items[i] = next;
+    npc.magicItems = items;
+  }
+
+  function rerollItem(i: number) {
+    const items = [...(npc.magicItems ?? [])];
+    items[i] = rerollMagicItem(snapshot(), $state.snapshot(items[i]) as NpcMagicItem, Math.random);
+    npc.magicItems = items;
   }
 
   function addMutation() {
@@ -393,6 +510,10 @@
     bookLore = "";
   }
 </script>
+
+{#snippet dice(part: PersonaPart)}
+  <button class="btn-sm ghost dice" title={part === "look" ? "Wylosuj wiek, wzrost, oczy i włosy" : "Wylosuj od nowa"} onclick={(e) => (e.preventDefault(), newPersonaPart(part))}>🎲</button>
+{/snippet}
 
 {#snippet infoPanel(key: string)}
   {@const body = infoBody(key)}
@@ -777,11 +898,14 @@
     <!-- Tryb edycji -->
     <section class="block edit-grid">
       {#if !creature}
-        <label>Płeć
-          <select bind:value={npc.sex}>
-            <option value="M">mężczyzna</option>
-            <option value="K">kobieta</option>
-          </select>
+        <label title="Zmiana płci losuje nowe imię i przerabia formy osobowości">Płeć
+          <span class="xp-row">
+            <select value={npc.sex} onchange={(e) => setSex(e.currentTarget.value as Sex)}>
+              <option value="M">mężczyzna</option>
+              <option value="K">kobieta</option>
+            </select>
+            <button class="btn-sm ghost" title="Wylosuj płeć (i imię)" onclick={() => setSex(Math.random() < 0.5 ? "M" : "K")}>🎲</button>
+          </span>
         </label>
       {/if}
       <label>Etykieta
@@ -842,16 +966,37 @@
     <section class="block">
       <h4>Broń i pancerz</h4>
       <div class="edit-list">
-        {#each npc.weapons as w, i (i)}
-          <div class="edit-row">
-            <span class="grow">⚔ {w}</span>
-            <button class="btn-sm ghost" aria-label="Usuń broń" onclick={() => npc.weapons.splice(i, 1)}>✕</button>
-          </div>
-        {/each}
-        {#each npc.armour as a, i (i)}
-          <div class="edit-row">
-            <span class="grow">🛡 {a}</span>
-            <button class="btn-sm ghost" aria-label="Usuń pancerz" onclick={() => npc.armour.splice(i, 1)}>✕</button>
+        {#each [...npc.weapons.map((name, i) => ({ list: "weapons" as const, name, i })), ...npc.armour.map((name, i) => ({ list: "armour" as const, name, i }))] as it (`${it.list}${it.i}`)}
+          {@const weapon = it.list === "weapons"}
+          {@const m = magicOn(it.name, !weapon)}
+          {@const craft = npc.craft?.[it.name]}
+          <div class="item-edit">
+            <div class="edit-row wrap">
+              <span>{weapon ? "⚔" : "🛡"}</span>
+              <select class="grow" value={it.name} onchange={(e) => swapItem(it.list, it.i, e.currentTarget.value)} aria-label={weapon ? "Zamień broń" : "Zamień pancerz"}>
+                {#if !(weapon ? weaponNames : armourNames).includes(it.name)}<option value={it.name}>{it.name}</option>{/if}
+                {#each weapon ? weaponNames : armourNames as n (n)}<option value={n}>{n}</option>{/each}
+              </select>
+              {#if m}
+                <span class="magic-mark">✦ {m.name}</span>
+                <button class="btn-sm ghost" title="Zostaw zwykły przedmiot" onclick={() => disenchant(it.name, !weapon)}>Odczaruj</button>
+              {/if}
+              <select value="" onchange={(e) => (enchant(it.name, e.currentTarget.value, !weapon), (e.currentTarget.value = ""))} aria-label="Zaklnij">
+                <option value="">{m ? "✦ zmień zaklęcie…" : "✦ zaklnij…"}</option>
+                {#each weapon ? weaponTemplates : armourTemplates as t (t.name)}<option value={t.name} title={t.description}>{t.name}{t.replaces && weapon && t.replaces !== it.name ? ` (zamienia na: ${t.replaces})` : ""}</option>{/each}
+              </select>
+              <button class="btn-sm ghost" aria-label={weapon ? "Usuń broń" : "Usuń pancerz"} onclick={() => removeItem(it.list, it.i)}>✕</button>
+            </div>
+            <div class="edit-row wrap craft-edit">
+              {#each craft?.qualities ?? [] as q (q)}
+                <button class="quality craft tap" title="{qualityText(q)} — kliknij, aby usunąć" onclick={() => toggleCraft(npc, it.name, q, false)}>{q} ✕</button>
+              {/each}
+              {#each craft?.flaws ?? [] as q (q)}
+                <button class="quality flaw craft tap" title="{qualityText(q)} — kliknij, aby usunąć" onclick={() => toggleCraft(npc, it.name, q, false)}>{q} ✕</button>
+              {/each}
+              <Autocomplete bind:value={() => newCraft[it.name] ?? "", (v) => (newCraft[it.name] = v)} options={craftNames} placeholder="+ Zaleta / Wada…" />
+              <button class="btn-sm" onclick={() => addCraft(it.name)}>Dodaj</button>
+            </div>
           </div>
         {/each}
       </div>
@@ -866,6 +1011,76 @@
           {#each armourNames as a (a)}<option value={a}>{a}</option>{/each}
         </select>
         <button class="btn-sm" onclick={() => addTo("armour", newArmour, () => (newArmour = ""))}>Dodaj</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h4>Przedmioty magiczne</h4>
+      <div class="edit-list">
+        {#each npc.magicItems ?? [] as m, i (i)}
+          {@const t = findTreasure(m.template)}
+          {@const runes = runesFor(m)}
+          <div class="item-edit">
+            <div class="edit-row wrap">
+              <span class="magic-mark">✦</span>
+              <input class="grow" type="text" value={m.name} onchange={(e) => updateItem(i, { name: e.currentTarget.value.trim() || m.name })} aria-label="Nazwa przedmiotu" />
+              <span class="text-dim small" title={t?.description}>{m.template}{m.base ? ` · na: ${m.base}` : ""}</span>
+              <button class="btn-sm ghost" title="Wylosuj od nowa runy, właściwości, demona albo miksturę" onclick={() => rerollItem(i)}>🎲</button>
+              <button class="btn-sm ghost" aria-label="Usuń przedmiot" onclick={() => (npc.magicItems = (npc.magicItems ?? []).filter((_, j) => j !== i))}>✕</button>
+            </div>
+            {#if t?.kind === "potion" && potions.length}
+              <div class="edit-row wrap">
+                <span class="text-dim small">Mikstura:</span>
+                <select value={m.name} onchange={(e) => updateItem(i, { name: e.currentTarget.value })}>
+                  {#if !potions.includes(m.name)}<option value={m.name}>{m.name}</option>{/if}
+                  {#each potions as p (p)}<option value={p}>{p}</option>{/each}
+                </select>
+              </div>
+            {/if}
+            {#if runes.length}
+              <div class="edit-row wrap">
+                <span class="text-dim small">Runy:</span>
+                {#each m.runes ?? [] as r, j (j)}
+                  <button class="chip tap" title="Kliknij, aby usunąć" onclick={() => updateItem(i, { runes: (m.runes ?? []).filter((_, k) => k !== j) })}>{r} ✕</button>
+                {/each}
+                <select value="" onchange={(e) => (e.currentTarget.value && updateItem(i, { runes: [...(m.runes ?? []), e.currentTarget.value] }), (e.currentTarget.value = ""))} aria-label="Dodaj runę">
+                  <option value="">+ runa…</option>
+                  {#each runes as r (r.name)}<option value={r.name} title={r.effect}>{r.name}{r.master ? " (mistrzowska)" : ""}</option>{/each}
+                </select>
+              </div>
+            {/if}
+            {#if t?.chaos || m.properties?.length}
+              <div class="edit-row wrap">
+                <span class="text-dim small">Właściwości:</span>
+                {#each m.properties ?? [] as p, j (j)}
+                  <button class="chip tap" title="Kliknij, aby usunąć" onclick={() => updateItem(i, { properties: (m.properties ?? []).filter((_, k) => k !== j) })}>{p} ✕</button>
+                {/each}
+                <select value="" onchange={(e) => (e.currentTarget.value && updateItem(i, { properties: [...(m.properties ?? []), e.currentTarget.value] }), (e.currentTarget.value = ""))} aria-label="Dodaj właściwość">
+                  <option value="">+ właściwość…</option>
+                  {#each chaosProps.filter((p) => !m.properties?.includes(p)) as p (p)}<option value={p}>{p}</option>{/each}
+                </select>
+              </div>
+            {/if}
+            {#if t?.daemon || m.daemon}
+              <div class="edit-row wrap">
+                <span class="text-dim small">Demon:</span>
+                <select value={m.daemon ?? ""} onchange={(e) => updateItem(i, { daemon: e.currentTarget.value || undefined })}>
+                  <option value="">— brak —</option>
+                  {#each daemons as d (d)}<option value={d}>{d}</option>{/each}
+                </select>
+              </div>
+            {/if}
+          </div>
+        {:else}
+          <p class="text-dim small">Brak. Broń i pancerz zaklinasz wyżej; tu dodasz osobny przedmiot.</p>
+        {/each}
+      </div>
+      <div class="edit-row wrap">
+        <select bind:value={newItemTemplate} aria-label="Dodaj przedmiot magiczny">
+          <option value="">+ przedmiot magiczny…</option>
+          {#each otherTemplates as t (t.name)}<option value={t.name} title={t.description}>{t.name}</option>{/each}
+        </select>
+        <button class="btn-sm" onclick={addMagicItem}>Dodaj</button>
       </div>
     </section>
 
@@ -969,16 +1184,16 @@
     {#if !beast}
       <section class="block edit-grid">
         <h4 class="wide">Osobowość i wygląd <button class="btn-sm ghost" title="Wylosuj od nowa" onclick={newPersona}>🎲</button></h4>
-        <label>Motywacja <input type="text" value={personaText("motivation")} onchange={(e) => setPersona("motivation", e.currentTarget.value)} /></label>
-        <label>Cechy charakteru <input type="text" placeholder="po przecinku" value={personaText("traits")} onchange={(e) => setPersona("traits", e.currentTarget.value)} /></label>
-        <label>Wiek <input type="number" min="0" value={personaText("age")} onchange={(e) => setPersona("age", e.currentTarget.value)} /></label>
+        <label>Motywacja <input type="text" value={personaText("motivation")} onchange={(e) => setPersona("motivation", e.currentTarget.value)} />{@render dice("motivation")}</label>
+        <label>Cechy charakteru <input type="text" placeholder="po przecinku" value={personaText("traits")} onchange={(e) => setPersona("traits", e.currentTarget.value)} />{@render dice("traits")}</label>
+        <label>Wiek <input type="number" min="0" value={personaText("age")} onchange={(e) => setPersona("age", e.currentTarget.value)} />{@render dice("look")}</label>
         <label>Wzrost (cm) <input type="number" min="0" value={personaText("height")} onchange={(e) => setPersona("height", e.currentTarget.value)} /></label>
         <label>Oczy <input type="text" value={personaText("eyes")} onchange={(e) => setPersona("eyes", e.currentTarget.value)} /></label>
         <label>Włosy <input type="text" value={personaText("hair")} onchange={(e) => setPersona("hair", e.currentTarget.value)} /></label>
-        <label class="wide">Znak szczególny <input type="text" value={personaText("feature")} onchange={(e) => setPersona("feature", e.currentTarget.value)} /></label>
-        <label class="wide">Manieryzm / dziwactwo <input type="text" value={personaText("mannerism")} onchange={(e) => setPersona("mannerism", e.currentTarget.value)} /></label>
-        <label class="wide">Potrzeba (chce…) <input type="text" value={personaText("need")} onchange={(e) => setPersona("need", e.currentTarget.value)} /></label>
-        <label class="wide">Skąd zna BG <input type="text" value={personaText("acquaintance")} onchange={(e) => setPersona("acquaintance", e.currentTarget.value)} /></label>
+        <label class="wide">Znak szczególny <input type="text" value={personaText("feature")} onchange={(e) => setPersona("feature", e.currentTarget.value)} />{@render dice("feature")}</label>
+        <label class="wide">Manieryzm / dziwactwo <input type="text" value={personaText("mannerism")} onchange={(e) => setPersona("mannerism", e.currentTarget.value)} />{@render dice("mannerism")}</label>
+        <label class="wide">Potrzeba (chce…) <input type="text" value={personaText("need")} onchange={(e) => setPersona("need", e.currentTarget.value)} />{@render dice("need")}</label>
+        <label class="wide">Skąd zna BG <input type="text" value={personaText("acquaintance")} onchange={(e) => setPersona("acquaintance", e.currentTarget.value)} />{@render dice("acquaintance")}</label>
       </section>
     {/if}
   {/if}
@@ -1474,6 +1689,38 @@
     gap: 2px;
     font-size: var(--fs-sm);
     color: var(--text-muted);
+  }
+
+  .edit-grid label:has(.dice) {
+    position: relative;
+  }
+
+  .edit-grid .dice {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    padding: 0 4px;
+  }
+
+  .item-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border, transparent);
+  }
+
+  .edit-list .item-edit {
+    grid-column: 1 / -1;
+  }
+
+  .item-edit .edit-row select.grow,
+  .item-edit .edit-row input.grow {
+    flex: 1 1 calc(200px * var(--ui-scale));
+  }
+
+  .craft-edit {
+    padding-left: 1.5em;
   }
 
   .edit-grid .wide {
