@@ -93,7 +93,8 @@ describe("przedmioty magiczne", () => {
     expect(runic("Krasnolud", "slaby")).toEqual({ temporary: 0, permanent: 0 });
     const avgDwarf = runic("Krasnolud", "sredni");
     expect(avgDwarf.permanent).toBe(0);
-    expect(avgDwarf.temporary).toBeGreaterThan(0);
+    // Zwykly: runy tymczasowe 0,01% - praktycznie nigdy; od Niezwyklego 1% (krasnolud x2,3).
+    expect(runic("Krasnolud", "zaawansowany").temporary).toBeGreaterThan(0);
     const human = runic("Człowiek", "doswiadczony");
     const dwarf = runic("Krasnolud", "doswiadczony");
     expect(human.permanent).toBeGreaterThan(0);

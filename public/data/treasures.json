@@ -32,8 +32,8 @@
  "runic": {
   "note": "Przedmioty runiczne losowane osobno od pozostalych przedmiotow magicznych. Trwale: najwyzej 3 zwykle runy (Prawo Trzech) i 1 mistrzowska (Prawo Zazdrosci), Krasnoludy s. 125-126. Tymczasowe: 1-3 zwykle runy (nigdy mistrzowskie), kazda gasnie po pierwszym zadzialaniu (ksiega wspomina runy tymczasowe bez zasad - interpretacja domowa).",
   "temporary": {
-   "sredni": 0.01,
-   "zaawansowany": 0.04,
+   "sredni": 0.0001,
+   "zaawansowany": 0.01,
    "doswiadczony": 0.08,
    "heroiczny": 0.12,
    "legendarny": 0.18,
