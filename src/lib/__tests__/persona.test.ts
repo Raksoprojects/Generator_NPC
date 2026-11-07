@@ -3,7 +3,7 @@ import { seedRng } from "../dice";
 import * as gd from "../gameData";
 import { generateNpc, rerollNpc } from "../generator";
 import { computeNpc, npcToText } from "../npc";
-import { fillTemplate } from "../persona";
+import { fillTemplate, regenderPersona, rerollPersonaPart } from "../persona";
 import { loadTestGameData } from "./loadData";
 
 beforeAll(() => loadTestGameData());
@@ -77,5 +77,25 @@ describe("osobowosc i wyglad", () => {
     expect(text).toMatch(/Kluczowe: .*Unik \d+/);
     expect(text).toMatch(/Motywacja: /);
     expect(text).toMatch(/Wygląd: \d+ lat/);
+  });
+});
+
+describe("edycja osobowosci", () => {
+  it("zmiana plci przerabia formy; reroll jednej czesci nie rusza reszty", () => {
+    const data = gd.getPersonality()!;
+    for (let seed = 1; seed <= 40; seed++) {
+      const npc = generateNpc({ race: "Człowiek", sex: "M" }, seedRng(seed));
+      const before = npc.persona!;
+      npc.sex = "K";
+      const after = regenderPersona(npc, "M", seedRng(seed))!;
+      for (const t of after.traits!) expect(data.traits.flat().some((x) => x.split("|")[1] === t || x === t), t).toBe(true);
+      expect(after.feature ?? "").not.toMatch(/Broda|Wąsy|Łysy/);
+      expect(after.motivation).toBe(before.motivation);
+      expect(after.age).toBe(before.age);
+    }
+    const npc = generateNpc({ race: "Krasnolud" }, seedRng(4));
+    const p = rerollPersonaPart(npc, "look", seedRng(99))!;
+    expect(p.motivation).toBe(npc.persona!.motivation);
+    expect(p.traits).toEqual(npc.persona!.traits);
   });
 });

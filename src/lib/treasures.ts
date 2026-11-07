@@ -6,7 +6,7 @@
  *   i elfy lepiej (elfie wyroby zawsze Wytrzymały 1, Wyśmienity 1). Gromril i
  *   ithilmar trafiaja sie bohaterom swoich ras.
  * - Przedmioty magiczne: tylko istoty rozumne; szanse wg poziomu (zaawansowany 1%,
- *   doswiadczony 10%, heroiczny 50%, legendarny co najmniej dwa). Losowane z
+ *   doswiadczony 5%, heroiczny 30%, legendarny co najmniej dwa). Losowane z
  *   szablonow pasujacych do BN - runy dla krasnoludow, Bron Chaosu dla slug
  *   Chaosu, artefakty wampirow, zaklete przedmioty elfow, przeklete przedmioty.
  */
@@ -382,6 +382,119 @@ export function rollTreasures(npc: Npc, rng: Rng, deterministic = false): void {
     npc.magicItems.push(item);
   }
   rollRunic(npc, rng, deterministic);
+}
+
+// ---------------------------------------------------------------------------
+// Edycja recznie (karta BN)
+// ---------------------------------------------------------------------------
+
+/** Szablony przedmiotow do wyboru w edycji: tylko pasujace rodzajem (bron/pancerz/osobne). */
+export function treasureTemplates(kinds: TreasureDef["kind"][]): TreasureDef[] {
+  return (gd.getTreasures()?.items ?? []).filter((t) => kinds.includes(t.kind));
+}
+
+/** Mikstury (Wiatry Magii) do wyboru dla szablonu "Mikstura". */
+export function potionNames(): string[] {
+  return (gd.getMagicItems()?.items ?? []).filter((i) => i.random && !i.scroll && !i.group && !i.cnMod).map((i) => i.name);
+}
+
+/** Runy, ktore mozna wyryc na przedmiocie (wg rodzaju szablonu). */
+export function runesFor(item: NpcMagicItem): RuneDef[] {
+  const kind = findTreasure(item.template)?.runes;
+  return kind ? (gd.getTreasures()?.runes[kind] ?? []) : [];
+}
+
+export function chaosPropertyNames(): string[] {
+  return (gd.getTreasures()?.chaosProperties ?? []).map((p) => p.name);
+}
+
+export function daemonNames(): string[] {
+  return Object.values(gd.getTreasures()?.daemons ?? {}).flatMap((v) => Object.values(v).map((d) => d.name));
+}
+
+/** Bron zamieniona na inna (np. pod przedmiot "Topór ..."): jakosc wykonania przechodzi na nowa. */
+function swapWeapon(npc: Npc, from: string, to: string): void {
+  const i = npc.weapons.indexOf(from);
+  if (i < 0 || from === to) return;
+  npc.weapons[i] = to;
+  if (npc.craft?.[from]) {
+    npc.craft[to] = npc.craft[from];
+    delete npc.craft[from];
+  }
+}
+
+/**
+ * Przedmiot magiczny z wybranego szablonu: runy, wlasciwosci Chaosu, demon i mikstura
+ * losowane jak w generatorze. Bron/pancerz - na wskazanym elemencie BN (base), inaczej
+ * jak przy losowaniu. Szablon zastepujacy konkretna bron (Topór ...) zamienia wskazana bron.
+ */
+export function createMagicItem(npc: Npc, template: string, base: string | undefined, rng: Rng): NpcMagicItem | undefined {
+  const t = findTreasure(template);
+  if (!t) return undefined;
+  npc.magicItems ??= [];
+  const item: NpcMagicItem = { template: t.name, name: t.name };
+  if (t.kind === "potion") item.name = potionName(npc, rng) ?? t.name;
+  if (t.kind === "weapon" && base) {
+    if (t.replaces && getWeaponDef(t.replaces) && npc.weapons.includes(base)) {
+      swapWeapon(npc, base, t.replaces);
+      item.base = t.replaces;
+    } else item.base = base;
+  } else if (t.kind === "armour" && base && t.replaces) item.base = base;
+  else {
+    // Zaklety pancerz/runy/gromril dzialaja na caly pancerz ("pancerz"), jak przy losowaniu.
+    const b = attach(npc, t, npc.magicItems);
+    if (b) item.base = b;
+  }
+  if (t.runes) {
+    item.runes = rollRunes(npc, gd.getTreasures()!.runes[t.runes], rng, false);
+    if (t.kind === "weapon" && item.base) item.name = `runiczny ${item.base.toLowerCase()}`;
+  }
+  if (t.chaos) item.properties = rollChaosProperties(npc, t.chaos, rng, false);
+  if (t.daemon) item.daemon = rollDaemon(npc, rng, false);
+  return item;
+}
+
+/** Ten sam szablon i ten sam element, nowe runy/wlasciwosci/demon (nazwa wlasna zostaje). */
+export function rerollMagicItem(npc: Npc, item: NpcMagicItem, rng: Rng): NpcMagicItem {
+  const t = findTreasure(item.template);
+  if (!t) return item;
+  const next: NpcMagicItem = { ...item };
+  if (t.kind === "potion") next.name = potionName({ ...npc, magicItems: (npc.magicItems ?? []).filter((m) => m !== item) }, rng) ?? item.name;
+  if (t.runes) {
+    const data = gd.getTreasures()!;
+    next.runes = rollRunes(npc, data.runes[t.runes], rng, false, item.temporary);
+  }
+  if (t.chaos) next.properties = rollChaosProperties(npc, t.chaos, rng, false);
+  if (t.daemon) next.daemon = rollDaemon(npc, rng, false);
+  return next;
+}
+
+/** Zaleta/Wada broni albo pancerza dodana recznie - do Wad trafiaja Wady z podrecznika. */
+const WEAPON_FLAWS = new Set(["Ciężka", "Niebezpieczna", "Nieprecyzyjna", "Powolna", "Przeładowanie", "Tępa", "Niewyważona", "Częściowy", "Wrażliwe punkty"]);
+
+export function isFlawName(name: string): boolean {
+  const base = name.replace(/\s*\(?\d+\)?$/, "").trim();
+  return isCraftFlaw(base) || WEAPON_FLAWS.has(base);
+}
+
+/** Zalety i Wady do wyboru w edycji: wykonanie (PG s. 291-293) i cechy broni/pancerza (PG s. 297-301). */
+export function editableQualities(): { qualities: string[]; flaws: string[] } {
+  const craft = gd.getTreasures()?.craft;
+  const book = Object.keys(gd.getWeapons().qualities ?? {});
+  const all = [...Object.keys(craft?.qualities ?? {}), ...Object.keys(craft?.flaws ?? {}), ...book];
+  const uniq = [...new Set(all)];
+  return { qualities: uniq.filter((q) => !isFlawName(q)), flaws: uniq.filter((q) => isFlawName(q)) };
+}
+
+/** Dodaje (albo usuwa) Zalete/Wade broni lub pancerza BN. */
+export function toggleCraft(npc: Npc, item: string, name: string, add: boolean): void {
+  npc.craft ??= {};
+  const cur = npc.craft[item] ?? { qualities: [], flaws: [] };
+  const key = isFlawName(name) ? "flaws" : "qualities";
+  const list = cur[key].filter((q) => q !== name);
+  const next: ItemCraft = { ...cur, [key]: add ? mergeLevels([...list, name]) : list };
+  if (next.qualities.length || next.flaws.length || next.material || next.label) npc.craft[item] = next;
+  else delete npc.craft[item];
 }
 
 // ---------------------------------------------------------------------------

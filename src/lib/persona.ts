@@ -138,6 +138,78 @@ export function rollPersona(npc: Npc, rng: Rng = defaultRng): NpcPersona | undef
   return out;
 }
 
+/** Czesci osobowosci losowane osobno w edycji; "look" = wiek, wzrost, oczy i wlosy razem. */
+export type PersonaPart = "motivation" | "traits" | "mannerism" | "feature" | "need" | "acquaintance" | "look";
+
+const LOOK_KEYS = ["age", "height", "eyes", "hair"] as const;
+
+/** Losuje od nowa jedna czesc osobowosci, reszta zostaje. */
+export function rerollPersonaPart(npc: Npc, part: PersonaPart, rng: Rng = defaultRng): NpcPersona | undefined {
+  const fresh = rollPersona(npc, rng);
+  if (!fresh) return npc.persona;
+  const out: NpcPersona = { ...(npc.persona ?? {}) };
+  for (const key of part === "look" ? LOOK_KEYS : [part]) {
+    if (fresh[key] === undefined) delete out[key];
+    else (out as Record<string, unknown>)[key] = fresh[key];
+  }
+  return out;
+}
+
+/**
+ * Tekst z szablonu wypelniony dla jednej plci -> wpis i ta sama tresc dla drugiej plci
+ * (wartosci z list, np. akcent, zostaja). Brak pasujacego wpisu - undefined.
+ */
+function regenderText<E extends { text: string }>(text: string, entries: E[], from: Sex, to: Sex): { entry: E; text: string } | undefined {
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const slot = (p: string) => /^\{([^}]*)\}$/.exec(p)?.[1];
+  for (const entry of entries) {
+    const parts = entry.text.split(/(\{[^}]*\})/);
+    const pattern = parts.map((p) => {
+      const s = slot(p);
+      return s === undefined ? esc(p) : s.includes("|") ? esc(gendered(s, from)) : "(.+?)";
+    });
+    const hit = new RegExp(`^${pattern.join("")}$`).exec(text);
+    if (!hit) continue;
+    let g = 1;
+    const out = parts.map((p) => {
+      const s = slot(p);
+      return s === undefined ? p : s.includes("|") ? gendered(s, to) : hit[g++];
+    });
+    return { entry, text: out.join("") };
+  }
+  return undefined;
+}
+
+/**
+ * Osobowosc po zmianie plci (npc.sex juz nowa): cechy charakteru, manieryzm, znak szczegolny
+ * i potrzeba w formach nowej plci; znak tylko dla dawnej plci (broda) - losowany od nowa.
+ */
+export function regenderPersona(npc: Npc, from: Sex, rng: Rng = defaultRng): NpcPersona | undefined {
+  const data = gd.getPersonality();
+  const p = npc.persona;
+  const to = npc.sex;
+  if (!data || !p || from === to) return p;
+  const out: NpcPersona = { ...p };
+  out.traits = p.traits?.map((t) => {
+    const form = data.traits.flat().find((x) => gendered(x, from) === t);
+    return form ? gendered(form, to) : t;
+  });
+  const race = npc.turned ? "Człowiek" : npc.race;
+  for (const [key, list] of [
+    ["mannerism", data.mannerisms],
+    ["feature", data.features]
+  ] as const) {
+    const text = p[key];
+    if (!text) continue;
+    const hit = regenderText(text, list, from, to);
+    if (hit?.entry.sex && hit.entry.sex !== to) {
+      const e = pick(list.filter((x) => entryFits(x, race, to)), rng);
+      if (e) out[key] = fillTemplate(e.text, to, rng);
+    } else if (hit) out[key] = hit.text;
+  }
+  if (p.need) out.need = regenderText(p.need, data.needs, from, to)?.text ?? p.need;
+  return out;
+}
 /** Wiek sredni (PG s. 39: srednia dlugosc zycia 60 / 120 / 200) - od niego wlosy siwieja. */
 function lifespanMid(race: string): number {
   return race === "Krasnolud" ? 100 : race === "Niziołek" ? 60 : 35;
