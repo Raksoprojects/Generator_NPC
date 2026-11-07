@@ -130,7 +130,7 @@ Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia. Poziom lic
 | | Nowicjusz | Zwykły | Niezwykły | Zaawansowany | Ekspert | Legenda | Heros |
 |---|---|---|---|---|---|---|---|
 | Kolejne przedmioty magiczne (istoty rozumne) | — | — | 1% | 5%, 1% | 30%, 10%, 2% | 100%, 100%, 50%, 20% | 100%, 100%, 100%, 50%, 20% |
-| Przedmiot z runami tymczasowymi | — | 1% | 4% | 8% | 12% | 18% | 22% |
+| Przedmiot z runami tymczasowymi | — | 0,01% | 1% | 8% | 12% | 18% | 22% |
 | Trwały przedmiot runiczny | — | — | 1% | 3% | 8% | 25% | 38% |
 | Wady wykonania broni/pancerza | 35% | 20% | 10% | 4% | 0 | 0 | 0 |
 | Zalety wykonania (szansa / maks.) | 2% / 1 | 6% / 1 | 15% / 1 | 30% / 2 | 55% / 2 | 80% / 3 | 100% / 3 |
