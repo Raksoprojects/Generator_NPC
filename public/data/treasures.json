@@ -7,13 +7,13 @@
    0.01
   ],
   "doswiadczony": [
-   0.1,
-   0.03
+   0.05,
+   0.01
   ],
   "heroiczny": [
-   0.5,
-   0.2,
-   0.05
+   0.3,
+   0.1,
+   0.02
   ],
   "legendarny": [
    1,
@@ -32,17 +32,17 @@
  "runic": {
   "note": "Przedmioty runiczne losowane osobno od pozostalych przedmiotow magicznych. Trwale: najwyzej 3 zwykle runy (Prawo Trzech) i 1 mistrzowska (Prawo Zazdrosci), Krasnoludy s. 125-126. Tymczasowe: 1-3 zwykle runy (nigdy mistrzowskie), kazda gasnie po pierwszym zadzialaniu (ksiega wspomina runy tymczasowe bez zasad - interpretacja domowa).",
   "temporary": {
-   "sredni": 0.03,
-   "zaawansowany": 0.12,
-   "doswiadczony": 0.18,
-   "heroiczny": 0.22,
-   "legendarny": 0.25,
-   "heros": 0.28
+   "sredni": 0.01,
+   "zaawansowany": 0.04,
+   "doswiadczony": 0.08,
+   "heroiczny": 0.12,
+   "legendarny": 0.18,
+   "heros": 0.22
   },
   "permanent": {
-   "zaawansowany": 0.02,
-   "doswiadczony": 0.05,
-   "heroiczny": 0.12,
+   "zaawansowany": 0.01,
+   "doswiadczony": 0.03,
+   "heroiczny": 0.08,
    "legendarny": 0.25,
    "heros": 0.38
   },

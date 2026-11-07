@@ -4,7 +4,7 @@ import { allArmourNames, allWeaponNames, getArmourDef, getWeaponDef, qualityDesc
 import * as gd from "../gameData";
 import { generateNpc } from "../generator";
 import { computeNpc } from "../npc";
-import { craftDescription, findRune, rollTreasures } from "../treasures";
+import { craftDescription, createMagicItem, findRune, isFlawName, rerollMagicItem, rollTreasures, toggleCraft } from "../treasures";
 import type { Npc, TierId } from "../types";
 import { loadTestGameData } from "./loadData";
 
@@ -29,7 +29,9 @@ describe("przedmioty magiczne", () => {
     expect(counts[0]).toBe(0);
     expect(counts[1]).toBeLessThan(10);
     expect(counts[2]).toBeGreaterThan(counts[1]);
-    expect(counts[3]).toBeGreaterThan(60);
+    // Heroiczny ~30% (zaawansowany 1%, doswiadczony 5%).
+    expect(counts[3]).toBeGreaterThan(35);
+    expect(counts[3]).toBeLessThan(90);
     for (let seed = 1; seed <= 30; seed++) {
       const legend = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek" }, seedRng(seed));
       expect(legend.magicItems!.length).toBeGreaterThanOrEqual(2);
@@ -193,5 +195,41 @@ describe("jakosc wykonania", () => {
     const craft = gd.getTreasures()!.craft;
     for (const q of [...Object.keys(craft.qualities), ...Object.keys(craft.flaws)]) names.add(q);
     for (const n of names) expect(craftDescription(n) || qualityDescription(n), n).toBeTruthy();
+  });
+});
+
+describe("edycja broni, pancerza i przedmiotow magicznych", () => {
+  it("Zalety i Wady dodane recznie trafiaja na wlasciwa liste i sa widoczne w karcie", () => {
+    const npc = generateNpc({ archetype: "Wojownik", tier: "sredni", race: "Człowiek" }, seedRng(3));
+    const w = npc.weapons[0];
+    npc.craft = {};
+    toggleCraft(npc, w, "Tępa", true);
+    toggleCraft(npc, w, "Wytrzymały 1", true);
+    toggleCraft(npc, w, "Wytrzymały 1", true);
+    expect(isFlawName("Przeładowanie 2")).toBe(true);
+    expect(npc.craft[w]).toEqual({ qualities: ["Wytrzymały 1"], flaws: ["Tępa"] });
+    const view = computeNpc(npc).weapons.find((x) => x.name === w)!;
+    expect(view.craftFlaws).toContain("Tępa");
+    toggleCraft(npc, w, "Tępa", false);
+    toggleCraft(npc, w, "Wytrzymały 1", false);
+    expect(npc.craft[w]).toBeUndefined();
+  });
+
+  it("zaklecie wskazanej broni; szablon z konkretna bronia zamienia ja; reroll trzyma szablon", () => {
+    const npc = generateNpc({ archetype: "Wojownik", tier: "sredni", race: "Człowiek" }, seedRng(5));
+    npc.magicItems = [];
+    const w = npc.weapons[0];
+    const plain = createMagicItem(npc, "Zaklęta broń", w, seedRng(1))!;
+    expect(plain.base).toBe(w);
+    npc.magicItems.push(plain);
+    expect(computeNpc(npc).weapons.find((x) => x.name === w)!.magicItem).toBe("Zaklęta broń");
+    const axe = createMagicItem(npc, "Topór Nieokiełznanej Furii", w, seedRng(1))!;
+    expect(axe.base).toBe("Topór");
+    expect(npc.weapons).toContain("Topór");
+    const runic = createMagicItem(npc, "Runiczna broń", "Topór", seedRng(2))!;
+    expect(runic.runes!.length).toBeGreaterThan(0);
+    expect(rerollMagicItem(npc, runic, seedRng(9)).template).toBe("Runiczna broń");
+    const chaos = createMagicItem(npc, "Broń Chaosu", "Topór", seedRng(2))!;
+    expect(chaos.properties!.length).toBeGreaterThan(0);
   });
 });
