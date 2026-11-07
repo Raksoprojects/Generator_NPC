@@ -129,9 +129,9 @@ Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia. Poziom lic
 
 | | Nowicjusz | Zwykły | Niezwykły | Zaawansowany | Ekspert | Legenda | Heros |
 |---|---|---|---|---|---|---|---|
-| Kolejne przedmioty magiczne (istoty rozumne) | — | — | 1% | 10%, 3% | 50%, 20%, 5% | 100%, 100%, 50%, 20% | 100%, 100%, 100%, 50%, 20% |
-| Przedmiot z runami tymczasowymi | — | 3% | 12% | 18% | 22% | 25% | 28% |
-| Trwały przedmiot runiczny | — | — | 2% | 5% | 12% | 25% | 38% |
+| Kolejne przedmioty magiczne (istoty rozumne) | — | — | 1% | 5%, 1% | 30%, 10%, 2% | 100%, 100%, 50%, 20% | 100%, 100%, 100%, 50%, 20% |
+| Przedmiot z runami tymczasowymi | — | 1% | 4% | 8% | 12% | 18% | 22% |
+| Trwały przedmiot runiczny | — | — | 1% | 3% | 8% | 25% | 38% |
 | Wady wykonania broni/pancerza | 35% | 20% | 10% | 4% | 0 | 0 | 0 |
 | Zalety wykonania (szansa / maks.) | 2% / 1 | 6% / 1 | 15% / 1 | 30% / 2 | 55% / 2 | 80% / 3 | 100% / 3 |
 | Gromril (krasnoludy) | — | — | 2% | 10% | 35% | 70% | 90% |
@@ -181,7 +181,10 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
     - **Skąd zna BG [EMG s. 23–25]:** 50 powiązań z tabeli „Skąd my się znamy?” — zaczep fabularny.
     - **Wygląd [PG s. 39–40]:** wiek startowy rasy (człowiek 15+k10, krasnolud 15+10k10, niziołek 15+5k10, elf 30+10k10), wzrost (człowiek 150+4k10 z dorzucaniem przy „10”, krasnolud 130+2k10, niziołek 95+2k10, elf 180+3k10), kolor oczu i włosów 2k10 (elfy: dwa rzuty na oczy). [dom]: wiek rośnie z poziomem BN (lata × indeks poziomu, ×3 u krasnoludów, ×5/3 u niziołków, ×7 u elfów); po średnim wieku rośnie szansa na siwe włosy (elfy nie siwieją).
     - **Cechy charakteru, manieryzm, znak szczególny [dom]:** EMG s. 16 każe korzystać z list spoza podręcznika. Dwie cechy z różnych par przeciwieństw (forma wg płci), jeden manieryzm/dziwactwo, jeden znak szczególny (brody, wąsy, łysina tylko u mężczyzn; bez ospy i odstających uszu u elfów).
-    - Blokada „Imię i osobowość” chroni je przy ponownym losowaniu. Na karcie: 🎲 losuje od nowa, edycja pozwala wpisać własne.
+    - Blokada „Imię i osobowość” chroni je przy ponownym losowaniu. Na karcie: 🎲 losuje od nowa, edycja pozwala wpisać własne albo wylosować osobno każde pole (wygląd: wiek, wzrost, oczy i włosy razem).
+    - **Zmiana płci w edycji** (wybór albo 🎲): nowe imię, cechy charakteru, manieryzm, znak szczególny i potrzeba w formach nowej płci (wartości z list, np. akcent, zostają); znak tylko dla dawnej płci (broda) losowany od nowa.
+    - **Edycja broni i pancerza:** zamiana na inny przedmiot (Zalety/Wady wykonania i zaklęcie przechodzą); dodawanie i usuwanie Zalet/Wad wykonania [PG s. 291–293] i cech broni/pancerza [PG s. 297–301] — Wady z podręcznika (Ciężka, Tępa, Częściowy…) trafiają do Wad; zaklęcie wybranym szablonem albo „Odczaruj”. Szablon z konkretną bronią (np. Topór Nieokiełznanej Furii) zamienia wskazaną broń; zaklęty pancerz, runy i gromril działają na cały pancerz.
+    - **Edycja przedmiotów magicznych:** nazwa, runy, właściwości Broni Chaosu, demon, mikstura; 🎲 losuje je od nowa w tym samym szablonie; osobne przedmioty dodaje się z listy szablonów.
 14. **Karta BN — kolejność:** cechy; linia kluczowych testów (najlepsza Broń Biała albo WW, najlepsza Broń Zasięgowa, Unik, Odporność, Opanowanie, Percepcja — bez rozwinięć test na samej cesze [PG s. 117]; w drugiej linii 4 najlepsze pozostałe umiejętności); walka (broń z Zaletami i Wadami, pancerz, redukcja obrażeń); umiejętności, talenty, cechy, zaklęcia; osobowość i wygląd; na końcu wyposażenie z pieniędzmi.
 
 ---
