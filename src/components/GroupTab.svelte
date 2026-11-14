@@ -9,6 +9,7 @@
   import { groupsToJson, parseGroupsJson, type SavedGroup } from "../lib/library";
   import { computeNpc, normalizeNpc, npcToText } from "../lib/npc";
   import { TIER_IDS, type GroupRow, type Npc, type Sex, type TierId } from "../lib/types";
+  import { bloodlineFitsArchetype } from "../lib/vampires";
 
   const presets = gd.getGroupPresets();
   const presetNames = Object.keys(presets);
@@ -69,7 +70,7 @@
       row.creature = undefined;
       row.archetype = name;
       row.noArchetype = undefined;
-      row.bloodline = row.turned = undefined;
+      row.bloodline = undefined;
     }
   }
 
@@ -110,7 +111,7 @@
   /** Opcje dokladnego kreatora wiersza -> GenSpec (jak w generatorze pojedynczego BN). */
   function detailSpec(row: GroupRow): Partial<GenSpec> {
     if (!detailed) return {};
-    const spec: Partial<GenSpec> = { sex: row.sex, bloodline: row.bloodline || undefined, turned: row.turned, noArchetype: row.noArchetype };
+    const spec: Partial<GenSpec> = { sex: row.sex, bloodline: row.bloodline || undefined, noArchetype: row.noArchetype };
     const xp = Math.round(Number(row.xp));
     if (row.xp != null && Number.isFinite(xp) && xp > 0) Object.assign(spec, row.xpMode === "zamiast" ? { xp } : { xpBonus: xp });
     const steps = (row.path ?? []) as PathStep[];
@@ -295,8 +296,8 @@
           {#if row.creature && gd.isCivilized(row.creature)}
             <select value={row.noArchetype ? "-" : row.archetype} onchange={(e) => { const v = e.currentTarget.value; row.noArchetype = v === "-" || undefined; row.archetype = v === "-" ? "" : v; }} aria-label="Archetyp stworzenia">
               <option value="">profesja wg stworzenia</option>
-              <option value="-">bez profesji (jak bestia)</option>
-              {#each gd.allArchetypeNames().filter((a) => !gd.getCreature(row.creature)?.archetypes || a in gd.getCreature(row.creature)!.archetypes!) as a (a)}<option value={a}>{a}</option>{/each}
+              {#if !isVampire(row)}<option value="-">bez profesji (jak bestia)</option>{/if}
+              {#each gd.allArchetypeNames().filter((a) => (!gd.getCreature(row.creature)?.archetypes || a in gd.getCreature(row.creature)!.archetypes!) && bloodlineFitsArchetype(row.bloodline, a)) as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           {/if}
           <select bind:value={row.tier} aria-label="Poziom">
@@ -318,7 +319,7 @@
           {/if}
           {#if detailed}
             <div class="row-detail">
-              {#if !row.creature || hasCareer(row) || row.turned}
+              {#if !row.creature || hasCareer(row) || isVampire(row)}
                 <label>Płeć
                   <select value={row.sex ?? ""} onchange={(e) => (row.sex = (e.currentTarget.value || undefined) as Sex | undefined)}>
                     <option value="">losowo</option>
@@ -345,7 +346,6 @@
                     {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
                   </select>
                 </label>
-                <label class="check"><input type="checkbox" checked={!!row.turned} onchange={(e) => (row.turned = e.currentTarget.checked || undefined)} /> przemiana człowieka</label>
               {/if}
               <label title="Profil z Bestiariusza 2.0">Wyjątkowa jednostka
                 <select value={row.heroProfile ?? ""} onchange={(e) => (row.heroProfile = e.currentTarget.value || undefined)}>

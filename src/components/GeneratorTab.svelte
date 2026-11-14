@@ -6,6 +6,7 @@
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
   import PathEditor from "./PathEditor.svelte";
   import { TIER_IDS, type Npc, type Sex, type TierId } from "../lib/types";
+  import { bloodlineFitsArchetype } from "../lib/vampires";
 
   type Mode = "losowy" | "polLosowy" | "wlasny";
   type Kind = "rasy" | "stworzenia";
@@ -15,8 +16,6 @@
   /** Grupa albo podgrupa stworzen ("Chaos › Zwierzoludzie"); pusta = wszystkie. */
   let creatureGroup = $state("");
   let bloodline = $state("");
-  /** Wampir: profil z bestiariusza albo przemiana czlowieka (profesje za zycia + premie Linii Krwi). */
-  let vampireMethod = $state<"profil" | "przemiana">("profil");
 
   const groupTree = gd.creatureGroupTree();
   const bloodlines = gd.getVampires()?.bloodlines.map((b) => b.name) ?? [];
@@ -66,7 +65,9 @@
   /** Archetypy dozwolone dla stworzenia (ogr: tylko proste profesje). */
   let creatureArchetypes = $derived.by(() => {
     const allowed = gd.getCreature(creature)?.archetypes;
-    return allowed ? archetypes.filter((a) => a in allowed) : archetypes;
+    const list = allowed ? archetypes.filter((a) => a in allowed) : archetypes;
+    // Wampir z wybrana linia: tylko archetypy z jej Preferowanych Profesji (Strigoi nie bedzie czarodziejem).
+    return showBloodline && bloodline ? list.filter((a) => bloodlineFitsArchetype(bloodline, a)) : list;
   });
   /** Najnizszy poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego); dla grupy - najnizszy w grupie. */
   let minTierIdx = $derived.by(() => {
@@ -191,7 +192,6 @@
         creature: creature || (creatureGroup ? undefined : pick(typicalCreatures)),
         creatureGroup: creature ? undefined : creatureGroup || undefined,
         bloodline: showBloodline && bloodline ? bloodline : undefined,
-        turned: showBloodline && vampireMethod === "przemiana",
         archetype: civilized && archetype && archetype !== NO_CAREER ? archetype : undefined,
         noArchetype: civilized && archetype === NO_CAREER,
         tier: (tier || undefined) as TierId | undefined,
@@ -314,18 +314,12 @@
               {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
             </select>
           </label>
-          <label>Sposób tworzenia
-            <select bind:value={vampireMethod}>
-              <option value="profil">profil z bestiariusza</option>
-              <option value="przemiana">przemiana człowieka</option>
-            </select>
-          </label>
         {/if}
         {#if civilized}
           <label>Archetyp (profesje)
             <select bind:value={archetype}>
               <option value="">— losowo (wg stworzenia) —</option>
-              <option value={NO_CAREER}>— bez profesji (jak bestia) —</option>
+              {#if !showBloodline}<option value={NO_CAREER}>— bez profesji (jak bestia) —</option>{/if}
               {#each creatureArchetypes as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           </label>
@@ -414,7 +408,7 @@
       </div>
 
       <div class="checks">
-        <label class="check"><input type="checkbox" bind:checked={randomTraits} /> Dolosuj cechy opcjonalne (15% / 5% / 1%)</label>
+        <label class="check"><input type="checkbox" bind:checked={randomTraits} /> Dolosuj cechy opcjonalne (7% jedna, 1% dwie)</label>
         <label class="check" title="Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji">Wyjątkowa jednostka<select bind:value={exceptional}><option value="">— losowo (mała szansa) —</option><option value="Weteran">Weteran</option><option value="Doborowy">Doborowy</option><option value="Pomniejszy Bohater">Pomniejszy Bohater</option><option value="Wielki Bohater">Wielki Bohater</option></select></label>
         <label class="check"><input type="checkbox" bind:checked={commander} /> {COMMANDER_PROFILE}</label>
         <button class="btn-sm ghost" onclick={resetForm}>Wyczyść</button>
