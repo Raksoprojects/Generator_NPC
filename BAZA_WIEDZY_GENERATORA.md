@@ -103,11 +103,12 @@ Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia (pasowanie 
 
 | Poziom (od minimum stworzenia) | 1. | 2. | 3. | 4. | 5. | 6. | 7. |
 |---|---|---|---|---|---|---|---|
-| Cechy Stworzeń rodziny | 0 | 1 | 1 | 2 | 3 | 4 | 5 |
-| Szansa na cechę opcjonalną | 0 | 25% | 50% | 75% | 100% | 100% | 100% |
+| Cechy Stworzeń rodziny (ułamek = szansa na kolejną) | 0 | 0,25 | 0,5 | 0,75 | 1 | 1,5 | 2 |
+| Szansa na cechę Opcjonalną z bestiariusza | 0 | 10% | 15% | 20% | 30% | 40% | 50% |
 
 - Int, SW i Ogd bestii zostają jak w książce.
-- **Cechy Stworzeń wg siły [dom]:** waga z rodziny × (20 / siła)^1,5, gdzie siła = suma dodatnich modyfikatorów (Twardy 20, Zabijaka 30, Elitarny 60). Cechy o sile od 50 (Elitarny) dopiero od 3. poziomu stworzenia (Niezwykły dla szkieleta). Dotyczy też cech dolosowywanych.
+- **Cechy Stworzeń wg siły [dom]:** waga × (20 / siła)², najwyżej 1, gdzie siła = suma dodatnich modyfikatorów: Twardy 20 (×1), Zabijaka 30 (×0,44), Elitarny 60 (×0,11). Mocne cechy są rzadsze, ale możliwe na każdym poziomie. Dotyczy też cech dolosowywanych (BN i stworzeń): 7% na jedną, 1% na dwie.
+- **Cechy pasujące do istoty:** cecha zmieniająca Int, SW albo Ogd nie trafia do istoty bez tej cechy (szkielet bez SW); cechy podnoszące Ogładę nie trafiają do bestii (zwierzęta, potwory, nieumarli bez rozumu).
 - **Średnie z 1000 losowań** (Broń Biała; Now/Zwy/Nzw/Zaa/Eks/Leg/Her): człowiek Wojownik 63/67/75/89/124/169/210; szkielet przy stałych premiach 38/68/88/118/148/188/228 (Elitarny u 47% zwykłych), przy PD 43/55/72/102/146/186/227.
 - Opisy poziomów: typowy osobnik → rosły osobnik → doświadczony łowca/weteran stada → przewodnik stada → bestia z legend → mityczna bestia → boska bestia, awatar pradawnej potęgi.
 
@@ -135,9 +136,12 @@ Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia (pasowanie 
 
 | | Nowicjusz | Zwykły | Niezwykły | Zaawansowany | Ekspert | Legenda | Heros |
 |---|---|---|---|---|---|---|---|
-| Kolejne przedmioty magiczne (istoty rozumne) | — | — | 1% | 5%, 1% | 30%, 10%, 2% | 100%, 100%, 50%, 20% | 100%, 100%, 100%, 50%, 20% |
-| Przedmiot z runami tymczasowymi | — | 0,01% | 1% | 8% | 12% | 18% | 22% |
-| Trwały przedmiot runiczny | — | — | 1% | 3% | 8% | 25% | 38% |
+| Kolejne przedmioty magiczne (istoty rozumne) | — | 0,1% | 1% | 4%, 0,5% | 15%, 3% | 100%, 50%, 15% | 100%, 100%, 50%, 15% |
+| Przedmiot z runami tymczasowymi | — | 0,01% | 1% | 4% | 8% | 12% | 15% |
+| Trwały przedmiot runiczny | — | — | 0,25% | 1% | 3% | 8% | 15% |
+
+- Wybrany przedmiot: drobiazgi (amulety, pierścienie, mikstury) ×1,5, zaklęta broń ×0,4, zaklęty pancerz ×0,5 wagi szablonu.
+- **Krasnoludy:** runy ×12 (tymczasowe na Zwykłym 0,12%, na Niezwykłym 12%), inne przedmioty magiczne ×0,3. Elfy: runy ×0,2. Pewne przedmioty (100%) bez mnożników.
 | Wady wykonania broni/pancerza | 35% | 20% | 10% | 4% | 0 | 0 | 0 |
 | Zalety wykonania (szansa / maks.) | 2% / 1 | 6% / 1 | 15% / 1 | 30% / 2 | 55% / 2 | 80% / 3 | 100% / 3 |
 | Gromril (krasnoludy) | — | — | 2% | 10% | 35% | 70% | 90% |
@@ -248,9 +252,11 @@ Linię krwi losuje się k100 [Wampiry]:
 | 66–90 | Von Carstein |
 | 91–00 | Niezależny |
 
-Są **dwa sposoby tworzenia** (w generatorze do wyboru).
+Wampir powstaje **wyłącznie przez przemianę człowieka** (sposób B). Profil z bestiariusza (A, niżej) służy już tylko jako źródło cech Opcjonalnych: przemieniony wampir dostaje jedną z nich z szansą poziomu (tabela cech opcjonalnych bestii), bez Rzucania Czarów — o czarach decyduje Linia Krwi.
 
-### 5.1 Sposób A — profil z bestiariusza
+**Linia krwi a archetyp:** przy wybranym archetypie linia jest losowana z tabeli k100 tylko spośród linii, których Preferowane Profesje go dopuszczają (Strigoi: same proste profesje, więc nigdy Czarodziej). Przy wybranej linii lista archetypów pokazuje tylko zgodne.
+
+### 5.1 Sposób A — profil z bestiariusza (już nieużywany)
 
 - **Baza:** profil Wampira [PG] — Sz 6, WW 60, US 40, S 50, Wt 40, I 50, Zw 70, Zr 40, Int 40, SW 60, Ogd 40, Żyw 19.
 - **Cechy:** Broń +9, Ożywieniec, Ugryzienie +8, Wampiryczny, Widzenie w Ciemności.
