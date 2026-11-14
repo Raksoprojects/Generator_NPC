@@ -33,12 +33,22 @@
   let {
     npc = $bindable(),
     onremove,
-    removeLabel = "Usuń"
+    removeLabel = "Usuń",
+    oncollapse
   }: {
     npc: Npc;
     onremove?: () => void;
     removeLabel?: string;
+    /** Zwiniecie karty (grupa): klikniecie w naglowek obok imienia. */
+    oncollapse?: () => void;
   } = $props();
+
+  /** Klik w naglowek (poza przyciskami i polami) zwija karte. */
+  function headClick(e: MouseEvent) {
+    if (!oncollapse || editing) return;
+    if ((e.target as HTMLElement).closest("button, input, select, textarea, a")) return;
+    oncollapse();
+  }
 
   normalizeNpc(npc);
 
@@ -527,7 +537,8 @@
 {/snippet}
 
 <article class="npc panel" class:editing>
-  <header class="head">
+  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+  <header class="head" class:collapsible={!!oncollapse && !editing} onclick={headClick} title={oncollapse && !editing ? "Kliknij, aby zwinąć" : undefined}>
     <div class="title">
       {#if editing}
         <div class="name-edit">
@@ -543,6 +554,7 @@
       <p class="meta">
         {#if creature}
           <b>{creature.name}</b> <span class="text-dim">({gd.creatureGroupKey(creature)})</span>
+          <span class="text-dim small source" title="Źródło profilu stworzenia">· {creature.source}, s. {creature.page}</span>
           {#if npc.turned}<span class="text-dim" title="Wampir przemieniony z człowieka: cechy człowieka, profesje za życia i premie Linii Krwi"> · przemieniony człowiek, {npc.sex === "K" ? "kobieta" : "mężczyzna"}</span>{/if}
           {#if npc.archetype} · {npc.archetype}{/if}
         {:else}
@@ -566,6 +578,7 @@
       {/if}
     </div>
     <div class="head-actions">
+      {#if oncollapse}<button class="btn-sm ghost" title="Zwiń" onclick={oncollapse}>▲</button>{/if}
       <button class="btn-sm" class:primary={editing} onclick={() => (editing = !editing)}>
         {editing ? "Gotowe" : "Edytuj"}
       </button>
@@ -936,20 +949,18 @@
         {/if}
         <label>Poziom
           <select bind:value={npc.tier}>
-            {#each TIER_IDS as t (t)}<option value={t as TierId}>{gd.getTier(t).label}</option>{/each}
+            {#each TIER_IDS as t (t)}<option value={t as TierId}>{gd.tierLabelXp(t)}</option>{/each}
           </select>
         </label>
-        {#if !beast}
-          <label title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
-            <span class="xp-row">
-              <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpEdit} />
-              <select bind:value={xpEditMode} aria-label="Sposób użycia PD">
-                <option value="dodaj">dodaj do poziomu</option>
-                <option value="zamiast">zamiast poziomu</option>
-              </select>
-            </span>
-          </label>
-        {/if}
+        <label title={beast ? "PD ponad profil z bestiariusza: cechy walki i umiejętności rodziny" : "PD ponad tworzenie postaci, wydawane wg priorytetów archetypu"}>PD
+          <span class="xp-row">
+            <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpEdit} />
+            <select bind:value={xpEditMode} aria-label="Sposób użycia PD">
+              <option value="dodaj">dodaj do poziomu</option>
+              <option value="zamiast">zamiast poziomu</option>
+            </select>
+          </span>
+        </label>
       </div>
       {#if !beast}
         <div class="path-edit">
@@ -1230,6 +1241,10 @@
     flex-direction: column;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4);
+  }
+
+  .head.collapsible {
+    cursor: pointer;
   }
 
   .npc.editing {

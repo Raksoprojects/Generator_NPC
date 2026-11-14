@@ -1,12 +1,14 @@
 <script lang="ts">
   import NpcCard from "./NpcCard.svelte";
+  import Autocomplete from "./Autocomplete.svelte";
+  import PathEditor from "./PathEditor.svelte";
   import { app } from "../lib/app.svelte";
   import { copyText, downloadText, pickFile } from "../lib/files";
   import * as gd from "../lib/gameData";
-  import { generateNpc, racesForArchetype } from "../lib/generator";
+  import { generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
   import { groupsToJson, parseGroupsJson, type SavedGroup } from "../lib/library";
   import { computeNpc, normalizeNpc, npcToText } from "../lib/npc";
-  import { TIER_IDS, type GroupRow, type Npc } from "../lib/types";
+  import { TIER_IDS, type GroupRow, type Npc, type Sex, type TierId } from "../lib/types";
 
   const presets = gd.getGroupPresets();
   const presetNames = Object.keys(presets);
@@ -47,6 +49,13 @@
     return row.creature ? `c:${row.creature}` : `a:${row.archetype}`;
   }
 
+  /** Najnizszy (podstawowy) poziom stworzenia albo grupy - proponowany przy wyborze. */
+  function baseTier(kind: string, name: string): TierId {
+    const list = kind === "c" ? [gd.getCreature(name)].filter(Boolean) : gd.creaturesInGroup(name).filter((c) => !c.unique);
+    const idx = Math.min(...list.map((c) => TIER_IDS.indexOf(c!.minTier ?? "slaby")));
+    return TIER_IDS[Number.isFinite(idx) ? idx : 0];
+  }
+
   function setWho(row: GroupRow, value: string) {
     const [kind, name] = [value.slice(0, 1), value.slice(2)];
     row.creatureGroup = kind === "g" ? name : undefined;
@@ -54,14 +63,64 @@
       row.creature = kind === "c" ? name : undefined;
       row.archetype = "";
       row.race = undefined;
+      row.path = undefined;
+      row.tier = baseTier(kind, name);
     } else {
       row.creature = undefined;
       row.archetype = name;
+      row.noArchetype = undefined;
+      row.bloodline = row.turned = undefined;
     }
   }
 
+  /** Wyszukiwanie w wierszu: archetyp, grupa albo stworzenie z podpowiedziami. */
+  let queries = $state<Record<number, string>>({});
+  const SEARCH: Record<string, string> = {};
+  for (const a of gd.allArchetypeNames()) SEARCH[`Archetyp: ${a}`] = `a:${a}`;
+  for (const g of Object.keys(creatureGroups)) SEARCH[`Grupa: ${g}`] = `g:${g}`;
+  for (const t of gd.creatureGroupTree().filter((x) => x.subgroups.length)) SEARCH[`Grupa: ${t.group} (wszystkie)`] = `g:${t.group}`;
+  for (const names of Object.values(creatureGroups)) for (const c of names) SEARCH[c] = `c:${c}`;
+  const searchOptions = Object.keys(SEARCH);
+
   function addRow() {
     rows.push({ count: 1, archetype: gd.allArchetypeNames()[0], tier: "slaby" });
+  }
+
+  /** Szybki - tylko liczba, kto i poziom; dokladny - wszystkie opcje pojedynczego BN dla wiersza. */
+  let detailed = $state(false);
+  const bloodlines = gd.getVampires()?.bloodlines.map((b) => b.name) ?? [];
+  const isVampire = (row: GroupRow) =>
+    row.creature ? !!gd.getVampires()?.creatures.includes(row.creature) : !!row.creatureGroup && gd.creaturesInGroup(row.creatureGroup).some((c) => gd.getVampires()?.creatures.includes(c.name));
+  const randomPool = Object.entries(gd.getCreatureTraits()).filter(([, t]) => t.randomPool).map(([n]) => n);
+  /** Wiersz z profesja: archetyp rasy albo stworzenie rozumne z archetypem. */
+  const hasCareer = (row: GroupRow) => !row.noArchetype && (!row.creature && !row.creatureGroup ? true : !!row.creature && gd.isCivilized(row.creature));
+
+  function rowProfessions(row: GroupRow): string[] {
+    const race = row.creature ? "Człowiek" : row.race;
+    const allowed = (p: string) => !race || gd.professionAllowsRace(p, race);
+    const own = Object.keys(gd.getArchetype(row.archetype)?.professions ?? {}).filter((p) => gd.getProfession(p) && allowed(p));
+    return [...own, ...gd.allProfessionNames().filter((p) => allowed(p) && !own.includes(p))];
+  }
+
+  function toggleRowTrait(row: GroupRow, t: string) {
+    const cur = row.traits ?? [];
+    row.traits = cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t];
+  }
+
+  /** Opcje dokladnego kreatora wiersza -> GenSpec (jak w generatorze pojedynczego BN). */
+  function detailSpec(row: GroupRow): Partial<GenSpec> {
+    if (!detailed) return {};
+    const spec: Partial<GenSpec> = { sex: row.sex, bloodline: row.bloodline || undefined, turned: row.turned, noArchetype: row.noArchetype };
+    const xp = Math.round(Number(row.xp));
+    if (row.xp != null && Number.isFinite(xp) && xp > 0) Object.assign(spec, row.xpMode === "zamiast" ? { xp } : { xpBonus: xp });
+    const steps = (row.path ?? []) as PathStep[];
+    const main = steps[steps.length - 1]?.profession;
+    const exact = steps.some((s) => s.level != null) || (steps.length > 1 && steps.some((s) => s.profession));
+    if (hasCareer(row)) Object.assign(spec, exact ? { path: steps } : main ? { professions: [main] } : {});
+    if (row.heroProfile) spec.heroProfiles = [row.heroProfile];
+    if (row.traits?.length) spec.traits = row.traits;
+    if (row.randomTraits === false) spec.randomTraits = false;
+    return spec;
   }
 
   function generateGroup() {
@@ -76,7 +135,8 @@
           tier: row.tier,
           race: row.race || undefined,
           commander: row.commander,
-          label: row.label || undefined
+          label: row.label || undefined,
+          ...detailSpec($state.snapshot(row) as GroupRow)
         });
         // Bestie bez imion numerujemy: Wilk 1, Wilk 2...
         if (npc.creature && npc.name === npc.creature && count > 1) npc.name = `${npc.creature} ${i + 1}`;
@@ -156,6 +216,16 @@
     app.notify(ok ? "Skopiowano całą grupę." : "Nie udało się skopiować.");
   }
 
+  /** Poziom w wierszu: przedzial PD; u stworzen - co poziom oznacza dla tej istoty. */
+  function tierOption(row: GroupRow, t: TierId, i: number): string {
+    if (!row.creature && !row.creatureGroup) return gd.tierLabelXp(t);
+    const min = TIER_IDS.indexOf(baseTier(row.creature ? "c" : "g", (row.creature ?? row.creatureGroup)!));
+    const label = gd.getTier(t).label;
+    if (i < min) return `${label} — osłabiony`;
+    const note = gd.getCreatureFamilies().settings.tierLabels[TIER_IDS[i - min]];
+    return note ? `${label} — ${note}` : label;
+  }
+
   function toggleAll(value: boolean) {
     collapsed = Object.fromEntries(members.map((m) => [m.id, value]));
   }
@@ -186,15 +256,26 @@
       <button class="btn-sm ghost" onclick={importGroups}>Importuj grupy</button>
     </div>
 
-    <label class="group-name">Nazwa grupy
-      <input type="text" bind:value={groupName} placeholder="np. Banda z traktu" />
-    </label>
+    <div class="preset-row">
+      <label class="group-name">Nazwa grupy
+        <input type="text" bind:value={groupName} placeholder="np. Banda z traktu" />
+      </label>
+      <div class="seg" role="group" aria-label="Kreator">
+        <button class="seg-opt" class:active={!detailed} aria-pressed={!detailed} onclick={() => (detailed = false)}>Szybki</button>
+        <button class="seg-opt" class:active={detailed} aria-pressed={detailed} onclick={() => (detailed = true)}>Dokładny</button>
+      </div>
+      <span class="text-dim hint">{detailed ? "Każdy wiersz: płeć, PD, ścieżka profesji, Cechy Stworzeń, wyjątkowa jednostka, linia krwi." : "Liczba, kto i poziom — reszta losowo."}</span>
+    </div>
 
     <div class="rows">
       {#each rows as row, i (i)}
-        <div class="row">
+        <div class="row" class:detailed>
+          <div class="row-main">
           <input class="count" type="number" min="1" max="30" bind:value={row.count} aria-label="Liczba" />
           <span class="x">×</span>
+          <div class="who-search">
+            <Autocomplete bind:value={() => queries[i] ?? "", (v) => (queries[i] = v)} options={searchOptions} placeholder="szukaj…" onpick={(v) => { setWho(row, SEARCH[v]); queries[i] = ""; }} />
+          </div>
           <select value={whoOf(row)} onchange={(e) => setWho(row, (e.currentTarget as HTMLSelectElement).value)} aria-label="Archetyp albo stworzenie">
             <optgroup label="Archetypy">
               {#each gd.allArchetypeNames() as a (a)}<option value={`a:${a}`}>{a}</option>{/each}
@@ -212,13 +293,14 @@
             {/each}
           </select>
           {#if row.creature && gd.isCivilized(row.creature)}
-            <select bind:value={row.archetype} aria-label="Archetyp stworzenia">
+            <select value={row.noArchetype ? "-" : row.archetype} onchange={(e) => { const v = e.currentTarget.value; row.noArchetype = v === "-" || undefined; row.archetype = v === "-" ? "" : v; }} aria-label="Archetyp stworzenia">
               <option value="">profesja wg stworzenia</option>
+              <option value="-">bez profesji (jak bestia)</option>
               {#each gd.allArchetypeNames().filter((a) => !gd.getCreature(row.creature)?.archetypes || a in gd.getCreature(row.creature)!.archetypes!) as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           {/if}
           <select bind:value={row.tier} aria-label="Poziom">
-            {#each TIER_IDS as t (t)}<option value={t}>{gd.getTier(t).label}</option>{/each}
+            {#each TIER_IDS as t, ti (t)}<option value={t}>{tierOption(row, t, ti)}</option>{/each}
           </select>
           {#if !row.creature}
             <select bind:value={row.race} aria-label="Rasa">
@@ -229,6 +311,63 @@
           <input class="label" type="text" placeholder="etykieta" bind:value={row.label} aria-label="Etykieta" />
           <label class="check"><input type="checkbox" bind:checked={row.commander} /> dowódca</label>
           <button class="btn-sm ghost" aria-label="Usuń wiersz" onclick={() => rows.splice(i, 1)}>✕</button>
+          </div>
+          {#if row.creature}
+            {@const c = gd.getCreature(row.creature)}
+            <span class="text-dim small src">{c?.source}, s. {c?.page}{c?.minTier ? ` · od poziomu: ${gd.getTier(c.minTier).label}` : ""}</span>
+          {/if}
+          {#if detailed}
+            <div class="row-detail">
+              {#if !row.creature || hasCareer(row) || row.turned}
+                <label>Płeć
+                  <select value={row.sex ?? ""} onchange={(e) => (row.sex = (e.currentTarget.value || undefined) as Sex | undefined)}>
+                    <option value="">losowo</option>
+                    <option value="M">mężczyzna</option>
+                    <option value="K">kobieta</option>
+                  </select>
+                </label>
+              {/if}
+              {#if hasCareer(row)}
+                <label title="PD ponad tworzenie postaci">PD
+                  <span class="xp-row">
+                    <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={row.xp} />
+                    <select value={row.xpMode ?? "dodaj"} onchange={(e) => (row.xpMode = e.currentTarget.value as "zamiast" | "dodaj")} aria-label="Sposób użycia PD">
+                      <option value="dodaj">dodaj do poziomu</option>
+                      <option value="zamiast">zamiast poziomu</option>
+                    </select>
+                  </span>
+                </label>
+              {/if}
+              {#if isVampire(row)}
+                <label>Linia krwi
+                  <select value={row.bloodline ?? ""} onchange={(e) => (row.bloodline = e.currentTarget.value || undefined)}>
+                    <option value="">losowa</option>
+                    {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
+                  </select>
+                </label>
+                <label class="check"><input type="checkbox" checked={!!row.turned} onchange={(e) => (row.turned = e.currentTarget.checked || undefined)} /> przemiana człowieka</label>
+              {/if}
+              <label title="Profil z Bestiariusza 2.0">Wyjątkowa jednostka
+                <select value={row.heroProfile ?? ""} onchange={(e) => (row.heroProfile = e.currentTarget.value || undefined)}>
+                  <option value="">losowo (mała szansa)</option>
+                  {#each ["Weteran", "Doborowy", "Pomniejszy Bohater", "Wielki Bohater"] as h (h)}<option value={h}>{h}</option>{/each}
+                </select>
+              </label>
+              <label class="check"><input type="checkbox" checked={row.randomTraits !== false} onchange={(e) => (row.randomTraits = e.currentTarget.checked ? undefined : false)} /> dolosuj cechy opcjonalne</label>
+              <div class="traits">
+                <span class="text-dim small">Cechy Stworzeń:</span>
+                {#each randomPool as t (t)}
+                  <button class="chip tap" class:warning={row.traits?.includes(t)} aria-pressed={!!row.traits?.includes(t)} title={gd.getCreatureTrait(t)?.description} onclick={() => toggleRowTrait(row, t)}>{t}</button>
+                {/each}
+              </div>
+              {#if hasCareer(row)}
+                <div class="path-box">
+                  <span class="text-dim small">Ścieżka profesji</span>
+                  <PathEditor bind:path={() => row.path ?? [{ profession: "", level: null }], (p) => (row.path = p)} professions={rowProfessions(row)} sex={row.sex ?? "M"} />
+                </div>
+              {/if}
+            </div>
+          {/if}
         </div>
       {/each}
     </div>
@@ -263,7 +402,7 @@
           </button>
         {:else}
           <div class="member">
-            <NpcCard bind:npc={members[i]} onremove={() => members.splice(i, 1)} removeLabel="Usuń z grupy" />
+            <NpcCard bind:npc={members[i]} onremove={() => members.splice(i, 1)} removeLabel="Usuń z grupy" oncollapse={() => (collapsed[m.id] = true)} />
             <button class="btn-sm ghost collapse-btn" onclick={() => (collapsed[m.id] = true)}>Zwiń ▲</button>
           </div>
         {/if}
@@ -327,10 +466,59 @@
   }
 
   .row {
+    flex-direction: column;
+    align-items: stretch;
     padding: var(--space-2);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--bg-panel-2);
+  }
+
+  .row-main,
+  .row-detail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .row-detail {
+    align-items: flex-end;
+    padding-top: var(--space-2);
+    border-top: 1px dashed var(--border);
+  }
+
+  .row-detail .traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .path-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+  }
+
+  .xp-row {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .xp-row input {
+    width: calc(90px * var(--ui-scale));
+  }
+
+  .who-search {
+    display: flex;
+    width: calc(150px * var(--ui-scale));
+  }
+
+  .src {
+    font-size: var(--fs-sm);
   }
 
   .count {
