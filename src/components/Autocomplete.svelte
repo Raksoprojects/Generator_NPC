@@ -16,7 +16,9 @@
   let open = $state(false);
   let active = $state(-1);
 
-  const norm = (s: string) => s.trim().toLowerCase();
+  /** Bez wielkosci liter i polskich znakow: "zolnierz" znajduje "Żołnierz". */
+  const norm = (s: string) =>
+    s.trim().toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/\p{M}/gu, "");
 
   let matches = $derived.by(() => {
     const q = norm(value);

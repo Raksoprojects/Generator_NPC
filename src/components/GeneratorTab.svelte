@@ -1,5 +1,6 @@
 <script lang="ts">
   import NpcCard from "./NpcCard.svelte";
+  import Autocomplete from "./Autocomplete.svelte";
   import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
@@ -35,6 +36,24 @@
     }
     return out;
   });
+
+  /** Wyszukiwanie stworzenia albo grupy po wpisanym tekscie (podpowiedzi). */
+  let creatureQuery = $state("");
+  const GROUP_PREFIX = "Grupa: ";
+  const creatureSearch = [
+    ...groupTree.flatMap((g) => [g.group, ...g.subgroups.map((s) => `${g.group}${gd.GROUP_SEP}${s}`)]).map((g) => GROUP_PREFIX + g),
+    ...typicalCreatures
+  ];
+  function pickSearch(v: string) {
+    if (v.startsWith(GROUP_PREFIX)) {
+      creatureGroup = v.slice(GROUP_PREFIX.length);
+      creature = "";
+    } else {
+      creatureGroup = "";
+      creature = v;
+    }
+    creatureQuery = "";
+  }
 
   // Stworzenie spoza nowo wybranej grupy - wracamy do losowania z grupy.
   $effect(() => {
@@ -94,6 +113,20 @@
     if (xpValue == null || !Number.isFinite(v) || v <= 0) return {};
     return xpMode === "zamiast" ? { xp: Math.round(v) } : { xpBonus: Math.round(v) };
   });
+
+  /**
+   * Poziom stworzenia z przedzialem PD: u bestii PD ponad profil z ksiazki (liczone od
+   * minimalnego poziomu stworzenia), u stworzen z profesja - jak u ras.
+   */
+  function creatureTierLabel(t: TierId, i: number): string {
+    if (!beastMode) return gd.tierLabelXp(t);
+    const label = gd.getTier(t).label;
+    if (i < minTierIdx) return label;
+    const [lo, hi] = gd.getTier(t).xp ?? [0, 0];
+    const shift = gd.getTier(TIER_IDS[minTierIdx]).xp?.[0] ?? 0;
+    const fmt = (n: number) => n.toLocaleString("pl-PL");
+    return `${label} (${fmt(lo - shift)}${i === TIER_IDS.length - 1 ? "+" : `–${fmt(hi - shift)}`} PD)`;
+  }
 
   /** Bestia (bez profesji) moze wystapic ponizej swojego minimum - osłabiona, z cechami negatywnymi. */
   let beastMode = $derived(!!creature && (!civilized || archetype === NO_CAREER));
@@ -167,7 +200,7 @@
         randomTraits,
         commander,
         heroProfiles: exceptional ? [exceptional] : [],
-        ...(civilized && archetype !== NO_CAREER ? xpSpec : {}),
+        ...xpSpec,
         deterministic: mode === "wlasny"
       };
     }
@@ -221,10 +254,14 @@
   <label class="xp-field" title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
     <span class="xp-row">
       <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpValue} />
-      <select bind:value={xpMode} aria-label="Sposób użycia PD">
-        <option value="dodaj">dodaj do poziomu</option>
-        <option value="zamiast">zamiast poziomu</option>
-      </select>
+      {#if tier}
+        <select bind:value={xpMode} aria-label="Sposób użycia PD">
+          <option value="dodaj">dodaj do poziomu</option>
+          <option value="zamiast">zamiast poziomu</option>
+        </select>
+      {:else}
+        <span class="text-dim small xp-auto" title="Bez wybranego poziomu PD są całym budżetem, a poziom wynika z przedziału, w który wpadają">poziom wg PD</span>
+      {/if}
     </span>
   </label>
 {/snippet}
@@ -248,6 +285,9 @@
 
     {#if mode !== "losowy" && kind === "stworzenia"}
       <div class="form">
+        <label class="search">Szukaj
+          <Autocomplete bind:value={creatureQuery} options={creatureSearch} placeholder="wpisz stworzenie albo grupę…" onpick={pickSearch} />
+        </label>
         <label>Grupa
           <select bind:value={creatureGroup}>
             <option value="">— wszystkie —</option>
@@ -294,13 +334,13 @@
           <select bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each TIER_IDS as t, i (t)}
-              <option value={t} disabled={i < minTierIdx && !beastMode}>{gd.getTier(t).label}{beastMode && i < minTierIdx ? ` — osłabiony (${minTierIdx - i} ${minTierIdx - i === 1 ? "cecha negatywna" : "cechy negatywne"})` : !civilized || !archetype
+              <option value={t} disabled={i < minTierIdx && !beastMode}>{creatureTierLabel(t, i)}{beastMode && i < minTierIdx ? ` — osłabiony (${minTierIdx - i} ${minTierIdx - i === 1 ? "cecha negatywna" : "cechy negatywne"})` : !civilized || !archetype
                   ? ` — ${gd.getCreatureFamilies().settings.tierLabels[TIER_IDS[Math.max(0, i - minTierIdx)]]}`
                   : ""}</option>
             {/each}
           </select>
         </label>
-        {#if civilized && archetype !== NO_CAREER}{@render xpField()}{/if}
+        {@render xpField()}
         <label>Imię
           <input type="text" placeholder="nazwa stworzenia" bind:value={name} />
         </label>
@@ -325,7 +365,7 @@
         <label>Poziom
           <select bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
-            {#each TIER_IDS as t (t)}<option value={t}>{gd.getTier(t).label}</option>{/each}
+            {#each TIER_IDS as t (t)}<option value={t}>{gd.tierLabelXp(t)}</option>{/each}
           </select>
         </label>
         {@render xpField()}
@@ -416,6 +456,7 @@
   .xp-row {
     display: flex;
     gap: 0.3rem;
+    align-items: center;
   }
   .xp-row input {
     width: 6.5rem;
