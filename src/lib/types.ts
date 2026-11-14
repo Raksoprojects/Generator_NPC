@@ -575,6 +575,10 @@ export interface TreasuresData {
   chances: Record<TierId, number[]>;
   runic: RunicData;
   fitWeight: number;
+  /** Mnoznik wagi szablonu wg rodzaju (drobiazgi czesciej niz bron i pancerz). */
+  kindWeight?: Partial<Record<TreasureDef["kind"], number>>;
+  /** Mnoznik szans na przedmioty magiczne (nie runiczne) wg rasy - krasnoludy rzadziej. */
+  itemRaceMult?: Record<string, number>;
   craft: CraftData;
   runes: Record<"weapon" | "armour" | "talisman", RuneDef[]>;
   chaosProperties: ChaosPropertyDef[];

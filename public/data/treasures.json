@@ -2,31 +2,30 @@
  "note": "Przedmioty magiczne BN i jakość wykonania. 'chances' = szanse na kolejne przedmioty na danym poziomie (tylko istoty rozumne). Szablony z 'for…' trafiają tylko do pasujących BN (rasa, grupa stworzeń, talent, tradycja); 'replaces' = broń/pancerz tego typu zastąpiony przedmiotem; 'runes' / 'chaos' = losowane runy (Krasnoludy s. 127–130) albo właściwości Broni Chaosu (Warriors of Chaos s. 35–43). 'effects' liczą się w statystykach.",
  "chances": {
   "slaby": [],
-  "sredni": [],
+  "sredni": [
+   0.001
+  ],
   "zaawansowany": [
    0.01
   ],
   "doswiadczony": [
-   0.05,
-   0.01
+   0.04,
+   0.005
   ],
   "heroiczny": [
-   0.3,
-   0.1,
-   0.02
+   0.15,
+   0.03
   ],
   "legendarny": [
    1,
-   1,
    0.5,
-   0.2
+   0.15
   ],
   "heros": [
    1,
    1,
-   1,
    0.5,
-   0.2
+   0.15
   ]
  },
  "runic": {
@@ -34,20 +33,20 @@
   "temporary": {
    "sredni": 0.0001,
    "zaawansowany": 0.01,
-   "doswiadczony": 0.08,
-   "heroiczny": 0.12,
-   "legendarny": 0.18,
-   "heros": 0.22
+   "doswiadczony": 0.04,
+   "heroiczny": 0.08,
+   "legendarny": 0.12,
+   "heros": 0.15
   },
   "permanent": {
-   "zaawansowany": 0.01,
-   "doswiadczony": 0.03,
-   "heroiczny": 0.08,
-   "legendarny": 0.25,
-   "heros": 0.38
+   "zaawansowany": 0.0025,
+   "doswiadczony": 0.01,
+   "heroiczny": 0.03,
+   "legendarny": 0.08,
+   "heros": 0.15
   },
   "raceMult": {
-   "Krasnolud": 2.3,
+   "Krasnolud": 12,
    "Wysoki elf": 0.2,
    "Leśny elf": 0.2
   },
@@ -109,6 +108,15 @@
   }
  },
  "fitWeight": 3,
+ "kindWeight": {
+  "weapon": 0.4,
+  "armour": 0.5,
+  "item": 1.5,
+  "potion": 1.5
+ },
+ "itemRaceMult": {
+  "Krasnolud": 0.3
+ },
  "craft": {
   "note": "Jakość wykonania broni i pancerzy BN (PG s. 291–293). Niski poziom BN = częściej Wady, wysoki = częściej Zalety. Szanse z 'tiers' mnożą 'flawMult' / 'qualityMult' z pasujących modyfikatorów (rasa, grupa stworzeń, archetyp). 'always' = Zalety, które przedmiot ma zawsze (elfie wyroby). Materiały (gromril, ithilmar) losowane wg 'chance' dla poziomu.",
   "qualities": {

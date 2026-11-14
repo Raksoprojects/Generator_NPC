@@ -23,18 +23,18 @@ const magicCount = (spec: Parameters<typeof generateNpc>[0], n = 200) => {
 };
 
 describe("przedmioty magiczne", () => {
-  it("szanse rosna z poziomem; legendarny ma co najmniej dwa, bestie zadnego", () => {
+  it("szanse rosna z poziomem; od Legendy co najmniej jeden, bestie zadnego", () => {
     const tiers: TierId[] = ["sredni", "zaawansowany", "doswiadczony", "heroiczny"];
     const counts = tiers.map((tier) => magicCount({ archetype: "Wojownik", tier, race: "Człowiek" }).npcs);
-    expect(counts[0]).toBe(0);
+    expect(counts[0]).toBeLessThanOrEqual(1);
     expect(counts[1]).toBeLessThan(10);
     expect(counts[2]).toBeGreaterThan(counts[1]);
-    // Heroiczny ~30% (zaawansowany 1%, doswiadczony 5%).
-    expect(counts[3]).toBeGreaterThan(35);
-    expect(counts[3]).toBeLessThan(90);
+    // Ekspert ~15% (Zwykly 0,1%, Niezwykly 1%, Zaawansowany 4%).
+    expect(counts[3]).toBeGreaterThan(10);
+    expect(counts[3]).toBeLessThan(60);
     for (let seed = 1; seed <= 30; seed++) {
       const legend = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Człowiek" }, seedRng(seed));
-      expect(legend.magicItems!.length).toBeGreaterThanOrEqual(2);
+      expect(legend.magicItems!.length).toBeGreaterThanOrEqual(1);
       const dragon = generateNpc({ creature: "Smok", tier: "legendarny" }, seedRng(seed));
       expect(dragon.magicItems ?? []).toEqual([]);
     }
@@ -93,13 +93,18 @@ describe("przedmioty magiczne", () => {
     expect(runic("Krasnolud", "slaby")).toEqual({ temporary: 0, permanent: 0 });
     const avgDwarf = runic("Krasnolud", "sredni");
     expect(avgDwarf.permanent).toBe(0);
-    // Zwykly: runy tymczasowe 0,01% - praktycznie nigdy; od Niezwyklego 1% (krasnolud x2,3).
+    // Zwykly: runy tymczasowe 0,01% (krasnolud 0,12%) - praktycznie nigdy; Niezwykly 1% (krasnolud 12%).
     expect(runic("Krasnolud", "zaawansowany").temporary).toBeGreaterThan(0);
     const human = runic("Człowiek", "doswiadczony");
     const dwarf = runic("Krasnolud", "doswiadczony");
     expect(human.permanent).toBeGreaterThan(0);
-    expect(dwarf.permanent).toBeGreaterThan(human.permanent * 1.5);
-    expect(dwarf.temporary).toBeGreaterThan(human.temporary * 1.5);
+    expect(dwarf.permanent).toBeGreaterThan(human.permanent * 4);
+    expect(dwarf.temporary).toBeGreaterThan(human.temporary * 4);
+    // Runy tymczasowe czestsze niz trwale.
+    expect(dwarf.temporary).toBeGreaterThan(dwarf.permanent);
+    // Krasnoludy: inne przedmioty magiczne rzadziej niz u ludzi.
+    const general = (race: string) => magicCount({ archetype: "Wojownik", tier: "heroiczny", race }, 400).npcs;
+    expect(general("Krasnolud")).toBeLessThan(general("Człowiek"));
     for (let seed = 1; seed <= 40; seed++) {
       const goblin = generateNpc({ creature: "Goblin", tier: "legendarny" }, seedRng(seed));
       expect((goblin.magicItems ?? []).some((m) => m.runes)).toBe(false);
@@ -149,7 +154,7 @@ describe("przedmioty magiczne", () => {
     // Losowanie nie wywraca sie dla zadnego poziomu.
     const npc = generateNpc({ archetype: "Czarodziej", tier: "legendarny", race: "Wysoki elf" }, seedRng(2));
     rollTreasures(npc, seedRng(3));
-    expect(npc.magicItems!.length).toBeGreaterThanOrEqual(2);
+    expect(npc.magicItems!.length).toBeGreaterThanOrEqual(1);
   });
 });
 

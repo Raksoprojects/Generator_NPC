@@ -5,8 +5,9 @@
  *   wyzsi - Wytrzymale i Wysmienite; zielonoskorzy i skaveny gorzej, krasnoludy
  *   i elfy lepiej (elfie wyroby zawsze Wytrzymały 1, Wyśmienity 1). Gromril i
  *   ithilmar trafiaja sie bohaterom swoich ras.
- * - Przedmioty magiczne: tylko istoty rozumne; szanse wg poziomu (zaawansowany 1%,
- *   doswiadczony 5%, heroiczny 30%, legendarny co najmniej dwa). Losowane z
+ * - Przedmioty magiczne: tylko istoty rozumne; rzadkie, szanse wg poziomu (treasures.json ->
+ *   chances; od Legendy co najmniej jeden), drobiazgi czesciej niz bron i pancerz (kindWeight),
+ *   krasnoludy rzadziej (itemRaceMult), za to znacznie czesciej runy (runic.raceMult). Losowane z
  *   szablonow pasujacych do BN - runy dla krasnoludow, Bron Chaosu dla slug
  *   Chaosu, artefakty wampirow, zaklete przedmioty elfow, przeklete przedmioty.
  */
@@ -355,18 +356,22 @@ function potionName(npc: Npc, rng: Rng): string | undefined {
 }
 
 /**
- * Przedmioty magiczne BN wg poziomu: kolejne z malejaca szansa (legendarny - co
- * najmniej dwa). Szablony pasujace do BN (rasa, grupa, talent) sa bardziej prawdopodobne.
+ * Przedmioty magiczne BN wg poziomu: kolejne z malejaca szansa (od Legendy - co
+ * najmniej jeden). Szablony pasujace do BN (rasa, grupa, talent) sa bardziej prawdopodobne.
  */
 export function rollTreasures(npc: Npc, rng: Rng, deterministic = false): void {
   npc.magicItems = [];
   const data = gd.getTreasures();
   if (!data || !isRational(npc)) return;
-  for (const p of data.chances[npc.tier] ?? []) {
+  // Krasnoludy: runy zamiast innych przedmiotow magicznych (pewne przedmioty - szansa 1 - bez zmian).
+  const mult = npc.creature ? 1 : (data.itemRaceMult?.[npc.race] ?? 1);
+  for (const raw of data.chances[npc.tier] ?? []) {
+    const p = raw >= 1 ? 1 : raw * mult;
     if (deterministic ? p < 1 : !chance(p, rng)) break;
     const pool = data.items.filter((t) => !t.runes && fits(npc, t, npc.magicItems!));
     const specific = (t: TreasureDef) => !!(t.forRaces || t.forGroups || t.forTalents || t.forLores || t.forBloodlines);
-    const weight = (t: TreasureDef) => t.weight * (specific(t) ? data.fitWeight : 1);
+    // Drobiazgi (amulety, pierscienie, mikstury) czesciej niz zaklete bronie i pancerze.
+    const weight = (t: TreasureDef) => t.weight * (specific(t) ? data.fitWeight : 1) * (data.kindWeight?.[t.kind] ?? 1);
     const t = deterministic ? [...pool].sort((a, b) => weight(b) - weight(a))[0] : weightedPick(pool, weight, rng);
     if (!t) break;
     const item: NpcMagicItem = { template: t.name, name: t.name };
