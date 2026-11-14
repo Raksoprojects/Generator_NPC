@@ -63,7 +63,7 @@ W danych poziomy mają stałe identyfikatory, a nazwy wyświetlane to:
 12. Jeśli profesje podano ręcznie, generator używa tylko ich.
 13. **Profile bohaterów** nie wynikają z poziomu. Dostępne: Weteran i Doborowy (generator), Pomniejszy i Wielki Bohater [B2.0], Dowódca Oddziału. Nadawane ręcznie („Wyjątkowa jednostka”) albo z małej szansy poziomu (tabela wyżej, najwyżej 5% łącznie). Legendarny Bohater usunięty.
 14. Na karcie BN widać wydane PD.
-15. **PD ręcznie** (generator i edycja karty): „dodaj do poziomu” dokłada PD do budżetu poziomu, „zamiast poziomu” ustala budżet. Bez wybranego poziomu BN dostaje poziom wg PD (najwyższy, którego zakres zaczyna się nie wyżej). Przebudowa rozwoju zachowuje podane PD.
+15. **PD ręcznie** (generator, kreator grup i edycja karty): „dodaj do poziomu” dokłada PD do budżetu poziomu, „zamiast poziomu” ustala budżet. Bez wybranego poziomu PD są całym budżetem, a BN dostaje poziom wg PD (najwyższy, którego zakres zaczyna się nie wyżej). Przebudowa rozwoju zachowuje podane PD. Listy poziomów pokazują przedział PD, np. „Zwykły (1000–1900 PD)”.
 
 **Przykładowe wartości** (człowiek, średnia z 40 losowań, w nawiasie zakres):
 
@@ -81,7 +81,13 @@ Splatanie i Rzucanie mają też premie PS (rozdział 4), których tabela nie zaw
 
 ### 1.2 Bestie (stworzenia bez profesji)
 
-Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia. Poziom liczy się od minimalnego poziomu stworzenia: Wybraniec Chaosu występuje od Zaawansowanego, więc na Zaawansowanym ma profil z książki. Bestie nie rozwijają się za PD.
+Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia (pasowanie × 0,5). Profil z książki to BN, który dopiero wszedł na minimalny poziom stworzenia.
+
+**Rozwój za PD [dom]** (jak u ludzi, koszty z PG s. 47):
+- budżet = PD poziomu z `tiers.json` minus początek przedziału minimalnego poziomu stworzenia. Szkielet (od Nowicjusza): Nowicjusz 0–600, Zwykły 800–1700, Niezwykły 2000–4800 PD itd. Wybraniec Chaosu (od Zaawansowanego): na Zaawansowanym 0–4500 PD;
+- PD idą na cechy WW, S, Wt, I, Zw (priorytet WW 2, reszta 1) i umiejętności: rodziny (pasowanie ≥30 → priorytet 3, ≥20 → 2, reszta 1), z książki (1), Odporność i Opanowanie (2), Unik (1); Opanowanie tylko, gdy stworzenie ma SW;
+- waga = priorytet² / koszt, jak u ludzi — drogie rozwinięcia kupowane rzadziej, więc wzrost łagodnieje;
+- PD ręcznie: jak u ludzi; same PD bez poziomu wyznaczają poziom (PD + początek przedziału minimum).
 
 **Bestia poniżej swojego minimum [dom]** (np. olbrzym na Nowicjuszu, gdy poziom wybrano ręcznie, albo 15% losowań z grupy): profil z książki i **jedna cecha negatywna za każdy poziom poniżej minimum**. Cechy negatywne (zasada domowa — podręcznik ich nie ma) są też w zwykłej puli losowanych Cech Stworzeń:
 
@@ -97,12 +103,12 @@ Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia. Poziom lic
 
 | Poziom (od minimum stworzenia) | 1. | 2. | 3. | 4. | 5. | 6. | 7. |
 |---|---|---|---|---|---|---|---|
-| Premia do wszystkich umiejętności | 0 | +10 | +20 | +30 | +40 | +60 | +80 |
-| Rozwinięcia WW, S, Wt, I, Zw | 0 | +10 | +20 | +30 | +40 | +60 | +80 |
 | Cechy Stworzeń rodziny | 0 | 1 | 1 | 2 | 3 | 4 | 5 |
 | Szansa na cechę opcjonalną | 0 | 25% | 50% | 75% | 100% | 100% | 100% |
 
 - Int, SW i Ogd bestii zostają jak w książce.
+- **Cechy Stworzeń wg siły [dom]:** waga z rodziny × (20 / siła)^1,5, gdzie siła = suma dodatnich modyfikatorów (Twardy 20, Zabijaka 30, Elitarny 60). Cechy o sile od 50 (Elitarny) dopiero od 3. poziomu stworzenia (Niezwykły dla szkieleta). Dotyczy też cech dolosowywanych.
+- **Średnie z 1000 losowań** (Broń Biała; Now/Zwy/Nzw/Zaa/Eks/Leg/Her): człowiek Wojownik 63/67/75/89/124/169/210; szkielet przy stałych premiach 38/68/88/118/148/188/228 (Elitarny u 47% zwykłych), przy PD 43/55/72/102/146/186/227.
 - Opisy poziomów: typowy osobnik → rosły osobnik → doświadczony łowca/weteran stada → przewodnik stada → bestia z legend → mityczna bestia → boska bestia, awatar pradawnej potęgi.
 
 **Profile bohaterów** — z wyboru albo małej szansy poziomu, dodawane do cech:
@@ -185,6 +191,8 @@ Mnożniki run: krasnoludy ×2,3, elfy ×0,2. Stworzenia nie mają run.
     - **Zmiana płci w edycji** (wybór albo 🎲): nowe imię, cechy charakteru, manieryzm, znak szczególny i potrzeba w formach nowej płci (wartości z list, np. akcent, zostają); znak tylko dla dawnej płci (broda) losowany od nowa.
     - **Edycja broni i pancerza:** zamiana na inny przedmiot (Zalety/Wady wykonania i zaklęcie przechodzą); dodawanie i usuwanie Zalet/Wad wykonania [PG s. 291–293] i cech broni/pancerza [PG s. 297–301] — Wady z podręcznika (Ciężka, Tępa, Częściowy…) trafiają do Wad; zaklęcie wybranym szablonem albo „Odczaruj”. Szablon z konkretną bronią (np. Topór Nieokiełznanej Furii) zamienia wskazaną broń; zaklęty pancerz, runy i gromril działają na cały pancerz.
     - **Edycja przedmiotów magicznych:** nazwa, runy, właściwości Broni Chaosu, demon, mikstura; 🎲 losuje je od nowa w tym samym szablonie; osobne przedmioty dodaje się z listy szablonów.
+    - **Karta stworzenia:** źródło profilu (podręcznik, strona); w bloku tekstowym linia „Źródło”.
+    - **Kreator grup:** tryb Szybki (liczba, kto, poziom) albo Dokładny (dla każdego wiersza płeć, PD, ścieżka profesji, Cechy Stworzeń, wyjątkowa jednostka, linia krwi, stworzenie bez profesji). Wybór stworzenia ustawia jego podstawowy (minimalny) poziom; lista poziomów opisuje, czym jest dany poziom dla tej istoty. Wyszukiwanie z podpowiedziami (archetyp, grupa, stworzenie; bez polskich znaków też działa) w wierszu grupy i w generatorze stworzeń. Kartę w grupie zwija klik w nagłówek obok imienia.
 14. **Karta BN — kolejność:** cechy; linia kluczowych testów (najlepsza Broń Biała albo WW, najlepsza Broń Zasięgowa, Unik, Odporność, Opanowanie, Percepcja — bez rozwinięć test na samej cesze [PG s. 117]; w drugiej linii 4 najlepsze pozostałe umiejętności); walka (broń z Zaletami i Wadami, pancerz, redukcja obrażeń); umiejętności, talenty, cechy, zaklęcia; osobowość i wygląd; na końcu wyposażenie z pieniędzmi.
 
 ---
