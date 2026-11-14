@@ -260,25 +260,36 @@ export function traitStrength(name: string): number {
   return Object.values(mods).reduce((s: number, v) => s + Math.max(0, Number(v) || 0), 0);
 }
 
-/** Cechy o sile od STRONG_TRAIT dopiero od poziomu STRONG_TRAIT_TIER (wzgledem minimum stworzenia). */
-const STRONG_TRAIT = 50;
-const STRONG_TRAIT_TIER: TierId = "zaawansowany";
+/**
+ * Mnoznik wagi cechy wg sily: (20 / sila)^2, najwyzej 1 - Twardy (20) bez zmian,
+ * Zabijaka (30) x0,44, Elitarny (60) x0,11. Mocne cechy rzadsze, ale mozliwe na kazdym poziomie.
+ */
+export function traitStrengthFactor(name: string): number {
+  return Math.min(1, (20 / Math.max(traitStrength(name), 1)) ** 2);
+}
 
 /**
- * Wagi Cech Stworzen rodziny (losowanie cech bestii): waga z rodziny x (20 / sila)^1,5 -
- * im mocniejszy modyfikator, tym rzadszy; najsilniejsze dopiero od Niezwyklego.
+ * Czy cecha pasuje do stworzenia: nie zmienia Int, SW ani Ogd istoty, ktora tej cechy
+ * nie ma (szkielet bez SW), a Ogladu nie podnosi bestiom (zwierzeta, potwory).
  */
-export function familyTraitWeights(creature: CreatureDef | undefined, npc?: Pick<Npc, "tier">): Record<string, number> | undefined {
+export function traitFitsCreature(creature: CreatureDef | undefined, name: string): boolean {
+  if (!creature) return true;
+  const mods = gd.getCreatureTrait(name)?.modifiers ?? {};
+  for (const code of ["Int", "SW", "Ogd"] as const) if (mods[code] && creature.stats[code] == null) return false;
+  return !((mods.Ogd ?? 0) > 0 && !gd.isCivilized(creature.name));
+}
+
+/** Wagi Cech Stworzen rodziny (losowanie cech bestii): tylko pasujace do stworzenia. */
+export function familyTraitWeights(creature: CreatureDef | undefined): Record<string, number> | undefined {
   const base = creature ? gd.getCreatureFamilies().families[creature.family]?.traits : undefined;
   if (!base || !creature) return base;
-  const tierIdx = npc ? TIER_IDS.indexOf(beastTier(npc, creature)) : TIER_IDS.length;
-  const out: Record<string, number> = {};
-  for (const [name, w] of Object.entries(base)) {
-    const strength = traitStrength(name);
-    if (strength >= STRONG_TRAIT && tierIdx < TIER_IDS.indexOf(STRONG_TRAIT_TIER)) continue;
-    out[name] = w * Math.min(1, (20 / Math.max(strength, 1)) ** 1.5);
-  }
-  return out;
+  return Object.fromEntries(Object.entries(base).filter(([name]) => traitFitsCreature(creature, name)));
+}
+
+/** Liczba z ulamkiem: 1,5 = jedna i 50% szans na druga. */
+function fractionalCount(x: number, rng: Rng, deterministic: boolean): number {
+  const whole = Math.floor(x);
+  return whole + (deterministic ? (x - whole >= 0.5 ? 1 : 0) : chance(x - whole, rng) ? 1 : 0);
 }
 
 /** Cechy Stworzen wynikajace z poziomu bestii oraz cechy "Opcjonalne" z ksiazki. */
@@ -286,8 +297,10 @@ export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, determini
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
   const tier: TierId = beastTier(npc, creature);
-  const count = fam.settings.traitCount[tier] ?? 0;
-  const weights = { ...(familyTraitWeights(creature, npc) ?? family?.traits ?? {}) };
+  const count = fractionalCount(fam.settings.traitCount[tier] ?? 0, rng, deterministic);
+  const weights = Object.fromEntries(
+    Object.entries(familyTraitWeights(creature) ?? family?.traits ?? {}).map(([n, w]) => [n, w * traitStrengthFactor(n)])
+  );
   for (let i = 0; i < count; i++) {
     for (const t of npc.traits) delete weights[t];
     const t = deterministic ? Object.entries(weights).sort((a, b) => b[1] - a[1])[0]?.[0] : weightedKey(weights, rng);
@@ -297,15 +310,25 @@ export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, determini
   // Bestia ponizej swojego minimalnego poziomu (np. olbrzym na Nowicjuszu): mlody, chory albo slaby
   // osobnik - jedna cecha negatywna (Slaby, Chorowity...) za kazdy poziom ponizej minimum.
   const below = TIER_IDS.indexOf(creature.minTier ?? "slaby") - TIER_IDS.indexOf(npc.tier);
-  const negative = Object.entries(gd.getCreatureTraits()).filter(([n, t]) => t.negative && !npc.traits.includes(n)).map(([n]) => n);
+  const negative = Object.entries(gd.getCreatureTraits())
+    .filter(([n, t]) => t.negative && !npc.traits.includes(n) && traitFitsCreature(creature, n))
+    .map(([n]) => n);
   for (let i = 0; i < below && negative.length; i++) {
     const n = deterministic ? negative[0] : negative[randInt(0, negative.length - 1, rng)];
     npc.traits.push(n);
     negative.splice(negative.indexOf(n), 1);
   }
 
-  const optional = usableOptional(creature).filter((o) => !npc.traits.includes(o));
-  if (optional.length && !deterministic && chance(fam.settings.optionalChance[tier] ?? 0, rng)) {
+  rollBookOptional(npc, creature, tier, rng, deterministic);
+}
+
+/**
+ * Cecha "Opcjonalna" z bloku stworzenia z szansa poziomu (optionalChance) - u bestii
+ * i u przemienionych wampirow (profil Wampira z bestiariusza ma liste opcjonalnych).
+ */
+export function rollBookOptional(npc: Npc, creature: CreatureDef, tier: TierId, rng: Rng, deterministic = false, skip: (t: string) => boolean = () => false): void {
+  const optional = usableOptional(creature).filter((o) => !npc.traits.includes(o) && !skip(o));
+  if (optional.length && !deterministic && chance(gd.getCreatureFamilies().settings.optionalChance[tier] ?? 0, rng)) {
     npc.traits.push(optional[randInt(0, optional.length - 1, rng)]);
   }
 }

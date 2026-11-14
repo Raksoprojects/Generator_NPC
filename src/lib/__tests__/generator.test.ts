@@ -230,12 +230,10 @@ describe("specjalizacje", () => {
 
 describe("cechy opcjonalne", () => {
   it("jeden rzut k100: 1 = 3 cechy, 2-5 = 2, 6-20 = 1, reszta = 0", () => {
-    expect(traitCountForRoll(1)).toBe(3);
-    expect(traitCountForRoll(2)).toBe(2);
-    expect(traitCountForRoll(5)).toBe(2);
-    expect(traitCountForRoll(6)).toBe(1);
-    expect(traitCountForRoll(20)).toBe(1);
-    expect(traitCountForRoll(21)).toBe(0);
+    expect(traitCountForRoll(1)).toBe(2);
+    expect(traitCountForRoll(2)).toBe(1);
+    expect(traitCountForRoll(8)).toBe(1);
+    expect(traitCountForRoll(9)).toBe(0);
     expect(traitCountForRoll(100)).toBe(0);
   });
 

@@ -20,6 +20,12 @@ function bookNpc(c: CreatureDef): Npc {
     const { die } = creatureBase(c, code);
     npc.rolls[code as Attribute] = die === "1k10" ? (v ?? 0) : 10;
   }
+  // Wampir zawsze powstaje z przemiany - tu potrzebny sam profil z ksiazki (bez talentow z profesji).
+  if (npc.turned) {
+    delete npc.turned;
+    npc.archetype = "";
+    npc.talents = [];
+  }
   npc.traits = [];
   npc.mutations = [];
   npc.charAdvances = Object.fromEntries(ATTRIBUTES.map((a) => [a, 0])) as Npc["charAdvances"];
@@ -93,9 +99,10 @@ describe("rozwoj bestii", () => {
     expect(weak.xp!.spent).toBeLessThanOrEqual(300);
     const advances = (n: Npc) => Object.values(n.charAdvances).reduce((a, b) => a + b, 0) + n.skills.reduce((a, s) => a + s.advances, 0);
     expect(advances(mid)).toBeGreaterThan(advances(weak));
-    expect(mid.traits.length).toBe(1);
+    // Cechy Stworzen: 0,25 na Zwyklym, 0,75 na Zaawansowanym (deterministycznie: 0 i 1).
+    expect(mid.traits.length).toBe(0);
     expect(advances(top)).toBeGreaterThan(advances(mid));
-    expect(top.traits.length).toBe(2);
+    expect(top.traits.length).toBe(1);
   });
 
   it("slaba bestia z podrecznika dostaje umiejetnosci rodziny (niedzwiedz: Bijatyka)", () => {
@@ -274,8 +281,15 @@ describe("rozwoj bestii", () => {
       expect(line.turning!.skills.filter((s) => owned.has(gd.splitSpec(s).base)).length).toBeGreaterThanOrEqual(6);
       expect(turned.heroProfiles).toEqual([]);
     }
-    const book = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: "Von Carstein", deterministic: true }, seedRng(1));
-    expect(book.turned).toBeUndefined();
+    // Jedyna metoda: przemiana (bez profilu z bestiariusza).
+    const any = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: "Von Carstein", deterministic: true }, seedRng(1));
+    expect(any.turned).toBe(true);
+    // Wybrany archetyp: linia, ktora go dopuszcza (Strigoi nie ma profesji czarodzieja).
+    for (let seed = 1; seed <= 40; seed++) {
+      const w = generateNpc({ creature: "Wampir", archetype: "Czarodziej", tier: "doswiadczony" }, seedRng(seed));
+      expect(w.archetype).toBe("Czarodziej");
+      expect(w.mutations.find((m) => m.kind === "bloodline")?.name).not.toBe("Strigoi");
+    }
   });
 
   it("Strigoi: proste profesje, bez zwyklego pancerza", () => {
@@ -334,7 +348,8 @@ describe("rozwoj bestii", () => {
   });
 
   it("wampir dostaje Linie Krwi, 6 Slabosci, Dary Krwi wg poziomu, Wiek i nekromancje", () => {
-    const v = generateNpc({ creature: "Wampir", tier: "heroiczny" }, seedRng(2));
+    // Nekrarcha czaruje zawsze (inne linie - z szansa poziomu).
+    const v = generateNpc({ creature: "Wampir", tier: "heroiczny", bloodline: "Nekrarcha" }, seedRng(2));
     const kinds = (k: string) => v.mutations.filter((m) => m.kind === k);
     expect(kinds("bloodline")).toHaveLength(1);
     expect(kinds("weakness")).toHaveLength(6);

@@ -6,7 +6,7 @@
  * linii, a Splatanie i Jezyk (Magiczny) ma tym wyzsze, im linia bardziej sklonna do czarow.
  */
 
-import { chance, pick, randInt, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
+import { chance, pick, randInt, weightedKey, weightedPick, type Rng } from "./dice";
 import * as gd from "./gameData";
 import { TIER_IDS, type Npc, type NpcMutation, type VampiresData } from "./types";
 
@@ -20,13 +20,29 @@ export function findBloodline(name: string | undefined): Bloodline | undefined {
   return gd.getVampires()?.bloodlines.find((b) => b.name === name);
 }
 
-/** Linia Krwi z tabeli k100 (albo wybrana). */
-export function rollBloodline(rng: Rng, deterministic = false, chosen?: string): string | undefined {
+/** Czy Preferowane Profesje linii (Strigoi: tylko proste) obejmuja jakas profesje archetypu. */
+export function bloodlineFitsArchetype(bloodline: string | undefined, archetype: string | undefined): boolean {
+  const allowed = findBloodline(bloodline)?.professions;
+  const arch = archetype ? gd.getArchetype(archetype) : undefined;
+  if (!allowed || !arch) return true;
+  return Object.keys(arch.professions).some((p) => allowed.includes(p));
+}
+
+/** Linia Krwi z tabeli k100 (albo wybrana); przy wybranym archetypie - tylko linia, ktora go dopuszcza. */
+export function rollBloodline(rng: Rng, deterministic = false, chosen?: string, archetype?: string): string | undefined {
   const data = gd.getVampires();
   if (!data) return undefined;
   if (findBloodline(chosen)) return chosen;
-  const roll = deterministic ? 70 : rollK100(rng);
-  return (data.bloodlines.find((b) => roll >= b.min && roll <= b.max) ?? data.bloodlines[0]).name;
+  const lines = data.bloodlines.filter((b) => bloodlineFitsArchetype(b.name, archetype));
+  const pool = lines.length ? lines : data.bloodlines;
+  // Rzut k100 tylko po pasujacych liniach - zachowuje proporcje tabeli miedzy nimi.
+  const span = pool.reduce((s, b) => s + b.max - b.min + 1, 0);
+  let roll = deterministic ? Math.ceil(span * 0.7) : randInt(1, span, rng);
+  for (const b of pool) {
+    roll -= b.max - b.min + 1;
+    if (roll <= 0) return b.name;
+  }
+  return pool[0].name;
 }
 
 export function npcBloodline(npc: Npc): Bloodline | undefined {

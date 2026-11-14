@@ -17,7 +17,7 @@
  * niezablokowane sekcje istniejacego BN.
  */
 
-import { beastSkills, beastTraits, beastXpBudget, beastXpDevelop, bookSkillsAndTalents, familyTraitWeights, rollCreature } from "./creatures";
+import { beastSkills, beastTraits, beastXpBudget, beastXpDevelop, bookSkillsAndTalents, rollBookOptional, traitFitsCreature, traitStrengthFactor, familyTraitWeights, rollCreature } from "./creatures";
 import { advanceCost, CAREER_STEP_COST, CLASS_CHANGE_EXTRA, levelRequirement, nextAdvanceCost, talentCost } from "./xp";
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { equipNpc } from "./equipment";
@@ -905,7 +905,7 @@ export function rollMoney(status: string, rng: Rng, deterministic = false): stri
 // Etap 5-6: cechy opcjonalne i profile bohaterow
 // ---------------------------------------------------------------------------
 
-/** Liczba cech opcjonalnych z jednego rzutu k100 (domyslnie 1: 3 cechy, 2-5: 2, 6-20: 1). */
+/** Liczba cech opcjonalnych z jednego rzutu k100 (domyslnie 1: 2 cechy, 2-8: 1). */
 export function traitCountForRoll(roll: number): number {
   for (const row of gd.getSettings().traitRoll) if (roll <= row.upTo) return row.count;
   return 0;
@@ -913,18 +913,26 @@ export function traitCountForRoll(roll: number): number {
 
 /**
  * Losuje cechy opcjonalne bez powtorzen, z wagami archetypu (albo rodziny
- * stworzenia - wtedy cechy spoza rodziny maja wage 0.2).
+ * stworzenia - wtedy cechy spoza rodziny maja wage 0.2). Mocne cechy (Elitarny) rzadsze
+ * (traitStrengthFactor); fits odrzuca cechy niepasujace do stworzenia.
  */
-export function pickTraits(count: number, archetype: string, exclude: string[], rng: Rng, weights?: Record<string, number>): string[] {
+export function pickTraits(
+  count: number,
+  archetype: string,
+  exclude: string[],
+  rng: Rng,
+  weights?: Record<string, number>,
+  fits: (name: string) => boolean = () => true
+): string[] {
   const arch = gd.getArchetype(archetype);
   const def = weights ? 0.2 : gd.getSettings().defaultTraitWeight;
   const table = weights ?? arch?.traits;
   const pool = Object.entries(gd.getCreatureTraits())
-    .filter(([name, t]) => t.randomPool && !exclude.includes(name))
+    .filter(([name, t]) => t.randomPool && !exclude.includes(name) && fits(name))
     .map(([name]) => name);
   const out: string[] = [];
   for (let i = 0; i < count && pool.length; i++) {
-    const t = weightedPick(pool, (name) => table?.[name] ?? def, rng);
+    const t = weightedPick(pool, (name) => (table?.[name] ?? def) * traitStrengthFactor(name), rng);
     if (!t) break;
     out.push(t);
     pool.splice(pool.indexOf(t), 1);
@@ -936,8 +944,9 @@ function rollTraits(spec: GenSpec, npc: Npc, rng: Rng): string[] {
   const chosen = [...(spec.traits ?? [])];
   const random = spec.randomTraits ?? !spec.deterministic;
   if (!random) return chosen;
-  const weights = isBeast(npc) ? familyTraitWeights(gd.getCreature(npc.creature), npc) : undefined;
-  return [...chosen, ...pickTraits(traitCountForRoll(rollK100(rng)), npc.archetype, chosen, rng, weights)];
+  const creature = npc.turned ? undefined : gd.getCreature(npc.creature);
+  const weights = isBeast(npc) ? familyTraitWeights(creature) : undefined;
+  return [...chosen, ...pickTraits(traitCountForRoll(rollK100(rng)), npc.archetype, chosen, rng, weights, (t) => traitFitsCreature(creature, t))];
 }
 
 /** Bestia = stworzenie bez archetypu (rozwoj przez cechy, nie profesje). */
@@ -1082,6 +1091,8 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   npc.traits = rollTraits(spec, npc, rng);
   if (creature && isBeast(npc)) beastTraits(npc, creature, rng, deterministic);
   // Czy wampir czaruje, rozstrzyga Linia Krwi - nie opcjonalna cecha z ksiazki.
+  // Przemieniony wampir: czasem cecha Opcjonalna z profilu Wampira w bestiariuszu (bez czarow - te z Linii Krwi).
+  if (creature && npc.turned) rollBookOptional(npc, creature, npc.tier, rng, deterministic, (t) => t.startsWith("Rzucanie Czarów"));
   if (isVampire(npc)) npc.traits = npc.traits.filter((t) => !t.startsWith("Rzucanie Czarów"));
   const vampire = rollVampire(npc, rng, deterministic, spec.bloodline);
   npc.traits = [...npc.traits, ...vampire.traits.filter((t) => !npc.traits.includes(t))];
@@ -1144,9 +1155,10 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const creature: CreatureDef | undefined = gd.getCreature(creatureName);
   const det = !!spec.deterministic;
   // Wampir: Linia Krwi od razu - od niej zalezy archetyp (Preferowane Profesje).
-  const bloodline = creature && isVampire({ creature: creature.name }) ? rollBloodline(rng, det, spec.bloodline) : undefined;
-  // Przemiana: wampir zawsze przeszedl za zycia przez profesje (archetyp wg Linii Krwi).
-  const turned = !!bloodline && !!spec.turned && !!findBloodline(bloodline)?.turning;
+  // Wybrany archetyp: linia, ktorej Preferowane Profesje go dopuszczaja (Strigoi nie czaruje jak czarodziej).
+  const bloodline = creature && isVampire({ creature: creature.name }) ? rollBloodline(rng, det, spec.bloodline, spec.archetype) : undefined;
+  // Wampir zawsze z przemiany czlowieka: profesje za zycia (archetyp wg Linii Krwi) i premie linii.
+  const turned = !!bloodline && !!findBloodline(bloodline)?.turning;
   let archetype = creature ? creatureArchetype({ ...spec, noArchetype: spec.noArchetype && !turned }, creature, bloodline, rng, det) : pickArchetype(spec, rng);
   // Ogr wybrany jak rasa: zawsze z profesja, dowolny archetyp (bez wyboru - wg wag stworzenia).
   if (creature?.asRace && spec.asRace && !archetype) {

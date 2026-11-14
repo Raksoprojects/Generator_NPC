@@ -4,14 +4,10 @@
     "traitRoll": [
       {
         "upTo": 1,
-        "count": 3
-      },
-      {
-        "upTo": 5,
         "count": 2
       },
       {
-        "upTo": 20,
+        "upTo": 8,
         "count": 1
       }
     ],
