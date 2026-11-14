@@ -343,6 +343,15 @@ export function getTier(id: TierId): TierDef {
   return data().tiers.tiers[id];
 }
 
+/** "Zwykły (1000–1900 PD)"; ostatni poziom bez gornej granicy ("Heros (100 000+ PD)"). */
+export function tierLabelXp(id: TierId): string {
+  const t = getTier(id);
+  if (!t?.xp) return t?.label ?? id;
+  const fmt = (n: number) => n.toLocaleString("pl-PL");
+  const last = id === Object.keys(getTiers()).at(-1);
+  return `${t.label} (${fmt(t.xp[0])}${last ? "+" : `–${fmt(t.xp[1])}`} PD)`;
+}
+
 export function getTiers(): Record<TierId, TierDef> {
   return data().tiers.tiers;
 }

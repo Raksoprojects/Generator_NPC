@@ -17,7 +17,7 @@
  * niezablokowane sekcje istniejacego BN.
  */
 
-import { beastSkills, beastTraits, bookSkillsAndTalents, familyTraitWeights, rollCreature } from "./creatures";
+import { beastSkills, beastTraits, beastXpBudget, beastXpDevelop, bookSkillsAndTalents, familyTraitWeights, rollCreature } from "./creatures";
 import { advanceCost, CAREER_STEP_COST, CLASS_CHANGE_EXTRA, levelRequirement, nextAdvanceCost, talentCost } from "./xp";
 import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { equipNpc } from "./equipment";
@@ -936,7 +936,7 @@ function rollTraits(spec: GenSpec, npc: Npc, rng: Rng): string[] {
   const chosen = [...(spec.traits ?? [])];
   const random = spec.randomTraits ?? !spec.deterministic;
   if (!random) return chosen;
-  const weights = isBeast(npc) ? familyTraitWeights(gd.getCreature(npc.creature)) : undefined;
+  const weights = isBeast(npc) ? familyTraitWeights(gd.getCreature(npc.creature), npc) : undefined;
   return [...chosen, ...pickTraits(traitCountForRoll(rollK100(rng)), npc.archetype, chosen, rng, weights)];
 }
 
@@ -1000,6 +1000,10 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     npc.specChoices = Object.fromEntries(Object.entries(npc.specChoices ?? {}).filter(([k]) => k.startsWith("cecha|")));
     bookSkillsAndTalents(npc, creature);
     beastSkills(npc, creature);
+    if (gd.getCreatureFamilies().settings.xpDevelopment) {
+      const budget = beastXpBudget(npc, creature, rng, deterministic);
+      npc.xp = { budget, spent: beastXpDevelop(npc, creature, budget, rng, deterministic) };
+    } else delete npc.xp;
     npc.trappings = creature.trappings.map((t) => rollDiceText(t, rng, deterministic));
     npc.weapons = [];
     npc.armour = [];
@@ -1127,7 +1131,15 @@ function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: stri
 
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
-  if (spec.xp != null && !spec.tier) spec = { ...spec, tier: tierForXp(spec.xp) };
+  // Same PD bez poziomu: PD to caly budzet, a poziom wg przedzialu, w ktory wpadaja.
+  if (!spec.tier && spec.xp == null && spec.xpBonus != null) spec = { ...spec, xp: spec.xpBonus, xpBonus: undefined };
+  if (spec.xp != null && !spec.tier) {
+    // Bestia: PD liczone ponad profil z ksiazki, czyli od poczatku jej minimalnego poziomu.
+    const c = gd.getCreature(spec.creature);
+    const beastLike = !!c && (!gd.isCivilized(c.name) || spec.noArchetype);
+    const shift = beastLike ? (gd.getTier(c.minTier ?? "slaby")?.xp?.[0] ?? 0) : 0;
+    spec = { ...spec, tier: tierForXp(spec.xp + shift) };
+  }
   const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);
   const creature: CreatureDef | undefined = gd.getCreature(creatureName);
   const det = !!spec.deterministic;

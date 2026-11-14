@@ -554,6 +554,8 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
   const lines: string[] = [];
   const title = npc.label ? `${npc.name} (${npc.label})` : npc.name;
   lines.push(`${title} — ${npc.race}${npc.archetype ? `, ${npc.archetype}` : ""} (${tier})`);
+  const creature = gd.getCreature(npc.creature);
+  if (creature) lines.push(`Źródło: ${creature.source}, s. ${creature.page}`);
   if (view.career) {
     lines.push(`Profesja: ${view.career.title} (${view.career.professionName} ${view.career.level}, ${view.career.status})${view.career.source ? ` — ${view.career.source}` : ""}`);
     if (npc.careerPath.length > 1) lines.push(`Ścieżka: ${view.careerPathText}`);
