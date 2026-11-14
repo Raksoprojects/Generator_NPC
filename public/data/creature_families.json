@@ -5,6 +5,11 @@
     "skillBonus": { "slaby": 0, "sredni": 10, "zaawansowany": 20, "doswiadczony": 30, "heroiczny": 40, "legendarny": 60, "heros": 80 },
     "charAdvances": { "slaby": 0, "sredni": 10, "zaawansowany": 20, "doswiadczony": 30, "heroiczny": 40, "legendarny": 60, "heros": 80 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
+    "xpDevelopment": {
+      "chars": { "WW": 2, "S": 1, "Wt": 1, "I": 1, "Zw": 1 },
+      "fitPriority": [[30, 3], [20, 2], [0, 1]],
+      "extraSkills": { "Odporność": 2, "Opanowanie": 2, "Unik": 1 }
+    },
     "traitCount": { "slaby": 0, "sredni": 1, "zaawansowany": 1, "doswiadczony": 2, "heroiczny": 3, "legendarny": 4, "heros": 5 },
     "optionalChance": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1, "legendarny": 1, "heros": 1 },
     "groupOrder": ["Zwierzęta", "Potwory", "Ludy", "Zielonoskórzy", "Skaveny", "Nieumarli", "Wampiry", "Chaos"],

@@ -653,6 +653,18 @@ export interface CreatureFamiliesData {
     /** Rozwiniecia cech z charCodes (tylko cechy, ktore stworzenie ma). */
     charAdvances?: Record<TierId, number>;
     charCodes?: Attribute[];
+    /**
+     * Rozwoj bestii za PD (jak u ludzi, budzet z tiers.json liczony od minimalnego poziomu
+     * stworzenia) zamiast stalych premii skillBonus/charAdvances.
+     */
+    xpDevelopment?: {
+      /** Priorytet cech (waga = priorytet^2 / koszt). */
+      chars: Partial<Record<Attribute, number>>;
+      /** Priorytet umiejetnosci wg pasowania rodziny: [prog, priorytet] od najwyzszego progu. */
+      fitPriority: [number, number][];
+      /** Umiejetnosci rozwijane przez kazda bestie (np. Odporność) i ich priorytet. */
+      extraSkills: Record<string, number>;
+    };
     traitCount: Record<TierId, number>;
     optionalChance: Record<TierId, number>;
     tierLabels: Record<TierId, string>;
@@ -815,6 +827,20 @@ export interface GroupRow {
   race?: string;
   commander?: boolean;
   label?: string;
+  // Dokladny kreator (jak dla pojedynczego BN); puste = losowo.
+  sex?: Sex;
+  /** PD: zamiast budzetu poziomu albo dodane do niego (bez poziomu - poziom wg PD). */
+  xp?: number;
+  xpMode?: "zamiast" | "dodaj";
+  /** Sciezka profesji (kroki po kolei, ostatni = obecna). */
+  path?: { profession: string; level?: number | null }[];
+  heroProfile?: string;
+  traits?: string[];
+  randomTraits?: boolean;
+  bloodline?: string;
+  turned?: boolean;
+  /** Stworzenie rozumne bez profesji (jak bestia). */
+  noArchetype?: boolean;
 }
 
 export interface GroupPreset {

@@ -77,7 +77,7 @@ describe("stworzenia z bestiariusza", () => {
 });
 
 describe("rozwoj bestii", () => {
-  it("bestia nie ma profesji ani profilu bohatera, a premie rosna z poziomem", () => {
+  it("bestia nie ma profesji ani profilu bohatera, a rozwoj za PD rosnie z poziomem", () => {
     const weak = generateNpc({ creature: "Dziki kot", tier: "slaby", deterministic: true }, seedRng(2));
     const mid = generateNpc({ creature: "Dziki kot", tier: "sredni", deterministic: true }, seedRng(2));
     const top = generateNpc({ creature: "Dziki kot", tier: "doswiadczony", deterministic: true }, seedRng(2));
@@ -85,41 +85,49 @@ describe("rozwoj bestii", () => {
     expect(weak.careerPath).toEqual([]);
     expect(top.heroProfiles).toEqual([]);
     const stealth = (n: Npc) => n.skills.find((s) => s.name === "Skradanie (Wieś)")!.advances;
-    // Ksiazka: Skradanie 75 przy Zw 55 = +20; rodzina Kot: 40 x 0.5 = 20. Kazdy poziom wyzej +10.
-    expect(stealth(weak)).toBe(20);
+    // Ksiazka: Skradanie 75 przy Zw 55 = +20 (rodzina Kot: 40 x 0.5 = 20), dalej PD.
+    expect(stealth(weak)).toBeGreaterThanOrEqual(20);
     expect(weak.traits).toEqual([]);
-    expect(Object.values(weak.charAdvances).every((v) => v === 0)).toBe(true);
-    expect(stealth(mid)).toBe(30);
-    expect(mid.charAdvances.Zw).toBe(10);
+    // Nowicjusz: PD 200-800 ponad poczatek przedzialu (200) - srodek 300.
+    expect(weak.xp).toEqual({ budget: 300, spent: expect.any(Number) });
+    expect(weak.xp!.spent).toBeLessThanOrEqual(300);
+    const advances = (n: Npc) => Object.values(n.charAdvances).reduce((a, b) => a + b, 0) + n.skills.reduce((a, s) => a + s.advances, 0);
+    expect(advances(mid)).toBeGreaterThan(advances(weak));
     expect(mid.traits.length).toBe(1);
-    expect(stealth(top)).toBe(50);
+    expect(advances(top)).toBeGreaterThan(advances(mid));
     expect(top.traits.length).toBe(2);
   });
 
   it("slaba bestia z podrecznika dostaje umiejetnosci rodziny (niedzwiedz: Bijatyka)", () => {
     const bear = generateNpc({ creature: "Niedźwiedź", tier: "slaby", deterministic: true }, seedRng(1));
     expect(gd.getCreature("Niedźwiedź")!.skills).toEqual([]);
-    expect(bear.skills.find((s) => s.name === "Broń Biała (Bijatyka)")?.advances).toBe(15);
-    expect(Object.values(bear.charAdvances).every((v) => v === 0)).toBe(true);
+    expect(bear.skills.find((s) => s.name === "Broń Biała (Bijatyka)")?.advances).toBeGreaterThanOrEqual(15);
+    // Bez PD (ponizej minimum nie schodzi - podajemy budzet 0): same umiejetnosci rodziny.
+    const bare = generateNpc({ creature: "Niedźwiedź", tier: "slaby", xp: 0, deterministic: true }, seedRng(1));
+    expect(bare.skills.find((s) => s.name === "Broń Biała (Bijatyka)")?.advances).toBe(15);
+    expect(Object.values(bare.charAdvances).every((v) => v === 0)).toBe(true);
   });
 
   it("wyzszy poziom tej samej bestii jest zawsze silniejszy", () => {
     const tiers = TIER_IDS;
     for (const c of gd.getCreatures().filter((x) => !gd.isCivilized(x.name))) {
       let prev: ReturnType<typeof computeNpc> | null = null;
+      let prevSpent = 0;
       // Ponizej minimalnego poziomu stworzenie i tak jest podnoszone do minimum.
       for (const tier of tiers.slice(tiers.indexOf(c.minTier ?? "slaby"))) {
         const npc = generateNpc({ creature: c.name, tier, deterministic: true, randomTraits: false }, seedRng(5));
         npc.traits = [];
         npc.mutations = [];
         const v = computeNpc(npc);
+        // Za PD: wiecej wydanych PD, cechy nie maleja (pojedyncza umiejetnosc moze stanac, gdy PD ida gdzie indziej).
+        const sum = (x: ReturnType<typeof computeNpc>) => ATTRIBUTES.reduce((a, code) => a + (x.chars[code].absent ? 0 : x.chars[code].total), 0);
         if (prev) {
-          for (const code of ATTRIBUTES) expect(v.chars[code].total, `${c.name} ${tier} ${code}`).toBeGreaterThanOrEqual(prev.chars[code].total);
-          for (const s of prev.skills) {
-            expect(v.skills.find((x) => x.name === s.name)!.total, `${c.name} ${tier} ${s.name}`).toBeGreaterThan(s.total);
-          }
+          expect(npc.xp!.spent, `${c.name} ${tier}`).toBeGreaterThan(prevSpent);
+          // Koncowka budzetu idzie w to, na co jeszcze starcza - suma cech moze drgnac o kilka punktow.
+          expect(sum(v), `${c.name} ${tier}`).toBeGreaterThanOrEqual(sum(prev) - 5);
         }
         prev = v;
+        prevSpent = npc.xp!.spent;
       }
     }
   });
@@ -134,10 +142,13 @@ describe("rozwoj bestii", () => {
       const r = generateNpc({ creature: "Wojownik Chaosu" }, seedRng(seed));
       expect(TIER_IDS.indexOf(r.tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));
     }
+    // Ponizej minimum - bez PD (sam profil z ksiazki i cechy negatywne).
+    expect(weak.xp?.budget).toBe(0);
+    // Na minimum: PD ponad poczatek przedzialu minimum (Zaawansowany 5500-10000, srodek 7750 - 5500).
     const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "doswiadczony", deterministic: true }, seedRng(1));
-    expect(Object.values(chosen.charAdvances).every((v) => v === 0)).toBe(true);
+    expect(chosen.xp?.budget).toBe(2250);
     const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
-    expect(lord.charAdvances.WW).toBe(10);
+    expect(lord.charAdvances.WW).toBeGreaterThan(chosen.charAdvances.WW);
   });
 
   it("cecha Broń trafia najlepsza Bronia Biala, nie sama WW", () => {

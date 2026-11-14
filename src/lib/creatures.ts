@@ -15,7 +15,8 @@
  * rozwijaja sie przez profesje jak ludzie.
  */
 
-import { chance, randInt, roll2k10, rollDie, weightedKey, type Rng } from "./dice";
+import { chance, randInt, roll2k10, rollDie, weightedKey, weightedPick, type Rng } from "./dice";
+import { nextAdvanceCost } from "./xp";
 import * as gd from "./gameData";
 import { ATTRIBUTES, characteristicBonus, type Attribute } from "./rules";
 import { TIER_IDS, type CreatureDef, type Npc, type TierId } from "./types";
@@ -171,10 +172,71 @@ export function beastTier(npc: Pick<Npc, "tier">, creature: CreatureDef): TierId
   return TIER_IDS[Math.max(0, TIER_IDS.indexOf(npc.tier) - shift)];
 }
 
+/**
+ * Budzet PD bestii: PD poziomu (tiers.json) ponad poczatek przedzialu minimalnego poziomu
+ * stworzenia - profil z ksiazki odpowiada BN, ktory dopiero wszedl na ten poziom.
+ */
+export function beastXpBudget(npc: Npc, creature: CreatureDef, rng: Rng, deterministic = false): number {
+  if (npc.xpSpec?.budget != null) return npc.xpSpec.budget;
+  const min = gd.getTier(creature.minTier ?? "slaby")?.xp?.[0] ?? 0;
+  const [lo, hi] = gd.getTier(npc.tier)?.xp ?? [0, 0];
+  const raw = deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng);
+  // Ponizej minimum (oslabiony osobnik) - sam profil z ksiazki.
+  return Math.max(0, raw - min) + (npc.xpSpec?.bonus ?? 0);
+}
+
+/**
+ * Rozwoj bestii za PD wg kosztow z podrecznika (PG s. 47): cechy z charCodes i umiejetnosci
+ * rodziny (+ Odporność, Opanowanie), waga = priorytet^2 / koszt - drozsze rozwiniecia
+ * kupowane rzadziej, wiec wzrost z poziomem lagodnieje jak u ludzi. Bez talentow.
+ */
+export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, rng: Rng, deterministic = false): number {
+  const fam = gd.getCreatureFamilies();
+  const cfg = fam.settings.xpDevelopment!;
+  const family = fam.families[creature.family];
+  const prioOf = (fit: number) => cfg.fitPriority.find(([min]) => fit >= min)?.[1] ?? 1;
+  const skills = new Map<string, number>();
+  for (const s of npc.skills) skills.set(s.name, 1);
+  for (const [name, fit] of Object.entries(family?.skills ?? {})) skills.set(name, prioOf(fit));
+  for (const [name, p] of Object.entries(cfg.extraSkills)) {
+    const attr = gd.skillAttr(name) as Attribute | undefined;
+    if (!attr || creature.stats[attr] != null) skills.set(name, Math.max(skills.get(name) ?? 0, p));
+  }
+  const chars = (fam.settings.charCodes ?? []).filter((c) => creature.stats[c] != null);
+  let spent = 0;
+  const skillAdv = (name: string) => npc.skills.find((s) => s.name === name)?.advances ?? 0;
+  for (let guard = 0; guard < 5000; guard++) {
+    const left = budget - spent;
+    const cands: { kind: "char" | "skill"; name: string; cost: number; weight: number }[] = [];
+    for (const code of chars) {
+      const cost = nextAdvanceCost("char", npc.charAdvances[code] ?? 0);
+      if (cost <= left) cands.push({ kind: "char", name: code, cost, weight: (cfg.chars[code] ?? 1) ** 2 / cost });
+    }
+    for (const [name, p] of skills) {
+      const cost = nextAdvanceCost("skill", skillAdv(name));
+      if (cost <= left) cands.push({ kind: "skill", name, cost, weight: p ** 2 / cost });
+    }
+    if (!cands.length) break;
+    const c = deterministic ? cands.sort((a, b) => b.weight - a.weight)[0] : weightedPick(cands, (x) => x.weight, rng)!;
+    // Do konca przedzialu kosztu (koszt w przedziale staly), jesli PD starcza.
+    const owned = c.kind === "char" ? (npc.charAdvances[c.name as Attribute] ?? 0) : skillAdv(c.name);
+    const n = Math.max(1, Math.min(5 - (owned % 5), Math.floor(left / c.cost)));
+    spent += n * c.cost;
+    if (c.kind === "char") npc.charAdvances[c.name as Attribute] = owned + n;
+    else {
+      const s = npc.skills.find((x) => x.name === c.name);
+      if (s) s.advances += n;
+      else npc.skills.push({ name: c.name, advances: n });
+    }
+  }
+  return spent;
+}
+
 export function beastSkills(npc: Npc, creature: CreatureDef): void {
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
-  const tier = beastTier(npc, creature);
+  // Rozwoj za PD: umiejetnosci rodziny jak u typowego osobnika, reszta z PD (beastXpDevelop).
+  const tier = fam.settings.xpDevelopment ? "slaby" : beastTier(npc, creature);
   const factor = fam.settings.tierFactor[tier] ?? 0;
   if (factor > 0) {
     for (const [skill, fit] of Object.entries(family?.skills ?? {})) {
@@ -192,9 +254,31 @@ export function beastSkills(npc: Npc, creature: CreatureDef): void {
   }
 }
 
-/** Wagi Cech Stworzen rodziny (do losowania cech opcjonalnych bestii). */
-export function familyTraitWeights(creature: CreatureDef | undefined): Record<string, number> | undefined {
-  return creature ? gd.getCreatureFamilies().families[creature.family]?.traits : undefined;
+/** Sila Cechy Stworzenia: suma dodatnich modyfikatorow (Elitarny 60, Zabijaka 30, Twardy 20). */
+export function traitStrength(name: string): number {
+  const mods = gd.getCreatureTrait(name)?.modifiers ?? {};
+  return Object.values(mods).reduce((s: number, v) => s + Math.max(0, Number(v) || 0), 0);
+}
+
+/** Cechy o sile od STRONG_TRAIT dopiero od poziomu STRONG_TRAIT_TIER (wzgledem minimum stworzenia). */
+const STRONG_TRAIT = 50;
+const STRONG_TRAIT_TIER: TierId = "zaawansowany";
+
+/**
+ * Wagi Cech Stworzen rodziny (losowanie cech bestii): waga z rodziny x (20 / sila)^1,5 -
+ * im mocniejszy modyfikator, tym rzadszy; najsilniejsze dopiero od Niezwyklego.
+ */
+export function familyTraitWeights(creature: CreatureDef | undefined, npc?: Pick<Npc, "tier">): Record<string, number> | undefined {
+  const base = creature ? gd.getCreatureFamilies().families[creature.family]?.traits : undefined;
+  if (!base || !creature) return base;
+  const tierIdx = npc ? TIER_IDS.indexOf(beastTier(npc, creature)) : TIER_IDS.length;
+  const out: Record<string, number> = {};
+  for (const [name, w] of Object.entries(base)) {
+    const strength = traitStrength(name);
+    if (strength >= STRONG_TRAIT && tierIdx < TIER_IDS.indexOf(STRONG_TRAIT_TIER)) continue;
+    out[name] = w * Math.min(1, (20 / Math.max(strength, 1)) ** 1.5);
+  }
+  return out;
 }
 
 /** Cechy Stworzen wynikajace z poziomu bestii oraz cechy "Opcjonalne" z ksiazki. */
@@ -203,7 +287,7 @@ export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, determini
   const family = fam.families[creature.family];
   const tier: TierId = beastTier(npc, creature);
   const count = fam.settings.traitCount[tier] ?? 0;
-  const weights = { ...(family?.traits ?? {}) };
+  const weights = { ...(familyTraitWeights(creature, npc) ?? family?.traits ?? {}) };
   for (let i = 0; i < count; i++) {
     for (const t of npc.traits) delete weights[t];
     const t = deterministic ? Object.entries(weights).sort((a, b) => b[1] - a[1])[0]?.[0] : weightedKey(weights, rng);
