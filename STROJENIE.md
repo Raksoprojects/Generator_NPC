@@ -40,7 +40,7 @@ Identyfikatory poziomów w plikach i ich nazwy w programie:
 | Krew Aenariona i podobne | `settings.raceTalents` | Szansa na talent rasowy, mnożona dla archetypów. |
 | Rzuty cech | `settings.charRolls` | `clamp` przycięcie rzutu (`[5, 17]`), `orderShare` część BN z rzutami w kolejności (0.5), `swaps` liczba zamian u reszty (1 = najwyżej 2 rzuty). Usuń, by wrócić do dawnych rzutów. W formularzu: „Rzuty bez ograniczeń”. |
 | Tworzenie postaci | `settings.creation` | `charMin` rozwinięć każdej cechy 1. poziomu profesji, `skillMin` każdej z 8 umiejętności, reszta wg archetypu do potęgi `power`. Dawne: 0, 0, 2. |
-| Talenty | `settings.talents` | `stackable` talenty rozwijane ponad 1. poziom (do sumy poziomów profesji z tym talentem + `stackBonus`), `freeWeight` waga talentów przy swobodnym wydawaniu PD. Zawsze co najmniej 1 talent na poziom profesji. |
+| Talenty | `settings.talents` | `stackable` talenty rozwijane ponad 1. poziom (do sumy poziomów profesji z tym talentem + `stackBonus`), `freeWeight` waga talentów przy swobodnym wydawaniu PD. Zawsze co najmniej 1 talent na poziom profesji. Na karcie liczone są: Silny Cios (+1 obrażeń wręcz za wykupienie), Celny Strzał (+1 strzeleckie), Cios Poniżej Pasa (+1 w Bijatyce) i Krzepki (+1 do redukcji obrażeń). |
 
 Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawansowany` Niezwykły, `doswiadczony` Zaawansowany, `weteran`, `wybitny`, `heroiczny` Ekspert, `mistrz`, `arcymistrz`, `legendarny` Legenda, `heros`. Stare id zostały, by działały zapisane BN.
 
@@ -62,7 +62,10 @@ Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawa
 | Co | Gdzie | Uwagi |
 |---|---|---|
 | Profil z podręcznika | `<stworzenie>.stats` | Baza do rzutu: wartość − 10 + 2k10. `null` oznacza brak cechy. |
-| Najniższy poziom | `<stworzenie>.minTier` | Niższy poziom podnosi się do tego. Od początku tego przedziału liczy się budżet PD bestii. |
+| Domyślny poziom | `<stworzenie>.minTier` | Poziom profilu z podręcznika. Bez wybranego poziomu stworzenie dostaje ten albo wyższy (każdy kolejny o połowę rzadziej). Od początku tego przedziału liczy się budżet PD bestii. Brak oznacza Nowicjusza. |
+| Przedział poziomów | `<stworzenie>.tierSpan`, domyślnie `settings.tierSpan` | `[od, do]` względem domyślnego, domyślnie `[-2, 3]`. Poziom spoza przedziału jest przycinany. Poniżej domyślnego bestia dostaje 1 cechę negatywną na poziom. Szkielet `[0, 2]` (najwyżej Doświadczony), czempion `[0, 3]`, wampir `[0, 8]`. |
+| Rozwój od innego poziomu | `<stworzenie>.xpFrom`, `turningXp` | Czempion: PD liczone od Nowicjusza jak u szkieletu, minus 500 PD na przemianę [dom]. |
+| Cecha rosnąca z poziomem | `<stworzenie>.tierTraits` | `{"Suche Kości": [1, 1, 2, 3]}`: poziom cechy na domyślnym poziomie stworzenia i kolejnych. |
 | Rodzina | `<stworzenie>.family` | Wskazuje wpis w `creature_families.json`. |
 
 ### Rodziny i rozwój — `creature_families.json`
@@ -76,7 +79,7 @@ Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawa
 | Limit rozwinięć bestii | `settings.xpDevelopment.advanceCap` | `[[od PD, umiejętność, cecha?], …]`: najwięcej rozwinięć kupionych za PD w jednej umiejętności (i cesze). PD z umiejętności przechodzą wtedy w cechy, więc limit nie osłabia bestii. Domyślnie brak. |
 | Rozrzut rzutów bestii | `settings.rollSpread` | 2: cechy 11 ± 2 zamiast 2k10. |
 | Zdziczałe ludy | `settings.feral` i `families.<rodzina>.feral` | Umiejętności i talenty, których orki i zwierzoludzie nie rozwijają (Wiedza poza Lokalną, Czytanie/Pisanie…). |
-| Profesje rodziny | `families.<rodzina>.careers`, `archetypes`, `archetypeChance` | Jedyne profesje orków, goblinów i zwierzoludzi; szansa na profesję przy losowaniu (0.7). |
+| Profesje rodziny | `families.<rodzina>.careers`, `archetypes`, `archetypeChance` | Jedyne profesje orków, goblinów i zwierzoludzi; szansa na profesję przy losowaniu (1 = zawsze). Stworzenia z profesją nie dostają darmowych rozwinięć tworzenia postaci, wszystko kupują za PD. |
 | Liczba cech stworzeń | `settings.traitCount.<poziom>` | Ułamek: 0.5 oznacza 50% na jedną cechę, 1.5 oznacza jedną cechę i 50% na drugą. |
 | Cechy opcjonalne z podręcznika | `settings.optionalChance.<poziom>` | Szansa na każdą cechę opcjonalną z bestiariusza. |
 | Opis poziomu stworzenia | `settings.tierLabels.<poziom>` | |
@@ -108,7 +111,7 @@ Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawa
 | Co | Gdzie | Uwagi |
 |---|---|---|
 | Szanse na kolejne przedmioty | `chances.<poziom>` | Lista: pierwsza liczba to szansa na 1. przedmiot, druga na 2. itd. `[0.04, 0.005]` = 4% na jeden i 0,5% na drugi. |
-| Rodzaj przedmiotu | `kindWeight` | `weapon` broń, `armour` pancerz, `item` drobiazg, `potion` mikstura. Wyższa waga oznacza częstszy wybór. |
+| Rodzaj przedmiotu | `kindWeight` | `weapon` broń, `armour` pancerz, `item` drobiazg, `potion` mikstura. Wyższa waga oznacza częstszy wybór. Pancerz 3.2 i broń 0.4 dają tę samą łączną szansę (pancerzy w tabeli jest mniej). Runy: broń 8, pancerz 3 + 5. |
 | Mnożnik rasy (bez run) | `itemRaceMult` | Krasnolud 0.3. Nie działa na szanse równe 1. |
 | Przedmiot pasujący do profesji | `fitWeight` | Mnożnik wagi szablonu pasującego do BN. |
 | Runy tymczasowe | `runic.temporary.<poziom>` | Szansa dla człowieka. |
