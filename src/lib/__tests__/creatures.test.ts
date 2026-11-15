@@ -84,8 +84,8 @@ describe("stworzenia z bestiariusza", () => {
 
 describe("rozwoj bestii", () => {
   it("bestia nie ma profesji ani profilu bohatera, a rozwoj za PD rosnie z poziomem", () => {
-    const weak = generateNpc({ creature: "Dziki kot", tier: "slaby", deterministic: true }, seedRng(2));
-    const mid = generateNpc({ creature: "Dziki kot", tier: "sredni", deterministic: true }, seedRng(2));
+    const weak = generateNpc({ creature: "Dziki kot", tier: "sredni", deterministic: true }, seedRng(2));
+    const mid = generateNpc({ creature: "Dziki kot", tier: "obyty", deterministic: true }, seedRng(2));
     const top = generateNpc({ creature: "Dziki kot", tier: "doswiadczony", deterministic: true }, seedRng(2));
     expect(isBeast(weak)).toBe(true);
     expect(weak.careerPath).toEqual([]);
@@ -94,12 +94,12 @@ describe("rozwoj bestii", () => {
     // Ksiazka: Skradanie 75 przy Zw 55 = +20 (rodzina Kot: 40 x 0.5 = 20), dalej PD.
     expect(stealth(weak)).toBeGreaterThanOrEqual(20);
     expect(weak.traits).toEqual([]);
-    // Nowicjusz: PD 100-450 ponad poczatek przedzialu (100) - srodek 175.
-    expect(weak.xp).toEqual({ budget: 175, spent: expect.any(Number) });
-    expect(weak.xp!.spent).toBeLessThanOrEqual(175);
+    // Domyslny poziom kota - Zwykly: PD 500-950 ponad poczatek przedzialu (500) - srodek 225.
+    expect(weak.xp).toEqual({ budget: 225, spent: expect.any(Number) });
+    expect(weak.xp!.spent).toBeLessThanOrEqual(225);
     const advances = (n: Npc) => Object.values(n.charAdvances).reduce((a, b) => a + b, 0) + n.skills.reduce((a, s) => a + s.advances, 0);
     expect(advances(mid)).toBeGreaterThan(advances(weak));
-    // Cechy Stworzen: 0,25 na Zwyklym, 0,75 na Zaawansowanym (deterministycznie: 0 i 1).
+    // Cechy Stworzen wg poziomu ponad domyslny: +1 - 0,25, +3 - 0,75 (deterministycznie: 0 i 1).
     expect(mid.traits.length).toBe(0);
     expect(advances(top)).toBeGreaterThan(advances(mid));
     expect(top.traits.length).toBe(1);
@@ -154,13 +154,13 @@ describe("rozwoj bestii", () => {
     }
     // Ponizej minimum - bez PD (sam profil z ksiazki i cechy negatywne).
     expect(weak.xp?.budget).toBe(0);
-    // Na minimum: PD ponad poczatek przedzialu minimum (Zaawansowany 2500-3900, srodek 3200 - 2500).
-    const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "doswiadczony", deterministic: true }, seedRng(1));
-    expect(chosen.xp?.budget).toBe(700);
-    const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
+    // Na domyslnym (Wybitny 6500-10000, srodek 8250 - 6500): PD ponad poczatek przedzialu.
+    const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "wybitny", deterministic: true }, seedRng(1));
+    expect(chosen.xp?.budget).toBe(1750);
+    const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "mistrz", deterministic: true }, seedRng(1));
     expect(lord.charAdvances.WW).toBeGreaterThan(chosen.charAdvances.WW);
-    // Powyzej przedzialu (domyslny +3) - przycinany: Wybraniec (Zaawansowany) najwyzej Ekspert.
-    expect(generateNpc({ creature: "Wybraniec Chaosu", tier: "heros" }, seedRng(1)).tier).toBe("heroiczny");
+    // Powyzej przedzialu (domyslny +3) - przycinany: Wybraniec (Wybitny) najwyzej Arcymistrz.
+    expect(generateNpc({ creature: "Wybraniec Chaosu", tier: "heros" }, seedRng(1)).tier).toBe("arcymistrz");
   });
 
   it("szkielet najwyzej Doswiadczony, czempion na profilu szkieletu z Suchymi Kosciami", () => {

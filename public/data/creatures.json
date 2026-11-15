@@ -47,7 +47,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Zwierzę roślinożerne"
+   "family": "Zwierzę roślinożerne",
+   "minTier": "obyty"
   },
   {
    "name": "Cień Rzeki",
@@ -100,7 +101,8 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Zwierzę roślinożerne",
-   "unique": true
+   "unique": true,
+   "minTier": "zaawansowany"
   },
   {
    "name": "Pająk arachnarok",
@@ -147,7 +149,7 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Pająk",
-   "minTier": "doswiadczony"
+   "minTier": "heroiczny"
   },
   {
    "name": "Drakwaldzki człekołap (olbrzymi pająk)",
@@ -198,7 +200,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Pająk"
+   "family": "Pająk",
+   "minTier": "sredni"
   },
   {
    "name": "Leśny goblin",
@@ -293,7 +296,8 @@
    ],
    "trappings": [],
    "group": "Zielonoskórzy",
-   "family": "Zielonoskóry"
+   "family": "Zielonoskóry",
+   "minTier": "sredni"
   },
   {
    "name": "Stegadon",
@@ -346,7 +350,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Gad olbrzymi",
-   "minTier": "doswiadczony"
+   "minTier": "heroiczny"
   },
   {
    "name": "Rogaty",
@@ -390,7 +394,8 @@
    "trappings": [],
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
-   "family": "Gad olbrzymi"
+   "family": "Gad olbrzymi",
+   "minTier": "obyty"
   },
   {
    "name": "Karnozaur",
@@ -444,7 +449,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Gad olbrzymi",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Dziki kot",
@@ -497,7 +502,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Kot"
+   "family": "Kot",
+   "minTier": "sredni"
   },
   {
    "name": "Lew bojowy z Chrace",
@@ -554,7 +560,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Kot"
+   "family": "Kot",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Lewiatan",
@@ -604,7 +611,7 @@
    "group": "Potwory",
    "subgroup": "Wodne i bagienne",
    "family": "Wodny",
-   "minTier": "heroiczny"
+   "minTier": "mistrz"
   },
   {
    "name": "Il Potente Granchio",
@@ -659,7 +666,7 @@
    "subgroup": "Wodne i bagienne",
    "family": "Wodny",
    "unique": true,
-   "minTier": "heroiczny"
+   "minTier": "arcymistrz"
   },
   {
    "name": "Syrena",
@@ -758,7 +765,7 @@
    "group": "Potwory",
    "subgroup": "Wodne i bagienne",
    "family": "Wodny",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Ostrokolcy smok",
@@ -815,7 +822,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Fantasma",
@@ -873,7 +880,7 @@
    "group": "Potwory",
    "subgroup": "Inne potwory",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "heroiczny"
   },
   {
    "name": "Nieumarły rycerz (upiór)",
@@ -993,7 +1000,8 @@
    ],
    "trappings": [],
    "group": "Skaveny",
-   "family": "Skaven"
+   "family": "Skaven",
+   "minTier": "sredni"
   },
   {
    "name": "Wielki wilk",
@@ -1084,7 +1092,8 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Psowate",
-   "unique": true
+   "unique": true,
+   "minTier": "obyty"
   },
   {
    "name": "Brzytwogor",
@@ -1130,7 +1139,8 @@
    "trappings": [],
    "group": "Chaos",
    "subgroup": "Zwierzoludzie",
-   "family": "Zwierzoczłek"
+   "family": "Zwierzoczłek",
+   "minTier": "obyty"
   },
   {
    "name": "Stary Kościogrzbiet",
@@ -1178,7 +1188,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "unique": true,
-   "minTier": "heroiczny"
+   "minTier": "wybitny"
   },
   {
    "name": "Gryf",
@@ -1230,7 +1240,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Straszna paszcza",
@@ -1286,7 +1296,7 @@
    "group": "Potwory",
    "subgroup": "Inne potwory",
    "family": "Potwór",
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Nosorożnik",
@@ -1331,7 +1341,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Zwierzę roślinożerne"
+   "family": "Zwierzę roślinożerne",
+   "minTier": "obyty"
   },
   {
    "name": "Łamacz Skał",
@@ -1386,7 +1397,7 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Zwierzę roślinożerne",
-   "minTier": "zaawansowany"
+   "minTier": "wybitny"
   },
   {
    "name": "Nocny goblin",
@@ -1571,7 +1582,7 @@
    "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
    "unique": true,
-   "minTier": "heroiczny"
+   "minTier": "legendarny"
   },
   {
    "name": "Wywerna",
@@ -1618,7 +1629,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Halagrundsor „Straszliwy”, olbrzym szpieg",
@@ -1728,7 +1739,8 @@
    ],
    "group": "Ludy",
    "family": "Humanoid",
-   "unique": true
+   "unique": true,
+   "minTier": "doswiadczony"
   },
   {
    "name": "Stirski szczupak",
@@ -1781,7 +1793,8 @@
    "trappings": [],
    "group": "Potwory",
    "subgroup": "Wodne i bagienne",
-   "family": "Wodny"
+   "family": "Wodny",
+   "minTier": "zaawansowany"
   },
   {
    "name": "Coś z Martwego Lasu",
@@ -1842,7 +1855,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Sługa Chaosu",
    "unique": true,
-   "minTier": "zaawansowany"
+   "minTier": "obyty"
   },
   {
    "name": "Poganiacz klanu Moulder",
@@ -1889,7 +1902,8 @@
    ],
    "trappings": [],
    "group": "Skaveny",
-   "family": "Skaven"
+   "family": "Skaven",
+   "minTier": "sredni"
   },
   {
    "name": "Szczurogr łamignat",
@@ -1939,7 +1953,7 @@
    "trappings": [],
    "group": "Skaveny",
    "family": "Skaven",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Szczurowilk",
@@ -2053,7 +2067,7 @@
    "trappings": [],
    "group": "Skaveny",
    "family": "Skaven",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Ameba",
@@ -2187,7 +2201,8 @@
    "group": "Potwory",
    "subgroup": "Inne potwory",
    "family": "Potwór",
-   "unique": true
+   "unique": true,
+   "minTier": "sredni"
   },
   {
    "name": "Troll rzeczny",
@@ -2321,7 +2336,7 @@
    "group": "Potwory",
    "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Kameleopij",
@@ -2426,7 +2441,7 @@
    "group": "Potwory",
    "subgroup": "Wodne i bagienne",
    "family": "Wodny",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Rozdzieracz Ciał",
@@ -2480,7 +2495,7 @@
    "group": "Potwory",
    "subgroup": "Inne potwory",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Mroczny pegaz",
@@ -2524,7 +2539,8 @@
    "trappings": [],
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
-   "family": "Potwór"
+   "family": "Potwór",
+   "minTier": "obyty"
   },
   {
    "name": "Stado nocnych kruków",
@@ -2569,7 +2585,7 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Ptak",
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Peryt",
@@ -2668,7 +2684,7 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Ptak",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Szary jastrząb górski",
@@ -2706,7 +2722,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Ptak"
+   "family": "Ptak",
+   "minTier": "sredni"
   },
   {
    "name": "Heomreth",
@@ -2760,7 +2777,7 @@
    "trappings": [],
    "group": "Zwierzęta",
    "family": "Ptak",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Kuroliszek",
@@ -2811,7 +2828,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "obyty"
   },
   {
    "name": "Chimera",
@@ -2870,7 +2887,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Bestia ze Strany",
@@ -2937,7 +2954,7 @@
    "subgroup": "Inne potwory",
    "family": "Potwór",
    "unique": true,
-   "minTier": "doswiadczony"
+   "minTier": "heroiczny"
   },
   {
    "name": "Kultysta Zwodniczego Księżyca",
@@ -3153,7 +3170,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Tregara",
@@ -3209,7 +3226,8 @@
    ],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Pająk"
+   "family": "Pająk",
+   "minTier": "obyty"
   },
   {
    "name": "Brzytwodziób",
@@ -3346,7 +3364,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Drapieżnik"
+   "family": "Drapieżnik",
+   "minTier": "sredni"
   },
   {
    "name": "Dzik",
@@ -3436,7 +3455,7 @@
    "group": "Chaos",
    "subgroup": "Demony",
    "family": "Demon",
-   "minTier": "heroiczny",
+   "minTier": "mistrz",
    "note": "Profil z książki: Smukłoudy Jęzobicz (książę demonów Slaanesha)"
   },
   {
@@ -3486,7 +3505,7 @@
    "group": "Chaos",
    "subgroup": "Demony",
    "family": "Demon",
-   "minTier": "heroiczny",
+   "minTier": "mistrz",
    "note": "Profil z książki: Fr'hough Żałobny Oddech (książę demonów Nurgla)"
   },
   {
@@ -3561,7 +3580,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Skaveny",
-   "family": "Skaven"
+   "family": "Skaven",
+   "minTier": "obyty"
   },
   {
    "name": "Szczurogr",
@@ -3605,7 +3625,7 @@
    "trappings": [],
    "group": "Skaveny",
    "family": "Skaven",
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Pies",
@@ -3929,7 +3949,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Bagienna ośmiornica",
@@ -3968,7 +3988,8 @@
    "trappings": [],
    "group": "Potwory",
    "subgroup": "Wodne i bagienne",
-   "family": "Wodny"
+   "family": "Wodny",
+   "minTier": "sredni"
   },
   {
    "name": "Zębacz jaskiniowy",
@@ -4009,7 +4030,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Zwierzęta",
-   "family": "Drapieżnik"
+   "family": "Drapieżnik",
+   "minTier": "sredni"
   },
   {
    "name": "Półgryf",
@@ -4048,7 +4070,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "obyty"
   },
   {
    "name": "Smok",
@@ -4099,7 +4121,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "heroiczny"
   },
   {
    "name": "Bestia bagienna",
@@ -4183,7 +4205,7 @@
    "group": "Potwory",
    "subgroup": "Inne potwory",
    "family": "Potwór",
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Olbrzym",
@@ -4266,7 +4288,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Hipogryf",
@@ -4403,7 +4425,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Mantikora",
@@ -4446,7 +4468,7 @@
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Pegaz",
@@ -4481,7 +4503,8 @@
    "trappings": [],
    "group": "Potwory",
    "subgroup": "Hybrydy i skrzydlate",
-   "family": "Potwór latający"
+   "family": "Potwór latający",
+   "minTier": "sredni"
   },
   {
    "name": "Troll",
@@ -4574,7 +4597,7 @@
    "group": "Potwory",
    "subgroup": "Smoki i wielkie gady",
    "family": "Potwór",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Ork",
@@ -4613,7 +4636,8 @@
    "abilities": [],
    "trappings": [],
    "group": "Zielonoskórzy",
-   "family": "Zielonoskóry"
+   "family": "Zielonoskóry",
+   "minTier": "sredni"
   },
   {
    "name": "Goblin",
@@ -5188,7 +5212,8 @@
    "trappings": [],
    "group": "Chaos",
    "subgroup": "Zwierzoludzie",
-   "family": "Zwierzoczłek"
+   "family": "Zwierzoczłek",
+   "minTier": "sredni"
   },
   {
    "name": "Ungor",
@@ -5273,7 +5298,7 @@
    "group": "Chaos",
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Szaman rykowców",
@@ -5315,7 +5340,8 @@
    "trappings": [],
    "group": "Chaos",
    "subgroup": "Zwierzoludzie",
-   "family": "Zwierzoczłek"
+   "family": "Zwierzoczłek",
+   "minTier": "sredni"
   },
   {
    "name": "Mutant",
@@ -5608,7 +5634,8 @@
    "group": "Chaos",
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
-   "status": "Brąz 3"
+   "status": "Brąz 3",
+   "minTier": "obyty"
   },
   {
    "name": "Konny Maruder",
@@ -5714,7 +5741,8 @@
    "group": "Chaos",
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
-   "status": "Brąz 3"
+   "status": "Brąz 3",
+   "minTier": "obyty"
   },
   {
    "name": "Maruder Łowca",
@@ -5823,7 +5851,8 @@
    "group": "Chaos",
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
-   "status": "Brąz 4"
+   "status": "Brąz 4",
+   "minTier": "sredni"
   },
   {
    "name": "Maruder Berserker",
@@ -5931,7 +5960,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Brąz 0",
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Czempion Maruderów",
@@ -6450,7 +6479,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 4",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Aspirujący Czempion",
@@ -6579,7 +6608,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Wybraniec Chaosu",
@@ -6726,7 +6755,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 1",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Wyklęty",
@@ -6822,7 +6851,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": null,
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Ogr, Wojownik Chaosu",
@@ -7039,7 +7068,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Rycerz Zagłady",
@@ -7165,7 +7194,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Miażdżyczaszka Khorne'a",
@@ -7273,7 +7302,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Łowca Czaszek Khorne'a",
@@ -7402,7 +7431,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Rycerz Tzeentcha",
@@ -7510,7 +7539,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Runiczny Rycerz Tzeentcha",
@@ -7642,7 +7671,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Rycerz Zarazy Nurgle'a",
@@ -7752,7 +7781,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Zwiastun Śmierci Nurgle'a",
@@ -7886,7 +7915,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Piekielny Rycerz Slaanesha",
@@ -7994,7 +8023,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Diabelski Rycerz Slaanesha",
@@ -8122,7 +8151,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Czarnoksiężnik Chaosu",
@@ -8775,7 +8804,7 @@
    "subgroup": "Wojownicy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 8",
-   "minTier": "heroiczny"
+   "minTier": "mistrz"
   },
   {
    "name": "Rozrywacz Wrogów",
@@ -8860,7 +8889,8 @@
    "group": "Chaos",
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
-   "status": "Brąz 4"
+   "status": "Brąz 4",
+   "minTier": "sredni"
   },
   {
    "name": "Bestigor",
@@ -8975,7 +9005,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 2",
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Wargor",
@@ -9114,7 +9144,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 4",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Władca Zwierzoludzi",
@@ -9265,7 +9295,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Ungor Najeźdźca",
@@ -9376,7 +9406,8 @@
    "group": "Chaos",
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
-   "status": "Brąz 2"
+   "status": "Brąz 2",
+   "minTier": "sredni"
   },
   {
    "name": "Półróg",
@@ -9508,7 +9539,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Brąz 5",
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Krwawy Byk",
@@ -9647,7 +9678,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Byk Zagłady",
@@ -9797,7 +9828,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Centigor",
@@ -9915,7 +9946,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 2",
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Krwawokopyty",
@@ -10054,7 +10085,7 @@
    "subgroup": "Zwierzoludzie",
    "family": "Zwierzoczłek",
    "status": "Srebro 4",
-   "minTier": "zaawansowany"
+   "minTier": "doswiadczony"
   },
   {
    "name": "Wielki Szaman Rykowców",
@@ -10293,7 +10324,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Krasnolud Chaosu z garłaczem",
@@ -10496,7 +10527,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 4",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Czempion Nieśmiertelnych",
@@ -10624,7 +10655,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Wybrany Nieśmiertelny Hashuta",
@@ -10760,7 +10791,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 1",
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Piekielny Strażnik",
@@ -10869,7 +10900,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 2",
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Piekielny Żelazoprzysiężny",
@@ -11001,7 +11032,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Piekielny Kasztelan",
@@ -11145,7 +11176,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 3",
-   "minTier": "zaawansowany"
+   "minTier": "wybitny"
   },
   {
    "name": "Artylerzysta Krasnoludów Chaosu",
@@ -11248,8 +11279,7 @@
    "group": "Chaos",
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
-   "status": "Srebro 3",
-   "minTier": "sredni"
+   "status": "Srebro 3"
   },
   {
    "name": "Mistrz Inżynier Krasnoludów Chaosu",
@@ -11775,7 +11805,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 7",
-   "minTier": "heroiczny"
+   "minTier": "wybitny"
   },
   {
    "name": "Byczy Centaur, strażnik świątyni",
@@ -11891,7 +11921,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Srebro 5",
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Byczy Centaur Taur’ruk",
@@ -12027,7 +12057,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Sługa Chaosu",
    "status": "Złoto 2",
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Olbrzym Chaosu",
@@ -12081,7 +12111,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Śluz Chaosu",
@@ -12250,7 +12280,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "Ogar Chaosu",
@@ -12299,7 +12329,8 @@
    "group": "Chaos",
    "subgroup": "Potwory Chaosu",
    "family": "Psowate",
-   "status": null
+   "status": null,
+   "minTier": "sredni"
   },
   {
    "name": "Cygor",
@@ -12398,7 +12429,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "zaawansowany"
+   "minTier": "weteran"
   },
   {
    "name": "Smoczy Ogr Shaggoth",
@@ -12450,7 +12481,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "heroiczny"
+   "minTier": "arcymistrz"
   },
   {
    "name": "Ghorgon",
@@ -12501,7 +12532,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Troll lodowy",
@@ -12555,7 +12586,7 @@
    "subgroup": "Trolle i olbrzymy",
    "family": "Potwór",
    "status": null,
-   "minTier": "sredni"
+   "minTier": "zaawansowany"
   },
   {
    "name": "K’Daai Niszczyciel",
@@ -12609,7 +12640,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Demon",
    "status": null,
-   "minTier": "heroiczny"
+   "minTier": "arcymistrz"
   },
   {
    "name": "K’Daai Zrodzony z Ognia",
@@ -12663,7 +12694,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Demon",
    "status": null,
-   "minTier": "zaawansowany"
+   "minTier": "wybitny"
   },
   {
    "name": "Lammasu",
@@ -12732,7 +12763,7 @@
    "subgroup": "Krasnoludy Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Kłogor",
@@ -12780,7 +12811,8 @@
    "group": "Chaos",
    "subgroup": "Potwory Chaosu",
    "family": "Zwierzę roślinożerne",
-   "status": null
+   "status": null,
+   "minTier": "sredni"
   },
   {
    "name": "Smok Chaosu",
@@ -12880,7 +12912,8 @@
    "group": "Chaos",
    "subgroup": "Potwory Chaosu",
    "family": "Zwierzę roślinożerne",
-   "status": null
+   "status": null,
+   "minTier": "sredni"
   },
   {
    "name": "Demoniczny Wierzchowiec",
@@ -13091,7 +13124,7 @@
    "subgroup": "Demony",
    "family": "Demon",
    "status": null,
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   },
   {
    "name": "Mantikora bojowa",
@@ -13139,7 +13172,7 @@
    "subgroup": "Potwory Chaosu",
    "family": "Potwór",
    "status": null,
-   "minTier": "doswiadczony"
+   "minTier": "wybitny"
   },
   {
    "name": "Rumak Slaanesha",
@@ -13240,7 +13273,7 @@
     }
    ],
    "trappings": [],
-   "minTier": "heroiczny"
+   "minTier": "mistrz"
   },
   {
    "name": "Książę demonów Tzeentcha",
@@ -13290,7 +13323,7 @@
     }
    ],
    "trappings": [],
-   "minTier": "heroiczny"
+   "minTier": "mistrz"
   },
   {
    "name": "Zarazonośca Nurgle’a",
@@ -13634,7 +13667,8 @@
     "Elita"
    ],
    "abilities": [],
-   "trappings": []
+   "trappings": [],
+   "minTier": "obyty"
   },
   {
    "name": "Sylwański Pospolitak",
@@ -13671,7 +13705,8 @@
     "Elita"
    ],
    "abilities": [],
-   "trappings": []
+   "trappings": [],
+   "minTier": "sredni"
   },
   {
    "name": "Vargheist",
@@ -13762,7 +13797,7 @@
    ],
    "abilities": [],
    "trappings": [],
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Otchłanna Groza",
@@ -13863,7 +13898,7 @@
    ],
    "abilities": [],
    "trappings": [],
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Widmowy Rumak",
@@ -14056,7 +14091,7 @@
    ],
    "abilities": [],
    "trappings": [],
-   "minTier": "sredni"
+   "minTier": "obyty"
   },
   {
    "name": "Smoczy Pijawiec",
@@ -14103,7 +14138,7 @@
    ],
    "abilities": [],
    "trappings": [],
-   "minTier": "doswiadczony"
+   "minTier": "weteran"
   }
  ]
 }
