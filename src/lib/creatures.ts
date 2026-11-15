@@ -185,11 +185,31 @@ export function beastTier(npc: Pick<Npc, "tier">, creature: CreatureDef): TierId
  */
 export function beastXpBudget(npc: Npc, creature: CreatureDef, rng: Rng, deterministic = false): number {
   if (npc.xpSpec?.budget != null) return npc.xpSpec.budget;
-  const min = gd.getTier(creature.minTier ?? "slaby")?.xp?.[0] ?? 0;
   const [lo, hi] = gd.getTier(npc.tier)?.xp ?? [0, 0];
   const raw = deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng);
   // Ponizej minimum (oslabiony osobnik) - sam profil z ksiazki.
-  return Math.max(0, Math.max(0, raw - min) + (npc.xpSpec?.bonus ?? 0));
+  return Math.max(0, Math.max(0, raw - beastXpShift(creature)) + (npc.xpSpec?.bonus ?? 0));
+}
+
+/**
+ * PD zawarte w profilu z ksiazki: poczatek domyslnego poziomu (albo xpFrom) plus koszt przemiany
+ * (turningXp) - czempion rozwija sie dalej jak szkielet, ale przemiana zjada czesc PD.
+ */
+export function beastXpShift(creature: CreatureDef): number {
+  return (gd.getTier(creature.xpFrom ?? creature.minTier ?? "slaby")?.xp?.[0] ?? 0) + (creature.turningXp ?? 0);
+}
+
+/** Indeksy (TIER_IDS) najnizszego i najwyzszego poziomu stworzenia: domyslny + tierSpan. */
+export function creatureTierRange(creature: CreatureDef): [number, number] {
+  const span = creature.tierSpan ?? gd.getCreatureFamilies().settings.tierSpan ?? [-(TIER_IDS.length - 1), TIER_IDS.length - 1];
+  const d = TIER_IDS.indexOf(creature.minTier ?? "slaby");
+  return [Math.max(0, d + span[0]), Math.min(TIER_IDS.length - 1, d + span[1])];
+}
+
+/** Poziom cechy z tierTraits wg poziomu BN wzgledem domyslnego ("Suche Kości (2)"). */
+export function tierTraitsFor(npc: Pick<Npc, "tier">, creature: CreatureDef): string[] {
+  const offset = Math.max(0, TIER_IDS.indexOf(npc.tier) - TIER_IDS.indexOf(creature.minTier ?? "slaby"));
+  return Object.entries(creature.tierTraits ?? {}).map(([name, ranks]) => `${name} (${ranks[Math.min(offset, ranks.length - 1)]})`);
 }
 
 /**
@@ -314,6 +334,7 @@ export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, determini
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
   const tier: TierId = beastTier(npc, creature);
+  for (const t of tierTraitsFor(npc, creature)) if (!npc.traits.includes(t)) npc.traits.push(t);
   const count = fractionalCount(fam.settings.traitCount[tier] ?? 0, rng, deterministic);
   const weights = Object.fromEntries(
     Object.entries(familyTraitWeights(creature) ?? family?.traits ?? {}).map(([n, w]) => [n, w * traitStrengthFactor(n)])

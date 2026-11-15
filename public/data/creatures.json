@@ -4731,7 +4731,8 @@
    "trappings": [],
    "group": "Nieumarli",
    "subgroup": "Ożywieńcy",
-   "family": "Nieumarły"
+   "family": "Nieumarły",
+   "tierSpan": [0, 2]
   },
   {
    "name": "Szkieletowy czempion",
@@ -4739,17 +4740,17 @@
    "page": 39,
    "stats": {
     "Sz": 4,
-    "WW": 70,
-    "US": 55,
-    "S": 50,
-    "Wt": 45,
-    "I": 40,
-    "Zw": 45,
-    "Zr": 45,
+    "WW": 25,
+    "US": 25,
+    "S": 30,
+    "Wt": 30,
+    "I": 20,
+    "Zw": 20,
+    "Zr": 25,
     "Int": null,
     "SW": null,
     "Ogd": null,
-    "Żyw": 22
+    "Żyw": 15
    },
    "skills": [],
    "talents": [],
@@ -4770,7 +4771,7 @@
    ],
    "optional": [],
    "abilities": [
-    "Wskrzeszony zaklęciem Wskrzeszenie czempiona z kości postaci, która osiągnęła co najmniej 3. poziom profesji. Pancerz: pełna zbroja płytowa i duża tarcza. Grimuar wymienia też cechę Suche Kości (bez opisu w dostępnych źródłach)."
+    "Wskrzeszony zaklęciem Wskrzeszenie czempiona z kości postaci, która osiągnęła co najmniej 3. poziom profesji. Pancerz: pełna zbroja płytowa i duża tarcza. Profil: podstawowy profil Szkieletu (Grimuar: „MG może dodać dawne Umiejętności i Talenty stworzenia do podstawowego profilu Szkieletu”), rozwijany dalej jak szkielet; przemiana zabiera część PD [dom]. Przykładowy profil z Grimuaru: WW 70, US 55, S 50, Wt 45, I 40, Zw 45, Zr 45, Żyw 22."
    ],
    "trappings": [
     "pełna zbroja płytowa",
@@ -4780,7 +4781,11 @@
    "group": "Nieumarli",
    "subgroup": "Ożywieńcy",
    "family": "Nieumarły",
-   "minTier": "doswiadczony"
+   "minTier": "zaawansowany",
+   "tierSpan": [0, 3],
+   "xpFrom": "slaby",
+   "turningXp": 500,
+   "tierTraits": { "Suche Kości": [1, 1, 2, 3] }
   },
   {
    "name": "Zombi",
@@ -5095,6 +5100,7 @@
    "group": "Wampiry",
    "family": "Nieumarły",
    "minTier": "zaawansowany",
+   "tierSpan": [0, 8],
    "civilized": true,
    "archetypeChance": 1
   },

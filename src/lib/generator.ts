@@ -17,7 +17,7 @@
  * niezablokowane sekcje istniejacego BN.
  */
 
-import { beastSkills, beastTraits, beastXpBudget, beastXpDevelop, bookSkillsAndTalents, rollBookOptional, traitFitsCreature, traitStrengthFactor, familyTraitWeights, rollCreature } from "./creatures";
+import { beastSkills, beastTraits, beastXpBudget, beastXpDevelop, beastXpShift, creatureTierRange, bookSkillsAndTalents, rollBookOptional, traitFitsCreature, traitStrengthFactor, familyTraitWeights, rollCreature } from "./creatures";
 import { advanceCost, CAREER_STEP_COST, CLASS_CHANGE_EXTRA, levelRequirement, nextAdvanceCost, talentCost } from "./xp";
 import { chance, defaultRng, pick, randInt, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
 import { arrangeRolls } from "./charRolls";
@@ -786,9 +786,10 @@ class XpDeveloper {
  * wyboru i z Tabeli Losowych Talentow), a z 1. poziomu profesji 5 rozwiniec jej Cech,
  * 40 rozwiniec jej 8 Umiejetnosci (najwyzej 10 w jednej) i 1 Talent. Bez kosztu PD.
  */
-function creationStart(dev: XpDeveloper, profession: string, species: boolean): void {
+function creationStart(dev: XpDeveloper, profession: string): void {
   const { npc, arch } = dev;
-  if (species) {
+  // Rasa: Umiejetnosci i Talenty rasowe (przemieniony wampir - jak czlowiek).
+  {
     const race = gd.getRace(npc.turned ? "Człowiek" : npc.race);
     const pool = [...new Set((race?.skills ?? []).map((s) => resolveSpecName(s, npc.specChoices, arch, dev.rng, dev.det)))];
     for (const amount of [5, 5, 5, 3, 3, 3]) {
@@ -909,7 +910,8 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
   const budget = fixedBudget ?? npc.xpSpec?.budget ?? Math.max(0, xpBudget(tier, rng, deterministic) - turning + (npc.xpSpec?.bonus ?? 0));
   const dev = new XpDeveloper(npc, arch, budget, rng, deterministic, exact);
   dev.careerLevels.set(plan[0].profession, plan[0].start);
-  creationStart(dev, plan[0].profession, !npc.creature || !!npc.turned);
+  // Stworzenia z profesja (orki, zwierzoludzie) - bez darmowych rozwiniec tworzenia postaci; wszystko z PD.
+  if (!npc.creature || npc.turned) creationStart(dev, plan[0].profession);
 
   const steps: CareerStep[] = [{ profession: plan[0].profession, level: plan[0].start }];
   let ci = 0;
@@ -1226,20 +1228,34 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   ];
 }
 
-/** Poziom BN nie nizszy niz minimalny poziom stworzenia (np. Wojownik Chaosu: od zaawansowanego). */
+/** Poziom BN w przedziale stworzenia (domyslny poziom + tierSpan, np. szkielet najwyzej Doswiadczony). */
 export function clampTier(tier: TierId, creature: CreatureDef | undefined): TierId {
-  const min = TIER_IDS.indexOf(creature?.minTier ?? "slaby");
-  return TIER_IDS.indexOf(tier) < min ? TIER_IDS[min] : tier;
+  if (!creature) return tier;
+  const [lo, hi] = creatureTierRange(creature);
+  return TIER_IDS[Math.min(hi, Math.max(lo, TIER_IDS.indexOf(tier)))];
+}
+
+/** Poziom stworzenia bez wybranego poziomu: domyslny albo wyzszy z jego przedzialu (waga x0,5 za kazdy poziom wyzej); nizej tylko recznie. */
+function creatureTier(creature: CreatureDef, rng: Rng, det: boolean): TierId {
+  const d = TIER_IDS.indexOf(creature.minTier ?? "slaby");
+  if (det) return TIER_IDS[d];
+  const hi = creatureTierRange(creature)[1];
+  const ids = TIER_IDS.slice(d, hi + 1);
+  return weightedPick(ids, (id) => 0.5 ** (TIER_IDS.indexOf(id) - d), rng) ?? TIER_IDS[d];
 }
 
 /**
- * Typowe (nie unikatowe) stworzenie z grupy, ktore wystepuje na wybranym poziomie;
- * bez poziomu - dowolne z grupy.
+ * Typowe (nie unikatowe) stworzenie z grupy, ktore wystepuje na wybranym poziomie (jego przedzial
+ * go obejmuje); bez poziomu - dowolne z grupy.
  */
 export function pickCreatureFromGroup(group: string, tier: TierId | undefined, rng: Rng): string | undefined {
   const all = gd.creaturesInGroup(group).filter((c) => !c.unique);
-  // Zwykle stworzenia pasujace do poziomu; czasem (15%) silniejsze, osłabione do tego poziomu.
-  const fits = tier && !chance(0.15, rng) ? all.filter((c) => TIER_IDS.indexOf(c.minTier ?? "slaby") <= TIER_IDS.indexOf(tier)) : all;
+  const fits = tier
+    ? all.filter((c) => {
+        const [lo, hi] = creatureTierRange(c);
+        return TIER_IDS.indexOf(tier) >= lo && TIER_IDS.indexOf(tier) <= hi;
+      })
+    : all;
   return pick(fits.length ? fits : all, rng)?.name;
 }
 
@@ -1269,7 +1285,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     // Wampir: przemiana sama w sobie podnosi poziom (turningXp), PD to rozwoj ponad nia.
     const c = gd.getCreature(spec.creature);
     const beastLike = !!c && (!gd.isCivilized(c.name) || spec.noArchetype);
-    const shift = beastLike ? (gd.getTier(c.minTier ?? "slaby")?.xp?.[0] ?? 0) : c && isVampire({ creature: c.name }) ? turningXp(c) : 0;
+    const shift = beastLike ? beastXpShift(c) : c && isVampire({ creature: c.name }) ? turningXp(c) : 0;
     spec = { ...spec, tier: tierForXp(spec.xp + shift) };
   }
   const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);
@@ -1294,10 +1310,14 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     archetype = spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : (creature.archetypes && weightedKey(creature.archetypes, rng)) || pickArchetype(spec, rng);
   }
   if (turned && !archetype) archetype = vampireArchetype(bloodline, rng, det) ?? "Wojownik";
-  // Bestia moze wystapic ponizej swojego minimum, gdy poziom wybrano recznie (dostaje wtedy cechy negatywne).
-  const beastSpec = !!creature && !archetype;
-  // Ogr wybrany jak rasa z poziomem ustawionym recznie - bez podnoszenia do minimum stworzenia.
-  const tier = (beastSpec || (creature?.asRace && archetype)) && spec.tier ? pickTier(spec, rng) : clampTier(pickTier(spec, rng), creature);
+  // Stworzenie: poziom w jego przedziale (ponizej domyslnego bestia dostaje cechy negatywne);
+  // bez wybranego poziomu - zwykle domyslny. Ogr wybrany jak rasa - dowolny poziom, jak czlowiek.
+  const tier =
+    creature?.asRace && archetype
+      ? pickTier(spec, rng)
+      : creature
+        ? clampTier(spec.tier ?? creatureTier(creature, rng, det), creature)
+        : pickTier(spec, rng);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
   const beast = !!creature && !archetype;
@@ -1378,7 +1398,8 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
  */
 export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng, path?: PathStep[]): Npc {
   const next: Npc = structuredClone(npc);
-  if (!isBeast(next) && !gd.getCreature(next.creature)?.asRace) next.tier = clampTier(next.tier, gd.getCreature(next.creature));
+  const c = gd.getCreature(next.creature);
+  if (!(c?.asRace && next.archetype)) next.tier = clampTier(next.tier, c);
   develop(next, professions, rng, false, path);
   rollTreasures(next, rng);
   finish(next, rng, false);

@@ -523,6 +523,12 @@
     "source": "Podręcznik podstawowy",
     "rules": "W ramach swojego Ruchu stworzenie może wykonać atak Tupnięciem, jeśli jest większe od przeciwnika (patrz Rozmiar)."
   },
+  "Suche Kości (wartość)": {
+    "randomPool": false,
+    "description": "Ataki nieobuchowe łatwo przechodzą przez suche kości. Obrażenia z ataków bez Zalety Tłukąca zmniejsza się o 2 za każdy poziom cechy (najwyżej 3 poziomy); ataki Magiczne zadają pełne obrażenia. [dom]",
+    "source": "Nieoficjalny Grimuar (zasada domowa)",
+    "rules": "Obrażenia z ataków bez Zalety Tłukąca: −2 za każdy poziom (najwyżej 3). Ataki Magiczne zadają pełne obrażenia. [dom]"
+  },
   "Strach (wartość)": {
     "randomPool": false,
     "description": "Stworzenie wywołuje nienaturalny Strach w innych istotach. Poziom Strachu równy jest podanej wartości. Patrz: strona 190.",

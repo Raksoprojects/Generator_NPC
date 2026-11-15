@@ -680,8 +680,16 @@ export interface CreatureDef {
   optional: string[];
   abilities: { name: string; description: string }[];
   trappings: string[];
-  /** Najnizszy poziom BN, na jakim stworzenie wystepuje (np. Wojownik Chaosu: zaawansowany). */
+  /** Domyslny poziom BN stworzenia - profil z ksiazki (np. Wojownik Chaosu: Niezwykly); brak = Nowicjusz. */
   minTier?: TierId;
+  /** Przedzial poziomow wzgledem domyslnego [od, do] (nadpisuje settings.tierSpan), np. szkielet [0, 2]. */
+  tierSpan?: [number, number];
+  /** Rozwoj za PD liczony od poczatku tego poziomu zamiast domyslnego (czempion rozwija sie dalej jak szkielet). */
+  xpFrom?: TierId;
+  /** PD "zuzyte" na przemiane (czempion ze szkieletu) - odejmowane od budzetu rozwoju. */
+  turningXp?: number;
+  /** Cechy z poziomem rosnacym z poziomem BN: nazwa -> poziom cechy dla kolejnych poziomow od domyslnego. */
+  tierTraits?: Record<string, number[]>;
   /** Status z bloku (dodatki, np. "Srebro 4"). */
   status?: string | null;
 }
@@ -729,6 +737,8 @@ export interface CreatureFamiliesData {
     };
     /** Rozrzut rzutu cech bestii: 11 +- spread zamiast 2k10 (mniejsza roznorodnosc). */
     rollSpread?: number;
+    /** Przedzial poziomow stworzenia wzgledem domyslnego (minTier): [-2, 3] = dwa nizej, trzy wyzej. */
+    tierSpan?: [number, number];
     /** Zdziczale ludy (orki, zwierzoludzie): umiejetnosci i talenty profesji, ktorych nie rozwijaja. */
     feral?: { skills: string[]; talents: string[]; keep?: string[] };
     traitCount: Record<TierId, number>;

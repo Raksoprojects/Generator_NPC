@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { creatureBase, naturalAttacks } from "../creatures";
+import { creatureBase, creatureTierRange, naturalAttacks } from "../creatures";
 import { findMagicItem } from "../magicItems";
 import { seedRng } from "../dice";
 import * as gd from "../gameData";
@@ -120,8 +120,9 @@ describe("rozwoj bestii", () => {
     for (const c of gd.getCreatures().filter((x) => !gd.isCivilized(x.name))) {
       let prev: ReturnType<typeof computeNpc> | null = null;
       let prevSpent = 0;
-      // Ponizej minimalnego poziomu stworzenie i tak jest podnoszone do minimum.
-      for (const tier of tiers.slice(tiers.indexOf(c.minTier ?? "slaby"))) {
+      // Od domyslnego poziomu do gornej granicy przedzialu stworzenia (wyzej poziom jest przycinany).
+      const [, hi] = creatureTierRange(c);
+      for (const tier of tiers.slice(tiers.indexOf(c.minTier ?? "slaby"), hi + 1)) {
         const npc = generateNpc({ creature: c.name, tier, deterministic: true, randomTraits: false }, seedRng(5));
         npc.traits = [];
         npc.mutations = [];
@@ -141,10 +142,11 @@ describe("rozwoj bestii", () => {
 
   it("bestia ponizej minimum jest osłabiona (cechy negatywne), na minimum ma profil z ksiazki", () => {
     const negative = (n: Npc) => n.traits.filter((t) => gd.getCreatureTraits()[t]?.negative);
+    // Najwyzej dwa poziomy ponizej domyslnego (Niezwykly): Nowicjusz przycinany do Zwyklego.
     const weak = generateNpc({ creature: "Wojownik Chaosu", tier: "slaby" }, seedRng(1));
-    expect(weak.tier).toBe("slaby");
-    // Jedna cecha negatywna na poziom ponizej minimum (Niezwykly - 3 poziomy nad Nowicjuszem).
-    expect(negative(weak)).toHaveLength(3);
+    expect(weak.tier).toBe("sredni");
+    // Jedna cecha negatywna na poziom ponizej domyslnego.
+    expect(negative(weak)).toHaveLength(2);
     // Poziom losowy (nie wybrany) - nie schodzi ponizej minimum.
     for (let seed = 1; seed <= 20; seed++) {
       const r = generateNpc({ creature: "Wojownik Chaosu" }, seedRng(seed));
@@ -157,6 +159,23 @@ describe("rozwoj bestii", () => {
     expect(chosen.xp?.budget).toBe(700);
     const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
     expect(lord.charAdvances.WW).toBeGreaterThan(chosen.charAdvances.WW);
+    // Powyzej przedzialu (domyslny +3) - przycinany: Wybraniec (Zaawansowany) najwyzej Ekspert.
+    expect(generateNpc({ creature: "Wybraniec Chaosu", tier: "heros" }, seedRng(1)).tier).toBe("heroiczny");
+  });
+
+  it("szkielet najwyzej Doswiadczony, czempion na profilu szkieletu z Suchymi Kosciami", () => {
+    expect(generateNpc({ creature: "Szkielet", tier: "heros" }, seedRng(1)).tier).toBe("obyty");
+    const champ = generateNpc({ creature: "Szkieletowy czempion", tier: "zaawansowany", deterministic: true }, seedRng(1));
+    expect(champ.traits).toContain("Suche Kości (1)");
+    // PD od poczatku Nowicjusza minus przemiana: (2000 - 100 - 500).
+    expect(champ.xp?.budget).toBe(1400);
+    const top = generateNpc({ creature: "Szkieletowy czempion", tier: "heros" }, seedRng(1));
+    expect(top.tier).toBe("wybitny");
+    expect(top.traits).toContain("Suche Kości (3)");
+    // Bez wybranego poziomu - domyslny albo wyzszy, nigdy nizszy.
+    for (let seed = 1; seed <= 10; seed++) {
+      expect(TIER_IDS.indexOf(generateNpc({ creature: "Szkieletowy czempion" }, seedRng(seed)).tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));
+    }
   });
 
   it("cecha Broń trafia najlepsza Bronia Biala, nie sama WW", () => {
@@ -502,10 +521,12 @@ describe("rozwoj bestii", () => {
   });
 
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {
-    const orc = generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "sredni" }, seedRng(3));
-    // Zwykly: 2. poziom profesji, czasem wczesniej 1 poziom innej.
+    const orc = generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "zaawansowany" }, seedRng(3));
+    // Bez darmowych rozwiniec tworzenia postaci - wszystko z PD (Niezwykly: 2. poziom profesji).
     expect(orc.careerPath.at(-1)?.level).toBe(2);
     expect(orc.weapons.length).toBeGreaterThan(0);
+    // Orki zawsze z profesja.
+    for (let seed = 1; seed <= 10; seed++) expect(generateNpc({ creature: "Ork" }, seedRng(seed)).archetype).not.toBe("");
     expect(gd.isCivilized("Ork")).toBe(true);
     expect(gd.isCivilized("Wilk")).toBe(false);
   });

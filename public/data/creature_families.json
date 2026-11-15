@@ -6,6 +6,7 @@
     "charAdvances": { "slaby": 0, "sredni": 10, "obyty": 15, "zaawansowany": 20, "doswiadczony": 30, "weteran": 33, "wybitny": 37, "heroiczny": 40, "mistrz": 47, "arcymistrz": 53, "legendarny": 60, "heros": 80 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
     "rollSpread": 2,
+    "tierSpan": [-2, 3],
     "xpDevelopment": {
       "chars": { "WW": 2, "S": 1, "Wt": 1, "I": 1, "Zw": 1 },
       "xpScale": 0.5,
@@ -97,7 +98,7 @@
       "skills": { "Broń Biała (Podstawowa)": 20, "Zastraszanie": 20, "Odporność": 10, "Percepcja": 10 },
       "traits": { "Zabijaka": 3, "Brutalny": 2, "Twardy": 2, "Duży": 1, "Przywódca": 1, "Przebiegły": 1, "Czujny": 0.5, "Szybki": 0.5 },
       "feral": true,
-      "archetypeChance": 0.7,
+      "archetypeChance": 1,
       "archetypes": { "Wojownik": 3, "Oprych": 3, "Zwiadowca": 1, "Złodziej": 1, "Strzelec": 1, "Strażnik": 0.5 },
       "careers": {
         "Żołnierz": 3,
@@ -128,7 +129,7 @@
       "skills": { "Broń Biała (Podstawowa)": 20, "Percepcja": 20, "Tropienie": 20, "Skradanie (Wieś)": 20, "Zastraszanie": 20 },
       "traits": { "Zabijaka": 3, "Brutalny": 2, "Duży": 2, "Twardy": 1, "Czujny": 1, "Szybki": 1, "Przywódca": 0.5 },
       "feral": true,
-      "archetypeChance": 0.7,
+      "archetypeChance": 1,
       "archetypes": { "Wojownik": 3, "Oprych": 2, "Zwiadowca": 2, "Strzelec": 0.5 },
       "careers": { "Bestigor": 3, "Najeźdźca Ungorów": 3, "Banita": 2, "Zwiadowca": 1, "Łowczyni": 2, "Oprych": 2, "Żołnierz": 1, "Gladiator": 1, "Hiena Cmentarna": 0.5, "Strzelec": 0.5 }
     },

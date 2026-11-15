@@ -51,7 +51,14 @@ describe("przedmioty magiczne", () => {
     const chosen = templates({ creature: "Wybraniec Chaosu", tier: "legendarny" });
     expect(chosen.has("Broń Chaosu") || chosen.has("Broń demoniczna")).toBe(true);
     expect(chosen.has("Runiczna broń")).toBe(false);
-    const goblin = templates({ creature: "Goblin", tier: "legendarny" });
+    // Goblin najwyzej Niezwykly (przedzial stworzenia) - przedmioty losowane jak dla Legendy.
+    const goblin = new Set<string>();
+    for (let seed = 1; seed <= 60; seed++) {
+      const g = generateNpc({ creature: "Goblin" }, seedRng(seed));
+      g.tier = "legendarny";
+      rollTreasures(g, seedRng(seed));
+      for (const m of g.magicItems ?? []) goblin.add(m.template);
+    }
     expect([...goblin].some((t) => ["Fetysz szamana", "Zaklęty rębacz"].includes(t))).toBe(true);
     expect(goblin.has("Pióro Płomiennego Feniksa")).toBe(false);
   });
