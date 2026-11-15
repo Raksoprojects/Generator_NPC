@@ -210,24 +210,34 @@ export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, 
     if (!attr || creature.stats[attr] != null) skills.set(name, Math.max(skills.get(name) ?? 0, p));
   }
   const chars = (fam.settings.charCodes ?? []).filter((c) => creature.stats[c] != null);
+  // Przelicznik PD bestii: wpisane PD to poziom jak u czlowieka, na rozwoj idzie ich czesc.
+  const scaled = Math.round(budget * (cfg.xpScale ?? 1));
+  // Limit rozwiniec KUPIONYCH za PD (ponad umiejetnosci rodziny i profil z ksiazki) wg wpisanych PD:
+  // [od PD, umiejetnosc, cecha]; brak cechy = bez limitu cech.
+  const capRow = [...(cfg.advanceCap ?? [])].reverse().find(([from]) => budget >= from);
+  const base = new Map(npc.skills.map((s) => [s.name, s.advances]));
+  const charBase = Object.fromEntries(chars.map((c) => [c, npc.charAdvances[c] ?? 0])) as Record<Attribute, number>;
+  const skillCap = (name: string) => (base.get(name) ?? 0) + (capRow?.[1] ?? Infinity);
+  const charCap = (code: Attribute) => charBase[code] + (capRow?.[2] ?? Infinity);
   let spent = 0;
   const skillAdv = (name: string) => npc.skills.find((s) => s.name === name)?.advances ?? 0;
   for (let guard = 0; guard < 5000; guard++) {
-    const left = budget - spent;
+    const left = scaled - spent;
     const cands: { kind: "char" | "skill"; name: string; cost: number; weight: number }[] = [];
     for (const code of chars) {
       const cost = nextAdvanceCost("char", npc.charAdvances[code] ?? 0);
-      if (cost <= left) cands.push({ kind: "char", name: code, cost, weight: (cfg.chars[code] ?? 1) ** 2 / cost });
+      if (cost <= left && (npc.charAdvances[code] ?? 0) < charCap(code)) cands.push({ kind: "char", name: code, cost, weight: (cfg.chars[code] ?? 1) ** 2 / cost });
     }
     for (const [name, p] of skills) {
       const cost = nextAdvanceCost("skill", skillAdv(name));
-      if (cost <= left) cands.push({ kind: "skill", name, cost, weight: p ** 2 / cost });
+      if (cost <= left && skillAdv(name) < skillCap(name)) cands.push({ kind: "skill", name, cost, weight: p ** 2 / cost });
     }
     if (!cands.length) break;
     const c = deterministic ? cands.sort((a, b) => b.weight - a.weight)[0] : weightedPick(cands, (x) => x.weight, rng)!;
     // Do konca przedzialu kosztu (koszt w przedziale staly), jesli PD starcza.
     const owned = c.kind === "char" ? (npc.charAdvances[c.name as Attribute] ?? 0) : skillAdv(c.name);
-    const n = Math.max(1, Math.min(5 - (owned % 5), Math.floor(left / c.cost)));
+    const cap = c.kind === "char" ? charCap(c.name as Attribute) : skillCap(c.name);
+    const n = Math.max(1, Math.min(5 - (owned % 5), Math.floor(left / c.cost), cap - owned));
     spent += n * c.cost;
     if (c.kind === "char") npc.charAdvances[c.name as Attribute] = owned + n;
     else {

@@ -711,7 +711,18 @@ export interface CreatureFamiliesData {
       fitPriority: [number, number][];
       /** Umiejetnosci rozwijane przez kazda bestie (np. Odporność) i ich priorytet. */
       extraSkills: Record<string, number>;
+      /** Mnoznik PD bestii (0.5 = 4000 PD czlowieka to 2000 PD na rozwoj bestii). */
+      xpScale?: number;
+      /**
+       * Limit rozwiniec KUPIONYCH za PD (ponad umiejetnosci rodziny i profil z ksiazki) jednej
+       * umiejetnosci i cechy wg wpisanych PD: [od PD, umiejetnosc, cecha], rosnaco; brak cechy = bez limitu.
+       */
+      advanceCap?: [number, number, number?][];
     };
+    /** Rozrzut rzutu cech bestii: 11 +- spread zamiast 2k10 (mniejsza roznorodnosc). */
+    rollSpread?: number;
+    /** Zdziczale ludy (orki, zwierzoludzie): umiejetnosci i talenty profesji, ktorych nie rozwijaja. */
+    feral?: { skills: string[]; talents: string[]; keep?: string[] };
     traitCount: Record<TierId, number>;
     optionalChance: Record<TierId, number>;
     tierLabels: Record<TierId, string>;
