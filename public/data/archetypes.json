@@ -21,7 +21,9 @@
       "Kawalerzysta": 1,
       "Zabójca": 1,
       "Straż Morska": 2,
-      "Mistrz Miecza": 2
+      "Mistrz Miecza": 2,
+      "Krwawy Rycerz": 1,
+      "Bestigor": 1
     },
     "keySkills": [
       "Broń Biała",
@@ -234,7 +236,9 @@
       "Szarlatan": 1,
       "Żebrak": 1,
       "Rajfur": 0.5,
-      "Przemytniczka": 1
+      "Przemytniczka": 1,
+      "Nocny Łupieżca": 1,
+      "Szpieg": 1
     },
     "keySkills": [
       "Skradanie",
@@ -379,7 +383,8 @@
       "Rekietierka": 2,
       "Banita": 3,
       "Pirat Rzeczny": 1,
-      "Gladiator": 0.5
+      "Gladiator": 0.5,
+      "Król Ghuli": 1
     },
     "keySkills": [
       "Broń Biała",
@@ -511,7 +516,8 @@
       "Mag": 2,
       "Kapłan-Kowal Vaula": 0.4,
       "Tkacz Burzy": 0.3,
-      "Mistrz Wiedzy Hoetha": 0.4
+      "Mistrz Wiedzy Hoetha": 0.4,
+      "Lektor": 1
     },
     "keySkills": [
       "Splatanie Magii",
@@ -644,7 +650,9 @@
       "Posłaniec": 1,
       "Lekki Kawalerzysta": 1,
       "Banita": 0.5,
-      "Wojownik Cienia": 3
+      "Wojownik Cienia": 3,
+      "Łowczyni Nagród": 1,
+      "Najeźdźca Ungorów": 1
     },
     "keySkills": [
       "Percepcja",
@@ -841,7 +849,9 @@
       "Poseł": 1,
       "Zwadźca": 1,
       "Namiestnik": 1,
-      "Estetyk": 1
+      "Estetyk": 1,
+      "Dworka": 1,
+      "Wampirzy Hrabia": 1
     },
     "keySkills": [
       "Dowodzenie",

@@ -690,6 +690,14 @@ export interface CreatureFamily {
   civilized?: boolean;
   skills: Record<string, number>;
   traits: Record<string, number>;
+  /** Domyslna szansa na profesje (gdy stworzenie nie ma wlasnej archetypeChance). */
+  archetypeChance?: number;
+  /** Domyslne archetypy rodziny z wagami. */
+  archetypes?: Record<string, number>;
+  /** Jedyne profesje rodziny (profesje ludzi i wlasne, np. Bestigor) z wagami. */
+  careers?: Record<string, number>;
+  /** Zdziczala rodzina: bez umiejetnosci i talentow z settings.feral (Wiedza, Czytanie/Pisanie...). */
+  feral?: boolean;
 }
 
 export interface CreatureFamiliesData {
@@ -777,9 +785,15 @@ export interface VampiresData {
     /** Bez pancerza - poza magicznym od heroicznego (Strigoi). */
     noArmour?: boolean;
     turning?: VampireTurning;
+    /** Tabela k100 Preferowanych Profesji (waga = szerokosc przedzialu); "Wampirzy X" - patrz careerAlternatives. */
+    careers?: Record<string, number>;
   })[];
   gifts: (MutationRow & { limit?: string; recommended?: string })[];
   weaknesses: MutationRow[];
+  /** Profesje Alternatywne: "Wampirzy Kawalerzysta" -> zwykla profesja "Kawalerzysta". */
+  careerAlternatives?: Record<string, string>;
+  /** Dary Krwi profesji na poziomach 1-4 (wampirze profesje i Profesje Alternatywne). */
+  careerGifts?: Record<string, string[][]>;
   /** Rozwiniecia Splatania i Jezyka (Magicznego) wampira na poziomie, mnozone przez magic / 2. */
   magicAdvances?: Partial<Record<TierId, number>>;
 }

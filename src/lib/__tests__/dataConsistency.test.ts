@@ -49,8 +49,9 @@ describe("professions.json i races.json", () => {
 
   it("rasy profesji istnieja w races.json", () => {
     const races = new Set(gd.allRaceNames());
+    // Profesje stworzen (wampirze, zwierzoludzi) - rasa to nazwa stworzenia z bestiariusza.
     const problems = gd.allProfessionNames().flatMap((p) =>
-      gd.getProfession(p)!.races.filter((r) => !races.has(r)).map((r) => `${p}: "${r}"`)
+      gd.getProfession(p)!.races.filter((r) => !races.has(r) && !gd.getCreature(r)).map((r) => `${p}: "${r}"`)
     );
     expect(problems).toEqual([]);
   });

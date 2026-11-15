@@ -217,7 +217,7 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("wampir rozwija sie jak czlowiek (archetyp z linii krwi), czaruje wg linii", () => {
+  it("wampir rozwija sie jak czlowiek (profesja z tabeli linii, archetyp z profesji), czaruje wg linii", () => {
     const casters: Record<string, number> = {};
     const adv = (v: ReturnType<typeof generateNpc>, name: string) => v.skills.find((s) => s.name === name)?.advances ?? 0;
     for (let seed = 1; seed <= 40; seed++) {
@@ -225,17 +225,23 @@ describe("rozwoj bestii", () => {
         for (const tier of ["zaawansowany", "doswiadczony", "heroiczny"] as const) {
           const v = generateNpc({ creature: "Wampir", tier, bloodline: line }, seedRng(seed));
           const def = gd.getVampires()!.bloodlines.find((b) => b.name === line)!;
-          expect(Object.keys(def.archetypes!)).toContain(v.archetype);
+          // Obecna profesja z tabeli Preferowanych Profesji linii (Wampirzy X = zwykla profesja X), archetyp ja ma.
+          const alt = gd.getVampires()!.careerAlternatives ?? {};
+          const main = v.careerPath.at(-1)!.profession;
+          expect(Object.keys(def.careers!).map((c) => alt[c] ?? c), `${line} ${tier}`).toContain(main);
+          expect(Object.keys(gd.getArchetype(v.archetype)!.professions)).toContain(main);
           // Tradycje z wyborem sa rozstrzygniete, jak przy wyposazeniu.
           for (const t of [...v.traits, ...computeNpc(v).creatureTraits]) expect(t, t).not.toMatch(/\s(albo|lub)\s/);
           const caster = v.traits.some((t) => t.startsWith("Rzucanie Czarów"));
           if (!caster) {
             // Bez cechy - tylko magia z Talentow profesji, jak u czlowieka (np. Świecki Alchemik:
             // Magia Prosta na 3. poziomie, Magia Tajemna (Metalu) na 4. - Wiatry Magii s. 38).
-            const lores = v.talents.map((t) => /^Magia Tajemna \((.+)\)$/.exec(t.name)?.[1]).filter(Boolean);
+            // "Nekromancja" w talencie (Lektor) = tradycja "Nekromancji" w zakleciach - porownanie po rdzeniu.
+            const lores = v.talents.map((t) => /^Magia Tajemna \((.+)\)$/.exec(t.name)?.[1]).filter((x): x is string => !!x);
+            const stem = (x: string) => x.slice(0, 6);
             for (const s of v.spells) {
               const lore = gd.getSpell(s)!.lore;
-              if (!/^Prosta/.test(lore)) expect([...lores, "Tajemna"], `${line} ${tier}: ${s}`).toContain(lore);
+              if (!/^Prosta/.test(lore)) expect([...lores, "Tajemna"].map(stem), `${line} ${tier}: ${s}`).toContain(stem(lore));
             }
             continue;
           }
@@ -285,12 +291,26 @@ describe("rozwoj bestii", () => {
     // Jedyna metoda: przemiana (bez profilu z bestiariusza).
     const any = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: "Von Carstein", deterministic: true }, seedRng(1));
     expect(any.turned).toBe(true);
-    // Wybrany archetyp: linia, ktora go dopuszcza (Strigoi nie ma profesji czarodzieja).
+    // Wybrany archetyp: profesja z tabeli linii, ktora do niego pasuje (Strigoi-czarodziej to tylko Lektor).
     for (let seed = 1; seed <= 40; seed++) {
       const w = generateNpc({ creature: "Wampir", archetype: "Czarodziej", tier: "doswiadczony" }, seedRng(seed));
       expect(w.archetype).toBe("Czarodziej");
-      expect(w.mutations.find((m) => m.kind === "bloodline")?.name).not.toBe("Strigoi");
+      if (w.mutations.find((m) => m.kind === "bloodline")?.name === "Strigoi") expect(w.careerPath.at(-1)!.profession).toBe("Lektor");
     }
+  });
+
+  it("orki i zwierzoludzie: profesje z listy rodziny, bez Wiedzy (poza Lokalna) i Czytania/Pisania", () => {
+    for (let seed = 1; seed <= 30; seed++) {
+      for (const creature of ["Ork", "Goblin", "Gor", "Ungor"]) {
+        const v = generateNpc({ creature, archetype: "Wojownik", tier: "heroiczny" }, seedRng(seed));
+        const fam = gd.getCreatureFamilies().families[gd.getCreature(creature)!.family];
+        for (const step of v.careerPath) expect(Object.keys(fam.careers!), `${creature}: ${step.profession}`).toContain(step.profession);
+        for (const s of v.skills) if (s.name.startsWith("Wiedza")) expect(s.name, creature).toBe("Wiedza (Lokalna)");
+        expect(v.talents.some((t) => t.name === "Czytanie/Pisanie"), creature).toBe(false);
+      }
+    }
+    // Profesja wlasna zwierzoludzi tylko dla nich.
+    expect(gd.professionAllowsRace("Bestigor", "Człowiek")).toBe(false);
   });
 
   it("Strigoi: proste profesje, bez zwyklego pancerza", () => {

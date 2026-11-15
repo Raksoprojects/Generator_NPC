@@ -12172,5 +12172,955 @@
       "level": 2
     },
     "minTier": "heroiczny"
+  },
+  "Krwawy Rycerz": {
+    "races": [
+      "Wampir"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Krwawy Giermek",
+        "status": "Srebro 3",
+        "characteristics": [
+          "Siła",
+          "Inicjatywa",
+          "Zwinność"
+        ],
+        "skills": [
+          "Atletyka",
+          "Opieka nad Zwierzętami",
+          "Oswajanie",
+          "Zastraszanie",
+          "Język (Bitewny)",
+          "Wiedza (Heraldyka)",
+          "Broń Biała (Kawaleryjska)",
+          "Jeździectwo (Konie)"
+        ],
+        "talents": [
+          "Rozproszenie Uwagi",
+          "Sekretna Tożsamość",
+          "Wstrzemięźliwy",
+          "Tragarz"
+        ],
+        "trappings": [
+          "puklerz",
+          "skórzany napierśnik",
+          "miecz"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Krwawy Rycerz",
+        "status": "Srebro 5",
+        "characteristics": [
+          "Walka Wręcz"
+        ],
+        "skills": [
+          "Opanowanie",
+          "Unik",
+          "Odporność",
+          "Wiedza (Wojskowość)",
+          "Broń Biała (Dowolna)",
+          "Percepcja"
+        ],
+        "talents": [
+          "Zbicie Broni",
+          "Odwrócenie Szans",
+          "Urodzony w Siodle",
+          "Tarczownik"
+        ],
+        "trappings": [
+          "ciężki pancerz",
+          "zmora w kropierzu",
+          "kopia",
+          "duża tarcza"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Krwawy Wawasor",
+        "status": "Złoto 2",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Charyzma",
+          "Targowanie",
+          "Intuicja",
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Nieustraszony (Dowolny)",
+          "Finta",
+          "Wściekły Atak",
+          "Nieustępliwy"
+        ],
+        "trappings": [
+          "zmora w kolczastym kropierzu",
+          "duża tarcza z naostrzonymi krawędziami",
+          "kopia templariuszy",
+          "oddział żołnierzy"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Krwawy Kasztelan",
+        "status": "Złoto 4",
+        "characteristics": [
+          "Ogłada"
+        ],
+        "skills": [
+          "Język (Dowolny)",
+          "Wiedza (Dowolna)"
+        ],
+        "talents": [
+          "Mistrz Walki",
+          "Inspirujący",
+          "Żelazna Wola",
+          "Wódz"
+        ],
+        "trappings": [
+          "metalowy napierśnik",
+          "metalowy hełm"
+        ]
+      }
+    ],
+    "class": "Wojownicy",
+    "source": "Wampiry",
+    "page": 20
+  },
+  "Król Ghuli": {
+    "races": [
+      "Wampir"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Ghulowy Brat",
+        "status": "Brąz 3",
+        "characteristics": [
+          "Walka Wręcz",
+          "Zwinność",
+          "Siła Woli"
+        ],
+        "skills": [
+          "Opieka nad Zwierzętami",
+          "Oswajanie",
+          "Unik",
+          "Zastraszanie",
+          "Język (Bitewny)",
+          "Wiedza (Bestie)",
+          "Broń Biała (Bijatyka)",
+          "Skradanie (Dowolne)"
+        ],
+        "talents": [
+          "Posłuch u Zwierząt",
+          "Cios Poniżej Pasa",
+          "Walka w Ciasnocie",
+          "Szczur Kanałowy"
+        ],
+        "trappings": [
+          "kastety",
+          "skórzany kaftan"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Pan Ghuli",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Tresura (Dowolna)",
+          "Wspinaczka",
+          "Odporność",
+          "Broń Biała (Podstawowa)",
+          "Percepcja",
+          "Tropienie"
+        ],
+        "talents": [
+          "Twardziel",
+          "Krzepki",
+          "Silny Cios",
+          "Doświadczony Wędrowiec (Bagna)"
+        ],
+        "trappings": [
+          "świta ghuli",
+          "wataha straszliwych wilków"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Władca Ghuli",
+        "status": "Srebro 5",
+        "characteristics": [
+          "Wytrzymałość"
+        ],
+        "skills": [
+          "Dowodzenie",
+          "Broń Biała (Parująca)",
+          "Sztuka Przetrwania",
+          "Jeździectwo (Straszliwy Wilk)"
+        ],
+        "talents": [
+          "Nieustraszony (Dowolny)",
+          "Nieubłagany",
+          "Atak Wyprzedzający",
+          "Cios Mierzony"
+        ],
+        "trappings": [
+          "wierzchowiec: straszliwy wilk",
+          "tarcza",
+          "miecz",
+          "orszak strażników grobów"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Król Ghuli",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Inteligencja"
+        ],
+        "skills": [
+          "Opanowanie",
+          "Nawigacja"
+        ],
+        "talents": [
+          "Wściekły Atak",
+          "Żelazna Wola",
+          "Zabójca",
+          "Waleczne Serce"
+        ],
+        "trappings": [
+          "świta czarnych rycerzy",
+          "towarzysz: wilk zagłady",
+          "wataha straszliwych wilków"
+        ]
+      }
+    ],
+    "class": "Zwiadowcy",
+    "source": "Wampiry",
+    "page": 21
+  },
+  "Dworka": {
+    "races": [
+      "Wampir"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Odaliska",
+        "status": "Brąz 2",
+        "characteristics": [
+          "Walka Wręcz",
+          "Zwinność",
+          "Ogłada"
+        ],
+        "skills": [
+          "Charyzma",
+          "Unik",
+          "Występy (Dowolne)",
+          "Plotkowanie",
+          "Intuicja",
+          "Hazard",
+          "Broń Biała (Podstawowa)",
+          "Otwieranie Zamków"
+        ],
+        "talents": [
+          "Etykieta (Szlachta)",
+          "Czytanie/Pisanie",
+          "Pomocny",
+          "Urodzony Wojownik"
+        ],
+        "trappings": [
+          "wytworny strój",
+          "fryzura pełna sekretów",
+          "broń ręczna",
+          "skórzany gorset",
+          "lina"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Dworka",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Opanowanie",
+          "Język (Dowolny)",
+          "Wiedza (Polityka)",
+          "Broń Biała (Parująca)",
+          "Percepcja",
+          "Skradanie (Miasto)"
+        ],
+        "talents": [
+          "Oburęczność",
+          "Gadanina",
+          "Na Cztery Łapy",
+          "Błękitna Krew"
+        ],
+        "trappings": [
+          "wytworny kapelusz",
+          "wpływowi klienci",
+          "łamacz mieczy"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Królewska Dworka",
+        "status": "Srebro 5",
+        "characteristics": [
+          "Umiejętności Strzeleckie"
+        ],
+        "skills": [
+          "Atletyka",
+          "Powożenie",
+          "Dowodzenie",
+          "Broń Zasięgowa (Dowolna)"
+        ],
+        "talents": [
+          "Musztra",
+          "Dwie Bronie",
+          "Riposta",
+          "Szósty Zmysł"
+        ],
+        "trappings": [
+          "narkotyki i trucizny",
+          "tron sabatu (lektyka)",
+          "pistolet kuszowy albo łuk żmii"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Cesarska Dworka",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Inteligencja"
+        ],
+        "skills": [
+          "Wiedza (Dowolna)",
+          "Broń Biała (Dowolna)"
+        ],
+        "talents": [
+          "Gładkie Słówka",
+          "Inspirujący",
+          "Krasomówstwo",
+          "Sekretna Tożsamość"
+        ],
+        "trappings": [
+          "imponująca biżuteria",
+          "sekretne legowisko"
+        ]
+      }
+    ],
+    "class": "Dworzanie",
+    "source": "Wampiry",
+    "page": 21
+  },
+  "Lektor": {
+    "races": [
+      "Wampir"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Nowicjusz Lektorów",
+        "status": "Brąz 3",
+        "characteristics": [
+          "Inicjatywa",
+          "Inteligencja",
+          "Siła Woli"
+        ],
+        "skills": [
+          "Splatanie Magii (Dhar)",
+          "Unik",
+          "Odporność",
+          "Intuicja",
+          "Język (Magiczny)",
+          "Dowodzenie",
+          "Wiedza (Magia)",
+          "Broń Biała (Bijatyka)"
+        ],
+        "talents": [
+          "Błękitna Krew",
+          "Magia Prosta",
+          "Czytanie/Pisanie",
+          "Szósty Zmysł"
+        ],
+        "trappings": [
+          "grimuar",
+          "kostur"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Lektor",
+        "status": "Srebro 3",
+        "characteristics": [
+          "Wytrzymałość"
+        ],
+        "skills": [
+          "Charyzma",
+          "Opanowanie",
+          "Zastraszanie",
+          "Broń Biała (Drzewcowa)",
+          "Percepcja",
+          "Badania Naukowe"
+        ],
+        "talents": [
+          "Magia Tajemna (Nekromancja)",
+          "Ruchliwe dłonie",
+          "Percepcja Magiczna",
+          "Chirurgia"
+        ],
+        "trappings": [
+          "kocioł",
+          "kostnica"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Kapłan Lektor",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Zwinność"
+        ],
+        "skills": [
+          "Wycena",
+          "Wiedza (Nehekhara)",
+          "Jeździectwo (Dowolne)",
+          "Skradanie (Dowolne)"
+        ],
+        "talents": [
+          "Mól Książkowy",
+          "Twardziel",
+          "Wykrywanie Magii",
+          "Krzepki"
+        ],
+        "trappings": [
+          "ołtarz (magiczny)",
+          "krypta"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Lektor Hierofant",
+        "status": "Złoto 5",
+        "characteristics": [
+          "Ogłada"
+        ],
+        "skills": [
+          "Język (Dowolny)",
+          "Wiedza (Dowolna)"
+        ],
+        "talents": [
+          "Magia Tajemna (Dowolna Tradycja)",
+          "Nieubłagany",
+          "Znawca (Dowolna Dziedzina)",
+          "Mag Bitewny"
+        ],
+        "trappings": [
+          "biblioteka (magiczna)",
+          "pracownia (magiczna)"
+        ]
+      }
+    ],
+    "class": "Uczeni",
+    "source": "Wampiry",
+    "page": 22,
+    "spellLore": "Nekromancja"
+  },
+  "Nocny Łupieżca": {
+    "races": [
+      "Wampir"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Porywacz",
+        "status": "Srebro 1",
+        "characteristics": [
+          "Umiejętności Strzeleckie",
+          "Siła",
+          "Zwinność"
+        ],
+        "skills": [
+          "Atletyka",
+          "Wspinaczka",
+          "Opanowanie",
+          "Zastraszanie",
+          "Broń Biała (Podstawowa)",
+          "Skradanie (Dowolne)",
+          "Tropienie"
+        ],
+        "talents": [
+          "Ulicznik",
+          "Wtargnięcie z Włamaniem",
+          "Bardzo Szybki",
+          "Ogłuszenie"
+        ],
+        "trappings": [
+          "maczuga",
+          "skórzana kurta"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Łupieżca",
+        "status": "Srebro 3",
+        "characteristics": [
+          "Walka Wręcz"
+        ],
+        "skills": [
+          "Powożenie",
+          "Plotkowanie",
+          "Percepcja",
+          "Broń Zasięgowa (Łuk)",
+          "Sztuka Przetrwania",
+          "Zastawianie Pułapek"
+        ],
+        "talents": [
+          "Musztra",
+          "Włóczykij",
+          "Cień",
+          "Szczur Kanałowy"
+        ],
+        "trappings": [
+          "łuk z 10 strzałami",
+          "koń z wozem",
+          "tarcza"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Kapitan Łupieżców",
+        "status": "Srebro 5",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Odporność",
+          "Intuicja",
+          "Dowodzenie",
+          "Broń Zasięgowa (Dowolna)"
+        ],
+        "talents": [
+          "Zręczny",
+          "Czytanie/Pisanie",
+          "Nieustępliwy",
+          "Snajper"
+        ],
+        "trappings": [
+          "banda łupieżców",
+          "hełm",
+          "kolczuga",
+          "szkieletowy rumak"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Baron Łupieżców",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Ogłada"
+        ],
+        "skills": [
+          "Charyzma",
+          "Wiedza (Imperium)"
+        ],
+        "talents": [
+          "Prosto Między Oczy",
+          "Nos do Kłopotów",
+          "Charyzmatyczny"
+        ],
+        "trappings": [
+          "legowisko",
+          "strażnicy grobów"
+        ]
+      }
+    ],
+    "class": "Łotry",
+    "source": "Wampiry",
+    "page": 23
+  },
+  "Wampirzy Hrabia": {
+    "races": [
+      "Wampir"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Wampirzy Sługa",
+        "status": "Złoto 1",
+        "characteristics": [
+          "Walka Wręcz",
+          "Siła",
+          "Inicjatywa"
+        ],
+        "skills": [
+          "Charyzma",
+          "Plotkowanie",
+          "Targowanie",
+          "Zastraszanie",
+          "Język (Klasyczny)",
+          "Wiedza (Wampiry)",
+          "Broń Biała (Podstawowa)",
+          "Muzyka (Organy)"
+        ],
+        "talents": [
+          "Etykieta (Szlachta)",
+          "Błękitna Krew",
+          "Czytanie/Pisanie",
+          "Charyzmatyczny"
+        ],
+        "trappings": [
+          "skórzany kaftan",
+          "miecz",
+          "10 zk"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Wampirzy Hrabia",
+        "status": "Złoto 3",
+        "characteristics": [
+          "Ogłada"
+        ],
+        "skills": [
+          "Opieka nad Zwierzętami",
+          "Opanowanie",
+          "Intuicja",
+          "Dowodzenie",
+          "Broń Biała (Szermiercza)",
+          "Percepcja"
+        ],
+        "talents": [
+          "Przekonujący",
+          "Inspirujący",
+          "Intrygant",
+          "Odporność Psychiczna"
+        ],
+        "trappings": [
+          "kareta ciągnięta przez szkieletowe rumaki",
+          "złowieszczy śmiech",
+          "wytworne ubranie",
+          "kolczuga",
+          "rapier",
+          "sługa",
+          "dwór",
+          "50 zk"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Wampirzy Władca",
+        "status": "Złoto 5",
+        "characteristics": [
+          "Siła Woli"
+        ],
+        "skills": [
+          "Oswajanie",
+          "Wspinaczka",
+          "Wiedza (Wojskowość)",
+          "Jeździectwo (Konie)"
+        ],
+        "talents": [
+          "Władcza Postura",
+          "Mówca",
+          "Szósty Zmysł",
+          "Majętny"
+        ],
+        "trappings": [
+          "lenno",
+          "zmora z siodłem i kropierzem",
+          "100 zk"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Wampirzy Król",
+        "status": "Złoto 7",
+        "characteristics": [
+          "Inteligencja"
+        ],
+        "skills": [
+          "Wiedza (Dowolna)",
+          "Język (Dowolny)"
+        ],
+        "talents": [
+          "Zimna krew",
+          "Żyłka Handlowa",
+          "Krasomówstwo",
+          "Wódz"
+        ],
+        "trappings": [
+          "powóz ciągnięty przez widmowe rumaki",
+          "200 zk",
+          "stajnia nieumarłych potworów",
+          "skarb wart 1000 zk",
+          "prowincja"
+        ]
+      }
+    ],
+    "class": "Dworzanie",
+    "source": "Wampiry",
+    "page": 23
+  },
+  "Bestigor": {
+    "races": [
+      "Gor",
+      "Bestigor",
+      "Wargor",
+      "Władca Zwierzoludzi"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Rozszarpywacz",
+        "status": "Brąz 4",
+        "skills": [
+          "Atletyka",
+          "Opanowanie",
+          "Unik",
+          "Odporność",
+          "Broń Biała (Podstawowa)",
+          "Broń Biała (Drzewcowa)",
+          "Muzyka (Bęben)",
+          "Skradanie (Wieś)"
+        ],
+        "talents": [
+          "Berserkerska Szarża",
+          "Dwie Bronie",
+          "Odwrócenie Szans",
+          "Ogłuszenie"
+        ],
+        "trappings": [
+          "puklerz",
+          "prymitywna broń ręczna albo włócznia",
+          "bęben wojenny"
+        ],
+        "characteristics": [
+          "Walka Wręcz",
+          "Siła",
+          "Wytrzymałość"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Bestigor",
+        "status": "Srebro 2",
+        "skills": [
+          "Wspinaczka",
+          "Mocna Głowa",
+          "Dowodzenie",
+          "Broń Biała (Korbacz albo Dwuręczna)",
+          "Sztuka Przetrwania",
+          "Percepcja"
+        ],
+        "talents": [
+          "Zmysł Bitewny",
+          "Nieustraszony (Ludzie)",
+          "Krzepki",
+          "Niezwykle Odporny"
+        ],
+        "trappings": [
+          "korbacz albo broń dwuręczna",
+          "zdobyczny napierśnik i hełm"
+        ],
+        "characteristics": [
+          "Inicjatywa"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Wargor",
+        "status": "Srebro 4",
+        "skills": [
+          "Zastraszanie",
+          "Intuicja",
+          "Pływanie",
+          "Tropienie"
+        ],
+        "talents": [
+          "Rozbrojenie",
+          "Żelazna Szczęka",
+          "Silny Cios",
+          "Wódz"
+        ],
+        "trappings": [
+          "chata z ludzkiej skóry",
+          "zdobyczna kolczuga z czepcem",
+          "stado wojenne"
+        ],
+        "characteristics": [
+          "Zwinność"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Władca Bestii",
+        "status": "Złoto 2",
+        "skills": [
+          "Wiedza (Sztuka Wojenna)",
+          "Nawigacja"
+        ],
+        "talents": [
+          "Władcza Postura",
+          "Straszny",
+          "Żelazna Wola",
+          "Szósty Zmysł"
+        ],
+        "trappings": [
+          "sztandar Chaosu z ludzkiej skóry",
+          "duże stado wojenne",
+          "głowa poprzedniego władcy bestii",
+          "zrabowana broń i pancerze (3k10 zk)"
+        ],
+        "characteristics": [
+          "Siła Woli"
+        ]
+      }
+    ],
+    "class": "Wojownicy",
+    "source": "Warriors of Chaos (nieoficjalny)"
+  },
+  "Najeźdźca Ungorów": {
+    "races": [
+      "Ungor",
+      "Ungor Najeźdźca",
+      "Półróg"
+    ],
+    "characteristics_pending": false,
+    "level1_marker_hint": 3,
+    "levels": [
+      {
+        "level": 1,
+        "title": "Łowca Ludzi",
+        "status": "Brąz 1",
+        "skills": [
+          "Atletyka",
+          "Mocna Głowa",
+          "Opanowanie",
+          "Odporność",
+          "Hazard",
+          "Broń Biała (Podstawowa albo Drzewcowa)",
+          "Sztuka Przetrwania",
+          "Broń Zasięgowa (Miotana)"
+        ],
+        "talents": [
+          "Zmysł Bitewny",
+          "Chodu!",
+          "Włóczykij",
+          "Traper"
+        ],
+        "trappings": [
+          "posłanie",
+          "prymitywna broń ręczna",
+          "włócznia albo 3 oszczepy"
+        ],
+        "characteristics": [
+          "Walka Wręcz",
+          "Siła",
+          "Wytrzymałość"
+        ]
+      },
+      {
+        "level": 2,
+        "title": "Najeźdźca Ungorów",
+        "status": "Brąz 2",
+        "skills": [
+          "Unik",
+          "Leczenie",
+          "Wiedza (Lokalna)",
+          "Percepcja",
+          "Broń Zasięgowa (Łuk)",
+          "Skradanie (Wieś)"
+        ],
+        "talents": [
+          "Celny Strzał",
+          "Oko Łowcy",
+          "Strzelec Wyborowy",
+          "Ogłuszenie"
+        ],
+        "trappings": [
+          "łuk z 10 strzałami",
+          "puklerz",
+          "zdobyczny skórzany kaftan",
+          "namiot"
+        ],
+        "characteristics": [
+          "Umiejętności Strzeleckie"
+        ]
+      },
+      {
+        "level": 3,
+        "title": "Półrogi Najeźdźca",
+        "status": "Brąz 5",
+        "skills": [
+          "Plotkowanie",
+          "Zastraszanie",
+          "Intuicja",
+          "Dowodzenie"
+        ],
+        "talents": [
+          "Groźny",
+          "Nieustępliwy",
+          "Strzał w Dziesiątkę",
+          "Szybkobiegacz"
+        ],
+        "trappings": [
+          "hełm",
+          "zdobyczna kolczuga z rękawami",
+          "banda najeźdźców ungorów"
+        ],
+        "characteristics": [
+          "Inicjatywa"
+        ]
+      },
+      {
+        "level": 4,
+        "title": "Wódz Półrogich",
+        "status": "Srebro 1",
+        "skills": [
+          "Charyzma",
+          "Wiedza (Imperium)"
+        ],
+        "talents": [
+          "Prosto Między Oczy",
+          "Nieustraszony (Ludzie)",
+          "Żelazna Wola",
+          "Krzepki"
+        ],
+        "trappings": [
+          "tajne ścieżki leśne",
+          "leże ungorów",
+          "3 topory do rzucania"
+        ],
+        "characteristics": [
+          "Ogłada"
+        ]
+      }
+    ],
+    "class": "Wędrowcy",
+    "source": "Warriors of Chaos (nieoficjalny)"
   }
 }

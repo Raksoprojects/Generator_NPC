@@ -28,6 +28,11 @@
       "arcymistrz": "zmora całej krainy",
       "legendarny": "mityczna bestia — jedyna w swoim rodzaju",
       "heros": "boska bestia — awatar pradawnej potęgi"
+    },
+    "feral": {
+      "skills": ["Wiedza", "Badania Naukowe", "Sztuka", "Sekretne Znaki", "Nawigacja", "Język (Klasyczny)", "Prawo"],
+      "talents": ["Czytanie/Pisanie", "Etykieta", "Błękitna Krew", "Mól Książkowy", "Szybkie Czytanie", "Poliglota", "Taktyk", "Prawnik"],
+      "keep": ["Wiedza (Lokalna)"]
     }
   },
   "families": {
@@ -90,7 +95,28 @@
     "Zielonoskóry": {
       "civilized": true,
       "skills": { "Broń Biała (Podstawowa)": 20, "Zastraszanie": 20, "Odporność": 10, "Percepcja": 10 },
-      "traits": { "Zabijaka": 3, "Brutalny": 2, "Twardy": 2, "Duży": 1, "Przywódca": 1, "Przebiegły": 1, "Czujny": 0.5, "Szybki": 0.5 }
+      "traits": { "Zabijaka": 3, "Brutalny": 2, "Twardy": 2, "Duży": 1, "Przywódca": 1, "Przebiegły": 1, "Czujny": 0.5, "Szybki": 0.5 },
+      "feral": true,
+      "archetypeChance": 0.7,
+      "archetypes": { "Wojownik": 3, "Oprych": 3, "Zwiadowca": 1, "Złodziej": 1, "Strzelec": 1, "Strażnik": 0.5 },
+      "careers": {
+        "Żołnierz": 3,
+        "Oprych": 3,
+        "Banita": 3,
+        "Gladiator": 1,
+        "Ochroniarz": 1,
+        "Strażnik": 1,
+        "Zwiadowca": 1,
+        "Łowczyni": 1,
+        "Lekki Kawalerzysta": 1,
+        "Rekietierka": 1,
+        "Złodziej": 1,
+        "Szczurołap": 0.5,
+        "Górnik": 0.5,
+        "Hiena Cmentarna": 0.5,
+        "Pirat Rzeczny": 0.5,
+        "Strzelec": 0.5
+      }
     },
     "Skaven": {
       "civilized": true,
@@ -100,7 +126,11 @@
     "Zwierzoczłek": {
       "civilized": true,
       "skills": { "Broń Biała (Podstawowa)": 20, "Percepcja": 20, "Tropienie": 20, "Skradanie (Wieś)": 20, "Zastraszanie": 20 },
-      "traits": { "Zabijaka": 3, "Brutalny": 2, "Duży": 2, "Twardy": 1, "Czujny": 1, "Szybki": 1, "Przywódca": 0.5 }
+      "traits": { "Zabijaka": 3, "Brutalny": 2, "Duży": 2, "Twardy": 1, "Czujny": 1, "Szybki": 1, "Przywódca": 0.5 },
+      "feral": true,
+      "archetypeChance": 0.7,
+      "archetypes": { "Wojownik": 3, "Oprych": 2, "Zwiadowca": 2, "Strzelec": 0.5 },
+      "careers": { "Bestigor": 3, "Najeźdźca Ungorów": 3, "Banita": 2, "Zwiadowca": 1, "Łowczyni": 2, "Oprych": 2, "Żołnierz": 1, "Gladiator": 1, "Hiena Cmentarna": 0.5, "Strzelec": 0.5 }
     },
     "Sługa Chaosu": {
       "civilized": true,

@@ -49,6 +49,39 @@ export function npcBloodline(npc: Npc): Bloodline | undefined {
   return findBloodline(npc.mutations?.find((m) => m.kind === "bloodline")?.name);
 }
 
+/**
+ * Profesja wampira z tabeli k100 Preferowanych Profesji linii: nowa wampirza (Krwawy Rycerz, Dworka...)
+ * albo Profesja Alternatywna ("Wampirzy Kawalerzysta" = Kawalerzysta + Dary Krwi). Przy wybranym
+ * archetypie - tylko profesje, ktore ten archetyp ma.
+ */
+export function rollVampireCareer(bloodline: string | undefined, rng: Rng, deterministic = false, archetype?: string): string | undefined {
+  const data = gd.getVampires();
+  const table = findBloodline(bloodline)?.careers;
+  if (!data || !table) return undefined;
+  const real = (c: string) => data.careerAlternatives?.[c] ?? c;
+  let entries = Object.entries(table).filter(([c]) => gd.getProfession(real(c)));
+  const arch = archetype ? gd.getArchetype(archetype) : undefined;
+  if (arch) {
+    const fit = entries.filter(([c]) => real(c) in arch.professions);
+    if (fit.length) entries = fit;
+  }
+  if (!entries.length) return undefined;
+  const chosen = deterministic ? entries.sort((a, b) => b[1] - a[1])[0][0] : weightedKey(Object.fromEntries(entries), rng);
+  return chosen && real(chosen);
+}
+
+/** Archetyp dla profesji wampira: sposrod archetypow z ta profesja, wg wag linii. */
+export function archetypeForCareer(career: string, bloodline: string | undefined, rng: Rng, deterministic = false): string | undefined {
+  const weights = findBloodline(bloodline)?.archetypes ?? {};
+  const fits: Record<string, number> = {};
+  for (const a of gd.allArchetypeNames()) {
+    const w = gd.getArchetype(a)?.professions[career];
+    if (w) fits[a] = w * (weights[a] ?? 0.25);
+  }
+  if (!Object.keys(fits).length) return undefined;
+  return deterministic ? Object.entries(fits).sort((a, b) => b[1] - a[1])[0][0] : weightedKey(fits, rng);
+}
+
 /** Archetyp wampira wg Preferowanych Profesji jego linii. */
 export function vampireArchetype(bloodline: string | undefined, rng: Rng, deterministic = false): string | undefined {
   const weights = findBloodline(bloodline)?.archetypes;
@@ -86,10 +119,21 @@ export function rollVampire(
   const pool = data.gifts.filter((g) => line.gifts.includes(g.name) || g.recommended === "dowolna");
   const weight = (name: string) => (line.gifts.includes(name) ? data.bloodlineGiftWeight : 1);
   const chosen: string[] = [];
-  for (let i = 0; i < count && chosen.length < pool.length; i++) {
+  // Najpierw Dary Krwi obecnej profesji: po jednym z kazdego osiagnietego poziomu (Wampiry, s. 20-27).
+  const main = npc.careerPath?.[npc.careerPath.length - 1];
+  const packs = main ? data.careerGifts?.[main.profession] : undefined;
+  const known = new Set(data.gifts.map((g) => g.name));
+  for (let l = 1; packs && main && l <= Math.min(main.level, packs.length) && chosen.length < count; l++) {
+    const opts = (packs[l - 1] ?? []).filter((g) => known.has(g) && !chosen.includes(g));
+    const g = deterministic ? opts[0] : pick(opts, rng);
+    if (g) chosen.push(g);
+  }
+  while (chosen.length < count) {
     const left = pool.filter((g) => !chosen.includes(g.name));
+    if (!left.length) break;
     const g = deterministic ? left.sort((a, b) => weight(b.name) - weight(a.name))[0] : weightedPick(left, (x) => weight(x.name), rng);
-    if (g) chosen.push(g.name);
+    if (!g) break;
+    chosen.push(g.name);
   }
   for (const g of chosen) entries.push({ kind: "blood", name: g });
 

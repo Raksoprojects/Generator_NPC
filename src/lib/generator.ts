@@ -25,7 +25,18 @@ import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
 import { addCasterSkills, pickSpells, resolveTraitChoice, rollExtraLores } from "./magic";
 import { rollChaosGifts, rollNpcMutations } from "./mutations";
-import { findBloodline, isVampire, npcBloodline, rollBloodline, rollVampire, stripVampireArmour, vampireArchetype, vampireProfessions } from "./vampires";
+import {
+  archetypeForCareer,
+  findBloodline,
+  isVampire,
+  npcBloodline,
+  rollBloodline,
+  rollVampire,
+  rollVampireCareer,
+  stripVampireArmour,
+  vampireArchetype,
+  vampireProfessions
+} from "./vampires";
 import { resolveMagicTrappings } from "./magicItems";
 import { rollPersona } from "./persona";
 import { rollCraft, rollTreasures } from "./treasures";
@@ -45,6 +56,8 @@ export interface GenSpec {
   noArchetype?: boolean;
   /** Jedyne dozwolone profesje (np. Strigoi - proste, dzikie). */
   onlyProfessions?: string[];
+  /** Obecna profesja ustalona z gory (wampir: z tabeli linii), wczesniejsze - losowe jak zwykle. */
+  mainProfession?: string;
   /** Wampir przemieniony z czlowieka (profesje za zycia + premie Linii Krwi) zamiast profilu z bestiariusza. */
   turned?: boolean;
   race?: string;
@@ -168,7 +181,31 @@ export function assignRolls(codes: Attribute[], keys: Attribute[], rng: Rng, det
 
 /** Czy rasa moze wykonywac profesje; stworzenia cywilizowane - te dostepne dla ludzi. */
 function raceOk(profession: string, race: string): boolean {
+  // Stworzenie: wlasne profesje (wampirze - "Wampir") albo profesje ludzi.
+  if (gd.getCreature(race) && gd.professionAllowsRace(profession, race)) return true;
   return gd.professionAllowsRace(profession, gd.getCreature(race) ? "Człowiek" : race);
+}
+
+/** Jedyne profesje rodziny stworzenia (orki, zwierzoludzie), pasujace do niego; brak listy = bez ograniczen. */
+function familyCareers(creature: CreatureDef | undefined): string[] | undefined {
+  const list = creature ? gd.getCreatureFamilies().families[creature.family]?.careers : undefined;
+  return list ? Object.keys(list).filter((p) => gd.getProfession(p) && raceOk(p, creature!.name)) : undefined;
+}
+
+/** Zdziczale stworzenie (orki, zwierzoludzie) nie rozwija umiejetnosci i talentow "uczonych" (settings.feral). */
+function feralSkip(npc: Npc, name: string, kind: "skills" | "talents"): boolean {
+  const creature = gd.getCreature(npc.creature);
+  if (!creature || npc.turned) return false;
+  const fams = gd.getCreatureFamilies();
+  const cfg = fams.settings.feral;
+  if (!cfg || !fams.families[creature.family]?.feral) return false;
+  if (cfg.keep?.some((k) => matchesKey(name, k) || name === k)) return false;
+  return cfg[kind].some((k) => name === k || matchesKey(name, k));
+}
+
+/** Wampirza profesja u wampira - nie bywa profesja z zycia smiertelnika (wczesniejsza w sciezce). */
+function vampireCareerFor(profession: string, race: string): boolean {
+  return isVampire({ creature: race }) && !gd.professionAllowsRace(profession, "Człowiek");
 }
 
 function professionCandidates(arch: Archetype, race: string, withFallback = false): Record<string, number> {
@@ -213,13 +250,19 @@ function pickPreviousCareer(arch: Archetype, race: string, main: string, rng: Rn
   for (const t of taken) delete cands[t];
   const weights: Record<string, number> = {};
   for (const [name, w] of Object.entries(cands)) {
-    if (!raceOk(name, race) || !careerSwitchOk(name, main) || firstLevel(name) > 1) continue;
+    if (!raceOk(name, race) || !careerSwitchOk(name, main) || firstLevel(name) > 1 || vampireCareerFor(name, race)) continue;
     weights[name] = w * (gd.getProfession(name)?.class === mainClass ? 2 : 1);
   }
   if (Object.keys(weights).length) return weightedKey(weights, rng);
   // Archetyp nie ma kolejnej profesji dla tej rasy - dowolna z tej samej klasy.
   const usable = (p: string) =>
-    p !== main && !taken.includes(p) && raceOk(p, race) && careerSwitchOk(p, main) && firstLevel(p) === 1 && (!only?.length || only.includes(p));
+    p !== main &&
+    !taken.includes(p) &&
+    raceOk(p, race) &&
+    !vampireCareerFor(p, race) &&
+    careerSwitchOk(p, main) &&
+    firstLevel(p) === 1 &&
+    (!only?.length || only.includes(p));
   const sameClass = gd.allProfessionNames().filter((p) => gd.getProfession(p)?.class === mainClass && usable(p));
   if (sameClass.length) return pick(sameClass, rng);
   // Np. elf czarodziej: jego klasa to same profesje magiczne - wczesniej byl kimkolwiek innym.
@@ -272,7 +315,8 @@ export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId
     .map((p) => gd.getProfession(p)?.entry?.from)
     .filter((p): p is string => !!p && raceOk(p, race));
   const fallback = entries.length ? Object.fromEntries(entries.map((p) => [p, 1])) : professionCandidates(arch, race);
-  const main = chosen[chosen.length - 1] ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
+  const preset = spec.mainProfession && gd.getProfession(spec.mainProfession) ? spec.mainProfession : undefined;
+  const main = chosen[chosen.length - 1] ?? preset ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
   if (!main) return [];
   const mainTarget = maybeLevel5(main, Math.min(4, maxLevelOf(main)), tier, rng);
 
@@ -566,7 +610,7 @@ class XpDeveloper {
   }
 
   skills(profession: string, level: number): string[] {
-    return [...new Set(levelSkills(profession, level).map((s) => this.resolve(profession, s)))];
+    return [...new Set(levelSkills(profession, level).map((s) => this.resolve(profession, s)))].filter((s) => !feralSkip(this.npc, s, "skills"));
   }
 
   /** Talenty sa dostepne tylko na poziomie, przy ktorym je wymieniono (PG s. 48). */
@@ -575,7 +619,8 @@ class XpDeveloper {
     const lvl = gd.getProfession(profession)?.levels.find((l) => l.level === level);
     return (lvl?.talents ?? [])
       .filter((t) => TIER_IDS.indexOf(gd.getTalent(t)?.minTier ?? "slaby") <= tierIdx)
-      .map((t) => this.resolve(profession, t));
+      .map((t) => this.resolve(profession, t))
+      .filter((t) => !feralSkip(this.npc, t, "talents"));
   }
 
   skillAdv(name: string): number {
@@ -804,6 +849,16 @@ function creationStart(dev: XpDeveloper, profession: string, species: boolean): 
   dev.buyRequired(profession, 1);
 }
 
+/**
+ * PD "zawarte" w przemianie wampira: przemiana sama robi z czlowieka-Nowicjusza wampira na minimalnym
+ * poziomie stworzenia (Niezwykly), wiec budzet PD poziomu pomniejszamy o roznice poczatkow przedzialow.
+ */
+export function turningXp(creature: CreatureDef | undefined): number {
+  if (!creature) return 0;
+  const start = (t: TierId) => gd.getTier(t)?.xp?.[0] ?? 0;
+  return Math.max(0, start(creature.minTier ?? "slaby") - start("slaby"));
+}
+
 /** Poziom BN dla podanej liczby PD: najwyzszy, ktorego zakres zaczyna sie nie wyzej. */
 export function tierForXp(xp: number): TierId {
   return [...TIER_IDS].reverse().find((t) => (gd.getTier(t)?.xp?.[0] ?? 0) <= xp) ?? "slaby";
@@ -849,7 +904,9 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
     }
   }
 
-  const budget = fixedBudget ?? npc.xpSpec?.budget ?? xpBudget(tier, rng, deterministic) + (npc.xpSpec?.bonus ?? 0);
+  // Przemieniony wampir: przemiana zastepuje czesc PD (turningXp); ujemny bonus odejmuje PD od poziomu.
+  const turning = npc.turned ? turningXp(gd.getCreature(npc.creature)) : 0;
+  const budget = fixedBudget ?? npc.xpSpec?.budget ?? Math.max(0, xpBudget(tier, rng, deterministic) - turning + (npc.xpSpec?.bonus ?? 0));
   const dev = new XpDeveloper(npc, arch, budget, rng, deterministic, exact);
   dev.careerLevels.set(plan[0].profession, plan[0].start);
   creationStart(dev, plan[0].profession, !npc.creature || !!npc.turned);
@@ -1050,7 +1107,7 @@ function rollAttributes(npc: Npc, rng: Rng, deterministic = false): Record<Attri
  * Sekcja "rozwoj": sciezka profesji (ludzie, stworzenia cywilizowane) albo
  * rozwoj bestii, a do tego bron i pancerz.
  */
-function develop(npc: Npc, professions: string[] | undefined, rng: Rng, deterministic: boolean, path?: PathStep[]): void {
+function develop(npc: Npc, professions: string[] | undefined, rng: Rng, deterministic: boolean, path?: PathStep[], mainProfession?: string): void {
   const creature = gd.getCreature(npc.creature);
   if (creature && isBeast(npc)) {
     npc.careerPath = [];
@@ -1072,9 +1129,18 @@ function develop(npc: Npc, professions: string[] | undefined, rng: Rng, determin
     return;
   }
   const exact = !!path?.some((s) => s.profession || s.level != null);
+  // Wampir bez recznej sciezki: obecna profesja z tabeli Preferowanych Profesji linii, wczesniejsze - z zycia.
+  const main =
+    mainProfession ?? (npc.turned && !exact && !professions?.length ? rollVampireCareer(npcBloodline(npc)?.name, rng, deterministic, npc.archetype) : undefined);
   const plan = exact
     ? buildExactPlan(path!, npc.archetype, npc.tier, npc.race, rng)
-    : buildCareerPlan({ professions, onlyProfessions: vampireProfessions(npc) }, npc.archetype, npc.tier, npc.race, rng);
+    : buildCareerPlan(
+        { professions, onlyProfessions: vampireProfessions(npc) ?? familyCareers(creature), mainProfession: main },
+        npc.archetype,
+        npc.tier,
+        npc.race,
+        rng
+      );
   developByXp(npc, plan, rng, deterministic, undefined, exact);
   // Rzadkie talenty rasy (Krew Aenariona) - tylko przy losowaniu.
   for (const rt of gd.getSettings().raceTalents ?? []) {
@@ -1183,11 +1249,14 @@ export function pickCreatureFromGroup(group: string, tier: TierId | undefined, r
  */
 function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: string | undefined, rng: Rng, det: boolean): string {
   if (!gd.isCivilized(creature.name) || spec.noArchetype) return "";
+  // Bez wlasnych ustawien stworzenia - domyslne rodziny (orki, zwierzoludzie: profesje z listy rodziny).
+  const family = gd.getCreatureFamilies().families[creature.family];
+  const archetypes = creature.archetypes ?? family?.archetypes;
   const allowed = (a: string) => !!gd.getArchetype(a) && (!creature.archetypes || a in creature.archetypes);
   if (spec.archetype) return allowed(spec.archetype) ? spec.archetype : "";
-  const p = creature.archetypeChance ?? 0;
+  const p = creature.archetypeChance ?? family?.archetypeChance ?? 0;
   if (!(det ? p >= 0.5 : chance(p, rng))) return "";
-  const pick = bloodline ? vampireArchetype(bloodline, rng, det) : creature.archetypes && weightedKey(creature.archetypes, rng);
+  const pick = bloodline ? vampireArchetype(bloodline, rng, det) : archetypes && weightedKey(archetypes, rng);
   return pick && allowed(pick) ? pick : "";
 }
 
@@ -1197,9 +1266,10 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   if (!spec.tier && spec.xp == null && spec.xpBonus != null && spec.xpBonus > 0) spec = { ...spec, xp: spec.xpBonus, xpBonus: undefined };
   if (spec.xp != null && !spec.tier) {
     // Bestia: PD liczone ponad profil z ksiazki, czyli od poczatku jej minimalnego poziomu.
+    // Wampir: przemiana sama w sobie podnosi poziom (turningXp), PD to rozwoj ponad nia.
     const c = gd.getCreature(spec.creature);
     const beastLike = !!c && (!gd.isCivilized(c.name) || spec.noArchetype);
-    const shift = beastLike ? (gd.getTier(c.minTier ?? "slaby")?.xp?.[0] ?? 0) : 0;
+    const shift = beastLike ? (gd.getTier(c.minTier ?? "slaby")?.xp?.[0] ?? 0) : c && isVampire({ creature: c.name }) ? turningXp(c) : 0;
     spec = { ...spec, tier: tierForXp(spec.xp + shift) };
   }
   const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);
@@ -1210,7 +1280,15 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   const bloodline = creature && isVampire({ creature: creature.name }) ? rollBloodline(rng, det, spec.bloodline, spec.archetype) : undefined;
   // Wampir zawsze z przemiany czlowieka: profesje za zycia (archetyp wg Linii Krwi) i premie linii.
   const turned = !!bloodline && !!findBloodline(bloodline)?.turning;
-  let archetype = creature ? creatureArchetype({ ...spec, noArchetype: spec.noArchetype && !turned }, creature, bloodline, rng, det) : pickArchetype(spec, rng);
+  // Profesja wampira z tabeli Preferowanych Profesji linii (gdy sciezki nie podano recznie); archetyp z niej.
+  const manualPath = !!spec.professions?.length || !!spec.path?.some((s) => s.profession);
+  const vampireCareer = turned && !manualPath ? rollVampireCareer(bloodline, rng, det, spec.archetype) : undefined;
+  let archetype =
+    vampireCareer && !spec.archetype
+      ? (archetypeForCareer(vampireCareer, bloodline, rng, det) ?? "")
+      : creature
+        ? creatureArchetype({ ...spec, noArchetype: spec.noArchetype && !turned }, creature, bloodline, rng, det)
+        : pickArchetype(spec, rng);
   // Ogr wybrany jak rasa: zawsze z profesja, dowolny archetyp (bez wyboru - wg wag stworzenia).
   if (creature?.asRace && spec.asRace && !archetype) {
     archetype = spec.archetype && gd.getArchetype(spec.archetype) ? spec.archetype : (creature.archetypes && weightedKey(creature.archetypes, rng)) || pickArchetype(spec, rng);
@@ -1257,7 +1335,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     createdAt: new Date().toISOString()
   };
   npc.rolls = rollAttributes(npc, rng, det);
-  develop(npc, spec.professions, rng, det, spec.path);
+  develop(npc, spec.professions, rng, det, spec.path, vampireCareer);
   rollFeatures(npc, { ...spec, bloodline }, rng, det);
   // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
   rollTreasures(npc, rng, det);

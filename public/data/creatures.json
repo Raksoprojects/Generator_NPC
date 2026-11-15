@@ -4734,6 +4734,55 @@
    "family": "Nieumarły"
   },
   {
+   "name": "Szkieletowy czempion",
+   "source": "Nieoficjalny Grimuar",
+   "page": 39,
+   "stats": {
+    "Sz": 4,
+    "WW": 70,
+    "US": 55,
+    "S": 50,
+    "Wt": 45,
+    "I": 40,
+    "Zw": 45,
+    "Zr": 45,
+    "Int": null,
+    "SW": null,
+    "Ogd": null,
+    "Żyw": 22
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Broń +9",
+    "Czempion",
+    "Konstrukt",
+    "Nie Czuje Bólu",
+    "Niestabilny",
+    "Ożywieniec",
+    "Pancerz (6)",
+    "Spaczenie (Pomniejsze)",
+    "Strach (3)",
+    "Terytorialny",
+    "Twardziel",
+    "Widzenie w Mroku",
+    "Zaraza"
+   ],
+   "optional": [],
+   "abilities": [
+    "Wskrzeszony zaklęciem Wskrzeszenie czempiona z kości postaci, która osiągnęła co najmniej 3. poziom profesji. Pancerz: pełna zbroja płytowa i duża tarcza. Grimuar wymienia też cechę Suche Kości (bez opisu w dostępnych źródłach)."
+   ],
+   "trappings": [
+    "pełna zbroja płytowa",
+    "duża tarcza",
+    "broń ręczna"
+   ],
+   "group": "Nieumarli",
+   "subgroup": "Ożywieńcy",
+   "family": "Nieumarły",
+   "minTier": "doswiadczony"
+  },
+  {
    "name": "Zombi",
    "source": "Podręcznik podstawowy",
    "page": 328,

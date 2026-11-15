@@ -120,6 +120,13 @@
      "broń ręczna",
      "sakiewka"
     ]
+   },
+   "careers": {
+    "Krwawy Rycerz": 60,
+    "Wampirzy Kawalerzysta": 10,
+    "Wampirzy Pojedynkowicz": 10,
+    "Wampirza Straż": 10,
+    "Wampirzy Żołnierz": 10
    }
   },
   {
@@ -213,6 +220,13 @@
      "sakiewka",
      "torba"
     ]
+   },
+   "careers": {
+    "Dworka": 60,
+    "Lektor": 10,
+    "Wampirzy Łowca Nagród": 10,
+    "Wampirzy Hrabia": 10,
+    "Wampirzy Szpieg": 10
    }
   },
   {
@@ -306,6 +320,13 @@
      "wytworne ubranie",
      "torba z przyborami do pisania i k10 arkuszami pergaminu"
     ]
+   },
+   "careers": {
+    "Lektor": 60,
+    "Wampirzy Hrabia": 10,
+    "Wampirzy Rabuś Grobów": 10,
+    "Wampirzy Uczony": 10,
+    "Wampirzy Czarodziej": 10
    }
   },
   {
@@ -377,7 +398,10 @@
     "Oprych",
     "Rekietierka",
     "Gladiator",
-    "Żołnierz"
+    "Żołnierz",
+    "Król Ghuli",
+    "Lektor",
+    "Nocny Łupieżca"
    ],
    "noArmour": true,
    "turning": {
@@ -421,6 +445,13 @@
      "znoszone ubranie",
      "torba"
     ]
+   },
+   "careers": {
+    "Król Ghuli": 60,
+    "Lektor": 10,
+    "Nocny Łupieżca": 10,
+    "Wampirzy Awanturnik": 10,
+    "Wampirzy Zabójca": 10
    }
   },
   {
@@ -510,6 +541,13 @@
      "broń ręczna",
      "sakiewka"
     ]
+   },
+   "careers": {
+    "Krwawy Rycerz": 10,
+    "Lektor": 10,
+    "Wampirzy Doradca": 10,
+    "Wampirzy Hrabia": 60,
+    "Wampirzy Kasztelan": 10
    }
   },
   {
@@ -609,6 +647,13 @@
      "znoszone ubranie",
      "torba"
     ]
+   },
+   "careers": {
+    "Nocny Łupieżca": 20,
+    "Wampirzy Łowca Nagród": 20,
+    "Wampirzy Banita": 20,
+    "Wampirzy Awanturnik": 20,
+    "Wampirzy Haracznik": 20
    }
   }
  ],
@@ -1459,5 +1504,543 @@
   "heros": 55
  },
  "casting_note": "casting: chance - szansa, ze wampir tej linii czaruje (wg poziomu; brak poziomu = 0), minAdvances - co najmniej tyle rozwiniec Splatania i Jezyka (Magicznego), maxArcane/maxPetty - najwiecej zaklec, lores - zamiast tradycji linii, direct - tylko zaklecia bezposrednie (obrazenia albo na siebie). professions - jedyne dozwolone profesje, noArmour - bez pancerza (poza magicznym od heroicznego).",
- "turning_note": "turning - przemiana czlowieka w wampira (Krwawy Pocałunek): modifiers - premie do Cech wzgledem czlowieka (zasada domowa), movement - premia do Szybkosci, skills - 12 Umiejetnosci Rasowych linii (3 x +5, 3 x +3), talents - 5 Talentow linii ('A lub B' = jeden z nich, 'losowy' = z Tabeli Losowych Talentow), trappings - wyposazenie linii."
+ "turning_note": "turning - przemiana czlowieka w wampira (Krwawy Pocałunek): modifiers - premie do Cech wzgledem czlowieka (zasada domowa), movement - premia do Szybkosci, skills - 12 Umiejetnosci Rasowych linii (3 x +5, 3 x +3), talents - 5 Talentow linii ('A lub B' = jeden z nich, 'losowy' = z Tabeli Losowych Talentow), trappings - wyposazenie linii.",
+ "careerAlternatives": {
+  "Wampirzy Kawalerzysta": "Kawalerzysta",
+  "Wampirzy Pojedynkowicz": "Zwadźca",
+  "Wampirza Straż": "Ochroniarz",
+  "Wampirzy Żołnierz": "Żołnierz",
+  "Wampirzy Łowca Nagród": "Łowczyni Nagród",
+  "Wampirzy Szpieg": "Szpieg",
+  "Wampirzy Rabuś Grobów": "Hiena Cmentarna",
+  "Wampirzy Uczony": "Uczony",
+  "Wampirzy Czarodziej": "Czarodziej",
+  "Wampirzy Awanturnik": "Gladiator",
+  "Wampirzy Zabójca": "Oprych",
+  "Wampirzy Doradca": "Doradca",
+  "Wampirzy Kasztelan": "Namiestnik",
+  "Wampirzy Banita": "Banita",
+  "Wampirzy Haracznik": "Rekietierka"
+ },
+ "careerGifts": {
+  "Krwawy Rycerz": [
+   [
+    "Trębacz",
+    "Rycerski Honor",
+    "Przeszywający Cios",
+    "Szybkokrwisty"
+   ],
+   [
+    "Mistrz Ostrza",
+    "Wściekła Szarża",
+    "Rtęć",
+    "Błędny Rycerz"
+   ],
+   [
+    "Krwawa Furia",
+    "Niezmordowany",
+    "Potworna Chwała",
+    "Awangarda"
+   ],
+   [
+    "Nasycony Krwią",
+    "Czempion (rodzaj)",
+    "Mroczne Przeznaczenie",
+    "Potworna Masa"
+   ]
+  ],
+  "Król Ghuli": [
+   [
+    "Zwierzęce Szepty",
+    "Zapalczywość",
+    "Żelazne Ścięgna",
+    "Pasożyt"
+   ],
+   [
+    "Postać Nietoperza",
+    "Zwierzęca Percepcja",
+    "Przyzwanie Ghuli",
+    "Przyzwanie Wilków"
+   ],
+   [
+    "Opancerzone Ciało",
+    "Potworna Masa",
+    "Szpony",
+    "Straszliwe Ciosy"
+   ],
+   [
+    "Mroczny Majestat",
+    "Potworna Chwała",
+    "Bezbożna Regeneracja",
+    "Chodzenie po Wodzie"
+   ]
+  ],
+  "Dworka": [
+   [
+    "Zepsuta Niewinność",
+    "Szybkokrwisty",
+    "Hipnotyczne Spojrzenie",
+    "Bezbożna Dusza"
+   ],
+   [
+    "Dominacja",
+    "Postać Chowańca",
+    "Iluzja",
+    "Rtęć"
+   ],
+   [
+    "Odwieczna Przebiegłość",
+    "Przyzwanie Robactwa",
+    "Straszliwe Ciosy",
+    "Awangarda"
+   ],
+   [
+    "Hipnotyczne Spojrzenie",
+    "Wyzwanie Świtu",
+    "Przyzwanie Burzy",
+    "Bezbożna Regeneracja"
+   ]
+  ],
+  "Lektor": [
+   [
+    "Mroczny Majestat",
+    "Wzrok Śmierci",
+    "Zniekształcony",
+    "Źródło Dharu"
+   ],
+   [
+    "Eteryczna Mgła",
+    "Nehekhariańskie Zwoje",
+    "Przyzwanie Pradawnych",
+    "Przyzwanie Ghuli"
+   ],
+   [
+    "Władza nad Śmiercią",
+    "Wyssanie Duszy",
+    "Przyzwanie Robactwa",
+    "Krocząca Śmierć"
+   ],
+   [
+    "Eteryczny Szyfr",
+    "Szlachetne Pochodzenie",
+    "Przyzwanie Burzy",
+    "Przyzwanie Wilków"
+   ]
+  ],
+  "Nocny Łupieżca": [
+   [
+    "Eteryczny Szyfr",
+    "Eteryczna Mgła",
+    "Postać Chowańca",
+    "Węch Krwi"
+   ],
+   [
+    "Niezmordowany",
+    "Potworna Masa",
+    "Przeszywający Cios",
+    "Nocny Drapieżnik"
+   ],
+   [
+    "Hipnotyczne Spojrzenie",
+    "Wyssanie Duszy",
+    "Szpony",
+    "Twarda Skóra"
+   ],
+   [
+    "Opancerzone Ciało",
+    "Powstały",
+    "Bezbożna Dusza",
+    "Awangarda"
+   ]
+  ],
+  "Wampirzy Hrabia": [
+   [
+    "Eteryczna Mgła",
+    "Nocna Wiedźma",
+    "Przyzwanie Robactwa",
+    "Hipnotyczne Spojrzenie"
+   ],
+   [
+    "Nieśmiertelni Słudzy",
+    "Dominacja",
+    "Przyzwanie Wilków",
+    "Postać Wilka"
+   ],
+   [
+    "Odwieczna Przebiegłość",
+    "Hipnotyczne Spojrzenie",
+    "Dręczyciel Umysłów",
+    "Nocna Wiedźma"
+   ],
+   [
+    "Mroczny Majestat",
+    "Władca Nocy",
+    "Przyzwanie Burzy",
+    "Twarda Skóra"
+   ]
+  ],
+  "Uczony": [
+   [
+    "Odwieczna Przebiegłość",
+    "Mroczny Majestat",
+    "Wzrok Śmierci",
+    "Zniekształcony"
+   ],
+   [
+    "Zimnokrwistość",
+    "Eteryczna Mgła",
+    "Przyzwanie Wilków",
+    "Źródło Dharu"
+   ],
+   [
+    "Nasycony Krwią",
+    "Wyssanie Duszy",
+    "Przyzwanie Robactwa",
+    "Potworna Masa"
+   ],
+   [
+    "Eteryczny Szyfr",
+    "Mroczne Przeznaczenie",
+    "Przyzwanie Burzy",
+    "Krocząca Śmierć"
+   ]
+  ],
+  "Czarodziej": [
+   [
+    "Eteryczny Szyfr",
+    "Mroczny Majestat",
+    "Wzrok Śmierci",
+    "Władza nad Śmiercią"
+   ],
+   [
+    "Zimnokrwistość",
+    "Eteryczna Mgła",
+    "Przyzwanie Wilków",
+    "Źródło Dharu"
+   ],
+   [
+    "Mroczny Akolita",
+    "Nieśmiertelni Słudzy",
+    "Wyssanie Duszy",
+    "Przyzwanie Robactwa"
+   ],
+   [
+    "Odwieczna Przebiegłość",
+    "Szlachetne Pochodzenie",
+    "Przyzwanie Burzy",
+    "Krocząca Śmierć"
+   ]
+  ],
+  "Doradca": [
+   [
+    "Zepsuta Niewinność",
+    "Szlachetne Pochodzenie",
+    "Trwały Obraz",
+    "Szybkokrwisty"
+   ],
+   [
+    "Odwieczna Przebiegłość",
+    "Mroczny Majestat",
+    "Dominacja",
+    "Rtęć"
+   ],
+   [
+    "Hipnotyczne Spojrzenie",
+    "Eteryczna Mgła",
+    "Nocny Drapieżnik"
+   ],
+   [
+    "Nieśmiertelni Słudzy",
+    "Wyzwanie Świtu",
+    "Władca Nocy",
+    "Posrebrzona Krew"
+   ]
+  ],
+  "Zwadźca": [
+   [
+    "Odwieczna Przebiegłość",
+    "Mistrz Ostrza",
+    "Przeszywający Cios",
+    "Posrebrzona Krew"
+   ],
+   [
+    "Postać Chowańca",
+    "Rtęć",
+    "Straszliwe Ciosy",
+    "Błędny Rycerz"
+   ],
+   [
+    "Hipnotyczne Spojrzenie",
+    "Zimnokrwistość",
+    "Eteryczna Mgła",
+    "Wściekła Szarża"
+   ],
+   [
+    "Krwawa Furia",
+    "Potworna Masa",
+    "Powstały",
+    "Twarda Skóra"
+   ]
+  ],
+  "Namiestnik": [
+   [
+    "Potworna Masa",
+    "Węch Krwi",
+    "Przyzwanie Robactwa",
+    "Chodzenie po Wodzie"
+   ],
+   [
+    "Dominacja",
+    "Postać Chowańca",
+    "Przeszywający Cios",
+    "Przyzwanie Wilków"
+   ],
+   [
+    "Lodowata Obecność",
+    "Zimnokrwistość",
+    "Eteryczna Mgła",
+    "Straszliwe Ciosy"
+   ],
+   [
+    "Powstały",
+    "Przyzwanie Ghuli",
+    "Chodzenie po Ścianach",
+    "Potworna Masa"
+   ]
+  ],
+  "Łowczyni Nagród": [
+   [
+    "Wyzwanie Świtu",
+    "Postać Chowańca",
+    "Węch Krwi",
+    "Hipnotyczne Spojrzenie"
+   ],
+   [
+    "Dominacja",
+    "Iluzja",
+    "Bezbożna Dusza",
+    "Postać Wilka"
+   ],
+   [
+    "Eteryczny Szyfr",
+    "Postać Nietoperza",
+    "Nocny Drapieżnik",
+    "Rtęć"
+   ],
+   [
+    "Żelazne Ścięgna",
+    "Wyssanie Duszy",
+    "Postać Roju (rodzaj)"
+   ]
+  ],
+  "Hiena Cmentarna": [
+   [
+    "Wzrok Śmierci",
+    "Chory (rodzaj)",
+    "Twarda Skóra",
+    "Bezbożna Dusza"
+   ],
+   [
+    "Postać Nietoperza",
+    "Lodowata Obecność",
+    "Zniekształcony",
+    "Pasożyt"
+   ],
+   [
+    "Potworna Masa",
+    "Nocny Drapieżnik",
+    "Smród",
+    "Przyzwanie Ghuli"
+   ],
+   [
+    "Diabelski Krzyk",
+    "Żarłoczna Bestia",
+    "Krocząca Śmierć",
+    "Skrzydła"
+   ]
+  ],
+  "Banita": [
+   [
+    "Postać Nietoperza",
+    "Węch Krwi",
+    "Przyzwanie Wilków",
+    "Postać Wilka"
+   ],
+   [
+    "Nasycony Krwią",
+    "Trębacz",
+    "Nocny Drapieżnik",
+    "Chodzenie po Ścianach"
+   ],
+   [
+    "Krwawa Furia",
+    "Pasożyt",
+    "Postać Roju (rodzaj)",
+    "Chodzenie po Wodzie"
+   ],
+   [
+    "Hipnotyczne Spojrzenie",
+    "Diabelski Krzyk",
+    "Żarłoczna Bestia",
+    "Twarda Skóra"
+   ]
+  ],
+  "Rekietierka": [
+   [
+    "Eteryczny Szyfr",
+    "Dominacja",
+    "Eteryczna Mgła",
+    "Bezbożna Dusza"
+   ],
+   [
+    "Postać Nietoperza",
+    "Zepsuta Niewinność",
+    "Nocny Drapieżnik",
+    "Postać Wilka"
+   ],
+   [
+    "Kwasowa Krew",
+    "Przyzwanie Wilków",
+    "Błędny Rycerz",
+    "Chodzenie po Ścianach"
+   ],
+   [
+    "Hipnotyczne Spojrzenie",
+    "Mroczny Majestat",
+    "Posrebrzona Krew",
+    "Kroczenie z Wiatrem"
+   ]
+  ],
+  "Kawalerzysta": [
+   [
+    "Zwierzęce Szepty",
+    "Rtęć",
+    "Straszliwe Ciosy",
+    "Awangarda"
+   ],
+   [
+    "Opancerzone Ciało",
+    "Wściekła Szarża",
+    "Rycerski Honor",
+    "Błędny Rycerz"
+   ],
+   [
+    "Zwierzęca Percepcja",
+    "Mistrz Ostrza",
+    "Hipnoza",
+    "Przeszywający Cios"
+   ],
+   [
+    "Czempion (rodzaj)",
+    "Żarłoczna Bestia",
+    "Twarda Skóra",
+    "Kroczenie z Wiatrem"
+   ]
+  ],
+  "Ochroniarz": [
+   [
+    "Opancerzone Ciało",
+    "Węch Krwi",
+    "Straszliwe Ciosy",
+    "Bezbożna Dusza"
+   ],
+   [
+    "Wybuch Krwi",
+    "Żelazne Ścięgna",
+    "Zniekształcony",
+    "Postać Wilka"
+   ],
+   [
+    "Zapalczywość",
+    "Krwawa Furia",
+    "Potworna Masa",
+    "Przyzwanie Wilków"
+   ],
+   [
+    "Niezmordowany",
+    "Szybkokrwisty",
+    "Powstały",
+    "Bezbożna Regeneracja"
+   ]
+  ],
+  "Gladiator": [
+   [
+    "Eteryczny Szyfr",
+    "Postać Nietoperza",
+    "Zniekształcony",
+    "Błędny Rycerz"
+   ],
+   [
+    "Zwierzęce Szepty",
+    "Nocny Drapieżnik",
+    "Bezbożna Dusza",
+    "Postać Wilka"
+   ],
+   [
+    "Opancerzone Ciało",
+    "Krwawa Furia",
+    "Niezapadająca w Pamięć Twarz",
+    "Niezmordowany"
+   ],
+   [
+    "Odwieczna Przebiegłość",
+    "Potworna Chwała",
+    "Potworna Masa",
+    "Twarda Skóra"
+   ]
+  ],
+  "Oprych": [
+   [
+    "Zapalczywość",
+    "Przeszywający Cios",
+    "Szpony",
+    "Rycerski Honor"
+   ],
+   [
+    "Krwawa Furia",
+    "Żelazne Ścięgna",
+    "Twarda Skóra",
+    "Potworna Masa"
+   ],
+   [
+    "Wybuch Krwi",
+    "Krwawa Furia",
+    "Wściekła Szarża",
+    "Straszliwe Ciosy"
+   ],
+   [
+    "Potworna Chwała",
+    "Potworna Masa",
+    "Bezbożna Regeneracja",
+    "Błędny Rycerz"
+   ]
+  ],
+  "Żołnierz": [
+   [
+    "Zimnokrwistość",
+    "Wyzwanie Świtu",
+    "Eteryczna Mgła",
+    "Przeszywający Cios"
+   ],
+   [
+    "Żelazne Ścięgna",
+    "Straszliwe Ciosy",
+    "Powstały",
+    "Potworna Masa"
+   ],
+   [
+    "Opancerzone Ciało",
+    "Mistrz Ostrza",
+    "Nasycony Krwią",
+    "Krwawa Furia"
+   ],
+   [
+    "Krwawa Furia",
+    "Mroczny Majestat",
+    "Dominacja",
+    "Twarda Skóra"
+   ]
+  ]
+ },
+ "careers_note": "careers - tabela k100 Preferowanych Profesji linii (szerokosc przedzialu = waga); 'Wampirzy X' to Profesja Alternatywna: zwykla profesja z careerAlternatives + Dary Krwi z careerGifts. careerGifts - Dary Krwi profesji na poziomach 1-4: wampir na kazdym osiagnietym poziomie bierze jeden z nich, reszte Darow (giftsPerTier) - z listy linii."
 }
