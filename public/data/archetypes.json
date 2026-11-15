@@ -23,7 +23,8 @@
       "Straż Morska": 2,
       "Mistrz Miecza": 2,
       "Krwawy Rycerz": 1,
-      "Bestigor": 1
+      "Bestigor": 1,
+      "Łowczyni Nagród": 1
     },
     "keySkills": [
       "Broń Biała",
@@ -384,7 +385,8 @@
       "Banita": 3,
       "Pirat Rzeczny": 1,
       "Gladiator": 0.5,
-      "Król Ghuli": 1
+      "Król Ghuli": 1,
+      "Łowczyni Nagród": 1
     },
     "keySkills": [
       "Broń Biała",
@@ -851,7 +853,8 @@
       "Namiestnik": 1,
       "Estetyk": 1,
       "Dworka": 1,
-      "Wampirzy Hrabia": 1
+      "Wampirzy Hrabia": 1,
+      "Szpieg": 1
     },
     "keySkills": [
       "Dowodzenie",
