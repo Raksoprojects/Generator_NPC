@@ -137,12 +137,13 @@ Bazą jest profil z bestiariusza i umiejętności rodziny stworzenia (pasowanie 
 | | Nowicjusz | Zwykły | Niezwykły | Zaawansowany | Ekspert | Legenda | Heros |
 |---|---|---|---|---|---|---|---|
 | Kolejne przedmioty magiczne (istoty rozumne) | — | 0,1% | 1% | 4%, 0,5% | 15%, 3% | 100%, 50%, 15% | 100%, 100%, 50%, 15% |
-| Przedmiot z runami tymczasowymi | — | 0,01% | 1% | 4% | 8% | 12% | 15% |
-| Trwały przedmiot runiczny | — | — | 0,25% | 1% | 3% | 8% | 15% |
-
-- Wybrany przedmiot: drobiazgi (amulety, pierścienie, mikstury) ×1,5, zaklęta broń ×0,4, zaklęty pancerz ×0,5 wagi szablonu.
-- **Krasnoludy:** runy ×12 (tymczasowe na Zwykłym 0,12%, na Niezwykłym 12%), inne przedmioty magiczne ×0,3. Elfy: runy ×0,2. Pewne przedmioty (100%) bez mnożników.
+| Przedmiot z runami tymczasowymi | — | 0,001% | 0,1% | 0,4% | 1% | 3% | 6% |
+| Trwały przedmiot runiczny | — | — | 0,008% | 0,04% | 0,15% | 0,6% | 1,5% |
 | Wady wykonania broni/pancerza | 35% | 20% | 10% | 4% | 0 | 0 | 0 |
+
+- Szanse w tabeli dotyczą jednego BN: tyle BN na sto ma dany przedmiot. To nie jest szansa „pod warunkiem, że wypadł przedmiot magiczny”.
+- Wybrany przedmiot: drobiazgi (amulety, pierścienie, mikstury) ×1,5, zaklęta broń ×0,4, zaklęty pancerz ×0,5 wagi szablonu.
+- **Krasnoludy:** runy ×12, inne przedmioty magiczne ×0,3. Krasnolud Niezwykły: runy tymczasowe 1,2%, trwałe 0,1%; Zaawansowany 4,8% i 0,5%; Heros 72% i 18%. Elfy: runy ×0,2. Pewne przedmioty (100%) bez mnożników.
 | Zalety wykonania (szansa / maks.) | 2% / 1 | 6% / 1 | 15% / 1 | 30% / 2 | 55% / 2 | 80% / 3 | 100% / 3 |
 | Gromril (krasnoludy) | — | — | 2% | 10% | 35% | 70% | 90% |
 | Ithilmar (wysokie elfy) | — | — | — | 10% | 40% | 80% | 90% |
