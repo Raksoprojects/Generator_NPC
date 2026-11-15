@@ -114,9 +114,12 @@
     const spec: Partial<GenSpec> = { sex: row.sex, bloodline: row.bloodline || undefined, noArchetype: row.noArchetype };
     const xp = Math.round(Number(row.xp));
     // Ujemne PD odejmuja od budzetu poziomu.
-    if (row.xp != null && Number.isFinite(xp) && xp !== 0) {
+    const xpTo = Math.round(Number(row.xpTo));
+    const hasTo = row.xpTo != null && Number.isFinite(xpTo) && xpTo !== xp;
+    if (row.xp != null && Number.isFinite(xp) && (xp !== 0 || hasTo)) {
       if (row.xpMode !== "zamiast") spec.xpBonus = xp;
-      else if (xp > 0) spec.xp = xp;
+      else if (xp > 0 || xpTo > 0) spec.xp = Math.max(0, xp);
+      if (hasTo && (spec.xp != null || spec.xpBonus != null)) spec.xpTo = spec.xp != null ? Math.max(0, xpTo) : xpTo;
     }
     const steps = (row.path ?? []) as PathStep[];
     const main = steps[steps.length - 1]?.profession;
@@ -138,6 +141,7 @@
           creatureGroup: row.creature ? undefined : row.creatureGroup,
           archetype: row.archetype || undefined,
           tier: row.tier,
+          tierTo: row.tierTo && TIER_IDS.indexOf(row.tierTo) > TIER_IDS.indexOf(row.tier) ? row.tierTo : undefined,
           race: row.race || undefined,
           commander: row.commander,
           label: row.label || undefined,
@@ -307,6 +311,10 @@
           <select bind:value={row.tier} aria-label="Poziom">
             {#each TIER_IDS as t, ti (t)}<option value={t}>{tierOption(row, t, ti)}</option>{/each}
           </select>
+          <select value={row.tierTo ?? ""} onchange={(e) => (row.tierTo = (e.currentTarget.value || undefined) as TierId | undefined)} aria-label="Do poziomu (losowo z przedziału)" title="Poziom losowany równo z przedziału od–do">
+            <option value="">tylko ten poziom</option>
+            {#each TIER_IDS as t, ti (t)}{#if ti > TIER_IDS.indexOf(row.tier)}<option value={t}>do: {gd.getTier(t).label}</option>{/if}{/each}
+          </select>
           {#if !row.creature}
             <select bind:value={row.race} aria-label="Rasa">
               <option value={undefined}>rasa losowo</option>
@@ -319,7 +327,7 @@
           </div>
           {#if row.creature}
             {@const c = gd.getCreature(row.creature)}
-            <span class="text-dim small src">{c?.source}, s. {c?.page}{c?.minTier ? ` · od poziomu: ${gd.getTier(c.minTier).label}` : ""}</span>
+            <span class="text-dim small src">{c?.source}, s. {c?.page} · domyślny poziom: {gd.getTier(c?.minTier ?? "slaby").label}</span>
           {/if}
           {#if detailed}
             <div class="row-detail">
@@ -336,6 +344,7 @@
                 <label title="PD ponad tworzenie postaci; liczba ujemna odejmuje PD od poziomu">PD
                   <span class="xp-row">
                     <input type="number" step="100" placeholder="wg poziomu" bind:value={row.xp} />
+                    <input type="number" step="100" placeholder="do" aria-label="PD do (losowo z przedziału)" bind:value={row.xpTo} />
                     <select value={row.xpMode ?? "dodaj"} onchange={(e) => (row.xpMode = e.currentTarget.value as "zamiast" | "dodaj")} aria-label="Sposób użycia PD">
                       <option value="dodaj">dodaj do poziomu</option>
                       <option value="zamiast">zamiast poziomu</option>

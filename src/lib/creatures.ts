@@ -199,11 +199,14 @@ export function beastXpShift(creature: CreatureDef): number {
   return (gd.getTier(creature.xpFrom ?? creature.minTier ?? "slaby")?.xp?.[0] ?? 0) + (creature.turningXp ?? 0);
 }
 
-/** Indeksy (TIER_IDS) najnizszego i najwyzszego poziomu stworzenia: domyslny + tierSpan. */
-export function creatureTierRange(creature: CreatureDef): [number, number] {
+/**
+ * Indeksy (TIER_IDS) najnizszego i najwyzszego poziomu stworzenia: domyslny + tierSpan.
+ * Stworzenie z profesja (career) nie ma gornej granicy - rozwija sie jak czlowiek.
+ */
+export function creatureTierRange(creature: CreatureDef, career = false): [number, number] {
   const span = creature.tierSpan ?? gd.getCreatureFamilies().settings.tierSpan ?? [-(TIER_IDS.length - 1), TIER_IDS.length - 1];
   const d = TIER_IDS.indexOf(creature.minTier ?? "slaby");
-  return [Math.max(0, d + span[0]), Math.min(TIER_IDS.length - 1, d + span[1])];
+  return [Math.max(0, d + span[0]), career ? TIER_IDS.length - 1 : Math.min(TIER_IDS.length - 1, d + span[1])];
 }
 
 /** Poziom cechy z tierTraits wg poziomu BN wzgledem domyslnego ("Suche Kości (2)"). */

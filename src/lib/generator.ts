@@ -65,10 +65,14 @@ export interface GenSpec {
   name?: string;
   archetype?: string;
   tier?: TierId;
+  /** Gorna granica losowania poziomu: poziom losowany rowno z przedzialu tier..tierTo. */
+  tierTo?: TierId;
   /** PD do wydania zamiast budzetu poziomu (bez poziomu - poziom wg PD). */
   xp?: number;
   /** PD dodane do budzetu poziomu (ujemne - odjete, budzet nie spada ponizej 0). */
   xpBonus?: number;
+  /** Gorna granica losowania PD: xp (albo xpBonus) losowane z przedzialu od..xpTo. */
+  xpTo?: number;
   /** Rzuty bez ograniczen BN z settings.charRolls (pelne 2k10, najwyzsze do cech kluczowych). */
   freeRolls?: boolean;
   /** Profesje sciezki w kolejnosci (ostatnia = obecna). */
@@ -1228,10 +1232,13 @@ function rollFeatures(npc: Npc, spec: GenSpec, rng: Rng, deterministic: boolean)
   ];
 }
 
-/** Poziom BN w przedziale stworzenia (domyslny poziom + tierSpan, np. szkielet najwyzej Doswiadczony). */
-export function clampTier(tier: TierId, creature: CreatureDef | undefined): TierId {
+/**
+ * Poziom BN w przedziale stworzenia (domyslny poziom + tierSpan, np. szkielet najwyzej Doswiadczony);
+ * stworzenie z profesja (career) bez gornej granicy.
+ */
+export function clampTier(tier: TierId, creature: CreatureDef | undefined, career = false): TierId {
   if (!creature) return tier;
-  const [lo, hi] = creatureTierRange(creature);
+  const [lo, hi] = creatureTierRange(creature, career);
   return TIER_IDS[Math.min(hi, Math.max(lo, TIER_IDS.indexOf(tier)))];
 }
 
@@ -1276,8 +1283,27 @@ function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: stri
   return pick && allowed(pick) ? pick : "";
 }
 
+/** Przedzialy "od-do" (tierTo, xpTo) zamienione na jedna wylosowana wartosc; deterministycznie - srodek. */
+function resolveRanges(spec: GenSpec, rng: Rng): GenSpec {
+  const det = !!spec.deterministic;
+  const between = (a: number, b: number) => (det ? Math.round((a + b) / 2) : randInt(Math.min(a, b), Math.max(a, b), rng));
+  let out = spec;
+  if (spec.tier && spec.tierTo) {
+    out = { ...out, tier: TIER_IDS[between(TIER_IDS.indexOf(spec.tier), TIER_IDS.indexOf(spec.tierTo))], tierTo: undefined };
+  }
+  if (spec.xpTo != null) {
+    // Losowanie co 50 PD - liczby jak z sesji, nie 1373.
+    const roll = (from: number) => Math.round(between(from, spec.xpTo!) / 50) * 50;
+    if (spec.xp != null) out = { ...out, xp: roll(spec.xp) };
+    else if (spec.xpBonus != null) out = { ...out, xpBonus: roll(spec.xpBonus) };
+    out = { ...out, xpTo: undefined };
+  }
+  return out;
+}
+
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
+  spec = resolveRanges(spec, rng);
   // Same PD bez poziomu: PD to caly budzet, a poziom wg przedzialu, w ktory wpadaja.
   if (!spec.tier && spec.xp == null && spec.xpBonus != null && spec.xpBonus > 0) spec = { ...spec, xp: spec.xpBonus, xpBonus: undefined };
   if (spec.xp != null && !spec.tier) {
@@ -1316,7 +1342,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     creature?.asRace && archetype
       ? pickTier(spec, rng)
       : creature
-        ? clampTier(spec.tier ?? creatureTier(creature, rng, det), creature)
+        ? clampTier(spec.tier ?? creatureTier(creature, rng, det), creature, !!archetype)
         : pickTier(spec, rng);
   const race = creature ? creature.name : pickRace(spec, archetype, rng);
   const sex: Sex = spec.sex ?? (chance(0.5, rng) ? "M" : "K");
@@ -1399,7 +1425,7 @@ export function rerollNpc(npc: Npc, rng: Rng = defaultRng): Npc {
 export function rebuildDevelopment(npc: Npc, professions: string[] | undefined, rng: Rng = defaultRng, path?: PathStep[]): Npc {
   const next: Npc = structuredClone(npc);
   const c = gd.getCreature(next.creature);
-  if (!(c?.asRace && next.archetype)) next.tier = clampTier(next.tier, c);
+  if (!(c?.asRace && next.archetype)) next.tier = clampTier(next.tier, c, !!next.archetype);
   develop(next, professions, rng, false, path);
   rollTreasures(next, rng);
   finish(next, rng, false);

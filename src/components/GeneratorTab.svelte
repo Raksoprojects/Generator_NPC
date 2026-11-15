@@ -3,6 +3,7 @@
   import Autocomplete from "./Autocomplete.svelte";
   import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
+  import { creatureTierRange } from "../lib/creatures";
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
   import PathEditor from "./PathEditor.svelte";
   import { TIER_IDS, type Npc, type Sex, type TierId } from "../lib/types";
@@ -93,6 +94,8 @@
   // Pola formularza. Pusty string = "losowo" (w trybie pół-losowym).
   let archetype = $state("");
   let tier = $state<TierId | "">("");
+  /** Gorna granica losowania poziomu (pusta = dokladnie wybrany poziom). */
+  let tierTo = $state<TierId | "">("");
   let race = $state("");
   let sex = $state<Sex | "">("");
   let name = $state("");
@@ -108,13 +111,22 @@
   let exceptional = $state("");
   /** PD podane recznie: zamiast budzetu poziomu albo dodane do niego. */
   let xpValue = $state<number | null>(null);
+  /** Gorna granica losowania PD (pusta = dokladnie xpValue). */
+  let xpToValue = $state<number | null>(null);
   let xpMode = $state<"zamiast" | "dodaj">("dodaj");
-  let xpSpec = $derived.by((): Pick<GenSpec, "xp" | "xpBonus"> => {
+  let xpSpec = $derived.by((): Pick<GenSpec, "xp" | "xpBonus" | "xpTo"> => {
     const v = Math.round(Number(xpValue));
-    if (xpValue == null || !Number.isFinite(v) || v === 0) return {};
-    if (xpMode === "zamiast" || !tier) return v > 0 ? { xp: v } : {};
+    const to = Math.round(Number(xpToValue));
+    const hasTo = xpToValue != null && Number.isFinite(to) && to !== v;
+    if (xpValue == null || !Number.isFinite(v) || (v === 0 && !hasTo)) return {};
+    if (xpMode === "zamiast" || !tier) {
+      // PD jako caly budzet - tylko dodatnie.
+      const lo = Math.max(0, v);
+      const hi = hasTo ? Math.max(0, to) : lo;
+      return lo > 0 || hi > 0 ? { xp: lo, ...(hasTo ? { xpTo: hi } : {}) } : {};
+    }
     // Ujemne PD odejmuja od budzetu poziomu (np. Ekspert przy dolnej granicy).
-    return { xpBonus: v };
+    return { xpBonus: v, ...(hasTo ? { xpTo: to } : {}) };
   });
   /** Rzuty bez ograniczen BN (pelne 2k10, najwyzsze do cech kluczowych); w trybie wlasnym domyslnie wlaczone. */
   let freeRolls = $state(false);
@@ -139,8 +151,24 @@
   /** Bestia (bez profesji) moze wystapic ponizej swojego minimum - osłabiona, z cechami negatywnymi. */
   let beastMode = $derived(!!creature && (!civilized || archetype === NO_CAREER));
 
+  /** Dozwolone poziomy stworzenia (indeksy): domyslny -2..+3, z profesja bez gornej granicy; grupa - suma przedzialow. */
+  let tierRange = $derived.by((): [number, number] => {
+    const c = gd.getCreature(creature);
+    if (c) return creatureTierRange(c, !beastMode);
+    if (!creatureGroup) return [0, TIER_IDS.length - 1];
+    const ranges = gd.creaturesInGroup(creatureGroup).filter((x) => !x.unique).map((x) => creatureTierRange(x));
+    return ranges.length ? [Math.min(...ranges.map((r) => r[0])), Math.max(...ranges.map((r) => r[1]))] : [0, TIER_IDS.length - 1];
+  });
+  const tierAllowed = (i: number) => kind !== "stworzenia" || (i >= tierRange[0] && i <= tierRange[1]);
+
   $effect(() => {
-    if (kind === "stworzenia" && !beastMode && tier && TIER_IDS.indexOf(tier) < minTierIdx) tier = TIER_IDS[minTierIdx];
+    if (kind !== "stworzenia" || !tier) return;
+    const i = TIER_IDS.indexOf(tier);
+    if (!tierAllowed(i)) tier = TIER_IDS[Math.min(tierRange[1], Math.max(tierRange[0], i))];
+  });
+  // "Do poziomu" tylko powyzej "od" i w przedziale stworzenia.
+  $effect(() => {
+    if (tierTo && (!tier || TIER_IDS.indexOf(tierTo) <= TIER_IDS.indexOf(tier) || !tierAllowed(TIER_IDS.indexOf(tierTo)))) tierTo = "";
   });
 
   let npc = $state<Npc | null>(null);
@@ -202,6 +230,7 @@
         archetype: civilized && archetype && archetype !== NO_CAREER ? archetype : undefined,
         noArchetype: civilized && archetype === NO_CAREER,
         tier: (tier || undefined) as TierId | undefined,
+        tierTo: (tierTo || undefined) as TierId | undefined,
         name: name.trim() || undefined,
         traits: chosenTraits,
         randomTraits,
@@ -220,6 +249,7 @@
     return {
       archetype: archetype || undefined,
       tier: (tier || undefined) as TierId | undefined,
+      tierTo: (tierTo || undefined) as TierId | undefined,
       ...(raceIsCreature ? { creature: race, asRace: true } : { race: race || undefined }),
       sex: (sex || undefined) as Sex | undefined,
       name: name.trim() || undefined,
@@ -247,8 +277,9 @@
   }
 
   function resetForm() {
-    archetype = tier = race = sex = creature = creatureGroup = bloodline = "";
+    archetype = tier = tierTo = race = sex = creature = creatureGroup = bloodline = "";
     name = "";
+    xpToValue = null;
     path = [{ profession: "", level: null }];
     chosenTraits = [];
     randomTraits = true;
@@ -259,10 +290,27 @@
   }
 </script>
 
+{#snippet tierToField(labelOf: (t: TierId, i: number) => string)}
+  {#if tier}
+    <label title="Poziom losowany równo z przedziału od wybranego do tego">Do poziomu
+      <select bind:value={tierTo}>
+        <option value="">— tylko wybrany —</option>
+        {#each TIER_IDS as t, i (t)}
+          {#if i > TIER_IDS.indexOf(tier) && tierAllowed(i)}<option value={t}>{labelOf(t, i)}</option>{/if}
+        {/each}
+      </select>
+    </label>
+  {/if}
+{/snippet}
+
 {#snippet xpField()}
-  <label class="xp-field" title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu; liczba ujemna odejmuje PD od poziomu">PD
+  <label class="xp-field" title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu; liczba ujemna odejmuje PD od poziomu. Drugie pole: losuj PD z przedziału od–do.">PD
     <span class="xp-row">
       <input type="number" step="100" placeholder="wg poziomu" bind:value={xpValue} />
+      {#if xpValue != null}
+        <span class="text-dim">–</span>
+        <input type="number" step="100" placeholder="do" aria-label="PD do (losowo z przedziału)" bind:value={xpToValue} />
+      {/if}
       {#if tier}
         <select bind:value={xpMode} aria-label="Sposób użycia PD">
           <option value="dodaj">dodaj do poziomu</option>
@@ -337,12 +385,13 @@
           <select bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each TIER_IDS as t, i (t)}
-              <option value={t} disabled={i < minTierIdx && !beastMode}>{creatureTierLabel(t, i)}{beastMode && i < minTierIdx ? ` — osłabiony (${minTierIdx - i} ${minTierIdx - i === 1 ? "cecha negatywna" : "cechy negatywne"})` : !civilized || !archetype
+              <option value={t} disabled={!tierAllowed(i)}>{creatureTierLabel(t, i)}{beastMode && i < minTierIdx ? ` — osłabiony (${minTierIdx - i} ${minTierIdx - i === 1 ? "cecha negatywna" : "cechy negatywne"})` : !civilized || !archetype
                   ? ` — ${gd.getCreatureFamilies().settings.tierLabels[TIER_IDS[Math.max(0, i - minTierIdx)]]}`
                   : ""}</option>
             {/each}
           </select>
         </label>
+        {@render tierToField(creatureTierLabel)}
         {@render xpField()}
         <label>Imię
           <input type="text" placeholder="nazwa stworzenia" bind:value={name} />
@@ -352,7 +401,7 @@
         <p class="text-dim hint">
           {gd.getCreature(creature)?.source}, s. {gd.getCreature(creature)?.page} · rodzina: {gd.getCreature(creature)?.family}
           {civilized ? " · może rozwijać się przez profesje" : " · rozwój przez umiejętności i Cechy Stworzeń"}
-          {minTierIdx > 0 ? ` · występuje od poziomu: ${gd.getTier(TIER_IDS[minTierIdx]).label}` : ""}
+          · domyślny poziom: {gd.getTier(TIER_IDS[minTierIdx]).label} (dozwolone: {gd.getTier(TIER_IDS[tierRange[0]]).label}–{gd.getTier(TIER_IDS[tierRange[1]]).label})
         </p>
       {/if}
     {/if}
@@ -371,6 +420,7 @@
             {#each TIER_IDS as t (t)}<option value={t}>{gd.tierLabelXp(t)}</option>{/each}
           </select>
         </label>
+        {@render tierToField((t) => gd.tierLabelXp(t))}
         {@render xpField()}
         <label>Rasa
           <select bind:value={race}>
@@ -465,7 +515,7 @@
     align-items: center;
   }
   .xp-row input {
-    width: 6.5rem;
+    width: 5.5rem;
     flex: none;
   }
   .xp-row select {

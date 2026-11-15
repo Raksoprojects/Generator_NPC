@@ -178,6 +178,25 @@ describe("rozwoj bestii", () => {
     }
   });
 
+  it("stworzenie z profesja bez gornej granicy poziomu, bestia w przedziale", () => {
+    // Ork: domyslnie Zwykly; z profesja dowolnie wysoko, bez profesji najwyzej domyslny +3.
+    expect(generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "heros" }, seedRng(1)).tier).toBe("heros");
+    expect(generateNpc({ creature: "Ork", noArchetype: true, tier: "heros" }, seedRng(1)).tier).toBe("doswiadczony");
+  });
+
+  it("poziom i PD losowane z przedzialu od-do", () => {
+    const tiers = new Set<string>();
+    for (let seed = 1; seed <= 40; seed++) {
+      const n = generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "sredni", tierTo: "zaawansowany" }, seedRng(seed));
+      tiers.add(n.tier);
+      const x = generateNpc({ archetype: "Wojownik", race: "Człowiek", xp: 1000, xpTo: 2000 }, seedRng(seed));
+      expect(x.xp!.budget).toBeGreaterThanOrEqual(1000);
+      expect(x.xp!.budget).toBeLessThanOrEqual(2000);
+      expect(x.xp!.budget % 50).toBe(0);
+    }
+    expect([...tiers].sort()).toEqual(["obyty", "sredni", "zaawansowany"]);
+  });
+
   it("cecha Broń trafia najlepsza Bronia Biala, nie sama WW", () => {
     for (let seed = 1; seed <= 10; seed++) {
       const g = generateNpc({ creature: "Goblin", tier: "sredni" }, seedRng(seed));

@@ -906,6 +906,8 @@ export interface GroupRow {
   /** Grupa stworzen - kazdy BN wiersza losowany z niej osobno ("Nieumarli", "Chaos › Zwierzoludzie"). */
   creatureGroup?: string;
   tier: TierId;
+  /** Gorna granica losowania poziomu (od tier do tierTo). */
+  tierTo?: TierId;
   race?: string;
   commander?: boolean;
   label?: string;
@@ -913,6 +915,8 @@ export interface GroupRow {
   sex?: Sex;
   /** PD: zamiast budzetu poziomu albo dodane do niego (bez poziomu - poziom wg PD). */
   xp?: number;
+  /** Gorna granica losowania PD (od xp do xpTo). */
+  xpTo?: number;
   xpMode?: "zamiast" | "dodaj";
   /** Sciezka profesji (kroki po kolei, ostatni = obecna). */
   path?: { profession: string; level?: number | null }[];
