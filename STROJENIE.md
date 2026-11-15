@@ -65,7 +65,7 @@ Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawa
 | Domyślny poziom | `<stworzenie>.minTier` | Poziom profilu z podręcznika. Bez wybranego poziomu stworzenie dostaje ten albo wyższy (każdy kolejny o połowę rzadziej). Od początku tego przedziału liczy się budżet PD bestii. Brak oznacza Nowicjusza. |
 | Przedział poziomów | `<stworzenie>.tierSpan`, domyślnie `settings.tierSpan` | `[od, do]` względem domyślnego, domyślnie `[-2, 3]`. Poziom spoza przedziału jest przycinany. Poniżej domyślnego bestia dostaje 1 cechę negatywną na poziom. Szkielet `[0, 2]` (najwyżej Doświadczony), czempion `[0, 3]`, wampir `[0, 8]`. |
 | Rozwój od innego poziomu | `<stworzenie>.xpFrom`, `turningXp` | Czempion: PD liczone od Nowicjusza jak u szkieletu, minus 500 PD na przemianę [dom]. |
-| Cecha rosnąca z poziomem | `<stworzenie>.tierTraits` | `{"Suche Kości": [1, 1, 2, 3]}`: poziom cechy na domyślnym poziomie stworzenia i kolejnych. |
+| Cecha rosnąca z poziomem | `<stworzenie>.tierTraits` | `{"Pancerz": [4, [4, 4, 5], [4, 5, 6], [5, 6]]}`: wartość cechy na domyślnym poziomie stworzenia i kolejnych. Lista to losowanie jednej wartości (powtórzenie zwiększa szansę). |
 | Rodzina | `<stworzenie>.family` | Wskazuje wpis w `creature_families.json`. |
 
 ### Rodziny i rozwój — `creature_families.json`

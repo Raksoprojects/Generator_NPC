@@ -164,14 +164,22 @@ describe("rozwoj bestii", () => {
   });
 
   it("szkielet najwyzej Doswiadczony, czempion na profilu szkieletu z Suchymi Kosciami", () => {
-    expect(generateNpc({ creature: "Szkielet", tier: "heros" }, seedRng(1)).tier).toBe("obyty");
+    const skel = generateNpc({ creature: "Szkielet", tier: "heros" }, seedRng(1));
+    expect(skel.tier).toBe("obyty");
+    expect(gd.getCreature("Szkielet")!.traits).toContain("Suche Kości (1)");
+    expect(gd.getCreature("Szkieletowy czempion")!.traits).toContain("Suche Kości (3)");
     const champ = generateNpc({ creature: "Szkieletowy czempion", tier: "zaawansowany", deterministic: true }, seedRng(1));
-    expect(champ.traits).toContain("Suche Kości (1)");
+    // Pancerz 4 na domyslnym poziomie, wyzej szansa na 5-6.
+    expect(champ.traits.filter((t) => t.startsWith("Pancerz"))).toEqual(["Pancerz (4)"]);
     // PD od poczatku Nowicjusza minus przemiana: (2000 - 100 - 500).
     expect(champ.xp?.budget).toBe(1400);
-    const top = generateNpc({ creature: "Szkieletowy czempion", tier: "heros" }, seedRng(1));
-    expect(top.tier).toBe("wybitny");
-    expect(top.traits).toContain("Suche Kości (3)");
+    const armours = new Set<string>();
+    for (let seed = 1; seed <= 30; seed++) {
+      const top = generateNpc({ creature: "Szkieletowy czempion", tier: "heros" }, seedRng(seed));
+      expect(top.tier).toBe("wybitny");
+      armours.add(top.traits.find((t) => t.startsWith("Pancerz"))!);
+    }
+    expect([...armours].sort()).toEqual(["Pancerz (5)", "Pancerz (6)"]);
     // Bez wybranego poziomu - domyslny albo wyzszy, nigdy nizszy.
     for (let seed = 1; seed <= 10; seed++) {
       expect(TIER_IDS.indexOf(generateNpc({ creature: "Szkieletowy czempion" }, seedRng(seed)).tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));

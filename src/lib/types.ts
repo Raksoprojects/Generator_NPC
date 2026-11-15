@@ -688,8 +688,11 @@ export interface CreatureDef {
   xpFrom?: TierId;
   /** PD "zuzyte" na przemiane (czempion ze szkieletu) - odejmowane od budzetu rozwoju. */
   turningXp?: number;
-  /** Cechy z poziomem rosnacym z poziomem BN: nazwa -> poziom cechy dla kolejnych poziomow od domyslnego. */
-  tierTraits?: Record<string, number[]>;
+  /**
+   * Cechy rosnace z poziomem BN: nazwa -> wartosc dla kolejnych poziomow od domyslnego; lista
+   * wartosci = losowo jedna z nich (np. Pancerz [4, [4, 4, 5], [4, 5, 6]]).
+   */
+  tierTraits?: Record<string, (number | number[])[]>;
   /** Status z bloku (dodatki, np. "Srebro 4"). */
   status?: string | null;
 }

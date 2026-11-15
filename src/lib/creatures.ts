@@ -209,10 +209,17 @@ export function creatureTierRange(creature: CreatureDef, career = false): [numbe
   return [Math.max(0, d + span[0]), career ? TIER_IDS.length - 1 : Math.min(TIER_IDS.length - 1, d + span[1])];
 }
 
-/** Poziom cechy z tierTraits wg poziomu BN wzgledem domyslnego ("Suche Kości (2)"). */
-export function tierTraitsFor(npc: Pick<Npc, "tier">, creature: CreatureDef): string[] {
+/**
+ * Wartosc cechy z tierTraits wg poziomu BN wzgledem domyslnego ("Pancerz (5)"); pozycja z lista
+ * wartosci losuje jedna z nich (powtorzenia = wieksza szansa), deterministycznie - pierwsza.
+ */
+export function tierTraitsFor(npc: Pick<Npc, "tier">, creature: CreatureDef, rng: Rng = Math.random, deterministic = false): string[] {
   const offset = Math.max(0, TIER_IDS.indexOf(npc.tier) - TIER_IDS.indexOf(creature.minTier ?? "slaby"));
-  return Object.entries(creature.tierTraits ?? {}).map(([name, ranks]) => `${name} (${ranks[Math.min(offset, ranks.length - 1)]})`);
+  return Object.entries(creature.tierTraits ?? {}).map(([name, ranks]) => {
+    const r = ranks[Math.min(offset, ranks.length - 1)];
+    const v = Array.isArray(r) ? (deterministic ? r[0] : r[Math.floor(rng() * r.length)]) : r;
+    return `${name} (${v})`;
+  });
 }
 
 /**
@@ -337,7 +344,7 @@ export function beastTraits(npc: Npc, creature: CreatureDef, rng: Rng, determini
   const fam = gd.getCreatureFamilies();
   const family = fam.families[creature.family];
   const tier: TierId = beastTier(npc, creature);
-  for (const t of tierTraitsFor(npc, creature)) if (!npc.traits.includes(t)) npc.traits.push(t);
+  for (const t of tierTraitsFor(npc, creature, rng, deterministic)) if (!npc.traits.includes(t)) npc.traits.push(t);
   const count = fractionalCount(fam.settings.traitCount[tier] ?? 0, rng, deterministic);
   const weights = Object.fromEntries(
     Object.entries(familyTraitWeights(creature) ?? family?.traits ?? {}).map(([n, w]) => [n, w * traitStrengthFactor(n)])

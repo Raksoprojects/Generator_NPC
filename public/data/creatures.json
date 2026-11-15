@@ -4720,6 +4720,7 @@
     "Ożywieniec",
     "Pancerz (2)",
     "Strach (2)",
+    "Suche Kości (1)",
     "Widzenie w Mroku"
    ],
    "optional": [
@@ -4761,9 +4762,9 @@
     "Nie Czuje Bólu",
     "Niestabilny",
     "Ożywieniec",
-    "Pancerz (6)",
     "Spaczenie (Pomniejsze)",
     "Strach (3)",
+    "Suche Kości (3)",
     "Terytorialny",
     "Twardziel",
     "Widzenie w Mroku",
@@ -4771,7 +4772,7 @@
    ],
    "optional": [],
    "abilities": [
-    "Wskrzeszony zaklęciem Wskrzeszenie czempiona z kości postaci, która osiągnęła co najmniej 3. poziom profesji. Pancerz: pełna zbroja płytowa i duża tarcza. Profil: podstawowy profil Szkieletu (Grimuar: „MG może dodać dawne Umiejętności i Talenty stworzenia do podstawowego profilu Szkieletu”), rozwijany dalej jak szkielet; przemiana zabiera część PD [dom]. Przykładowy profil z Grimuaru: WW 70, US 55, S 50, Wt 45, I 40, Zw 45, Zr 45, Żyw 22."
+    "Wskrzeszony zaklęciem Wskrzeszenie czempiona z kości postaci, która osiągnęła co najmniej 3. poziom profesji. Pancerz: zbroja i duża tarcza; Pancerz 4, na wyższych poziomach szansa na 5–6 [dom]. Profil: podstawowy profil Szkieletu (Grimuar: „MG może dodać dawne Umiejętności i Talenty stworzenia do podstawowego profilu Szkieletu”), rozwijany dalej jak szkielet; przemiana zabiera część PD [dom]. Przykładowy profil z Grimuaru: WW 70, US 55, S 50, Wt 45, I 40, Zw 45, Zr 45, Żyw 22."
    ],
    "trappings": [
     "pełna zbroja płytowa",
@@ -4785,7 +4786,7 @@
    "tierSpan": [0, 3],
    "xpFrom": "slaby",
    "turningXp": 500,
-   "tierTraits": { "Suche Kości": [1, 1, 2, 3] }
+   "tierTraits": { "Pancerz": [4, [4, 4, 5], [4, 5, 6], [5, 6]] }
   },
   {
    "name": "Zombi",
