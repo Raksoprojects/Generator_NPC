@@ -193,14 +193,13 @@
   $effect(() => {
     if (!editing) return;
     path = currentPath();
-    const bonus = npc.xpSpec?.bonus;
-    xpEdit = npc.xpSpec?.budget ?? (bonus != null ? Math.abs(bonus) : null);
-    xpEditMode = npc.xpSpec?.budget != null ? "zamiast" : bonus != null && bonus < 0 ? "odejmij" : "dodaj";
+    xpEdit = npc.xpSpec?.budget ?? npc.xpSpec?.bonus ?? null;
+    xpEditMode = npc.xpSpec?.budget != null ? "zamiast" : "dodaj";
   });
 
-  /** PD podane recznie przy przebudowie: zamiast budzetu poziomu, dodane do niego albo odjete. */
+  /** PD podane recznie przy przebudowie: zamiast budzetu poziomu albo dodane do niego (ujemne - odjete). */
   let xpEdit = $state<number | null>(null);
-  let xpEditMode = $state<"zamiast" | "dodaj" | "odejmij">("dodaj");
+  let xpEditMode = $state<"zamiast" | "dodaj">("dodaj");
 
   let professionOptions = $derived(
     gd.allProfessionNames().filter((p) => gd.professionAllowsRace(p, creature ? "Człowiek" : npc.race))
@@ -209,8 +208,8 @@
   function rebuild() {
     const next = snapshot();
     const v = Math.round(Number(xpEdit));
-    if (xpEdit == null || !Number.isFinite(v) || v <= 0) delete next.xpSpec;
-    else next.xpSpec = xpEditMode === "zamiast" ? { budget: v } : { bonus: xpEditMode === "odejmij" ? -v : v };
+    if (xpEdit == null || !Number.isFinite(v) || v === 0 || (xpEditMode === "zamiast" && v < 0)) delete next.xpSpec;
+    else next.xpSpec = xpEditMode === "zamiast" ? { budget: v } : { bonus: v };
     const steps = $state.snapshot(path) as PathStep[];
     const main = steps[steps.length - 1]?.profession;
     // Poziom w ktoryms kroku albo kilka krokow - dokladna sciezka; sama obecna profesja bez poziomu - jak dotad.
@@ -955,10 +954,9 @@
         </label>
         <label title={beast ? "PD ponad profil z bestiariusza: cechy walki i umiejętności rodziny" : "PD ponad tworzenie postaci, wydawane wg priorytetów archetypu"}>PD
           <span class="xp-row">
-            <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpEdit} />
+            <input type="number" step="100" placeholder="wg poziomu" title="Liczba ujemna odejmuje PD od poziomu" bind:value={xpEdit} />
             <select bind:value={xpEditMode} aria-label="Sposób użycia PD">
               <option value="dodaj">dodaj do poziomu</option>
-              <option value="odejmij">odejmij od poziomu</option>
               <option value="zamiast">zamiast poziomu</option>
             </select>
           </span>

@@ -108,14 +108,13 @@
   let exceptional = $state("");
   /** PD podane recznie: zamiast budzetu poziomu albo dodane do niego. */
   let xpValue = $state<number | null>(null);
-  let xpMode = $state<"zamiast" | "dodaj" | "odejmij">("dodaj");
+  let xpMode = $state<"zamiast" | "dodaj">("dodaj");
   let xpSpec = $derived.by((): Pick<GenSpec, "xp" | "xpBonus"> => {
-    const v = Number(xpValue);
-    if (xpValue == null || !Number.isFinite(v) || v <= 0) return {};
-    if (xpMode === "zamiast") return { xp: Math.round(v) };
-    // Odejmowanie tylko od budzetu poziomu (np. Ekspert przy dolnej granicy).
-    if (xpMode === "odejmij") return tier ? { xpBonus: -Math.round(v) } : {};
-    return { xpBonus: Math.round(v) };
+    const v = Math.round(Number(xpValue));
+    if (xpValue == null || !Number.isFinite(v) || v === 0) return {};
+    if (xpMode === "zamiast" || !tier) return v > 0 ? { xp: v } : {};
+    // Ujemne PD odejmuja od budzetu poziomu (np. Ekspert przy dolnej granicy).
+    return { xpBonus: v };
   });
   /** Rzuty bez ograniczen BN (pelne 2k10, najwyzsze do cech kluczowych); w trybie wlasnym domyslnie wlaczone. */
   let freeRolls = $state(false);
@@ -261,13 +260,12 @@
 </script>
 
 {#snippet xpField()}
-  <label class="xp-field" title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu">PD
+  <label class="xp-field" title="PD ponad tworzenie postaci, wydawane wg priorytetów archetypu; liczba ujemna odejmuje PD od poziomu">PD
     <span class="xp-row">
-      <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={xpValue} />
+      <input type="number" step="100" placeholder="wg poziomu" bind:value={xpValue} />
       {#if tier}
         <select bind:value={xpMode} aria-label="Sposób użycia PD">
           <option value="dodaj">dodaj do poziomu</option>
-          <option value="odejmij">odejmij od poziomu</option>
           <option value="zamiast">zamiast poziomu</option>
         </select>
       {:else}

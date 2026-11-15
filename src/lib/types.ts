@@ -903,7 +903,7 @@ export interface GroupRow {
   sex?: Sex;
   /** PD: zamiast budzetu poziomu albo dodane do niego (bez poziomu - poziom wg PD). */
   xp?: number;
-  xpMode?: "zamiast" | "dodaj" | "odejmij";
+  xpMode?: "zamiast" | "dodaj";
   /** Sciezka profesji (kroki po kolei, ostatni = obecna). */
   path?: { profession: string; level?: number | null }[];
   heroProfile?: string;
