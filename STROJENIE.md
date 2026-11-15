@@ -111,7 +111,7 @@ Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawa
 | Co | Gdzie | Uwagi |
 |---|---|---|
 | Szanse na kolejne przedmioty | `chances.<poziom>` | Lista: pierwsza liczba to szansa na 1. przedmiot, druga na 2. itd. `[0.04, 0.005]` = 4% na jeden i 0,5% na drugi. |
-| Rodzaj przedmiotu | `kindWeight` | `weapon` broń, `armour` pancerz, `item` drobiazg, `potion` mikstura. Wyższa waga oznacza częstszy wybór. Pancerz 3.2 i broń 0.4 dają tę samą łączną szansę (pancerzy w tabeli jest mniej). Runy: broń 8, pancerz 3 + 5. |
+| Rodzaj przedmiotu | `kindWeight` | `weapon` broń, `armour` pancerz, `item` drobiazg, `potion` mikstura. Wyższa waga oznacza częstszy wybór. Pancerz 1.6 przy broni 0.4 daje pancerz 2 razy rzadziej niż broń (pancerzy w tabeli jest mniej, 3.2 zrównałoby szanse). Runy: broń 8, pancerz 3 + 1. |
 | Mnożnik rasy (bez run) | `itemRaceMult` | Krasnolud 0.3. Nie działa na szanse równe 1. |
 | Przedmiot pasujący do profesji | `fitWeight` | Mnożnik wagi szablonu pasującego do BN. |
 | Runy tymczasowe | `runic.temporary.<poziom>` | Szansa dla człowieka. |

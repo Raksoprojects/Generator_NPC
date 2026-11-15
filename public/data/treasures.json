@@ -180,7 +180,7 @@
  "fitWeight": 3,
  "kindWeight": {
   "weapon": 0.4,
-  "armour": 3.2,
+  "armour": 1.6,
   "item": 1.5,
   "potion": 1.5
  },
@@ -1737,7 +1737,7 @@
    "name": "Runiczny pancerz",
    "kind": "armour",
    "runes": "armour",
-   "weight": 5,
+   "weight": 1,
    "source": "Podręcznik Gracza: Krasnoludy",
    "page": 128,
    "description": "Metalowy pancerz z Runami Zbroi — runy wykuwa się tylko na metalu, kamieniu albo klejnotach (Prawo Formy). Najwyżej trzy zwykłe runy i jedna mistrzowska."
