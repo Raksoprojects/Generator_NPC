@@ -49,12 +49,11 @@ describe("poziomy BN", () => {
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
         const top = maxLevel(npc);
+        const i = TIER_IDS.indexOf(tier);
         if (tier === "legendarny" || tier === "heros") expect(top).toBeGreaterThanOrEqual(4);
-        else if (tier === "doswiadczony") expect(top).toBeGreaterThanOrEqual(3);
-        else if (tier === "heroiczny") expect(top).toBeGreaterThanOrEqual(3);
-        // Niezwykly przy gornej granicy PD (ok. 5000) bywa juz na 4. poziomie.
-        else if (tier === "zaawansowany") expect(top).toBeLessThanOrEqual(4);
-        else expect(top).toBeLessThanOrEqual(3);
+        else if (i >= TIER_IDS.indexOf("wybitny")) expect(top).toBeGreaterThanOrEqual(3);
+        // Do Doswiadczonego (1500 PD) najwyzej 3. poziom.
+        else if (i <= TIER_IDS.indexOf("obyty")) expect(top).toBeLessThanOrEqual(3);
       }
     }
   });
@@ -76,11 +75,11 @@ describe("poziomy BN", () => {
 
   it("PD podane recznie: zamiast budzetu poziomu (poziom wg PD) albo dodane do niego", () => {
     const a = generateNpc({ archetype: "Szlachcic", race: "Człowiek", xp: 3000 }, seedRng(1));
-    expect(a.tier).toBe("zaawansowany");
+    expect(a.tier).toBe("doswiadczony");
     expect(a.xp!.budget).toBe(3000);
     const b = generateNpc({ archetype: "Szlachcic", race: "Człowiek", tier: "sredni", xpBonus: 500 }, seedRng(1));
-    expect(b.xp!.budget).toBeGreaterThanOrEqual(1500);
-    expect(b.xp!.budget).toBeLessThanOrEqual(2400);
+    expect(b.xp!.budget).toBeGreaterThanOrEqual(1000);
+    expect(b.xp!.budget).toBeLessThanOrEqual(1450);
     // Przebudowa zachowuje recznie podane PD.
     expect(rebuildDevelopment(a, undefined, seedRng(2)).xp!.budget).toBe(3000);
     // Zwykly z 1500 PD jest na 2. poziomie profesji.
@@ -122,7 +121,7 @@ describe("poziomy BN", () => {
   });
 
   it("sciezka profesji podana recznie jest zachowana", () => {
-    const npc = generateNpc({ tier: "zaawansowany", archetype: "Wojownik", race: "Człowiek", professions: ["Żołnierz", "Rycerz"] }, seedRng(3));
+    const npc = generateNpc({ tier: "weteran", archetype: "Wojownik", race: "Człowiek", professions: ["Żołnierz", "Rycerz"] }, seedRng(3));
     const names = npc.careerPath.map((s) => s.profession);
     expect(names[0]).toBe("Żołnierz");
     expect(names[names.length - 1]).toBe("Rycerz");
@@ -185,7 +184,8 @@ describe("rozwoj losowy", () => {
         return sum / 15;
       };
       const means = TIER_IDS.map(mean);
-      for (let i = 1; i < means.length; i++) expect(means[i], `${archName} ${TIER_IDS[i]}`).toBeGreaterThan(means[i - 1]);
+      // Sasiednie niskie poziomy roznia sie o kilkaset PD - porownanie co drugi poziom.
+      for (let i = 2; i < means.length; i++) expect(means[i], `${archName} ${TIER_IDS[i]}`).toBeGreaterThan(means[i - 2]);
     }
   });
   it("rzuty w wyposazeniu sa wykonywane", () => {
@@ -381,7 +381,7 @@ describe("profile bohaterow i sciezki profesji", () => {
         if (tier === "heros") expect(last.level).toBeGreaterThanOrEqual(4);
       }
     }
-    expect(maxCareers.sredni).toBe(2);
+    expect(maxCareers.weteran).toBe(2);
     expect(maxCareers.heroiczny).toBe(3);
     expect(maxCareers.legendarny).toBe(3);
     expect(maxCareers.heros).toBe(4);

@@ -6,9 +6,14 @@
  "giftsPerTier": {
   "slaby": 3,
   "sredni": 4,
+  "obyty": 4,
   "zaawansowany": 5,
   "doswiadczony": 6,
+  "weteran": 7,
+  "wybitny": 7,
   "heroiczny": 8,
+  "mistrz": 9,
+  "arcymistrz": 9,
   "legendarny": 10,
   "heros": 12
  },
@@ -16,9 +21,14 @@
  "ageByTier": {
   "slaby": 1,
   "sredni": 2,
+  "obyty": 2,
   "zaawansowany": 3,
   "doswiadczony": 4,
+  "weteran": 4,
+  "wybitny": 5,
   "heroiczny": 5,
+  "mistrz": 5,
+  "arcymistrz": 5,
   "legendarny": 5,
   "heros": 6
  },
@@ -62,6 +72,8 @@
    "casting": {
     "chance": {
      "heroiczny": 0.35,
+     "mistrz": 0.4,
+     "arcymistrz": 0.45,
      "legendarny": 0.5,
      "heros": 0.65
     },
@@ -151,7 +163,11 @@
     "chance": {
      "zaawansowany": 0.5,
      "doswiadczony": 0.6,
+     "weteran": 0.633,
+     "wybitny": 0.667,
      "heroiczny": 0.7,
+     "mistrz": 0.733,
+     "arcymistrz": 0.767,
      "legendarny": 0.8,
      "heros": 0.9
     },
@@ -241,7 +257,11 @@
     "chance": {
      "zaawansowany": 1,
      "doswiadczony": 1,
+     "weteran": 1,
+     "wybitny": 1,
      "heroiczny": 1,
+     "mistrz": 1,
+     "arcymistrz": 1,
      "legendarny": 1,
      "heros": 1
     },
@@ -331,7 +351,11 @@
    "casting": {
     "chance": {
      "doswiadczony": 0.1,
+     "weteran": 0.117,
+     "wybitny": 0.133,
      "heroiczny": 0.15,
+     "mistrz": 0.183,
+     "arcymistrz": 0.217,
      "legendarny": 0.25,
      "heros": 0.35
     },
@@ -436,7 +460,11 @@
     "chance": {
      "zaawansowany": 0.5,
      "doswiadczony": 0.6,
+     "weteran": 0.633,
+     "wybitny": 0.667,
      "heroiczny": 0.7,
+     "mistrz": 0.733,
+     "arcymistrz": 0.767,
      "legendarny": 0.8,
      "heros": 0.9
     },
@@ -531,7 +559,11 @@
     "chance": {
      "zaawansowany": 0.3,
      "doswiadczony": 0.4,
+     "weteran": 0.433,
+     "wybitny": 0.467,
      "heroiczny": 0.5,
+     "mistrz": 0.533,
+     "arcymistrz": 0.567,
      "legendarny": 0.6,
      "heros": 0.7
     },
@@ -1415,9 +1447,14 @@
  "magicAdvances": {
   "slaby": 4,
   "sredni": 6,
+  "obyty": 8,
   "zaawansowany": 10,
   "doswiadczony": 15,
+  "weteran": 18,
+  "wybitny": 22,
   "heroiczny": 25,
+  "mistrz": 30,
+  "arcymistrz": 35,
   "legendarny": 40,
   "heros": 55
  },

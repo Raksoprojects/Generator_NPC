@@ -94,9 +94,9 @@ describe("rozwoj bestii", () => {
     // Ksiazka: Skradanie 75 przy Zw 55 = +20 (rodzina Kot: 40 x 0.5 = 20), dalej PD.
     expect(stealth(weak)).toBeGreaterThanOrEqual(20);
     expect(weak.traits).toEqual([]);
-    // Nowicjusz: PD 200-800 ponad poczatek przedzialu (200) - srodek 300.
-    expect(weak.xp).toEqual({ budget: 300, spent: expect.any(Number) });
-    expect(weak.xp!.spent).toBeLessThanOrEqual(300);
+    // Nowicjusz: PD 100-450 ponad poczatek przedzialu (100) - srodek 175.
+    expect(weak.xp).toEqual({ budget: 175, spent: expect.any(Number) });
+    expect(weak.xp!.spent).toBeLessThanOrEqual(175);
     const advances = (n: Npc) => Object.values(n.charAdvances).reduce((a, b) => a + b, 0) + n.skills.reduce((a, s) => a + s.advances, 0);
     expect(advances(mid)).toBeGreaterThan(advances(weak));
     // Cechy Stworzen: 0,25 na Zwyklym, 0,75 na Zaawansowanym (deterministycznie: 0 i 1).
@@ -143,7 +143,8 @@ describe("rozwoj bestii", () => {
     const negative = (n: Npc) => n.traits.filter((t) => gd.getCreatureTraits()[t]?.negative);
     const weak = generateNpc({ creature: "Wojownik Chaosu", tier: "slaby" }, seedRng(1));
     expect(weak.tier).toBe("slaby");
-    expect(negative(weak)).toHaveLength(2);
+    // Jedna cecha negatywna na poziom ponizej minimum (Niezwykly - 3 poziomy nad Nowicjuszem).
+    expect(negative(weak)).toHaveLength(3);
     // Poziom losowy (nie wybrany) - nie schodzi ponizej minimum.
     for (let seed = 1; seed <= 20; seed++) {
       const r = generateNpc({ creature: "Wojownik Chaosu" }, seedRng(seed));
@@ -151,9 +152,9 @@ describe("rozwoj bestii", () => {
     }
     // Ponizej minimum - bez PD (sam profil z ksiazki i cechy negatywne).
     expect(weak.xp?.budget).toBe(0);
-    // Na minimum: PD ponad poczatek przedzialu minimum (Zaawansowany 5500-10000, srodek 7750 - 5500).
+    // Na minimum: PD ponad poczatek przedzialu minimum (Zaawansowany 2500-3900, srodek 3200 - 2500).
     const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "doswiadczony", deterministic: true }, seedRng(1));
-    expect(chosen.xp?.budget).toBe(2250);
+    expect(chosen.xp?.budget).toBe(700);
     const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "heroiczny", deterministic: true }, seedRng(1));
     expect(lord.charAdvances.WW).toBeGreaterThan(chosen.charAdvances.WW);
   });

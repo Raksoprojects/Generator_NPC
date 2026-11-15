@@ -134,9 +134,39 @@ export interface HeroProfile {
   source?: string;
 }
 
-export type TierId = "slaby" | "sredni" | "zaawansowany" | "doswiadczony" | "heroiczny" | "legendarny" | "heros";
+/**
+ * Id poziomow (kolejnosc rosnaca). Etykiety w tiers.json; stare id zostaly dla zgodnosci z zapisanymi BN:
+ * slaby = Nowicjusz, sredni = Zwykly, obyty = Doswiadczony, zaawansowany = Niezwykly,
+ * doswiadczony = Zaawansowany, heroiczny = Ekspert, legendarny = Legenda.
+ */
+export type TierId =
+  | "slaby"
+  | "sredni"
+  | "obyty"
+  | "zaawansowany"
+  | "doswiadczony"
+  | "weteran"
+  | "wybitny"
+  | "heroiczny"
+  | "mistrz"
+  | "arcymistrz"
+  | "legendarny"
+  | "heros";
 
-export const TIER_IDS: readonly TierId[] = ["slaby", "sredni", "zaawansowany", "doswiadczony", "heroiczny", "legendarny", "heros"];
+export const TIER_IDS: readonly TierId[] = [
+  "slaby",
+  "sredni",
+  "obyty",
+  "zaawansowany",
+  "doswiadczony",
+  "weteran",
+  "wybitny",
+  "heroiczny",
+  "mistrz",
+  "arcymistrz",
+  "legendarny",
+  "heros"
+];
 
 /** Poziom zaawansowania BN (tiers.json). */
 export interface TierDef {

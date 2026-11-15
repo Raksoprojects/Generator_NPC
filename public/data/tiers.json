@@ -31,11 +31,11 @@
   "tiers": {
     "slaby": {
       "label": "Nowicjusz",
-      "description": "200–800 PD ponad tworzenie postaci: 1. poziom jednej profesji, rozwinięty.",
+      "description": "100–450 PD ponad tworzenie postaci: 1. poziom jednej profesji, rozwinięty.",
       "randomWeight": 4,
       "xp": [
-        200,
-        800
+        100,
+        450
       ],
       "maxCareers": 1,
       "spells": {
@@ -49,11 +49,11 @@
     },
     "sredni": {
       "label": "Zwykły",
-      "description": "1000–1900 PD: typowy przedstawiciel fachu, 2. poziom profesji, czasem wcześniej inna profesja.",
+      "description": "500–950 PD: typowy przedstawiciel fachu, często już na 2. poziomie profesji (ale nie musi).",
       "randomWeight": 4,
       "xp": [
-        1000,
-        1900
+        500,
+        950
       ],
       "maxCareers": 2,
       "spells": {
@@ -72,13 +72,42 @@
         }
       ]
     },
+    "obyty": {
+      "label": "Doświadczony",
+      "description": "1000–1500 PD: 2. poziom profesji, czasem wcześniej inna profesja.",
+      "randomWeight": 3,
+      "xp": [
+        1000,
+        1500
+      ],
+      "maxCareers": 2,
+      "spells": {
+        "maxCn": 8,
+        "arcane": [
+          -2,
+          2
+        ],
+        "topSpells": 1,
+        "casterAdvances": 18
+      },
+      "heroProfileChances": [
+        {
+          "profile": "Weteran",
+          "chance": 0.035
+        },
+        {
+          "profile": "Doborowy",
+          "chance": 0.005
+        }
+      ]
+    },
     "zaawansowany": {
       "label": "Niezwykły",
-      "description": "2200–5000 PD: do dwóch profesji, ostatnia zwykle na 3. poziomie.",
+      "description": "1600–2400 PD: do dwóch profesji, ostatnia zwykle na 2.–3. poziomie.",
       "randomWeight": 2,
       "xp": [
-        2200,
-        5000
+        1600,
+        2400
       ],
       "maxCareers": 2,
       "spells": {
@@ -107,11 +136,11 @@
     },
     "doswiadczony": {
       "label": "Zaawansowany",
-      "description": "5500–10000 PD: do dwóch profesji, ostatnia na 4. poziomie; 2–3 kluczowe talenty.",
-      "randomWeight": 1,
+      "description": "2500–3900 PD: do dwóch profesji, ostatnia na 3. poziomie.",
+      "randomWeight": 1.5,
       "xp": [
-        5500,
-        10000
+        2500,
+        3900
       ],
       "maxCareers": 2,
       "spells": {
@@ -143,13 +172,102 @@
         }
       ]
     },
+    "weteran": {
+      "label": "Weteran",
+      "description": "4000–6400 PD: do dwóch profesji, ostatnia na 3.–4. poziomie.",
+      "randomWeight": 1,
+      "xp": [
+        4000,
+        6400
+      ],
+      "maxCareers": 2,
+      "spells": {
+        "maxCn": 41,
+        "arcane": [
+          0,
+          4
+        ],
+        "extraLores": [
+          1,
+          0.5,
+          0.233,
+          0.1,
+          0.05
+        ],
+        "topSpells": 2,
+        "casterAdvances": 27
+      },
+      "heroProfileChances": [
+        {
+          "profile": "Weteran",
+          "chance": 0.0133
+        },
+        {
+          "profile": "Doborowy",
+          "chance": 0.02
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.0133
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.00333
+        }
+      ]
+    },
+    "wybitny": {
+      "label": "Wybitny",
+      "description": "6500–10000 PD: do dwóch profesji, ostatnia na 4. poziomie; 2–3 kluczowe talenty.",
+      "randomWeight": 0.6,
+      "xp": [
+        6500,
+        10000
+      ],
+      "maxCareers": 2,
+      "spells": {
+        "maxCn": 70,
+        "arcane": [
+          1,
+          5
+        ],
+        "extraLores": [
+          1,
+          0.65,
+          0.367,
+          0.2,
+          0.1
+        ],
+        "topSpells": 3,
+        "casterAdvances": 28
+      },
+      "level5Chance": 0.005,
+      "heroProfileChances": [
+        {
+          "profile": "Weteran",
+          "chance": 0.00667
+        },
+        {
+          "profile": "Doborowy",
+          "chance": 0.02
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.0167
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.00667
+        }
+      ]
+    },
     "heroiczny": {
       "label": "Ekspert",
-      "description": "12500–32000 PD: do trzech profesji, ostatnia na 4. poziomie, kluczowe cechy i umiejętności mocno rozwinięte.",
+      "description": "10500–16500 PD: do trzech profesji, ostatnia na 4. poziomie, kluczowe cechy i umiejętności mocno rozwinięte.",
       "randomWeight": 0.3,
       "xp": [
-        12500,
-        32000
+        10500,
+        16500
       ],
       "maxCareers": 3,
       "spells": {
@@ -184,12 +302,98 @@
         }
       ]
     },
+    "mistrz": {
+      "label": "Mistrz",
+      "description": "17000–27000 PD: do trzech profesji, mistrz swojego fachu.",
+      "randomWeight": 0.15,
+      "xp": [
+        17000,
+        27000
+      ],
+      "maxCareers": 3,
+      "spells": {
+        "maxCn": 99,
+        "arcane": [
+          2,
+          6
+        ],
+        "extraLores": [
+          1,
+          0.867,
+          0.6,
+          0.417,
+          0.267,
+          0.117,
+          0.0667
+        ],
+        "topSpells": 3,
+        "casterAdvances": 33
+      },
+      "level5Chance": 0.17,
+      "heroProfileChances": [
+        {
+          "profile": "Doborowy",
+          "chance": 0.0133
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.0233
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.0133
+        }
+      ]
+    },
+    "arcymistrz": {
+      "label": "Arcymistrz",
+      "description": "28000–48000 PD: do trzech profesji, jeden z najlepszych w Imperium.",
+      "randomWeight": 0.08,
+      "xp": [
+        28000,
+        48000
+      ],
+      "maxCareers": 3,
+      "spells": {
+        "maxCn": 99,
+        "arcane": [
+          2,
+          6
+        ],
+        "extraLores": [
+          1,
+          0.933,
+          0.7,
+          0.533,
+          0.383,
+          0.233,
+          0.133
+        ],
+        "topSpells": 4,
+        "casterAdvances": 37
+      },
+      "level5Chance": 0.335,
+      "heroProfileChances": [
+        {
+          "profile": "Doborowy",
+          "chance": 0.00667
+        },
+        {
+          "profile": "Pomniejszy Bohater",
+          "chance": 0.0267
+        },
+        {
+          "profile": "Wielki Bohater",
+          "chance": 0.0167
+        }
+      ]
+    },
     "legendarny": {
       "label": "Legenda",
-      "description": "40000–80000 PD: do trzech profesji, ostatnia na 4. poziomie, a jeśli profesja ma 5. (np. Arcymag) — połowa szans na niego.",
-      "randomWeight": 0.1,
+      "description": "50000–80000 PD: do trzech profesji, ostatnia na 4. poziomie, a jeśli profesja ma 5. (np. Arcymag) — połowa szans na niego.",
+      "randomWeight": 0.05,
       "xp": [
-        40000,
+        50000,
         80000
       ],
       "maxCareers": 3,
@@ -225,10 +429,10 @@
     },
     "heros": {
       "label": "Heros",
-      "description": "100000+ PD: do czterech profesji; ostatnia na 4. poziomie albo na 5., jeśli profesja go ma. Wybrańcy bogów, półbogowie, najstarsze wampiry, książęta demonów.",
-      "randomWeight": 0.03,
+      "description": "90000+ PD: do czterech profesji; ostatnia na 4. poziomie albo na 5., jeśli profesja go ma. Wybrańcy bogów, półbogowie, najstarsze wampiry, książęta demonów.",
+      "randomWeight": 0.02,
       "xp": [
-        100000,
+        90000,
         150000
       ],
       "maxCareers": 4,

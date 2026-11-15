@@ -5,6 +5,9 @@
   "sredni": [
    0.001
   ],
+  "obyty": [
+   0.0055
+  ],
   "zaawansowany": [
    0.01
   ],
@@ -12,9 +15,27 @@
    0.04,
    0.005
   ],
+  "weteran": [
+   0.0767,
+   0.0133
+  ],
+  "wybitny": [
+   0.113,
+   0.0217
+  ],
   "heroiczny": [
    0.15,
    0.03
+  ],
+  "mistrz": [
+   0.433,
+   0.187,
+   0.05
+  ],
+  "arcymistrz": [
+   0.717,
+   0.343,
+   0.1
   ],
   "legendarny": [
    1,
@@ -32,16 +53,25 @@
   "note": "Przedmioty runiczne losowane osobno od pozostalych przedmiotow magicznych. Trwale: najwyzej 3 zwykle runy (Prawo Trzech) i 1 mistrzowska (Prawo Zazdrosci), Krasnoludy s. 125-126. Tymczasowe: 1-3 zwykle runy (nigdy mistrzowskie), kazda gasnie po pierwszym zadzialaniu (ksiega wspomina runy tymczasowe bez zasad - interpretacja domowa).",
   "temporary": {
    "sredni": 0.00001,
+   "obyty": 0.000505,
    "zaawansowany": 0.001,
    "doswiadczony": 0.004,
+   "weteran": 0.006,
+   "wybitny": 0.008,
    "heroiczny": 0.01,
+   "mistrz": 0.0167,
+   "arcymistrz": 0.0233,
    "legendarny": 0.03,
    "heros": 0.06
   },
   "permanent": {
    "zaawansowany": 0.0000833,
    "doswiadczony": 0.0004,
+   "weteran": 0.000767,
+   "wybitny": 0.00113,
    "heroiczny": 0.0015,
+   "mistrz": 0.003,
+   "arcymistrz": 0.0045,
    "legendarny": 0.006,
    "heros": 0.015
   },
@@ -59,8 +89,24 @@
     1,
     2
    ],
+   "weteran": [
+    1,
+    2
+   ],
+   "wybitny": [
+    1,
+    3
+   ],
    "heroiczny": [
     1,
+    3
+   ],
+   "mistrz": [
+    1,
+    3
+   ],
+   "arcymistrz": [
+    2,
     3
    ],
    "legendarny": [
@@ -75,7 +121,11 @@
   "masterChance": {
    "zaawansowany": 0.05,
    "doswiadczony": 0.1,
+   "weteran": 0.183,
+   "wybitny": 0.267,
    "heroiczny": 0.35,
+   "mistrz": 0.433,
+   "arcymistrz": 0.517,
    "legendarny": 0.6,
    "heros": 0.85
   },
@@ -85,6 +135,10 @@
     1,
     1
    ],
+   "obyty": [
+    1,
+    2
+   ],
    "zaawansowany": [
     1,
     2
@@ -93,7 +147,23 @@
     1,
     2
    ],
+   "weteran": [
+    1,
+    2
+   ],
+   "wybitny": [
+    1,
+    3
+   ],
    "heroiczny": [
+    1,
+    3
+   ],
+   "mistrz": [
+    1,
+    3
+   ],
+   "arcymistrz": [
     1,
     3
    ],
@@ -142,6 +212,11 @@
     "quality": 0.06,
     "maxQualities": 1
    },
+   "obyty": {
+    "flaw": 0.15,
+    "quality": 0.105,
+    "maxQualities": 1
+   },
    "zaawansowany": {
     "flaw": 0.1,
     "quality": 0.15,
@@ -152,10 +227,30 @@
     "quality": 0.3,
     "maxQualities": 2
    },
+   "weteran": {
+    "flaw": 0.0267,
+    "quality": 0.383,
+    "maxQualities": 2
+   },
+   "wybitny": {
+    "flaw": 0.0133,
+    "quality": 0.467,
+    "maxQualities": 2
+   },
    "heroiczny": {
     "flaw": 0,
     "quality": 0.55,
     "maxQualities": 2
+   },
+   "mistrz": {
+    "flaw": 0,
+    "quality": 0.633,
+    "maxQualities": 2
+   },
+   "arcymistrz": {
+    "flaw": 0,
+    "quality": 0.717,
+    "maxQualities": 3
    },
    "legendarny": {
     "flaw": 0,
@@ -349,7 +444,11 @@
     "chance": {
      "zaawansowany": 0.02,
      "doswiadczony": 0.1,
+     "weteran": 0.183,
+     "wybitny": 0.267,
      "heroiczny": 0.35,
+     "mistrz": 0.467,
+     "arcymistrz": 0.583,
      "legendarny": 0.7,
      "heros": 0.9
     },
@@ -390,7 +489,11 @@
     ],
     "chance": {
      "doswiadczony": 0.1,
+     "weteran": 0.2,
+     "wybitny": 0.3,
      "heroiczny": 0.4,
+     "mistrz": 0.533,
+     "arcymistrz": 0.667,
      "legendarny": 0.8,
      "heros": 0.9
     },

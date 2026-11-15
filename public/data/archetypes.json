@@ -72,9 +72,14 @@
     "armour": {
       "slaby": "lekki",
       "sredni": "sredni",
+      "obyty": "sredni",
       "zaawansowany": "ciezki",
       "doswiadczony": "ciezki",
+      "weteran": "ciezki",
+      "wybitny": "pelna_plyta",
       "heroiczny": "pelna_plyta",
+      "mistrz": "pelna_plyta",
+      "arcymistrz": "pelna_plyta",
       "legendarny": "pelna_plyta",
       "heros": "pelna_plyta"
     }
@@ -144,9 +149,14 @@
     "armour": {
       "slaby": "lekki",
       "sredni": "lekki",
+      "obyty": "lekki",
       "zaawansowany": "lekki",
       "doswiadczony": "sredni",
+      "weteran": "sredni",
+      "wybitny": "sredni",
       "heroiczny": "sredni",
+      "mistrz": "sredni",
+      "arcymistrz": "sredni",
       "legendarny": "sredni",
       "heros": "sredni"
     }
@@ -274,7 +284,11 @@
     "armour": {
       "zaawansowany": "lekki",
       "doswiadczony": "lekki",
+      "weteran": "lekki",
+      "wybitny": "lekki",
       "heroiczny": "lekki",
+      "mistrz": "lekki",
+      "arcymistrz": "lekki",
       "legendarny": "lekki",
       "heros": "lekki"
     }
@@ -338,9 +352,14 @@
     "armour": {
       "slaby": "lekki",
       "sredni": "lekki",
+      "obyty": "lekki",
       "zaawansowany": "sredni",
       "doswiadczony": "sredni",
+      "weteran": "sredni",
+      "wybitny": "ciezki",
       "heroiczny": "ciezki",
+      "mistrz": "ciezki",
+      "arcymistrz": "ciezki",
       "legendarny": "ciezki",
       "heros": "ciezki"
     }
@@ -404,9 +423,14 @@
     "armour": {
       "slaby": "lekki",
       "sredni": "lekki",
+      "obyty": "lekki",
       "zaawansowany": "sredni",
       "doswiadczony": "sredni",
+      "weteran": "sredni",
+      "wybitny": "ciezki",
       "heroiczny": "ciezki",
+      "mistrz": "ciezki",
+      "arcymistrz": "ciezki",
       "legendarny": "ciezki",
       "heros": "ciezki"
     }
@@ -671,9 +695,14 @@
     "armour": {
       "slaby": "lekki",
       "sredni": "lekki",
+      "obyty": "lekki",
       "zaawansowany": "lekki",
       "doswiadczony": "lekki",
+      "weteran": "lekki",
+      "wybitny": "sredni",
       "heroiczny": "sredni",
+      "mistrz": "sredni",
+      "arcymistrz": "sredni",
       "legendarny": "sredni",
       "heros": "sredni"
     }
@@ -908,7 +937,11 @@
     "armour": {
       "zaawansowany": "lekki",
       "doswiadczony": "lekki",
+      "weteran": "lekki",
+      "wybitny": "lekki",
       "heroiczny": "lekki",
+      "mistrz": "lekki",
+      "arcymistrz": "lekki",
       "legendarny": "lekki",
       "heros": "lekki"
     }

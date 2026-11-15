@@ -854,6 +854,12 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
         plan = [...plan.slice(0, ci), { ...step, target: Math.min(4, maxLevelOf(prof)) }];
         continue;
       }
+      if (!next.switching && !lastStep && !step.fixed) {
+        // Wczesniejsza profesja nie dojdzie do celu - konczy na obecnym poziomie i BN przechodzi do kolejnej
+        // (inaczej sciezka konczylaby sie na wczesniejszej profesji, a ostatnia ma byc glowna).
+        plan = plan.map((s, i) => (i === ci ? { ...s, target: level } : s));
+        continue;
+      }
       break;
     }
     dev.applyNeeds(need);

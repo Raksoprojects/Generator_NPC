@@ -320,9 +320,14 @@
         "chances": {
           "slaby": [],
           "sredni": [0.1],
+          "obyty": [0.2],
           "zaawansowany": [0.3],
           "doswiadczony": [0.5, 0.2],
+          "weteran": [0.58, 0.27, 0.05],
+          "wybitny": [0.67, 0.33, 0.1],
           "heroiczny": [0.75, 0.4, 0.15],
+          "mistrz": [0.8, 0.47, 0.2, 0.05],
+          "arcymistrz": [0.85, 0.53, 0.25, 0.1],
           "legendarny": [0.9, 0.6, 0.3, 0.15],
           "heros": [1, 0.8, 0.5, 0.3, 0.15]
         }
@@ -333,9 +338,14 @@
         "chances": {
           "slaby": [],
           "sredni": [],
+          "obyty": [0.025],
           "zaawansowany": [0.05],
           "doswiadczony": [0.15],
+          "weteran": [0.2, 0.03],
+          "wybitny": [0.25, 0.07],
           "heroiczny": [0.3, 0.1],
+          "mistrz": [0.37, 0.13, 0.02],
+          "arcymistrz": [0.43, 0.17, 0.03],
           "legendarny": [0.5, 0.2, 0.05],
           "heros": [0.7, 0.35, 0.1]
         }

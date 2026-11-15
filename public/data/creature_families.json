@@ -1,24 +1,29 @@
 {
   "settings": {
     "note": "System rozwoju stworzeń (bez profesji). Słaby = profil z książki + umiejętności rodziny (bestie z podręcznika nie mają umiejętności). Umiejętność = max(książka, pasowanie × tierFactor zaokr. do 5) + skillBonus; charAdvances do cech z charCodes; Cechy Stworzeń rodziny (traitCount) i szansa na cechę Opcjonalną.",
-    "tierFactor": { "slaby": 0.5, "sredni": 0.5, "zaawansowany": 0.5, "doswiadczony": 0.5, "heroiczny": 0.5, "legendarny": 0.5, "heros": 0.5 },
-    "skillBonus": { "slaby": 0, "sredni": 10, "zaawansowany": 20, "doswiadczony": 30, "heroiczny": 40, "legendarny": 60, "heros": 80 },
-    "charAdvances": { "slaby": 0, "sredni": 10, "zaawansowany": 20, "doswiadczony": 30, "heroiczny": 40, "legendarny": 60, "heros": 80 },
+    "tierFactor": { "slaby": 0.5, "sredni": 0.5, "obyty": 0.5, "zaawansowany": 0.5, "doswiadczony": 0.5, "weteran": 0.5, "wybitny": 0.5, "heroiczny": 0.5, "mistrz": 0.5, "arcymistrz": 0.5, "legendarny": 0.5, "heros": 0.5 },
+    "skillBonus": { "slaby": 0, "sredni": 10, "obyty": 15, "zaawansowany": 20, "doswiadczony": 30, "weteran": 33, "wybitny": 37, "heroiczny": 40, "mistrz": 47, "arcymistrz": 53, "legendarny": 60, "heros": 80 },
+    "charAdvances": { "slaby": 0, "sredni": 10, "obyty": 15, "zaawansowany": 20, "doswiadczony": 30, "weteran": 33, "wybitny": 37, "heroiczny": 40, "mistrz": 47, "arcymistrz": 53, "legendarny": 60, "heros": 80 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
     "xpDevelopment": {
       "chars": { "WW": 2, "S": 1, "Wt": 1, "I": 1, "Zw": 1 },
       "fitPriority": [[30, 3], [20, 2], [0, 1]],
       "extraSkills": { "Odporność": 2, "Opanowanie": 2, "Unik": 1 }
     },
-    "traitCount": { "slaby": 0, "sredni": 0.25, "zaawansowany": 0.5, "doswiadczony": 0.75, "heroiczny": 1, "legendarny": 1.5, "heros": 2 },
-    "optionalChance": { "slaby": 0, "sredni": 0.1, "zaawansowany": 0.15, "doswiadczony": 0.2, "heroiczny": 0.3, "legendarny": 0.4, "heros": 0.5 },
+    "traitCount": { "slaby": 0, "sredni": 0.25, "obyty": 0.375, "zaawansowany": 0.5, "doswiadczony": 0.75, "weteran": 0.833, "wybitny": 0.917, "heroiczny": 1, "mistrz": 1.17, "arcymistrz": 1.33, "legendarny": 1.5, "heros": 2 },
+    "optionalChance": { "slaby": 0, "sredni": 0.1, "obyty": 0.125, "zaawansowany": 0.15, "doswiadczony": 0.2, "weteran": 0.233, "wybitny": 0.267, "heroiczny": 0.3, "mistrz": 0.333, "arcymistrz": 0.367, "legendarny": 0.4, "heros": 0.5 },
     "groupOrder": ["Zwierzęta", "Potwory", "Ludy", "Zielonoskórzy", "Skaveny", "Nieumarli", "Wampiry", "Chaos"],
     "tierLabels": {
       "slaby": "typowy osobnik (profil z książki + umiejętności)",
       "sredni": "rosły, silniejszy osobnik",
+      "obyty": "zaprawiony osobnik, niejedno przeżył",
       "zaawansowany": "doświadczony łowca / weteran stada",
       "doswiadczony": "przewodnik stada / stary osobnik",
+      "weteran": "postrach okolicy",
+      "wybitny": "bestia, o której krążą opowieści",
       "heroiczny": "bestia z legend",
+      "mistrz": "pradawny potwór, pamiętający dawne wieki",
+      "arcymistrz": "zmora całej krainy",
       "legendarny": "mityczna bestia — jedyna w swoim rodzaju",
       "heros": "boska bestia — awatar pradawnej potęgi"
     }
