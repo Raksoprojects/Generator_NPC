@@ -67,7 +67,7 @@ describe("przedmioty magiczne", () => {
     const runes = gd.getTreasures()!.runes;
     const kindOf = { weapon: "weapon", armour: "armour", item: "talisman" } as const;
     let four = 0;
-    for (let seed = 1; seed <= 150; seed++) {
+    for (let seed = 1; seed <= 300; seed++) {
       const d = generateNpc({ archetype: "Wojownik", tier: "legendarny", race: "Krasnolud" }, seedRng(seed));
       for (const m of d.magicItems ?? []) {
         if (!m.runes) continue;
