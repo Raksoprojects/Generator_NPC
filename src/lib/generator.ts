@@ -19,7 +19,8 @@
 
 import { beastSkills, beastTraits, beastXpBudget, beastXpDevelop, bookSkillsAndTalents, rollBookOptional, traitFitsCreature, traitStrengthFactor, familyTraitWeights, rollCreature } from "./creatures";
 import { advanceCost, CAREER_STEP_COST, CLASS_CHANGE_EXTRA, levelRequirement, nextAdvanceCost, talentCost } from "./xp";
-import { chance, defaultRng, pick, randInt, roll2k10, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
+import { chance, defaultRng, pick, randInt, rollDie, rollK100, weightedKey, weightedPick, type Rng } from "./dice";
+import { arrangeRolls } from "./charRolls";
 import { equipNpc } from "./equipment";
 import * as gd from "./gameData";
 import { addCasterSkills, pickSpells, resolveTraitChoice, rollExtraLores } from "./magic";
@@ -53,8 +54,10 @@ export interface GenSpec {
   tier?: TierId;
   /** PD do wydania zamiast budzetu poziomu (bez poziomu - poziom wg PD). */
   xp?: number;
-  /** PD dodane do budzetu poziomu. */
+  /** PD dodane do budzetu poziomu (ujemne - odjete, budzet nie spada ponizej 0). */
   xpBonus?: number;
+  /** Rzuty bez ograniczen BN z settings.charRolls (pelne 2k10, najwyzsze do cech kluczowych). */
+  freeRolls?: boolean;
   /** Profesje sciezki w kolejnosci (ostatnia = obecna). */
   professions?: string[];
   /** Cechy Stworzen wybrane recznie. */
@@ -142,26 +145,21 @@ export function pickName(race: string, sex: Sex, rng: Rng): string {
 /**
  * Rzuty 2k10 na wszystkie cechy; najwyzsze trafiaja do kluczowych cech archetypu.
  */
-export function rollCharacteristics(archetype: Archetype | undefined, rng: Rng, deterministic = false): Record<Attribute, number> {
-  return assignRolls([...ATTRIBUTES], archetype?.characteristics ?? [], rng, deterministic);
+export function rollCharacteristics(archetype: Archetype | undefined, rng: Rng, deterministic = false, free = false): Record<Attribute, number> {
+  return assignRolls([...ATTRIBUTES], archetype?.characteristics ?? [], rng, deterministic, free);
 }
 
 /**
- * Rzuty 2k10 dla podanych cech: najwyzsze trafiaja do cech kluczowych archetypu (w ich kolejnosci),
- * reszta losowo. Bez minimum rzutu - zdarzaja sie i slabsi, i silniejsi BN.
+ * Rzuty 2k10 dla podanych cech wg settings.charRolls (charRolls.ts): czesc BN w kolejnosci,
+ * reszta z zamianami, rzut przyciety; free = bez ograniczen (najwyzsze do cech kluczowych).
  */
-export function assignRolls(codes: Attribute[], keys: Attribute[], rng: Rng, deterministic = false): Record<Attribute, number> {
+export function assignRolls(codes: Attribute[], keys: Attribute[], rng: Rng, deterministic = false, free = false): Record<Attribute, number> {
   const out = {} as Record<Attribute, number>;
   if (deterministic) {
     for (const c of codes) out[c] = 11;
     return out;
   }
-  const rolls = codes.map(() => roll2k10(rng)).sort((a, b) => b - a);
-  const keyCodes = keys.filter((k) => codes.includes(k));
-  keyCodes.forEach((k, i) => (out[k] = rolls[i]));
-  const rest = rolls.slice(keyCodes.length);
-  for (const c of codes.filter((c) => !keyCodes.includes(c))) out[c] = rest.splice(Math.floor(rng() * rest.length), 1)[0];
-  return out;
+  return arrangeRolls(codes, keys, rng, undefined, free);
 }
 
 // ---------------------------------------------------------------------------
@@ -589,12 +587,39 @@ class XpDeveloper {
   }
 
   private caps = new Map<string, number>();
+  /** Osiagniety poziom kazdej profesji sciezki (limit poziomow talentow wielopoziomowych). */
+  readonly careerLevels = new Map<string, number>();
+
+  /**
+   * Limit poziomu talentu u BN: wiekszosc talentow najwyzej 1; talenty z settings.talents.stackable
+   * (Twardziel, Zmysl Magii...) - suma poziomow profesji, ktore maja ten talent, + stackBonus.
+   */
+  npcTalentLimit(name: string): number {
+    const cfg = gd.getSettings().talents;
+    if (!cfg) return Infinity;
+    if (!cfg.stackable.some((s) => matchesKey(name, s))) return 1;
+    let sum = 0;
+    for (const [prof, reached] of this.careerLevels) {
+      const has = gd.getProfession(prof)?.levels.some((l) => l.level <= reached && l.talents.some((t) => matchesKey(name, gd.splitSpec(t).base) || matchesKey(name, t)));
+      if (has) sum += reached;
+    }
+    return sum + cfg.stackBonus;
+  }
 
   /** Maksimum Talentu (zalezne od Cech) - liczone raz na kazde 5 rozwiniec Cech. */
   canGrowTalent(name: string): boolean {
     const key = `${name}|${Object.values(this.npc.charAdvances).map((v) => Math.floor(v / 5)).join(",")}`;
     if (!this.caps.has(key)) this.caps.set(key, talentCap(name, approxChars(this.npc)));
-    return this.talentLevel(name) < this.caps.get(key)!;
+    const level = this.talentLevel(name);
+    return level < this.caps.get(key)! && (level === 0 || level < this.npcTalentLimit(name));
+  }
+
+  /** Co najmniej 1 Talent z obecnego poziomu profesji (o ile starczy PD). */
+  ensureLevelTalent(profession: string, level: number): void {
+    const pool = this.talents(profession, level);
+    if (!pool.length || pool.some((t) => this.talentLevel(t) > 0) || talentCost(0) > this.left) return;
+    const t = this.pick(pool.filter((x) => this.canGrowTalent(x)), (x) => talentPriority(this.arch, x) ** 2);
+    if (t) this.buyTalent(t);
   }
 
   pick<T>(items: T[], weight: (x: T) => number): T | undefined {
@@ -671,12 +696,12 @@ class XpDeveloper {
     if (n.talent) this.buyTalent(n.talent);
   }
 
-  /** Swobodny rozwoj w obecnej profesji: waga = priorytet^2 / koszt; nizsze poziomy BN rzadziej kupuja talenty. */
+  /** Swobodny rozwoj w obecnej profesji: waga = priorytet^2 / koszt; talenty z mniejsza waga (settings.talents.freeWeight). */
   spendFree(profession: string, level: number): void {
     const chars = this.chars(profession, level);
     const skills = this.skills(profession, level);
     const talents = this.talents(profession, level);
-    const talentFactor = TIER_IDS.indexOf(this.npc.tier) < TIER_IDS.indexOf("doswiadczony") ? 0.5 : 1;
+    const talentFactor = gd.getSettings().talents?.freeWeight ?? 1;
     for (let guard = 0; guard < 5000; guard++) {
       const cands: Candidate[] = [];
       for (const code of chars) {
@@ -748,13 +773,27 @@ function creationStart(dev: XpDeveloper, profession: string, species: boolean): 
       }
     }
   }
+  // Rozwiniecia rozdzielane rowniej (settings.creation): najpierw po charMin/skillMin kazdej Cesze
+  // i Umiejetnosci profesji, reszta wg priorytetow archetypu - Nowicjusz nie ma od razu 10 w kluczowej.
+  const spread = gd.getSettings().creation ?? { charMin: 0, skillMin: 0, power: 2 };
   const chars = dev.chars(profession, 1);
-  for (let i = 0; i < 5 && chars.length; i++) dev.buyChar(dev.pick(chars, (c) => charPriority(arch, c) ** 2)!, false);
+  let charLeft = 5;
+  for (const c of chars) {
+    for (let k = 0; k < spread.charMin && charLeft > 0; k++, charLeft--) dev.buyChar(c, false);
+  }
+  for (; charLeft > 0 && chars.length; charLeft--) dev.buyChar(dev.pick(chars, (c) => charPriority(arch, c) ** spread.power)!, false);
   const skills = dev.skills(profession, 1);
   const career = new Map<string, number>();
-  for (let i = 0; i < 40 && skills.length; i++) {
+  let skillLeft = 40;
+  for (const s of skills.slice(0, 8)) {
+    const n = Math.min(spread.skillMin, skillLeft);
+    for (let k = 0; k < n; k++) dev.buySkill(s, false);
+    career.set(s, n);
+    skillLeft -= n;
+  }
+  for (; skillLeft > 0 && skills.length; skillLeft--) {
     const open = skills.filter((s) => (career.get(s) ?? 0) < 10);
-    const s = dev.pick(open, (x) => skillPriority(arch, x) ** 2);
+    const s = dev.pick(open, (x) => skillPriority(arch, x) ** spread.power);
     if (!s) break;
     career.set(s, (career.get(s) ?? 0) + 1);
     dev.buySkill(s, false);
@@ -812,6 +851,7 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
 
   const budget = fixedBudget ?? npc.xpSpec?.budget ?? xpBudget(tier, rng, deterministic) + (npc.xpSpec?.bonus ?? 0);
   const dev = new XpDeveloper(npc, arch, budget, rng, deterministic, exact);
+  dev.careerLevels.set(plan[0].profession, plan[0].start);
   creationStart(dev, plan[0].profession, !npc.creature || !!npc.turned);
 
   const steps: CareerStep[] = [{ profession: plan[0].profession, level: plan[0].start }];
@@ -871,8 +911,11 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
     prof = next.profession;
     level = next.level;
     steps.push({ profession: prof, level });
+    dev.careerLevels.set(prof, Math.max(level, dev.careerLevels.get(prof) ?? 0));
     dev.buyRequired(prof, level);
   }
+  // Minimum 1 Talent na kazdy poziom profesji - takze obecny, jeszcze nieukonczony.
+  dev.ensureLevelTalent(prof, level);
   dev.spendFree(prof, level);
   npc.careerPath = steps;
   npc.xp = { budget, spent: dev.spent };
@@ -996,9 +1039,11 @@ function rollAttributes(npc: Npc, rng: Rng, deterministic = false): Record<Attri
   const arch = gd.getArchetype(npc.archetype);
   const creature = gd.getCreature(npc.creature);
   // Przemieniony wampir rodzil sie czlowiekiem - rzuty jak czlowiek.
+  // Bestie (bez profesji) maja mniejszy rozrzut niz ludzie (creature_families -> rollSpread).
+  const spread = isBeast(npc) ? gd.getCreatureFamilies().settings.rollSpread : undefined;
   return creature && !npc.turned
-    ? rollCreature(creature, arch?.characteristics ?? [], rng, deterministic)
-    : rollCharacteristics(arch, rng, deterministic);
+    ? rollCreature(creature, arch?.characteristics ?? [], rng, deterministic, spread, !!npc.freeRolls)
+    : rollCharacteristics(arch, rng, deterministic, !!npc.freeRolls);
 }
 
 /**
@@ -1149,7 +1194,7 @@ function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: stri
 /** Generuje kompletnego BN wg specyfikacji. */
 export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
   // Same PD bez poziomu: PD to caly budzet, a poziom wg przedzialu, w ktory wpadaja.
-  if (!spec.tier && spec.xp == null && spec.xpBonus != null) spec = { ...spec, xp: spec.xpBonus, xpBonus: undefined };
+  if (!spec.tier && spec.xp == null && spec.xpBonus != null && spec.xpBonus > 0) spec = { ...spec, xp: spec.xpBonus, xpBonus: undefined };
   if (spec.xp != null && !spec.tier) {
     // Bestia: PD liczone ponad profil z ksiazki, czyli od poczatku jej minimalnego poziomu.
     const c = gd.getCreature(spec.creature);
@@ -1191,6 +1236,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     tier,
     label: spec.label,
     ...(spec.xp != null || spec.xpBonus ? { xpSpec: { budget: spec.xp ?? undefined, bonus: spec.xpBonus || undefined } } : {}),
+    ...(spec.freeRolls ? { freeRolls: true } : {}),
     careerPath: [],
     rolls: emptyAttrs(),
     charAdvances: emptyAttrs(),

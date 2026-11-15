@@ -26,10 +26,26 @@ function maxLevel(npc: ReturnType<typeof generateNpc>): number {
 }
 
 describe("rzuty na cechy", () => {
-  it("najwyzsze rzuty trafiaja do kluczowych cech archetypu (w ich kolejnosci)", () => {
-    const keys = gd.getArchetype("Wojownik")!.characteristics;
+  it("domyslnie: rzut przyciety do 5-17, czesc BN w kolejnosci, reszta najwyzej 1 zamiana (2 rzuty)", () => {
+    const [lo, hi] = gd.getSettings().charRolls!.clamp!;
+    let ordered = 0;
     for (const seed of SEEDS) {
       const npc = generateNpc({ archetype: "Wojownik" }, seedRng(seed));
+      for (const code of ATTRIBUTES) {
+        expect(npc.rolls[code]).toBeGreaterThanOrEqual(lo);
+        expect(npc.rolls[code]).toBeLessThanOrEqual(hi);
+      }
+      // Bez rozpoznania kolejnosci rzutow wprost: kluczowa cecha nie zawsze ma najwyzszy rzut.
+      const keys = gd.getArchetype("Wojownik")!.characteristics;
+      if (ATTRIBUTES.some((c) => npc.rolls[c] > npc.rolls[keys[0]])) ordered++;
+    }
+    expect(ordered).toBeGreaterThan(SEEDS.length * 0.2);
+  });
+
+  it("rzuty bez ograniczen: najwyzsze trafiaja do kluczowych cech archetypu (w ich kolejnosci)", () => {
+    const keys = gd.getArchetype("Wojownik")!.characteristics;
+    for (const seed of SEEDS) {
+      const npc = generateNpc({ archetype: "Wojownik", freeRolls: true }, seedRng(seed));
       const others = ATTRIBUTES.filter((c) => !keys.includes(c)).map((c) => npc.rolls[c]);
       for (let i = 0; i < keys.length; i++) {
         if (i > 0) expect(npc.rolls[keys[i]]).toBeLessThanOrEqual(npc.rolls[keys[i - 1]]);
@@ -82,6 +98,12 @@ describe("poziomy BN", () => {
     expect(b.xp!.budget).toBeLessThanOrEqual(1450);
     // Przebudowa zachowuje recznie podane PD.
     expect(rebuildDevelopment(a, undefined, seedRng(2)).xp!.budget).toBe(3000);
+    // Odjete od poziomu (Ekspert przy dolnej granicy): budzet ponizej przedzialu, poziom zostaje.
+    const low = generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "heroiczny", xpBonus: -2000, deterministic: true }, seedRng(1));
+    expect(low.tier).toBe("heroiczny");
+    expect(low.xp!.budget).toBe(13500 - 2000);
+    // Nie mniej niz 0.
+    expect(generateNpc({ race: "Człowiek", tier: "slaby", xpBonus: -5000 }, seedRng(1)).xp!.budget).toBe(0);
     // Zwykly z 1500 PD jest na 2. poziomie profesji.
     let second = 0;
     for (const seed of SEEDS) {

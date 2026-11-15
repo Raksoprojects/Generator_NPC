@@ -15,7 +15,8 @@
  * rozwijaja sie przez profesje jak ludzie.
  */
 
-import { chance, randInt, roll2k10, rollDie, weightedKey, weightedPick, type Rng } from "./dice";
+import { chance, randInt, rollDie, weightedKey, weightedPick, type Rng } from "./dice";
+import { arrangeRolls } from "./charRolls";
 import { nextAdvanceCost } from "./xp";
 import * as gd from "./gameData";
 import { ATTRIBUTES, characteristicBonus, type Attribute } from "./rules";
@@ -30,7 +31,14 @@ export function creatureBase(creature: CreatureDef, code: Attribute): { base: nu
 }
 
 /** Rzuty na cechy stworzenia (minimum kluczowych cech archetypu dla cywilizowanych). */
-export function rollCreature(creature: CreatureDef, keyChars: Attribute[], rng: Rng, deterministic = false): Record<Attribute, number> {
+export function rollCreature(
+  creature: CreatureDef,
+  keyChars: Attribute[],
+  rng: Rng,
+  deterministic = false,
+  spread?: number,
+  free = false
+): Record<Attribute, number> {
   const out = {} as Record<Attribute, number>;
   const twoDice: Attribute[] = [];
   for (const code of ATTRIBUTES) {
@@ -39,13 +47,12 @@ export function rollCreature(creature: CreatureDef, keyChars: Attribute[], rng: 
     else if (die === "1k10") out[code] = deterministic ? 5 : rollDie(10, rng);
     else twoDice.push(code);
   }
-  // Cechy 2k10: najwyzsze rzuty do cech kluczowych archetypu, reszta losowo (jak u ras).
-  const rolls = twoDice.map(() => (deterministic ? 11 : roll2k10(rng))).sort((a, b) => b - a);
-  const keys = keyChars.filter((k) => twoDice.includes(k));
-  keys.forEach((k, i) => (out[k] = rolls[i]));
-  const rest = rolls.slice(keys.length);
-  for (const c of twoDice.filter((c) => !keys.includes(c))) out[c] = rest.splice(deterministic ? 0 : Math.floor(rng() * rest.length), 1)[0];
-  return out;
+  // Cechy 2k10: rozdzielane jak u ras (charRolls.ts); rollSpread zaweza rozrzut stworzen.
+  if (deterministic) {
+    for (const c of twoDice) out[c] = 11;
+    return out;
+  }
+  return { ...out, ...arrangeRolls(twoDice, keyChars, rng, spread, free) };
 }
 
 export function sizeOf(traits: string[]): string {
@@ -182,7 +189,7 @@ export function beastXpBudget(npc: Npc, creature: CreatureDef, rng: Rng, determi
   const [lo, hi] = gd.getTier(npc.tier)?.xp ?? [0, 0];
   const raw = deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng);
   // Ponizej minimum (oslabiony osobnik) - sam profil z ksiazki.
-  return Math.max(0, raw - min) + (npc.xpSpec?.bonus ?? 0);
+  return Math.max(0, Math.max(0, raw - min) + (npc.xpSpec?.bonus ?? 0));
 }
 
 /**

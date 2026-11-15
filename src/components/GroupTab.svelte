@@ -113,7 +113,7 @@
     if (!detailed) return {};
     const spec: Partial<GenSpec> = { sex: row.sex, bloodline: row.bloodline || undefined, noArchetype: row.noArchetype };
     const xp = Math.round(Number(row.xp));
-    if (row.xp != null && Number.isFinite(xp) && xp > 0) Object.assign(spec, row.xpMode === "zamiast" ? { xp } : { xpBonus: xp });
+    if (row.xp != null && Number.isFinite(xp) && xp > 0) Object.assign(spec, row.xpMode === "zamiast" ? { xp } : { xpBonus: row.xpMode === "odejmij" ? -xp : xp });
     const steps = (row.path ?? []) as PathStep[];
     const main = steps[steps.length - 1]?.profession;
     const exact = steps.some((s) => s.level != null) || (steps.length > 1 && steps.some((s) => s.profession));
@@ -332,8 +332,9 @@
                 <label title="PD ponad tworzenie postaci">PD
                   <span class="xp-row">
                     <input type="number" min="0" step="100" placeholder="wg poziomu" bind:value={row.xp} />
-                    <select value={row.xpMode ?? "dodaj"} onchange={(e) => (row.xpMode = e.currentTarget.value as "zamiast" | "dodaj")} aria-label="Sposób użycia PD">
+                    <select value={row.xpMode ?? "dodaj"} onchange={(e) => (row.xpMode = e.currentTarget.value as "zamiast" | "dodaj" | "odejmij")} aria-label="Sposób użycia PD">
                       <option value="dodaj">dodaj do poziomu</option>
+                      <option value="odejmij">odejmij od poziomu</option>
                       <option value="zamiast">zamiast poziomu</option>
                     </select>
                   </span>

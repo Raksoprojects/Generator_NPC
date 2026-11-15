@@ -108,11 +108,19 @@
   let exceptional = $state("");
   /** PD podane recznie: zamiast budzetu poziomu albo dodane do niego. */
   let xpValue = $state<number | null>(null);
-  let xpMode = $state<"zamiast" | "dodaj">("dodaj");
+  let xpMode = $state<"zamiast" | "dodaj" | "odejmij">("dodaj");
   let xpSpec = $derived.by((): Pick<GenSpec, "xp" | "xpBonus"> => {
     const v = Number(xpValue);
     if (xpValue == null || !Number.isFinite(v) || v <= 0) return {};
-    return xpMode === "zamiast" ? { xp: Math.round(v) } : { xpBonus: Math.round(v) };
+    if (xpMode === "zamiast") return { xp: Math.round(v) };
+    // Odejmowanie tylko od budzetu poziomu (np. Ekspert przy dolnej granicy).
+    if (xpMode === "odejmij") return tier ? { xpBonus: -Math.round(v) } : {};
+    return { xpBonus: Math.round(v) };
+  });
+  /** Rzuty bez ograniczen BN (pelne 2k10, najwyzsze do cech kluczowych); w trybie wlasnym domyslnie wlaczone. */
+  let freeRolls = $state(false);
+  $effect(() => {
+    freeRolls = mode === "wlasny";
   });
 
   /**
@@ -201,6 +209,7 @@
         commander,
         heroProfiles: exceptional ? [exceptional] : [],
         ...xpSpec,
+        freeRolls,
         deterministic: mode === "wlasny"
       };
     }
@@ -222,6 +231,7 @@
       commander,
       heroProfiles: exceptional ? [exceptional] : [],
       ...xpSpec,
+      freeRolls,
       deterministic: mode === "wlasny"
     };
   }
@@ -257,6 +267,7 @@
       {#if tier}
         <select bind:value={xpMode} aria-label="Sposób użycia PD">
           <option value="dodaj">dodaj do poziomu</option>
+          <option value="odejmij">odejmij od poziomu</option>
           <option value="zamiast">zamiast poziomu</option>
         </select>
       {:else}
@@ -411,6 +422,9 @@
         <label class="check"><input type="checkbox" bind:checked={randomTraits} /> Dolosuj cechy opcjonalne (7% jedna, 1% dwie)</label>
         <label class="check" title="Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji">Wyjątkowa jednostka<select bind:value={exceptional}><option value="">— losowo (mała szansa) —</option><option value="Weteran">Weteran</option><option value="Doborowy">Doborowy</option><option value="Pomniejszy Bohater">Pomniejszy Bohater</option><option value="Wielki Bohater">Wielki Bohater</option></select></label>
         <label class="check"><input type="checkbox" bind:checked={commander} /> {COMMANDER_PROFILE}</label>
+        <label class="check" title="Domyślnie rzuty BN są przycięte do 5–17, połowa BN zostawia je w kolejności, reszta zamienia najwyżej 2 rzuty. Zaznaczone: pełne 2k10, najwyższe rzuty do cech kluczowych archetypu (w trybie Własnym rzuty i tak są średnie, 11).">
+          <input type="checkbox" bind:checked={freeRolls} /> Rzuty bez ograniczeń (2–20, dowolne rozłożenie)
+        </label>
         <button class="btn-sm ghost" onclick={resetForm}>Wyczyść</button>
       </div>
     {/if}

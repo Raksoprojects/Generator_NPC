@@ -12,6 +12,31 @@
       }
     ],
     "defaultTraitWeight": 1,
+    "talents": {
+      "stackable": [
+        "Twardziel",
+        "Zmysł Magii",
+        "Zmysł Bitewny",
+        "Szósty Zmysł",
+        "Wyczulony Zmysł",
+        "Silny Cios"
+      ],
+      "stackBonus": 1,
+      "freeWeight": 0.35
+    },
+    "creation": {
+      "charMin": 1,
+      "skillMin": 3,
+      "power": 1
+    },
+    "charRolls": {
+      "orderShare": 0.5,
+      "swaps": 1,
+      "clamp": [
+        5,
+        17
+      ]
+    },
     "unlimitedTalentCap": 3,
     "multiLoreRaces": [
       "Wysoki elf",

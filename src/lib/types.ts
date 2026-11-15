@@ -222,6 +222,19 @@ export interface GeneratorSettings {
   multiLoreRaces?: string[];
   /** Rzadkie talenty rasy (np. Krew Aenariona u Wysokich Elfow: 1%, u szlachty 5%). */
   raceTalents?: { race: string; talent: string; chance: number; archetypes?: Record<string, number> }[];
+  /** Rzuty na cechy: przyciecie wyniku, czesc BN z rzutami w kolejnosci, liczba zamian (charRolls.ts). */
+  charRolls?: import("./charRolls").CharRollSettings;
+  /**
+   * Talenty kupowane za PD: stackable - talenty, ktore BN rozwija ponad 1. poziom (reszta najwyzej 1),
+   * do sumy poziomow profesji majacych ten talent + stackBonus; freeWeight - waga talentow przy
+   * swobodnym wydawaniu PD (ponad 1 talent na poziom profesji, ktory jest zawsze).
+   */
+  talents?: { stackable: string[]; stackBonus: number; freeWeight: number };
+  /**
+   * Tworzenie postaci: ile rozwiniec dostaje kazda Cecha (charMin) i kazda z 8 Umiejetnosci (skillMin)
+   * 1. poziomu profesji, zanim reszta pojdzie wg priorytetow archetypu (do potegi power).
+   */
+  creation?: { charMin: number; skillMin: number; power: number };
 }
 
 export interface TiersData {
@@ -865,7 +878,7 @@ export interface GroupRow {
   sex?: Sex;
   /** PD: zamiast budzetu poziomu albo dodane do niego (bez poziomu - poziom wg PD). */
   xp?: number;
-  xpMode?: "zamiast" | "dodaj";
+  xpMode?: "zamiast" | "dodaj" | "odejmij";
   /** Sciezka profesji (kroki po kolei, ostatni = obecna). */
   path?: { profession: string; level?: number | null }[];
   heroProfile?: string;
@@ -986,8 +999,10 @@ export interface Npc {
   creature?: string;
   /** Budzet PD BN i ile z niego wydano na rozwoj (ponad tworzenie postaci). */
   xp?: { budget: number; spent: number };
-  /** PD podane recznie: budget - zamiast budzetu poziomu, bonus - dodane do niego. */
+  /** PD podane recznie: budget - zamiast budzetu poziomu, bonus - dodane do niego (ujemne - odjete). */
   xpSpec?: { budget?: number; bonus?: number };
+  /** Rzuty bez ograniczen BN (pelne 2k10, najwyzsze do cech kluczowych) - zachowywane przy ponownym rzucie. */
+  freeRolls?: boolean;
   /** Wampir przemieniony z czlowieka: cechy czlowieka + premie Linii Krwi zamiast profilu z bestiariusza. */
   turned?: boolean;
   /** Archetyp; pusty dla bestii bez profesji. */
