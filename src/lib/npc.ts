@@ -229,6 +229,7 @@ export function computeNpc(input: Npc): NpcView {
   const race = gd.getRace(npc.race);
   const bookTraits = creature?.traits ?? [];
 
+  const talentRank = (name: string) => npc.talents.find((t) => t.name === name)?.level ?? 0;
   const talentBonus: Partial<Record<Attribute, number>> = {};
   const talentSources = Object.fromEntries(ATTRIBUTES.map((c) => [c, [] as CharView["sources"]])) as Record<Attribute, CharView["sources"]>;
   let hardy = 0;
@@ -343,6 +344,12 @@ export function computeNpc(input: Npc): NpcView {
   const heroArmour = heroTraits.reduce((sum, t) => sum + (+(/^\+(\d+) do Pancerza/.exec(t)?.[1] ?? 0)), 0);
 
   const sb = chars.S.bonus;
+  /**
+   * Talenty z efektem za kazde wykupienie: Silny Cios (+1 obrazen wrecz), Celny Strzal (+1 obrazen
+   * z broni strzeleckiej), Cios Ponizej Pasa (+1 obrazen w Bijatyce).
+   */
+  const talentDamage = (ranged: boolean, skillName: string) =>
+    ranged ? talentRank("Celny Strzał") : talentRank("Silny Cios") + (skillName.includes("Bijatyka") ? talentRank("Cios Poniżej Pasa") : 0);
   const weapons: WeaponView[] = [];
   /** Jakosc wykonania i przedmiot magiczny broni/pancerza o tej nazwie. */
   const craftOf = (name: string) => {
@@ -359,8 +366,8 @@ export function computeNpc(input: Npc): NpcView {
     }
     const { def, ranged } = w;
     const m = magic.weapon[name];
-    const dmg = def.damage == null ? null : def.damage + (def.sb ? sb : 0) + heroWeapon + (m?.damage ?? 0);
     const skill = weaponSkill(skills, chars, ranged, def.group);
+    const dmg = def.damage == null ? null : def.damage + (def.sb ? sb : 0) + heroWeapon + (m?.damage ?? 0) + talentDamage(ranged, skill.name);
     weapons.push({
       name: w.name,
       damage: dmg,
@@ -384,7 +391,6 @@ export function computeNpc(input: Npc): NpcView {
       const ranged = !!a.range && a.name !== "Język";
       // Zaklety naturalny oręż (np. goblin z zaklętą bronią zamiast cechy Broń).
       const m = magic.weapon[a.name];
-      const dmg = a.base + (a.addsSb ? sb : 0) + heroWeapon + (m?.damage ?? 0);
       const skill = ranged
         ? weaponSkill(skills, chars, true, a.name)
         : (() => {
@@ -397,6 +403,7 @@ export function computeNpc(input: Npc): NpcView {
               skills.find((s) => s.name === "Broń Biała (Bijatyka)");
             return own ? { value: own.total, name: own.name } : { value: totals.WW, name: "WW" };
           })();
+      const dmg = a.base + (a.addsSb ? sb : 0) + heroWeapon + (m?.damage ?? 0) + talentDamage(ranged, skill.name);
       weapons.push({
         name: a.count && a.count > 1 ? `${a.count}× ${a.name}` : a.name,
         damage: dmg,
@@ -427,7 +434,8 @@ export function computeNpc(input: Npc): NpcView {
   const armour = {} as Record<Location, { ap: number; total: number }>;
   for (const loc of LOCATIONS) {
     const points = ap[loc] + flatAp + (loc === "głowa" ? headAp : 0) + (armoured.has(loc) ? magic.apArmoured : 0);
-    armour[loc] = { ap: points, total: points + chars.Wt.bonus };
+    // Krzepki: -1 do otrzymywanych obrazen za kazde wykupienie.
+    armour[loc] = { ap: points, total: points + chars.Wt.bonus + talentRank("Krzepki") };
   }
   const armourPenalties = [
     ...new Set(npc.armour.map((a) => gd.getWeapons().armour[a]?.penalty).filter(Boolean) as string[])
