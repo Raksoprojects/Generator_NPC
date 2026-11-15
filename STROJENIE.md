@@ -38,6 +38,11 @@ Identyfikatory poziomów w plikach i ich nazwy w programie:
 | 5. poziom profesji | `tiers.<poziom>.level5Chance` | |
 | Losowe cechy stworzeń u ludzi | `settings.traitRoll` | Na k100: `upTo: 1` daje 2 cechy (1%), `upTo: 8` daje 1 cechę (7%). |
 | Krew Aenariona i podobne | `settings.raceTalents` | Szansa na talent rasowy, mnożona dla archetypów. |
+| Rzuty cech | `settings.charRolls` | `clamp` przycięcie rzutu (`[5, 17]`), `orderShare` część BN z rzutami w kolejności (0.5), `swaps` liczba zamian u reszty (1 = najwyżej 2 rzuty). Usuń, by wrócić do dawnych rzutów. W formularzu: „Rzuty bez ograniczeń”. |
+| Tworzenie postaci | `settings.creation` | `charMin` rozwinięć każdej cechy 1. poziomu profesji, `skillMin` każdej z 8 umiejętności, reszta wg archetypu do potęgi `power`. Dawne: 0, 0, 2. |
+| Talenty | `settings.talents` | `stackable` talenty rozwijane ponad 1. poziom (do sumy poziomów profesji z tym talentem + `stackBonus`), `freeWeight` waga talentów przy swobodnym wydawaniu PD. Zawsze co najmniej 1 talent na poziom profesji. |
+
+Id poziomów: `slaby` Nowicjusz, `sredni` Zwykły, `obyty` Doświadczony, `zaawansowany` Niezwykły, `doswiadczony` Zaawansowany, `weteran`, `wybitny`, `heroiczny` Ekspert, `mistrz`, `arcymistrz`, `legendarny` Legenda, `heros`. Stare id zostały, by działały zapisane BN.
 
 ## Archetypy — `archetypes.json`
 
@@ -67,6 +72,11 @@ Identyfikatory poziomów w plikach i ich nazwy w programie:
 | Na co bestia wydaje PD | `settings.xpDevelopment.chars` | Priorytety cech, np. `WW: 2`. Wyższy priorytet oznacza częstszy zakup (waga = priorytet² / koszt). |
 | Priorytet umiejętności | `settings.xpDevelopment.fitPriority` | `[[30,3],[20,2],[0,1]]`: umiejętność rodziny z wartością 30+ ma priorytet 3 itd. |
 | Dodatkowe umiejętności | `settings.xpDevelopment.extraSkills` | Odporność, Opanowanie, Unik. Tylko gdy stworzenie ma cechę umiejętności. |
+| Przelicznik PD bestii | `settings.xpDevelopment.xpScale` | 0.5: 4000 PD człowieka to 2000 PD na rozwój bestii. Główne pokrętło siły bestii. |
+| Limit rozwinięć bestii | `settings.xpDevelopment.advanceCap` | `[[od PD, umiejętność, cecha?], …]`: najwięcej rozwinięć kupionych za PD w jednej umiejętności (i cesze). PD z umiejętności przechodzą wtedy w cechy, więc limit nie osłabia bestii. Domyślnie brak. |
+| Rozrzut rzutów bestii | `settings.rollSpread` | 2: cechy 11 ± 2 zamiast 2k10. |
+| Zdziczałe ludy | `settings.feral` i `families.<rodzina>.feral` | Umiejętności i talenty, których orki i zwierzoludzie nie rozwijają (Wiedza poza Lokalną, Czytanie/Pisanie…). |
+| Profesje rodziny | `families.<rodzina>.careers`, `archetypes`, `archetypeChance` | Jedyne profesje orków, goblinów i zwierzoludzi; szansa na profesję przy losowaniu (0.7). |
 | Liczba cech stworzeń | `settings.traitCount.<poziom>` | Ułamek: 0.5 oznacza 50% na jedną cechę, 1.5 oznacza jedną cechę i 50% na drugą. |
 | Cechy opcjonalne z podręcznika | `settings.optionalChance.<poziom>` | Szansa na każdą cechę opcjonalną z bestiariusza. |
 | Opis poziomu stworzenia | `settings.tierLabels.<poziom>` | |
@@ -89,6 +99,9 @@ Identyfikatory poziomów w plikach i ich nazwy w programie:
 | Dary wg poziomu | `giftsPerTier` | |
 | Waga darów linii | `bloodlineGiftWeight` | |
 | Wiek wg poziomu | `ageByTier` | |
+| Profesje linii | `bloodlines[].careers` | Tabela k100 Preferowanych Profesji (szerokość = waga). „Wampirzy X” to zwykła profesja z `careerAlternatives`. |
+| Dary Krwi profesji | `careerGifts.<profesja>` | 4 listy (poziomy 1–4): jeden dar z każdego osiągniętego poziomu, reszta z linii. |
+| Przemiana = poziom | `creatures.json`, `Wampir.minTier` | Wampir zaczyna od tego poziomu; jego budżet PD jest niższy o różnicę początków przedziałów (Niezwykły − Nowicjusz = 1500). |
 
 ## Przedmioty magiczne — `treasures.json`
 
@@ -118,7 +131,7 @@ Przykład: krasnolud Niezwykły, runa tymczasowa: `runic.temporary.zaawansowany`
 | Koszty PD cech i umiejętności | `src/lib/xp.ts` (`CHAR_COST`, `SKILL_COST`) | Z podręcznika. Nie zmieniaj. |
 | Kara wagi za silną cechę | `src/lib/creatures.ts`, `traitStrengthFactor` | `(20 / siła)²`: Twardy ×1, Zabijaka ×0,44, Elitarny ×0,11. Większa liczba niż 20 łagodzi karę. |
 | Tworzenie postaci | `src/lib/generator.ts`, `creationStart` | 5 rozwinięć cech, 40 rozwinięć umiejętności (najwyżej 10 w jednej), 1 talent. Z podręcznika. |
-| Rzuty cech | `src/lib/generator.ts`, `assignRolls` | Najwyższe rzuty 2k10 do cech kluczowych archetypu. |
+| Rzuty cech | `src/lib/charRolls.ts` | Logika `settings.charRolls`. |
 
 ## Sprawdzenie skutków
 
