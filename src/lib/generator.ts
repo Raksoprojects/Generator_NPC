@@ -1283,10 +1283,12 @@ function creatureArchetype(spec: GenSpec, creature: CreatureDef, bloodline: stri
   return pick && allowed(pick) ? pick : "";
 }
 
-/** Przedzialy "od-do" (tierTo, xpTo) zamienione na jedna wylosowana wartosc; deterministycznie - srodek. */
+/**
+ * Przedzialy "od-do" (tierTo, xpTo) zamienione na jedna wylosowana wartosc - zawsze losowo,
+ * takze w trybie Wlasnym (przedzial to prosba o losowanie).
+ */
 function resolveRanges(spec: GenSpec, rng: Rng): GenSpec {
-  const det = !!spec.deterministic;
-  const between = (a: number, b: number) => (det ? Math.round((a + b) / 2) : randInt(Math.min(a, b), Math.max(a, b), rng));
+  const between = (a: number, b: number) => randInt(Math.min(a, b), Math.max(a, b), rng);
   let out = spec;
   if (spec.tier && spec.tierTo) {
     out = { ...out, tier: TIER_IDS[between(TIER_IDS.indexOf(spec.tier), TIER_IDS.indexOf(spec.tierTo))], tierTo: undefined };
