@@ -116,6 +116,11 @@ export interface CreatureTrait {
   skills?: Record<string, number>;
   /** Zmiana Szybkosci. */
   movement?: number;
+  /**
+   * Warunkowa redukcja obrazen za kazdy poziom cechy (najwyzej maxRank), np. Suche Kosci: 2 przeciw
+   * broni nieobuchowej - na karcie w nawiasie: "Głowa 5 (7)".
+   */
+  conditionalReduction?: { perRank: number; maxRank?: number; against: string };
   /** Czy cecha bierze udzial w losowaniu cech opcjonalnych. */
   randomPool: boolean;
   description: string;

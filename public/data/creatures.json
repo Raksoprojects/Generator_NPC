@@ -4788,7 +4788,6 @@
     "Ożywieniec",
     "Spaczenie (Pomniejsze)",
     "Strach (3)",
-    "Suche Kości (3)",
     "Terytorialny",
     "Twardziel",
     "Widzenie w Mroku",
@@ -4810,7 +4809,7 @@
    "tierSpan": [0, 3],
    "xpFrom": "slaby",
    "turningXp": 500,
-   "tierTraits": { "Pancerz": [4, [4, 4, 5], [4, 5, 6], [5, 6]] }
+   "tierTraits": { "Pancerz": [4, [4, 4, 5], [4, 5, 6], [5, 6]], "Suche Kości": [3, 3, [3, 3, 4], [3, 4]] }
   },
   {
    "name": "Zombi",

@@ -106,7 +106,9 @@ export interface NpcView {
   talents: TalentView[];
   weapons: WeaponView[];
   /** Punkty Pancerza i redukcja obrazen (BWt + PP) na lokacjach. */
-  armour: Record<Location, { ap: number; total: number }>;
+  armour: Record<Location, { ap: number; total: number; conditional?: number }>;
+  /** Skad warunkowa redukcja w nawiasie (Suche Kosci: przeciw czemu). */
+  armourConditional: string[];
   armourPenalties: string[];
   armourPieces: ArmourPieceView[];
   magicItems: MagicItemView[];
@@ -431,11 +433,22 @@ export function computeNpc(input: Npc): NpcView {
   // Pancerz z ksiazki u stworzen cywilizowanych to ich zwykla zbroja - zastepuje ja pancerz z profesji.
   const bookAp = npc.armour.length && npc.archetype ? 0 : creatureArmour(bookTraits);
   const flatAp = bookAp + extraAp + heroArmour + magic.apAll;
-  const armour = {} as Record<Location, { ap: number; total: number }>;
+  // Warunkowa redukcja (Suche Kosci: przeciw broni nieobuchowej) - na karcie w nawiasie.
+  let conditional = 0;
+  const conditionalAgainst: string[] = [];
+  for (const name of [...bookTraits, ...npc.traits]) {
+    const cr = gd.findCreatureTrait(name)?.trait.conditionalReduction;
+    if (!cr) continue;
+    const rank = Math.min(cr.maxRank ?? Infinity, Number(/\((\d+)\)/.exec(name)?.[1] ?? 1));
+    conditional += cr.perRank * rank;
+    conditionalAgainst.push(`${name}: +${cr.perRank * rank} ${cr.against}`);
+  }
+  const armour = {} as Record<Location, { ap: number; total: number; conditional?: number }>;
   for (const loc of LOCATIONS) {
     const points = ap[loc] + flatAp + (loc === "głowa" ? headAp : 0) + (armoured.has(loc) ? magic.apArmoured : 0);
     // Krzepki: -1 do otrzymywanych obrazen za kazde wykupienie.
-    armour[loc] = { ap: points, total: points + chars.Wt.bonus + talentRank("Krzepki") };
+    const total = points + chars.Wt.bonus + talentRank("Krzepki");
+    armour[loc] = { ap: points, total, ...(conditional ? { conditional: total + conditional } : {}) };
   }
   const armourPenalties = [
     ...new Set(npc.armour.map((a) => gd.getWeapons().armour[a]?.penalty).filter(Boolean) as string[])
@@ -488,6 +501,7 @@ export function computeNpc(input: Npc): NpcView {
     talents,
     weapons,
     armour,
+    armourConditional: conditionalAgainst,
     armourPenalties,
     armourPieces,
     magicItems,
@@ -551,8 +565,10 @@ export function weaponLabel(w: WeaponView): string {
 
 const LOCATION_LABELS: Record<Location, string> = { głowa: "Głowa", ręce: "Ręce", korpus: "Korpus", nogi: "Nogi" };
 
+/** "Głowa 5 (7) · …" - w nawiasie redukcja z warunkiem (Suche Kosci przeciw broni nieobuchowej). */
 export function armourLine(view: NpcView): string {
-  return LOCATIONS.map((l) => `${LOCATION_LABELS[l]} ${view.armour[l].total}`).join(" · ");
+  const cell = (l: Location) => `${LOCATION_LABELS[l]} ${view.armour[l].total}${view.armour[l].conditional != null ? ` (${view.armour[l].conditional})` : ""}`;
+  return LOCATIONS.map(cell).join(" · ");
 }
 
 /** Blok statystyk jako czysty tekst (do notatek sesyjnych). */
@@ -581,7 +597,7 @@ export function npcToText(input: Npc, view: NpcView = computeNpc(input)): string
     ].filter(Boolean);
     lines.push(`Broń: ${w.magicItem ? `✦ ${w.magicItem} — ` : ""}${weaponLabel(w)}${extra.length ? " — " + extra.join("; ") : ""}`);
   }
-  lines.push(`Redukcja obrażeń (BWt+PP): ${armourLine(view)}`);
+  lines.push(`Redukcja obrażeń (BWt+PP): ${armourLine(view)}${view.armourConditional.length ? ` (w nawiasie: ${view.armourConditional.join("; ")})` : ""}`);
   if (view.armourPieces.length) {
     const piece = (a: ArmourPieceView) => {
       const q = [...a.qualities, ...a.craftQualities, ...a.craftFlaws];

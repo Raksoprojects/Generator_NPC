@@ -705,6 +705,7 @@
     <div class="armour" title="Redukcja obrażeń = Bonus z Wytrzymałości + Punkty Pancerza">
       <span class="text-dim">Redukcja obrażeń:</span>
       <b>{armourLine(view)}</b>
+      {#if view.armourConditional.length}<span class="text-dim small">(w nawiasie: {view.armourConditional.join("; ")})</span>{/if}
       {#each view.armourPenalties as p (p)}<span class="chip warning">{p}</span>{/each}
     </div>
     {#if view.armourPieces.length}

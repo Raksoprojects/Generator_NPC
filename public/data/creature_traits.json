@@ -525,9 +525,10 @@
   },
   "Suche Kości (wartość)": {
     "randomPool": false,
-    "description": "Ataki nieobuchowe łatwo przechodzą przez suche kości. Obrażenia z ataków bez Zalety Tłukąca zmniejsza się o 2 za każdy poziom cechy (najwyżej 3 poziomy); ataki Magiczne zadają pełne obrażenia. [dom]",
+    "description": "Ostrza i groty ześlizgują się po suchych kościach, a obuchy je kruszą. Broń nieobuchowa zadaje −2 Obrażenia za każdy poziom cechy, broń obuchowa +2 za poziom (najwyżej 4 poziomy); ataki Magiczne zadają pełne obrażenia. [dom]",
     "source": "Nieoficjalny Grimuar (zasada domowa)",
-    "rules": "Obrażenia z ataków bez Zalety Tłukąca: −2 za każdy poziom (najwyżej 3). Ataki Magiczne zadają pełne obrażenia. [dom]"
+    "rules": "Broń nieobuchowa: −2 Obrażenia za każdy poziom. Broń obuchowa (buzdygan, młot, maczuga, kostur): +2 Obrażenia za każdy poziom. Najwyżej 4 poziomy. Ataki Magiczne zadają pełne obrażenia, bez premii i kary. [dom]",
+    "conditionalReduction": { "perRank": 2, "maxRank": 4, "against": "przeciw broni nieobuchowej" }
   },
   "Strach (wartość)": {
     "randomPool": false,

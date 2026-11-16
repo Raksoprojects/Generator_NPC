@@ -5,7 +5,7 @@ import { seedRng } from "../dice";
 import * as gd from "../gameData";
 import { generateNpc, isBeast } from "../generator";
 import { isDirectSpell } from "../magic";
-import { computeNpc } from "../npc";
+import { armourLine, computeNpc } from "../npc";
 import { ATTRIBUTES, type Attribute } from "../rules";
 import { TIER_IDS, type CreatureDef, type Npc, type TierId } from "../types";
 import { loadTestGameData } from "./loadData";
@@ -167,19 +167,27 @@ describe("rozwoj bestii", () => {
     const skel = generateNpc({ creature: "Szkielet", tier: "heros" }, seedRng(1));
     expect(skel.tier).toBe("obyty");
     expect(gd.getCreature("Szkielet")!.traits).toContain("Suche Kości (1)");
-    expect(gd.getCreature("Szkieletowy czempion")!.traits).toContain("Suche Kości (3)");
     const champ = generateNpc({ creature: "Szkieletowy czempion", tier: "zaawansowany", deterministic: true }, seedRng(1));
+    // Czempion: Suche Kosci co najmniej 3, wyzej szansa na 4 (limit cechy).
+    expect(champ.traits).toContain("Suche Kości (3)");
+    // Redukcja w nawiasie: +2 za poziom przeciw broni nieobuchowej.
+    const view = computeNpc(champ);
+    expect(view.armour.głowa.conditional).toBe(view.armour.głowa.total + 6);
+    expect(armourLine(view)).toMatch(/^Głowa \d+ \(\d+\)/);
     // Pancerz 4 na domyslnym poziomie, wyzej szansa na 5-6.
     expect(champ.traits.filter((t) => t.startsWith("Pancerz"))).toEqual(["Pancerz (4)"]);
     // PD od poczatku Nowicjusza minus przemiana: (2000 - 100 - 500).
     expect(champ.xp?.budget).toBe(1400);
     const armours = new Set<string>();
+    const bones = new Set<string>();
     for (let seed = 1; seed <= 30; seed++) {
       const top = generateNpc({ creature: "Szkieletowy czempion", tier: "heros" }, seedRng(seed));
       expect(top.tier).toBe("wybitny");
       armours.add(top.traits.find((t) => t.startsWith("Pancerz"))!);
+      bones.add(top.traits.find((t) => t.startsWith("Suche"))!);
     }
     expect([...armours].sort()).toEqual(["Pancerz (5)", "Pancerz (6)"]);
+    expect([...bones].sort()).toEqual(["Suche Kości (3)", "Suche Kości (4)"]);
     // Bez wybranego poziomu - domyslny albo wyzszy, nigdy nizszy.
     for (let seed = 1; seed <= 10; seed++) {
       expect(TIER_IDS.indexOf(generateNpc({ creature: "Szkieletowy czempion" }, seedRng(seed)).tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));
