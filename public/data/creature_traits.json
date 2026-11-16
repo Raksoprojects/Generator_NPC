@@ -525,9 +525,9 @@
   },
   "Suche Kości (wartość)": {
     "randomPool": false,
-    "description": "Ostrza i groty ześlizgują się po suchych kościach, a obuchy je kruszą. Broń nieobuchowa zadaje −2 Obrażenia za każdy poziom cechy, broń obuchowa +2 za poziom (najwyżej 4 poziomy); ataki Magiczne zadają pełne obrażenia. [dom]",
+    "description": "Ostrza i groty ześlizgują się po suchych kościach, a obuchy je kruszą. Broń nieobuchowa zadaje −2 Obrażenia za każdy poziom cechy (najwyżej 4 poziomy), broń obuchowa +2 Obrażenia (raz, bez względu na poziom); ataki Magiczne zadają pełne obrażenia. [dom]",
     "source": "Nieoficjalny Grimuar (zasada domowa)",
-    "rules": "Broń nieobuchowa: −2 Obrażenia za każdy poziom. Broń obuchowa (buzdygan, młot, maczuga, kostur): +2 Obrażenia za każdy poziom. Najwyżej 4 poziomy. Ataki Magiczne zadają pełne obrażenia, bez premii i kary. [dom]",
+    "rules": "Broń nieobuchowa: −2 Obrażenia za każdy poziom (najwyżej 4 poziomy). Broń obuchowa (buzdygan, młot, maczuga, kostur): +2 Obrażenia, niezależnie od poziomu. Ataki Magiczne zadają pełne obrażenia, bez premii i kary. [dom]",
     "conditionalReduction": { "perRank": 2, "maxRank": 4, "against": "przeciw broni nieobuchowej" }
   },
   "Strach (wartość)": {
