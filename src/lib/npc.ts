@@ -431,7 +431,8 @@ export function computeNpc(input: Npc): NpcView {
   }
   const armoured = new Set(LOCATIONS.filter((l) => ap[l] > 0));
   // Pancerz z ksiazki u stworzen cywilizowanych to ich zwykla zbroja - zastepuje ja pancerz z profesji.
-  const bookAp = npc.armour.length && npc.archetype ? 0 : creatureArmour(bookTraits);
+  // Pancerz z ksiazki, a bez niego - z cech BN (czempion: Pancerz rosnacy z poziomem, tierTraits).
+  const bookAp = npc.armour.length && npc.archetype ? 0 : creatureArmour([...bookTraits, ...npc.traits]);
   const flatAp = bookAp + extraAp + heroArmour + magic.apAll;
   // Warunkowa redukcja (Suche Kosci: przeciw broni nieobuchowej) - na karcie w nawiasie.
   let conditional = 0;

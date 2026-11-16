@@ -173,6 +173,8 @@ describe("rozwoj bestii", () => {
     // Redukcja w nawiasie: +2 za poziom przeciw broni nieobuchowej.
     const view = computeNpc(champ);
     expect(view.armour.głowa.conditional).toBe(view.armour.głowa.total + 6);
+    // Pancerz (4) z poziomu liczony do Redukcji: BWt + 4.
+    expect(view.armour.korpus.ap).toBe(4);
     expect(armourLine(view)).toMatch(/^Głowa \d+ \(\d+\)/);
     // Pancerz 4 na domyslnym poziomie, wyzej szansa na 5-6.
     expect(champ.traits.filter((t) => t.startsWith("Pancerz"))).toEqual(["Pancerz (4)"]);
