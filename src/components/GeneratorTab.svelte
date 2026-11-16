@@ -63,6 +63,8 @@
   let civilized = $derived(!!creature && gd.isCivilized(creature));
   /** Stworzenie rozumne bez profesji - wartosc listy archetypow. */
   const NO_CAREER = "-";
+  /** Profile wyjatkowej jednostki do wyboru (Dowodca Oddzialu - osobna opcja dowodcy). */
+  const HERO_CHOICES = ["Weteran", "Doborowy", "Pomniejszy Bohater", "Wielki Bohater"];
   /** Archetypy dozwolone dla stworzenia (ogr: tylko proste profesje). */
   let creatureArchetypes = $derived.by(() => {
     const allowed = gd.getCreature(creature)?.archetypes;
@@ -468,13 +470,16 @@
 
       <div class="checks">
         <label class="check"><input type="checkbox" bind:checked={randomTraits} /> Dolosuj cechy opcjonalne (7% jedna, 1% dwie)</label>
-        <label class="check" title="Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji">Wyjątkowa jednostka<select bind:value={exceptional}><option value="">— losowo (mała szansa) —</option><option value="Weteran">Weteran</option><option value="Doborowy">Doborowy</option><option value="Pomniejszy Bohater">Pomniejszy Bohater</option><option value="Wielki Bohater">Wielki Bohater</option></select></label>
+        <label class="check" title={exceptional ? gd.heroProfileText(exceptional) : "Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji"}>Wyjątkowa jednostka<select bind:value={exceptional}><option value="">— losowo (mała szansa) —</option>{#each HERO_CHOICES as hp (hp)}<option value={hp} title={gd.heroProfileText(hp)}>{hp}</option>{/each}</select></label>
         <label class="check"><input type="checkbox" bind:checked={commander} /> {COMMANDER_PROFILE}</label>
         <label class="check" title="Domyślnie rzuty BN są przycięte do 5–17, połowa BN zostawia je w kolejności, reszta zamienia najwyżej 2 rzuty. Zaznaczone: pełne 2k10, najwyższe rzuty do cech kluczowych archetypu (w trybie Własnym rzuty i tak są średnie, 11).">
           <input type="checkbox" bind:checked={freeRolls} /> Rzuty bez ograniczeń (2–20, dowolne rozłożenie)
         </label>
         <button class="btn-sm ghost" onclick={resetForm}>Wyczyść</button>
       </div>
+      {#if exceptional}
+        <p class="text-dim hint">{exceptional}: {gd.heroProfileText(exceptional).replace("\n", " ")}</p>
+      {/if}
     {/if}
 
     <button class="primary generate" onclick={generate}>🎲 Generuj BN</button>

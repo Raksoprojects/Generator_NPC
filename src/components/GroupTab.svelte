@@ -360,10 +360,10 @@
                   </select>
                 </label>
               {/if}
-              <label title="Profil z Bestiariusza 2.0">Wyjątkowa jednostka
+              <label title={row.heroProfile ? gd.heroProfileText(row.heroProfile) : "Profil z Bestiariusza 2.0"}>Wyjątkowa jednostka
                 <select value={row.heroProfile ?? ""} onchange={(e) => (row.heroProfile = e.currentTarget.value || undefined)}>
                   <option value="">losowo (mała szansa)</option>
-                  {#each ["Weteran", "Doborowy", "Pomniejszy Bohater", "Wielki Bohater"] as h (h)}<option value={h}>{h}</option>{/each}
+                  {#each ["Weteran", "Doborowy", "Pomniejszy Bohater", "Wielki Bohater"] as h (h)}<option value={h} title={gd.heroProfileText(h)}>{h}</option>{/each}
                 </select>
               </label>
               <label class="check"><input type="checkbox" checked={row.randomTraits !== false} onchange={(e) => (row.randomTraits = e.currentTarget.checked ? undefined : false)} /> dolosuj cechy opcjonalne</label>

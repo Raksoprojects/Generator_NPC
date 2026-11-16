@@ -475,7 +475,7 @@
       return { meta, text: t.description ?? "Brak opisu." };
     }
     if (kind === "c") return { text: traitText(name) };
-    if (kind === "p") return { text: gd.getHeroProfile(name)?.description ?? "" };
+    if (kind === "p") return { text: gd.heroProfileText(name) };
     if (kind === "q") return { text: qualityText(name).split(" ALBO ").join("\nALBO\n") };
     if (kind === "x") return { text: view.magicItems.find((m) => m.name === name)?.description ?? "" };
     if (kind === "g") {
@@ -1159,7 +1159,7 @@
       <h4>Profile bohaterów</h4>
       <p class="list">
         {#each Object.keys(gd.getHeroProfiles()) as hp (hp)}
-          <button class="chip tap" class:info={npc.heroProfiles.includes(hp)} aria-pressed={npc.heroProfiles.includes(hp)} title={gd.getHeroProfile(hp)?.description} onclick={() => toggleProfile(hp)}>{hp}</button>
+          <button class="chip tap" class:info={npc.heroProfiles.includes(hp)} aria-pressed={npc.heroProfiles.includes(hp)} title={gd.heroProfileText(hp)} onclick={() => toggleProfile(hp)}>{hp}</button>
         {/each}
       </p>
       <h4>Mutacje</h4>

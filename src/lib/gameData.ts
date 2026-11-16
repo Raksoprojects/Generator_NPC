@@ -406,6 +406,23 @@ export function getHeroProfile(name: string): HeroProfile | undefined {
   return data().heroProfiles[name];
 }
 
+/** Co profil bohatera zmienia: "WW +10, US +5 …; Cechy: +1 do Broni" (bez zerowych premii). */
+export function heroProfileEffect(name: string): string {
+  const p = getHeroProfile(name);
+  if (!p) return "";
+  const mods = Object.entries(p.modifiers)
+    .filter(([, v]) => v)
+    .map(([k, v]) => `${k} ${v! > 0 ? "+" : ""}${v}`)
+    .join(", ");
+  return [mods && `Cechy: ${mods}`, p.traits.length ? `Cechy Stworzeń: ${p.traits.join(", ")}` : ""].filter(Boolean).join(". ");
+}
+
+/** Pelny opis profilu bohatera: czym jest i co zmienia. */
+export function heroProfileText(name: string): string {
+  const p = getHeroProfile(name);
+  return p ? [p.description, heroProfileEffect(name)].filter(Boolean).join("\n") : "";
+}
+
 export function getSpecializations(): SpecializationsData {
   return data().specializations;
 }
