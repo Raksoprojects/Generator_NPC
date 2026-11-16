@@ -405,6 +405,18 @@
           {civilized ? " · może rozwijać się przez profesje" : " · rozwój przez umiejętności i Cechy Stworzeń"}
           · domyślny poziom: {gd.getTier(TIER_IDS[minTierIdx]).label} (dozwolone: {gd.getTier(TIER_IDS[tierRange[0]]).label}–{gd.getTier(TIER_IDS[tierRange[1]]).label})
         </p>
+        {@const entry = gd.getCreature(creature)}
+        {#if entry}
+          <details class="entry">
+            <summary>Wpis z bestiariusza: {entry.name}</summary>
+            <p class="small">{entry.group}{entry.subgroup ? ` › ${entry.subgroup}` : ""} · rodzina: {entry.family}{entry.unique ? " · istota unikatowa" : ""}</p>
+            <p class="small mono">{Object.entries(entry.stats).filter(([, v]) => v != null).map(([k, v]) => `${k} ${v}`).join(" · ")}</p>
+            <p class="small"><b>Cechy:</b> {entry.traits.join(", ") || "—"}</p>
+            {#if entry.optional.length}<p class="small"><b>Opcjonalne:</b> {entry.optional.join(", ")}</p>{/if}
+            {#each entry.abilities as a, ai (ai)}<p class="small">{typeof a === "string" ? a : `${a.name}: ${a.description}`}</p>{/each}
+            {#if entry.trappings.length}<p class="small"><b>Wyposażenie:</b> {entry.trappings.join(", ")}</p>{/if}
+          </details>
+        {/if}
       {/if}
     {/if}
 
@@ -510,6 +522,16 @@
   .path-box .lbl {
     font-size: var(--fs-sm);
     color: var(--text-muted);
+  }
+  .entry {
+    font-size: var(--fs-sm);
+  }
+  .entry summary {
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .entry p {
+    margin: 0.25rem 0;
   }
   .xp-field {
     grid-column: span 2;
