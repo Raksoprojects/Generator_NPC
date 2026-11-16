@@ -1,0 +1,32 @@
+import { beforeAll, describe, expect, it } from "vitest";
+import { fight, npcFighter } from "../combatSim";
+import { seedRng } from "../dice";
+import { generateNpc } from "../generator";
+import { loadTestGameData } from "./loadData";
+
+beforeAll(loadTestGameData);
+
+describe("symulator starc", () => {
+  const wins = (a: Parameters<typeof generateNpc>[0], b: Parameters<typeof generateNpc>[0], n = 40) => {
+    let w = 0;
+    for (let i = 1; i <= n; i++) {
+      const r = fight([npcFighter(generateNpc(a, seedRng(i)))], [npcFighter(generateNpc(b, seedRng(100 + i)))], seedRng(i));
+      w += r.winner === "A" ? 1 : 0;
+    }
+    return w / n;
+  };
+
+  it("wyzszy poziom wygrywa czesciej", () => {
+    expect(wins({ archetype: "Wojownik", race: "Człowiek", tier: "mistrz" }, { archetype: "Wojownik", race: "Człowiek", tier: "slaby" })).toBeGreaterThan(0.9);
+  });
+
+  it("Rozmiar [dom] i Eteryczny dzialaja", () => {
+    const troll = npcFighter(generateNpc({ creature: "Troll", tier: "sredni" }, seedRng(1)));
+    expect(troll.size).toBe(4);
+    const ghost = npcFighter(generateNpc({ creature: "Duch", tier: "slaby" }, seedRng(1)));
+    expect(ghost.ethereal).toBe(true);
+    // Zwykly wojownik bez magicznej broni nie zrani ducha.
+    const r = fight([npcFighter(generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "weteran" }, seedRng(2)))], [ghost], seedRng(3));
+    expect(r.dealtByA).toBe(0);
+  });
+});
