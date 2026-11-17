@@ -87,6 +87,14 @@ export interface Fighter {
   fearless?: boolean;
   /** Pocisk magiczny: test Rzucania, PZ, Obrazenia. */
   spell?: { cast: number; channel: number; cn: number; damage: number };
+  /** Szansa (0-1), ze atak w danej Turze jest ognisty (pochodnia, olej, czar). */
+  fire?: number;
+  /** Osaczony albo broni mlodych: Zwierzecy nie ucieka, tylko wpada w Szal Bojowy. */
+  cornered?: boolean;
+  /** Roj: Rany na koniec Rundy kazdemu wrogowi (1 Przecietny, 2 Duzy, 3 Wielki, 4 Monstrualny); atakuje wszystkich. */
+  swarm?: number;
+  /** Roj Drobnych / Niewielkich stworzonek: zwykle ataki go nie rania, tylko ogien. */
+  swarmTiny?: boolean;
 }
 
 /** Postac gracza z druzyna.json. */
@@ -293,6 +301,8 @@ interface State {
   fortune: number;
   /** Kontry Czempiona wykorzystane w tej Rundzie. */
   counters: number;
+  /** Rany od ognia - Regeneracja ich nie leczy. */
+  burnt: number;
   dealt: number;
   taken: number;
   /** Pula Przewagi strony (wspolna dla wszystkich jej walczacych) i kara Dekoncentrujacy dla strony. */
@@ -364,12 +374,17 @@ function wounds(a: State, d: State, h: Hit, rng: Rng): number {
 }
 
 /** Zadaje Rany (Kwasowa Krew, Jad, Wampiryczny, Pochwycenie), zwraca zadane. */
-function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolean; bite?: boolean; entangle?: boolean; knockdown?: boolean } = {}): void {
+function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolean; bite?: boolean; entangle?: boolean; knockdown?: boolean; fire?: boolean } = {}): void {
   if (dmg <= 0) return;
   const real = Math.min(dmg, Math.max(0, d.hp));
   d.hp -= dmg;
   a.dealt += real;
   d.taken += real;
+  // Ogien: Rany nie do zregenerowania; Zwierzecy w zetknieciu z ogniem dostaje Panike.
+  if (opts.fire) {
+    d.burnt += real;
+    if (d.f.animal && !d.f.fearless && !d.frenzied) d.broken = Math.max(d.broken, 1);
+  }
   if (opts.venom) d.poisoned++;
   if (opts.entangle) d.entangled++;
   if (opts.knockdown && d.f.size < a.f.size) d.prone = true;
@@ -387,7 +402,7 @@ function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolea
  * Obronca: parowanie (kara Rozmiaru [dom]) albo Unik (bez kary); Zwierzecy tylko Unik.
  * Czempion broniacy sie z wygrana zadaje Obrazenia jak atakujacy.
  */
-function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: FreeAttack): void {
+function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: FreeAttack, fire = false): void {
   const att = a.f.attack;
   const prone = d.prone ? 20 : 0;
   const hate = hates(a, d) ? 1 : 0;
@@ -419,7 +434,9 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
   // Wygrana: wygrany Test Przeciwstawny, ktory sam zainicjowales - +1 do puli strony [PB 133].
   if (gain) a.side.pool++;
   const hit: Hit = { damage: fa?.damage ?? att.damage, magical: att.magical, blunt: fa ? false : att.blunt, sl: atkSl - defSl, roll: atkTest.roll };
-  apply(a, d, wounds(a, d, hit, rng), rng, { venom: a.f.venom, bite: fa?.name === "Ugryzienie", entangle: a.f.entangle && !fa, knockdown: fa?.knockdown });
+  // Roj Drobnych stworzonek: zwykly cios zabija garsc owadow, Rany zadaje tylko ogien.
+  if (d.f.swarmTiny && !fire) return;
+  apply(a, d, wounds(a, d, hit, rng), rng, { venom: a.f.venom, bite: fa?.name === "Ugryzienie", entangle: a.f.entangle && !fa, knockdown: fa?.knockdown, fire });
 }
 
 /** Pocisk magiczny: kumulacja PS Splatania, potem Rzucanie (PS >= PZ), Obrazenia + PS ponad PZ. */
@@ -567,7 +584,7 @@ function creatureTurn(s: State, foes: State[], round: number, rng: Rng, act: (bo
     if (fa.firstRound && round > 0) continue;
     const target = pick();
     if (fa.vsSmaller && target.f.size >= s.f.size) continue;
-    if (fa.cost) {
+    if (fa.cost && !s.f.swarm) {
       if (pool.pool < fa.cost) continue;
       pool.pool -= fa.cost;
     }
@@ -586,13 +603,14 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
   const poolB = { pool: 0, distracted: false };
   const mk = (side: State["side"]) => (f: Fighter): State => ({
     f, hp: f.wounds, broken: 0, stunned: 0, poisoned: 0, entangled: 0, prone: false, fearSl: 0, fearDone: !!f.fearless,
-    frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, counters: 0, dealt: 0, taken: 0, side
+    frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, counters: 0, burnt: 0, dealt: 0, taken: 0, side
   });
   const A = sideA.map(mk(poolA));
   const B = sideB.map(mk(poolB));
   const alive = (xs: State[]) => xs.filter((x) => x.hp > 0 && !x.fled);
-  poolA.pool = numbersStart(A.length, B.length) + Math.max(0, ...A.map((x) => THREAT_START[x.f.size] ?? 0));
-  poolB.pool = numbersStart(B.length, A.length) + Math.max(0, ...B.map((x) => THREAT_START[x.f.size] ?? 0));
+  const swarmFight = [...A, ...B].some((x) => x.f.swarm);
+  poolA.pool = (swarmFight ? 0 : numbersStart(A.length, B.length)) + Math.max(0, ...A.map((x) => THREAT_START[x.f.size] ?? 0));
+  poolB.pool = (swarmFight ? 0 : numbersStart(B.length, A.length)) + Math.max(0, ...B.map((x) => THREAT_START[x.f.size] ?? 0));
   // Dekoncentrujacy: -20 do wszystkich Testow strony przeciwnej (raz).
   poolA.distracted = B.some((x) => x.f.distracting);
   poolB.distracted = A.some((x) => x.f.distracting);
@@ -610,7 +628,7 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
   for (; round < maxRounds && alive(A).length && alive(B).length; round++) {
     for (const s of [...A, ...B]) {
       s.counters = 0;
-      if (s.f.regenerate && s.hp > 0 && s.hp < s.f.wounds) s.hp = Math.min(s.f.wounds, s.hp + randInt(1, 10, rng));
+      if (s.f.regenerate && s.hp > 0 && s.hp < s.f.wounds - s.burnt) s.hp = Math.min(s.f.wounds - s.burnt, s.hp + randInt(1, 10, rng));
     }
     const order = [...A, ...B].sort((x, y) => y.f.init - x.f.init);
     for (const s of order) {
@@ -648,11 +666,18 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
       }
       // Szal Bojowy: Test Sily Woli na wejscie.
       if (s.f.frenzy && !s.frenzied && test(s.f.willpower, rng).ok) s.frenzied = true;
+      // Ogien: z szansa fire atak w tej Turze jest ognisty.
+      const fire = !!s.f.fire && randInt(1, 100, rng) <= s.f.fire * 100;
       const act = (bonus: number, gain: boolean) => {
         const targets = alive(foes);
         if (!targets.length) return;
+        // Roj: atakuje wszystkich wrogow w zasiegu.
+        if (s.f.swarm) {
+          targets.forEach((t, i) => melee(s, t, rng, bonus, gain && i === 0, undefined, fire));
+          return;
+        }
         const target = targets[randInt(0, targets.length - 1, rng)];
-        if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain);
+        if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain, undefined, fire);
       };
       if (!isA) creatureTurn(s, foes, round, rng, act);
       else {
@@ -663,7 +688,7 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
       }
       // Zwierzecy: ponizej polowy Zywotnosci ucieka, a Terytorialny wpada w Szal Bojowy.
       if (s.f.animal && s.hp > 0 && s.hp < s.f.wounds / 2) {
-        if (s.f.territorial) s.frenzied = true;
+        if (s.f.territorial || s.f.cornered) s.frenzied = true;
         else s.fled = true;
       }
     }
@@ -680,10 +705,17 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
         if (t.ok) s.stunned = Math.max(0, s.stunned - 1 - Math.max(0, t.sl));
       }
     }
-    // Strona liczniejsza dominuje - zabiera 1 punkt (albo +1, gdy pula wroga pusta).
+    // Roj: kazdy wrog Zwiazany walka traci Rany na koniec Rundy (bez BWt i PP).
+    for (const [side, foes] of [[A, B], [B, A]] as const) {
+      for (const s of alive(side)) {
+        if (!s.f.swarm) continue;
+        for (const t of alive(foes)) apply(s, t, s.f.swarm, rng);
+      }
+    }
+    // Strona liczniejsza dominuje - zabiera 1 punkt (albo +1, gdy pula wroga pusta). Roje ignoruja liczebnosc.
     const nA = alive(A).length;
     const nB = alive(B).length;
-    if (nA !== nB && nA && nB) {
+    if (nA !== nB && nA && nB && !swarmFight) {
       const [win, lose] = nA > nB ? [poolA, poolB] : [poolB, poolA];
       if (lose.pool > 0) lose.pool--;
       win.pool++;
