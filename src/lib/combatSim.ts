@@ -327,13 +327,13 @@ function warded(d: State, magical: boolean, rng: Rng): boolean {
   return !!d.f.ward && randInt(1, 10, rng) >= d.f.ward;
 }
 
-/** Nienawisc dziala na obiekt: rasa celu albo ogolny (Intruzi, Zywi, wszyscy). */
+/** Nienawisc dziala tylko na swoj obiekt: rasa celu, Zywi, Wszystko. Bez obiektu i Intruzi - brak premii. */
 function hates(a: State, d: State): boolean {
   if (!a.f.hatred && !a.hating) return false;
   if (a.hating) return true;
   const o = a.f.hatred!.toLowerCase();
   const r = d.f.race.toLowerCase();
-  return /intruz|żyw|wszys|wrog/.test(o) || (o.startsWith("krasnolud") && r.startsWith("krasnolud")) || (o.startsWith("ludzi") && r.startsWith("człowiek")) || (o.startsWith("elf") && r.includes("elf"));
+  return /^(żyw|wszys)/.test(o) || (o.startsWith("krasnolud") && r.startsWith("krasnolud")) || (o.startsWith("ludzi") && r.startsWith("człowiek")) || (o.startsWith("elf") && r.includes("elf"));
 }
 
 interface Hit {
@@ -351,9 +351,10 @@ function wounds(a: State, d: State, h: Hit, rng: Rng): number {
   if (warded(d, h.magical, rng)) return 0;
   const loc = location(h.roll);
   // Rozmiar [dom]: +BS za kazdy stopien ponad Sredni. Suche Kosci [dom]: -2/poziom nieobuchowa, +2 obuchowa.
-  const sizeDmg = a.f.sb * Math.max(0, a.f.size - AVERAGE);
-  const bones = d.f.dryBones && !h.magical ? (h.blunt ? 2 : -2 * d.f.dryBones) : 0;
+  // Szal Bojowy: +1 do BS - w Obrazeniach broni i w premii Rozmiaru.
   const frenzy = a.frenzied ? 1 : 0;
+  const sizeDmg = (a.f.sb + frenzy) * Math.max(0, a.f.size - AVERAGE);
+  const bones = d.f.dryBones && !h.magical ? (h.blunt ? 2 : -2 * d.f.dryBones) : 0;
   const red = h.ignoreTb ? 0 : h.ignoreAp ? d.f.tb : d.f.armour[loc];
   const raw = h.damage + sizeDmg + bones + frenzy + h.sl - red;
   const minOne = d.f.demonic && !h.magical ? 0 : 1;
