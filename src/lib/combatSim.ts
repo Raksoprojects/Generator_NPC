@@ -276,7 +276,11 @@ export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
     hatred: /^Nienawiść \(([^)]+)\)/.exec(traits.find((t) => /^Nienawiść/.test(t)) ?? "")?.[1],
     animal: has(traits, /^Zwierzęcy/),
     territorial: has(traits, /^Terytorialny/),
-    fearless: has(traits, /^Niewrażliwość na Psychologię/),
+    // Roj z ksiazki (profil juz roju): Rany na koniec Rundy wg Rozmiaru, odporny na Psychologie.
+    // "Rój (Rój Brzytw)" to zdolnosc stada opisana osobno - pojedynczy osobnik nie jest rojem.
+    // Tylko z profilu ksiazki - wylosowana opcjonalna cecha Roj nie zmienia profilu, wiec nie robi z BN roju.
+    swarm: has(view.creatureTraits, /^Rój( \(wliczony\))?$/) ? Math.max(1, size - AVERAGE + 1) : 0,
+    fearless: has(traits, /^Niewrażliwość na Psychologię/) || has(view.creatureTraits, /^Rój( \(wliczony\))?$/),
     spell: missile(view)
   };
 }
@@ -666,18 +670,20 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
       }
       // Szal Bojowy: Test Sily Woli na wejscie.
       if (s.f.frenzy && !s.frenzied && test(s.f.willpower, rng).ok) s.frenzied = true;
-      // Ogien: z szansa fire atak w tej Turze jest ognisty.
-      const fire = !!s.f.fire && randInt(1, 100, rng) <= s.f.fire * 100;
+      // Ogien: z szansa fire atak w tej Turze jest ognisty - tylko na cel, na ktory warto go uzyc
+      // (Regeneracja, roj drobnicy); na inne stworzenia (np. Bazyliszek) ognia sie nie uzywa.
+      const fireRoll = !!s.f.fire && randInt(1, 100, rng) <= s.f.fire * 100;
+      const fireOn = (t: State) => fireRoll && (t.f.regenerate || !!t.f.swarmTiny);
       const act = (bonus: number, gain: boolean) => {
         const targets = alive(foes);
         if (!targets.length) return;
         // Roj: atakuje wszystkich wrogow w zasiegu.
         if (s.f.swarm) {
-          targets.forEach((t, i) => melee(s, t, rng, bonus, gain && i === 0, undefined, fire));
+          targets.forEach((t, i) => melee(s, t, rng, bonus, gain && i === 0, undefined, fireOn(t)));
           return;
         }
         const target = targets[randInt(0, targets.length - 1, rng)];
-        if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain, undefined, fire);
+        if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain, undefined, fireOn(target));
       };
       if (!isA) creatureTurn(s, foes, round, rng, act);
       else {
