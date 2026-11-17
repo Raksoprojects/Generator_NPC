@@ -557,7 +557,8 @@ function creatureTurn(s: State, foes: State[], round: number, rng: Rng, act: (bo
     pool.pool -= 2;
     icyGrip(s, pick(), rng);
     acted = true;
-  } else if (s.f.petrify && pool.pool >= 1) {
+  } else if (s.f.petrify && pool.pool >= 4) {
+    // Petryfikujace Spojrzenie dopiero od 4 Przewag (realna szansa na 6 PS); wczesniej zwykly atak i darmowe ataki.
     const spent = pool.pool;
     pool.pool = 0;
     petrify(s, pick(), spent, rng);
