@@ -10,7 +10,6 @@
  */
 import { randInt, type Rng } from "./dice";
 import { sizeOf } from "./creatures";
-import * as gd from "./gameData";
 import { computeNpc, type NpcView } from "./npc";
 import { characteristicBonus } from "./rules";
 import type { Npc } from "./types";
@@ -71,7 +70,8 @@ export interface Fighter {
   howl?: boolean;
   icyGrip?: boolean;
   petrify?: boolean;
-  champion?: boolean;
+  /** Czempion (X) [dom]: kontry na Runde. */
+  champion?: number;
   acidBlood?: boolean;
   vampiric?: boolean;
   venom?: boolean;
@@ -208,7 +208,7 @@ function breathOf(traits: string[], tb: number): Fighter["breath"] {
 
 /** Stworzenie albo BN z generatora jako walczacy. */
 export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
-  const traits = [...(gd.getCreature(npc.creature)?.traits ?? []), ...npc.traits, ...view.heroTraits];
+  const traits = [...view.creatureTraits, ...view.rolledTraits, ...view.heroTraits];
   const melee = view.weapons.filter((w) => !w.ranged && w.damage != null).sort((a, b) => b.skill + 3 * (b.damage ?? 0) - (a.skill + 3 * (a.damage ?? 0)))[0];
   const skill = (name: string) => view.skills.find((s) => s.name === name)?.total;
   const parry = Math.max(0, ...view.skills.filter((s) => s.name.startsWith("Broń Biała")).map((s) => s.total));
@@ -257,7 +257,7 @@ export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
     howl: has(traits, /^Upiorne Wycie/),
     icyGrip: has(traits, /^Lodowaty Uścisk/),
     petrify: has(traits, /^Petryfikujące/),
-    champion: has(traits, /^(Czempion|Mistrz)$/),
+    champion: rank(traits, /^(?:Czempion|Mistrz)(?: \((\d+)\))?$/),
     acidBlood: has(traits, /^Kwasowa Krew/),
     vampiric: has(traits, /^Wampiryczny/),
     venom: has(traits, /^Jad/) || /\(Jad\)/.test(traits.join(" ")),
@@ -291,6 +291,8 @@ interface State {
   /** PS Splatania zebrane na zaklecie. */
   channelled: number;
   fortune: number;
+  /** Kontry Czempiona wykorzystane w tej Rundzie. */
+  counters: number;
   dealt: number;
   taken: number;
   /** Pula Przewagi strony (wspolna dla wszystkich jej walczacych) i kara Dekoncentrujacy dla strony. */
@@ -405,8 +407,9 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
     defSl = useParry ? parrySl(def) : def.sl + (att.slow ? 1 : 0);
   }
   if (!wins()) {
-    // Czempion: wygrana obrona zadaje Obrazenia jak atak.
-    if (d.f.champion && def.ok && defSl > atkSl && !fa) {
+    // Czempion (X) [dom]: wygrana obrona zadaje Obrazenia jak atak, najwyzej X razy na Runde.
+    if (d.f.champion && d.counters < d.f.champion && def.ok && defSl > atkSl && !fa) {
+      d.counters++;
       const dmg = wounds(d, a, { damage: d.f.attack.damage, magical: d.f.attack.magical, blunt: d.f.attack.blunt, sl: defSl - atkSl, roll: def.roll }, rng);
       apply(d, a, dmg, rng, { venom: d.f.venom });
     }
@@ -582,7 +585,7 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
   const poolB = { pool: 0, distracted: false };
   const mk = (side: State["side"]) => (f: Fighter): State => ({
     f, hp: f.wounds, broken: 0, stunned: 0, poisoned: 0, entangled: 0, prone: false, fearSl: 0, fearDone: !!f.fearless,
-    frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, dealt: 0, taken: 0, side
+    frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, counters: 0, dealt: 0, taken: 0, side
   });
   const A = sideA.map(mk(poolA));
   const B = sideB.map(mk(poolB));
@@ -605,6 +608,7 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
   let round = 0;
   for (; round < maxRounds && alive(A).length && alive(B).length; round++) {
     for (const s of [...A, ...B]) {
+      s.counters = 0;
       if (s.f.regenerate && s.hp > 0 && s.hp < s.f.wounds) s.hp = Math.min(s.f.wounds, s.hp + randInt(1, 10, rng));
     }
     const order = [...A, ...B].sort((x, y) => y.f.init - x.f.init);

@@ -16,7 +16,7 @@ import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from 
 import { findBloodline } from "./vampires";
 import { personaLines } from "./persona";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
-import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
+import { TIER_IDS, type Npc, type NpcMutation, type Sex, type SpellDef } from "./types";
 
 export interface CharView {
   code: Attribute;
@@ -118,6 +118,8 @@ export interface NpcView {
   mutations: { label: string; effect: string; kind: NpcMutation["kind"] }[];
   /** Cechy ksiazkowe stworzenia (bez zmian w statystykach). */
   creatureTraits: string[];
+  /** Cechy wylosowane (npc.traits) z poziomem wyliczanym w widoku - Czempion (X). */
+  rolledTraits: string[];
   abilities: { name: string; description: string }[];
   wounds: number;
   movement: number;
@@ -223,6 +225,20 @@ function weaponSkill(skills: SkillView[], chars: Record<Attribute, CharView>, ra
   if (exact) return { value: exact.total, name: exact.name };
   const code: Attribute = ranged ? "US" : "WW";
   return { value: chars[code].total, name: code };
+}
+
+/**
+ * Czempion (X) [dom]: X kontr na Runde = 1 + 1 za kazde 3 poziomy BN,
+ * najwyzej polowa Bonusu z WW (co najmniej 1). Slabszy BN - mniej kontr.
+ */
+export function championRank(tier: string, ww: number): number {
+  const byTier = 1 + Math.floor(Math.max(0, (TIER_IDS as readonly string[]).indexOf(tier)) / 3);
+  return Math.max(1, Math.min(byTier, Math.floor(characteristicBonus(ww) / 2)));
+}
+
+/** "Czempion" / "Mistrz" -> "Czempion (X)"; reszta bez zmian. */
+function rankChampion(traits: string[], rank: number): string[] {
+  return traits.map((t) => (/^(Czempion|Mistrz)$/.test(t) ? `Czempion (${rank})` : t));
 }
 
 export function computeNpc(input: Npc): NpcView {
@@ -509,7 +525,8 @@ export function computeNpc(input: Npc): NpcView {
     spells,
     keySpells,
     mutations,
-    creatureTraits: bookTraits.map((t) => gd.resolvedBookTrait(npc.specChoices, t)),
+    creatureTraits: rankChampion(bookTraits.map((t) => gd.resolvedBookTrait(npc.specChoices, t)), championRank(npc.tier, totals.WW)),
+    rolledTraits: rankChampion(npc.traits, championRank(npc.tier, totals.WW)),
     abilities: creature?.abilities ?? [],
     wounds,
     movement: Math.max(0, movement),

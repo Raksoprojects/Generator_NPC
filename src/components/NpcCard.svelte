@@ -772,7 +772,7 @@
           {#each view.creatureTraits as tr (tr)}
             <button class="chip tap" onclick={() => toggleInfo(`c|${tr}`)}>{tr}</button>
           {/each}
-          {#each npc.traits as tr (tr)}
+          {#each view.rolledTraits as tr (tr)}
             <button class="chip warning tap" title="Wylosowana cecha — zmienia statystyki" onclick={() => toggleInfo(`c|${tr}`)}>{tr}</button>
           {/each}
           {#each npc.heroProfiles as hp (hp)}

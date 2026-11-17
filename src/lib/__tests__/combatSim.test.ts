@@ -2,6 +2,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { fight, npcFighter } from "../combatSim";
 import { seedRng } from "../dice";
 import { generateNpc } from "../generator";
+import { championRank, computeNpc } from "../npc";
 import { loadTestGameData } from "./loadData";
 
 beforeAll(loadTestGameData);
@@ -28,5 +29,17 @@ describe("symulator starc", () => {
     // Zwykly wojownik bez magicznej broni nie zrani ducha.
     const r = fight([npcFighter(generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "weteran" }, seedRng(2)))], [ghost], seedRng(3));
     expect(r.dealtByA).toBe(0);
+  });
+
+  it("Czempion (X): 1 + 1 za 3 poziomy, najwyzej polowa BWW", () => {
+    expect(championRank("slaby", 70)).toBe(1);
+    expect(championRank("legendarny", 70)).toBe(3);
+    expect(championRank("legendarny", 39)).toBe(1);
+    expect(championRank("weteran", 60)).toBe(2);
+    expect(championRank("wybitny", 80)).toBe(3);
+    const w = generateNpc({ creature: "Wojownik Chaosu", noArchetype: true }, seedRng(1));
+    const view = computeNpc(w);
+    expect(view.creatureTraits.some((t) => /^Czempion \(\d\)$/.test(t))).toBe(true);
+    expect(npcFighter(w, view).champion).toBeGreaterThanOrEqual(1);
   });
 });
