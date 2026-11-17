@@ -329,7 +329,7 @@ function warded(d: State, magical: boolean, rng: Rng): boolean {
   return !!d.f.ward && randInt(1, 10, rng) >= d.f.ward;
 }
 
-/** Nienawisc dziala tylko na swoj obiekt: rasa celu, Zywi, Wszystko. Bez obiektu i Intruzi - brak premii. */
+/** Nienawisc (PG s. 191): +1 PS do wszystkich Testow walki, tylko wobec swojego obiektu: rasa celu, Zywi, Wszystko. Bez obiektu i Intruzi - brak premii. */
 function hates(a: State, d: State): boolean {
   if (!a.f.hatred && !a.hating) return false;
   if (a.hating) return true;
@@ -398,13 +398,14 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
   const parrySl = (v: { sl: number }) => v.sl - 2 * sizeGap + (att.slow ? 1 : 0) - (d.f.attack.unbalanced ? 1 : 0);
   const useParry = !d.f.animal && parryVal - 20 * sizeGap > dodgeVal;
   let def = test(useParry ? parryVal : dodgeVal, rng);
-  let defSl = useParry ? parrySl(def) : def.sl + (att.slow ? 1 : 0);
+  const defHate = hates(d, a) ? 1 : 0;
+  let defSl = (useParry ? parrySl(def) : def.sl + (att.slow ? 1 : 0)) + defHate;
   const atkSl = atkTest.sl + hate;
   const wins = () => atkTest.ok && (atkSl > defSl || (atkSl === defSl && att.skill >= (useParry ? d.f.parry : d.f.dodge)));
   if (wins() && d.fortune > 0 && !def.ok) {
     d.fortune--;
     def = test(useParry ? parryVal : dodgeVal, rng);
-    defSl = useParry ? parrySl(def) : def.sl + (att.slow ? 1 : 0);
+    defSl = (useParry ? parrySl(def) : def.sl + (att.slow ? 1 : 0)) + defHate;
   }
   if (!wins()) {
     // Czempion (X) [dom]: wygrana obrona zadaje Obrazenia jak atak, najwyzej X razy na Runde.
@@ -627,7 +628,8 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
         if (s.fearSl >= fear) s.fearDone = true;
       } else if (!fear) s.fearDone = true;
       if (s.stunned > 0) {
-        // Oszolomienie: brak Akcji, wrog +1 Przewagi.
+        // Oszolomienie: brak Akcji, wrog +1 Przewagi; konczy Szal Bojowy (PG s. 191).
+        s.frenzied = false;
         (isA ? poolB : poolA).pool++;
         continue;
       }
