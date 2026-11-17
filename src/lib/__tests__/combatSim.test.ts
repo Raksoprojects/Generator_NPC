@@ -31,12 +31,15 @@ describe("symulator starc", () => {
     expect(r.dealtByA).toBe(0);
   });
 
-  it("Czempion (X): 1 + 1 za 3 poziomy, najwyzej polowa BWW", () => {
-    expect(championRank("slaby", 70)).toBe(1);
-    expect(championRank("legendarny", 70)).toBe(3);
+  it("Czempion (X): 1 do Weterana, +1 za 2 poziomy i BWW 7+, najwyzej polowa BWW", () => {
+    expect(championRank("slaby", 60)).toBe(1);
+    expect(championRank("slaby", 70)).toBe(2);
+    expect(championRank("zaawansowany", 65)).toBe(1);
+    expect(championRank("zaawansowany", 75)).toBe(2);
+    expect(championRank("wybitny", 60)).toBe(2);
+    expect(championRank("mistrz", 65)).toBe(3);
+    expect(championRank("legendarny", 90)).toBe(4);
     expect(championRank("legendarny", 39)).toBe(1);
-    expect(championRank("weteran", 60)).toBe(2);
-    expect(championRank("wybitny", 80)).toBe(3);
     const w = generateNpc({ creature: "Wojownik Chaosu", noArchetype: true }, seedRng(1));
     const view = computeNpc(w);
     expect(view.creatureTraits.some((t) => /^Czempion \(\d\)$/.test(t))).toBe(true);

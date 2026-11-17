@@ -240,9 +240,9 @@
   },
   "Czempion": {
     "randomPool": false,
-    "description": "Stworzenie wyjątkowo dobrze walczy. Jeśli wygra Test Przeciwstawny, gdy broni się w walce w zwarciu, może zadać Obrażenia, tak jakby to ono atakowało. Poziom cechy to liczba takich kontr na Rundę: 1 + 1 za każde 3 poziomy BN, najwyżej połowa Bonusu z WW (co najmniej 1). [dom]",
+    "description": "Stworzenie wyjątkowo dobrze walczy. Jeśli wygra Test Przeciwstawny, gdy broni się w walce w zwarciu, może zadać Obrażenia, tak jakby to ono atakowało. Poziom cechy to liczba takich kontr na Rundę: 1 do Weterana, potem +1 za każde 2 poziomy BN i +1 dla bardzo wojowniczych (BWW 7+), najwyżej połowa Bonusu z WW (co najmniej 1). [dom]",
     "source": "Podręcznik podstawowy",
-    "rules": "Stworzenie wyjątkowo dobrze walczy. Jeśli wygra Test Przeciwstawny, gdy broni się w walce w zwarciu, może zadać Obrażenia, tak jakby to ono atakowało. [dom] Czempion (X): najwyżej X kontr na Rundę; X = 1 + 1 za każde 3 poziomy BN (Nowicjusz–Doświadczony 1, Niezwykły–Weteran 2, Wybitny–Mistrz 3, Arcymistrz–Heros 4), najwyżej połowa Bonusu z WW zaokrąglona w dół, co najmniej 1.",
+    "rules": "Stworzenie wyjątkowo dobrze walczy. Jeśli wygra Test Przeciwstawny, gdy broni się w walce w zwarciu, może zadać Obrażenia, tak jakby to ono atakowało. [dom] Czempion (X): najwyżej X kontr na Rundę; X wg poziomu BN: Nowicjusz–Weteran 1, Wybitny–Ekspert 2, Mistrz–Arcymistrz 3, Legenda–Heros 4; +1 dla bardzo wojowniczych (BWW 7+); najwyżej połowa Bonusu z WW zaokrąglona w dół, co najmniej 1.",
     "aliases": [
       "Mistrz"
     ]

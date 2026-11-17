@@ -228,12 +228,15 @@ function weaponSkill(skills: SkillView[], chars: Record<Attribute, CharView>, ra
 }
 
 /**
- * Czempion (X) [dom]: X kontr na Runde = 1 + 1 za kazde 3 poziomy BN,
- * najwyzej polowa Bonusu z WW (co najmniej 1). Slabszy BN - mniej kontr.
+ * Czempion (X) [dom]: X kontr na Runde = 1 do Weterana, potem +1 za kazde 2 poziomy
+ * (Wybitny, Ekspert 2; Mistrz, Arcymistrz 3; Legenda, Heros 4), +1 bardzo wojowniczy (BWW 7+);
+ * najwyzej polowa Bonusu z WW, co najmniej 1.
  */
 export function championRank(tier: string, ww: number): number {
-  const byTier = 1 + Math.floor(Math.max(0, (TIER_IDS as readonly string[]).indexOf(tier)) / 3);
-  return Math.max(1, Math.min(byTier, Math.floor(characteristicBonus(ww) / 2)));
+  const t = Math.max(0, (TIER_IDS as readonly string[]).indexOf(tier));
+  const bww = characteristicBonus(ww);
+  const byTier = 1 + Math.floor(Math.max(0, t - 4) / 2) + (bww >= 7 ? 1 : 0);
+  return Math.max(1, Math.min(byTier, Math.floor(bww / 2)));
 }
 
 /** "Czempion" / "Mistrz" -> "Czempion (X)"; reszta bez zmian. */
