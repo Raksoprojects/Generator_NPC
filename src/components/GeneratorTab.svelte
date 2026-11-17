@@ -3,7 +3,7 @@
   import Autocomplete from "./Autocomplete.svelte";
   import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
-  import { creatureTierRange } from "../lib/creatures";
+  import { creatureTierRange, sizeOf } from "../lib/creatures";
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
   import PathEditor from "./PathEditor.svelte";
   import { TIER_IDS, type Npc, type Sex, type TierId } from "../lib/types";
@@ -23,10 +23,28 @@
   const isVampireName = (name: string) => !!gd.getVampires()?.creatures.includes(name);
   const typicalCreatures = gd.bestiaryCreatures().filter((c) => !c.unique).map((c) => c.name);
 
+  /** Filtry listy stworzen: Rozmiar ("duze" = Duzy i wiekszy) i Cecha Stworzenia z ksiazki. */
+  let sizeFilter = $state("");
+  let traitFilter = $state("");
+  const SIZE_NAMES = ["Drobny", "Niewielki", "Mały", "Średni", "Duży", "Wielki", "Monstrualny"];
+  /** Nazwa cechy do filtra: klucz z listy cech bez "(wartość)", a spoza listy - sam rdzen nazwy. */
+  const traitLabel = (t: string) =>
+    (gd.findCreatureTrait(t)?.key ?? t.replace(/\s*\(.*?\)/g, "").replace(/\s*\+.*$/, "").replace(/\s+\d+\+?$/, "")).replace(/\s*\(wartość\)$/, "").trim();
+  const traitOptions = [...new Set(gd.bestiaryCreatures().filter((c) => !c.unique).flatMap((c) => c.traits.map(traitLabel)))]
+    .filter((t) => t && !t.startsWith("Rozmiar"))
+    .sort((a, b) => a.localeCompare(b, "pl"));
+  function passesFilters(c: { traits: string[] }): boolean {
+    const size = sizeOf(c.traits);
+    if (sizeFilter === "duze" && SIZE_NAMES.indexOf(size) < SIZE_NAMES.indexOf("Duży")) return false;
+    if (sizeFilter && sizeFilter !== "duze" && size !== sizeFilter) return false;
+    return !traitFilter || c.traits.some((t) => traitLabel(t) === traitFilter);
+  }
+  let filtersOn = $derived(!!sizeFilter || !!traitFilter);
+
   /** Stworzenia wybranej grupy, pogrupowane wg podgrup (w kolejnosci drzewa grup). */
   let creatureGroups = $derived.by(() => {
     // Unikatowe postacie (Olbrzym szpieg, nazwane bestie) nie trafiaja do generatora - tylko rodzaje stworzen.
-    const pool = (creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.bestiaryCreatures()).filter((c) => !c.unique);
+    const pool = (creatureGroup ? gd.creaturesInGroup(creatureGroup) : gd.bestiaryCreatures()).filter((c) => !c.unique && passesFilters(c));
     const out: Record<string, string[]> = {};
     for (const { group, subgroups } of groupTree) {
       for (const key of [group, ...subgroups.map((s) => `${group}${gd.GROUP_SEP}${s}`)]) {
@@ -55,9 +73,11 @@
     creatureQuery = "";
   }
 
-  // Stworzenie spoza nowo wybranej grupy - wracamy do losowania z grupy.
+  // Stworzenie spoza nowo wybranej grupy albo filtrow - wracamy do losowania z grupy.
   $effect(() => {
     if (creature && creatureGroup && !gd.creaturesInGroup(creatureGroup).some((c) => c.name === creature)) creature = "";
+    const c = gd.getCreature(creature);
+    if (c && filtersOn && !passesFilters(c)) creature = "";
   });
 
   let civilized = $derived(!!creature && gd.isCivilized(creature));
@@ -225,9 +245,12 @@
   function buildSpec(): GenSpec {
     if (kind === "stworzenia") {
       if (mode === "losowy") return { creature: pick(typicalCreatures) };
+      // Z filtrami: losowo z przefiltrowanej listy (grupa juz w niej uwzgledniona).
+      const filtered = filtersOn && !creature ? Object.values(creatureGroups).flat() : [];
+      const chosen = creature || (filtered.length ? pick(filtered) : "");
       return {
-        creature: creature || (creatureGroup ? undefined : pick(typicalCreatures)),
-        creatureGroup: creature ? undefined : creatureGroup || undefined,
+        creature: chosen || (creatureGroup ? undefined : pick(typicalCreatures)),
+        creatureGroup: chosen ? undefined : creatureGroup || undefined,
         bloodline: showBloodline && bloodline ? bloodline : undefined,
         archetype: civilized && archetype && archetype !== NO_CAREER ? archetype : undefined,
         noArchetype: civilized && archetype === NO_CAREER,
@@ -279,7 +302,7 @@
   }
 
   function resetForm() {
-    archetype = tier = tierTo = race = sex = creature = creatureGroup = bloodline = "";
+    archetype = tier = tierTo = race = sex = creature = creatureGroup = bloodline = sizeFilter = traitFilter = "";
     name = "";
     xpToValue = null;
     path = [{ profession: "", level: null }];
@@ -354,6 +377,19 @@
               <option value={g.group}>{g.group}</option>
               {#each g.subgroups as s (s)}<option value={`${g.group}${gd.GROUP_SEP}${s}`}>&nbsp;&nbsp;› {s}</option>{/each}
             {/each}
+          </select>
+        </label>
+        <label>Rozmiar
+          <select bind:value={sizeFilter}>
+            <option value="">— każdy —</option>
+            <option value="duze">Duży i większy</option>
+            {#each SIZE_NAMES as s (s)}<option value={s}>{s}</option>{/each}
+          </select>
+        </label>
+        <label>Cecha
+          <select bind:value={traitFilter}>
+            <option value="">— dowolna —</option>
+            {#each traitOptions as t (t)}<option value={t}>{t}</option>{/each}
           </select>
         </label>
         <label>Stworzenie
