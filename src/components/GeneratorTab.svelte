@@ -208,7 +208,8 @@
   $effect(() => {
     if (mode !== "wlasny") return;
     if (kind === "stworzenia") {
-      if (!creature) creature = Object.values(creatureGroups)[0]?.[0] ?? typicalCreatures[0];
+      // Z filtrami bez wynikow - zostaje puste (inaczej efekt filtrow i ten przestawialyby sie w petli).
+      if (!creature) creature = Object.values(creatureGroups)[0]?.[0] ?? (filtersOn ? "" : typicalCreatures[0]);
       if (!tier) tier = "sredni";
       randomTraits = false;
       return;
