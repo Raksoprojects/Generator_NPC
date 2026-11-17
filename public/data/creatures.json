@@ -131,6 +131,7 @@
     "Pancerz 3",
     "Rozmiar (Monstrualny)",
     "Sieć (50)",
+    "Srogi (3)",
     "Ugryzienie +9",
     "Widzenie w Mroku",
     "Wspinacz"
@@ -1079,6 +1080,7 @@
     "Długi Krok",
     "Pancerz (1)",
     "Rozmiar (Duży)",
+    "Srogi (1)",
     "Tropiciel",
     "Widzenie w Ciemności"
    ],
@@ -1172,6 +1174,7 @@
     "Pancerz (3)",
     "Rogi (Szable) +11",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Szał Bojowy",
     "Twardziel",
     "Widzenie w Ciemności"
@@ -1610,6 +1613,7 @@
     "Latanie (90)",
     "Pancerz (2)",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Zwierzęcy"
    ],
    "optional": [
@@ -1727,6 +1731,7 @@
     "Długi Krok",
     "Nie Czuje Bólu",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Widzenie w Ciemności",
     "Wrogość (Zielonoskórzy)"
    ],
@@ -1932,6 +1937,7 @@
     "Nie Czuje Bólu",
     "Pancerz (2)",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Widzenie w Ciemności",
     "Zaraza"
    ],
@@ -2184,6 +2190,7 @@
     "Regeneracja",
     "Rozmiar (Duży)",
     "Skryty",
+    "Srogi (1)",
     "Ziemnowodny"
    ],
    "optional": [],
@@ -2421,6 +2428,7 @@
     "Pancerz (2)",
     "Rozmiar (Wielki)",
     "Skryty",
+    "Srogi (2)",
     "Widzenie w Mroku",
     "Zimnokrwisty",
     "Zwierzęcy"
@@ -2666,6 +2674,7 @@
     "Broń (Szpony) +10",
     "Latanie (120)",
     "Pancerz (1)",
+    "Srogi (2)",
     "Ugryzienie (Dziób) +9",
     "Rozmiar (Wielki)",
     "Widzenie w Ciemności"
@@ -2765,6 +2774,7 @@
     "Pancerz (1)",
     "Rozmiar (Wielki)",
     "Skryty",
+    "Srogi (2)",
     "Widzenie w Mroku"
    ],
    "optional": [
@@ -3442,6 +3452,7 @@
     "Rozmiar (Duży)",
     "Rzucanie Czarów (Slaanesh)",
     "Spaczenie (Większe)",
+    "Srogi (3)",
     "Widzenie w Ciemności"
    ],
    "optional": [],
@@ -3489,6 +3500,7 @@
     "Rozmiar (Duży)",
     "Rzucanie Czarów (Nurgle)",
     "Spaczenie (Większe)",
+    "Srogi (3)",
     "Widzenie w Mroku",
     "Zakażony",
     "Zaraza",
@@ -3934,6 +3946,7 @@
     "Pancerz (2)",
     "Petryfikujące Spojrzenie",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Ugryzienie +9",
     "Widzenie w Ciemności",
     "Zimnokrwisty",
@@ -4098,6 +4111,7 @@
     "Pancerz (5)",
     "Ogon +9",
     "Rozmiar (Wielki)",
+    "Srogi (3)",
     "Ugryzienie +10",
     "Widzenie w Ciemności",
     "Zionięcie +15 (różne)"
@@ -4232,6 +4246,7 @@
     "Długi Krok",
     "Pancerz (1)",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Twardy",
     "Widzenie w Ciemności"
    ],
@@ -4276,6 +4291,7 @@
     "Latanie (80)",
     "Pancerz (1)",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Ugryzienie +9",
     "Widzenie w Ciemności",
     "Zwierzęcy"
@@ -4364,6 +4380,7 @@
     "Regeneracja",
     "Rozmiar (Wielki)",
     "Skryty",
+    "Srogi (2)",
     "Tropiciel",
     "Widzenie w Ciemności",
     "Zionięcie +10 (Ogień)",
@@ -4411,6 +4428,7 @@
     "Pancerz (3)",
     "Rozmiar (Wielki)",
     "Skoczny",
+    "Srogi (2)",
     "Ugryzienie +9",
     "Widzenie w Ciemności",
     "Zaraza",
@@ -4454,6 +4472,7 @@
     "Ogon +8",
     "Pancerz (2)",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Terytorialny",
     "Ugryzienie +9",
     "Zwierzęcy"
@@ -4584,6 +4603,7 @@
     "Latanie (90)",
     "Pancerz (2)",
     "Rozmiar (Wielki)",
+    "Srogi (2)",
     "Zwierzęcy"
    ],
    "optional": [
@@ -4966,6 +4986,7 @@
     "Pancerz (1)",
     "Regeneracja",
     "Rozmiar (Duży)",
+    "Srogi (1)",
     "Strach (4)",
     "Ugryzienie +8",
     "Wampiryczny",
@@ -5014,6 +5035,7 @@
     "Lodowaty Uścisk",
     "Niestabilny",
     "Ożywieniec",
+    "Srogi (1)",
     "Widzenie w Mroku"
    ],
    "optional": [
@@ -5055,6 +5077,7 @@
     "Groza (3)",
     "Niestabilny",
     "Ożywieniec",
+    "Srogi (1)",
     "Upiorne Wycie",
     "Widzenie w Mroku"
    ],
@@ -12080,6 +12103,7 @@
    "talents": [],
    "traits": [
     "Pancerz (1) – gruba skóra",
+    "Srogi (2)",
     "Wojowniczy",
     "Spaczenie (Umiarkowane)",
     "Widzenie w Ciemności",
@@ -12354,6 +12378,7 @@
    "traits": [
     "Pancerz (1) – gruba skóra",
     "Rogi +11",
+    "Srogi (2)",
     "Żarłoczny",
     "Niewrażliwość na Psychologię",
     "Widzenie w Ciemności",
@@ -12401,6 +12426,7 @@
    "talents": [],
    "traits": [
     "Pancerz (3) – gruba skóra",
+    "Srogi (2)",
     "Wojowniczy",
     "Ugryzienie +9",
     "Spaczenie (Umiarkowane)",
@@ -12452,6 +12478,7 @@
    "talents": [],
    "traits": [
     "Pancerz (4) – gruba skóra",
+    "Srogi (3)",
     "Ugryzienie +10",
     "Spaczenie (Umiarkowane)",
     "Niewrażliwość (Błyskawice albo Trucizny)",
@@ -12505,6 +12532,7 @@
    "traits": [
     "Pancerz (1) – gruba skóra",
     "Duży",
+    "Srogi (2)",
     "Szał Bojowy",
     "Rogi +11",
     "Żarłoczny",
@@ -12613,6 +12641,7 @@
     "Konstrukt",
     "Spaczenie (Poważne)",
     "Demoniczny 7+",
+    "Srogi (3)",
     "Widzenie w Mroku",
     "Dekoncentrujący",
     "Strach (5)",
@@ -12667,6 +12696,7 @@
     "Konstrukt",
     "Spaczenie (Umiarkowane)",
     "Demoniczny 8+",
+    "Srogi (1)",
     "Widzenie w Mroku",
     "Dekoncentrujący",
     "Strach (4)",
@@ -12735,6 +12765,7 @@
    ],
    "traits": [
     "Pancerz (2) – gruba skóra",
+    "Srogi (2)",
     "Ugryzienie +8",
     "Sprytny",
     "Przebiegły",
@@ -12835,6 +12866,7 @@
    "talents": [],
    "traits": [
     "Pancerz (5) – gruba skóra",
+    "Srogi (3)",
     "Ugryzienie +10",
     "Zionięcie +17 (Various)",
     "Spaczenie (Umiarkowane)",
@@ -13147,6 +13179,7 @@
    "talents": [],
    "traits": [
     "Pancerz (2) – gruba skóra",
+    "Srogi (2)",
     "Zwierzęcy",
     "Ugryzienie +9",
     "Latanie (80)",
@@ -13258,6 +13291,7 @@
     "Rogi +15",
     "Rozmiar (Duży)",
     "Spaczenie (Większe)",
+    "Srogi (3)",
     "Szał Bojowy",
     "Widzenie w Ciemności"
    ],
@@ -13309,6 +13343,7 @@
     "Rozmiar (Duży)",
     "Rzucanie Czarów (Tzeentch)",
     "Spaczenie (Większe)",
+    "Srogi (3)",
     "Widzenie w Ciemności"
    ],
    "optional": [
@@ -13485,6 +13520,7 @@
    "talents": [],
    "traits": [
     "Lodowaty Uścisk",
+    "Srogi (1)",
     "Widzenie w Mroku",
     "Eteryczny",
     "Unoszący się",
@@ -13613,6 +13649,7 @@
    "traits": [
     "Odbijanie",
     "Lodowaty Uścisk",
+    "Srogi (1)",
     "Widzenie w Mroku",
     "Eteryczny",
     "Unoszący się",
@@ -13730,6 +13767,7 @@
    "skills": [],
    "talents": [],
    "traits": [
+    "Srogi (1)",
     "Ugryzienie +8",
     "Widzenie w Mroku",
     "Strach (3)",
@@ -13821,6 +13859,7 @@
    "skills": [],
    "talents": [],
    "traits": [
+    "Srogi (2)",
     "Ugryzienie +8",
     "Konstrukt",
     "Widzenie w Mroku",
@@ -13968,6 +14007,7 @@
    "skills": [],
    "talents": [],
    "traits": [
+    "Srogi (2)",
     "Ugryzienie +9",
     "Widzenie w Mroku",
     "Dekoncentrujący",
@@ -14017,6 +14057,7 @@
    "talents": [],
    "traits": [
     "Pancerz (5)",
+    "Srogi (3)",
     "Ugryzienie +10",
     "Zionięcie +15 (Kwas)",
     "Konstrukt",
@@ -14116,6 +14157,7 @@
    "skills": [],
    "talents": [],
    "traits": [
+    "Srogi (2)",
     "Ziemnowodny",
     "Pancerz (3)",
     "Dusiciel",
