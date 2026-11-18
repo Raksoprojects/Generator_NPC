@@ -1,8 +1,9 @@
-import { beforeAll, describe, expect, it } from "vitest";
+﻿import { beforeAll, describe, expect, it } from "vitest";
 import { fight, npcFighter } from "../combatSim";
 import { seedRng } from "../dice";
 import { generateNpc } from "../generator";
 import { championRank, computeNpc } from "../npc";
+import { CRIT_TABLE, critEntry } from "../criticals";
 import { loadTestGameData } from "./loadData";
 
 beforeAll(loadTestGameData);
@@ -29,6 +30,27 @@ describe("symulator starc", () => {
     // Zwykly wojownik bez magicznej broni nie zrani ducha.
     const r = fight([npcFighter(generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "weteran" }, seedRng(2)))], [ghost], seedRng(3));
     expect(r.dealtByA).toBe(0);
+  });
+
+  it("Tabela Ran Krytycznych pokrywa 01-00 w kazdej lokacji, 00 to Smierc", () => {
+    for (const [loc, rows] of Object.entries(CRIT_TABLE)) {
+      expect(rows.at(-1)!.max, loc).toBe(100);
+      expect(rows.at(-1)!.death, loc).toBe(true);
+      for (let i = 1; i < rows.length; i++) expect(rows[i].max, loc).toBeGreaterThan(rows[i - 1].max);
+    }
+    expect(critEntry("głowa", 1).name).toBe("Zawadiacka rana");
+    expect(critEntry("nogi", -15).max).toBe(10);
+  });
+
+  it("walka z Krytykami konczy sie rozstrzygnieciem (pionki wypadaja przy Krytyku)", () => {
+    const party = () => [1, 2, 3, 4].map((i) => npcFighter(generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "obyty" }, seedRng(i))));
+    const mobs = () => [1, 2, 3, 4].map((i) => ({ ...npcFighter(generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "slaby" }, seedRng(50 + i))), minion: true }));
+    let done = 0;
+    for (let i = 0; i < 30; i++) {
+      const r = fight(party(), mobs(), seedRng(i), 30, { crits: true });
+      if (r.winner !== "remis") done++;
+    }
+    expect(done).toBeGreaterThan(20);
   });
 
   it("Czempion (X): 1 do Weterana, +1 za 2 poziomy i BWW 7+, najwyzej polowa BWW", () => {

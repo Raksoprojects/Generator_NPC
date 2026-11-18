@@ -6,10 +6,13 @@
  * Zioniecie, Wymiot, Upiorne Wycie, Lodowaty Uscisk, Petryfikujace Spojrzenie, Czempion, Ochrona,
  * Kwasowa Krew, Wampiryczny, Jad, Dusiciel, Siec, Dekoncentrujacy, Furia, Szal Bojowy, Nienawisc,
  * Zwierzecy (tylko Unik, ucieczka), Eteryczny, Demoniczny, Magiczny, Regeneracja i pociski magiczne.
- * Pomija: Rany Krytyczne (0 Zyw = wylaczony z walki), ruch i dystans, talenty bez liczb.
+ * Inicjatywa k10 + BI + BZw [dom HR-019], Zwiazanie Walka (skupienie na celu), przewaga liczebna [dom],
+ * Rany Krytyczne jako opcja (Fuks, Pech, Tabela Ran Krytycznych PG 174-178, pionki - Nagla Smierc).
+ * Pomija: ruch i dystans, talenty bez liczb.
  */
 import { randInt, type Rng } from "./dice";
 import { sizeOf } from "./creatures";
+import { critEntry, critLocation, type CritLoc } from "./criticals";
 import { computeNpc, type NpcView } from "./npc";
 import { characteristicBonus } from "./rules";
 import type { Npc } from "./types";
@@ -37,6 +40,13 @@ export interface Fighter {
   race: string;
   wounds: number;
   init: number;
+  /** Zwinnosc (Inicjatywa k10 + BI + BZw [dom HR-019]) i modyfikator Inicjatywy z broni (Szybka +3, Powolna -3). */
+  agility: number;
+  initMod?: number;
+  /** Rozumny: skupia ataki z sojusznikami na jednym celu (gracze, ludzie, rozumne stworzenia). */
+  smart?: boolean;
+  /** Pionek: przy Ranie Krytycznej wypada z walki (opcjonalna Nagla Smierc, PG 173). */
+  minion?: boolean;
   /** Atak wrecz: wartosc testu i Obrazenia (z BS). */
   attack: { skill: number; damage: number; blunt: boolean; magical: boolean; slow: boolean; unbalanced: boolean };
   ranged: number;
@@ -102,6 +112,7 @@ export interface PartyMember {
   name: string;
   race?: string;
   I: number;
+  Zw?: number;
   S: number;
   Wt: number;
   SW?: number;
@@ -125,6 +136,9 @@ export function partyFighter(p: PartyMember): Fighter {
     race: p.race ?? "Krasnolud",
     wounds: p.wounds,
     init: p.I,
+    agility: p.Zw ?? 30,
+    initMod: p.weapon.qualities.includes("Powolny") ? -3 : 0,
+    smart: true,
     attack: {
       skill: p.melee,
       damage: p.weapon.damage,
@@ -231,6 +245,10 @@ export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
     race: npc.race,
     wounds: view.wounds,
     init: char("I", 0),
+    agility: char("Zw", 10),
+    initMod: (melee?.qualities.includes("Szybka") ? 3 : 0) - (melee?.qualities.includes("Powolny") ? 3 : 0),
+    // Rozumny: nie Zwierzecy i z Inteligencja co najmniej 20 (zombie, bestie - bez taktyki).
+    smart: !has(traits, /^Zwierzęcy/) && !view.chars.Int.absent && view.chars.Int.total >= 20,
     attack: {
       skill: melee?.skill ?? char("WW", 20),
       damage,
@@ -307,11 +325,38 @@ interface State {
   counters: number;
   /** Rany od ognia - Regeneracja ich nie leczy. */
   burnt: number;
+  /** Wylaczony z walki: bez Krytykow 0 Zyw; z Krytykami Utrata Przytomnosci albo Smierc. */
+  out: boolean;
+  /** Krytyki: liczba Ran Krytycznych, Krwawienie, Oslepienie, Rundy na 0 Zyw, kara z okaleczen, stracone Akcje, odsloniecie po Pechu. */
+  crits: number;
+  bleed: number;
+  blind: number;
+  zeroRounds: number;
+  maim: number;
+  skip: number;
+  exposed: number;
+  /** Przeciwnik, z ktorym walczacy jest Zwiazany Walka. */
+  target: State | null;
+  /** Inicjatywa wylosowana na poczatku walki [dom HR-019]. */
+  initRoll: number;
+  /** Wlasna strona (sojusznicy razem z nim). */
+  team: State[];
   dealt: number;
   taken: number;
   /** Pula Przewagi strony (wspolna dla wszystkich jej walczacych) i kara Dekoncentrujacy dla strony. */
   side: { pool: number; distracted: boolean };
 }
+
+/** Opcje walki: crits - Rany Krytyczne (Fuks, Pech, Tabela Ran Krytycznych; 0 Zyw = Powalenie, nie wylaczenie). */
+export interface FightOptions {
+  crits?: boolean;
+}
+
+/** Biezaca walka liczy Rany Krytyczne (ustawiane w fight). */
+let CRITS = false;
+
+/** Walczy dalej: nie wylaczony i nie uciekl; bez Krytykow 0 Zyw wylacza z walki. */
+const up = (x: State) => !x.out && !x.fled && (CRITS || x.hp > 0);
 
 function test(value: number, rng: Rng): { ok: boolean; sl: number; roll: number } {
   const roll = randInt(1, 100, rng);
@@ -319,21 +364,26 @@ function test(value: number, rng: Rng): { ok: boolean; sl: number; roll: number 
   return { ok, sl: Math.floor(value / 10) - Math.floor(roll / 10), roll };
 }
 
+/** Dublet na kosciach (11, 22 ... 99, 00): Fuks przy sukcesie, Pech przy porazce [PG 160]. */
+const double = (roll: number) => roll % 11 === 0 || roll === 100;
+
 function location(roll: number): Loc {
   // Lokacja z odwroconego rzutu ataku.
   const r = (roll % 10) * 10 + Math.floor(roll / 10) || 100;
   return r <= 9 ? "głowa" : r <= 44 ? "ręce" : r <= 79 ? "korpus" : "nogi";
 }
 
-/** Kary do Testow walczacego: Strach (-10 do wroga), Zatrucie, Oszolomienie, Pochwycenie, Dekoncentrujacy. */
+/**
+ * Kary do Testow. Kary ze Stanow sie nie sumuja - liczy sie najwyzsza (Zatrucie, Oszolomienie,
+ * Pochwycenie, Oslepienie, odsloniecie po Pechu: -10). Osobno: Strach (-10), Dekoncentrujacy (-20)
+ * i okaleczenia z Ran Krytycznych.
+ */
 function penalty(s: State, enemy: State): number {
   let p = 0;
   if ((enemy.f.fear || enemy.f.terror) && !s.fearDone) p += 10;
-  if (s.poisoned) p += 10;
-  if (s.stunned) p += 10;
-  if (s.entangled) p += 10;
+  if (s.poisoned || s.stunned || s.entangled || s.blind || s.exposed) p += 10;
   if (s.side.distracted) p += 20;
-  return p;
+  return p + s.maim;
 }
 
 /** Rzuty ochronne: Eteryczny (tylko Magiczne), Demoniczny (nie-Magiczne), Ochrona (kazdy cios). */
@@ -352,6 +402,39 @@ function hates(a: State, d: State): boolean {
   return /^(żyw|wszys)/.test(o) || (o.startsWith("krasnolud") && r.startsWith("krasnolud")) || (o.startsWith("ludzi") && r.startsWith("człowiek")) || (o.startsWith("elf") && r.includes("elf"));
 }
 
+/**
+ * Przewaga liczebna [dom, Kompendium MG; RAW PG 162: +20 / +40]: 2:1 +10, kazdy kolejny stopien +10.
+ * Liczy sie, kto z kim jest Zwiazany Walka: atakujacy na tym samym celu przeciw obroncy i jego
+ * sojusznikom, ktorzy walcza z ktoryms z atakujacych. Roje ignoruja liczebnosc.
+ */
+function outnumber(a: State, d: State): number {
+  if (a.f.swarm || d.f.swarm) return 0;
+  const att = a.team.filter((x) => up(x) && (x === a || x.target === d));
+  const def = d.team.filter((x) => up(x) && (x === d || (x.target != null && att.includes(x.target))));
+  const ratio = Math.floor(att.length / Math.max(1, def.length));
+  return ratio >= 2 ? 10 * (ratio - 1) : 0;
+}
+
+/**
+ * Cel ataku: walczacy trzyma sie przeciwnika, z ktorym jest Zwiazany Walka, az ten padnie.
+ * Gracze i rozumne stworzenia potem przechodza na wroga, ktorego juz atakuja sojusznicy (skupienie),
+ * a gdy takiego brak - na najbardziej ranionego; bestie bez rozumu biora losowego.
+ */
+function chooseTarget(s: State, foes: State[], rng: Rng): State | undefined {
+  const live = foes.filter(up);
+  if (!live.length) return undefined;
+  if (s.target && live.includes(s.target)) return s.target;
+  let t: State;
+  if (s.f.smart) {
+    const engaged = (x: State) => s.team.filter((y) => y !== s && up(y) && y.target === x).length;
+    const best = Math.max(...live.map(engaged));
+    const pool = best > 0 ? live.filter((x) => engaged(x) === best) : live;
+    t = pool.reduce((m, x) => (x.hp / x.f.wounds < m.hp / m.f.wounds ? x : m));
+  } else t = live[randInt(0, live.length - 1, rng)];
+  s.target = t;
+  return t;
+}
+
 interface Hit {
   damage: number;
   ignoreAp?: boolean;
@@ -362,10 +445,14 @@ interface Hit {
   roll: number;
 }
 
+/** Miejsce Trafienia ostatniego ciosu (do Rany Krytycznej za przekroczenie Zywotnosci). */
+let lastLoc: Loc = "korpus";
+
 /** Rany z trafienia po Redukcji i zasadach domowych; 0 = brak Ran. */
 function wounds(a: State, d: State, h: Hit, rng: Rng): number {
   if (warded(d, h.magical, rng)) return 0;
   const loc = location(h.roll);
+  lastLoc = loc;
   // Rozmiar [dom]: +BS za kazdy stopien ponad Sredni. Suche Kosci [dom]: -2/poziom nieobuchowa, +2 obuchowa.
   // Szal Bojowy: +1 do BS - w Obrazeniach broni i w premii Rozmiaru.
   const frenzy = a.frenzied ? 1 : 0;
@@ -377,13 +464,68 @@ function wounds(a: State, d: State, h: Hit, rng: Rng): number {
   return Math.max(minOne, raw);
 }
 
-/** Zadaje Rany (Kwasowa Krew, Jad, Wampiryczny, Pochwycenie), zwraca zadane. */
+/** Rany bez trafienia (Zatrucie, Krwawienie, Kwasowa Krew, Pech); z Krytykami Zywotnosc nie spada ponizej 0. */
+function hurt(s: State, n: number): void {
+  s.hp = CRITS ? Math.max(0, s.hp - n) : s.hp - n;
+}
+
+/**
+ * Rana Krytyczna [PG 174-178]: dodatkowe Rany bez BWt i PP (nie wywoluja kolejnej), Stany,
+ * Utrata Przytomnosci, Smierc. Pionek (opcjonalna Nagla Smierc, PG 173) od razu wypada z walki.
+ */
+function critical(d: State, loc: CritLoc, mod: number, rng: Rng): void {
+  if (d.out) return;
+  if (d.f.minion) {
+    d.out = true;
+    return;
+  }
+  const e = critEntry(loc, randInt(1, 100, rng) + mod);
+  d.crits++;
+  if (e.death) {
+    d.out = true;
+    return;
+  }
+  d.hp = Math.max(0, d.hp - e.wounds);
+  d.bleed += e.bleed ?? 0;
+  d.stunned += (e.stun ?? 0) + (e.stunD10 ? randInt(1, 10, rng) : 0);
+  d.blind += e.blind ?? 0;
+  if (e.prone) d.prone = true;
+  if (e.drop) d.skip++;
+  if (e.maim) d.maim = Math.min(30, Math.max(d.maim, e.maim));
+  if (e.stunTest != null && !test(d.f.endurance + e.stunTest, rng).ok) d.stunned += e.stunFail ?? 1;
+  if (e.proneTest != null && !test(d.f.endurance + e.proneTest, rng).ok) d.prone = true;
+  if (e.ko || (e.koTest != null && !test(d.f.endurance + e.koTest, rng).ok)) d.out = true;
+  // Oszolomienie konczy Szal Bojowy (PG s. 191).
+  if (d.stunned) d.frenzied = false;
+}
+
+/** Pech (dublet przy porazce) - Tabela „Ożeż!” [PG 160], skutki liczace sie w walce. */
+function oops(s: State, rng: Rng): void {
+  const r = randInt(1, 100, rng);
+  if (r <= 20) hurt(s, 1);
+  else if (r > 40 && r <= 60) s.exposed = 1;
+  else if (r > 70 && r <= 80) s.skip++;
+  else if (r > 80 && r <= 90) s.crits++;
+  else if (r > 90) s.stunned++;
+}
+
+/** Zadaje Rany (Kwasowa Krew, Jad, Wampiryczny, Pochwycenie, Krytyk za przekroczenie Zywotnosci). */
 function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolean; bite?: boolean; entangle?: boolean; knockdown?: boolean; fire?: boolean } = {}): void {
   if (dmg <= 0) return;
-  const real = Math.min(dmg, Math.max(0, d.hp));
+  const before = Math.max(0, d.hp);
+  const real = Math.min(dmg, before);
   d.hp -= dmg;
   a.dealt += real;
   d.taken += real;
+  if (CRITS) {
+    // Rany ponad Zywotnosc: Rana Krytyczna i Powalenie [PG 159]; -20 do rzutu, gdy nadwyzka mniejsza niz BWt [PG 172].
+    const over = dmg - before;
+    d.hp = Math.max(0, d.hp);
+    if (over > 0) {
+      d.prone = true;
+      critical(d, lastLoc, over < d.f.tb ? -20 : 0, rng);
+    }
+  }
   // Ogien: Rany nie do zregenerowania; Zwierzecy w zetknieciu z ogniem dostaje Panike.
   if (opts.fire) {
     d.burnt += real;
@@ -394,9 +536,9 @@ function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolea
   if (opts.knockdown && d.f.size < a.f.size) d.prone = true;
   if (opts.bite && a.f.vampiric) a.hp = Math.min(a.f.wounds, a.hp + real);
   // Kwasowa Krew: ranione stworzenie pryska na atakujacego (1k10 po Redukcji, min. 1).
-  if (d.f.acidBlood && a.hp > 0) {
+  if (d.f.acidBlood && up(a)) {
     const acid = Math.max(1, randInt(1, 10, rng) - a.f.armour.korpus);
-    a.hp -= acid;
+    hurt(a, acid);
     d.dealt += acid;
   }
 }
@@ -404,13 +546,15 @@ function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolea
 /**
  * Atak wrecz (Test Przeciwstawny). bonus - premia z wydanej Przewagi; gain - Wygrana daje +1 do puli.
  * Obronca: parowanie (kara Rozmiaru [dom]) albo Unik (bez kary); Zwierzecy tylko Unik.
- * Czempion broniacy sie z wygrana zadaje Obrazenia jak atakujacy.
+ * Premie: Powalenie +20, Oslepienie celu +10, przewaga liczebna. Czempion broniacy sie z wygrana
+ * zadaje Obrazenia jak atakujacy. Z Krytykami: Fuks (dublet przy sukcesie, takze w obronie) i Pech.
  */
 function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: FreeAttack, fire = false): void {
   const att = a.f.attack;
   const prone = d.prone ? 20 : 0;
+  const blind = d.blind ? 10 : 0;
   const hate = hates(a, d) ? 1 : 0;
-  const atkTest = test(att.skill + bonus + prone - penalty(a, d), rng);
+  const atkTest = test(att.skill + bonus + prone + blind + outnumber(a, d) - penalty(a, d), rng);
   const sizeGap = Math.max(0, a.f.size - d.f.size);
   const parryVal = d.f.parry - penalty(d, a);
   const dodgeVal = d.f.dodge - penalty(d, a);
@@ -426,6 +570,10 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
     def = test(useParry ? parryVal : dodgeVal, rng);
     defSl = (useParry ? parrySl(def) : def.sl + (att.slow ? 1 : 0)) + defHate;
   }
+  if (CRITS) {
+    if (!atkTest.ok && double(atkTest.roll)) oops(a, rng);
+    if (!def.ok && double(def.roll)) oops(d, rng);
+  }
   if (!wins()) {
     // Czempion (X) [dom]: wygrana obrona zadaje Obrazenia jak atak, najwyzej X razy na Runde.
     if (d.f.champion && d.counters < d.f.champion && def.ok && defSl > atkSl && !fa) {
@@ -433,6 +581,8 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
       const dmg = wounds(d, a, { damage: d.f.attack.damage, magical: d.f.attack.magical, blunt: d.f.attack.blunt, sl: defSl - atkSl, roll: def.roll }, rng);
       apply(d, a, dmg, rng, { venom: d.f.venom });
     }
+    // Fuks obroncy: udana obrona z dubletem - atakujacy dostaje Rane Krytyczna [PG 160].
+    if (CRITS && def.ok && double(def.roll) && !fa && up(a) && !warded(a, d.f.attack.magical, rng)) critical(a, critLocation(randInt(1, 100, rng)), 0, rng);
     return;
   }
   // Wygrana: wygrany Test Przeciwstawny, ktory sam zainicjowales - +1 do puli strony [PB 133].
@@ -440,7 +590,10 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
   const hit: Hit = { damage: fa?.damage ?? att.damage, magical: att.magical, blunt: fa ? false : att.blunt, sl: atkSl - defSl, roll: atkTest.roll };
   // Roj Drobnych stworzonek: zwykly cios zabija garsc owadow, Rany zadaje tylko ogien.
   if (d.f.swarmTiny && !fire) return;
-  apply(a, d, wounds(a, d, hit, rng), rng, { venom: a.f.venom, bite: fa?.name === "Ugryzienie", entangle: a.f.entangle && !fa, knockdown: fa?.knockdown, fire });
+  const w = wounds(a, d, hit, rng);
+  apply(a, d, w, rng, { venom: a.f.venom, bite: fa?.name === "Ugryzienie", entangle: a.f.entangle && !fa, knockdown: fa?.knockdown, fire });
+  // Fuks: trafienie z dubletem - dodatkowo Rana Krytyczna (osobny rzut na Miejsce Trafienia) [PG 160].
+  if (CRITS && w > 0 && double(atkTest.roll) && up(d)) critical(d, critLocation(randInt(1, 100, rng)), 0, rng);
 }
 
 /** Pocisk magiczny: kumulacja PS Splatania, potem Rzucanie (PS >= PZ), Obrazenia + PS ponad PZ. */
@@ -465,7 +618,7 @@ function castMissile(a: State, d: State, rng: Rng, bonus: number): boolean {
   return true;
 }
 
-/** Zioniecie / Wymiot: jeden Test Umiejetnosci Strzeleckich przeciw Unikowi kazdego celu. */
+/** Zioniecie / Wymiot: jeden Test Umiejetnosci Strzeleckich przeciw Unikowi kazdego celu; foes[0] - glowny cel. */
 function breathe(a: State, foes: State[], rng: Rng): void {
   const b = a.f.breath!;
   const t = test(a.f.ranged + b.bonus - penalty(a, foes[0]), rng);
@@ -503,8 +656,10 @@ function petrify(a: State, d: State, spent: number, rng: Rng): void {
   const t = test(a.f.ranged - penalty(a, d), rng);
   const def = test(d.f.init - penalty(d, a), rng);
   const margin = (t.ok ? t.sl : -1) + spent - (def.ok ? def.sl : -1);
-  if (margin >= 6) d.hp = 0;
-  else if (margin >= 2) d.stunned += Math.floor(margin / 2);
+  if (margin >= 6) {
+    d.hp = 0;
+    d.out = true;
+  } else if (margin >= 2) d.stunned += Math.floor(margin / 2);
 }
 
 export interface FightResult {
@@ -529,14 +684,23 @@ function numbersStart(mine: number, theirs: number): number {
   return mine >= 3 * theirs ? 3 : mine >= 2 * theirs ? 2 : 1;
 }
 
-/** Tura stworzenia ze zdolnosciami za Przewage: najmocniejsza zdolnosc, darmowe ataki, Dodatkowa Akcja. */
+/** Strona w opalach: ktos juz wypadl z walki albo zostalo jej mniej niz 60% Zywotnosci. */
+function badly(team: State[]): boolean {
+  if (team.some((x) => !up(x))) return true;
+  const hp = team.reduce((t, x) => t + Math.max(0, x.hp), 0);
+  return hp < 0.6 * team.reduce((t, x) => t + x.f.wounds, 0);
+}
+
+/**
+ * Tura stworzenia: najmocniejsza zdolnosc za Przewage, darmowe ataki, Dodatkowa Akcja.
+ * Przewage zbiera na konkretne efekty; Dodatkowa Akcja i Dodatkowy wysilek, gdy idzie zle,
+ * pula jest pelna (8+) albo Srogi i tak ja odnawia.
+ */
 function creatureTurn(s: State, foes: State[], round: number, rng: Rng, act: (bonus: number, gain: boolean) => void): void {
-  const alive = () => foes.filter((x) => x.hp > 0 && !x.fled);
-  const pick = () => {
-    const t = alive();
-    return t[randInt(0, t.length - 1, rng)];
-  };
+  const alive = () => foes.filter(up);
+  const target = () => chooseTarget(s, foes, rng)!;
   const pool = s.side;
+  const bad = badly(s.team);
   // Furia: wszystkie Przewagi (min. 1) na Nienawisc, a od 3 - na Szal Bojowy.
   if (s.f.fury && !s.frenzied && pool.pool >= 3) {
     pool.pool = 0;
@@ -549,76 +713,89 @@ function creatureTurn(s: State, foes: State[], round: number, rng: Rng, act: (bo
   let acted = false;
   if (s.f.breath && pool.pool >= s.f.breath.cost) {
     pool.pool -= s.f.breath.cost;
-    breathe(s, alive(), rng);
+    const t = target();
+    breathe(s, [t, ...alive().filter((x) => x !== t)], rng);
   } else if (s.f.howl && pool.pool >= 2) {
     pool.pool = 0;
     howl(s, alive(), rng);
   } else if (s.f.icyGrip && pool.pool >= 2) {
     pool.pool -= 2;
-    icyGrip(s, pick(), rng);
+    icyGrip(s, target(), rng);
     acted = true;
   } else if (s.f.petrify && pool.pool >= 4) {
     // Petryfikujace Spojrzenie dopiero od 4 Przewag (realna szansa na 6 PS); wczesniej zwykly atak i darmowe ataki.
     const spent = pool.pool;
     pool.pool = 0;
-    petrify(s, pick(), spent, rng);
+    petrify(s, target(), spent, rng);
     acted = true;
   }
   if (!acted) {
+    const reserve = s.f.freeAttacks.some((x) => x.cost) ? 1 : 0;
+    const spend = bad || !!s.f.fierce;
     let extra = false;
-    if (pool.pool >= 4 + (s.f.freeAttacks.some((x) => x.cost) ? 1 : 0)) {
+    if (pool.pool >= 4 + reserve && (spend || pool.pool >= 8)) {
       pool.pool -= 4;
       extra = true;
     }
+    // Dodatkowy wysilek [PB 134]: 2 Przewagi = +10, kazda kolejna +10.
     let bonus = 0;
-    if (s.f.fierce) {
-      while (pool.pool >= 2 + (s.f.freeAttacks.some((x) => x.cost) ? 1 : 0)) {
-        pool.pool -= 2;
-        bonus += 10;
-      }
+    const spare = pool.pool - reserve;
+    if (spend && spare >= 2) {
+      bonus = 10 * (spare - 1);
+      pool.pool -= spare;
     }
     act(bonus, bonus === 0);
     if (extra && alive().length) act(0, false);
     // Szal Bojowy: jeden darmowy atak co Ture.
     if (s.frenzied && alive().length) act(0, false);
   }
-  // Darmowe ataki (Ugryzienie, Ogon, Jezyk za 1 Przewage; Macki, Tupniecie, Rogi bez kosztu).
+  // Darmowe ataki (Ugryzienie, Ogon, Jezyk za 1 Przewage; Macki, Tupniecie, Rogi bez kosztu) - w ten sam cel.
   for (const fa of s.f.freeAttacks) {
-    const t = alive();
-    if (!t.length) break;
+    if (!alive().length) break;
     if (fa.firstRound && round > 0) continue;
-    const target = pick();
-    if (fa.vsSmaller && target.f.size >= s.f.size) continue;
+    const t = target();
+    if (fa.vsSmaller && t.f.size >= s.f.size) continue;
     if (fa.cost && !s.f.swarm) {
       if (pool.pool < fa.cost) continue;
       pool.pool -= fa.cost;
     }
-    melee(s, target, rng, 0, false, fa);
+    melee(s, t, rng, 0, false, fa);
   }
 }
 
 /**
  * Starcie: strona A (druzyna albo jeden gracz) na stronie B (jedno stworzenie albo kilka).
+ * Inicjatywa [dom HR-019]: k10 + BI + BZw (zalety broni), rzut raz na poczatku walki.
  * Przewaga Grupowa [PB 133-135]: dwie pule; +1 za wygrany wlasny Test Przeciwstawny; na koniec
- * Rundy strona liczniejsza zabiera 1 punkt (albo dostaje +1); na start liczebnosc i Zagrozenie;
- * gracze wydaja 4 na Dodatkowa Akcje; stworzenia - na swoje zdolnosci (Zioniecie 2, Ugryzienie 1...).
+ * Rundy strona liczniejsza zabiera 1 punkt (albo dostaje +1); na start liczebnosc i Zagrozenie.
+ * Gracze trzymaja Przewage i wydaja ja, gdy idzie zle (albo pula pelna); stworzenia - na swoje zdolnosci.
+ * opts.crits: Rany Krytyczne - przy 0 Zyw walczacy jest Powalony, a wypada z walki dopiero przez
+ * Utrate Przytomnosci (Krytyk, Krwawienie, BWt Rund na 0 Zyw) albo Smierc; pionki (minion) - przy Krytyku.
  */
-export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 30): FightResult {
+export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 30, opts: FightOptions = {}): FightResult {
+  CRITS = !!opts.crits;
   const poolA = { pool: 0, distracted: false };
   const poolB = { pool: 0, distracted: false };
   const mk = (side: State["side"]) => (f: Fighter): State => ({
     f, hp: f.wounds, broken: 0, stunned: 0, poisoned: 0, entangled: 0, prone: false, fearSl: 0, fearDone: !!f.fearless,
-    frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, counters: 0, burnt: 0, dealt: 0, taken: 0, side
+    frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, counters: 0, burnt: 0,
+    out: false, crits: 0, bleed: 0, blind: 0, zeroRounds: 0, maim: 0, skip: 0, exposed: 0, target: null, initRoll: 0, team: [],
+    dealt: 0, taken: 0, side
   });
   const A = sideA.map(mk(poolA));
   const B = sideB.map(mk(poolB));
-  const alive = (xs: State[]) => xs.filter((x) => x.hp > 0 && !x.fled);
+  for (const s of A) s.team = A;
+  for (const s of B) s.team = B;
+  const alive = (xs: State[]) => xs.filter(up);
   const swarmFight = [...A, ...B].some((x) => x.f.swarm);
   poolA.pool = (swarmFight ? 0 : numbersStart(A.length, B.length)) + Math.max(0, ...A.map((x) => THREAT_START[x.f.size] ?? 0));
   poolB.pool = (swarmFight ? 0 : numbersStart(B.length, A.length)) + Math.max(0, ...B.map((x) => THREAT_START[x.f.size] ?? 0));
   // Dekoncentrujacy: -20 do wszystkich Testow strony przeciwnej (raz).
   poolA.distracted = B.some((x) => x.f.distracting);
   poolB.distracted = A.some((x) => x.f.distracting);
+  // Inicjatywa [dom HR-019]: k10 + BI + BZw (+ zalety broni), raz na poczatku walki; remis - wyzsza Zwinnosc.
+  for (const s of [...A, ...B]) s.initRoll = randInt(1, 10, rng) + Math.floor(s.f.init / 10) + Math.floor(s.f.agility / 10) + (s.f.initMod ?? 0);
+  const order = [...A, ...B].sort((x, y) => y.initRoll - x.initRoll || y.f.agility - x.f.agility);
   // Groza: Test Opanowania na starcie, porazka = Zlamany (1 + PS porazki rund), potem Strach.
   for (const [side, foes] of [[A, B], [B, A]] as const) {
     const terror = Math.max(0, ...foes.map((x) => x.f.terror));
@@ -633,15 +810,18 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
   for (; round < maxRounds && alive(A).length && alive(B).length; round++) {
     for (const s of [...A, ...B]) {
       s.counters = 0;
-      if (s.f.regenerate && s.hp > 0 && s.hp < s.f.wounds - s.burnt) s.hp = Math.min(s.f.wounds - s.burnt, s.hp + randInt(1, 10, rng));
+      if (!s.f.regenerate || !up(s)) continue;
+      // Regeneracja: 1k10 na poczatku Rundy; przy 0 Zyw - 1 Rana na 8+ (Krytyki).
+      if (s.hp > 0 && s.hp < s.f.wounds - s.burnt) s.hp = Math.min(s.f.wounds - s.burnt, s.hp + randInt(1, 10, rng));
+      else if (CRITS && s.hp === 0 && randInt(1, 10, rng) >= 8) s.hp = 1;
     }
-    const order = [...A, ...B].sort((x, y) => y.f.init - x.f.init);
     for (const s of order) {
-      if (s.hp <= 0 || s.fled) continue;
+      if (!up(s)) continue;
       const isA = A.includes(s);
       const foes = isA ? B : A;
       if (!alive(foes).length) break;
-      s.prone = false;
+      // Powalenie mija w Turze; przy 0 Zyw (Krytyki) trwa, dopoki ktos nie uleczy Rany.
+      s.prone = CRITS && s.hp === 0;
       if (s.f.fierce && s.side.pool < s.f.fierce) s.side.pool = s.f.fierce;
       // Strach (Prog): rozszerzony Test Opanowania co Runde, az PS >= Prog.
       const fear = Math.max(0, ...foes.map((x) => Math.max(x.f.fear, x.f.terror)));
@@ -654,6 +834,11 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
         // Oszolomienie: brak Akcji, wrog +1 Przewagi; konczy Szal Bojowy (PG s. 191).
         s.frenzied = false;
         (isA ? poolB : poolA).pool++;
+        continue;
+      }
+      // Stracona Akcja (upuszczona bron po Krytyku, Pech).
+      if (s.skip > 0) {
+        s.skip--;
         continue;
       }
       if (s.broken > 0 && !s.frenzied) {
@@ -683,33 +868,54 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
           targets.forEach((t, i) => melee(s, t, rng, bonus, gain && i === 0, undefined, fireOn(t)));
           return;
         }
-        const target = targets[randInt(0, targets.length - 1, rng)];
+        const target = chooseTarget(s, foes, rng)!;
         if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain, undefined, fireOn(target));
       };
       if (!isA) creatureTurn(s, foes, round, rng, act);
       else {
-        const extra = s.side.pool >= 4;
-        if (extra) s.side.pool -= 4;
-        act(0, true);
+        // Gracze trzymaja Przewage: Dodatkowa Akcja, gdy idzie zle albo pula pelna (8+);
+        // przy zlej sytuacji i 2-3 punktach - Dodatkowy wysilek (+10 za 2, kazdy kolejny +10).
+        const bad = badly(A);
+        let extra = false;
+        let bonus = 0;
+        if (s.side.pool >= 4 && (bad || s.side.pool >= 8)) {
+          s.side.pool -= 4;
+          extra = true;
+        } else if (bad && s.side.pool >= 2) {
+          bonus = 10 * (s.side.pool - 1);
+          s.side.pool = 0;
+        }
+        act(bonus, bonus === 0);
         if (extra) act(0, false);
       }
-      // Zwierzecy: ponizej polowy Zywotnosci ucieka, a Terytorialny wpada w Szal Bojowy.
-      if (s.f.animal && s.hp > 0 && s.hp < s.f.wounds / 2) {
+      // Zwierzecy: ponizej polowy Zywotnosci ucieka, a Terytorialny albo osaczony wpada w Szal Bojowy.
+      if (s.f.animal && up(s) && s.hp < s.f.wounds / 2) {
         if (s.f.territorial || s.f.cornered) s.frenzied = true;
         else s.fled = true;
       }
     }
     // Koniec Rundy: Stany (Zatrucie - 1 Rana na poziom; Odpornosc zdejmuje 1 + PS z Zatrucia i Oszolomienia).
     for (const s of [...A, ...B]) {
-      if (s.hp <= 0) continue;
+      if (!up(s)) continue;
       if (s.poisoned) {
-        s.hp -= s.poisoned;
+        hurt(s, s.poisoned);
         const t = test(s.f.endurance, rng);
         if (t.ok) s.poisoned = Math.max(0, s.poisoned - 1 - Math.max(0, t.sl));
       }
       if (s.stunned) {
         const t = test(s.f.endurance, rng);
         if (t.ok) s.stunned = Math.max(0, s.stunned - 1 - Math.max(0, t.sl));
+      }
+      if (CRITS) {
+        // Krwawienie: 1 Rana na poziom; przy 0 Zyw Test Odpornosci albo omdlenie.
+        if (s.bleed) {
+          if (s.hp > 0) hurt(s, s.bleed);
+          else if (!test(s.f.endurance, rng).ok) s.out = true;
+        }
+        // Na 0 Zyw dluzej niz BWt Rund - Utrata Przytomnosci [PG 172].
+        if (s.hp === 0 && ++s.zeroRounds > s.f.tb) s.out = true;
+        if (s.blind && round % 2 === 1) s.blind--;
+        s.exposed = 0;
       }
     }
     // Roj: kazdy wrog Zwiazany walka traci Rany na koniec Rundy (bez BWt i PP).
@@ -736,7 +942,7 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
     rounds: round,
     dealtByB: B.reduce((s, x) => s + x.dealt, 0),
     dealtByA: A.reduce((s, x) => s + x.dealt, 0),
-    downedA: A.filter((x) => x.hp <= 0).length,
+    downedA: A.filter((x) => !up(x) && !x.fled).length,
     fledB
   };
 }
