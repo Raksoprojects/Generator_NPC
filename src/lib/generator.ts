@@ -790,7 +790,8 @@ class XpDeveloper {
 /**
  * Tworzenie postaci (PG s. 33-37): 3 Umiejetnosci rasowe +5 i 3 +3, Talenty rasowe (stale, do
  * wyboru i z Tabeli Losowych Talentow), a z 1. poziomu profesji 5 rozwiniec jej Cech,
- * 40 rozwiniec jej 8 Umiejetnosci (najwyzej 10 w jednej) i 1 Talent. Bez kosztu PD.
+ * rozwiniecia jej 8 Umiejetnosci (settings.creation.skillAdvances: [dom] 25, RAW 40; najwyzej 10
+ * w jednej) i 1 Talent. Bez kosztu PD.
  */
 function creationStart(dev: XpDeveloper, profession: string): void {
   const { npc, arch } = dev;
@@ -836,7 +837,8 @@ function creationStart(dev: XpDeveloper, profession: string): void {
   for (; charLeft > 0 && chars.length; charLeft--) dev.buyChar(dev.pick(chars, (c) => charPriority(arch, c) ** spread.power)!, false);
   const skills = dev.skills(profession, 1);
   const career = new Map<string, number>();
-  let skillLeft = 40;
+  // [dom] BN dostaja mniej darmowych rozwiniec niz gracze (RAW 40) - gracze to wyjatkowe jednostki.
+  let skillLeft = spread.skillAdvances ?? 40;
   for (const s of skills.slice(0, 8)) {
     const n = Math.min(spread.skillMin, skillLeft);
     for (let k = 0; k < n; k++) dev.buySkill(s, false);

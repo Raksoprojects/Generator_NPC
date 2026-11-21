@@ -47,7 +47,8 @@
     "creation": {
       "charMin": 1,
       "skillMin": 3,
-      "power": 1
+      "power": 1,
+      "skillAdvances": 25
     },
     "charRolls": {
       "orderShare": 0.5,

@@ -239,7 +239,8 @@ export interface GeneratorSettings {
    * Tworzenie postaci: ile rozwiniec dostaje kazda Cecha (charMin) i kazda z 8 Umiejetnosci (skillMin)
    * 1. poziomu profesji, zanim reszta pojdzie wg priorytetow archetypu (do potegi power).
    */
-  creation?: { charMin: number; skillMin: number; power: number };
+  /** Tworzenie postaci BN; skillAdvances - darmowe rozwiniecia Umiejetnosci profesji (RAW 40, [dom] BN 25). */
+  creation?: { charMin: number; skillMin: number; power: number; skillAdvances?: number };
 }
 
 export interface TiersData {
