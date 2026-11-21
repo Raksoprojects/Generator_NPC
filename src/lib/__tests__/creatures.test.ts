@@ -94,9 +94,11 @@ describe("rozwoj bestii", () => {
     // Ksiazka: Skradanie 75 przy Zw 55 = +20 (rodzina Kot: 40 x 0.5 = 20), dalej PD.
     expect(stealth(weak)).toBeGreaterThanOrEqual(20);
     expect(weak.traits).toEqual([]);
-    // Domyslny poziom kota - Zwykly: PD 500-950 ponad poczatek przedzialu (500) - srodek 225.
-    expect(weak.xp).toEqual({ budget: 225, spent: expect.any(Number) });
-    expect(weak.xp!.spent).toBeLessThanOrEqual(225);
+    // Domyslny poziom kota (Zwykly) to baza: rozwiniecia jak u Nowicjusza - PD 100-450, srodek 275.
+    expect(weak.xp).toEqual({ budget: 275, spent: expect.any(Number) });
+    expect(weak.xp!.spent).toBeLessThanOrEqual(275);
+    // Poziom wyzej (Doswiadczony 1000-1500, srodek 1250): baza + PD ponad koniec Zwyklego (950).
+    expect(mid.xp!.budget).toBe(275 + 300);
     const advances = (n: Npc) => Object.values(n.charAdvances).reduce((a, b) => a + b, 0) + n.skills.reduce((a, s) => a + s.advances, 0);
     expect(advances(mid)).toBeGreaterThan(advances(weak));
     // Cechy Stworzen wg poziomu ponad domyslny: +1 - 0,25, +3 - 0,75 (deterministycznie: 0 i 1).
@@ -154,9 +156,9 @@ describe("rozwoj bestii", () => {
     }
     // Ponizej minimum - bez PD (sam profil z ksiazki i cechy negatywne).
     expect(weak.xp?.budget).toBe(0);
-    // Na domyslnym (Wybitny 6500-10000, srodek 8250 - 6500): PD ponad poczatek przedzialu.
+    // Na domyslnym (Wybitny) baza stworzenia: rozwiniecia jak u Nowicjusza (100-450, srodek 275), nie caly przedzial Wybitnego.
     const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "wybitny", deterministic: true }, seedRng(1));
-    expect(chosen.xp?.budget).toBe(1750);
+    expect(chosen.xp?.budget).toBe(275);
     const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "mistrz", deterministic: true }, seedRng(1));
     expect(lord.charAdvances.WW).toBeGreaterThan(chosen.charAdvances.WW);
     // Powyzej przedzialu (domyslny +3) - przycinany: Wybraniec (Wybitny) najwyzej Arcymistrz.

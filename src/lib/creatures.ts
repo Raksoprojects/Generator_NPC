@@ -180,15 +180,23 @@ export function beastTier(npc: Pick<Npc, "tier">, creature: CreatureDef): TierId
 }
 
 /**
- * Budzet PD bestii: PD poziomu (tiers.json) ponad poczatek przedzialu minimalnego poziomu
- * stworzenia - profil z ksiazki odpowiada BN, ktory dopiero wszedl na ten poziom.
+ * Budzet PD bestii. Baza stworzenia (domyslny poziom) to profil z ksiazki i rozwiniecia jak u
+ * Nowicjusza - PD z przedzialu najnizszego poziomu (tiers.json); na wyzszych poziomach dochodza
+ * PD ponad koniec przedzialu domyslnego poziomu. Profil "od" nizszego poziomu (xpFrom: czempion
+ * od szkieleta) - PD ponad poczatek tamtego poziomu i przemiane, jak dotad.
  */
 export function beastXpBudget(npc: Npc, creature: CreatureDef, rng: Rng, deterministic = false): number {
   if (npc.xpSpec?.budget != null) return npc.xpSpec.budget;
-  const [lo, hi] = gd.getTier(npc.tier)?.xp ?? [0, 0];
-  const raw = deterministic ? Math.round((lo + hi) / 2) : randInt(lo, hi, rng);
+  const roll = (range: [number, number]) => (deterministic ? Math.round((range[0] + range[1]) / 2) : randInt(range[0], range[1], rng));
+  const raw = roll((gd.getTier(npc.tier)?.xp ?? [0, 0]) as [number, number]);
+  const bonus = npc.xpSpec?.bonus ?? 0;
+  if (creature.xpFrom) return Math.max(0, Math.max(0, raw - beastXpShift(creature)) + bonus);
   // Ponizej minimum (oslabiony osobnik) - sam profil z ksiazki.
-  return Math.max(0, Math.max(0, raw - beastXpShift(creature)) + (npc.xpSpec?.bonus ?? 0));
+  const minTier = creature.minTier ?? "slaby";
+  if (TIER_IDS.indexOf(npc.tier) < TIER_IDS.indexOf(minTier)) return Math.max(0, bonus);
+  const base = roll((gd.getTier(TIER_IDS[0])?.xp ?? [0, 0]) as [number, number]);
+  const minEnd = gd.getTier(minTier)?.xp?.[1] ?? 0;
+  return Math.max(0, base + Math.max(0, raw - minEnd) + bonus);
 }
 
 /**
