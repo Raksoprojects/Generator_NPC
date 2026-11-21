@@ -1107,7 +1107,7 @@ function rollAttributes(npc: Npc, rng: Rng, deterministic = false): Record<Attri
   // Bestie (bez profesji) maja mniejszy rozrzut niz ludzie (creature_families -> rollSpread).
   const spread = isBeast(npc) ? gd.getCreatureFamilies().settings.rollSpread : undefined;
   return creature && !npc.turned
-    ? rollCreature(creature, arch?.characteristics ?? [], rng, deterministic, spread, !!npc.freeRolls)
+    ? rollCreature(creature, arch?.characteristics ?? [], rng, deterministic, spread, !!npc.freeRolls, !!gd.getCreatureFamilies().settings.bookRolls)
     : rollCharacteristics(arch, rng, deterministic, !!npc.freeRolls);
 }
 

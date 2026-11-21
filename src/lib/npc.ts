@@ -493,7 +493,8 @@ export function computeNpc(input: Npc): NpcView {
     magic.wounds +
     mutationWounds +
     (creature
-      ? creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, bookTraits, hardy + bookHardy(bookTraits))
+      ? // Roj dodany recznie (npc.traits) tez zmienia Zywotnosc (x5, jak Sredni).
+        creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, [...bookTraits, ...npc.traits.filter((t) => /^Rój/.test(t))], hardy + bookHardy(bookTraits))
       : computeWounds(totals.S, totals.Wt, totals.SW, race?.woundsIncludeStrength ?? true, hardy));
 
   const spells = npc.spells.map((n) => gd.getSpell(n)).filter(Boolean) as SpellDef[];
