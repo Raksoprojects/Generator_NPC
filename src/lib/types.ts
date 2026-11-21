@@ -746,8 +746,6 @@ export interface CreatureFamiliesData {
     };
     /** Rozrzut rzutu cech bestii: 11 +- spread zamiast 2k10 (mniejsza roznorodnosc). */
     rollSpread?: number;
-    /** [dom] Profil z ksiazki = baza z rzutami 10 (bez losowania cech stworzen). */
-    bookRolls?: boolean;
     /** Przedzial poziomow stworzenia wzgledem domyslnego (minTier): [-2, 3] = dwa nizej, trzy wyzej. */
     tierSpan?: [number, number];
     /** Zdziczale ludy (orki, zwierzoludzie): umiejetnosci i talenty profesji, ktorych nie rozwijaja. */

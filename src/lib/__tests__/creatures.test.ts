@@ -41,13 +41,7 @@ describe("stworzenia z bestiariusza", () => {
     expect(creatureBase(ameba, "I")).toEqual({ base: 0, die: "1k10" });
   });
 
-  it("[dom] baza stworzenia = profil z ksiazki (rzuty 10), rozwoj tylko w gore; Roj tylko recznie", () => {
-    const dragon = gd.getCreature("Smok")!;
-    for (let seed = 1; seed <= 10; seed++) {
-      const v = computeNpc(generateNpc({ creature: "Smok", tier: dragon.minTier, noArchetype: true, randomTraits: false, noHeroRoll: true }, seedRng(seed)));
-      for (const code of ["WW", "S", "Wt", "I", "Zw"] as const) expect(v.chars[code].total, `${seed} ${code}`).toBeGreaterThanOrEqual(dragon.stats[code]!);
-      expect(v.wounds, `${seed}`).toBeGreaterThanOrEqual(dragon.stats["Żyw"]!);
-    }
+  it("Roj tylko recznie: Ogar Chaosu pojedynczy, z Rojem - stado", () => {
     // Ogar Chaosu: pojedynczy pies; Roj dodany recznie daje stado (Zyw x5).
     const hound = generateNpc({ creature: "Ogar Chaosu", noArchetype: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
     const single = computeNpc(hound).wounds;

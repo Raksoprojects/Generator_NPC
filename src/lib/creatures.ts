@@ -30,30 +30,22 @@ export function creatureBase(creature: CreatureDef, code: Attribute): { base: nu
   return { base: v - 10, die: "2k10" };
 }
 
-/**
- * Rzuty na cechy stworzenia (minimum kluczowych cech archetypu dla cywilizowanych).
- * book [dom]: profil z ksiazki to baza z rzutami 10 (cechy do 5 - sama wartosc); osobniki roznia sie dopiero rozwojem.
- */
+/** Rzuty na cechy stworzenia (minimum kluczowych cech archetypu dla cywilizowanych). */
 export function rollCreature(
   creature: CreatureDef,
   keyChars: Attribute[],
   rng: Rng,
   deterministic = false,
   spread?: number,
-  free = false,
-  book = false
+  free = false
 ): Record<Attribute, number> {
   const out = {} as Record<Attribute, number>;
   const twoDice: Attribute[] = [];
   for (const code of ATTRIBUTES) {
     const { die } = creatureBase(creature, code);
     if (!die) out[code] = 0;
-    else if (die === "1k10") out[code] = book ? (creature.stats[code] ?? 0) : deterministic ? 5 : rollDie(10, rng);
+    else if (die === "1k10") out[code] = deterministic ? 5 : rollDie(10, rng);
     else twoDice.push(code);
-  }
-  if (book) {
-    for (const c of twoDice) out[c] = 10;
-    return out;
   }
   // Cechy 2k10: rozdzielane jak u ras (charRolls.ts); rollSpread zaweza rozrzut stworzen.
   if (deterministic) {

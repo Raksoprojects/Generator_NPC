@@ -6,7 +6,6 @@
     "charAdvances": { "slaby": 0, "sredni": 10, "obyty": 15, "zaawansowany": 20, "doswiadczony": 30, "weteran": 33, "wybitny": 37, "heroiczny": 40, "mistrz": 47, "arcymistrz": 53, "legendarny": 60, "heros": 80 },
     "charCodes": ["WW", "S", "Wt", "I", "Zw"],
     "rollSpread": 2,
-    "bookRolls": true,
     "tierSpan": [-2, 3],
     "xpDevelopment": {
       "chars": { "WW": 2, "S": 1, "Wt": 1, "I": 1, "Zw": 1 },
