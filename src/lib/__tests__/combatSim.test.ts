@@ -1,5 +1,5 @@
 ﻿import { beforeAll, describe, expect, it } from "vitest";
-import { fight, npcFighter } from "../combatSim";
+import { fight, npcFighter, outnumberBonus } from "../combatSim";
 import { seedRng } from "../dice";
 import { generateNpc } from "../generator";
 import { championRank, computeNpc } from "../npc";
@@ -51,6 +51,23 @@ describe("symulator starc", () => {
       if (r.winner !== "remis") done++;
     }
     expect(done).toBeGreaterThan(20);
+  });
+
+  it("przewaga liczebna [dom]: 2:1 +10 na Sredniego; Duzy od 3:1, +20 od 5:1; Wielki od 4:1", () => {
+    expect([1, 2, 3, 4].map((r) => outnumberBonus(r, 3))).toEqual([0, 10, 20, 30]);
+    expect([2, 3, 4, 5].map((r) => outnumberBonus(r, 4))).toEqual([0, 10, 10, 20]);
+    expect([3, 4, 6, 7].map((r) => outnumberBonus(r, 5))).toEqual([0, 10, 10, 20]);
+  });
+
+  it("strzelec trzyma dystans i strzela, walka z dystansem sie rozstrzyga", () => {
+    const archer = { ...npcFighter(generateNpc({ archetype: "Strzelec", race: "Człowiek", tier: "obyty" }, seedRng(3))), shooter: true };
+    expect(archer.shot).toBeDefined();
+    let done = 0;
+    for (let i = 0; i < 20; i++) {
+      const foe = npcFighter(generateNpc({ archetype: "Wojownik", race: "Człowiek", tier: "obyty" }, seedRng(40 + i)));
+      if (fight([archer], [foe], seedRng(i), 30, { distance: [12, 30] }).winner !== "remis") done++;
+    }
+    expect(done).toBeGreaterThan(14);
   });
 
   it("Czempion (X): 1 do Weterana, +1 za 2 poziomy i BWW 7+, najwyzej polowa BWW", () => {

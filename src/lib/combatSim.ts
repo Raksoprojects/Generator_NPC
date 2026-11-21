@@ -47,6 +47,18 @@ export interface Fighter {
   smart?: boolean;
   /** Pionek: przy Ranie Krytycznej wypada z walki (opcjonalna Nagla Smierc, PG 173). */
   minion?: boolean;
+  /** Szybkosc (Ruch 2 x Sz m, Bieg 4 x Sz m) i Latanie (metrow na Ruch). */
+  speed?: number;
+  fly?: number;
+  /** Bron zasiegowa (najlepsza): wartosc testu, Obrazenia, zasieg w m; shooter - woli strzelac niz walczyc wrecz. */
+  shot?: { skill: number; damage: number; magical: boolean; range: number };
+  shooter?: boolean;
+  /** Nie czuje bolu (Ozywieniec, Demoniczny, Konstrukt, Nie Czuje Bolu): Rany Krytyczne bez Stanow - liczy sie tylko Smierc i Amputacja. */
+  painless?: boolean;
+  /** Odporny na Oszolomienie i Zatrucie (Ozywieniec, Demoniczny). */
+  noStun?: boolean;
+  /** Druzyna ma srodki na roje (ogien, czary obszarowe): kazdy jej atak w roj jest skuteczny. */
+  antiSwarm?: boolean;
   /** Atak wrecz: wartosc testu i Obrazenia (z BS). */
   attack: { skill: number; damage: number; blunt: boolean; magical: boolean; slow: boolean; unbalanced: boolean };
   ranged: number;
@@ -117,6 +129,7 @@ export interface PartyMember {
   Wt: number;
   SW?: number;
   US?: number;
+  Sz?: number;
   melee: number;
   weapon: { name: string; damage: number; qualities: string[] };
   dodge: number;
@@ -139,6 +152,7 @@ export function partyFighter(p: PartyMember): Fighter {
     agility: p.Zw ?? 30,
     initMod: p.weapon.qualities.includes("Powolny") ? -3 : 0,
     smart: true,
+    speed: p.Sz ?? (p.race && !/krasnolud/i.test(p.race) ? 4 : 3),
     attack: {
       skill: p.melee,
       damage: p.weapon.damage,
@@ -228,6 +242,21 @@ function breathOf(traits: string[], tb: number): Fighter["breath"] {
   return undefined;
 }
 
+/** Zasieg broni z tabeli ("50", "BS×3", "S×2"); bez liczby - 30 m. */
+function rangeOf(text: string | undefined, sb: number): number {
+  const mult = /(?:BS|S)\s*[×x*]\s*(\d+)/.exec(text ?? "");
+  if (mult) return sb * Number(mult[1]);
+  const n = Number(/\d+/.exec(text ?? "")?.[0]);
+  return Number.isFinite(n) && n > 0 ? n : 30;
+}
+
+/** Najlepsza bron zasiegowa BN (wartosc testu + 3 x Obrazenia). */
+function bestShot(view: NpcView, s: number): Fighter["shot"] {
+  const w = view.weapons.filter((x) => x.ranged && x.damage != null).sort((a, b) => b.skill + 3 * (b.damage ?? 0) - (a.skill + 3 * (a.damage ?? 0)))[0];
+  if (!w) return undefined;
+  return { skill: w.skill, damage: w.damage!, magical: !!w.magicItem, range: rangeOf(w.range, characteristicBonus(s)) };
+}
+
 /** Stworzenie albo BN z generatora jako walczacy. */
 export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
   const traits = [...view.creatureTraits, ...view.rolledTraits, ...view.heroTraits];
@@ -249,6 +278,11 @@ export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
     initMod: (melee?.qualities.includes("Szybka") ? 3 : 0) - (melee?.qualities.includes("Powolny") ? 3 : 0),
     // Rozumny: nie Zwierzecy i z Inteligencja co najmniej 20 (zombie, bestie - bez taktyki).
     smart: !has(traits, /^Zwierzęcy/) && !view.chars.Int.absent && view.chars.Int.total >= 20,
+    speed: view.movement || 4,
+    fly: rank(traits, /^Latanie \((\d+)\)/),
+    shot: bestShot(view, char("S", 10)),
+    painless: has(traits, /^(Ożywieniec|Demoniczny|Konstrukt|Nie Czuje Bólu)/),
+    noStun: has(traits, /^(Ożywieniec|Demoniczny)/),
     attack: {
       skill: melee?.skill ?? char("WW", 20),
       damage,
@@ -341,6 +375,9 @@ interface State {
   initRoll: number;
   /** Wlasna strona (sojusznicy razem z nim). */
   team: State[];
+  /** Pozycja na linii walki (m) i premia z Szarzy do pierwszego Testu Broni Bialej. */
+  pos: number;
+  charge: number;
   dealt: number;
   taken: number;
   /** Pula Przewagi strony (wspolna dla wszystkich jej walczacych) i kara Dekoncentrujacy dla strony. */
@@ -350,10 +387,16 @@ interface State {
 /** Opcje walki: crits - Rany Krytyczne (Fuks, Pech, Tabela Ran Krytycznych; 0 Zyw = Powalenie, nie wylaczenie). */
 export interface FightOptions {
   crits?: boolean;
+  /** Dystans poczatkowy miedzy stronami [od, do] m (losowany); bez - wszyscy od razu w zwarciu. */
+  distance?: [number, number];
 }
 
-/** Biezaca walka liczy Rany Krytyczne (ustawiane w fight). */
+/** Biezaca walka liczy Rany Krytyczne / dystans (ustawiane w fight). */
 let CRITS = false;
+let DIST = false;
+
+/** W zasiegu walki wrecz (do 2 m). */
+const near = (a: State, b: State) => Math.abs(a.pos - b.pos) <= 2;
 
 /** Walczy dalej: nie wylaczony i nie uciekl; bez Krytykow 0 Zyw wylacza z walki. */
 const up = (x: State) => !x.out && !x.fled && (CRITS || x.hp > 0);
@@ -403,16 +446,23 @@ function hates(a: State, d: State): boolean {
 }
 
 /**
- * Przewaga liczebna [dom, Kompendium MG; RAW PG 162: +20 / +40]: 2:1 +10, kazdy kolejny stopien +10.
+ * Przewaga liczebna [dom, Kompendium MG; RAW PG 162: +20 / +40]: 2:1 +10, kazdy kolejny stopien +10;
+ * wiekszy obronca liczy sie jak kilku (Duzy: 3:1 +10, 5:1 +20; Wielki: 4:1 +10, 7:1 +20).
  * Liczy sie, kto z kim jest Zwiazany Walka: atakujacy na tym samym celu przeciw obroncy i jego
  * sojusznikom, ktorzy walcza z ktoryms z atakujacych. Roje ignoruja liczebnosc.
  */
 function outnumber(a: State, d: State): number {
   if (a.f.swarm || d.f.swarm) return 0;
-  const att = a.team.filter((x) => up(x) && (x === a || x.target === d));
-  const def = d.team.filter((x) => up(x) && (x === d || (x.target != null && att.includes(x.target))));
-  const ratio = Math.floor(att.length / Math.max(1, def.length));
-  return ratio >= 2 ? 10 * (ratio - 1) : 0;
+  const att = a.team.filter((x) => up(x) && (x === a || (x.target === d && near(x, d))));
+  const def = d.team.filter((x) => up(x) && (x === d || (x.target != null && att.includes(x.target) && near(x, x.target))));
+  return outnumberBonus(Math.floor(att.length / Math.max(1, def.length)), d.f.size);
+}
+
+/** Premia z przewagi liczebnej przy stosunku ratio:1 wobec obroncy danego Rozmiaru (indeks SIZES). */
+export function outnumberBonus(ratio: number, size: number): number {
+  // Wiekszy obronca trudniej osaczyc [dom]: Duzy - +10 od 3:1 i co 2 kolejne, Wielki - od 4:1 i co 3 kolejne...
+  const step = 1 + Math.max(0, size - AVERAGE);
+  return 10 * Math.floor(Math.max(0, ratio - 1) / step);
 }
 
 /**
@@ -443,6 +493,8 @@ interface Hit {
   blunt?: boolean;
   sl: number;
   roll: number;
+  /** Strzal: bez premii z BS za Rozmiar i Szal Bojowy. */
+  ranged?: boolean;
 }
 
 /** Miejsce Trafienia ostatniego ciosu (do Rany Krytycznej za przekroczenie Zywotnosci). */
@@ -455,8 +507,8 @@ function wounds(a: State, d: State, h: Hit, rng: Rng): number {
   lastLoc = loc;
   // Rozmiar [dom]: +BS za kazdy stopien ponad Sredni. Suche Kosci [dom]: -2/poziom nieobuchowa, +2 obuchowa.
   // Szal Bojowy: +1 do BS - w Obrazeniach broni i w premii Rozmiaru.
-  const frenzy = a.frenzied ? 1 : 0;
-  const sizeDmg = (a.f.sb + frenzy) * Math.max(0, a.f.size - AVERAGE);
+  const frenzy = a.frenzied && !h.ranged ? 1 : 0;
+  const sizeDmg = h.ranged ? 0 : (a.f.sb + frenzy) * Math.max(0, a.f.size - AVERAGE);
   const bones = d.f.dryBones && !h.magical ? (h.blunt ? 2 : -2 * d.f.dryBones) : 0;
   const red = h.ignoreTb ? 0 : h.ignoreAp ? d.f.tb : d.f.armour[loc];
   const raw = h.damage + sizeDmg + bones + frenzy + h.sl - red;
@@ -472,6 +524,8 @@ function hurt(s: State, n: number): void {
 /**
  * Rana Krytyczna [PG 174-178]: dodatkowe Rany bez BWt i PP (nie wywoluja kolejnej), Stany,
  * Utrata Przytomnosci, Smierc. Pionek (opcjonalna Nagla Smierc, PG 173) od razu wypada z walki.
+ * [dom] Wiekszym trudniej odciac konczyne: -10 do rzutu za kazdy stopien Rozmiaru ponad Sredni.
+ * Istota bez bolu (Ozywieniec, Demoniczny, Konstrukt, Nie Czuje Bolu) - tylko Rany, Amputacja i Smierc.
  */
 function critical(d: State, loc: CritLoc, mod: number, rng: Rng): void {
   if (d.out) return;
@@ -479,13 +533,18 @@ function critical(d: State, loc: CritLoc, mod: number, rng: Rng): void {
     d.out = true;
     return;
   }
-  const e = critEntry(loc, randInt(1, 100, rng) + mod);
+  const e = critEntry(loc, randInt(1, 100, rng) + mod - 10 * Math.max(0, d.f.size - AVERAGE));
   d.crits++;
   if (e.death) {
     d.out = true;
     return;
   }
   d.hp = Math.max(0, d.hp - e.wounds);
+  if (d.f.painless) {
+    if (e.amp && e.maim) d.maim = Math.min(30, Math.max(d.maim, e.maim));
+    if (e.amp && e.drop) d.skip++;
+    return;
+  }
   d.bleed += e.bleed ?? 0;
   d.stunned += (e.stun ?? 0) + (e.stunD10 ? randInt(1, 10, rng) : 0);
   d.blind += e.blind ?? 0;
@@ -531,7 +590,7 @@ function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolea
     d.burnt += real;
     if (d.f.animal && !d.f.fearless && !d.frenzied) d.broken = Math.max(d.broken, 1);
   }
-  if (opts.venom) d.poisoned++;
+  if (opts.venom && !d.f.noStun) d.poisoned++;
   if (opts.entangle) d.entangled++;
   if (opts.knockdown && d.f.size < a.f.size) d.prone = true;
   if (opts.bite && a.f.vampiric) a.hp = Math.min(a.f.wounds, a.hp + real);
@@ -550,11 +609,16 @@ function apply(a: State, d: State, dmg: number, rng: Rng, opts: { venom?: boolea
  * zadaje Obrazenia jak atakujacy. Z Krytykami: Fuks (dublet przy sukcesie, takze w obronie) i Pech.
  */
 function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: FreeAttack, fire = false): void {
+  // Z dystansem: cios tylko w zasiegu (2 m); Atak Jezykiem siega dalej.
+  if (DIST && !near(a, d) && !fa?.ranged) return;
   const att = a.f.attack;
   const prone = d.prone ? 20 : 0;
   const blind = d.blind ? 10 : 0;
   const hate = hates(a, d) ? 1 : 0;
-  const atkTest = test(att.skill + bonus + prone + blind + outnumber(a, d) - penalty(a, d), rng);
+  // Szarza: +10 do pierwszego Testu Broni Bialej po Ruchu [PG 165].
+  const charge = fa ? 0 : a.charge;
+  a.charge = 0;
+  const atkTest = test(att.skill + bonus + prone + blind + charge + outnumber(a, d) - penalty(a, d), rng);
   const sizeGap = Math.max(0, a.f.size - d.f.size);
   const parryVal = d.f.parry - penalty(d, a);
   const dodgeVal = d.f.dodge - penalty(d, a);
@@ -582,7 +646,7 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
       apply(d, a, dmg, rng, { venom: d.f.venom });
     }
     // Fuks obroncy: udana obrona z dubletem - atakujacy dostaje Rane Krytyczna [PG 160].
-    if (CRITS && def.ok && double(def.roll) && !fa && up(a) && !warded(a, d.f.attack.magical, rng)) critical(a, critLocation(randInt(1, 100, rng)), 0, rng);
+    if (CRITS && def.ok && double(def.roll) && !fa && up(a) && !warded(a, d.f.attack.magical, rng)) critical(a, critLocation(randInt(1, 100, rng)), -20, rng);
     return;
   }
   // Wygrana: wygrany Test Przeciwstawny, ktory sam zainicjowales - +1 do puli strony [PB 133].
@@ -592,8 +656,43 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
   if (d.f.swarmTiny && !fire) return;
   const w = wounds(a, d, hit, rng);
   apply(a, d, w, rng, { venom: a.f.venom, bite: fa?.name === "Ugryzienie", entangle: a.f.entangle && !fa, knockdown: fa?.knockdown, fire });
-  // Fuks: trafienie z dubletem - dodatkowo Rana Krytyczna (osobny rzut na Miejsce Trafienia) [PG 160].
-  if (CRITS && w > 0 && double(atkTest.roll) && up(d)) critical(d, critLocation(randInt(1, 100, rng)), 0, rng);
+  // Fuks: trafienie z dubletem - dodatkowo Rana Krytyczna (osobny rzut na Miejsce Trafienia) [PG 160];
+  // [dom] Krytyk bez przekroczenia Zywotnosci rzucany z -20.
+  if (CRITS && w > 0 && double(atkTest.roll) && up(d)) critical(d, critLocation(randInt(1, 100, rng)), -20, rng);
+}
+
+/**
+ * Strzal (Test Prosty Umiejetnosci Strzeleckich / Broni Zasiegowej) [PG 159-162]: Rozmiar celu (Drobny -30 ... Monstrualny +60),
+ * trafienie daje +1 Przewagi. Cel Zwiazany Walka z sojusznikiem: -20 [dom HR-020]; pudlo, ktore bez kary byloby
+ * trafieniem, trafia losowego sojusznika z tego zwarcia (0 PS).
+ */
+function shoot(a: State, d: State, rng: Rng, bonus = 0): void {
+  const sh = a.f.shot!;
+  const allies = a.team.filter((x) => x !== a && up(x) && near(x, d));
+  const base = sh.skill + bonus + ([-30, -20, -10, 0, 20, 40, 60][d.f.size] ?? 0) - penalty(a, d);
+  const t = test(base - (allies.length ? 20 : 0), rng);
+  if (CRITS && !t.ok && double(t.roll)) oops(a, rng);
+  let victim = d;
+  if (!t.ok) {
+    if (!allies.length || t.roll > base || t.roll > 95) return;
+    victim = allies[randInt(0, allies.length - 1, rng)];
+  } else a.side.pool++;
+  if (victim.f.swarmTiny && !a.f.antiSwarm) return;
+  const w = wounds(a, victim, { damage: sh.damage, magical: sh.magical, sl: t.ok ? Math.max(0, t.sl) : 0, roll: t.roll, ranged: true }, rng);
+  apply(a, victim, w, rng);
+  if (CRITS && t.ok && w > 0 && double(t.roll) && up(victim)) critical(victim, critLocation(randInt(1, 100, rng)), -20, rng);
+}
+
+/** Ruch w strone celu: najwyzej m metrow, do 1,5 m od niego. */
+function moveTo(s: State, t: State, m: number): void {
+  const d = t.pos - s.pos;
+  s.pos += Math.sign(d) * Math.max(0, Math.min(m, Math.abs(d) - 1.5));
+}
+
+/** Odejscie od najblizszego wroga o m metrow. */
+function moveAway(s: State, foes: State[], m: number): void {
+  const n = foes.reduce((x, y) => (Math.abs(y.pos - s.pos) < Math.abs(x.pos - s.pos) ? y : x));
+  s.pos += (Math.sign(s.pos - n.pos) || (s.pos <= 0 ? -1 : 1)) * m;
 }
 
 /** Pocisk magiczny: kumulacja PS Splatania, potem Rzucanie (PS >= PZ), Obrazenia + PS ponad PZ. */
@@ -774,18 +873,24 @@ function creatureTurn(s: State, foes: State[], round: number, rng: Rng, act: (bo
  */
 export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 30, opts: FightOptions = {}): FightResult {
   CRITS = !!opts.crits;
+  DIST = !!opts.distance;
   const poolA = { pool: 0, distracted: false };
   const poolB = { pool: 0, distracted: false };
   const mk = (side: State["side"]) => (f: Fighter): State => ({
     f, hp: f.wounds, broken: 0, stunned: 0, poisoned: 0, entangled: 0, prone: false, fearSl: 0, fearDone: !!f.fearless,
     frenzied: false, hating: false, fled: false, channelled: 0, fortune: f.fortune, counters: 0, burnt: 0,
-    out: false, crits: 0, bleed: 0, blind: 0, zeroRounds: 0, maim: 0, skip: 0, exposed: 0, target: null, initRoll: 0, team: [],
+    out: false, crits: 0, bleed: 0, blind: 0, zeroRounds: 0, maim: 0, skip: 0, exposed: 0, target: null, initRoll: 0, team: [], pos: 0, charge: 0,
     dealt: 0, taken: 0, side
   });
   const A = sideA.map(mk(poolA));
   const B = sideB.map(mk(poolB));
   for (const s of A) s.team = A;
   for (const s of B) s.team = B;
+  // Dystans: strona A w 0, strona B w wylosowanej odleglosci.
+  if (opts.distance) {
+    const gap = opts.distance[0] + rng() * (opts.distance[1] - opts.distance[0]);
+    for (const s of B) s.pos = gap;
+  }
   const alive = (xs: State[]) => xs.filter(up);
   const swarmFight = [...A, ...B].some((x) => x.f.swarm);
   poolA.pool = (swarmFight ? 0 : numbersStart(A.length, B.length)) + Math.max(0, ...A.map((x) => THREAT_START[x.f.size] ?? 0));
@@ -822,6 +927,8 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
       if (!alive(foes).length) break;
       // Powalenie mija w Turze; przy 0 Zyw (Krytyki) trwa, dopoki ktos nie uleczy Rany.
       s.prone = CRITS && s.hp === 0;
+      // Ozywieniec, Demoniczny: odporni na Oszolomienie i Zatrucie.
+      if (s.f.noStun) s.stunned = s.poisoned = 0;
       if (s.f.fierce && s.side.pool < s.f.fierce) s.side.pool = s.f.fierce;
       // Strach (Prog): rozszerzony Test Opanowania co Runde, az PS >= Prog.
       const fear = Math.max(0, ...foes.map((x) => Math.max(x.f.fear, x.f.terror)));
@@ -859,18 +966,49 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
       // Ogien: z szansa fire atak w tej Turze jest ognisty - tylko na cel, na ktory warto go uzyc
       // (Regeneracja, roj drobnicy); na inne stworzenia (np. Bazyliszek) ognia sie nie uzywa.
       const fireRoll = !!s.f.fire && randInt(1, 100, rng) <= s.f.fire * 100;
-      const fireOn = (t: State) => fireRoll && (t.f.regenerate || !!t.f.swarmTiny);
+      const fireOn = (t: State) => (!!t.f.swarm && !!s.f.antiSwarm) || (fireRoll && (t.f.regenerate || !!t.f.swarmTiny));
+      let shooting = false;
       const act = (bonus: number, gain: boolean) => {
         const targets = alive(foes);
         if (!targets.length) return;
         // Roj: atakuje wszystkich wrogow w zasiegu.
         if (s.f.swarm) {
-          targets.forEach((t, i) => melee(s, t, rng, bonus, gain && i === 0, undefined, fireOn(t)));
+          targets.filter((t) => !DIST || near(s, t)).forEach((t, i) => melee(s, t, rng, bonus, gain && i === 0, undefined, fireOn(t)));
           return;
         }
         const target = chooseTarget(s, foes, rng)!;
-        if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain, undefined, fireOn(target));
+        if (shooting) shoot(s, target, rng, bonus);
+        else if (!castMissile(s, target, rng, bonus)) melee(s, target, rng, bonus, gain, undefined, fireOn(target));
       };
+      // Dystans: Ruch przed Akcja. Strzelec strzela, a zwiazany walka odchodzi za 2 Przewagi (Ucieczka
+      // przed zagrozeniem, PB 134); pozostali ida do celu: Ruch (2 x Sz) i atak, Szarza do Biegu (4 x Sz, +10),
+      // dalej - sam Bieg bez Akcji. Latajacy pokonuje Latanie metrow. Zioniecie siega 20 m.
+      if (DIST) {
+        const t = chooseTarget(s, foes, rng)!;
+        const walk = 2 * (s.f.speed ?? 4);
+        const run = Math.max(2 * walk, s.f.fly ?? 0);
+        const engaged = alive(foes).filter((x) => near(s, x));
+        if (s.f.shooter && s.f.shot) {
+          if (engaged.length && s.side.pool >= 2) {
+            s.side.pool -= 2;
+            moveAway(s, engaged, walk);
+          }
+          shooting = !alive(foes).some((x) => near(s, x));
+          if (shooting && Math.abs(t.pos - s.pos) > s.f.shot.range) moveTo(s, t, walk);
+        }
+        const breathNow = !isA && !!s.f.breath && s.side.pool >= s.f.breath.cost && Math.abs(t.pos - s.pos) <= 20;
+        if (!shooting && !breathNow && !near(s, t)) {
+          const gap = Math.abs(t.pos - s.pos) - 1.5;
+          if (gap <= walk) moveTo(s, t, walk);
+          else if (gap <= run) {
+            moveTo(s, t, run);
+            s.charge = 10;
+          } else {
+            moveTo(s, t, run);
+            continue;
+          }
+        }
+      }
       if (!isA) creatureTurn(s, foes, round, rng, act);
       else {
         // Gracze trzymaja Przewage: Dodatkowa Akcja, gdy idzie zle albo pula pelna (8+);
@@ -912,8 +1050,11 @@ export function fight(sideA: Fighter[], sideB: Fighter[], rng: Rng, maxRounds = 
           if (s.hp > 0) hurt(s, s.bleed);
           else if (!test(s.f.endurance, rng).ok) s.out = true;
         }
-        // Na 0 Zyw dluzej niz BWt Rund - Utrata Przytomnosci [PG 172].
-        if (s.hp === 0 && ++s.zeroRounds > s.f.tb) s.out = true;
+        // Na 0 Zyw dluzej niz BWt Rund - Utrata Przytomnosci [PG 172]; istota bez bolu nie mdleje,
+        // pada dopiero, gdy ma wiecej Ran Krytycznych niz BWt.
+        if (s.f.painless) {
+          if (s.hp === 0 && s.crits > s.f.tb) s.out = true;
+        } else if (s.hp === 0 && ++s.zeroRounds > s.f.tb) s.out = true;
         if (s.blind && round % 2 === 1) s.blind--;
         s.exposed = 0;
       }
