@@ -32,6 +32,8 @@ export interface CritEffect {
   drop?: boolean;
   /** Trwale okaleczenie w walce: kara do Testow (bezwladne ramie, noga, zlamanie). */
   maim?: number;
+  /** Amputacja - dziala takze na istoty niewrazliwe na bol (Ozywieniec, Demoniczny, Nie Czuje Bolu). */
+  amp?: boolean;
 }
 
 export const CRIT_TABLE: Record<CritLoc, CritEffect[]> = {
@@ -50,11 +52,11 @@ export const CRIT_TABLE: Record<CritLoc, CritEffect[]> = {
     { max: 70, name: "Złamany nos", wounds: 3, bleed: 2, stunTest: 0, stunFail: 1 },
     { max: 75, name: "Zmiażdżona żuchwa", wounds: 4, stun: 3 },
     { max: 80, name: "Wstrząśnienie mózgu", wounds: 4, bleed: 2, stunD10: true },
-    { max: 85, name: "Rozkwaszone usta", wounds: 4, bleed: 2 },
-    { max: 90, name: "Zgruchotane ucho", wounds: 4, bleed: 2 },
-    { max: 93, name: "Wybite oko", wounds: 5, blind: 3, bleed: 2, stun: 1 },
-    { max: 96, name: "Oszpecający cios", wounds: 5, blind: 3, bleed: 3, stun: 2 },
-    { max: 99, name: "Zgruchotana szczęka", wounds: 5, bleed: 4, stun: 3 },
+    { max: 85, name: "Rozkwaszone usta", wounds: 4, amp: true, bleed: 2 },
+    { max: 90, name: "Zgruchotane ucho", wounds: 4, amp: true, bleed: 2 },
+    { max: 93, name: "Wybite oko", wounds: 5, amp: true, blind: 3, bleed: 2, stun: 1 },
+    { max: 96, name: "Oszpecający cios", wounds: 5, amp: true, blind: 3, bleed: 3, stun: 2 },
+    { max: 99, name: "Zgruchotana szczęka", wounds: 5, amp: true, bleed: 4, stun: 3 },
     { max: 100, name: "Dekapitacja", wounds: 0, death: true }
   ],
   "ręce": [
@@ -72,11 +74,11 @@ export const CRIT_TABLE: Record<CritLoc, CritEffect[]> = {
     { max: 70, name: "Uszkodzona tętnica", wounds: 4, bleed: 4 },
     { max: 75, name: "Zmiażdżony łokieć", wounds: 4, drop: true, maim: 20 },
     { max: 80, name: "Wywichnięty bark", wounds: 4, drop: true, maim: 20, stun: 1, koTest: -20 },
-    { max: 85, name: "Odcięty palec", wounds: 4, bleed: 1 },
-    { max: 90, name: "Zmasakrowana dłoń", wounds: 4, bleed: 2, stun: 1 },
+    { max: 85, name: "Odcięty palec", wounds: 4, amp: true, bleed: 1 },
+    { max: 90, name: "Zmasakrowana dłoń", wounds: 4, amp: true, bleed: 2, stun: 1 },
     { max: 93, name: "Rozszarpany biceps", wounds: 5, drop: true, maim: 20, bleed: 2, stun: 1 },
-    { max: 96, name: "Zgruchotana dłoń", wounds: 5, drop: true, maim: 20, bleed: 2, koTest: -20 },
-    { max: 99, name: "Przecięte ścięgna", wounds: 5, drop: true, maim: 20, prone: true, bleed: 3, stun: 1, koTest: -20 },
+    { max: 96, name: "Zgruchotana dłoń", wounds: 5, amp: true, drop: true, maim: 20, bleed: 2, koTest: -20 },
+    { max: 99, name: "Przecięte ścięgna", wounds: 5, drop: true, amp: true, maim: 20, prone: true, bleed: 3, stun: 1, koTest: -20 },
     { max: 100, name: "Odcięte ramię", wounds: 0, death: true }
   ],
   korpus: [
@@ -119,8 +121,8 @@ export const CRIT_TABLE: Record<CritLoc, CritEffect[]> = {
     { max: 85, name: "Strzaskane kolano", wounds: 4, prone: true, bleed: 1, stun: 1, maim: 20 },
     { max: 90, name: "Zwichnięte kolano", wounds: 4, prone: true, stunTest: -20, stunFail: 1, maim: 10 },
     { max: 93, name: "Zmiażdżona stopa", wounds: 5, bleed: 2, proneTest: 20 },
-    { max: 96, name: "Odcięta stopa", wounds: 5, prone: true, bleed: 3, stun: 2, maim: 20 },
-    { max: 99, name: "Przecięte ścięgna", wounds: 5, prone: true, bleed: 2, stun: 2, maim: 20 },
+    { max: 96, name: "Odcięta stopa", wounds: 5, amp: true, prone: true, bleed: 3, stun: 2, maim: 20 },
+    { max: 99, name: "Przecięte ścięgna", wounds: 5, prone: true, amp: true, bleed: 2, stun: 2, maim: 20 },
     { max: 100, name: "Strzaskana miednica", wounds: 0, death: true }
   ]
 };
