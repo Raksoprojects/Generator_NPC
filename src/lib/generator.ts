@@ -83,6 +83,8 @@ export interface GenSpec {
   randomTraits?: boolean;
   /** Dodatkowe profile bohaterow. */
   heroProfiles?: string[];
+  /** Bez losowego profilu bohatera (sama baza - do porownan i symulacji). */
+  noHeroRoll?: boolean;
   /** Dodaje profil Dowodcy Oddzialu. */
   commander?: boolean;
   label?: string;
@@ -1074,7 +1076,7 @@ function heroProfilesFor(spec: GenSpec, tierId: TierId, rng: Rng): string[] {
   const out = new Set<string>((spec.heroProfiles ?? []).filter((h) => gd.getHeroProfile(h)));
   // Mala losowa szansa (najwyzej kilka procent) na wyjatkowa jednostke - tylko przy losowaniu.
   const chances = gd.getTier(tierId)?.heroProfileChances ?? [];
-  if (!spec.deterministic && !out.size && chances.length) {
+  if (!spec.deterministic && !spec.noHeroRoll && !out.size && chances.length) {
     let roll = rng();
     for (const c of chances) {
       if (roll < c.chance) {
