@@ -14180,6 +14180,824 @@
    "abilities": [],
    "trappings": [],
    "minTier": "weteran"
+  },
+  {
+   "name": "Zgubny wilk",
+   "source": "Homebrew (Balewolf)",
+   "page": null,
+   "stats": {
+    "Sz": 5,
+    "WW": 45,
+    "US": null,
+    "S": 55,
+    "Wt": 50,
+    "I": 40,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 15,
+    "SW": 45,
+    "Ogd": null,
+    "Żyw": 38
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (1)",
+    "Choroba (Likantropia)",
+    "Strach (2)",
+    "Szał Bojowy",
+    "Srogi (1)",
+    "Magiczny",
+    "Widzenie w Ciemności",
+    "Regeneracja",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Tropiciel",
+    "Ugryzienie +9",
+    "Broń (Pazury) +9"
+   ],
+   "optional": [
+    "Pancerz (2)",
+    "Duży",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Nie do Zdarcia",
+    "Elitarny",
+    "Szybki",
+    "Twardziel",
+    "Żarłoczny",
+    "Odporność (Zwykłe Ataki)",
+    "Zakażony",
+    "Mutacja",
+    "Rozmiar (Wielki)",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Zjadliwe szczęki",
+     "description": "Ugryzienie zgubnego wilka ma Zaletę broni Nadziewająca."
+    },
+    {
+     "name": "Skażenie",
+     "description": "Rany zadane przez to stworzenie są trwałe - leczy je tylko magia."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "subgroup": "Inne potwory",
+   "family": "Psowate",
+   "status": null,
+   "minTier": "weteran"
+  },
+  {
+   "name": "Ogar Khorne'a",
+   "source": "Homebrew (Flesh Hound)",
+   "page": null,
+   "stats": {
+    "Sz": 7,
+    "WW": 55,
+    "US": null,
+    "S": 45,
+    "Wt": 40,
+    "I": 50,
+    "Zw": 50,
+    "Zr": null,
+    "Int": 15,
+    "SW": 70,
+    "Ogd": null,
+    "Żyw": 16
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Spaczenie (Pomniejsze)",
+    "Demoniczny 9+",
+    "Strach (2)",
+    "Szał Bojowy",
+    "Odporność na Magię (3)",
+    "Widzenie w Ciemności",
+    "Długi Krok",
+    "Tropiciel",
+    "Niestabilny",
+    "Jad",
+    "Ugryzienie +7",
+    "Broń (Pazury) +8"
+   ],
+   "optional": [
+    "Pancerz (1)",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Elitarny",
+    "Szybki",
+    "Srogi (1)",
+    "Twardziel",
+    "Zakażony",
+    "Mutacja",
+    "Rozmiar (Duży)",
+    "Wyszkolony (Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Odporność jeźdźca",
+     "description": "Odporność na Magię chroni też jeźdźca ogara."
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "subgroup": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Wielki squig jaskiniowy",
+   "source": "Homebrew (Great Cave Squig)",
+   "page": null,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": null,
+    "S": 60,
+    "Wt": 40,
+    "I": 10,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 5,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Zwierzęcy",
+    "Skoczny",
+    "Widzenie w Mroku",
+    "Zakażony",
+    "Rozmiar (Duży)",
+    "Broń (Paszcza pełna kłów) +10"
+   ],
+   "optional": [
+    "Ziemnowodny",
+    "Zionięcie +8 (Kwas albo Gaz)",
+    "Furia",
+    "Rogi +10",
+    "Rozmiar (Wielki)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Squig miażdżyciel",
+   "source": "Homebrew (Mangler Squig)",
+   "page": null,
+   "stats": {
+    "Sz": 4,
+    "WW": 55,
+    "US": null,
+    "S": 60,
+    "Wt": 40,
+    "I": 10,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 5,
+    "SW": 15,
+    "Ogd": null,
+    "Żyw": 30
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Zwierzęcy",
+    "Skoczny",
+    "Widzenie w Mroku",
+    "Furia",
+    "Niewrażliwość na Psychologię",
+    "Zakażony",
+    "Rozmiar (Duży)",
+    "Broń (Paszcze i łańcuchy) +10"
+   ],
+   "optional": [
+    "Ziemnowodny",
+    "Zionięcie +8 (Kwas albo Gaz)",
+    "Dusiciel",
+    "Dekoncentrujący",
+    "Rogi +10",
+    "Rozmiar (Wielki)"
+   ],
+   "abilities": [
+    {
+     "name": "Siła zniszczenia",
+     "description": "Dwa wielkie squigi skute łańcuchem, każdy z własną Żywotnością. Zawsze szarżuje w losowym kierunku (Rozrzut) na 2k8 m i nie zatrzymuje się po Związaniu walką; atakuje raz każdego, kogo minie w zasięgu walki. Jeździec po udanym Teście Jeździectwa wybiera kierunek i dystans, po nieudanym sam jest atakowany. Bez innego celu squigi atakują się nawzajem."
+    }
+   ],
+   "trappings": [],
+   "group": "Zielonoskórzy",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "doswiadczony"
+  },
+  {
+   "name": "Hagranym",
+   "source": "Homebrew (Hagranym)",
+   "page": null,
+   "stats": {
+    "Sz": 7,
+    "WW": 45,
+    "US": null,
+    "S": 55,
+    "Wt": 50,
+    "I": 35,
+    "Zw": 35,
+    "Zr": null,
+    "Int": 30,
+    "SW": 35,
+    "Ogd": 25,
+    "Żyw": 36
+   },
+   "skills": [],
+   "talents": [
+    "Wyczulony Zmysł (Słuch)",
+    "Wyborny Wspinacz",
+    "Silny Cios"
+   ],
+   "traits": [
+    "Wojowniczy",
+    "Zwierzęcy",
+    "Bystry",
+    "Furia",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Ugryzienie +8",
+    "Broń (Kopyta) +9"
+   ],
+   "optional": [
+    "Pancerz (1)",
+    "Duży",
+    "Brutalny",
+    "Czempion",
+    "Elitarny",
+    "Szybki",
+    "Twardziel",
+    "Staje Dęba",
+    "Twardy",
+    "Wyszkolony (Bojowy, Magiczny, Pociągowy, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
+   "family": "Potwór",
+   "status": null,
+   "minTier": "zaawansowany"
+  },
+  {
+   "name": "Mamut",
+   "source": "Homebrew (Mammoth)",
+   "page": null,
+   "stats": {
+    "Sz": 8,
+    "WW": 35,
+    "US": 15,
+    "S": 85,
+    "Wt": 80,
+    "I": 15,
+    "Zw": 10,
+    "Zr": null,
+    "Int": 10,
+    "SW": 70,
+    "Ogd": null,
+    "Żyw": 124
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (2)",
+    "Zwierzęcy",
+    "Strach (2)",
+    "Widzenie w Ciemności",
+    "Staje Dęba",
+    "Rozmiar (Wielki)",
+    "Płochliwy",
+    "Długi Krok",
+    "Rogi +12",
+    "1× Macki (Trąba) +11",
+    "Broń (Kły) +12"
+   ],
+   "optional": [
+    "Pancerz (3)",
+    "Duży",
+    "Brutalny",
+    "Czempion",
+    "Bystry",
+    "Spaczenie (Pomniejsze)",
+    "Choroba (Ospa Tragarzy)",
+    "Niewrażliwość na Psychologię",
+    "Szał Bojowy",
+    "Twardziel",
+    "Mutacja",
+    "Rozmiar (Monstrualny)",
+    "Groza (1)",
+    "Wyszkolony (Bojowy, Magiczny, Pociągowy, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Zwierzę roślinożerne",
+   "status": null,
+   "minTier": "mistrz"
+  },
+  {
+   "name": "Mucha Zgnilizny",
+   "source": "Homebrew (Rot Fly)",
+   "page": null,
+   "stats": {
+    "Sz": 1,
+    "WW": 35,
+    "US": 35,
+    "S": 50,
+    "Wt": 55,
+    "I": 25,
+    "Zw": 50,
+    "Zr": null,
+    "Int": 20,
+    "SW": 70,
+    "Ogd": null,
+    "Żyw": 44
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (1)",
+    "Czempion",
+    "Spaczenie (Umiarkowane)",
+    "Demoniczny 8+",
+    "Widzenie w Mroku",
+    "Dekoncentrujący",
+    "Strach (2)",
+    "Latanie (100)",
+    "Rozmiar (Duży)",
+    "Jad",
+    "Niestabilny",
+    "Atak Ogonem +9",
+    "Atak Językiem +8 (10)",
+    "Broń (Pazury) +9"
+   ],
+   "optional": [
+    "Pancerz (2)",
+    "Elitarny",
+    "Szybki",
+    "Twardziel",
+    "Zakażony",
+    "Mutacja",
+    "Nie Czuje Bólu",
+    "Rozmiar (Wielki)",
+    "Wyszkolony (Bojowy, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Ostre jak brzytwa odnóża",
+     "description": "Pazury i żądło muchy mają Zaletę broni Przebijająca."
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "subgroup": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "weteran"
+  },
+  {
+   "name": "Burzogr",
+   "source": "Homebrew (Stormfiend)",
+   "page": null,
+   "stats": {
+    "Sz": 6,
+    "WW": 45,
+    "US": 35,
+    "S": 55,
+    "Wt": 45,
+    "I": 50,
+    "Zw": 45,
+    "Zr": 25,
+    "Int": 30,
+    "SW": 45,
+    "Ogd": 15,
+    "Żyw": 42
+   },
+   "skills": [],
+   "talents": [
+    "Oburęczność",
+    "Dwie Bronie"
+   ],
+   "traits": [
+    "Pancerz (2)",
+    "Strach (1)",
+    "Twardziel",
+    "Zakażony",
+    "Widzenie w Ciemności",
+    "Nie Czuje Bólu",
+    "Rozmiar (Duży)",
+    "Broń (Rękawice) +9",
+    "Strzelanie (Grzechoczące działka) +9 (20)"
+   ],
+   "optional": [
+    "Pancerz (5)",
+    "Duży",
+    "Brutalny",
+    "Czempion",
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Mroku",
+    "Choroba (Szczurza Gorączka)",
+    "Elitarny",
+    "Szał Bojowy",
+    "Srogi (1)",
+    "Zaraza",
+    "Mutacja",
+    "Rozmiar (Wielki)",
+    "Długi Krok",
+    "Atak Ogonem +8",
+    "Groza (1)",
+    "Tropiciel",
+    "Wyszkolony (Bojowy, Stróżujący, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Uzbrojenie",
+     "description": "Jedno do wyboru: moździerze trującego wiatru (zasięg 100 m, najmniej 20 m, zasady specjalne), grzechoczące działka (+9, 20 m), miotacze spaczognia (+12, 30 m) albo rękawice: zgniatacze (+9, Ogłuszająca), szlifierze (+9, ze spaczenia) lub rażące prądem (+9)."
+    }
+   ],
+   "trappings": [],
+   "group": "Skaveny",
+   "family": "Skaven",
+   "status": null,
+   "minTier": "wybitny"
+  },
+  {
+   "name": "Jednorożec",
+   "source": "Homebrew (Unicorn)",
+   "page": null,
+   "stats": {
+    "Sz": 8,
+    "WW": 55,
+    "US": null,
+    "S": 40,
+    "Wt": 45,
+    "I": 55,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 25,
+    "SW": 60,
+    "Ogd": 30,
+    "Żyw": 36
+   },
+   "skills": [],
+   "talents": [
+    "Wyczulony Zmysł (Słuch)",
+    "Nieustraszony (wszystko)"
+   ],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Wojowniczy",
+    "Strach (1)",
+    "Furia",
+    "Magiczny",
+    "Widzenie w Ciemności",
+    "Rozmiar (Duży)",
+    "Odporność na Magię (2)",
+    "Długi Krok",
+    "Rogi +8",
+    "Broń (Kopyta) +8",
+    "Broń (Róg) +8"
+   ],
+   "optional": [
+    "Pancerz (1)",
+    "Czempion",
+    "Przebiegły",
+    "Elitarny",
+    "Szybki",
+    "Twardziel",
+    "Staje Dęba",
+    "Wyszkolony (Bojowy, Magiczny, Pociągowy, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Kościany grot",
+     "description": "Róg jednorożca ma Zalety broni Druzgocząca i Nadziewająca. Odporność na Magię może chronić też jeźdźca."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "subgroup": "Inne potwory",
+   "family": "Zwierzę roślinożerne",
+   "status": null,
+   "minTier": "wybitny"
+  },
+  {
+   "name": "Borsuk",
+   "source": "Homebrew (Badger)",
+   "page": null,
+   "stats": {
+    "Sz": 4,
+    "WW": 30,
+    "US": null,
+    "S": 20,
+    "Wt": 30,
+    "I": 35,
+    "Zw": 30,
+    "Zr": null,
+    "Int": 15,
+    "SW": 35,
+    "Ogd": null,
+    "Żyw": 9
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Zwierzęcy",
+    "Szał Bojowy",
+    "Widzenie w Ciemności",
+    "Płochliwy",
+    "Rozmiar (Mały)",
+    "Długi Krok",
+    "Twardy",
+    "Broń (Pazury) +5"
+   ],
+   "optional": [
+    "Pancerz (1)",
+    "Wojowniczy",
+    "Duży",
+    "Ugryzienie +4",
+    "Szybki",
+    "Zakażony",
+    "Zaraza",
+    "Rozmiar (Średni)",
+    "Terytorialny",
+    "Tropiciel",
+    "Wyszkolony (Aportujący, Bojowy, Magiczny, Stróżujący, Ujarzmiony, Wierzchowiec)"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Zwierzęta",
+   "family": "Drapieżnik",
+   "status": null,
+   "minTier": "slaby"
+  },
+  {
+   "name": "Be'lakor",
+   "source": "Homebrew (Be'lakor)",
+   "page": null,
+   "stats": {
+    "Sz": 6,
+    "WW": 110,
+    "US": 55,
+    "S": 120,
+    "Wt": 120,
+    "I": 95,
+    "Zw": 100,
+    "Zr": 55,
+    "Int": 110,
+    "SW": 120,
+    "Ogd": 100,
+    "Żyw": 120
+   },
+   "skills": [
+    {
+     "name": "Splatanie Magii (Dhar)",
+     "value": 160
+    },
+    {
+     "name": "Język (Magiczny)",
+     "value": 150
+    },
+    {
+     "name": "Broń Biała (Podstawowa)",
+     "value": 150
+    }
+   ],
+   "talents": [],
+   "traits": [
+    "Pancerz (3)",
+    "Czempion",
+    "Spaczenie (Większe)",
+    "Demoniczny 6+",
+    "Widzenie w Mroku",
+    "Dekoncentrujący",
+    "Eteryczny",
+    "Latanie (100)",
+    "Szał Bojowy",
+    "Twardziel",
+    "Widzenie w Ciemności",
+    "Nie Czuje Bólu",
+    "Rozmiar (Duży)",
+    "Rzucanie Czarów (Chaosu, Demonologii i Cieni)",
+    "Groza (3)",
+    "Niestabilny",
+    "Rogi +15",
+    "Broń (Ostrze Cieni) +17",
+    "Broń (Pazury) +16"
+   ],
+   "optional": [],
+   "abilities": [
+    {
+     "name": "Czary",
+     "description": "Zna wszystkie zaklęcia Magii Prostej i Tajemnej oraz całe Tradycje Cieni, Chaosu i Demonologii."
+    },
+    {
+     "name": "Ostrze Cieni",
+     "description": "Miecz z Zaletą Niezniszczalna, magiczny. Ignoruje PP, BWt i Cechę Ochrona; Obrażenia zadają podwójne Rany."
+    }
+   ],
+   "trappings": [],
+   "group": "Chaos",
+   "subgroup": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "heros",
+   "unique": true
+  },
+  {
+   "name": "Nurgling",
+   "source": "Homebrew (Nurgling)",
+   "page": null,
+   "stats": {
+    "Sz": 4,
+    "WW": 35,
+    "US": 30,
+    "S": 25,
+    "Wt": 25,
+    "I": 30,
+    "Zw": 60,
+    "Zr": 35,
+    "Int": 25,
+    "SW": 30,
+    "Ogd": 25,
+    "Żyw": 7
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Spaczenie (Pomniejsze)",
+    "Demoniczny 9+",
+    "Niewrażliwość na Psychologię",
+    "Zakażony",
+    "Widzenie w Ciemności",
+    "Rozmiar (Mały)",
+    "Niestabilny",
+    "Broń (Pazury) +6"
+   ],
+   "optional": [
+    "Ugryzienie +5",
+    "Choroba (dowolny)",
+    "Strach (1)",
+    "Zaraza",
+    "Mutacja",
+    "Nie Czuje Bólu",
+    "Rój"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "subgroup": "Demony",
+   "family": "Demon",
+   "status": null,
+   "minTier": "slaby"
+  },
+  {
+   "name": "Preyton",
+   "source": "Homebrew (Preyton)",
+   "page": null,
+   "stats": {
+    "Sz": 6,
+    "WW": 55,
+    "US": null,
+    "S": 60,
+    "Wt": 55,
+    "I": 45,
+    "Zw": 40,
+    "Zr": null,
+    "Int": 25,
+    "SW": 45,
+    "Ogd": null,
+    "Żyw": 40
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Mieszkaniec Lasu",
+    "Pancerz (2)",
+    "Wojowniczy",
+    "Zwierzęcy",
+    "Spaczenie (Pomniejsze)",
+    "Widzenie w Mroku",
+    "Strach (1)",
+    "Latanie (60)",
+    "Szał Bojowy",
+    "Rozmiar (Duży)",
+    "Nie Czuje Bólu",
+    "Długi Krok",
+    "Ugryzienie +9",
+    "Rogi +10",
+    "Broń (Poroże) +10"
+   ],
+   "optional": [
+    "Czempion",
+    "Kwasowa Krew",
+    "Szybki",
+    "Nienawiść (Wszystko)",
+    "Niewrażliwość (Trucizna)",
+    "Zakażony",
+    "Zaraza",
+    "Magiczny",
+    "Mutacja",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Atak Ogonem +9",
+    "Groza (1)",
+    "Tropiciel",
+    "Jad"
+   ],
+   "abilities": [],
+   "trappings": [],
+   "group": "Chaos",
+   "subgroup": "Potwory Chaosu",
+   "family": "Potwór latający",
+   "status": null,
+   "minTier": "wybitny"
+  },
+  {
+   "name": "Pterolykos",
+   "source": "Homebrew (Pterolycus)",
+   "page": null,
+   "stats": {
+    "Sz": 6,
+    "WW": 55,
+    "US": 45,
+    "S": 55,
+    "Wt": 55,
+    "I": 35,
+    "Zw": 45,
+    "Zr": null,
+    "Int": 30,
+    "SW": 45,
+    "Ogd": 20,
+    "Żyw": 38
+   },
+   "skills": [],
+   "talents": [],
+   "traits": [
+    "Pancerz (1)",
+    "Wojowniczy",
+    "Czempion",
+    "Widzenie w Mroku",
+    "Szybki",
+    "Latanie (80)",
+    "Srogi (1)",
+    "Magiczny",
+    "Rozmiar (Duży)",
+    "Długi Krok",
+    "Tropiciel",
+    "Ugryzienie +8",
+    "Zionięcie +9 (różne)",
+    "Broń (Pazury) +9"
+   ],
+   "optional": [
+    "Pancerz (2)",
+    "Duży",
+    "Błogosławiony (Ulryk)",
+    "Spaczenie (Pomniejsze)",
+    "Nie do Zdarcia",
+    "Elitarny",
+    "Strach (1)",
+    "Szał Bojowy",
+    "Srogi (2)",
+    "Cuda (Ulryk)",
+    "Mutacja",
+    "Nie Czuje Bólu",
+    "Regeneracja",
+    "Rozmiar (Wielki)",
+    "Skryty",
+    "Atak Ogonem +8",
+    "Wyszkolony (Aportujący, Bojowy, Magiczny, Pociągowy, Stróżujący, Wierzchowiec)"
+   ],
+   "abilities": [
+    {
+     "name": "Wariant",
+     "description": "Spaczony krewniak, synmurg, ma szpony drapieżnego ptaka, nietoperze szczątki skrzydeł i wężowy ogon."
+    }
+   ],
+   "trappings": [],
+   "group": "Potwory",
+   "subgroup": "Hybrydy i skrzydlate",
+   "family": "Potwór latający",
+   "status": null,
+   "minTier": "wybitny"
   }
  ]
 }
