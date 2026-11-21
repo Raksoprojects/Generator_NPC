@@ -1,4 +1,4 @@
-﻿import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { fight, npcFighter, outnumberBonus } from "../combatSim";
 import { seedRng } from "../dice";
 import { generateNpc } from "../generator";
