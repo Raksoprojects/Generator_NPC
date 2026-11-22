@@ -304,8 +304,9 @@ export interface CareerPlanStep {
 const maxLevelOf = (profession: string) => Math.max(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
 
 /**
- * Plan profesji BN: 0..maxCareers-1 wczesniejszych (cel 1.-3. poziom) i glowna (cel 4., a 5. z szansa
- * poziomu BN). Ile z planu BN faktycznie przejdzie, rozstrzyga budzet PD (developByXp).
+ * Plan profesji BN: od polowy do maxCareers-1 wczesniejszych pokrewnych (cel 1.-2. poziom) i glowna
+ * (cel maxCareerLevel poziomu BN: 2., 3. od Weterana, 4. od Eksperta, 5. z szansa). Ile z planu BN
+ * faktycznie przejdzie, rozstrzyga budzet PD (developByXp); nadwyzka zostaje w obecnym poziomie.
  */
 export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId, race: string, rng: Rng): CareerPlanStep[] {
   const arch = restrictArchetype(gd.getArchetype(archetype), spec.onlyProfessions);
@@ -324,7 +325,9 @@ export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId
   const preset = spec.mainProfession && gd.getProfession(spec.mainProfession) ? spec.mainProfession : undefined;
   const main = chosen[chosen.length - 1] ?? preset ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
   if (!main) return [];
-  const mainTarget = maybeLevel5(main, Math.min(4, maxLevelOf(main)), tier, rng);
+  // [dom] Poziom profesji zalezy od poziomu BN (maxCareerLevel): 3. od Weterana, 4. od Eksperta.
+  const levelCap = tier.maxCareerLevel ?? 4;
+  const mainTarget = levelCap >= 4 ? maybeLevel5(main, Math.min(4, maxLevelOf(main)), tier, rng) : Math.max(firstLevel(main), Math.min(levelCap, maxLevelOf(main)));
 
   const def = gd.getProfession(main)!;
   // Profesja zaawansowana (elfi kaplani): najpierw profesja wejsciowa (Mag 1-2), potem kaplan od 3. poziomu.
@@ -335,14 +338,16 @@ export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId
     ];
   }
   const manual = chosen.slice(0, -1);
-  const count = chosen.length ? manual.length : randInt(0, Math.max(0, tier.maxCareers - 1), rng);
+  // Wyzszy poziom BN - wiecej pokrewnych profesji (co najmniej polowa limitu), kazda na 1.-2. poziomie.
+  const maxPrev = Math.max(0, tier.maxCareers - 1);
+  const count = chosen.length ? manual.length : randInt(Math.floor(maxPrev / 2), maxPrev, rng);
   const plan: CareerPlanStep[] = [];
   const taken: string[] = [];
   for (let i = 0; i < count; i++) {
     const prof = manual[i] ?? pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions, taken);
     if (!prof) break;
     taken.push(prof);
-    plan.push({ profession: prof, start: 1, target: Math.min(maxLevelOf(prof), randInt(1, 3, rng)) });
+    plan.push({ profession: prof, start: 1, target: Math.min(maxLevelOf(prof), levelCap, randInt(1, 2, rng)) });
   }
   plan.push({ profession: main, start: firstLevel(main), target: mainTarget });
   return plan;
@@ -958,7 +963,7 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
       }
       if (next.switching && level < maxLevelOf(prof)) {
         // Profesja zaawansowana (np. elfi kaplan od 3. poziomu) - zostaje w obecnej i rozwija ja dalej.
-        plan = [...plan.slice(0, ci), { ...step, target: Math.min(4, maxLevelOf(prof)) }];
+        plan = [...plan.slice(0, ci), { ...step, target: Math.min(exact ? 4 : (tier?.maxCareerLevel ?? 4), maxLevelOf(prof)) }];
         continue;
       }
       if (!next.switching && !lastStep && !step.fixed) {

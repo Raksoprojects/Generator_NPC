@@ -183,6 +183,8 @@ export interface TierDef {
   xp: [number, number];
   /** Maksymalna liczba profesji w sciezce. */
   maxCareers: number;
+  /** [dom] Najwyzszy poziom profesji przy losowej sciezce: 3. od Weterana, 4. od Eksperta. */
+  maxCareerLevel?: number;
   /** Szansa, ze profesja z 5. poziomem (Arcymag) dojdzie do niego (Ekspert 0,5%, Legenda 50%, Heros zawsze). */
   level5Chance?: number;
   /** Mala losowa szansa na profil bohatera (Weteran, Doborowy, Pomniejszy/Wielki Bohater) - wykluczajace sie. */

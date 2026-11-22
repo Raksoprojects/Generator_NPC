@@ -540,10 +540,10 @@ describe("rozwoj bestii", () => {
       }
     }
     expect(staff).toBeGreaterThan(0);
-    // Czarodziej od 3. poziomu zawsze ma wylosowany przedmiot magiczny (poza kosturem i szatami).
+    // Czarodziej od 3. poziomu (Weteran - [dom] maxCareerLevel) zawsze ma wylosowany przedmiot magiczny (poza kosturem i szatami).
     let wizards = 0;
     for (let seed = 1; seed <= 40; seed++) {
-      const w = generateNpc({ archetype: "Czarodziej", tier: "doswiadczony", race: "Człowiek" }, seedRng(seed));
+      const w = generateNpc({ archetype: "Czarodziej", tier: "weteran", race: "Człowiek" }, seedRng(seed));
       const last = w.careerPath.at(-1)!;
       const levels = gd.getProfession(last.profession)!.levels.filter((l) => l.level <= last.level);
       // Archetyp Czarodzieja obejmuje tez nie-magow (np. Aptekarz) - bez przedmiotu magicznego w profesji.

@@ -398,15 +398,19 @@ describe("profile bohaterow i sciezki profesji", () => {
         for (const [, lvl] of byProf) expect(lvl, `${tier}: ${JSON.stringify(npc.careerPath)}`).toBeLessThanOrEqual(last.level);
         maxCareers[tier] = Math.max(maxCareers[tier] ?? 0, byProf.size);
         expect(byProf.size).toBeLessThanOrEqual(gd.getTier(tier).maxCareers);
+        // [dom] maxCareerLevel: do Zaawansowanego najwyzej 2. poziom, Weteran i Wybitny 3., od Eksperta 4. (5. z szansa).
+        const cap = gd.getTier(tier).maxCareerLevel ?? 4;
+        const firstOfLast = Math.min(...gd.getProfession(last.profession)!.levels.map((l) => l.level));
+        expect(last.level, `${tier}: ${JSON.stringify(npc.careerPath)}`).toBeLessThanOrEqual(Math.max(firstOfLast, cap >= 4 ? 5 : cap));
         if (tier === "heroiczny") expect(last.level).toBeGreaterThanOrEqual(3);
-        if (tier === "legendarny") expect(last.level).toBe(4);
+        if (tier === "legendarny") expect(last.level).toBeGreaterThanOrEqual(4);
         if (tier === "heros") expect(last.level).toBeGreaterThanOrEqual(4);
       }
     }
-    expect(maxCareers.weteran).toBe(2);
-    expect(maxCareers.heroiczny).toBe(3);
-    expect(maxCareers.legendarny).toBe(3);
-    expect(maxCareers.heros).toBe(4);
+    expect(maxCareers.weteran).toBe(3);
+    expect(maxCareers.heroiczny).toBe(4);
+    expect(maxCareers.legendarny).toBe(5);
+    expect(maxCareers.heros).toBe(5);
   });
 });
 

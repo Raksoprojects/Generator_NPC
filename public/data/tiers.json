@@ -84,6 +84,7 @@
         450
       ],
       "maxCareers": 1,
+      "maxCareerLevel": 2,
       "spells": {
         "maxCn": 0,
         "arcane": [
@@ -102,6 +103,7 @@
         950
       ],
       "maxCareers": 2,
+      "maxCareerLevel": 2,
       "spells": {
         "maxCn": 6,
         "arcane": [
@@ -127,6 +129,7 @@
         1500
       ],
       "maxCareers": 2,
+      "maxCareerLevel": 2,
       "spells": {
         "maxCn": 8,
         "arcane": [
@@ -155,7 +158,8 @@
         1600,
         2400
       ],
-      "maxCareers": 2,
+      "maxCareers": 3,
+      "maxCareerLevel": 2,
       "spells": {
         "maxCn": 9,
         "arcane": [
@@ -188,7 +192,8 @@
         2500,
         3900
       ],
-      "maxCareers": 2,
+      "maxCareers": 3,
+      "maxCareerLevel": 2,
       "spells": {
         "maxCn": 12,
         "arcane": [
@@ -226,7 +231,8 @@
         4000,
         6400
       ],
-      "maxCareers": 2,
+      "maxCareers": 3,
+      "maxCareerLevel": 3,
       "spells": {
         "maxCn": 41,
         "arcane": [
@@ -270,7 +276,8 @@
         6500,
         10000
       ],
-      "maxCareers": 2,
+      "maxCareers": 4,
+      "maxCareerLevel": 3,
       "spells": {
         "maxCn": 70,
         "arcane": [
@@ -315,7 +322,8 @@
         10500,
         16500
       ],
-      "maxCareers": 3,
+      "maxCareers": 4,
+      "maxCareerLevel": 4,
       "spells": {
         "maxCn": 99,
         "arcane": [
@@ -356,7 +364,8 @@
         17000,
         27000
       ],
-      "maxCareers": 3,
+      "maxCareers": 5,
+      "maxCareerLevel": 4,
       "spells": {
         "maxCn": 99,
         "arcane": [
@@ -399,7 +408,8 @@
         28000,
         48000
       ],
-      "maxCareers": 3,
+      "maxCareers": 5,
+      "maxCareerLevel": 4,
       "spells": {
         "maxCn": 99,
         "arcane": [
@@ -442,7 +452,8 @@
         50000,
         80000
       ],
-      "maxCareers": 3,
+      "maxCareers": 5,
+      "maxCareerLevel": 4,
       "spells": {
         "maxCn": 99,
         "arcane": [
@@ -481,7 +492,8 @@
         90000,
         150000
       ],
-      "maxCareers": 4,
+      "maxCareers": 5,
+      "maxCareerLevel": 4,
       "spells": {
         "maxCn": 99,
         "arcane": [
