@@ -387,6 +387,13 @@ describe("profile bohaterow i sciezki profesji", () => {
     expect(expert5).toBeLessThanOrEqual(3);
   });
 
+  it("mainProfession ustala obecna profesje, wczesniejsze losowe", () => {
+    for (const p of ["Żołnierz", "Gladiator", "Rycerz Najemny"]) {
+      const n = generateNpc({ archetype: "Wojownik", race: "Człowiek", xp: 5200, mainProfession: p, deterministic: true }, seedRng(1));
+      expect(n.careerPath.at(-1)!.profession).toBe(p);
+    }
+  });
+
   it("ostatnia profesja ma zawsze najwyzszy poziom; liczba profesji wg poziomu BN", () => {
     const maxCareers: Record<string, number> = {};
     for (let seed = 1; seed <= 120; seed++) {

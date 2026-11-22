@@ -1392,7 +1392,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     createdAt: new Date().toISOString()
   };
   npc.rolls = rollAttributes(npc, rng, det);
-  develop(npc, spec.professions, rng, det, spec.path, vampireCareer);
+  develop(npc, spec.professions, rng, det, spec.path, vampireCareer ?? spec.mainProfession);
   rollFeatures(npc, { ...spec, bloodline }, rng, det);
   // Po cechach: przedmioty wampirow zaleza od Linii Krwi.
   rollTreasures(npc, rng, det);
