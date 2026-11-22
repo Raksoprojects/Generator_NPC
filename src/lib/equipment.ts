@@ -234,6 +234,14 @@ export function equipNpc(npc: Npc, rng: Rng): void {
     const options = spec ? MELEE_BY_SPEC[spec] : undefined;
     weapons.add(options ? resolveMarker(pick(options, rng) ?? options[0], npc, rng) : "Sztylet");
   }
+  // Najlepiej rozwinieta specjalizacja (np. z wczesniejszej profesji) bez pasujacej broni - BN nosi i taka bron.
+  {
+    const top = meleeSpecs.find((s) => MELEE_BY_SPEC[s] && s !== "Parująca");
+    const groups = [...weapons].map((w) => getWeaponDef(w)).filter((w) => w && !w.ranged && !w.def.shield).map((w) => w!.def.group);
+    const adv = (spec: string) => npc.skills.find((s) => s.name === `Broń Biała (${spec})`)?.advances ?? 0;
+    const best = Math.max(0, ...groups.map((g) => adv(g)));
+    if (top && !groups.includes(top) && adv(top) >= best + 10) weapons.add(resolveMarker(pick(MELEE_BY_SPEC[top], rng) ?? MELEE_BY_SPEC[top][0], npc, rng));
+  }
   // Wojownik lub straznik z Bronia Biala (Podstawowa) czesto nosi tarcze.
   if (meleeSpecs.includes("Podstawowa") && ![...weapons].some(isShield)) {
     const twoHanded = [...weapons].some((w) => getWeaponDef(w)?.def.twoHanded && !getWeaponDef(w)?.ranged);
