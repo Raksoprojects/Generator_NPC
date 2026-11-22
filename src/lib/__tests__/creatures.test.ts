@@ -41,6 +41,17 @@ describe("stworzenia z bestiariusza", () => {
     expect(creatureBase(ameba, "I")).toEqual({ base: 0, die: "1k10" });
   });
 
+  it("rozwoj bestii etapami: najpierw Cechy etapu po +5 za etap, potem Umiejetnosci", () => {
+    const troll = generateNpc({ creature: "Troll", tier: "doswiadczony", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
+    // Zaawansowany: 2 etapy (maxCareerLevel 2) - 4 Cechy po 10 rozwiniec.
+    expect(Object.values(troll.charAdvances).filter((v) => v >= 10).length).toBe(4);
+    const wolf = generateNpc({ creature: "Wilk", tier: "slaby", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
+    // Za malo PD na caly 1. etap - rozwiniecia rozlozone rowno na 3 Cechy etapu.
+    const adv = Object.values(wolf.charAdvances).filter((v) => v > 0);
+    expect(adv.length).toBe(3);
+    expect(Math.max(...adv) - Math.min(...adv)).toBeLessThanOrEqual(1);
+  });
+
   it("Roj tylko recznie: Ogar Chaosu pojedynczy, z Rojem - stado", () => {
     // Ogar Chaosu: pojedynczy pies; Roj dodany recznie daje stado (Zyw x5).
     const hound = generateNpc({ creature: "Ogar Chaosu", noArchetype: true, randomTraits: false, noHeroRoll: true }, seedRng(1));

@@ -233,8 +233,9 @@ export function tierTraitsFor(npc: Pick<Npc, "tier">, creature: CreatureDef, rng
 
 /**
  * Rozwoj bestii za PD wg kosztow z podrecznika (PG s. 47): cechy z charCodes i umiejetnosci
- * rodziny (+ Odporność, Opanowanie), waga = priorytet^2 / koszt - drozsze rozwiniecia
- * kupowane rzadziej, wiec wzrost z poziomem lagodnieje jak u ludzi. Bez talentow.
+ * rodziny (+ Odporność, Opanowanie). Najpierw etapy jak poziomy profesji (Cechy, potem Umiejetnosci
+ * do 5 x etap), reszta swobodnie: waga = priorytet^2 / koszt - drozsze rozwiniecia kupowane rzadziej,
+ * wiec wzrost z poziomem lagodnieje jak u ludzi. Bez talentow.
  */
 export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, rng: Rng, deterministic = false): number {
   const fam = gd.getCreatureFamilies();
@@ -260,6 +261,42 @@ export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, 
   const charCap = (code: Attribute) => charBase[code] + (capRow?.[2] ?? Infinity);
   let spent = 0;
   const skillAdv = (name: string) => npc.skills.find((s) => s.name === name)?.advances ?? 0;
+  const addSkillAdv = (name: string, n: number) => {
+    const s = npc.skills.find((x) => x.name === name);
+    if (s) s.advances += n;
+    else npc.skills.push({ name, advances: n });
+  };
+
+  // [dom] Etapy jak poziomy profesji: najpierw Cechy etapu do 5 x etap, potem Umiejetnosci etapu do 5 x etap.
+  // Cechy etapu: 2 + etap najwazniejszych (WW i Cechy Umiejetnosci rodziny); Umiejetnosci etapu: priorytet 2+.
+  // Etapow najwyzej tyle, ile poziomow profesji ma BN tego poziomu (maxCareerLevel); reszta PD - swobodnie.
+  const relevance = (code: Attribute) =>
+    (cfg.chars[code] ?? 1) + [...skills].reduce((sum, [name, p]) => sum + (gd.skillAttr(name) === code && p >= 2 ? p : 0), 0);
+  const ranked = [...chars].sort((a, b) => relevance(b) - relevance(a) || chars.indexOf(a) - chars.indexOf(b));
+  const stageSkills = [...skills].filter(([, p]) => p >= 2).map(([name]) => name);
+  const stageCap = gd.getTier(npc.tier)?.maxCareerLevel ?? 4;
+  stages: for (let stage = 1; stage <= stageCap; stage++) {
+    const req = 5 * stage;
+    // Po jednym rozwinieciu dla najmniej rozwinietej (przy remisie - wazniejszej), wiec brak PD dzieli sie rowno.
+    const stageChars = ranked.slice(0, 2 + stage);
+    for (let g = 0; g < 1000; g++) {
+      const code = stageChars.filter((c) => (npc.charAdvances[c] ?? 0) < req).sort((a, b) => (npc.charAdvances[a] ?? 0) - (npc.charAdvances[b] ?? 0))[0];
+      if (!code) break;
+      const cost = nextAdvanceCost("char", npc.charAdvances[code] ?? 0);
+      if (spent + cost > scaled) break stages;
+      spent += cost;
+      npc.charAdvances[code] = (npc.charAdvances[code] ?? 0) + 1;
+    }
+    for (let g = 0; g < 1000; g++) {
+      const name = stageSkills.filter((s) => skillAdv(s) < req).sort((a, b) => skillAdv(a) - skillAdv(b))[0];
+      if (!name) break;
+      const cost = nextAdvanceCost("skill", skillAdv(name));
+      if (spent + cost > scaled) break stages;
+      spent += cost;
+      addSkillAdv(name, 1);
+    }
+  }
+
   for (let guard = 0; guard < 5000; guard++) {
     const left = scaled - spent;
     const cands: { kind: "char" | "skill"; name: string; cost: number; weight: number }[] = [];
@@ -279,11 +316,7 @@ export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, 
     const n = Math.max(1, Math.min(5 - (owned % 5), Math.floor(left / c.cost), cap - owned));
     spent += n * c.cost;
     if (c.kind === "char") npc.charAdvances[c.name as Attribute] = owned + n;
-    else {
-      const s = npc.skills.find((x) => x.name === c.name);
-      if (s) s.advances += n;
-      else npc.skills.push({ name: c.name, advances: n });
-    }
+    else addSkillAdv(c.name, n);
   }
   return spent;
 }
