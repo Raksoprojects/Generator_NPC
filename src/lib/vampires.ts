@@ -137,7 +137,10 @@ export function rollVampire(
   }
   for (const g of chosen) entries.push({ kind: "blood", name: g });
 
-  const traits = [`Wiek (${data.ageByTier[npc.tier] ?? 3})`, "Klątwa Nocy"];
+  const traits = [`Wiek (${data.ageByTier[npc.tier] ?? 3})`, "Klątwa Nocy", ...(line.traits ?? [])];
+  // [dom] Rozmiar linii (Strigoi: Duzy) od domyslnego poziomu; oslabiony, swiezo przemieniony - Sredni.
+  const minTier = gd.getCreature(npc.creature)?.minTier ?? "slaby";
+  if (line.size && TIER_IDS.indexOf(npc.tier) >= TIER_IDS.indexOf(minTier)) traits.push(`Rozmiar (${line.size})`);
   // Nie kazdy wampir czaruje: Nekrarcha zawsze, Lahmianka i von Carstein czesto, Krwawy Smok
   // dopiero od heroicznego, Strigoi rzadko od doswiadczonego (vampires.json -> casting).
   const p = line.casting ? (line.casting.chance[npc.tier] ?? 0) : 1;

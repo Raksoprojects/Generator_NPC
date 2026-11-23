@@ -399,6 +399,17 @@ describe("rozwoj bestii", () => {
     }
   });
 
+  it("Strigoi: Regeneracja; Duzy od domyslnego poziomu, oslabiony Sredni", () => {
+    const strong = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: "Strigoi", deterministic: true }, seedRng(1));
+    expect(strong.traits).toContain("Regeneracja");
+    expect(strong.traits).toContain("Rozmiar (Duży)");
+    const weak = generateNpc({ creature: "Wampir", tier: "obyty", bloodline: "Strigoi", deterministic: true }, seedRng(1));
+    expect(weak.traits).toContain("Regeneracja");
+    expect(weak.traits.some((t) => t.startsWith("Rozmiar"))).toBe(false);
+    // Duzy ma wiecej Zywotnosci (mnoznik Rozmiaru).
+    expect(computeNpc(strong).wounds).toBeGreaterThan(computeNpc(weak).wounds);
+  });
+
   it("demony i inne stworzenia czarujace z cechy maja Splatanie Magii i Jezyk (Magiczny)", () => {
     for (let seed = 1; seed <= 10; seed++) {
       const horror = generateNpc({ creature: "Różowy Horror Tzeentcha", tier: "zaawansowany" }, seedRng(seed));
@@ -425,9 +436,9 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("wampir: od zaawansowanego, z wybrana Linia Krwi", () => {
+  it("wampir: od zaawansowanego (oslabiony, swiezo przemieniony - poziom nizej), z wybrana Linia Krwi", () => {
     const weak = generateNpc({ creature: "Wampir", tier: "slaby" }, seedRng(4));
-    expect(weak.tier).toBe("zaawansowany");
+    expect(weak.tier).toBe("obyty");
     for (const line of gd.getVampires()!.bloodlines) {
       const v = generateNpc({ creature: "Wampir", tier: "doswiadczony", bloodline: line.name }, seedRng(7));
       expect(v.mutations.find((m) => m.kind === "bloodline")?.name).toBe(line.name);

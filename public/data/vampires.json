@@ -404,6 +404,8 @@
     "Nocny Łupieżca"
    ],
    "noArmour": true,
+   "traits": ["Regeneracja"],
+   "size": "Duży",
    "turning": {
     "modifiers": {
      "WW": 20,

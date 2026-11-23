@@ -805,6 +805,10 @@ export interface VampiresData {
     professions?: string[];
     /** Bez pancerza - poza magicznym od heroicznego (Strigoi). */
     noArmour?: boolean;
+    /** Cechy Stworzen linii (Strigoi: Regeneracja). */
+    traits?: string[];
+    /** [dom] Rozmiar linii od domyslnego poziomu stworzenia; oslabiony (ponizej) zostaje Sredni (Strigoi: Duzy). */
+    size?: string;
     turning?: VampireTurning;
     /** Tabela k100 Preferowanych Profesji (waga = szerokosc przedzialu); "Wampirzy X" - patrz careerAlternatives. */
     careers?: Record<string, number>;

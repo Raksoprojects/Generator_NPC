@@ -263,7 +263,8 @@ export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
   const melee = view.weapons.filter((w) => !w.ranged && w.damage != null).sort((a, b) => b.skill + 3 * (b.damage ?? 0) - (a.skill + 3 * (a.damage ?? 0)))[0];
   const skill = (name: string) => view.skills.find((s) => s.name === name)?.total;
   const parry = Math.max(0, ...view.skills.filter((s) => s.name.startsWith("Broń Biała")).map((s) => s.total));
-  const size = Math.max(0, SIZES.indexOf(sizeOf(traits)));
+  // Rozmiar spoza ksiazki (linia wampira) ma pierwszenstwo przed profilem z ksiazki.
+  const size = Math.max(0, SIZES.indexOf(sizeOf([...view.rolledTraits.filter((t) => /^Rozmiar/.test(t)), ...traits])));
   const demonicAll = has(traits, /^Demoniczny/);
   const char = (c: keyof NpcView["chars"], fallback: number) => (view.chars[c].absent ? fallback : view.chars[c].total);
   const damage = melee?.damage ?? characteristicBonus(char("S", 10));

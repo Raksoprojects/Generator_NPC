@@ -5147,7 +5147,7 @@
    "group": "Wampiry",
    "family": "Nieumarły",
    "minTier": "zaawansowany",
-   "tierSpan": [0, 8],
+   "tierSpan": [-1, 8],
    "civilized": true,
    "archetypeChance": 1
   },
