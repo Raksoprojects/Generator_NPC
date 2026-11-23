@@ -497,13 +497,16 @@ describe("rozwoj bestii", () => {
       expect(has(adv, "Wysoka Magia")).toBe(false);
       expect(adv.spells.some((s) => gd.getSpell(s)?.lore === "Wysokiej Magii")).toBe(false);
       const hero = generateNpc({ archetype: "Czarodziej", tier: "heroiczny", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      // Heros na 4. poziomie zawsze dochodzi do 5. (Arcymag); [dom] czasem konczy na 3.
+      const legend = generateNpc({ archetype: "Czarodziej", tier: "heros", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
+      expect(legend.careerPath.at(-1)!.level === 3 || legend.careerPath.at(-1)!.level === 5, JSON.stringify(legend.careerPath.at(-1))).toBe(true);
+      // Wysoka Magia z 3. poziomu Maga - [dom] Ekspert czasem konczy nizej.
+      if (hero.careerPath.at(-1)!.level < 3) continue;
       expect(has(hero, "Wysoka Magia")).toBe(true);
       expect(hero.spells.some((s) => gd.getSpell(s)?.lore === "Wysokiej Magii")).toBe(true);
       expect(hero.spells.some((s) => gd.getSpell(s)?.lore === "Prosta (Elfia)")).toBe(true);
       // Doswiadczony i wyzszy elfi czarodziej zna co najmniej dwie tradycje kolorow.
       expect(hero.talents.filter((t) => t.name.startsWith("Magia Tajemna")).length).toBeGreaterThanOrEqual(2);
-      const legend = generateNpc({ archetype: "Czarodziej", tier: "heros", race: "Wysoki elf", professions: ["Mag"] }, seedRng(seed));
-      expect(legend.careerPath.at(-1)).toEqual({ profession: "Mag", level: 5 });
     }
   });
 
@@ -555,7 +558,8 @@ describe("rozwoj bestii", () => {
       expect(npc.trappings.some((t) => /^(przedmiot magiczny|magiczny przedmiot)$/i.test(t))).toBe(false);
       const v = computeNpc(npc);
       expect(v.casting).not.toBeNull();
-      expect(v.casting!.lores.some((l) => l.key === "Ognia" && l.rule)).toBe(true);
+      // Tradycja (Magia Tajemna) od 2. poziomu profesji - [dom] poziom koncowy jest losowy.
+      if (npc.careerPath.at(-1)!.level >= 2) expect(v.casting!.lores.some((l) => l.key === "Ognia" && l.rule)).toBe(true);
       if (npc.trappings.includes("umagiczniony kostur")) {
         staff++;
         expect(v.casting!.cnMod).toBe(-1);
@@ -579,7 +583,7 @@ describe("rozwoj bestii", () => {
       });
       expect(extra.length, `${seed}: ${w.careerPath.at(-1)?.profession} ${w.trappings.join(", ")}`).toBeGreaterThan(0);
     }
-    expect(wizards).toBeGreaterThan(20);
+    expect(wizards).toBeGreaterThan(12);
     const npc = generateNpc({ archetype: "Czarodziej", tier: "sredni", race: "Człowiek", professions: ["Piromanta"], deterministic: true }, seedRng(1));
     npc.trappings = ["zwykłe szaty", "umagiczniony kostur"];
     npc.talents = [...npc.talents, { name: "Precyzyjne Inkantowanie", level: 1 }];
@@ -591,8 +595,9 @@ describe("rozwoj bestii", () => {
 
   it("stworzenie cywilizowane z archetypem rozwija sie przez profesje", () => {
     const orc = generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "zaawansowany" }, seedRng(3));
-    // Bez darmowych rozwiniec tworzenia postaci - wszystko z PD (Niezwykly: 2. poziom profesji).
-    expect(orc.careerPath.at(-1)?.level).toBe(2);
+    // Bez darmowych rozwiniec tworzenia postaci - wszystko z PD (Niezwykly: najwyzej 2. poziom profesji).
+    expect(orc.careerPath.at(-1)?.level).toBeGreaterThanOrEqual(1);
+    expect(orc.careerPath.at(-1)?.level).toBeLessThanOrEqual(2);
     expect(orc.weapons.length).toBeGreaterThan(0);
     // Orki zawsze z profesja.
     for (let seed = 1; seed <= 10; seed++) expect(generateNpc({ creature: "Ork" }, seedRng(seed)).archetype).not.toBe("");

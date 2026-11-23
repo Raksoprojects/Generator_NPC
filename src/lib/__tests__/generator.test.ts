@@ -60,18 +60,23 @@ describe("rzuty na cechy", () => {
 });
 
 describe("poziomy BN", () => {
-  it("tylko doswiadczeni i wyzsi osiagaja 4. poziom profesji", () => {
+  it("[dom] 3. poziom profesji od 4000 PD, 4. od 15 000 PD - i wtedy tylko czasem", () => {
+    const fourth: Record<string, number> = {};
     for (const tier of TIER_IDS) {
       for (const seed of SEEDS) {
         const npc = generateNpc({ tier }, seedRng(seed));
         const top = maxLevel(npc);
-        const i = TIER_IDS.indexOf(tier);
-        if (tier === "legendarny" || tier === "heros") expect(top).toBeGreaterThanOrEqual(4);
-        else if (i >= TIER_IDS.indexOf("wybitny")) expect(top).toBeGreaterThanOrEqual(3);
-        // Do Doswiadczonego (1500 PD) najwyzej 3. poziom.
-        else if (i <= TIER_IDS.indexOf("obyty")) expect(top).toBeLessThanOrEqual(3);
+        const budget = npc.xp!.budget;
+        // Profesje zaczynajace sie wyzej (elfi kaplani od 3.) - wyjatek.
+        if (npc.careerPath.some((s) => s.level > 2 && Math.min(...gd.getProfession(s.profession)!.levels.map((l) => l.level)) > 1)) continue;
+        if (budget < 4000) expect(top, `${tier} ${budget}`).toBeLessThanOrEqual(2);
+        else if (budget < 15000) expect(top, `${tier} ${budget}`).toBeLessThanOrEqual(3);
+        if (top >= 4) fourth[tier] = (fourth[tier] ?? 0) + 1;
       }
     }
+    // Od Mistrza 4. poziom czesto, ale nie zawsze.
+    expect(fourth.mistrz ?? 0).toBeGreaterThan(0);
+    expect(fourth.mistrz ?? 0).toBeLessThan(SEEDS.length);
   });
 
   it("budzet PD z zakresu poziomu BN, wydane nie wiecej niz budzet", () => {
@@ -104,12 +109,12 @@ describe("poziomy BN", () => {
     expect(low.xp!.budget).toBe(13500 - 2000);
     // Nie mniej niz 0.
     expect(generateNpc({ race: "Człowiek", tier: "slaby", xpBonus: -5000 }, seedRng(1)).xp!.budget).toBe(0);
-    // Zwykly z 1500 PD jest na 2. poziomie profesji.
+    // Zwykly z 1500 PD jest zwykle na 2. poziomie profesji ([dom] poziom koncowy losowany wg finalLevel).
     let second = 0;
     for (const seed of SEEDS) {
       if (generateNpc({ tier: "sredni", race: "Człowiek", xp: 1500 }, seedRng(seed)).careerPath.at(-1)!.level >= 2) second++;
     }
-    expect(second / SEEDS.length).toBeGreaterThan(0.85);
+    expect(second / SEEDS.length).toBeGreaterThan(0.5);
   });
 
   it("przed kazdym awansem poziom jest skompletowany (Cechy i Umiejetnosci na 5 x poziom, Talent)", () => {
@@ -117,7 +122,9 @@ describe("poziomy BN", () => {
       for (const seed of SEEDS.slice(0, 20)) {
         const npc = generateNpc({ tier, race: "Człowiek" }, seedRng(seed));
         const arch = gd.getArchetype(npc.archetype);
-        for (const step of npc.careerPath.slice(0, -1)) {
+        // Awans w tej samej profesji (przy zmianie profesji poziom bywa nieukonczony - [dom] +100 PD).
+        for (const [i, step] of npc.careerPath.slice(0, -1).entries()) {
+          if (npc.careerPath[i + 1].profession !== step.profession) continue;
           const req = 5 * step.level;
           const label = `${tier} ${seed} ${step.profession} ${step.level}`;
           for (const c of levelCharacteristics(step.profession, step.level, arch)) expect(npc.charAdvances[c], label).toBeGreaterThanOrEqual(req);
@@ -405,19 +412,17 @@ describe("profile bohaterow i sciezki profesji", () => {
         for (const [, lvl] of byProf) expect(lvl, `${tier}: ${JSON.stringify(npc.careerPath)}`).toBeLessThanOrEqual(last.level);
         maxCareers[tier] = Math.max(maxCareers[tier] ?? 0, byProf.size);
         expect(byProf.size).toBeLessThanOrEqual(gd.getTier(tier).maxCareers);
-        // [dom] maxCareerLevel: do Zaawansowanego najwyzej 2. poziom, Weteran i Wybitny 3., od Eksperta 4. (5. z szansa).
-        const cap = gd.getTier(tier).maxCareerLevel ?? 4;
+        // [dom] Poziom wg PD: 3. od 4000, 4. (i 5.) od 15 000 PD; nizej najwyzej 2.
+        const cap = npc.xp!.budget >= 15000 ? 5 : npc.xp!.budget >= 4000 ? 3 : 2;
         const firstOfLast = Math.min(...gd.getProfession(last.profession)!.levels.map((l) => l.level));
-        expect(last.level, `${tier}: ${JSON.stringify(npc.careerPath)}`).toBeLessThanOrEqual(Math.max(firstOfLast, cap >= 4 ? 5 : cap));
-        if (tier === "heroiczny") expect(last.level).toBeGreaterThanOrEqual(3);
-        if (tier === "legendarny") expect(last.level).toBeGreaterThanOrEqual(4);
-        if (tier === "heros") expect(last.level).toBeGreaterThanOrEqual(4);
+        expect(last.level, `${tier}: ${JSON.stringify(npc.careerPath)}`).toBeLessThanOrEqual(Math.max(firstOfLast, cap));
       }
     }
-    expect(maxCareers.weteran).toBe(3);
-    expect(maxCareers.heroiczny).toBe(4);
-    expect(maxCareers.legendarny).toBe(5);
-    expect(maxCareers.heros).toBe(5);
+    // Wiecej PD - wiecej profesji.
+    expect(maxCareers.slaby).toBe(1);
+    expect(maxCareers.weteran).toBeGreaterThanOrEqual(3);
+    expect(maxCareers.heroiczny).toBeGreaterThanOrEqual(4);
+    expect(maxCareers.heros).toBeGreaterThanOrEqual(6);
   });
 });
 

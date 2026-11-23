@@ -269,12 +269,12 @@ export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, 
 
   // [dom] Etapy jak poziomy profesji: najpierw Cechy etapu do 5 x etap, potem Umiejetnosci etapu do 5 x etap.
   // Cechy etapu: 2 + etap najwazniejszych (WW i Cechy Umiejetnosci rodziny); Umiejetnosci etapu: priorytet 2+.
-  // Etapow najwyzej tyle, ile poziomow profesji ma BN tego poziomu (maxCareerLevel); reszta PD - swobodnie.
+  // Etapow tyle, ile poziomu BN daje tiers.json -> stages (jak poziomy profesji); reszta PD - swobodnie.
   const relevance = (code: Attribute) =>
     (cfg.chars[code] ?? 1) + [...skills].reduce((sum, [name, p]) => sum + (gd.skillAttr(name) === code && p >= 2 ? p : 0), 0);
   const ranked = [...chars].sort((a, b) => relevance(b) - relevance(a) || chars.indexOf(a) - chars.indexOf(b));
   const stageSkills = [...skills].filter(([, p]) => p >= 2).map(([name]) => name);
-  const stageCap = gd.getTier(npc.tier)?.maxCareerLevel ?? 4;
+  const stageCap = gd.getTier(npc.tier)?.stages ?? 4;
   stages: for (let stage = 1; stage <= stageCap; stage++) {
     const req = 5 * stage;
     // Po jednym rozwinieciu dla najmniej rozwinietej (przy remisie - wazniejszej), wiec brak PD dzieli sie rowno.

@@ -299,14 +299,36 @@ export interface CareerPlanStep {
   target: number;
   /** Poziom docelowy podany recznie - osiagany nawet ponad budzet PD. */
   fixed?: boolean;
+  /** [dom] BN zmienia te profesje przed ukonczeniem ostatniego poziomu (zmiana +100 PD). */
+  incomplete?: boolean;
 }
 
 const maxLevelOf = (profession: string) => Math.max(...(gd.getProfession(profession)?.levels.map((l) => l.level) ?? [1]));
 
+const archetypeHas = (arch: Archetype, profession: string) => profession in arch.professions;
+
 /**
- * Plan profesji BN: od polowy do maxCareers-1 wczesniejszych pokrewnych (cel 1.-2. poziom) i glowna
- * (cel maxCareerLevel poziomu BN: 2., 3. od Weterana, 4. od Eksperta, 5. z szansa). Ile z planu BN
- * faktycznie przejdzie, rozstrzyga budzet PD (developByXp); nadwyzka zostaje w obecnym poziomie.
+ * [dom] Wczesniejsza profesja spoza archetypu (np. Mieszczanin przed Zolnierzem): dostepna rasie, bez kaplanow
+ * i magow (chyba ze glowna sama czaruje); ta sama Klasa co glowna x3.
+ */
+function pickOutsideCareer(race: string, main: string, rng: Rng, only?: string[], taken: string[] = []): string | undefined {
+  const mainClass = gd.getProfession(main)?.class;
+  const magicMain = careerHas(main, [...ARCANE, ...DIVINE]);
+  const weights: Record<string, number> = {};
+  for (const p of gd.allProfessionNames()) {
+    if (p === main || taken.includes(p) || !raceOk(p, race) || vampireCareerFor(p, race) || !careerSwitchOk(p, main) || firstLevel(p) !== 1) continue;
+    if (only?.length && !only.includes(p)) continue;
+    if (!magicMain && careerHas(p, [...ARCANE, ...DIVINE])) continue;
+    weights[p] = gd.getProfession(p)?.class === mainClass ? 3 : 1;
+  }
+  return weightedKey(weights, rng);
+}
+
+/**
+ * Plan profesji BN [dom]: od polowy do maxCareers-1 wczesniejszych profesji (glownie z archetypu, czesc spoza
+ * niego; cel 1.-3. poziom wg settings.careers.previousLevel, czasem nieukonczony) i glowna z archetypu
+ * (cel losowany wg finalLevel poziomu BN, 5. z szansa). Limit poziomu wg PD (3. od 4000, 4. od 15 000) i to,
+ * ile z planu BN faktycznie przejdzie, rozstrzyga developByXp.
  */
 export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId, race: string, rng: Rng): CareerPlanStep[] {
   const arch = restrictArchetype(gd.getArchetype(archetype), spec.onlyProfessions);
@@ -325,9 +347,10 @@ export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId
   const preset = spec.mainProfession && gd.getProfession(spec.mainProfession) ? spec.mainProfession : undefined;
   const main = chosen[chosen.length - 1] ?? preset ?? weightedKey(Object.keys(candidates).length ? candidates : fallback, rng);
   if (!main) return [];
-  // [dom] Poziom profesji zalezy od poziomu BN (maxCareerLevel): 3. od Weterana, 4. od Eksperta.
-  const levelCap = tier.maxCareerLevel ?? 4;
-  const mainTarget = levelCap >= 4 ? maybeLevel5(main, Math.min(4, maxLevelOf(main)), tier, rng) : Math.max(firstLevel(main), Math.min(levelCap, maxLevelOf(main)));
+  // [dom] Poziom profesji koncowej losowany wg poziomu BN (finalLevel); nie ma poziomu, na ktorym BN musi skonczyc.
+  const cfg = gd.getSettings().careers;
+  const rolled = tier.finalLevel ? Number(weightedKey(tier.finalLevel, rng) ?? 4) : 4;
+  const mainTarget = rolled >= 4 ? maybeLevel5(main, Math.min(4, maxLevelOf(main)), tier, rng) : Math.max(firstLevel(main), Math.min(rolled, maxLevelOf(main)));
 
   const def = gd.getProfession(main)!;
   // Profesja zaawansowana (elfi kaplani): najpierw profesja wejsciowa (Mag 1-2), potem kaplan od 3. poziomu.
@@ -338,16 +361,22 @@ export function buildCareerPlan(spec: GenSpec, archetype: string, tierId: TierId
     ];
   }
   const manual = chosen.slice(0, -1);
-  // Wyzszy poziom BN - wiecej pokrewnych profesji (co najmniej polowa limitu), kazda na 1.-2. poziomie.
+  // Wyzszy poziom BN - wiecej profesji (co najmniej polowa limitu); wczesniejsze nie wyzej niz koncowa.
   const maxPrev = Math.max(0, tier.maxCareers - 1);
   const count = chosen.length ? manual.length : randInt(Math.floor(maxPrev / 2), maxPrev, rng);
   const plan: CareerPlanStep[] = [];
   const taken: string[] = [];
   for (let i = 0; i < count; i++) {
-    const prof = manual[i] ?? pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions, taken);
+    const outside = !manual[i] && !!cfg && chance(cfg.outsideArchetype, rng);
+    const prof =
+      manual[i] ?? (outside ? pickOutsideCareer(race, main, rng, spec.onlyProfessions, taken) : undefined) ?? pickPreviousCareer(arch, race, main, rng, spec.onlyProfessions, taken);
     if (!prof) break;
     taken.push(prof);
-    plan.push({ profession: prof, start: 1, target: Math.min(maxLevelOf(prof), levelCap, randInt(1, 2, rng)) });
+    const rolledLvl = cfg ? Number(weightedKey(cfg.previousLevel, rng) ?? 1) : randInt(1, 2, rng);
+    // Profesja spoza archetypu - epizod, najwyzej 2. poziom.
+    const lvl = outside && !archetypeHas(arch, prof) ? Math.min(2, rolledLvl) : rolledLvl;
+    const incomplete = !manual[i] && !!cfg && chance(cfg.incompleteChance, rng);
+    plan.push({ profession: prof, start: 1, target: Math.max(1, Math.min(maxLevelOf(prof), mainTarget, lvl)), ...(incomplete ? { incomplete } : {}) });
   }
   plan.push({ profession: main, start: firstLevel(main), target: mainTarget });
   return plan;
@@ -752,26 +781,58 @@ class XpDeveloper {
     if (n.talent) this.buyTalent(n.talent);
   }
 
-  /** Swobodny rozwoj w obecnej profesji: waga = priorytet^2 / koszt; talenty z mniejsza waga (settings.talents.freeWeight). */
-  spendFree(profession: string, level: number): void {
+  /** Czy BN spelnia juz wymagania poziomu profesji (Cechy i Umiejetnosci; bez Talentu). */
+  meets(profession: string, level: number): boolean {
+    const n = this.needs(profession, level);
+    return !n.chars.length && !n.skills.length;
+  }
+
+  private prevPick = new Map<string, boolean>();
+  /**
+   * [dom] Talenty z nizszych poziomow obecnej profesji: dostepna polowa (losowana raz na profesje),
+   * kupowane z waga settings.careers.prevTalentWeight.
+   */
+  prevTalents(profession: string, level: number): string[] {
+    const out: string[] = [];
+    for (let l = 1; l < level; l++) {
+      this.talents(profession, l).forEach((t, i) => {
+        const key = `${profession}|${t}`;
+        if (!this.prevPick.has(key)) this.prevPick.set(key, this.det ? i % 2 === 0 : chance(0.5, this.rng));
+        if (this.prevPick.get(key)) out.push(t);
+      });
+    }
+    return out;
+  }
+
+  /**
+   * Swobodny rozwoj w obecnej profesji: waga = priorytet^2 / koszt; talenty z mniejsza waga (settings.talents.freeWeight).
+   * limit - najwyzej tyle PD (rozwoj w profesji po drodze, przed jej zmiana).
+   */
+  spendFree(profession: string, level: number, limit = Infinity): void {
     const chars = this.chars(profession, level);
     const skills = this.skills(profession, level);
     const talents = this.talents(profession, level);
+    const prevW = gd.getSettings().careers?.prevTalentWeight ?? 0;
+    const prev = prevW > 0 ? this.prevTalents(profession, level).filter((t) => !talents.includes(t)) : [];
     const talentFactor = gd.getSettings().talents?.freeWeight ?? 1;
+    const stopAt = this.spent + limit;
     for (let guard = 0; guard < 5000; guard++) {
+      const avail = Math.min(this.left, stopAt - this.spent);
       const cands: Candidate[] = [];
       for (const code of chars) {
         const cost = nextAdvanceCost("char", this.npc.charAdvances[code]);
-        if (cost <= this.left) cands.push({ kind: "char", name: code, cost, weight: charPriority(this.arch, code) ** 2 / cost });
+        if (cost <= avail) cands.push({ kind: "char", name: code, cost, weight: charPriority(this.arch, code) ** 2 / cost });
       }
       for (const s of skills) {
         const cost = nextAdvanceCost("skill", this.skillAdv(s));
-        if (cost <= this.left) cands.push({ kind: "skill", name: s, cost, weight: skillPriority(this.arch, s) ** 2 / cost });
+        if (cost <= avail) cands.push({ kind: "skill", name: s, cost, weight: skillPriority(this.arch, s) ** 2 / cost });
       }
-      for (const t of talents) {
-        const cost = talentCost(this.talentLevel(t));
-        if (cost <= this.left && this.canGrowTalent(t)) {
-          cands.push({ kind: "talent", name: t, cost, weight: (talentPriority(this.arch, t) ** 2 * talentFactor) / cost });
+      for (const [list, factor] of [[talents, talentFactor], [prev, talentFactor * prevW]] as const) {
+        for (const t of list) {
+          const cost = talentCost(this.talentLevel(t));
+          if (cost <= avail && this.canGrowTalent(t)) {
+            cands.push({ kind: "talent", name: t, cost, weight: (talentPriority(this.arch, t) ** 2 * factor) / cost });
+          }
         }
       }
       const c = this.pick(cands, (x) => x.weight);
@@ -783,7 +844,7 @@ class XpDeveloper {
       // Przy duzym zapasie PD kupujemy od razu do konca przedzialu kosztu (koszt w przedziale jest staly).
       const owned = c.kind === "char" ? this.npc.charAdvances[c.name as Attribute] : this.skillAdv(c.name);
       const inBracket = 5 - (owned % 5);
-      const n = this.left > 20 * c.cost ? Math.min(inBracket, Math.floor(this.left / c.cost)) : 1;
+      const n = avail > 20 * c.cost ? Math.min(inBracket, Math.floor(avail / c.cost)) : 1;
       for (let i = 0; i < n; i++) {
         if (c.kind === "char") this.buyChar(c.name as Attribute);
         else this.buySkill(c.name);
@@ -873,6 +934,19 @@ export function turningXp(creature: CreatureDef | undefined): number {
   return Math.max(0, start(creature.minTier ?? "slaby") - start("slaby"));
 }
 
+/** Przyblizony koszt skompletowania poziomu profesji (Cechy, Umiejetnosci, Talent) - do szacowania reszty sciezki. */
+const LEVEL_COST = [0, 200, 600, 900, 1300, 1800];
+
+/** Szacunek PD na reszte planu od kroku `from`: poziomy profesji, awanse i zmiany profesji. */
+function restOfPlanCost(plan: CareerPlanStep[], from: number): number {
+  let sum = 0;
+  for (const s of plan.slice(from)) {
+    for (let l = s.start; l <= s.target; l++) sum += LEVEL_COST[Math.min(l, LEVEL_COST.length - 1)];
+    sum += CAREER_STEP_COST * (s.target - s.start + 1);
+  }
+  return sum;
+}
+
 /** Poziom BN dla podanej liczby PD: najwyzszy, ktorego zakres zaczyna sie nie wyzej. */
 export function tierForXp(xp: number): TierId {
   return [...TIER_IDS].reverse().find((t) => (gd.getTier(t)?.xp?.[0] ?? 0) <= xp) ?? "slaby";
@@ -926,13 +1000,19 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
   // Stworzenia z profesja (orki, zwierzoludzie) - bez darmowych rozwiniec tworzenia postaci; wszystko z PD.
   if (!npc.creature || npc.turned) creationStart(dev, plan[0].profession);
 
+  // [dom] Limit poziomu profesji wg PD (settings.careers.levelMinXp): 3. od 4000 PD, 4. (i 5.) od 15 000 PD.
+  const minXp = gd.getSettings().careers?.levelMinXp;
+  const total = budget + turning;
+  const xpCap = !minXp ? 5 : total >= (minXp["4"] ?? 0) ? 5 : total >= (minXp["3"] ?? 0) ? 3 : 2;
+  if (!exact) plan = plan.map((s) => (s.fixed ? s : { ...s, target: Math.max(s.start, Math.min(s.target, xpCap)) }));
+
   const steps: CareerStep[] = [{ profession: plan[0].profession, level: plan[0].start }];
   let ci = 0;
   let prof = plan[0].profession;
   let level = plan[0].start;
   // Poziom, do ktorego obecna profesja musi dojsc (po zmianie profesji - poziom poprzedniej).
   let mustReach = 0;
-  for (let guard = 0; guard < 40; guard++) {
+  for (let guard = 0; guard < 60; guard++) {
     const step = plan[ci];
     const lastStep = ci === plan.length - 1;
     let next: { profession: string; level: number; cost: number; switching: boolean } | undefined;
@@ -940,10 +1020,17 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
     else if (!lastStep) {
       const n = plan[ci + 1];
       const otherClass = gd.getProfession(n.profession)?.class !== gd.getProfession(prof)?.class;
-      next = { profession: n.profession, level: n.start, cost: CAREER_STEP_COST + (otherClass ? CLASS_CHANGE_EXTRA : 0), switching: true };
+      // [dom] Wejscie od razu na 2. albo 3. poziom, gdy BN spelnia juz wymagania nizszych poziomow nowej profesji.
+      let entry = n.start;
+      if (!exact && !n.fixed && n.start === 1) {
+        for (let l = 2; l <= Math.min(3, n.target, maxLevelOf(n.profession)) && dev.meets(n.profession, l - 1); l++) entry = l;
+      }
+      // Zmiana przed ukonczeniem poziomu: +100 PD (PG s. 49), podobnie zmiana Klasy.
+      const unfinished = !exact && !!step.incomplete;
+      next = { profession: n.profession, level: entry, cost: CAREER_STEP_COST + (otherClass ? CLASS_CHANGE_EXTRA : 0) + (unfinished ? CAREER_STEP_COST : 0), switching: true };
     }
     if (!next) break;
-    const need = dev.needs(prof, level);
+    const need = next.switching && !exact && step.incomplete ? { cost: 0, chars: [], skills: [] } : dev.needs(prof, level);
     // Po awansie trzeba miec za co pracowac na nowym poziomie; przy zmianie profesji - dojsc do obecnego poziomu.
     let reserve: number;
     if (next.switching) {
@@ -963,7 +1050,7 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
       }
       if (next.switching && level < maxLevelOf(prof)) {
         // Profesja zaawansowana (np. elfi kaplan od 3. poziomu) - zostaje w obecnej i rozwija ja dalej.
-        plan = [...plan.slice(0, ci), { ...step, target: Math.min(exact ? 4 : (tier?.maxCareerLevel ?? 4), maxLevelOf(prof)) }];
+        plan = [...plan.slice(0, ci), { ...step, target: Math.min(exact ? 4 : Math.min(4, xpCap), maxLevelOf(prof)) }];
         continue;
       }
       if (!next.switching && !lastStep && !step.fixed) {
@@ -975,6 +1062,12 @@ export function developByXp(npc: Npc, plan: CareerPlanStep[], rng: Rng, determin
       break;
     }
     dev.applyNeeds(need);
+    if (next.switching && !exact) {
+      // [dom] Rozwoj w profesji po drodze: czesc wolnych PD (ponad szacunek reszty sciezki) przed zmiana profesji.
+      const surplus = dev.left - next.cost - reserve - restOfPlanCost(plan, ci + 1);
+      const share = Math.floor(surplus / (plan.length - ci));
+      if (share > 50) dev.spendFree(prof, level, share);
+    }
     dev.spent += next.cost;
     if (next.switching) {
       ci++;

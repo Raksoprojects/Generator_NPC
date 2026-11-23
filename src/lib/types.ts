@@ -183,8 +183,10 @@ export interface TierDef {
   xp: [number, number];
   /** Maksymalna liczba profesji w sciezce. */
   maxCareers: number;
-  /** [dom] Najwyzszy poziom profesji przy losowej sciezce: 3. od Weterana, 4. od Eksperta. */
-  maxCareerLevel?: number;
+  /** [dom] Wagi poziomu profesji koncowej przy losowej sciezce (ograniczone przez settings.careers.levelMinXp). */
+  finalLevel?: Record<string, number>;
+  /** [dom] Liczba etapow rozwoju stworzenia (jak poziomy profesji). */
+  stages?: number;
   /** Szansa, ze profesja z 5. poziomem (Arcymag) dojdzie do niego (Ekspert 0,5%, Legenda 50%, Heros zawsze). */
   level5Chance?: number;
   /** Mala losowa szansa na profil bohatera (Weteran, Doborowy, Pomniejszy/Wielki Bohater) - wykluczajace sie. */
@@ -243,6 +245,18 @@ export interface GeneratorSettings {
    */
   /** Tworzenie postaci BN; skillAdvances - darmowe rozwiniecia Umiejetnosci profesji (RAW 40, [dom] BN 25). */
   creation?: { charMin: number; skillMin: number; power: number; skillAdvances?: number };
+  /**
+   * [dom] Sciezka wielu profesji: levelMinXp - od ilu PD mozliwy 3./4. poziom; previousLevel - wagi poziomu
+   * wczesniejszych profesji; outsideArchetype - szansa na wczesniejsza profesje spoza archetypu; incompleteChance -
+   * szansa, ze BN zmienia profesje przed ukonczeniem poziomu (+100 PD); prevTalentWeight - waga Talentow z nizszych poziomow.
+   */
+  careers?: {
+    levelMinXp: Record<string, number>;
+    previousLevel: Record<string, number>;
+    outsideArchetype: number;
+    incompleteChance: number;
+    prevTalentWeight: number;
+  };
 }
 
 export interface TiersData {
