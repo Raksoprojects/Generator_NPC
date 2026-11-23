@@ -74,23 +74,47 @@ export function creatureWounds(
   t: number,
   wp: number | null,
   traits: string[],
-  hardy: number
+  hardy: number,
+  swarmGrade = 0
 ): number {
   const sb = characteristicBonus(s);
   const tb = characteristicBonus(t);
   const wpb = wp == null ? sb : characteristicBonus(wp);
+  const bySize = (size: string) => {
+    let w: number;
+    if (size === "Drobny") w = 1;
+    else if (size === "Niewielki") w = tb;
+    else if (size === "Mały") w = 2 * tb + wpb;
+    else w = sb + 2 * tb + wpb;
+    w += hardy * tb;
+    const mult: Record<string, number> = { Duży: 2, Wielki: 4, Monstrualny: 8 };
+    return w * (mult[size] ?? 1);
+  };
+  // Roj ze stopniem (Bestiariusz 2.0): Zyw wg Rozmiaru roju z poprawionymi Cechami, [dom] co najmniej 3 x osobnik.
+  if (swarmGrade > 0) return Math.max(bySize(SWARM_GRADES[swarmGrade - 1].size), 3 * bySize(sizeOf(traits)));
+  // Roj z ksiazki (profil juz roju, podrecznik glowny): x5 jak Sredni.
   const swarm = traits.some((x) => /^Rój/.test(x));
-  const size = swarm ? "Średni" : sizeOf(traits);
-  let w: number;
-  if (size === "Drobny") w = 1;
-  else if (size === "Niewielki") w = tb;
-  else if (size === "Mały") w = 2 * tb + wpb;
-  else w = sb + 2 * tb + wpb;
-  w += hardy * tb;
-  const mult: Record<string, number> = { Duży: 2, Wielki: 4, Monstrualny: 8 };
-  w *= mult[size] ?? 1;
-  if (swarm) w *= 5;
-  return w;
+  return swarm ? bySize("Średni") * 5 : bySize(sizeOf(traits));
+}
+
+/** Stopnie Roju (Bestiariusz 2.0): Rozmiar roju, premia do WW, S, Wt, SW, kara do Zw, Rany na koniec Rundy. */
+export const SWARM_GRADES = [
+  { name: "Przeciętny", size: "Średni", bonus: 10, agility: -5, damage: 1 },
+  { name: "Duży", size: "Duży", bonus: 20, agility: -10, damage: 2 },
+  { name: "Ogromny", size: "Wielki", bonus: 30, agility: -15, damage: 3 },
+  { name: "Monstrualny", size: "Monstrualny", bonus: 40, agility: -20, damage: 4 }
+] as const;
+
+/** Stopien Roju dodanego do BN (1-4): "Rój" bez nawiasu albo z nazwa roju - Przecietny; "Rój (wliczony)" - 0 (profil juz roju). */
+export function swarmGradeOf(traits: string[]): number {
+  for (const t of traits) {
+    const m = /^Rój(?: \(([^)]+)\))?$/.exec(t);
+    if (!m) continue;
+    if (m[1] === "wliczony") return 0;
+    const i = SWARM_GRADES.findIndex((g) => g.name === m[1]);
+    return i >= 0 ? i + 1 : 1;
+  }
+  return 0;
 }
 
 /** Naturalne ataki z cech ksiazkowych (Broń +X, Ugryzienie +X, Ogon, Rogi, Macki, Język, Strzelanie, Zionięcie). */

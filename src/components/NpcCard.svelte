@@ -9,7 +9,7 @@
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc, type PathStep } from "../lib/generator";
-  import { beastTier } from "../lib/creatures";
+  import { beastTier, SWARM_GRADES } from "../lib/creatures";
   import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { findMagicItem } from "../lib/magicItems";
   import {
@@ -399,6 +399,19 @@
 
   function toggleTrait(name: string) {
     npc.traits = npc.traits.includes(name) ? npc.traits.filter((t) => t !== name) : [...npc.traits, name];
+  }
+
+  /** Cechy Opcjonalne stworzenia z ksiazki do wlaczenia recznie; Rój rozbity na stopnie (Bestiariusz 2.0). */
+  let optionalChips = $derived(
+    (creature?.optional ?? [])
+      .flatMap((o) => (/^Rój/.test(o) ? SWARM_GRADES.map((g) => `Rój (${g.name})`) : [o]))
+      .filter((o) => !gd.getCreatureTrait(o)?.randomPool && !/usuń|dodaj|zmień|zwiększ|Wszystkie Cechy|jedynie/i.test(o))
+  );
+
+  /** Roj ma jeden stopien naraz - wlaczenie stopnia zdejmuje inne. */
+  function toggleOptional(name: string) {
+    if (/^Rój/.test(name) && !npc.traits.includes(name)) npc.traits = npc.traits.filter((t) => !/^Rój/.test(t));
+    toggleTrait(name);
   }
 
   function toggleProfile(name: string) {
@@ -1152,10 +1165,18 @@
         {#each Object.entries(gd.getCreatureTraits()).filter(([, t]) => t.randomPool).map(([n]) => n) as tr (tr)}
           <button class="chip tap" class:warning={npc.traits.includes(tr)} aria-pressed={npc.traits.includes(tr)} title={traitText(tr)} onclick={() => toggleTrait(tr)}>{tr}</button>
         {/each}
-        {#each npc.traits.filter((t) => !gd.getCreatureTrait(t)?.randomPool) as tr (tr)}
+        {#each npc.traits.filter((t) => !gd.getCreatureTrait(t)?.randomPool && !optionalChips.includes(t)) as tr (tr)}
           <button class="chip warning tap" aria-pressed="true" title="Kliknij, aby usunąć" onclick={() => toggleTrait(tr)}>{tr} ✕</button>
         {/each}
       </p>
+      {#if optionalChips.length}
+        <h4>Opcjonalne z bestiariusza <span class="hint text-dim">(Rój wg Bestiariusza 2.0 – jeden stopień)</span></h4>
+        <p class="list">
+          {#each optionalChips as tr (tr)}
+            <button class="chip tap" class:warning={npc.traits.includes(tr)} aria-pressed={npc.traits.includes(tr)} title={traitText(tr)} onclick={() => toggleOptional(tr)}>{tr}</button>
+          {/each}
+        </p>
+      {/if}
       <h4>Profile bohaterów</h4>
       <p class="list">
         {#each Object.keys(gd.getHeroProfiles()) as hp (hp)}

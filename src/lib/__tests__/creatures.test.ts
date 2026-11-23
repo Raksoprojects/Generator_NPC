@@ -52,12 +52,27 @@ describe("stworzenia z bestiariusza", () => {
     expect(Math.max(...adv) - Math.min(...adv)).toBeLessThanOrEqual(1);
   });
 
+  it("Roj ze stopniami (Bestiariusz 2.0): premie do Cech i Zyw wg Rozmiaru roju", () => {
+    const rat = generateNpc({ creature: "Olbrzymi szczur", tier: "slaby", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
+    const one = computeNpc(rat);
+    const avg = computeNpc({ ...rat, traits: [...rat.traits, "Rój (Przeciętny)"] });
+    const big = computeNpc({ ...rat, traits: [...rat.traits, "Rój (Duży)"] });
+    expect(avg.chars.WW.total).toBe(one.chars.WW.total + 10);
+    expect(avg.chars.Zw.total).toBe(one.chars.Zw.total - 5);
+    expect(big.chars.S.total).toBe(one.chars.S.total + 20);
+    // Co najmniej 3 x osobnik; Duzy roj ma wiecej niz Przecietny.
+    expect(avg.wounds).toBeGreaterThanOrEqual(3 * one.wounds);
+    expect(big.wounds).toBeGreaterThan(avg.wounds);
+    // "Rój" bez stopnia = Przecietny.
+    expect(computeNpc({ ...rat, traits: [...rat.traits, "Rój"] }).wounds).toBe(avg.wounds);
+  });
+
   it("Roj tylko recznie: Ogar Chaosu pojedynczy, z Rojem - stado", () => {
-    // Ogar Chaosu: pojedynczy pies; Roj dodany recznie daje stado (Zyw x5).
+    // Ogar Chaosu: pojedynczy pies; Roj dodany recznie daje stado (Bestiariusz 2.0: co najmniej 3 x osobnik).
     const hound = generateNpc({ creature: "Ogar Chaosu", noArchetype: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
     const single = computeNpc(hound).wounds;
     expect(single).toBeLessThan(30);
-    expect(computeNpc({ ...hound, traits: [...hound.traits, "Rój"] }).wounds).toBe(single * 5);
+    expect(computeNpc({ ...hound, traits: [...hound.traits, "Rój"] }).wounds).toBeGreaterThanOrEqual(single * 3);
   });
 
   it("cechy z ksiazki odtwarzaja sie przy rzucie 10", () => {

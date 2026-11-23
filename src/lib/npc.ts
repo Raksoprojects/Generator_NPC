@@ -7,7 +7,7 @@
  *   + talenty dajace +5 + wylosowane Cechy Stworzen + mutacje.
  */
 
-import { creatureArmour, creatureBase, creatureWounds, naturalAttacks } from "./creatures";
+import { creatureArmour, creatureBase, creatureWounds, naturalAttacks, SWARM_GRADES, swarmGradeOf } from "./creatures";
 import { armourPoints, getArmourDef, getWeaponDef, LOCATIONS, pieceLocations, type Location } from "./equipment";
 import * as gd from "./gameData";
 import { castingSummary, type CastingView } from "./magicItems";
@@ -287,6 +287,12 @@ export function computeNpc(input: Npc): NpcView {
   // Przedmioty magiczne: runy, wlasciwosci Broni Chaosu, pierscienie.
   const magic = magicEffects(npc);
   addMods(magic.chars, "przedmioty magiczne", "item");
+  // Roj dodany do BN (Bestiariusz 2.0): +10/20/30/40 do WW, S, Wt, SW i -5/10/15/20 Zw wg stopnia.
+  const grade = swarmGradeOf(npc.traits);
+  if (grade > 0) {
+    const g = SWARM_GRADES[grade - 1];
+    addMods({ WW: g.bonus, S: g.bonus, Wt: g.bonus, SW: g.bonus, Zw: g.agility }, `Rój (${g.name})`, "trait");
+  }
   for (const name of npc.traits) {
     const tr = gd.findCreatureTrait(name)?.trait;
     if (!tr) continue;
@@ -493,8 +499,8 @@ export function computeNpc(input: Npc): NpcView {
     magic.wounds +
     mutationWounds +
     (creature
-      ? // Roj dodany recznie (npc.traits) tez zmienia Zywotnosc (x5, jak Sredni); Rozmiar spoza ksiazki (linia wampira) ma pierwszenstwo.
-        creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, [...npc.traits.filter((t) => /^Rozmiar/.test(t)), ...bookTraits, ...npc.traits.filter((t) => /^Rój/.test(t))], hardy + bookHardy(bookTraits))
+      ? // Roj dodany do BN (npc.traits): stopnie z Bestiariusza 2.0; Rozmiar spoza ksiazki (linia wampira) ma pierwszenstwo.
+        creatureWounds(totals.S, totals.Wt, chars.SW.absent ? null : totals.SW, [...npc.traits.filter((t) => /^Rozmiar/.test(t)), ...bookTraits, ...npc.traits.filter((t) => t === "Rój (wliczony)")], hardy + bookHardy(bookTraits), swarmGradeOf(npc.traits))
       : computeWounds(totals.S, totals.Wt, totals.SW, race?.woundsIncludeStrength ?? true, hardy));
 
   const spells = npc.spells.map((n) => gd.getSpell(n)).filter(Boolean) as SpellDef[];
