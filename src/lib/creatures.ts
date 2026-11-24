@@ -107,6 +107,22 @@ export const SWARM_GRADES = [
   { name: "Monstrualny", size: "Monstrualny", bonus: 40, agility: -20, damage: 4 }
 ] as const;
 
+/**
+ * Cechy Opcjonalne stworzenia do wlaczenia recznie (przy tworzeniu i edycji): tylko znane cechy, bez instrukcji
+ * ("usuń...", "Wszystkie Cechy..."); Rój rozbity na stopnie z Bestiariusza 2.0.
+ */
+export function optionalTraitChoices(creature: CreatureDef | undefined): string[] {
+  return (creature?.optional ?? [])
+    .flatMap((o) => (/^Rój/.test(o) ? SWARM_GRADES.map((g) => `Rój (${g.name})`) : [o]))
+    .filter((o) => !!gd.findCreatureTrait(o) && !gd.getCreatureTrait(o)?.randomPool && !/usuń|dodaj|zmień|zwiększ|Wszystkie Cechy|jedynie/i.test(o));
+}
+
+/** Roj ma jeden stopien naraz: wlaczenie stopnia zdejmuje inne. */
+export function toggleOptionalTrait(traits: string[], name: string): string[] {
+  if (traits.includes(name)) return traits.filter((t) => t !== name);
+  return [...(/^Rój/.test(name) ? traits.filter((t) => !/^Rój/.test(t)) : traits), name];
+}
+
 /** Stopien Roju dodanego do BN (1-4): "Rój" bez nawiasu albo z nazwa roju - Przecietny; "Rój (wliczony)" - 0 (profil juz roju). */
 export function swarmGradeOf(traits: string[]): number {
   for (const t of traits) {

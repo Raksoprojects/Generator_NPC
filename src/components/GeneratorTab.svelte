@@ -3,7 +3,7 @@
   import Autocomplete from "./Autocomplete.svelte";
   import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
-  import { creatureTierRange, sizeOf } from "../lib/creatures";
+  import { creatureTierRange, optionalTraitChoices, sizeOf, toggleOptionalTrait } from "../lib/creatures";
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
   import PathEditor from "./PathEditor.svelte";
   import { TIER_IDS, type Npc, type Sex, type TierId } from "../lib/types";
@@ -203,6 +203,8 @@
   let otherTraits = $derived(
     Object.entries(gd.getCreatureTraits()).filter(([, t]) => !t.randomPool).map(([n]) => n)
   );
+  /** Cechy Opcjonalne wybranego stworzenia z ksiazki (Rój ze stopniem z Bestiariusza 2.0). */
+  let creatureOptional = $derived(kind === "stworzenia" && creature ? optionalTraitChoices(gd.getCreature(creature)) : []);
 
   // W trybie własnym każde pole ma wartość (brak opcji "losowo").
   $effect(() => {
@@ -502,6 +504,14 @@
     {/if}
 
     {#if mode !== "losowy"}
+      {#if creatureOptional.length}
+        <div class="traits">
+          <span class="lbl">Opcjonalne z bestiariusza:</span>
+          {#each creatureOptional as t (t)}
+            <button class="chip tap" class:warning={chosenTraits.includes(t)} aria-pressed={chosenTraits.includes(t)} title={gd.findCreatureTrait(t)?.trait.description} onclick={() => (chosenTraits = toggleOptionalTrait(chosenTraits, t))}>{t}</button>
+          {/each}
+        </div>
+      {/if}
       <div class="traits">
         <span class="lbl">Cechy Stworzeń:</span>
         {#each randomPool as t (t)}

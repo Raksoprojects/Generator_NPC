@@ -9,7 +9,7 @@
   import { copyText, downloadText, safeFileName } from "../lib/files";
   import * as gd from "../lib/gameData";
   import { isBeast, pickName, racesForArchetype, rebuildDevelopment, rerollNpc, type PathStep } from "../lib/generator";
-  import { beastTier, SWARM_GRADES } from "../lib/creatures";
+  import { beastTier, optionalTraitChoices, toggleOptionalTrait } from "../lib/creatures";
   import { mutationIcon, mutationLabel, mutationRow, mutationTable, rollLocation, rollMutation, rollMutationDice, usesHandbook } from "../lib/mutations";
   import { findMagicItem } from "../lib/magicItems";
   import {
@@ -402,16 +402,10 @@
   }
 
   /** Cechy Opcjonalne stworzenia z ksiazki do wlaczenia recznie; Rój rozbity na stopnie (Bestiariusz 2.0). */
-  let optionalChips = $derived(
-    (creature?.optional ?? [])
-      .flatMap((o) => (/^Rój/.test(o) ? SWARM_GRADES.map((g) => `Rój (${g.name})`) : [o]))
-      .filter((o) => !gd.getCreatureTrait(o)?.randomPool && !/usuń|dodaj|zmień|zwiększ|Wszystkie Cechy|jedynie/i.test(o))
-  );
+  let optionalChips = $derived(optionalTraitChoices(creature));
 
-  /** Roj ma jeden stopien naraz - wlaczenie stopnia zdejmuje inne. */
   function toggleOptional(name: string) {
-    if (/^Rój/.test(name) && !npc.traits.includes(name)) npc.traits = npc.traits.filter((t) => !/^Rój/.test(t));
-    toggleTrait(name);
+    npc.traits = toggleOptionalTrait(npc.traits, name);
   }
 
   function toggleProfile(name: string) {
