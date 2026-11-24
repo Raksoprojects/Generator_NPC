@@ -52,6 +52,19 @@ describe("stworzenia z bestiariusza", () => {
     expect(Math.max(...adv) - Math.min(...adv)).toBeLessThanOrEqual(1);
   });
 
+  it("bron i tarcza z ksiazki to dwie pozycje; Bron dostaje umiejetnosc swojej grupy", () => {
+    const hero = computeNpc(generateNpc({ creature: "Wywyższony Bohater Chaosu", noArchetype: true, deterministic: true }, seedRng(1)));
+    expect(hero.weapons.map((w) => w.name)).toEqual(expect.arrayContaining(["Broń Chaosu", "Tarcza duża"]));
+    expect(hero.weapons.find((w) => w.name === "Broń Chaosu")!.skillName).toBe("Broń Biała (Podstawowa)");
+    expect(hero.weapons.find((w) => w.name === "Tarcza duża")!.qualities).toContain("Tarcza 3");
+    expect(hero.weapons.some((w) => / i /.test(w.name))).toBe(false);
+  });
+
+  it("Rój (wliczony): Zyw z ksiazki obejmuje juz roj - bez mnoznika", () => {
+    const host = computeNpc(generateNpc({ creature: "Zastęp Duchów", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1)));
+    expect(host.wounds).toBeLessThan(25);
+  });
+
   it("Roj ze stopniami (Bestiariusz 2.0): premie do Cech i Zyw wg Rozmiaru roju", () => {
     const rat = generateNpc({ creature: "Olbrzymi szczur", tier: "slaby", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
     const one = computeNpc(rat);

@@ -92,6 +92,8 @@ export function creatureWounds(
   };
   // Roj ze stopniem (Bestiariusz 2.0): Zyw wg Rozmiaru roju z poprawionymi Cechami, [dom] co najmniej 3 x osobnik.
   if (swarmGrade > 0) return Math.max(bySize(SWARM_GRADES[swarmGrade - 1].size), 3 * bySize(sizeOf(traits)));
+  // "Rój (wliczony)": Zyw z ksiazki obejmuje juz roj (Wampiry: Zastep Duchow) - bez mnoznika.
+  if (traits.includes("Rój (wliczony)")) return bySize("Średni");
   // Roj z ksiazki (profil juz roju, podrecznik glowny): x5 jak Sredni.
   const swarm = traits.some((x) => /^Rój/.test(x));
   return swarm ? bySize("Średni") * 5 : bySize(sizeOf(traits));
@@ -126,6 +128,8 @@ export interface NaturalAttack {
   range?: string;
   count?: number;
   trait: string;
+  /** Tarcza noszona z bronia ("Miecz i tarcza") - nazwa z weapons.json (Tarcza, Tarcza duża, Puklerz). */
+  shield?: string;
 }
 
 export function naturalAttacks(creature: CreatureDef): NaturalAttack[] {
@@ -133,7 +137,12 @@ export function naturalAttacks(creature: CreatureDef): NaturalAttack[] {
   const out: NaturalAttack[] = [];
   for (const t of creature.traits) {
     let m: RegExpExecArray | null;
-    if ((m = /^Broń(?: \(([^)]+)\))? \+(\d+)/.exec(t))) out.push({ name: m[1] ?? "Broń", base: +m[2] - sb, addsSb: true, trait: t });
+    if ((m = /^Broń(?: \(([^)]+)\))? \+(\d+)/.exec(t))) {
+      // "Miecz i tarcza", "Broń Chaosu i duża tarcza", "Topór i puklerz" - bron i osobna tarcza (Bron +X dotyczy broni).
+      const split = m[1] ? /^(.+?) i (tarcza|duża tarcza|puklerz)$/.exec(m[1]) : null;
+      const shield = split ? ({ tarcza: "Tarcza", "duża tarcza": "Tarcza duża", puklerz: "Puklerz" } as const)[split[2] as "tarcza"] : undefined;
+      out.push({ name: split ? split[1] : (m[1] ?? "Broń"), base: +m[2] - sb, addsSb: true, trait: t, ...(shield ? { shield } : {}) });
+    }
     else if ((m = /^Ugryzienie(?: \(([^)]+)\))? \+(\d+)/.exec(t))) out.push({ name: m[1] ? `Ugryzienie (${m[1]})` : "Ugryzienie", base: +m[2] - sb, addsSb: true, trait: t });
     else if ((m = /^(?:Atak Ogonem|Ogon) \+(\d+)/.exec(t))) out.push({ name: "Ogon", base: +m[1] - sb, addsSb: true, trait: t });
     else if ((m = /^Rogi(?: \(([^)]+)\))? \+(\d+)/.exec(t))) out.push({ name: m[1] ? `Rogi (${m[1]})` : "Rogi", base: +m[2] - sb, addsSb: true, trait: t });

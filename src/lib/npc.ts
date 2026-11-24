@@ -422,10 +422,16 @@ export function computeNpc(input: Npc): NpcView {
         ? weaponSkill(skills, chars, true, a.name)
         : (() => {
             // Wlasna grupa, Bijatyka, a dla broni ("Broń", "Broń Chaosu i tarcza") najlepsza Broń Biała.
-            const melee = skills.filter((s) => s.name.startsWith("Broń Biała")).sort((x, y) => y.total - x.total);
+            // Przy rownej wartosci - Podstawowa (najczestsza grupa broni z ksiazki: "Broń Chaosu", "Topór").
+            const melee = skills
+              .filter((s) => s.name.startsWith("Broń Biała"))
+              .sort((x, y) => y.total - x.total || Number(y.name === "Broń Biała (Podstawowa)") - Number(x.name === "Broń Biała (Podstawowa)"));
             const bodyPart = /^(Ugryzienie|Ogon|Rogi|Macki|Pazury|Zmutowany|Kły|Szpony)/.test(a.name);
+            // Bron z weapons.json (Miecz dwuręczny, Korbacz, Rapier) - umiejetnosc jej grupy.
+            const group = getWeaponDef(a.name)?.def.group;
             const own =
               skills.find((s) => s.name === `Broń Biała (${a.name})`) ??
+              (group ? skills.find((s) => s.name === `Broń Biała (${group})`) : undefined) ??
               (bodyPart ? skills.find((s) => s.name === "Broń Biała (Bijatyka)") : melee[0]) ??
               skills.find((s) => s.name === "Broń Biała (Bijatyka)");
             return own ? { value: own.total, name: own.name } : { value: totals.WW, name: "WW" };
@@ -445,6 +451,23 @@ export function computeNpc(input: Npc): NpcView {
         craftFlaws: [],
         magicItem: m?.item
       });
+      // Tarcza z zapisu "bron i tarcza": osobna pozycja (Obrazenia i Cechy z weapons.json, umiejetnosc Podstawowa).
+      const sh = a.shield ? getWeaponDef(a.shield) : undefined;
+      if (sh) {
+        const own = skills.find((s) => s.name === `Broń Biała (${sh.def.group})`);
+        weapons.push({
+          name: sh.name,
+          damage: (sh.def.damage ?? 0) + (sh.def.sb ? sb : 0),
+          skill: own?.total ?? totals.WW,
+          skillName: own?.name ?? "WW",
+          qualities: sh.def.qualities ?? [],
+          flaws: sh.def.flaws ?? [],
+          ranged: false,
+          natural: true,
+          craftQualities: [],
+          craftFlaws: []
+        });
+      }
     }
   }
 
