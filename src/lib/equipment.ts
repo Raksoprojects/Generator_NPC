@@ -1,7 +1,7 @@
 /**
  * Bron i pancerz BN: rozpoznawanie ich w wyposazeniu profesji, dobor
- * konkretnej broni do postaci (krasnolud z "bronią ręczną" dostaje topór)
- * oraz zestawy pancerza archetypu. Bron wg kart z "Pod Bronią".
+ * konkretnej broni do postaci (krasnolud z "bronią ręczną" dostaje topór);
+ * pancerz tylko z wyposazenia profesji. Bron wg kart z "Pod Bronią".
  */
 
 import { chance, pick, weightedKey, type Rng } from "./dice";
@@ -30,7 +30,9 @@ const PAREN_WEAPON: Record<string, string> = {
 
 /** Wzorce wyposazenia z profesji (dopasowanie od poczatku tekstu). */
 const PATTERNS: [RegExp, Match][] = [
-  [/^(pełna )?zbroja płytowa/, { kind: "armour", names: PLATE }],
+  [/^(pełna )?zbroja płytowa|^zdobiona zbroja/, { kind: "armour", names: PLATE }],
+  [/^ciężki pancerz/, { kind: "armour", names: ["Kolczuga", "Napierśnik", "Naramienniki", "Nogawice kolcze", "Hełm"] }],
+  [/^kolczuga z czepcem/, { kind: "armour", names: ["Kolczuga", "Czepiec kolczy"] }],
   [/^napierśnik płytowy i hełm/, { kind: "armour", names: ["Napierśnik", "Hełm"] }],
   [/^skórzan[ya] napierśnik|^kaftan$/, { kind: "armour", names: ["Skórzany kaftan"] }],
   [/^skórzana kurta/, { kind: "armour", names: ["Skórzana kurta"] }],
@@ -48,7 +50,7 @@ const PATTERNS: [RegExp, Match][] = [
   [/^hełm (płytowy )?\(?otwarty|^hełm z gromrilu \(otwarty\)|^hełm płytowy otwarty/, { kind: "armour", names: ["Hełm otwarty"] }],
   [/^(wielki |pełny )?hełm/, { kind: "armour", names: ["Hełm"] }],
   [/^młot kawaleryjski/, { kind: "weapon", names: ["Młot kawaleryjski"] }],
-  [/^miecz dwuręczny/, { kind: "weapon", names: ["Miecz dwuręczny"] }],
+  [/^miecz dwuręczny|^wielki miecz/, { kind: "weapon", names: ["Miecz dwuręczny"] }],
   [/^wielki topór/, { kind: "weapon", names: ["Wielki topór"] }],
   [/^topór dwuręczny|^broń dwuręczna|^wielka broń/, { kind: "weapon", names: [TWO] }],
   [/^broń ręczna|^broń \(dowolna\)|^broń biała|^dowolna broń biała|^broń$/, { kind: "weapon", names: [HAND] }],
@@ -72,6 +74,7 @@ const PATTERNS: [RegExp, Match][] = [
   [/^łamacz mieczy/, { kind: "weapon", names: ["Łamacz mieczy"] }],
   [/^sztylet/, { kind: "weapon", names: ["Sztylet"] }],
   [/^nóż$/, { kind: "weapon", names: ["Nóż"] }],
+  [/^noże do rzucania|^nóż do rzucania/, { kind: "weapon", names: ["Nóż do rzucania"] }],
   [/^bicz/, { kind: "weapon", names: ["Bicz"] }],
   [/^arkan/, { kind: "weapon", names: ["Arkan"] }],
   [/^sieć/, { kind: "weapon", names: ["Obciążona sieć"] }],
@@ -88,6 +91,7 @@ const PATTERNS: [RegExp, Match][] = [
   [/^łuk/, { kind: "weapon", names: ["Łuk"] }],
   [/^proca/, { kind: "weapon", names: ["Proca"] }],
   [/^puklerz/, { kind: "weapon", names: ["Puklerz"] }],
+  [/^duża tarcza|^tarcza duża/, { kind: "weapon", names: ["Tarcza duża"] }],
   [/^tarcza/, { kind: "weapon", names: ["Tarcza"] }]
 ];
 
@@ -178,8 +182,11 @@ function resolveMarker(name: string, npc: Npc, rng: Rng): string {
 /** Rozpoznaje bron/pancerz w pozycji wyposazenia (lub null). */
 export function matchTrapping(item: string, rng: Rng): Match | null {
   let t = item.trim().toLowerCase().replace(/\s+/g, " ");
-  t = t.replace(/^(dobrej jakości|dobra|dobry|posrebrzany|posrebrzana) /, "");
-  if (t.includes(" albo ")) t = pick(t.split(" albo "), rng) ?? t;
+  // Przymiotniki bez znaczenia dla broni i pancerza; liczba sztuk na poczatku ("3 topory do rzucania").
+  const strip = (s: string) =>
+    s.replace(/^\d+\s+/, "").replace(/^(dobrej jakości|dobra|dobry|posrebrzany|posrebrzana|metalowy|metalowa|wysoki|wysoka|zdobyczny|zdobyczna|prymitywna|prymitywny) /, "");
+  t = strip(t);
+  if (t.includes(" albo ")) t = strip(pick(t.split(" albo "), rng) ?? t);
   const paren = /^broń(?: ręczna)? \(([^)]+?)\s*\)/.exec(t);
   if (paren && PAREN_WEAPON[paren[1]]) return { kind: "weapon", names: [PAREN_WEAPON[paren[1]]] };
   const wielka = /^wielka broń \(([^)]+?)\s*\)/.exec(t);
@@ -259,8 +266,7 @@ export function equipNpc(npc: Npc, rng: Rng): void {
   weapons.clear();
   for (const w of [...melee.slice(0, 2), ...shields.slice(0, 1), ...ranged.slice(0, 1)]) weapons.add(w);
 
-  const setName = gd.getArchetype(npc.archetype)?.armour?.[npc.tier];
-  for (const piece of (setName && gd.getWeapons().armourSets[setName]) || []) armour.add(piece);
+  // Pancerz tylko z wyposazenia profesji (jej poziomow do obecnego) - bez zestawu archetypu (Zabojca nie nosi pancerza).
 
   // Rasy z wlasnym orezem (krasnoludzki topor zamiast zwyklego) - z szansa z weapons.json.
   const variants = gd.getCreature(npc.creature) ? undefined : gd.getWeapons().raceVariants?.[npc.race];
