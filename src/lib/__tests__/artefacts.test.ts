@@ -64,6 +64,20 @@ describe("lupy wg lokacji", () => {
     expect(formatPence(253)).toBe("1 zk 1 s 1 p");
   });
 
+  it("sztucce i talerze maja cene z listy PG, a jakosc rosnie ze Statusem miejsca", () => {
+    const seen = new Map<string, string[]>();
+    for (let seed = 1; seed <= 300; seed++) {
+      for (const [loc, level] of [["chata", 1], ["posiadlosc", 3]] as const) {
+        const r = rollLoot({ location: loc, level, money: false, magic: false }, seedRng(seed));
+        for (const s of r.sections) for (const i of s.items) if (/^(zwykłe sztućce|sztućce|talerze i misy)$/.test(i.name)) seen.set(`${loc}:${i.name}:${i.note ?? ""}`, [i.value ?? ""]);
+      }
+    }
+    // PG s. 308: Sztućce 3 s 6 p, Talerz 1 s; komplet talerzy [dom] 12 sztuk.
+    expect(seen.get("posiadlosc:sztućce:Wyśmienity (2×)")).toEqual(["14 s"]);
+    expect(seen.get("posiadlosc:talerze i misy:Wyśmienity (2×)")).toEqual(["2 zk 8 s"]);
+    for (const [k, [v]] of seen) if (k.startsWith("chata:zwykłe sztućce")) expect(["3 s 6 p", "1 s 9 p"]).toContain(v);
+  });
+
   it("dom czarodzieja czesto ma zwoje i grimuary, chata prawie nigdy przedmiotow magicznych", () => {
     let wizard = 0;
     let hovel = 0;

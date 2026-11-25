@@ -63,7 +63,7 @@
       <span class="lbl">{s.label}:</span>
       <ul>
         {#each s.items as i, k (k)}
-          <li>{i.name}{#if i.value}<span class="text-dim">{" — "}{i.value}</span>{/if}{#if i.note}<span class="chip warning flaw">{i.note}</span>{/if}</li>
+          <li>{i.name}{#if i.value}<span class="text-dim">{" — "}{i.value}</span>{/if}{#if i.note}<span class="chip flaw" class:warning={!i.note.startsWith("Wyśmienity")}>{i.note}</span>{/if}</li>
         {/each}
       </ul>
     </div>
@@ -72,7 +72,7 @@
     <p class="text-dim">Nic wartościowego — ktoś był tu przed bohaterami.</p>
   {/if}
   {#if loot.totalPence}
-    <p class="row"><span class="lbl">Łączna wartość pieniędzy i kosztowności:</span> <b>{formatPence(loot.totalPence)}</b></p>
+    <p class="row"><span class="lbl">Łączna wartość (pieniądze i wycenione przedmioty):</span> <b>{formatPence(loot.totalPence)}</b></p>
   {/if}
   {#if loot.artefacts.length}
     <div class="magic">

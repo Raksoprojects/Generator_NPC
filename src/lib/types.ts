@@ -570,6 +570,19 @@ export interface LootData {
   tables: Record<string, LootTable>;
   weaponFlaws: TableRow[];
   armourFlaws: TableRow[];
+  /** Ceny z listy PG (narzedzia/build_loot_prices.py): p - pensy za sztuke, qty - sztuk w zestawie, q - Zalety z nazwy. */
+  prices?: {
+    note: string;
+    items: Record<string, LootPrice>;
+    gear: Record<string, LootPrice>;
+  };
+}
+
+export interface LootPrice {
+  p: number;
+  src: string;
+  qty?: number;
+  q?: number;
 }
 
 export interface RuneDef {
