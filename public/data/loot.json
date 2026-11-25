@@ -2626,5 +2626,1097 @@
    "max": 100,
    "name": "rzuć dwa razy"
   }
- ]
+ ],
+ "prices": {
+  "note": "Ceny z listy PG (Ponury świat…, s. 288–311) w pensach, przez cennik Skarbca Imperium (cena_raw_p). Zalety przedmiotu: ×2 za każdą, Wady: ×½ za każdą (PG s. 292–293). qty = sztuk w zestawie [dom], q = Zalety z nazwy.",
+  "items": {
+   "beczka": {
+    "p": 96,
+    "src": "PG s. 301"
+   },
+   "beczułka": {
+    "p": 36,
+    "src": "PG s. 301"
+   },
+   "bukłak": {
+    "p": 20,
+    "src": "PG s. 301"
+   },
+   "butelka": {
+    "p": 60,
+    "src": "PG s. 301"
+   },
+   "duży worek": {
+    "p": 18,
+    "src": "PG s. 301"
+   },
+   "dzban": {
+    "p": 38,
+    "src": "PG s. 301"
+   },
+   "juki": {
+    "p": 216,
+    "src": "PG s. 301"
+   },
+   "kufel cynowy": {
+    "p": 48,
+    "src": "PG s. 301"
+   },
+   "plecak": {
+    "p": 58,
+    "src": "PG s. 301"
+   },
+   "sakiewka": {
+    "p": 4,
+    "src": "PG s. 301"
+   },
+   "torba na ramię": {
+    "p": 12,
+    "src": "PG s. 301"
+   },
+   "tuba na zwoje": {
+    "p": 192,
+    "src": "PG s. 301"
+   },
+   "worek": {
+    "p": 12,
+    "src": "PG s. 301"
+   },
+   "beczułka piwa": {
+    "p": 36,
+    "src": "PG s. 302"
+   },
+   "butelka wina": {
+    "p": 10,
+    "src": "PG s. 302"
+   },
+   "butelka dobrego wina": {
+    "p": 10,
+    "src": "PG s. 302",
+    "q": 1
+   },
+   "butelka rzadkiego wina": {
+    "p": 10,
+    "src": "PG s. 302",
+    "q": 2
+   },
+   "ciepły posiłek z gospody": {
+    "p": 12,
+    "src": "PG s. 302"
+   },
+   "kielich wina lub mocnego trunku": {
+    "p": 1,
+    "src": "PG s. 302"
+   },
+   "prowiant na 1 dzień": {
+    "p": 24,
+    "src": "PG s. 302"
+   },
+   "prowiant na tydzień": {
+    "p": 24,
+    "src": "PG s. 302",
+    "qty": 7
+   },
+   "pół litra Piwa Bugmana": {
+    "p": 9,
+    "src": "PG s. 302"
+   },
+   "pół litra mocnego trunku": {
+    "p": 24,
+    "src": "PG s. 302"
+   },
+   "pół litra piwa": {
+    "p": 3,
+    "src": "PG s. 302"
+   },
+   "żywność na dzień": {
+    "p": 10,
+    "src": "PG s. 302"
+   },
+   "arkusze pergaminu (12)": {
+    "p": 12,
+    "src": "PG s. 304",
+    "qty": 12
+   },
+   "dokument prawny": {
+    "p": 36,
+    "src": "PG s. 304"
+   },
+   "mapa": {
+    "p": 720,
+    "src": "PG s. 304"
+   },
+   "księga, aptekarstwo": {
+    "p": 1920,
+    "src": "PG s. 304"
+   },
+   "księga, inżynieria": {
+    "p": 720,
+    "src": "PG s. 304"
+   },
+   "księga, kryptografia": {
+    "p": 1920,
+    "src": "PG s. 304"
+   },
+   "księga, magia": {
+    "p": 4800,
+    "src": "PG s. 304"
+   },
+   "księga, medycyna": {
+    "p": 3600,
+    "src": "PG s. 304"
+   },
+   "księga, prawo": {
+    "p": 3600,
+    "src": "PG s. 304"
+   },
+   "księga, religia": {
+    "p": 240,
+    "src": "PG s. 304"
+   },
+   "księga, sztuka": {
+    "p": 1200,
+    "src": "PG s. 304"
+   },
+   "cud inżynierii (proteza)": {
+    "p": 4800,
+    "src": "PG s. 308"
+   },
+   "drewniana noga": {
+    "p": 192,
+    "src": "PG s. 308"
+   },
+   "drewniane zęby": {
+    "p": 120,
+    "src": "PG s. 308"
+   },
+   "kostium": {
+    "p": 240,
+    "src": "PG s. 302"
+   },
+   "maska teatralna": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "maska wojenna": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "puder do twarzy": {
+    "p": 120,
+    "src": "PG s. 302"
+   },
+   "zestaw do charakteryzacji": {
+    "p": 78,
+    "src": "PG s. 303"
+   },
+   "szklane oko": {
+    "p": 240,
+    "src": "PG s. 308"
+   },
+   "bosak": {
+    "p": 72,
+    "src": "PB"
+   },
+   "drąg (3 metry)": {
+    "p": 96,
+    "src": "PG s. 303"
+   },
+   "dłuto": {
+    "p": 50,
+    "src": "PG s. 303"
+   },
+   "grabie": {
+    "p": 54,
+    "src": "PG s. 303"
+   },
+   "grawerowana pieczęć": {
+    "p": 1200,
+    "src": "PG s. 303"
+   },
+   "grzebień": {
+    "p": 10,
+    "src": "PG s. 303"
+   },
+   "gwoździe (12)": {
+    "p": 2,
+    "src": "PG s. 303"
+   },
+   "haczyki na ryby (12)": {
+    "p": 12,
+    "src": "PG s. 303"
+   },
+   "kajdany": {
+    "p": 216,
+    "src": "PG s. 303"
+   },
+   "kilof": {
+    "p": 216,
+    "src": "PG s. 303"
+   },
+   "klucz": {
+    "p": 12,
+    "src": "PG s. 303"
+   },
+   "kołek": {
+    "p": 12,
+    "src": "PG s. 303"
+   },
+   "liczydło": {
+    "p": 40,
+    "src": "PG s. 303"
+   },
+   "lusterko ręczne": {
+    "p": 258,
+    "src": "PG s. 303"
+   },
+   "miotła": {
+    "p": 10,
+    "src": "PG s. 303"
+   },
+   "motyka": {
+    "p": 48,
+    "src": "PG s. 303"
+   },
+   "moździerz z tłuczkiem": {
+    "p": 168,
+    "src": "PG s. 303"
+   },
+   "młotek": {
+    "p": 36,
+    "src": "PG s. 303"
+   },
+   "młotek sędziego": {
+    "p": 240,
+    "src": "PG s. 303"
+   },
+   "narzędzia pracy": {
+    "p": 720,
+    "src": "PG s. 296"
+   },
+   "narzędzie do czyszczenia uszu": {
+    "p": 24,
+    "src": "PG s. 303"
+   },
+   "pinceta": {
+    "p": 12,
+    "src": "PG s. 303"
+   },
+   "pióro do pisania": {
+    "p": 36,
+    "src": "PG s. 303"
+   },
+   "piła": {
+    "p": 72,
+    "src": "PG s. 303"
+   },
+   "pędzel do malowania": {
+    "p": 48,
+    "src": "PG s. 303"
+   },
+   "sidła na zwierzęta": {
+    "p": 30,
+    "src": "PG s. 303"
+   },
+   "sierp": {
+    "p": 240,
+    "src": "PG s. 303"
+   },
+   "soczewki do czytania": {
+    "p": 720,
+    "src": "PG s. 303"
+   },
+   "stalowe szczypce": {
+    "p": 192,
+    "src": "PG s. 303"
+   },
+   "szczotka do podłogi": {
+    "p": 18,
+    "src": "PG s. 303"
+   },
+   "szpadel": {
+    "p": 96,
+    "src": "PG s. 303"
+   },
+   "teleskop": {
+    "p": 1200,
+    "src": "PG s. 303"
+   },
+   "wiadro": {
+    "p": 30,
+    "src": "PG s. 303"
+   },
+   "wytrychy": {
+    "p": 180,
+    "src": "PG s. 303"
+   },
+   "zestaw do pisania": {
+    "p": 480,
+    "src": "PG s. 303"
+   },
+   "Grzybki Szalonego Kapelusznika": {
+    "p": 1200,
+    "src": "PG s. 306"
+   },
+   "Rozkosz Ranalda": {
+    "p": 216,
+    "src": "PG s. 306"
+   },
+   "bandaż": {
+    "p": 4,
+    "src": "PG s. 308"
+   },
+   "czarny lotos": {
+    "p": 4800,
+    "src": "PG s. 306"
+   },
+   "czyste szmaty (12 pasków)": {
+    "p": 1,
+    "src": "PG s. 308",
+    "qty": 12
+   },
+   "dziwnokorzeń": {
+    "p": 48,
+    "src": "PG s. 306"
+   },
+   "eliksir żywotności": {
+    "p": 216,
+    "src": "PG s. 307"
+   },
+   "fakstoryl": {
+    "p": 180,
+    "src": "PG s. 307"
+   },
+   "kataplazm leczniczy": {
+    "p": 144,
+    "src": "PG s. 307"
+   },
+   "korzeń mandragory": {
+    "p": 240,
+    "src": "PG s. 306"
+   },
+   "księżycowy kwiat": {
+    "p": 1200,
+    "src": "PG s. 306"
+   },
+   "mikstura lecznicza": {
+    "p": 120,
+    "src": "PG s. 307"
+   },
+   "pluja": {
+    "p": 300,
+    "src": "PG s. 306"
+   },
+   "salwort": {
+    "p": 144,
+    "src": "PG s. 307"
+   },
+   "sercobój": {
+    "p": 9600,
+    "src": "PG s. 306"
+   },
+   "tonik na trawienie": {
+    "p": 36,
+    "src": "PG s. 307"
+   },
+   "zestaw na zatrucia": {
+    "p": 720,
+    "src": "PG s. 303"
+   },
+   "ziemny korzeń": {
+    "p": 1200,
+    "src": "PG s. 307"
+   },
+   "amulet albo błyskotka": {
+    "p": 2,
+    "src": "PG s. 302"
+   },
+   "berło": {
+    "p": 1920,
+    "src": "PG s. 302"
+   },
+   "buty": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "buty i trzewiki": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "futrzane rękawice": {
+    "p": 48,
+    "src": "PG s. 302"
+   },
+   "kaptur": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "laska": {
+    "p": 720,
+    "src": "PG s. 302"
+   },
+   "maska (teatralna albo wojenna)": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "mundur": {
+    "p": 264,
+    "src": "PG s. 302"
+   },
+   "perfumy": {
+    "p": 120,
+    "src": "PG s. 302"
+   },
+   "praktyczne rękawiczki": {
+    "p": 48,
+    "src": "PG s. 302"
+   },
+   "praktyczne ubranie": {
+    "p": 72,
+    "src": "PG s. 302"
+   },
+   "praktyczny kapelusz": {
+    "p": 48,
+    "src": "PG s. 302"
+   },
+   "płaszcz": {
+    "p": 120,
+    "src": "PG s. 302"
+   },
+   "strojny kapelusz": {
+    "p": 48,
+    "src": "PG s. 302",
+    "q": 1
+   },
+   "strój dworski": {
+    "p": 2880,
+    "src": "PG s. 302"
+   },
+   "sygnet": {
+    "p": 1200,
+    "src": "PG s. 302"
+   },
+   "symbol religijny": {
+    "p": 80,
+    "src": "PG s. 302"
+   },
+   "szata": {
+    "p": 480,
+    "src": "PG s. 302"
+   },
+   "szaty": {
+    "p": 480,
+    "src": "PG s. 302"
+   },
+   "tatuaż": {
+    "p": 48,
+    "src": "PG s. 302"
+   },
+   "ubranie podróżne": {
+    "p": 72,
+    "src": "PG s. 302"
+   },
+   "wysokie buty z ostrogami": {
+    "p": 60,
+    "src": "PG s. 302"
+   },
+   "wytworne rękawiczki": {
+    "p": 48,
+    "src": "PG s. 302",
+    "q": 1
+   },
+   "wytworne ubranie": {
+    "p": 72,
+    "src": "PG s. 302",
+    "q": 1
+   },
+   "zapinki (6)": {
+    "p": 120,
+    "src": "PG s. 302"
+   },
+   "jedwabna chustka": {
+    "p": 240,
+    "src": "PB"
+   },
+   "skóra zwierzęcia": {
+    "p": 360,
+    "src": "PB"
+   },
+   "afisz": {
+    "p": 12,
+    "src": "PG s. 308"
+   },
+   "fajka i tytoń": {
+    "p": 40,
+    "src": "PG s. 308"
+   },
+   "hubka i krzesiwo": {
+    "p": 50,
+    "src": "PG s. 308"
+   },
+   "instrument muzyczny": {
+    "p": 480,
+    "src": "PG s. 308"
+   },
+   "kotwiczka z liną": {
+    "p": 360,
+    "src": "PG s. 308"
+   },
+   "kości do gry": {
+    "p": 10,
+    "src": "PG s. 308"
+   },
+   "kreda": {
+    "p": 10,
+    "src": "PG s. 303"
+   },
+   "węgiel do rysowania": {
+    "p": 10,
+    "src": "PG s. 303"
+   },
+   "kubek": {
+    "p": 8,
+    "src": "PG s. 302"
+   },
+   "lalka": {
+    "p": 24,
+    "src": "PG s. 308"
+   },
+   "lampa Davricha": {
+    "p": 480,
+    "src": "PG s. 308"
+   },
+   "latarnia": {
+    "p": 144,
+    "src": "PG s. 308"
+   },
+   "latarnia sztormowa": {
+    "p": 240,
+    "src": "PG s. 308"
+   },
+   "lina (10 metrów)": {
+    "p": 100,
+    "src": "PG s. 308"
+   },
+   "miska": {
+    "p": 12,
+    "src": "PG s. 308"
+   },
+   "namiot": {
+    "p": 144,
+    "src": "PG s. 308"
+   },
+   "patelnia": {
+    "p": 90,
+    "src": "PG s. 308"
+   },
+   "piłka": {
+    "p": 5,
+    "src": "PG s. 308"
+   },
+   "posłanie": {
+    "p": 72,
+    "src": "PG s. 308"
+   },
+   "płócienna płachta": {
+    "p": 96,
+    "src": "PG s. 308"
+   },
+   "szmaty": {
+    "p": 1,
+    "src": "PG s. 308"
+   },
+   "talerz": {
+    "p": 12,
+    "src": "PG s. 308"
+   },
+   "talia kart": {
+    "p": 12,
+    "src": "PG s. 308"
+   },
+   "zapałki": {
+    "p": 1,
+    "src": "PG s. 308",
+    "qty": 12
+   },
+   "zwykłe sztućce": {
+    "p": 42,
+    "src": "PG s. 308"
+   },
+   "świece (12)": {
+    "p": 12,
+    "src": "PG s. 308"
+   },
+   "kaganek": {
+    "p": 24,
+    "src": "PG s. 308"
+   },
+   "kandelabr ze świecami": {
+    "p": 12,
+    "src": "PG s. 308"
+   },
+   "kubki i kieliszki": {
+    "p": 8,
+    "src": "PG s. 302",
+    "qty": 6
+   },
+   "sztućce": {
+    "p": 42,
+    "src": "PG s. 308"
+   },
+   "puchary": {
+    "p": 48,
+    "src": "PG s. 301",
+    "qty": 4
+   },
+   "latarnia z oliwą": {
+    "p": 144,
+    "src": "PG s. 308"
+   },
+   "talerze i misy": {
+    "p": 12,
+    "src": "PG s. 308",
+    "qty": 12
+   },
+   "wino i trunki": {
+    "p": 10,
+    "src": "PG s. 302",
+    "qty": 6
+   },
+   "cynowy kufel": {
+    "p": 48,
+    "src": "PG s. 301"
+   },
+   "lusterko": {
+    "p": 258,
+    "src": "PG s. 303"
+   }
+  },
+  "gear": {
+   "Bułat": {
+    "p": 240,
+    "src": "PB"
+   },
+   "Buzdygan": {
+    "p": 180,
+    "src": "PB"
+   },
+   "Miecz": {
+    "p": 240,
+    "src": "PB"
+   },
+   "Mizerykordia": {
+    "p": 192,
+    "src": "PB"
+   },
+   "Młot jednoręczny": {
+    "p": 240,
+    "src": "PB"
+   },
+   "Nadziak jednoręczny": {
+    "p": 108,
+    "src": "PB"
+   },
+   "Nóż": {
+    "p": 96,
+    "src": "PB"
+   },
+   "Pałka": {
+    "p": 48,
+    "src": "PB"
+   },
+   "Sztylet": {
+    "p": 192,
+    "src": "PB"
+   },
+   "Topór": {
+    "p": 120,
+    "src": "PB"
+   },
+   "Puklerz": {
+    "p": 218,
+    "src": "PB"
+   },
+   "Tarcza": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Tarcza duża": {
+    "p": 720,
+    "src": "PB"
+   },
+   "Pawęż": {
+    "p": 900,
+    "src": "PB"
+   },
+   "Kopia": {
+    "p": 240,
+    "src": "PG s. 294"
+   },
+   "Lanca": {
+    "p": 240,
+    "src": "PB"
+   },
+   "Młot kawaleryjski": {
+    "p": 720,
+    "src": "PG s. 294"
+   },
+   "Szabla": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Floret": {
+    "p": 1200,
+    "src": "PG s. 294"
+   },
+   "Rapier": {
+    "p": 1200,
+    "src": "PG s. 294"
+   },
+   "Szpada": {
+    "p": 960,
+    "src": "PB"
+   },
+   "Bosak": {
+    "p": 72,
+    "src": "PB"
+   },
+   "Garota": {
+    "p": 12,
+    "src": "PB"
+   },
+   "Kastet": {
+    "p": 30,
+    "src": "PG s. 294"
+   },
+   "Kolczasta rękawica": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Tłuk": {
+    "p": 12,
+    "src": "PB"
+   },
+   "Zamykana rękawica": {
+    "p": 240,
+    "src": "PB"
+   },
+   "Cep bojowy": {
+    "p": 120,
+    "src": "PG s. 294"
+   },
+   "Kiścień": {
+    "p": 720,
+    "src": "PG s. 294"
+   },
+   "Korbacz": {
+    "p": 480,
+    "src": "PG s. 294"
+   },
+   "Lewak": {
+    "p": 240,
+    "src": "PG s. 294"
+   },
+   "Łamacz mieczy": {
+    "p": 270,
+    "src": "PG s. 294"
+   },
+   "Obciążona sieć": {
+    "p": 360,
+    "src": "PB"
+   },
+   "Płaszcz": {
+    "p": 120,
+    "src": "PG s. 302"
+   },
+   "Halabarda": {
+    "p": 480,
+    "src": "PG s. 294"
+   },
+   "Kostur": {
+    "p": 36,
+    "src": "PG s. 294"
+   },
+   "Łapacz": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Partyzana / glewia": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Pika": {
+    "p": 216,
+    "src": "PG s. 294"
+   },
+   "Sierpak": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Szydło": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Topór drzewcowy": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Włócznia": {
+    "p": 180,
+    "src": "PG s. 294"
+   },
+   "Flamberg": {
+    "p": 7200,
+    "src": "PB"
+   },
+   "Miecz dwuręczny": {
+    "p": 2400,
+    "src": "PG s. 294"
+   },
+   "Młot bojowy": {
+    "p": 720,
+    "src": "PG s. 294"
+   },
+   "Nadziak": {
+    "p": 108,
+    "src": "PB"
+   },
+   "Półtorak": {
+    "p": 1920,
+    "src": "PG s. 294"
+   },
+   "Wielki topór": {
+    "p": 960,
+    "src": "PG s. 294"
+   },
+   "Krasnoludzki topór": {
+    "p": 240,
+    "src": "KR s. 93"
+   },
+   "Krasnoludzki młot bojowy": {
+    "p": 240,
+    "src": "KR s. 93"
+   },
+   "Wirujące ostrza śmierci": {
+    "p": 1200,
+    "src": "KR s. 93"
+   },
+   "Krasnoludzki wielki topór": {
+    "p": 960,
+    "src": "KR s. 93"
+   },
+   "Krasnoludzki wielki młot": {
+    "p": 960,
+    "src": "KR s. 93"
+   },
+   "Krasnoludzki kilof": {
+    "p": 240,
+    "src": "KR s. 93"
+   },
+   "Wielki miecz Hoetha": {
+    "p": 480000,
+    "src": "WE s. 31"
+   },
+   "Krótki łuk": {
+    "p": 720,
+    "src": "PG s. 295"
+   },
+   "Łuk": {
+    "p": 960,
+    "src": "PG s. 295"
+   },
+   "Łuk długi": {
+    "p": 1200,
+    "src": "PG s. 295"
+   },
+   "Łuk elfi": {
+    "p": 2400,
+    "src": "PG s. 295"
+   },
+   "Kusza pistoletowa": {
+    "p": 1440,
+    "src": "PG s. 295"
+   },
+   "Kusza": {
+    "p": 1200,
+    "src": "PG s. 295"
+   },
+   "Ciężka kusza": {
+    "p": 1680,
+    "src": "PG s. 295"
+   },
+   "Proca": {
+    "p": 12,
+    "src": "PG s. 295"
+   },
+   "Proca drzewcowa": {
+    "p": 48,
+    "src": "PG s. 295"
+   },
+   "Bolas": {
+    "p": 120,
+    "src": "PG s. 295"
+   },
+   "Nóż do rzucania": {
+    "p": 216,
+    "src": "PG s. 295"
+   },
+   "Oszczep": {
+    "p": 126,
+    "src": "PG s. 295"
+   },
+   "Strzałka": {
+    "p": 24,
+    "src": "PG s. 295"
+   },
+   "Topór do rzucania": {
+    "p": 240,
+    "src": "PG s. 295"
+   },
+   "Arkan": {
+    "p": 72,
+    "src": "PG s. 295"
+   },
+   "Bicz": {
+    "p": 60,
+    "src": "PG s. 295"
+   },
+   "Pistolet": {
+    "p": 1920,
+    "src": "PG s. 295"
+   },
+   "Rusznica": {
+    "p": 960,
+    "src": "PG s. 295"
+   },
+   "Rusznica lontowa": {
+    "p": 480,
+    "src": "PB"
+   },
+   "Rusznica dwulufowa": {
+    "p": 1680,
+    "src": "PB"
+   },
+   "Arkebuz": {
+    "p": 1200,
+    "src": "PB"
+   },
+   "Garłacz": {
+    "p": 480,
+    "src": "PG s. 295"
+   },
+   "Garłacz lontowy": {
+    "p": 240,
+    "src": "PB"
+   },
+   "Gryfia łapa": {
+    "p": 4800,
+    "src": "PB"
+   },
+   "Muszkiet hochlandzki": {
+    "p": 24000,
+    "src": "PG s. 295"
+   },
+   "Halabarda pistoletowa": {
+    "p": 2400,
+    "src": "PB"
+   },
+   "Topór pistoletowy": {
+    "p": 1920,
+    "src": "PB"
+   },
+   "Laska pistoletowa": {
+    "p": 3600,
+    "src": "PB"
+   },
+   "Moździerz ręczny": {
+    "p": 12000,
+    "src": "PB"
+   },
+   "Pieprzniczka": {
+    "p": 2880,
+    "src": "PB"
+   },
+   "Pistolet samopowtarzalny": {
+    "p": 3600,
+    "src": "PG s. 295"
+   },
+   "Rusznica samopowtarzalna": {
+    "p": 2400,
+    "src": "PG s. 295"
+   },
+   "Krasnoludzka kusza": {
+    "p": 1200,
+    "src": "KR s. 94"
+   },
+   "Krasnoludzka hakownica": {
+    "p": 1440,
+    "src": "KR s. 94"
+   },
+   "Krasnoludzki pistolet": {
+    "p": 2880,
+    "src": "KR s. 94"
+   },
+   "Krasnoludzki topór do rzucania": {
+    "p": 240,
+    "src": "KR s. 94"
+   },
+   "Skórzana kurta": {
+    "p": 144,
+    "src": "PG s. 300"
+   },
+   "Skórzany kaftan": {
+    "p": 120,
+    "src": "PG s. 300"
+   },
+   "Skórzane nogawice": {
+    "p": 168,
+    "src": "PG s. 300"
+   },
+   "Skórzany hełm": {
+    "p": 96,
+    "src": "PG s. 300"
+   },
+   "Kolet": {
+    "p": 216,
+    "src": "PG s. 300"
+   },
+   "Nogawice kolcze": {
+    "p": 480,
+    "src": "PG s. 300"
+   },
+   "Kolczuga": {
+    "p": 720,
+    "src": "PG s. 300"
+   },
+   "Czepiec kolczy": {
+    "p": 240,
+    "src": "PG s. 300"
+   },
+   "Kaftan kolczy": {
+    "p": 480,
+    "src": "PG s. 300"
+   },
+   "Napierśnik": {
+    "p": 2400,
+    "src": "PG s. 300"
+   },
+   "Hełm otwarty": {
+    "p": 480,
+    "src": "PG s. 300"
+   },
+   "Naramienniki": {
+    "p": 1920,
+    "src": "PG s. 300"
+   },
+   "Nagolenniki płytowe": {
+    "p": 2400,
+    "src": "PG s. 300"
+   },
+   "Hełm": {
+    "p": 720,
+    "src": "PG s. 300"
+   }
+  }
+ }
 }
