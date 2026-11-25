@@ -95,7 +95,11 @@
         <label>Miejsce
           <select use:searchable bind:value={location}>
             {#if mode === "polLosowy"}<option value="">— losowe —</option>{/if}
-            {#each groupLocations as l (l.id)}<option value={l.id}>{l.name} ({STATUS_LABEL[l.status]})</option>{/each}
+            {#each groups.filter((g) => !group || g === group) as g (g)}
+              <optgroup label={g}>
+                {#each groupLocations.filter((l) => l.group === g) as l (l.id)}<option value={l.id}>{l.name} ({STATUS_LABEL[l.status]})</option>{/each}
+              </optgroup>
+            {/each}
           </select>
         </label>
         <label>Poziom miejsca
@@ -123,7 +127,7 @@
     </div>
     <p class="text-dim small">
       Wg tabeli skarbów nieoficjalnego kompendium <i>Treasure &amp; Artefacts</i>. Poziom miejsca mnoży pieniądze i wartość kosztowności (jak Tier w źródle).
-      Zwykłe przedmioty, broń i pancerze mają cenę z cennika podręcznika (PG s. 288–311); każda Zaleta ×2, każda Wada ×½ (PG s. 292–293).
+      Zwykłe przedmioty, broń i pancerze mają cenę bazową z cennika Skarbca Imperium (bez osady i sytuacji); każda Zaleta ×2, każda Wada ×½ (PG s. 292–293).
       [dom] Jakość wg Statusu miejsca: Brąz — połowa Brzydkich, Srebro — od poziomu 4 Wyśmienite, Złoto — Wyśmienity 1× na poziomie 1–2, 2× na 3–4, 3× na 5.
       Szanse na przedmioty magiczne rosną o połowę za każdy poziom. Kości k10 i k100 „wybuchają” — przy maksimum rzuca się jeszcze raz.
     </p>

@@ -186,6 +186,116 @@
    ]
   },
   {
+   "id": "gospoda",
+   "name": "Gospoda albo zajazd",
+   "group": "Domostwa",
+   "status": "srebro",
+   "description": "Szynk, kuchnia i izby gości: utarg w szufladzie, zapasy, rzeczy zostawione przez podróżnych.",
+   "money": {
+    "p": "1k100",
+    "s": "3k10",
+    "zk": "10:1k10"
+   },
+   "domestic": "1k10",
+   "gems": "5:1",
+   "art": "5:1",
+   "cloth": "25:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "1:1",
+   "extra": [
+    [
+     "jedzenie",
+     "1k10"
+    ],
+    [
+     "pojemniki",
+     "1k5"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "odziez",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "kantor",
+   "name": "Kantor kupiecki",
+   "group": "Domostwa",
+   "status": "złoto",
+   "description": "Biuro i skład zamożnego kupca: kasa, weksle, próbki towaru, kosztowności zastawione przez dłużników.",
+   "money": {
+    "p": "1k100",
+    "s": "1k100",
+    "zk": "2k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "75:1k5",
+   "art": "25:1k2",
+   "cloth": "50:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "ksiazki",
+     "50:1k2"
+    ],
+    [
+     "pojemniki",
+     "1k5"
+    ],
+    [
+     "narzedzia",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "pracownia_alchemika",
+   "name": "Pracownia alchemika albo aptekarza",
+   "group": "Domostwa",
+   "status": "srebro",
+   "description": "Tygle, alembiki, zioła i specyfiki, notatki z doświadczeń.",
+   "money": {
+    "p": "50:3k10",
+    "s": "50:2k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "15:1k2",
+   "art": null,
+   "cloth": "10:1",
+   "scrolls": "5:1",
+   "grimoire": "2:1",
+   "magic": "3:1",
+   "extra": [
+    [
+     "ziola",
+     "1k10"
+    ],
+    [
+     "narzedzia",
+     "1k5"
+    ],
+    [
+     "ksiazki",
+     "50:1k2"
+    ],
+    [
+     "pojemniki",
+     "1k5"
+    ]
+   ],
+   "added": true
+  },
+  {
    "id": "kapliczka",
    "name": "Kapliczka",
    "group": "Świątynie",
@@ -291,6 +401,620 @@
      "25:1k5"
     ]
    ]
+  },
+  {
+   "id": "oboz_zwierzoludzi",
+   "name": "Obóz zwierzoludzi",
+   "group": "Legowiska",
+   "status": "brąz",
+   "description": "Zbieranina łupów z napadów na wsie — sporo zniszczone albo splugawione.",
+   "money": {
+    "p": "25:2k10",
+    "s": "10:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": "15:1k5",
+   "gems": "10:1k2",
+   "art": "5:1",
+   "cloth": "10:1k2",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "odziez",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "kanaly",
+   "name": "Kanały i nora skavenów",
+   "group": "Legowiska",
+   "status": "srebro",
+   "description": "Śmieci, przemyt i to, co ciągną do nor skaveny.",
+   "money": {
+    "p": "50:1k100",
+    "s": "25:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": "10:1k5",
+   "gems": "10:1k2",
+   "art": null,
+   "cloth": "10:1",
+   "scrolls": "2:1",
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "narzedzia",
+     "25:1k2"
+    ],
+    [
+     "ziola",
+     "15:1"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "leze_nekromanty",
+   "name": "Leże nekromanty",
+   "group": "Legowiska",
+   "status": "złoto",
+   "description": "Ukryta pracownia nekromanty: księgi zakazanej wiedzy, ingrediencje i łupy z rozkopanych grobów.",
+   "money": {
+    "p": "50:2k10",
+    "s": "50:3k10",
+    "zk": "50:2k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "50:1k5",
+   "art": "25:1k2",
+   "cloth": "10:1k2",
+   "scrolls": "75:1k5",
+   "grimoire": "75:1",
+   "magic": "50:1k2",
+   "extra": [
+    [
+     "ksiazki",
+     "1k5"
+    ],
+    [
+     "ziola",
+     "1k5"
+    ],
+    [
+     "pojemniki",
+     "50:1k2"
+    ],
+    [
+     "bron",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "leze_wampira",
+   "name": "Leże wampira",
+   "group": "Legowiska",
+   "status": "złoto",
+   "description": "Siedziba wampira: stare monety z dawnych wieków, wytworne stroje, dzieła sztuki i rodowe kosztowności.",
+   "money": {
+    "p": "25:1k100",
+    "s": "50:1k100",
+    "zk": "1k100"
+   },
+   "domestic": "1k10",
+   "gems": "90:1k10",
+   "art": "90:1k10",
+   "cloth": "1k10",
+   "scrolls": "25:1k2",
+   "grimoire": "25:1",
+   "magic": "50:1k2",
+   "extra": [
+    [
+     "odziez",
+     "1k5"
+    ],
+    [
+     "ksiazki",
+     "50:1k2"
+    ],
+    [
+     "bron",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "kryjowka_kultystow",
+   "name": "Kryjówka kultystów Chaosu",
+   "group": "Legowiska",
+   "status": "srebro",
+   "description": "Piwnica albo zapomniana kaplica, w której spotyka się kult: składki wyznawców, zakazane pisma, przeklęte pamiątki.",
+   "money": {
+    "p": "75:3k10",
+    "s": "75:2k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "25:1k2",
+   "art": "15:1",
+   "cloth": "25:1k5",
+   "scrolls": "25:1k2",
+   "grimoire": "15:1",
+   "magic": "15:1",
+   "extra": [
+    [
+     "ksiazki",
+     "50:1k2"
+    ],
+    [
+     "ziola",
+     "25:1k2"
+    ],
+    [
+     "odziez",
+     "50:1k2"
+    ],
+    [
+     "bron",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "oboz_orkow",
+   "name": "Obóz orków albo goblinów",
+   "group": "Legowiska",
+   "status": "brąz",
+   "description": "Zielonoskórzy znoszą wszystko, co błyszczy: łupy z napadów, poobijany oręż, rzeczy bez wartości.",
+   "money": {
+    "p": "50:2k10",
+    "s": "25:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": "10:1k5",
+   "gems": "10:1k2",
+   "art": "5:1",
+   "cloth": "10:1k2",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "bron",
+     "1k5"
+    ],
+    [
+     "pancerz",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "jedzenie",
+     "50:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "smocze_leze",
+   "name": "Smocze leże",
+   "group": "Legowiska",
+   "status": "złoto",
+   "description": "Skarb zbierany przez wieki przez wielką bestię — góra monet, klejnotów i dawnego oręża.",
+   "money": {
+    "p": "5k100",
+    "s": "5k100",
+    "zk": "3k100"
+   },
+   "domestic": "1k10",
+   "gems": "1k100",
+   "art": "1k10",
+   "cloth": "25:1k5",
+   "scrolls": "25:1k5",
+   "grimoire": "10:1k2",
+   "magic": "50:1k5",
+   "extra": [
+    [
+     "bron",
+     "1k5"
+    ],
+    [
+     "pancerz",
+     "1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "krypta",
+   "name": "Krypta albo kurhan",
+   "group": "Ruiny i grobowce",
+   "status": "złoto",
+   "description": "Grobowiec możnego albo dawny kurhan — dary grobowe, ale też klątwy i nieumarli.",
+   "money": {
+    "p": "25:1k100",
+    "s": "25:2k10",
+    "zk": "50:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "50:1k5",
+   "art": "50:1k2",
+   "cloth": "10:1k2",
+   "scrolls": "10:1",
+   "grimoire": "1:1",
+   "magic": "15:1",
+   "extra": [
+    [
+     "bron",
+     "25:1k2"
+    ],
+    [
+     "pancerz",
+     "15:1"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "wrak",
+   "name": "Wrak statku albo barki",
+   "group": "Ruiny i grobowce",
+   "status": "srebro",
+   "description": "Rozbita łódź rzeczna albo statek — ładunek, kufry pasażerów, rzeczy załogi.",
+   "money": {
+    "p": "50:2k10",
+    "s": "50:2k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "15:1k5",
+   "art": "10:1",
+   "cloth": "25:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "pojemniki",
+     "1k5"
+    ],
+    [
+     "jedzenie",
+     "50:1k5"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "ruiny_twierdzy",
+   "name": "Ruiny twierdzy albo zamku",
+   "group": "Ruiny i grobowce",
+   "status": "srebro",
+   "description": "Opuszczona warownia: zbrojownia, piwnice, komnata dawnego pana. Stare monety i rdzewiejący oręż.",
+   "money": {
+    "p": "50:2k10",
+    "s": "50:2k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "15:1k5",
+   "art": "25:1k2",
+   "cloth": "10:1k2",
+   "scrolls": "2:1",
+   "grimoire": "1:1",
+   "magic": "5:1",
+   "extra": [
+    [
+     "bron",
+     "1k5"
+    ],
+    [
+     "pancerz",
+     "50:1k2"
+    ],
+    [
+     "pojemniki",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "zrujnowana_swiatynia",
+   "name": "Zrujnowana świątynia",
+   "group": "Ruiny i grobowce",
+   "status": "srebro",
+   "description": "Splądrowany przybytek dawnego boga: ołtarz, zakrystia, skrytki kapłanów.",
+   "money": {
+    "p": "75:1k100",
+    "s": "25:1k10",
+    "zk": "10:1k5"
+   },
+   "domestic": "10:1k5",
+   "gems": "25:1k2",
+   "art": "50:1k2",
+   "cloth": "10:1",
+   "scrolls": "10:1",
+   "grimoire": "5:1",
+   "magic": "5:1",
+   "extra": [
+    [
+     "ksiazki",
+     "25:1"
+    ],
+    [
+     "rozne",
+     "50:1k5"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "opuszczona_kopalnia",
+   "name": "Opuszczona kopalnia albo krasnoludzka sztolnia",
+   "group": "Ruiny i grobowce",
+   "status": "srebro",
+   "description": "Zawalone chodniki, porzucone narzędzia i niewywiezione urobki.",
+   "money": {
+    "p": "25:1k10",
+    "s": "10:1k10",
+    "zk": "5:1k5"
+   },
+   "domestic": null,
+   "gems": "50:1k5",
+   "art": null,
+   "cloth": "5:1",
+   "scrolls": null,
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "narzedzia",
+     "1k5"
+    ],
+    [
+     "pojemniki",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "50:1k5"
+    ],
+    [
+     "bron",
+     "15:1"
+    ],
+    [
+     "pancerz",
+     "10:1"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "oboz_bandytow",
+   "name": "Obóz bandytów",
+   "group": "W drodze i obozy",
+   "status": "srebro",
+   "description": "Kryjówka bandy z traktu: łupy z napadów, broń i zapasy.",
+   "money": {
+    "p": "75:3k10",
+    "s": "50:2k10",
+    "zk": "15:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "15:1k5",
+   "art": "10:1",
+   "cloth": "25:1k5",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "jedzenie",
+     "1k5"
+    ],
+    [
+     "pojemniki",
+     "1k2"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ],
+    [
+     "bron",
+     "1k5"
+    ],
+    [
+     "pancerz",
+     "50:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "pole_bitwy",
+   "name": "Pole bitwy",
+   "group": "W drodze i obozy",
+   "status": "srebro",
+   "description": "Pobojowisko po potyczce — broń i pancerze poległych (część z Wadami), sakiewki, chorągwie.",
+   "money": {
+    "p": "50:1k100",
+    "s": "50:1k10",
+    "zk": "10:1k5"
+   },
+   "domestic": null,
+   "gems": "5:1",
+   "art": null,
+   "cloth": "15:1k2",
+   "scrolls": "2:1",
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "pojemniki",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "50:1k5"
+    ],
+    [
+     "bron",
+     "2k10"
+    ],
+    [
+     "pancerz",
+     "1k10"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "karawana",
+   "name": "Wóz albo karawana kupiecka",
+   "group": "W drodze i obozy",
+   "status": "srebro",
+   "description": "Towar kupca w drodze, jego kasetka i zapasy woźniców.",
+   "money": {
+    "p": "75:3k10",
+    "s": "75:3k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "25:1k5",
+   "gems": "10:1k2",
+   "art": "10:1",
+   "cloth": "50:1k10",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "1:1",
+   "extra": [
+    [
+     "pojemniki",
+     "1k5"
+    ],
+    [
+     "jedzenie",
+     "1k5"
+    ],
+    [
+     "odziez",
+     "50:1k5"
+    ],
+    [
+     "narzedzia",
+     "25:1k2"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "oboz_wojskowy",
+   "name": "Obóz wojskowy albo strażnica",
+   "group": "W drodze i obozy",
+   "status": "srebro",
+   "description": "Namioty i kwatery żołnierzy, kasa oddziału, zbrojownia, prowiant.",
+   "money": {
+    "p": "75:3k10",
+    "s": "50:2k10",
+    "zk": "15:1k10"
+   },
+   "domestic": "15:1k5",
+   "gems": "5:1",
+   "art": null,
+   "cloth": "25:1k2",
+   "scrolls": "1:1",
+   "grimoire": null,
+   "magic": "2:1",
+   "extra": [
+    [
+     "bron",
+     "1k10"
+    ],
+    [
+     "pancerz",
+     "1k5"
+    ],
+    [
+     "jedzenie",
+     "1k5"
+    ],
+    [
+     "pojemniki",
+     "1k2"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ]
+   ],
+   "added": true
+  },
+  {
+   "id": "kryjowka_przemytnikow",
+   "name": "Kryjówka przemytników albo złodziei",
+   "group": "W drodze i obozy",
+   "status": "srebro",
+   "description": "Melina, w której leży kontrabanda, łupy z kradzieży i wspólna kasa bandy.",
+   "money": {
+    "p": "1k100",
+    "s": "75:3k10",
+    "zk": "25:1k10"
+   },
+   "domestic": "50:1k5",
+   "gems": "50:1k5",
+   "art": "25:1k2",
+   "cloth": "25:1k5",
+   "scrolls": "2:1",
+   "grimoire": null,
+   "magic": "3:1",
+   "extra": [
+    [
+     "pojemniki",
+     "1k5"
+    ],
+    [
+     "ziola",
+     "50:1k2"
+    ],
+    [
+     "narzedzia",
+     "50:1k2"
+    ],
+    [
+     "rozne",
+     "1k5"
+    ]
+   ],
+   "added": true
   },
   {
    "id": "skrzynia_otwarta",
@@ -455,214 +1179,6 @@
      "50:1k2"
     ]
    ]
-  },
-  {
-   "id": "oboz_bandytow",
-   "name": "Obóz bandytów",
-   "group": "Dodane",
-   "status": "srebro",
-   "description": "Kryjówka bandy z traktu: łupy z napadów, broń i zapasy.",
-   "money": {
-    "p": "75:3k10",
-    "s": "50:2k10",
-    "zk": "15:1k10"
-   },
-   "domestic": "25:1k5",
-   "gems": "15:1k5",
-   "art": "10:1",
-   "cloth": "25:1k5",
-   "scrolls": "1:1",
-   "grimoire": null,
-   "magic": "2:1",
-   "extra": [
-    [
-     "jedzenie",
-     "1k5"
-    ],
-    [
-     "pojemniki",
-     "1k2"
-    ],
-    [
-     "rozne",
-     "1k5"
-    ],
-    [
-     "bron",
-     "1k5"
-    ],
-    [
-     "pancerz",
-     "50:1k2"
-    ]
-   ],
-   "added": true
-  },
-  {
-   "id": "krypta",
-   "name": "Krypta albo kurhan",
-   "group": "Dodane",
-   "status": "złoto",
-   "description": "Grobowiec możnego albo dawny kurhan — dary grobowe, ale też klątwy i nieumarli.",
-   "money": {
-    "p": "25:1k100",
-    "s": "25:2k10",
-    "zk": "50:1k10"
-   },
-   "domestic": "25:1k5",
-   "gems": "50:1k5",
-   "art": "50:1k2",
-   "cloth": "10:1k2",
-   "scrolls": "10:1",
-   "grimoire": "1:1",
-   "magic": "15:1",
-   "extra": [
-    [
-     "bron",
-     "25:1k2"
-    ],
-    [
-     "pancerz",
-     "15:1"
-    ]
-   ],
-   "added": true
-  },
-  {
-   "id": "oboz_zwierzoludzi",
-   "name": "Obóz zwierzoludzi",
-   "group": "Dodane",
-   "status": "brąz",
-   "description": "Zbieranina łupów z napadów na wsie — sporo zniszczone albo splugawione.",
-   "money": {
-    "p": "25:2k10",
-    "s": "10:1k10",
-    "zk": "5:1k5"
-   },
-   "domestic": "15:1k5",
-   "gems": "10:1k2",
-   "art": "5:1",
-   "cloth": "10:1k2",
-   "scrolls": null,
-   "grimoire": null,
-   "magic": "3:1",
-   "extra": [
-    [
-     "rozne",
-     "1k5"
-    ],
-    [
-     "odziez",
-     "25:1k2"
-    ]
-   ],
-   "added": true
-  },
-  {
-   "id": "kanaly",
-   "name": "Kanały i nora skavenów",
-   "group": "Dodane",
-   "status": "srebro",
-   "description": "Śmieci, przemyt i to, co ciągną do nor skaveny.",
-   "money": {
-    "p": "50:1k100",
-    "s": "25:1k10",
-    "zk": "5:1k5"
-   },
-   "domestic": "10:1k5",
-   "gems": "10:1k2",
-   "art": null,
-   "cloth": "10:1",
-   "scrolls": "2:1",
-   "grimoire": null,
-   "magic": "3:1",
-   "extra": [
-    [
-     "rozne",
-     "1k5"
-    ],
-    [
-     "narzedzia",
-     "25:1k2"
-    ],
-    [
-     "ziola",
-     "15:1"
-    ]
-   ],
-   "added": true
-  },
-  {
-   "id": "pole_bitwy",
-   "name": "Pole bitwy",
-   "group": "Dodane",
-   "status": "srebro",
-   "description": "Pobojowisko po potyczce — broń i pancerze poległych (część z Wadami), sakiewki, chorągwie.",
-   "money": {
-    "p": "50:1k100",
-    "s": "50:1k10",
-    "zk": "10:1k5"
-   },
-   "domestic": null,
-   "gems": "5:1",
-   "art": null,
-   "cloth": "15:1k2",
-   "scrolls": "2:1",
-   "grimoire": null,
-   "magic": "3:1",
-   "extra": [
-    [
-     "pojemniki",
-     "50:1k2"
-    ],
-    [
-     "rozne",
-     "50:1k5"
-    ],
-    [
-     "bron",
-     "2k10"
-    ],
-    [
-     "pancerz",
-     "1k10"
-    ]
-   ],
-   "added": true
-  },
-  {
-   "id": "wrak",
-   "name": "Wrak statku albo barki",
-   "group": "Dodane",
-   "status": "srebro",
-   "description": "Rozbita łódź rzeczna albo statek — ładunek, kufry pasażerów, rzeczy załogi.",
-   "money": {
-    "p": "50:2k10",
-    "s": "50:2k10",
-    "zk": "25:1k10"
-   },
-   "domestic": "25:1k5",
-   "gems": "15:1k5",
-   "art": "10:1",
-   "cloth": "25:1k5",
-   "scrolls": "1:1",
-   "grimoire": null,
-   "magic": "2:1",
-   "extra": [
-    [
-     "pojemniki",
-     "1k5"
-    ],
-    [
-     "jedzenie",
-     "50:1k5"
-    ],
-    [
-     "rozne",
-     "1k5"
-    ]
-   ],
-   "added": true
   }
  ],
  "tables": {
@@ -2628,1094 +3144,1152 @@
   }
  ],
  "prices": {
-  "note": "Ceny z listy PG (Ponury świat…, s. 288–311) w pensach, przez cennik Skarbca Imperium (cena_raw_p). Zalety przedmiotu: ×2 za każdą, Wady: ×½ za każdą (PG s. 292–293). qty = sztuk w zestawie [dom], q = Zalety z nazwy.",
+  "note": "Ceny bazowe z cennika Skarbca Imperium (cena_p, cena wytwórcy bez osady i sytuacji) w pensach. Zalety przedmiotu: ×2 za każdą, Wady: ×½ za każdą (PG s. 292–293). qty = sztuk w zestawie [dom], q = Zalety z nazwy.",
   "items": {
    "beczka": {
-    "p": 96,
-    "src": "PG s. 301"
+    "p": 114,
+    "src": "Skarbiec: beczka-145-l"
    },
    "beczułka": {
-    "p": 36,
-    "src": "PG s. 301"
+    "p": 42,
+    "src": "Skarbiec: beczulka-45-l"
    },
    "bukłak": {
-    "p": 20,
-    "src": "PG s. 301"
+    "p": 42,
+    "src": "Skarbiec: buklak"
    },
    "butelka": {
-    "p": 60,
-    "src": "PG s. 301"
+    "p": 42,
+    "src": "Skarbiec: butelka"
    },
    "duży worek": {
-    "p": 18,
-    "src": "PG s. 301"
+    "p": 42,
+    "src": "Skarbiec: duzy-worek"
    },
    "dzban": {
-    "p": 38,
-    "src": "PG s. 301"
+    "p": 42,
+    "src": "Skarbiec: dzban"
    },
    "juki": {
-    "p": 216,
-    "src": "PG s. 301"
+    "p": 360,
+    "src": "Skarbiec: juki"
    },
    "kufel cynowy": {
-    "p": 48,
-    "src": "PG s. 301"
+    "p": 114,
+    "src": "Skarbiec: kufel-cynowy"
    },
    "plecak": {
-    "p": 58,
-    "src": "PG s. 301"
+    "p": 114,
+    "src": "Skarbiec: plecak"
    },
    "sakiewka": {
-    "p": 4,
-    "src": "PG s. 301"
+    "p": 14,
+    "src": "Skarbiec: sakiewka"
    },
    "torba na ramię": {
-    "p": 12,
-    "src": "PG s. 301"
+    "p": 30,
+    "src": "Skarbiec: torba-na-ramie"
    },
    "tuba na zwoje": {
-    "p": 192,
-    "src": "PG s. 301"
+    "p": 84,
+    "src": "Skarbiec: tuba-na-zwoje"
    },
    "worek": {
-    "p": 12,
-    "src": "PG s. 301"
+    "p": 22,
+    "src": "Skarbiec: worek"
    },
    "beczułka piwa": {
     "p": 36,
-    "src": "PG s. 302"
+    "src": "Skarbiec: beczulka-piwa-10-l"
    },
    "butelka wina": {
-    "p": 10,
-    "src": "PG s. 302"
+    "p": 66,
+    "src": "Skarbiec: butelka-wina"
    },
    "butelka dobrego wina": {
-    "p": 10,
-    "src": "PG s. 302",
+    "p": 66,
+    "src": "Skarbiec: butelka-wina",
     "q": 1
    },
    "butelka rzadkiego wina": {
-    "p": 10,
-    "src": "PG s. 302",
+    "p": 66,
+    "src": "Skarbiec: butelka-wina",
     "q": 2
    },
    "ciepły posiłek z gospody": {
     "p": 12,
-    "src": "PG s. 302"
+    "src": "Skarbiec: cieply-posilek-w-gospodzie"
    },
    "kielich wina lub mocnego trunku": {
-    "p": 1,
-    "src": "PG s. 302"
+    "p": 6,
+    "src": "Skarbiec: kielich-wina"
    },
    "prowiant na 1 dzień": {
     "p": 24,
-    "src": "PG s. 302"
+    "src": "Skarbiec: prowiant-na-1-dzien"
    },
    "prowiant na tydzień": {
     "p": 24,
-    "src": "PG s. 302",
+    "src": "Skarbiec: prowiant-na-1-dzien",
     "qty": 7
    },
    "pół litra Piwa Bugmana": {
-    "p": 9,
-    "src": "PG s. 302"
+    "p": 18,
+    "src": "Skarbiec: pol-litra-piwa-bugmana"
    },
    "pół litra mocnego trunku": {
     "p": 24,
-    "src": "PG s. 302"
+    "src": "Skarbiec: pol-litra-mocnego-trunku"
    },
    "pół litra piwa": {
     "p": 3,
-    "src": "PG s. 302"
+    "src": "Skarbiec: pol-litra-piwa"
    },
    "żywność na dzień": {
     "p": 10,
-    "src": "PG s. 302"
+    "src": "Skarbiec: jedzenie-na-zimno-na-1-dzien"
    },
    "arkusze pergaminu (12)": {
-    "p": 12,
-    "src": "PG s. 304",
+    "p": 14,
+    "src": "Skarbiec: arkusz-pergaminu",
     "qty": 12
    },
    "dokument prawny": {
-    "p": 36,
-    "src": "PG s. 304"
+    "p": 60,
+    "src": "Skarbiec: dokument-prawny"
    },
    "mapa": {
-    "p": 720,
-    "src": "PG s. 304"
+    "p": 2880,
+    "src": "Skarbiec: mapa"
    },
    "księga, aptekarstwo": {
-    "p": 1920,
-    "src": "PG s. 304"
+    "p": 7200,
+    "src": "Skarbiec: ksiega-aptekarstwo"
    },
    "księga, inżynieria": {
-    "p": 720,
-    "src": "PG s. 304"
+    "p": 2880,
+    "src": "Skarbiec: ksiega-inzynieria"
    },
    "księga, kryptografia": {
-    "p": 1920,
-    "src": "PG s. 304"
+    "p": 7200,
+    "src": "Skarbiec: ksiega-kryptografia"
    },
    "księga, magia": {
-    "p": 4800,
-    "src": "PG s. 304"
+    "p": 28800,
+    "src": "Skarbiec: ksiega-magia"
    },
    "księga, medycyna": {
-    "p": 3600,
-    "src": "PG s. 304"
+    "p": 14400,
+    "src": "Skarbiec: ksiega-medycyna"
    },
    "księga, prawo": {
-    "p": 3600,
-    "src": "PG s. 304"
+    "p": 14400,
+    "src": "Skarbiec: ksiega-prawo"
    },
    "księga, religia": {
-    "p": 240,
-    "src": "PG s. 304"
+    "p": 1200,
+    "src": "Skarbiec: ksiega-religia"
    },
    "księga, sztuka": {
-    "p": 1200,
-    "src": "PG s. 304"
+    "p": 4800,
+    "src": "Skarbiec: ksiega-sztuka"
    },
    "cud inżynierii (proteza)": {
-    "p": 4800,
-    "src": "PG s. 308"
+    "p": 17280,
+    "src": "Skarbiec: cud-inzynierii"
    },
    "drewniana noga": {
-    "p": 192,
-    "src": "PG s. 308"
+    "p": 432,
+    "src": "Skarbiec: sztuczna-noga"
    },
    "drewniane zęby": {
-    "p": 120,
-    "src": "PG s. 308"
+    "p": 288,
+    "src": "Skarbiec: drewniane-zeby"
    },
    "kostium": {
-    "p": 240,
-    "src": "PG s. 302"
+    "p": 720,
+    "src": "Skarbiec: kostium"
    },
    "maska teatralna": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 120,
+    "src": "Skarbiec: kaptur-lub-maska"
    },
    "maska wojenna": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 120,
+    "src": "Skarbiec: kaptur-lub-maska"
    },
    "puder do twarzy": {
-    "p": 120,
-    "src": "PG s. 302"
+    "p": 276,
+    "src": "Skarbiec: puder-do-twarzy"
    },
    "zestaw do charakteryzacji": {
-    "p": 78,
-    "src": "PG s. 303"
+    "p": 216,
+    "src": "Skarbiec: zestaw-do-charakteryzacji"
    },
    "szklane oko": {
-    "p": 240,
-    "src": "PG s. 308"
+    "p": 576,
+    "src": "Skarbiec: sztuczne-oko"
    },
    "bosak": {
-    "p": 72,
-    "src": "PB"
+    "p": 84,
+    "src": "Skarbiec: bosak"
    },
    "drąg (3 metry)": {
-    "p": 96,
-    "src": "PG s. 303"
+    "p": 30,
+    "src": "Skarbiec: drag-3-m"
    },
    "dłuto": {
-    "p": 50,
-    "src": "PG s. 303"
+    "p": 60,
+    "src": "Skarbiec: dluto"
    },
    "grabie": {
-    "p": 54,
-    "src": "PG s. 303"
+    "p": 14,
+    "src": "Skarbiec: grabie"
    },
    "grawerowana pieczęć": {
-    "p": 1200,
-    "src": "PG s. 303"
+    "p": 1920,
+    "src": "Skarbiec: grawerowana-pieczec"
    },
    "grzebień": {
-    "p": 10,
-    "src": "PG s. 303"
+    "p": 14,
+    "src": "Skarbiec: grzebien"
    },
    "gwoździe (12)": {
-    "p": 2,
-    "src": "PG s. 303"
+    "p": 4,
+    "src": "Skarbiec: gwozdzie-12"
    },
    "haczyki na ryby (12)": {
-    "p": 12,
-    "src": "PG s. 303"
+    "p": 14,
+    "src": "Skarbiec: haczyki-na-ryby-12"
    },
    "kajdany": {
-    "p": 216,
-    "src": "PG s. 303"
+    "p": 288,
+    "src": "Skarbiec: kajdany"
    },
    "kilof": {
-    "p": 216,
-    "src": "PG s. 303"
+    "p": 144,
+    "src": "Skarbiec: kilof"
    },
    "klucz": {
-    "p": 12,
-    "src": "PG s. 303"
+    "p": 30,
+    "src": "Skarbiec: klucz"
    },
    "kołek": {
-    "p": 12,
-    "src": "PG s. 303"
+    "p": 7,
+    "src": "Skarbiec: kolek"
    },
    "liczydło": {
-    "p": 40,
-    "src": "PG s. 303"
+    "p": 72,
+    "src": "Skarbiec: liczydlo"
    },
    "lusterko ręczne": {
-    "p": 258,
-    "src": "PG s. 303"
+    "p": 384,
+    "src": "Skarbiec: lusterko-reczne"
    },
    "miotła": {
-    "p": 10,
-    "src": "PG s. 303"
+    "p": 12,
+    "src": "Skarbiec: miotla"
    },
    "motyka": {
-    "p": 48,
-    "src": "PG s. 303"
+    "p": 22,
+    "src": "Skarbiec: motyka"
    },
    "moździerz z tłuczkiem": {
-    "p": 168,
-    "src": "PG s. 303"
+    "p": 204,
+    "src": "Skarbiec: mozdzierz-z-tluczkiem"
    },
    "młotek": {
-    "p": 36,
-    "src": "PG s. 303"
+    "p": 42,
+    "src": "Skarbiec: mlotek"
    },
    "młotek sędziego": {
-    "p": 240,
-    "src": "PG s. 303"
+    "p": 72,
+    "src": "Skarbiec: mlotek-sedziego"
    },
    "narzędzia pracy": {
-    "p": 720,
-    "src": "PG s. 296"
+    "p": 1728,
+    "src": "Skarbiec: narzedzia-pracy"
    },
    "narzędzie do czyszczenia uszu": {
-    "p": 24,
-    "src": "PG s. 303"
+    "p": 30,
+    "src": "Skarbiec: narzedzie-do-czyszczenia-uszu"
    },
    "pinceta": {
-    "p": 12,
-    "src": "PG s. 303"
+    "p": 14,
+    "src": "Skarbiec: pinceta"
    },
    "pióro do pisania": {
-    "p": 36,
-    "src": "PG s. 303"
+    "p": 5,
+    "src": "Skarbiec: pioro-do-pisania"
    },
    "piła": {
-    "p": 72,
-    "src": "PG s. 303"
+    "p": 114,
+    "src": "Skarbiec: pila"
    },
    "pędzel do malowania": {
-    "p": 48,
-    "src": "PG s. 303"
+    "p": 60,
+    "src": "Skarbiec: pedzel-do-malowania"
    },
    "sidła na zwierzęta": {
-    "p": 30,
-    "src": "PG s. 303"
+    "p": 42,
+    "src": "Skarbiec: sidla-na-zwierzeta"
    },
    "sierp": {
-    "p": 240,
-    "src": "PG s. 303"
+    "p": 42,
+    "src": "Skarbiec: sierp"
    },
    "soczewki do czytania": {
-    "p": 720,
-    "src": "PG s. 303"
+    "p": 576,
+    "src": "Skarbiec: soczewki-do-czytania"
    },
    "stalowe szczypce": {
-    "p": 192,
-    "src": "PG s. 303"
+    "p": 144,
+    "src": "Skarbiec: stalowe-szczypce"
    },
    "szczotka do podłogi": {
-    "p": 18,
-    "src": "PG s. 303"
+    "p": 22,
+    "src": "Skarbiec: szczotka-do-podlogi"
    },
    "szpadel": {
-    "p": 96,
-    "src": "PG s. 303"
+    "p": 22,
+    "src": "Skarbiec: szpadel"
    },
    "teleskop": {
-    "p": 1200,
-    "src": "PG s. 303"
+    "p": 4320,
+    "src": "Skarbiec: teleskop"
    },
    "wiadro": {
-    "p": 30,
-    "src": "PG s. 303"
+    "p": 42,
+    "src": "Skarbiec: wiadro"
    },
    "wytrychy": {
-    "p": 180,
-    "src": "PG s. 303"
+    "p": 288,
+    "src": "Skarbiec: wytrychy"
    },
    "zestaw do pisania": {
-    "p": 480,
-    "src": "PG s. 303"
+    "p": 576,
+    "src": "Skarbiec: zestaw-do-pisania"
    },
    "Grzybki Szalonego Kapelusznika": {
     "p": 1200,
-    "src": "PG s. 306"
+    "src": "Skarbiec: grzybki-szalonego-kapelusznika"
    },
    "Rozkosz Ranalda": {
-    "p": 216,
-    "src": "PG s. 306"
+    "p": 480,
+    "src": "Skarbiec: rozkosz-ranalda"
    },
    "bandaż": {
-    "p": 4,
-    "src": "PG s. 308"
+    "p": 7,
+    "src": "Skarbiec: bandaz"
    },
    "czarny lotos": {
-    "p": 4800,
-    "src": "PG s. 306"
+    "p": 7200,
+    "src": "Skarbiec: czarny-lotos"
    },
    "czyste szmaty (12 pasków)": {
     "p": 1,
-    "src": "PG s. 308",
+    "src": "Skarbiec: szmaty",
     "qty": 12
    },
    "dziwnokorzeń": {
     "p": 48,
-    "src": "PG s. 306"
+    "src": "Skarbiec: dziwnokorzen"
    },
    "eliksir żywotności": {
-    "p": 216,
-    "src": "PG s. 307"
+    "p": 480,
+    "src": "Skarbiec: eliksir-zywotnosci"
    },
    "fakstoryl": {
-    "p": 180,
-    "src": "PG s. 307"
+    "p": 240,
+    "src": "Skarbiec: fakstoryl"
    },
    "kataplazm leczniczy": {
-    "p": 144,
-    "src": "PG s. 307"
+    "p": 288,
+    "src": "Skarbiec: kataplazm-leczniczy"
    },
    "korzeń mandragory": {
     "p": 240,
-    "src": "PG s. 306"
+    "src": "Skarbiec: korzen-mandragory"
    },
    "księżycowy kwiat": {
-    "p": 1200,
-    "src": "PG s. 306"
+    "p": 1440,
+    "src": "Skarbiec: ksiezycowy-kwiat"
    },
    "mikstura lecznicza": {
-    "p": 120,
-    "src": "PG s. 307"
+    "p": 360,
+    "src": "Skarbiec: mikstura-lecznicza"
    },
    "pluja": {
     "p": 300,
-    "src": "PG s. 306"
+    "src": "Skarbiec: pluja"
    },
    "salwort": {
     "p": 144,
-    "src": "PG s. 307"
+    "src": "Skarbiec: salwort"
    },
    "sercobój": {
-    "p": 9600,
-    "src": "PG s. 306"
+    "p": 28800,
+    "src": "Skarbiec: sercoboj"
    },
    "tonik na trawienie": {
-    "p": 36,
-    "src": "PG s. 307"
+    "p": 72,
+    "src": "Skarbiec: tonik-na-trawienie"
    },
    "zestaw na zatrucia": {
-    "p": 720,
-    "src": "PG s. 303"
+    "p": 1152,
+    "src": "Skarbiec: zestaw-na-zatrucia"
    },
    "ziemny korzeń": {
     "p": 1200,
-    "src": "PG s. 307"
+    "src": "Skarbiec: ziemny-korzen"
    },
    "amulet albo błyskotka": {
-    "p": 2,
-    "src": "PG s. 302"
+    "p": 5,
+    "src": "Skarbiec: amulet"
    },
    "berło": {
-    "p": 1920,
-    "src": "PG s. 302"
+    "p": 3600,
+    "src": "Skarbiec: berlo"
    },
    "buty": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 216,
+    "src": "Skarbiec: buty"
    },
    "buty i trzewiki": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 216,
+    "src": "Skarbiec: buty"
    },
    "futrzane rękawice": {
-    "p": 48,
-    "src": "PG s. 302"
+    "p": 108,
+    "src": "Skarbiec: rekawiczki"
    },
    "kaptur": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 120,
+    "src": "Skarbiec: kaptur-lub-maska"
    },
    "laska": {
-    "p": 720,
-    "src": "PG s. 302"
+    "p": 1440,
+    "src": "Skarbiec: laska"
    },
    "maska (teatralna albo wojenna)": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 120,
+    "src": "Skarbiec: kaptur-lub-maska"
    },
    "mundur": {
-    "p": 264,
-    "src": "PG s. 302"
+    "p": 720,
+    "src": "Skarbiec: mundur"
    },
    "perfumy": {
-    "p": 120,
-    "src": "PG s. 302"
+    "p": 360,
+    "src": "Skarbiec: perfumy"
    },
    "praktyczne rękawiczki": {
-    "p": 48,
-    "src": "PG s. 302"
+    "p": 108,
+    "src": "Skarbiec: rekawiczki"
    },
    "praktyczne ubranie": {
-    "p": 72,
-    "src": "PG s. 302"
+    "p": 504,
+    "src": "Skarbiec: ubranie"
    },
    "praktyczny kapelusz": {
-    "p": 48,
-    "src": "PG s. 302"
+    "p": 126,
+    "src": "Skarbiec: kapelusz"
    },
    "płaszcz": {
-    "p": 120,
-    "src": "PG s. 302"
+    "p": 468,
+    "src": "Skarbiec: plaszcz"
    },
    "strojny kapelusz": {
-    "p": 48,
-    "src": "PG s. 302",
+    "p": 126,
+    "src": "Skarbiec: kapelusz",
     "q": 1
    },
    "strój dworski": {
-    "p": 2880,
-    "src": "PG s. 302"
+    "p": 10800,
+    "src": "Skarbiec: stroj-dworski"
    },
    "sygnet": {
-    "p": 1200,
-    "src": "PG s. 302"
+    "p": 2400,
+    "src": "Skarbiec: sygnet"
    },
    "symbol religijny": {
-    "p": 80,
-    "src": "PG s. 302"
+    "p": 144,
+    "src": "Skarbiec: symbol-religijny"
    },
    "szata": {
-    "p": 480,
-    "src": "PG s. 302"
+    "p": 1080,
+    "src": "Skarbiec: szata"
    },
    "szaty": {
-    "p": 480,
-    "src": "PG s. 302"
+    "p": 1080,
+    "src": "Skarbiec: szata"
    },
    "tatuaż": {
-    "p": 48,
-    "src": "PG s. 302"
+    "p": 72,
+    "src": "Skarbiec: tatuaz"
    },
    "ubranie podróżne": {
-    "p": 72,
-    "src": "PG s. 302"
+    "p": 504,
+    "src": "Skarbiec: ubranie"
    },
    "wysokie buty z ostrogami": {
-    "p": 60,
-    "src": "PG s. 302"
+    "p": 360,
+    "src": "Skarbiec: wysokie-buty"
    },
    "wytworne rękawiczki": {
-    "p": 48,
-    "src": "PG s. 302",
+    "p": 108,
+    "src": "Skarbiec: rekawiczki",
     "q": 1
    },
    "wytworne ubranie": {
-    "p": 72,
-    "src": "PG s. 302",
+    "p": 504,
+    "src": "Skarbiec: ubranie",
     "q": 1
    },
    "zapinki (6)": {
-    "p": 120,
-    "src": "PG s. 302"
+    "p": 360,
+    "src": "Skarbiec: zapinki-6"
    },
    "jedwabna chustka": {
-    "p": 240,
-    "src": "PB"
+    "p": 720,
+    "src": "Skarbiec: jedwabna-bielizna"
    },
    "skóra zwierzęcia": {
-    "p": 360,
-    "src": "PB"
+    "p": 1080,
+    "src": "Skarbiec: focza-skora"
    },
    "afisz": {
-    "p": 12,
-    "src": "PG s. 308"
+    "p": 7,
+    "src": "Skarbiec: afisz"
    },
    "fajka i tytoń": {
-    "p": 40,
-    "src": "PG s. 308"
+    "p": 72,
+    "src": "Skarbiec: fajka-i-tyton"
    },
    "hubka i krzesiwo": {
-    "p": 50,
-    "src": "PG s. 308"
+    "p": 72,
+    "src": "Skarbiec: pudelko-na-hubke-i-krzesiwo"
    },
    "instrument muzyczny": {
-    "p": 480,
-    "src": "PG s. 308"
+    "p": 1152,
+    "src": "Skarbiec: instrument"
    },
    "kotwiczka z liną": {
-    "p": 360,
-    "src": "PG s. 308"
+    "p": 432,
+    "src": "Skarbiec: kotwiczka"
    },
    "kości do gry": {
-    "p": 10,
-    "src": "PG s. 308"
+    "p": 14,
+    "src": "Skarbiec: kosci-do-gry"
    },
    "kreda": {
-    "p": 10,
-    "src": "PG s. 303"
+    "p": 7,
+    "src": "Skarbiec: kreda-wegiel-do-rysowania"
    },
    "węgiel do rysowania": {
-    "p": 10,
-    "src": "PG s. 303"
+    "p": 7,
+    "src": "Skarbiec: kreda-wegiel-do-rysowania"
    },
    "kubek": {
-    "p": 8,
-    "src": "PG s. 302"
+    "p": 10,
+    "src": "Skarbiec: kubek"
    },
    "lalka": {
-    "p": 24,
-    "src": "PG s. 308"
+    "p": 30,
+    "src": "Skarbiec: lalka"
    },
    "lampa Davricha": {
-    "p": 480,
-    "src": "PG s. 308"
+    "p": 1152,
+    "src": "Skarbiec: lampa-davricha"
    },
    "latarnia": {
-    "p": 144,
-    "src": "PG s. 308"
+    "p": 216,
+    "src": "Skarbiec: latarnia"
    },
    "latarnia sztormowa": {
-    "p": 240,
-    "src": "PG s. 308"
+    "p": 432,
+    "src": "Skarbiec: lampa-sztormowa"
    },
    "lina (10 metrów)": {
-    "p": 100,
-    "src": "PG s. 308"
+    "p": 144,
+    "src": "Skarbiec: lina-10-metrow"
    },
    "miska": {
-    "p": 12,
-    "src": "PG s. 308"
+    "p": 14,
+    "src": "Skarbiec: miska"
    },
    "namiot": {
-    "p": 144,
-    "src": "PG s. 308"
+    "p": 864,
+    "src": "Skarbiec: namiot"
    },
    "patelnia": {
-    "p": 90,
-    "src": "PG s. 308"
+    "p": 216,
+    "src": "Skarbiec: patelnia"
    },
    "piłka": {
-    "p": 5,
-    "src": "PG s. 308"
+    "p": 6,
+    "src": "Skarbiec: pilka"
    },
    "posłanie": {
-    "p": 72,
-    "src": "PG s. 308"
+    "p": 384,
+    "src": "Skarbiec: zwijane-poslanie"
    },
    "płócienna płachta": {
-    "p": 96,
-    "src": "PG s. 308"
+    "p": 360,
+    "src": "Skarbiec: plocienna-plandeka"
    },
    "szmaty": {
     "p": 1,
-    "src": "PG s. 308"
+    "src": "Skarbiec: szmaty"
    },
    "talerz": {
-    "p": 12,
-    "src": "PG s. 308"
+    "p": 14,
+    "src": "Skarbiec: talerz"
    },
    "talia kart": {
-    "p": 12,
-    "src": "PG s. 308"
+    "p": 30,
+    "src": "Skarbiec: talia-kart"
    },
    "zapałki": {
     "p": 1,
-    "src": "PG s. 308",
+    "src": "Skarbiec: zapalka",
     "qty": 12
    },
    "zwykłe sztućce": {
-    "p": 42,
-    "src": "PG s. 308"
+    "p": 84,
+    "src": "Skarbiec: sztucce"
    },
    "świece (12)": {
-    "p": 12,
-    "src": "PG s. 308"
+    "p": 30,
+    "src": "Skarbiec: swiece-tuzin"
    },
    "kaganek": {
-    "p": 24,
-    "src": "PG s. 308"
+    "p": 42,
+    "src": "Skarbiec: lampa-oliwna"
    },
    "kandelabr ze świecami": {
-    "p": 12,
-    "src": "PG s. 308"
+    "p": 30,
+    "src": "Skarbiec: swiece-tuzin"
    },
    "kubki i kieliszki": {
-    "p": 8,
-    "src": "PG s. 302",
+    "p": 10,
+    "src": "Skarbiec: kubek",
     "qty": 6
    },
    "sztućce": {
-    "p": 42,
-    "src": "PG s. 308"
+    "p": 84,
+    "src": "Skarbiec: sztucce"
    },
    "puchary": {
-    "p": 48,
-    "src": "PG s. 301",
+    "p": 114,
+    "src": "Skarbiec: kufel-cynowy",
     "qty": 4
    },
    "latarnia z oliwą": {
-    "p": 144,
-    "src": "PG s. 308"
+    "p": 216,
+    "src": "Skarbiec: latarnia"
    },
    "talerze i misy": {
-    "p": 12,
-    "src": "PG s. 308",
+    "p": 14,
+    "src": "Skarbiec: talerz",
     "qty": 12
    },
    "wino i trunki": {
-    "p": 10,
-    "src": "PG s. 302",
+    "p": 66,
+    "src": "Skarbiec: butelka-wina",
     "qty": 6
    },
+   "łom": {
+    "p": 60,
+    "src": "Skarbiec: lom"
+   },
+   "mop": {
+    "p": 14,
+    "src": "Skarbiec: mop"
+   },
+   "koc": {
+    "p": 288,
+    "src": "Skarbiec: koc"
+   },
+   "koce": {
+    "p": 288,
+    "src": "Skarbiec: koc",
+    "qty": 2
+   },
+   "garnek": {
+    "p": 288,
+    "src": "Skarbiec: kociolek-do-gotowania"
+   },
+   "olej do lamp": {
+    "p": 24,
+    "src": "Skarbiec: olej-do-lampy-litr"
+   },
+   "hak": {
+    "p": 84,
+    "src": "Skarbiec: hak"
+   },
+   "przepaska na oko": {
+    "p": 14,
+    "src": "Skarbiec: opaska-na-oko"
+   },
+   "pozłacany nos": {
+    "p": 576,
+    "src": "Skarbiec: zloty-nos"
+   },
+   "kula": {
+    "p": 42,
+    "src": "Skarbiec: kule"
+   },
+   "pościel": {
+    "p": 144,
+    "src": "Skarbiec: przescieradlo"
+   },
+   "zwykła pościel": {
+    "p": 144,
+    "src": "Skarbiec: przescieradlo"
+   },
+   "wytworna pościel": {
+    "p": 144,
+    "src": "Skarbiec: przescieradlo",
+    "q": 1
+   },
+   "peleryna": {
+    "p": 648,
+    "src": "Skarbiec: oponcza"
+   },
    "cynowy kufel": {
-    "p": 48,
-    "src": "PG s. 301"
+    "p": 114,
+    "src": "Skarbiec: kufel-cynowy"
    },
    "lusterko": {
-    "p": 258,
-    "src": "PG s. 303"
+    "p": 384,
+    "src": "Skarbiec: lusterko-reczne"
    }
   },
   "gear": {
    "Bułat": {
-    "p": 240,
-    "src": "PB"
+    "p": 720,
+    "src": "Skarbiec: bulat"
    },
    "Buzdygan": {
-    "p": 180,
-    "src": "PB"
+    "p": 264,
+    "src": "Skarbiec: buzdygan"
    },
    "Miecz": {
-    "p": 240,
-    "src": "PB"
+    "p": 720,
+    "src": "Skarbiec: miecz"
    },
    "Mizerykordia": {
-    "p": 192,
-    "src": "PB"
+    "p": 132,
+    "src": "Skarbiec: mizerykordia"
    },
    "Młot jednoręczny": {
-    "p": 240,
-    "src": "PB"
+    "p": 408,
+    "src": "Skarbiec: mlot-jednoreczny"
    },
    "Nadziak jednoręczny": {
-    "p": 108,
-    "src": "PB"
+    "p": 204,
+    "src": "Skarbiec: nadziak-jednoreczny"
    },
    "Nóż": {
-    "p": 96,
-    "src": "PB"
+    "p": 12,
+    "src": "Skarbiec: noz"
    },
    "Pałka": {
-    "p": 48,
-    "src": "PB"
+    "p": 7,
+    "src": "Skarbiec: palka"
    },
    "Sztylet": {
-    "p": 192,
-    "src": "PB"
+    "p": 132,
+    "src": "Skarbiec: sztylet"
    },
    "Topór": {
-    "p": 120,
-    "src": "PB"
+    "p": 192,
+    "src": "Skarbiec: topor"
    },
    "Puklerz": {
-    "p": 218,
-    "src": "PB"
+    "p": 96,
+    "src": "Skarbiec: tarcza-puklerz"
    },
    "Tarcza": {
-    "p": 480,
-    "src": "PB"
+    "p": 264,
+    "src": "Skarbiec: tarcza"
    },
    "Tarcza duża": {
-    "p": 720,
-    "src": "PB"
+    "p": 408,
+    "src": "Skarbiec: tarcza-duza"
    },
    "Pawęż": {
-    "p": 900,
-    "src": "PB"
+    "p": 552,
+    "src": "Skarbiec: pawez"
    },
    "Kopia": {
-    "p": 240,
-    "src": "PG s. 294"
+    "p": 264,
+    "src": "Skarbiec: kopia"
    },
    "Lanca": {
-    "p": 240,
-    "src": "PB"
+    "p": 264,
+    "src": "Skarbiec: lanca"
    },
    "Młot kawaleryjski": {
-    "p": 720,
-    "src": "PG s. 294"
+    "p": 816,
+    "src": "Skarbiec: mlot-kawaleryjski"
    },
    "Szabla": {
-    "p": 480,
-    "src": "PB"
+    "p": 1224,
+    "src": "Skarbiec: szabla"
    },
    "Floret": {
-    "p": 1200,
-    "src": "PG s. 294"
+    "p": 2460,
+    "src": "Skarbiec: floret"
    },
    "Rapier": {
-    "p": 1200,
-    "src": "PG s. 294"
+    "p": 3300,
+    "src": "Skarbiec: rapier"
    },
    "Szpada": {
-    "p": 960,
-    "src": "PB"
+    "p": 2460,
+    "src": "Skarbiec: szpada"
    },
    "Bosak": {
-    "p": 72,
-    "src": "PB"
+    "p": 84,
+    "src": "Skarbiec: bosak"
    },
    "Garota": {
-    "p": 12,
-    "src": "PB"
+    "p": 24,
+    "src": "Skarbiec: garota"
    },
    "Kastet": {
-    "p": 30,
-    "src": "PG s. 294"
+    "p": 36,
+    "src": "Skarbiec: kastet"
    },
    "Kolczasta rękawica": {
-    "p": 480,
-    "src": "PB"
+    "p": 816,
+    "src": "Skarbiec: kolczasta-rekawica"
    },
    "Tłuk": {
-    "p": 12,
-    "src": "PB"
+    "p": 24,
+    "src": "Skarbiec: tluk"
    },
    "Zamykana rękawica": {
-    "p": 240,
-    "src": "PB"
+    "p": 408,
+    "src": "Skarbiec: zamykana-rekawica"
    },
    "Cep bojowy": {
-    "p": 120,
-    "src": "PG s. 294"
+    "p": 168,
+    "src": "Skarbiec: cep-bojowy"
    },
    "Kiścień": {
-    "p": 720,
-    "src": "PG s. 294"
+    "p": 816,
+    "src": "Skarbiec: kiscien"
    },
    "Korbacz": {
-    "p": 480,
-    "src": "PG s. 294"
+    "p": 408,
+    "src": "Skarbiec: korbacz"
    },
    "Lewak": {
-    "p": 240,
-    "src": "PG s. 294"
+    "p": 264,
+    "src": "Skarbiec: lewak"
    },
    "Łamacz mieczy": {
-    "p": 270,
-    "src": "PG s. 294"
+    "p": 312,
+    "src": "Skarbiec: lamacz-mieczy"
    },
    "Obciążona sieć": {
-    "p": 360,
-    "src": "PB"
+    "p": 552,
+    "src": "Skarbiec: obciazona-siec"
    },
    "Płaszcz": {
-    "p": 120,
-    "src": "PG s. 302"
+    "p": 468,
+    "src": "Skarbiec: plaszcz"
    },
    "Halabarda": {
-    "p": 480,
-    "src": "PG s. 294"
+    "p": 384,
+    "src": "Skarbiec: halabarda"
    },
    "Kostur": {
-    "p": 36,
-    "src": "PG s. 294"
+    "p": 7,
+    "src": "Skarbiec: kostur"
    },
    "Łapacz": {
-    "p": 480,
-    "src": "PB"
+    "p": 552,
+    "src": "Skarbiec: lapacz"
    },
    "Partyzana / glewia": {
-    "p": 480,
-    "src": "PB"
+    "p": 384,
+    "src": "Skarbiec: partyzana-glewia"
    },
    "Pika": {
     "p": 216,
-    "src": "PG s. 294"
+    "src": "Skarbiec: pika"
    },
    "Sierpak": {
-    "p": 480,
-    "src": "PB"
+    "p": 264,
+    "src": "Skarbiec: sierpak"
    },
    "Szydło": {
-    "p": 480,
-    "src": "PB"
+    "p": 384,
+    "src": "Skarbiec: szydlo"
    },
    "Topór drzewcowy": {
-    "p": 480,
-    "src": "PB"
+    "p": 552,
+    "src": "Skarbiec: topor-drzewcowy"
    },
    "Włócznia": {
-    "p": 180,
-    "src": "PG s. 294"
+    "p": 192,
+    "src": "Skarbiec: wlocznia"
    },
    "Flamberg": {
-    "p": 7200,
-    "src": "PB"
+    "p": 12240,
+    "src": "Skarbiec: flamberg"
    },
    "Miecz dwuręczny": {
-    "p": 2400,
-    "src": "PG s. 294"
+    "p": 4080,
+    "src": "Skarbiec: miecz-dwureczny"
    },
    "Młot bojowy": {
-    "p": 720,
-    "src": "PG s. 294"
+    "p": 552,
+    "src": "Skarbiec: mlot-bojowy"
    },
    "Nadziak": {
-    "p": 108,
-    "src": "PB"
+    "p": 204,
+    "src": "Skarbiec: nadziak-jednoreczny"
    },
    "Półtorak": {
-    "p": 1920,
-    "src": "PG s. 294"
+    "p": 2880,
+    "src": "Skarbiec: poltorak"
    },
    "Wielki topór": {
-    "p": 960,
-    "src": "PG s. 294"
+    "p": 816,
+    "src": "Skarbiec: wielki-topor"
    },
    "Krasnoludzki topór": {
-    "p": 240,
-    "src": "KR s. 93"
+    "p": 408,
+    "src": "Skarbiec: krasnoludzki-topor"
    },
    "Krasnoludzki młot bojowy": {
-    "p": 240,
-    "src": "KR s. 93"
+    "p": 408,
+    "src": "Skarbiec: krasnoludzki-mlot-bojowy"
    },
    "Wirujące ostrza śmierci": {
-    "p": 1200,
-    "src": "KR s. 93"
+    "p": 1356,
+    "src": "Skarbiec: wirujace-ostrza-smierci"
    },
    "Krasnoludzki wielki topór": {
-    "p": 960,
-    "src": "KR s. 93"
+    "p": 816,
+    "src": "Skarbiec: krasnoludzki-wielki-topor"
    },
    "Krasnoludzki wielki młot": {
-    "p": 960,
-    "src": "KR s. 93"
+    "p": 732,
+    "src": "Skarbiec: krasnoludzki-wielki-mlot"
    },
    "Krasnoludzki kilof": {
-    "p": 240,
-    "src": "KR s. 93"
+    "p": 408,
+    "src": "Skarbiec: krasnoludzki-kilof"
    },
    "Wielki miecz Hoetha": {
-    "p": 480000,
-    "src": "WE s. 31"
+    "p": 547200,
+    "src": "Skarbiec: wielki-miecz-hoetha"
    },
    "Krótki łuk": {
-    "p": 720,
-    "src": "PG s. 295"
+    "p": 408,
+    "src": "Skarbiec: krotki-luk"
    },
    "Łuk": {
-    "p": 960,
-    "src": "PG s. 295"
+    "p": 480,
+    "src": "Skarbiec: luk"
    },
    "Łuk długi": {
-    "p": 1200,
-    "src": "PG s. 295"
+    "p": 660,
+    "src": "Skarbiec: luk-dlugi"
    },
    "Łuk elfi": {
-    "p": 2400,
-    "src": "PG s. 295"
+    "p": 3300,
+    "src": "Skarbiec: luk-elfi"
    },
    "Kusza pistoletowa": {
-    "p": 1440,
-    "src": "PG s. 295"
+    "p": 1392,
+    "src": "Skarbiec: kusza-pistoletowa"
    },
    "Kusza": {
-    "p": 1200,
-    "src": "PG s. 295"
+    "p": 960,
+    "src": "Skarbiec: kusza"
    },
    "Ciężka kusza": {
-    "p": 1680,
-    "src": "PG s. 295"
+    "p": 1440,
+    "src": "Skarbiec: ciezka-kusza"
    },
    "Proca": {
-    "p": 12,
-    "src": "PG s. 295"
+    "p": 24,
+    "src": "Skarbiec: proca"
    },
    "Proca drzewcowa": {
-    "p": 48,
-    "src": "PG s. 295"
+    "p": 60,
+    "src": "Skarbiec: proca-drzewcowa"
    },
    "Bolas": {
-    "p": 120,
-    "src": "PG s. 295"
+    "p": 84,
+    "src": "Skarbiec: bolas"
    },
    "Nóż do rzucania": {
-    "p": 216,
-    "src": "PG s. 295"
+    "p": 84,
+    "src": "Skarbiec: noz-do-rzucania"
    },
    "Oszczep": {
-    "p": 126,
-    "src": "PG s. 295"
+    "p": 168,
+    "src": "Skarbiec: oszczep"
    },
    "Strzałka": {
-    "p": 24,
-    "src": "PG s. 295"
+    "p": 30,
+    "src": "Skarbiec: strzalka"
    },
    "Topór do rzucania": {
-    "p": 240,
-    "src": "PG s. 295"
+    "p": 192,
+    "src": "Skarbiec: topor-do-rzucania"
    },
    "Arkan": {
-    "p": 72,
-    "src": "PG s. 295"
+    "p": 144,
+    "src": "Skarbiec: arkan"
    },
    "Bicz": {
-    "p": 60,
-    "src": "PG s. 295"
+    "p": 108,
+    "src": "Skarbiec: bicz"
    },
    "Pistolet": {
-    "p": 1920,
-    "src": "PG s. 295"
+    "p": 4800,
+    "src": "Skarbiec: pistolet"
    },
    "Rusznica": {
-    "p": 960,
-    "src": "PG s. 295"
+    "p": 1440,
+    "src": "Skarbiec: rusznica"
    },
    "Rusznica lontowa": {
-    "p": 480,
-    "src": "PB"
+    "p": 960,
+    "src": "Skarbiec: rusznica-lontowa"
    },
    "Rusznica dwulufowa": {
-    "p": 1680,
-    "src": "PB"
+    "p": 3360,
+    "src": "Skarbiec: rusznica-dwulufowa"
    },
    "Arkebuz": {
-    "p": 1200,
-    "src": "PB"
+    "p": 1440,
+    "src": "Skarbiec: arkebuz"
    },
    "Garłacz": {
-    "p": 480,
-    "src": "PG s. 295"
+    "p": 1440,
+    "src": "Skarbiec: garlacz"
    },
    "Garłacz lontowy": {
-    "p": 240,
-    "src": "PB"
+    "p": 720,
+    "src": "Skarbiec: garlacz-lontowy"
    },
    "Gryfia łapa": {
-    "p": 4800,
-    "src": "PB"
+    "p": 12000,
+    "src": "Skarbiec: gryfia-lapa"
    },
    "Muszkiet hochlandzki": {
-    "p": 24000,
-    "src": "PG s. 295"
+    "p": 48000,
+    "src": "Skarbiec: muszkiet-hochlandzki"
    },
    "Halabarda pistoletowa": {
-    "p": 2400,
-    "src": "PB"
+    "p": 7200,
+    "src": "Skarbiec: halabarda-pistoletowa"
    },
    "Topór pistoletowy": {
-    "p": 1920,
-    "src": "PB"
+    "p": 5760,
+    "src": "Skarbiec: topor-pistoletowy"
    },
    "Laska pistoletowa": {
-    "p": 3600,
-    "src": "PB"
+    "p": 9600,
+    "src": "Skarbiec: laska-pistoletowa"
    },
    "Moździerz ręczny": {
-    "p": 12000,
-    "src": "PB"
+    "p": 24000,
+    "src": "Skarbiec: mozdzierz-reczny"
    },
    "Pieprzniczka": {
-    "p": 2880,
-    "src": "PB"
+    "p": 7200,
+    "src": "Skarbiec: pieprzniczka"
    },
    "Pistolet samopowtarzalny": {
-    "p": 3600,
-    "src": "PG s. 295"
+    "p": 12000,
+    "src": "Skarbiec: pistolet-samopowtarzalny"
    },
    "Rusznica samopowtarzalna": {
-    "p": 2400,
-    "src": "PG s. 295"
+    "p": 9600,
+    "src": "Skarbiec: rusznica-samopowtarzalna"
    },
    "Krasnoludzka kusza": {
-    "p": 1200,
-    "src": "KR s. 94"
+    "p": 960,
+    "src": "Skarbiec: krasnoludzka-kusza"
    },
    "Krasnoludzka hakownica": {
-    "p": 1440,
-    "src": "KR s. 94"
+    "p": 1728,
+    "src": "Skarbiec: krasnoludzka-hakownica"
    },
    "Krasnoludzki pistolet": {
-    "p": 2880,
-    "src": "KR s. 94"
+    "p": 7200,
+    "src": "Skarbiec: krasnoludzki-pistolet"
    },
    "Krasnoludzki topór do rzucania": {
-    "p": 240,
-    "src": "KR s. 94"
+    "p": 192,
+    "src": "Skarbiec: krasnoludzki-topor-do-rzucania"
    },
    "Skórzana kurta": {
-    "p": 144,
-    "src": "PG s. 300"
+    "p": 396,
+    "src": "Skarbiec: skorzana-kurta"
    },
    "Skórzany kaftan": {
-    "p": 120,
-    "src": "PG s. 300"
+    "p": 360,
+    "src": "Skarbiec: skorzany-kaftan"
    },
    "Skórzane nogawice": {
-    "p": 168,
-    "src": "PG s. 300"
+    "p": 396,
+    "src": "Skarbiec: skorzane-nogawice"
    },
    "Skórzany hełm": {
-    "p": 96,
-    "src": "PG s. 300"
+    "p": 180,
+    "src": "Skarbiec: skorzany-helm"
    },
    "Kolet": {
-    "p": 216,
-    "src": "PG s. 300"
+    "p": 540,
+    "src": "Skarbiec: kolet"
    },
    "Nogawice kolcze": {
-    "p": 480,
-    "src": "PG s. 300"
+    "p": 2880,
+    "src": "Skarbiec: nogawice-kolcze"
    },
    "Kolczuga": {
-    "p": 720,
-    "src": "PG s. 300"
+    "p": 4800,
+    "src": "Skarbiec: kolczuga"
    },
    "Czepiec kolczy": {
-    "p": 240,
-    "src": "PG s. 300"
+    "p": 1440,
+    "src": "Skarbiec: czepiec-kolczy"
    },
    "Kaftan kolczy": {
-    "p": 480,
-    "src": "PG s. 300"
+    "p": 2880,
+    "src": "Skarbiec: kaftan-kolczy"
    },
    "Napierśnik": {
-    "p": 2400,
-    "src": "PG s. 300"
+    "p": 6720,
+    "src": "Skarbiec: napiersnik"
    },
    "Hełm otwarty": {
-    "p": 480,
-    "src": "PG s. 300"
+    "p": 288,
+    "src": "Skarbiec: helm-otwarty-morion"
    },
    "Naramienniki": {
-    "p": 1920,
-    "src": "PG s. 300"
+    "p": 5760,
+    "src": "Skarbiec: naramienniki"
    },
    "Nagolenniki płytowe": {
-    "p": 2400,
-    "src": "PG s. 300"
+    "p": 6720,
+    "src": "Skarbiec: nagolenniki-plytowe"
    },
    "Hełm": {
-    "p": 720,
-    "src": "PG s. 300"
+    "p": 3840,
+    "src": "Skarbiec: helm-zamkniety"
    }
   }
  }
