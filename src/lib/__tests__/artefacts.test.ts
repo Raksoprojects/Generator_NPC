@@ -72,10 +72,10 @@ describe("lupy wg lokacji", () => {
         for (const s of r.sections) for (const i of s.items) if (/^(zwykłe sztućce|sztućce|talerze i misy)$/.test(i.name)) seen.set(`${loc}:${i.name}:${i.note ?? ""}`, [i.value ?? ""]);
       }
     }
-    // PG s. 308: Sztućce 3 s 6 p, Talerz 1 s; komplet talerzy [dom] 12 sztuk.
-    expect(seen.get("posiadlosc:sztućce:Wyśmienity (2×)")).toEqual(["14 s"]);
-    expect(seen.get("posiadlosc:talerze i misy:Wyśmienity (2×)")).toEqual(["2 zk 8 s"]);
-    for (const [k, [v]] of seen) if (k.startsWith("chata:zwykłe sztućce")) expect(["3 s 6 p", "1 s 9 p"]).toContain(v);
+    // Cennik Skarbca: Sztućce 7 s, Talerz 1 s 2 p; komplet talerzy [dom] 12 sztuk.
+    expect(seen.get("posiadlosc:sztućce:Wyśmienity (2×)")).toEqual(["1 zk 8 s"]);
+    expect(seen.get("posiadlosc:talerze i misy:Wyśmienity (2×)")).toEqual(["2 zk 16 s"]);
+    for (const [k, [v]] of seen) if (k.startsWith("chata:zwykłe sztućce")) expect(["7 s", "3 s 6 p"]).toContain(v);
   });
 
   it("dom czarodzieja czesto ma zwoje i grimuary, chata prawie nigdy przedmiotow magicznych", () => {

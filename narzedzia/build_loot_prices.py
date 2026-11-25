@@ -1,7 +1,8 @@
-"""Ceny przedmiotow w lupach z cennika PG (przez dane Skarbca Imperium, ../Cennik_Warhammer_4ed/data/cennik.json).
+"""Ceny przedmiotow w lupach z cennika Skarbca Imperium (../Cennik_Warhammer_4ed/data/cennik.json).
 
-Dopisuje do public/data/loot.json pole "prices": nazwa z loot.json albo weapons.json -> cena z listy w pensach (cena_raw_p, PG),
-strona PG, liczba sztuk w zestawie i Zalety z nazwy ("wytworne" = Wyśmienity). Pozycje bez ceny w PG zostaja bez ceny.
+Dopisuje do public/data/loot.json pole "prices": nazwa z loot.json albo weapons.json -> cena bazowa w pensach (cena_p:
+cena wytworcy, bez osady i sytuacji), liczba sztuk w zestawie i Zalety z nazwy ("wytworne" = Wyśmienity).
+Pozycje spoza cennika zostaja bez ceny.
 Uruchom: python narzedzia/build_loot_prices.py
 """
 import json, os, sys
@@ -77,28 +78,32 @@ MAP = {
     "kandelabr ze świecami": ("Świece (tuzin)",), "kubki i kieliszki": ("Kubek", 6), "sztućce": ("Sztućce",),
     "puchary": ("Kufel cynowy", 4), "latarnia z oliwą": ("Latarnia",), "talerze i misy": ("Talerz", 12),
     "wino i trunki": ("Butelka wina", 6),
-    # Dziela sztuki z ceną w PG
+    # Tylko w cenniku Skarbca
+    "łom": ("Łom",), "mop": ("Mop",), "koc": ("Koc",), "koce": ("Koc", 2), "garnek": ("Kociołek do gotowania",),
+    "olej do lamp": ("Olej do lampy, rzepakowy albo tran (litr)",), "hak": ("Hak",), "przepaska na oko": ("Opaska na oko",),
+    "pozłacany nos": ("Złoty nos",), "kula": ("Kule",), "pościel": ("Prześcieradło",), "zwykła pościel": ("Prześcieradło",),
+    "wytworna pościel": ("Prześcieradło", 1, 1), "peleryna": ("Opończa",),
+    # Dziela sztuki z cena w cenniku
     "cynowy kufel": ("Kufel cynowy",), "lusterko": ("Lusterko ręczne",),
 }
 
-out = {"note": "Ceny z listy PG (Ponury świat…, s. 288–311) w pensach, przez cennik Skarbca Imperium (cena_raw_p). "
+out = {"note": "Ceny bazowe z cennika Skarbca Imperium (cena_p, cena wytwórcy bez osady i sytuacji) w pensach. "
                "Zalety przedmiotu: ×2 za każdą, Wady: ×½ za każdą (PG s. 292–293). qty = sztuk w zestawie [dom], q = Zalety z nazwy.",
        "items": {}, "gear": {}}
 missing = []
 
 
 def src(p):
-    z = p.get("zrodlo") or "PG"
-    return f"{z} s. {p['strona']}" if p.get("strona") else z
+    return f"Skarbiec: {p['id']}"
 
 
 for loot, spec in MAP.items():
     name, qty, q = spec[0], (spec[1] if len(spec) > 1 else 1), (spec[2] if len(spec) > 2 else 0)
     p = C.get(name)
-    if not p or p["cena_raw_p"] is None:
+    if not p or p.get("cena_p") is None:
         missing.append((loot, name))
         continue
-    e = {"p": p["cena_raw_p"], "src": src(p)}
+    e = {"p": p["cena_p"], "src": src(p)}
     if qty != 1:
         e["qty"] = qty
     if q:
@@ -108,8 +113,8 @@ alias = {"Tarcza duża": "Tarcza (duża)", "Puklerz": "Tarcza (puklerz)", "Hełm
 for kind in ("melee", "ranged", "armour"):
     for n in W[kind]:
         p = C.get(n) or C.get(alias.get(n, ""))
-        if p and p["cena_raw_p"] is not None:
-            out["gear"][n] = {"p": p["cena_raw_p"], "src": src(p)}
+        if p and p.get("cena_p") is not None:
+            out["gear"][n] = {"p": p["cena_p"], "src": src(p)}
 LOOT["prices"] = out
 json.dump(LOOT, open(os.path.join(ROOT, "public", "data", "loot.json"), "w", encoding="utf8"), ensure_ascii=False, indent=1)
 print(len(out["items"]), "przedmiotow,", len(out["gear"]), "broni i pancerzy; bez ceny:", missing)
