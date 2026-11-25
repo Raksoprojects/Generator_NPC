@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   /**
    * Edytor sciezki profesji: kroki po kolei (ostatni = obecna profesja) z poziomem docelowym.
    * Poziom "auto" - program dobiera sam (wg PD). Pusta ostatnia profesja - wg archetypu.
@@ -44,11 +45,11 @@
     {@const last = i === path.length - 1}
     <div class="path-row">
       <span class="text-dim idx">{last ? "Obecna" : `${i + 1}.`}</span>
-      <select value={step.profession} onchange={(e) => setProfession(i, e.currentTarget.value)} aria-label="Profesja">
+      <select use:searchable value={step.profession} onchange={(e) => setProfession(i, e.currentTarget.value)} aria-label="Profesja">
         {#if last && allowEmptyMain}<option value="">— wg archetypu —</option>{:else if !step.profession}<option value="">— wybierz —</option>{/if}
         {#each professions as p (p)}<option value={p} title={gd.professionSourceFull(p)}>{gd.withSource(gd.professionName(p, sex), gd.getProfession(p)?.source)}</option>{/each}
       </select>
-      <select
+      <select use:searchable
         value={step.level == null ? "" : String(step.level)}
         onchange={(e) => (path[i] = { ...step, level: e.currentTarget.value ? Number(e.currentTarget.value) : null })}
         aria-label="Poziom docelowy"

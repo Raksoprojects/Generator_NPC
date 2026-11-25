@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   import NpcCard from "./NpcCard.svelte";
   import Autocomplete from "./Autocomplete.svelte";
   import PathEditor from "./PathEditor.svelte";
@@ -244,7 +245,7 @@
   <div class="panel controls">
     <div class="preset-row">
       <label>Gotowa grupa
-        <select bind:value={presetName}>
+        <select use:searchable bind:value={presetName}>
           {#each presetNames as p (p)}<option value={p}>{p}</option>{/each}
         </select>
       </label>
@@ -254,7 +255,7 @@
 
     <div class="preset-row">
       <label>Zapisane grupy
-        <select bind:value={chosenSaved}>
+        <select use:searchable bind:value={chosenSaved}>
           <option value="">{savedGroups.length ? "— wybierz —" : "— brak —"}</option>
           {#each savedGroups as g (g.id)}<option value={g.id}>{g.name} ({g.members.length} BN)</option>{/each}
         </select>
@@ -285,7 +286,7 @@
           <div class="who-search">
             <Autocomplete bind:value={() => queries[i] ?? "", (v) => (queries[i] = v)} options={searchOptions} placeholder="szukaj…" onpick={(v) => { setWho(row, SEARCH[v]); queries[i] = ""; }} />
           </div>
-          <select value={whoOf(row)} onchange={(e) => setWho(row, (e.currentTarget as HTMLSelectElement).value)} aria-label="Archetyp albo stworzenie">
+          <select use:searchable value={whoOf(row)} onchange={(e) => setWho(row, (e.currentTarget as HTMLSelectElement).value)} aria-label="Archetyp albo stworzenie">
             <optgroup label="Archetypy">
               {#each gd.allArchetypeNames() as a (a)}<option value={`a:${a}`}>{a}</option>{/each}
             </optgroup>
@@ -302,21 +303,21 @@
             {/each}
           </select>
           {#if row.creature && gd.isCivilized(row.creature)}
-            <select value={row.noArchetype ? "-" : row.archetype} onchange={(e) => { const v = e.currentTarget.value; row.noArchetype = v === "-" || undefined; row.archetype = v === "-" ? "" : v; }} aria-label="Archetyp stworzenia">
+            <select use:searchable value={row.noArchetype ? "-" : row.archetype} onchange={(e) => { const v = e.currentTarget.value; row.noArchetype = v === "-" || undefined; row.archetype = v === "-" ? "" : v; }} aria-label="Archetyp stworzenia">
               <option value="">profesja wg stworzenia</option>
               {#if !isVampire(row)}<option value="-">bez profesji (jak bestia)</option>{/if}
               {#each gd.allArchetypeNames().filter((a) => (!gd.getCreature(row.creature)?.archetypes || a in gd.getCreature(row.creature)!.archetypes!) && bloodlineFitsArchetype(row.bloodline, a)) as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           {/if}
-          <select bind:value={row.tier} aria-label="Poziom">
+          <select use:searchable bind:value={row.tier} aria-label="Poziom">
             {#each TIER_IDS as t, ti (t)}<option value={t}>{tierOption(row, t, ti)}</option>{/each}
           </select>
-          <select value={row.tierTo ?? ""} onchange={(e) => (row.tierTo = (e.currentTarget.value || undefined) as TierId | undefined)} aria-label="Do poziomu (losowo z przedziału)" title="Poziom losowany równo z przedziału od–do">
+          <select use:searchable value={row.tierTo ?? ""} onchange={(e) => (row.tierTo = (e.currentTarget.value || undefined) as TierId | undefined)} aria-label="Do poziomu (losowo z przedziału)" title="Poziom losowany równo z przedziału od–do">
             <option value="">tylko ten poziom</option>
             {#each TIER_IDS as t, ti (t)}{#if ti > TIER_IDS.indexOf(row.tier)}<option value={t}>do: {gd.getTier(t).label}</option>{/if}{/each}
           </select>
           {#if !row.creature}
-            <select bind:value={row.race} aria-label="Rasa">
+            <select use:searchable bind:value={row.race} aria-label="Rasa">
               <option value={undefined}>rasa losowo</option>
               {#each racesForArchetype(row.archetype) as r (r)}<option value={r}>{r}</option>{/each}
             </select>
@@ -333,7 +334,7 @@
             <div class="row-detail">
               {#if !row.creature || hasCareer(row) || isVampire(row)}
                 <label>Płeć
-                  <select value={row.sex ?? ""} onchange={(e) => (row.sex = (e.currentTarget.value || undefined) as Sex | undefined)}>
+                  <select use:searchable value={row.sex ?? ""} onchange={(e) => (row.sex = (e.currentTarget.value || undefined) as Sex | undefined)}>
                     <option value="">losowo</option>
                     <option value="M">mężczyzna</option>
                     <option value="K">kobieta</option>
@@ -345,7 +346,7 @@
                   <span class="xp-row">
                     <input type="number" step="100" placeholder="wg poziomu" bind:value={row.xp} />
                     <input type="number" step="100" placeholder="do" aria-label="PD do (losowo z przedziału)" bind:value={row.xpTo} />
-                    <select value={row.xpMode ?? "dodaj"} onchange={(e) => (row.xpMode = e.currentTarget.value as "zamiast" | "dodaj")} aria-label="Sposób użycia PD">
+                    <select use:searchable value={row.xpMode ?? "dodaj"} onchange={(e) => (row.xpMode = e.currentTarget.value as "zamiast" | "dodaj")} aria-label="Sposób użycia PD">
                       <option value="dodaj">dodaj do poziomu</option>
                       <option value="zamiast">zamiast poziomu</option>
                     </select>
@@ -354,14 +355,14 @@
               {/if}
               {#if isVampire(row)}
                 <label>Linia krwi
-                  <select value={row.bloodline ?? ""} onchange={(e) => (row.bloodline = e.currentTarget.value || undefined)}>
+                  <select use:searchable value={row.bloodline ?? ""} onchange={(e) => (row.bloodline = e.currentTarget.value || undefined)}>
                     <option value="">losowa</option>
                     {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
                   </select>
                 </label>
               {/if}
               <label title={row.heroProfile ? gd.heroProfileText(row.heroProfile) : "Profil z Bestiariusza 2.0"}>Wyjątkowa jednostka
-                <select value={row.heroProfile ?? ""} onchange={(e) => (row.heroProfile = e.currentTarget.value || undefined)}>
+                <select use:searchable value={row.heroProfile ?? ""} onchange={(e) => (row.heroProfile = e.currentTarget.value || undefined)}>
                   <option value="">losowo (mała szansa)</option>
                   {#each ["Weteran", "Doborowy", "Pomniejszy Bohater", "Wielki Bohater"] as h (h)}<option value={h} title={gd.heroProfileText(h)}>{h}</option>{/each}
                 </select>

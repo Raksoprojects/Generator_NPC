@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   import NpcCard from "./NpcCard.svelte";
   import { app } from "../lib/app.svelte";
   import { downloadText, pickFile } from "../lib/files";
@@ -79,15 +80,15 @@
   <div class="panel controls">
     <div class="filters">
       <input class="search" type="search" placeholder="Szukaj: imię, profesja, grupa…" bind:value={query} />
-      <select bind:value={archetype} aria-label="Archetyp">
+      <select use:searchable bind:value={archetype} aria-label="Archetyp">
         <option value="">wszystkie archetypy</option>
         {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
       </select>
-      <select bind:value={tier} aria-label="Poziom">
+      <select use:searchable bind:value={tier} aria-label="Poziom">
         <option value="">wszystkie poziomy</option>
         {#each TIER_IDS as t (t)}<option value={t}>{gd.getTier(t).label}</option>{/each}
       </select>
-      <select bind:value={group} aria-label="Grupa">
+      <select use:searchable bind:value={group} aria-label="Grupa">
         <option value="">wszystkie grupy</option>
         {#each groups as g (g)}<option value={g}>{g}</option>{/each}
       </select>

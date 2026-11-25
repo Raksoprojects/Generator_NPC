@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   import Autocomplete from "./Autocomplete.svelte";
   import PathEditor from "./PathEditor.svelte";
   import Modal from "./Modal.svelte";
@@ -245,6 +246,8 @@
   const weaponNames = allWeaponNames();
   const armourNames = allArmourNames();
   const spellNames = gd.getSpellsData().spells.map((s) => s.name);
+  /** Tradycja zaklecia - do wyszukiwania po grupie. */
+  const spellGroups = Object.fromEntries(gd.getSpellsData().spells.map((s) => [s.name, s.lore]));
   const KIND_LABEL = { physical: "Fizyczne", mental: "Psychiczne" } as const;
   const SEVERITY_LABEL = { trivial: "błahe", minor: "pomniejsze", major: "poważne" } as const;
   const mutationGroups = (["physical", "mental"] as const).flatMap((kind) =>
@@ -292,6 +295,7 @@
 
   const craftOptions = editableQualities();
   const craftNames = [...craftOptions.qualities, ...craftOptions.flaws];
+  const craftGroups = Object.fromEntries([...craftOptions.qualities.map((q) => [q, "Zaleta"]), ...craftOptions.flaws.map((f) => [f, "Wada"])]);
   /** Wpisywana Zaleta/Wada dla kazdej broni/pancerza (klucz: nazwa przedmiotu). */
   let newCraft = $state<Record<string, string>>({});
   const weaponTemplates = treasureTemplates(["weapon"]);
@@ -921,7 +925,7 @@
       {#if !creature}
         <label title="Zmiana płci losuje nowe imię i przerabia formy osobowości">Płeć
           <span class="xp-row">
-            <select value={npc.sex} onchange={(e) => setSex(e.currentTarget.value as Sex)}>
+            <select use:searchable value={npc.sex} onchange={(e) => setSex(e.currentTarget.value as Sex)}>
               <option value="M">mężczyzna</option>
               <option value="K">kobieta</option>
             </select>
@@ -942,28 +946,28 @@
       <div class="edit-grid">
         {#if !creature}
           <label>Rasa
-            <select bind:value={npc.race}>
+            <select use:searchable bind:value={npc.race}>
               {#each gd.allRaceNames() as r (r)}<option value={r} disabled={!racesForArchetype(npc.archetype).includes(r)}>{r}</option>{/each}
             </select>
           </label>
         {/if}
         {#if !creature || gd.isCivilized(npc.creature)}
           <label>Archetyp
-            <select bind:value={npc.archetype}>
+            <select use:searchable bind:value={npc.archetype}>
               {#if creature}<option value="">— bestia (bez profesji) —</option>{/if}
               {#each gd.allArchetypeNames() as a (a)}<option value={a}>{a}</option>{/each}
             </select>
           </label>
         {/if}
         <label>Poziom
-          <select bind:value={npc.tier}>
+          <select use:searchable bind:value={npc.tier}>
             {#each TIER_IDS as t (t)}<option value={t as TierId}>{gd.tierLabelXp(t)}</option>{/each}
           </select>
         </label>
         <label title={beast ? "PD ponad profil z bestiariusza: cechy walki i umiejętności rodziny" : "PD ponad tworzenie postaci, wydawane wg priorytetów archetypu"}>PD
           <span class="xp-row">
             <input type="number" step="100" placeholder="wg poziomu" title="Liczba ujemna odejmuje PD od poziomu" bind:value={xpEdit} />
-            <select bind:value={xpEditMode} aria-label="Sposób użycia PD">
+            <select use:searchable bind:value={xpEditMode} aria-label="Sposób użycia PD">
               <option value="dodaj">dodaj do poziomu</option>
               <option value="zamiast">zamiast poziomu</option>
             </select>
@@ -992,7 +996,7 @@
           <div class="item-edit">
             <div class="edit-row wrap">
               <span>{weapon ? "⚔" : "🛡"}</span>
-              <select class="grow" value={it.name} onchange={(e) => swapItem(it.list, it.i, e.currentTarget.value)} aria-label={weapon ? "Zamień broń" : "Zamień pancerz"}>
+              <select use:searchable class="grow" value={it.name} onchange={(e) => swapItem(it.list, it.i, e.currentTarget.value)} aria-label={weapon ? "Zamień broń" : "Zamień pancerz"}>
                 {#if !(weapon ? weaponNames : armourNames).includes(it.name)}<option value={it.name}>{it.name}</option>{/if}
                 {#each weapon ? weaponNames : armourNames as n (n)}<option value={n}>{n}</option>{/each}
               </select>
@@ -1000,7 +1004,7 @@
                 <span class="magic-mark">✦ {m.name}</span>
                 <button class="btn-sm ghost" title="Zostaw zwykły przedmiot" onclick={() => disenchant(it.name, !weapon)}>Odczaruj</button>
               {/if}
-              <select value="" onchange={(e) => (enchant(it.name, e.currentTarget.value, !weapon), (e.currentTarget.value = ""))} aria-label="Zaklnij">
+              <select use:searchable value="" onchange={(e) => (enchant(it.name, e.currentTarget.value, !weapon), (e.currentTarget.value = ""))} aria-label="Zaklnij">
                 <option value="">{m ? "✦ zmień zaklęcie…" : "✦ zaklnij…"}</option>
                 {#each weapon ? weaponTemplates : armourTemplates as t (t.name)}<option value={t.name} title={t.description}>{t.name}{t.replaces && weapon && t.replaces !== it.name ? ` (zamienia na: ${t.replaces})` : ""}</option>{/each}
               </select>
@@ -1013,19 +1017,19 @@
               {#each craft?.flaws ?? [] as q (q)}
                 <button class="quality flaw craft tap" title="{qualityText(q)} — kliknij, aby usunąć" onclick={() => toggleCraft(npc, it.name, q, false)}>{q} ✕</button>
               {/each}
-              <Autocomplete bind:value={() => newCraft[it.name] ?? "", (v) => (newCraft[it.name] = v)} options={craftNames} placeholder="+ Zaleta / Wada…" />
+              <Autocomplete bind:value={() => newCraft[it.name] ?? "", (v) => (newCraft[it.name] = v)} options={craftNames} groups={craftGroups} placeholder="+ Zaleta / Wada…" />
               <button class="btn-sm" onclick={() => addCraft(it.name)}>Dodaj</button>
             </div>
           </div>
         {/each}
       </div>
       <div class="edit-row wrap">
-        <select bind:value={newWeapon} aria-label="Dodaj broń">
+        <select use:searchable bind:value={newWeapon} aria-label="Dodaj broń">
           <option value="">+ broń…</option>
           {#each weaponNames as w (w)}<option value={w}>{w}</option>{/each}
         </select>
         <button class="btn-sm" onclick={() => addTo("weapons", newWeapon, () => (newWeapon = ""))}>Dodaj</button>
-        <select bind:value={newArmour} aria-label="Dodaj pancerz">
+        <select use:searchable bind:value={newArmour} aria-label="Dodaj pancerz">
           <option value="">+ pancerz…</option>
           {#each armourNames as a (a)}<option value={a}>{a}</option>{/each}
         </select>
@@ -1050,7 +1054,7 @@
             {#if t?.kind === "potion" && potions.length}
               <div class="edit-row wrap">
                 <span class="text-dim small">Mikstura:</span>
-                <select value={m.name} onchange={(e) => updateItem(i, { name: e.currentTarget.value })}>
+                <select use:searchable value={m.name} onchange={(e) => updateItem(i, { name: e.currentTarget.value })}>
                   {#if !potions.includes(m.name)}<option value={m.name}>{m.name}</option>{/if}
                   {#each potions as p (p)}<option value={p}>{p}</option>{/each}
                 </select>
@@ -1062,7 +1066,7 @@
                 {#each m.runes ?? [] as r, j (j)}
                   <button class="chip tap" title="Kliknij, aby usunąć" onclick={() => updateItem(i, { runes: (m.runes ?? []).filter((_, k) => k !== j) })}>{r} ✕</button>
                 {/each}
-                <select value="" onchange={(e) => (e.currentTarget.value && updateItem(i, { runes: [...(m.runes ?? []), e.currentTarget.value] }), (e.currentTarget.value = ""))} aria-label="Dodaj runę">
+                <select use:searchable value="" onchange={(e) => (e.currentTarget.value && updateItem(i, { runes: [...(m.runes ?? []), e.currentTarget.value] }), (e.currentTarget.value = ""))} aria-label="Dodaj runę">
                   <option value="">+ runa…</option>
                   {#each runes as r (r.name)}<option value={r.name} title={r.effect}>{r.name}{r.master ? " (mistrzowska)" : ""}</option>{/each}
                 </select>
@@ -1074,7 +1078,7 @@
                 {#each m.properties ?? [] as p, j (j)}
                   <button class="chip tap" title="Kliknij, aby usunąć" onclick={() => updateItem(i, { properties: (m.properties ?? []).filter((_, k) => k !== j) })}>{p} ✕</button>
                 {/each}
-                <select value="" onchange={(e) => (e.currentTarget.value && updateItem(i, { properties: [...(m.properties ?? []), e.currentTarget.value] }), (e.currentTarget.value = ""))} aria-label="Dodaj właściwość">
+                <select use:searchable value="" onchange={(e) => (e.currentTarget.value && updateItem(i, { properties: [...(m.properties ?? []), e.currentTarget.value] }), (e.currentTarget.value = ""))} aria-label="Dodaj właściwość">
                   <option value="">+ właściwość…</option>
                   {#each chaosProps.filter((p) => !m.properties?.includes(p)) as p (p)}<option value={p}>{p}</option>{/each}
                 </select>
@@ -1083,7 +1087,7 @@
             {#if t?.daemon || m.daemon}
               <div class="edit-row wrap">
                 <span class="text-dim small">Demon:</span>
-                <select value={m.daemon ?? ""} onchange={(e) => updateItem(i, { daemon: e.currentTarget.value || undefined })}>
+                <select use:searchable value={m.daemon ?? ""} onchange={(e) => updateItem(i, { daemon: e.currentTarget.value || undefined })}>
                   <option value="">— brak —</option>
                   {#each daemons as d (d)}<option value={d}>{d}</option>{/each}
                 </select>
@@ -1095,7 +1099,7 @@
         {/each}
       </div>
       <div class="edit-row wrap">
-        <select bind:value={newItemTemplate} aria-label="Dodaj przedmiot magiczny">
+        <select use:searchable bind:value={newItemTemplate} aria-label="Dodaj przedmiot magiczny">
           <option value="">+ przedmiot magiczny…</option>
           {#each otherTemplates as t (t.name)}<option value={t.name} title={t.description}>{t.name}</option>{/each}
         </select>
@@ -1148,7 +1152,7 @@
         {/each}
       </div>
       <div class="edit-row">
-        <Autocomplete bind:value={newSpell} options={spellNames} placeholder="Dodaj zaklęcie…" />
+        <Autocomplete bind:value={newSpell} options={spellNames} groups={spellGroups} max={12} placeholder="Dodaj zaklęcie (nazwa albo tradycja)…" />
         <button class="btn-sm" onclick={() => addTo("spells", newSpell, () => (newSpell = ""))}>Dodaj</button>
       </div>
     </section>
@@ -1184,7 +1188,7 @@
         {/each}
       </p>
       <div class="edit-row wrap">
-        <select bind:value={newMutation} aria-label="Dodaj mutację">
+        <select use:searchable bind:value={newMutation} aria-label="Dodaj mutację">
           <option value="">+ mutacja…</option>
           {#each mutationGroups as g (g.label)}
             <optgroup label={g.label}>

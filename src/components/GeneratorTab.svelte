@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   import NpcCard from "./NpcCard.svelte";
-  import Autocomplete from "./Autocomplete.svelte";
-  import { pick } from "../lib/dice";
+    import { pick } from "../lib/dice";
   import * as gd from "../lib/gameData";
   import { creatureTierRange, optionalTraitChoices, sizeOf, toggleOptionalTrait } from "../lib/creatures";
   import { COMMANDER_PROFILE, generateNpc, racesForArchetype, type GenSpec, type PathStep } from "../lib/generator";
@@ -54,24 +54,6 @@
     }
     return out;
   });
-
-  /** Wyszukiwanie stworzenia albo grupy po wpisanym tekscie (podpowiedzi). */
-  let creatureQuery = $state("");
-  const GROUP_PREFIX = "Grupa: ";
-  const creatureSearch = [
-    ...groupTree.flatMap((g) => [g.group, ...g.subgroups.map((s) => `${g.group}${gd.GROUP_SEP}${s}`)]).map((g) => GROUP_PREFIX + g),
-    ...typicalCreatures
-  ];
-  function pickSearch(v: string) {
-    if (v.startsWith(GROUP_PREFIX)) {
-      creatureGroup = v.slice(GROUP_PREFIX.length);
-      creature = "";
-    } else {
-      creatureGroup = "";
-      creature = v;
-    }
-    creatureQuery = "";
-  }
 
   // Stworzenie spoza nowo wybranej grupy albo filtrow - wracamy do losowania z grupy.
   $effect(() => {
@@ -321,7 +303,7 @@
 {#snippet tierToField(labelOf: (t: TierId, i: number) => string)}
   {#if tier}
     <label title="Poziom losowany równo z przedziału od wybranego do tego">Do poziomu
-      <select bind:value={tierTo}>
+      <select use:searchable bind:value={tierTo}>
         <option value="">— tylko wybrany —</option>
         {#each TIER_IDS as t, i (t)}
           {#if i > TIER_IDS.indexOf(tier) && tierAllowed(i)}<option value={t}>{labelOf(t, i)}</option>{/if}
@@ -340,7 +322,7 @@
         <input type="number" step="100" placeholder="do" aria-label="PD do (losowo z przedziału)" bind:value={xpToValue} />
       {/if}
       {#if tier}
-        <select bind:value={xpMode} aria-label="Sposób użycia PD">
+        <select use:searchable bind:value={xpMode} aria-label="Sposób użycia PD">
           <option value="dodaj">dodaj do poziomu</option>
           <option value="zamiast">zamiast poziomu</option>
         </select>
@@ -370,11 +352,8 @@
 
     {#if mode !== "losowy" && kind === "stworzenia"}
       <div class="form">
-        <label class="search">Szukaj
-          <Autocomplete bind:value={creatureQuery} options={creatureSearch} placeholder="wpisz stworzenie albo grupę…" onpick={pickSearch} />
-        </label>
         <label>Grupa
-          <select bind:value={creatureGroup}>
+          <select use:searchable bind:value={creatureGroup}>
             <option value="">— wszystkie —</option>
             {#each groupTree as g (g.group)}
               <option value={g.group}>{g.group}</option>
@@ -383,20 +362,20 @@
           </select>
         </label>
         <label>Rozmiar
-          <select bind:value={sizeFilter}>
+          <select use:searchable bind:value={sizeFilter}>
             <option value="">— każdy —</option>
             <option value="duze">Duży i większy</option>
             {#each SIZE_NAMES as s (s)}<option value={s}>{s}</option>{/each}
           </select>
         </label>
         <label>Cecha
-          <select bind:value={traitFilter}>
+          <select use:searchable bind:value={traitFilter}>
             <option value="">— dowolna —</option>
             {#each traitOptions as t (t)}<option value={t}>{t}</option>{/each}
           </select>
         </label>
         <label>Stworzenie
-          <select bind:value={creature}>
+          <select use:searchable bind:value={creature}>
             {#if mode === "polLosowy"}<option value="">{creatureGroup ? "— losowo z grupy —" : "— losowo —"}</option>{/if}
             {#each Object.entries(creatureGroups) as [group, names] (group)}
               <optgroup label={group}>
@@ -407,7 +386,7 @@
         </label>
         {#if showBloodline}
           <label>Linia krwi
-            <select bind:value={bloodline}>
+            <select use:searchable bind:value={bloodline}>
               <option value="">— losowa —</option>
               {#each bloodlines as b (b)}<option value={b}>{b}</option>{/each}
             </select>
@@ -415,7 +394,7 @@
         {/if}
         {#if civilized}
           <label>Archetyp (profesje)
-            <select bind:value={archetype}>
+            <select use:searchable bind:value={archetype}>
               <option value="">— losowo (wg stworzenia) —</option>
               {#if !showBloodline}<option value={NO_CAREER}>— bez profesji (jak bestia) —</option>{/if}
               {#each creatureArchetypes as a (a)}<option value={a}>{a}</option>{/each}
@@ -423,7 +402,7 @@
           </label>
         {/if}
         <label>Poziom
-          <select bind:value={tier}>
+          <select use:searchable bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each TIER_IDS as t, i (t)}
               <option value={t} disabled={!tierAllowed(i)}>{creatureTierLabel(t, i)}{beastMode && i < minTierIdx ? ` — osłabiony (${minTierIdx - i} ${minTierIdx - i === 1 ? "cecha negatywna" : "cechy negatywne"})` : !civilized || !archetype
@@ -462,13 +441,13 @@
     {#if mode !== "losowy" && kind === "rasy"}
       <div class="form">
         <label>Archetyp
-          <select bind:value={archetype}>
+          <select use:searchable bind:value={archetype}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each archetypes as a (a)}<option value={a}>{a}</option>{/each}
           </select>
         </label>
         <label>Poziom
-          <select bind:value={tier}>
+          <select use:searchable bind:value={tier}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each TIER_IDS as t (t)}<option value={t}>{gd.tierLabelXp(t)}</option>{/each}
           </select>
@@ -476,7 +455,7 @@
         {@render tierToField((t) => gd.tierLabelXp(t))}
         {@render xpField()}
         <label>Rasa
-          <select bind:value={race}>
+          <select use:searchable bind:value={race}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             {#each gd.allRaceNames() as r (r)}<option value={r} disabled={!allowedRaces.includes(r)}>{r}</option>{/each}
             {#if raceLike.length}
@@ -487,7 +466,7 @@
           </select>
         </label>
         <label>Płeć
-          <select bind:value={sex}>
+          <select use:searchable bind:value={sex}>
             {#if mode === "polLosowy"}<option value="">— losowo —</option>{/if}
             <option value="M">mężczyzna</option>
             <option value="K">kobieta</option>
@@ -529,7 +508,7 @@
 
       <div class="checks">
         <label class="check"><input type="checkbox" bind:checked={randomTraits} /> Dolosuj cechy opcjonalne (7% jedna, 1% dwie)</label>
-        <label class="check" title={exceptional ? gd.heroProfileText(exceptional) : "Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji"}>Wyjątkowa jednostka<select bind:value={exceptional}><option value="">— losowo (mała szansa) —</option>{#each HERO_CHOICES as hp (hp)}<option value={hp} title={gd.heroProfileText(hp)}>{hp}</option>{/each}</select></label>
+        <label class="check" title={exceptional ? gd.heroProfileText(exceptional) : "Profil z Bestiariusza 2.0 dodawany do cech i umiejętności ponad rozwój z profesji"}>Wyjątkowa jednostka<select use:searchable bind:value={exceptional}><option value="">— losowo (mała szansa) —</option>{#each HERO_CHOICES as hp (hp)}<option value={hp} title={gd.heroProfileText(hp)}>{hp}</option>{/each}</select></label>
         <label class="check"><input type="checkbox" bind:checked={commander} /> {COMMANDER_PROFILE}</label>
         <label class="check" title="Domyślnie rzuty BN są przycięte do 5–17, połowa BN zostawia je w kolejności, reszta zamienia najwyżej 2 rzuty. Zaznaczone: pełne 2k10, najwyższe rzuty do cech kluczowych archetypu (w trybie Własnym rzuty i tak są średnie, 11).">
           <input type="checkbox" bind:checked={freeRolls} /> Rzuty bez ograniczeń (2–20, dowolne rozłożenie)

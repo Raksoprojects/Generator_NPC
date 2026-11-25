@@ -3,12 +3,15 @@
     value = $bindable(""),
     placeholder = "",
     options,
+    groups,
     max = 8,
     onpick
   }: {
     value?: string;
     placeholder?: string;
     options: string[];
+    /** Grupa opcji (np. tradycja zaklecia) - tez przeszukiwana i pokazana obok nazwy. */
+    groups?: Record<string, string>;
     max?: number;
     onpick?: (v: string) => void;
   } = $props();
@@ -21,9 +24,10 @@
     s.trim().toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/\p{M}/gu, "");
 
   let matches = $derived.by(() => {
-    const q = norm(value);
-    if (!q) return [];
-    return options.filter((o) => norm(o).includes(q)).slice(0, max);
+    const words = norm(value).split(/\s+/).filter(Boolean);
+    if (!words.length) return [];
+    // Kazde slowo w nazwie albo w grupie ("ogien pocisk" znajduje pociski Tradycji Ognia).
+    return options.filter((o) => words.every((w) => norm(`${o} ${groups?.[o] ?? ""}`).includes(w))).slice(0, max);
   });
 
   function pick(o: string) {
@@ -78,7 +82,7 @@
               pick(m);
             }}
           >
-            {m}
+            {m}{#if groups?.[m]}<span class="grp"> · {groups[m]}</span>{/if}
           </button>
         </li>
       {/each}
@@ -125,5 +129,10 @@
   .opt:hover,
   .opt.active {
     background: var(--bg-elevated);
+  }
+
+  .grp {
+    color: var(--text-muted);
+    font-size: 0.9em;
   }
 </style>

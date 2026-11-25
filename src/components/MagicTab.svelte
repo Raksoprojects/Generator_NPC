@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   import ArtefactCard from "./ArtefactCard.svelte";
   import { categoryChoices, categoryList, rollArtefact, type Artefact, type ArtefactOptions } from "../lib/artefacts";
   import * as gd from "../lib/gameData";
@@ -71,20 +72,20 @@
     {#if mode !== "losowy"}
       <div class="form">
         <label>Kategoria
-          <select bind:value={category}>
+          <select use:searchable bind:value={category}>
             {#if mode === "polLosowy"}<option value="">— losowa (k100) —</option>{/if}
             {#each categories as c (c.key)}<option value={c.key}>{c.name}</option>{/each}
           </select>
         </label>
         {#if mode === "wlasny"}
           <label>Przedmiot
-            <select bind:value={item}>
+            <select use:searchable bind:value={item}>
               {#each choices as c (c)}<option value={c}>{c}</option>{/each}
             </select>
           </label>
         {:else}
           <label>Liczba przedmiotów
-            <select bind:value={count}>
+            <select use:searchable bind:value={count}>
               {#each [1, 2, 3, 4, 5, 6] as n (n)}<option value={n}>{n}</option>{/each}
             </select>
           </label>

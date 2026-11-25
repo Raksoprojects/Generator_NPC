@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { searchable } from "../lib/searchable";
   import LootCard from "./LootCard.svelte";
   import { rollArtefact } from "../lib/artefacts";
   import { lootLevels, lootLocations, rollLoot, type LootOptions, type LootResult } from "../lib/loot";
@@ -86,19 +87,19 @@
     {#if mode !== "losowy"}
       <div class="form">
         <label>Rodzaj miejsca
-          <select bind:value={group}>
+          <select use:searchable bind:value={group}>
             <option value="">— wszystkie —</option>
             {#each groups as g (g)}<option value={g}>{g}</option>{/each}
           </select>
         </label>
         <label>Miejsce
-          <select bind:value={location}>
+          <select use:searchable bind:value={location}>
             {#if mode === "polLosowy"}<option value="">— losowe —</option>{/if}
             {#each groupLocations as l (l.id)}<option value={l.id}>{l.name} ({STATUS_LABEL[l.status]})</option>{/each}
           </select>
         </label>
         <label>Poziom miejsca
-          <select bind:value={level}>
+          <select use:searchable bind:value={level}>
             {#if mode === "polLosowy"}<option value="">— losowy —</option>{/if}
             {#each levels as l (l.level)}<option value={l.level}>{l.level} — {l.label}</option>{/each}
           </select>
