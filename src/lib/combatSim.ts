@@ -92,7 +92,7 @@ export interface Fighter {
   howl?: boolean;
   icyGrip?: boolean;
   petrify?: boolean;
-  /** Czempion (X) [dom]: kontry na Runde. */
+  /** Czempion [dom]: po wygranej obronie za 1 Przewage zadaje Obrazenia jak atak (1 = ma ceche). */
   champion?: number;
   acidBlood?: boolean;
   vampiric?: boolean;
@@ -318,7 +318,7 @@ export function npcFighter(npc: Npc, view: NpcView = computeNpc(npc)): Fighter {
     howl: has(traits, /^Upiorne Wycie/),
     icyGrip: has(traits, /^Lodowaty Uścisk/),
     petrify: has(traits, /^Petryfikujące/),
-    champion: rank(traits, /^(?:Czempion|Mistrz)(?: \((\d+)\))?$/),
+    champion: rank(traits, /^(?:Czempion|Mistrz)(?: \((\d+)\))?$/) > 0 ? 1 : 0,
     acidBlood: has(traits, /^Kwasowa Krew/),
     vampiric: has(traits, /^Wampiryczny/),
     venom: has(traits, /^Jad/) || /\(Jad\)/.test(traits.join(" ")),
@@ -640,8 +640,9 @@ function melee(a: State, d: State, rng: Rng, bonus: number, gain: boolean, fa?: 
     if (!def.ok && double(def.roll)) oops(d, rng);
   }
   if (!wins()) {
-    // Czempion (X) [dom]: wygrana obrona zadaje Obrazenia jak atak, najwyzej X razy na Runde.
-    if (d.f.champion && d.counters < d.f.champion && def.ok && defSl > atkSl && !fa) {
+    // Czempion [dom]: po wygranej obronie za 1 Przewage zadaje Obrazenia, jakby sam atakowal.
+    if (d.f.champion && d.side.pool >= 1 && def.ok && defSl > atkSl && !fa) {
+      d.side.pool--;
       d.counters++;
       const dmg = wounds(d, a, { damage: d.f.attack.damage, magical: d.f.attack.magical, blunt: d.f.attack.blunt, sl: defSl - atkSl, roll: def.roll }, rng);
       apply(d, a, dmg, rng, { venom: d.f.venom });

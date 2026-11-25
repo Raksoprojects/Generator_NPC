@@ -16,7 +16,7 @@ import { mutationEffects, mutationEffectText, mutationLabel, mutationRow } from 
 import { findBloodline } from "./vampires";
 import { personaLines } from "./persona";
 import { ATTRIBUTES, characteristicBonus, computeWounds, type Attribute } from "./rules";
-import { TIER_IDS, type Npc, type NpcMutation, type Sex, type SpellDef } from "./types";
+import type { Npc, NpcMutation, Sex, SpellDef } from "./types";
 
 export interface CharView {
   code: Attribute;
@@ -118,7 +118,7 @@ export interface NpcView {
   mutations: { label: string; effect: string; kind: NpcMutation["kind"] }[];
   /** Cechy ksiazkowe stworzenia (bez zmian w statystykach). */
   creatureTraits: string[];
-  /** Cechy wylosowane (npc.traits) z poziomem wyliczanym w widoku - Czempion (X). */
+  /** Cechy wylosowane (npc.traits); "Mistrz" pokazywany jako Czempion. */
   rolledTraits: string[];
   abilities: { name: string; description: string }[];
   wounds: number;
@@ -227,21 +227,9 @@ function weaponSkill(skills: SkillView[], chars: Record<Attribute, CharView>, ra
   return { value: chars[code].total, name: code };
 }
 
-/**
- * Czempion (X) [dom]: X kontr na Runde = 1 do Weterana, potem +1 za kazde 2 poziomy
- * (Wybitny, Ekspert 2; Mistrz, Arcymistrz 3; Legenda, Heros 4), +1 bardzo wojowniczy (BWW 7+);
- * najwyzej polowa Bonusu z WW, co najmniej 1.
- */
-export function championRank(tier: string, ww: number): number {
-  const t = Math.max(0, (TIER_IDS as readonly string[]).indexOf(tier));
-  const bww = characteristicBonus(ww);
-  const byTier = 1 + Math.floor(Math.max(0, t - 4) / 2) + (bww >= 7 ? 1 : 0);
-  return Math.max(1, Math.min(byTier, Math.floor(bww / 2)));
-}
-
-/** "Czempion" / "Mistrz" -> "Czempion (X)"; reszta bez zmian. */
-function rankChampion(traits: string[], rank: number): string[] {
-  return traits.map((t) => (/^(Czempion|Mistrz)$/.test(t) ? `Czempion (${rank})` : t));
+/** "Mistrz" (inna nazwa z bestiariuszy) -> "Czempion"; [dom] Czempion bez stopni (1 Przewaga za kontre). */
+function rankChampion(traits: string[]): string[] {
+  return traits.map((t) => (/^(Czempion|Mistrz)( \(\d+\))?$/.test(t) ? "Czempion" : t));
 }
 
 export function computeNpc(input: Npc): NpcView {
@@ -558,8 +546,8 @@ export function computeNpc(input: Npc): NpcView {
     spells,
     keySpells,
     mutations,
-    creatureTraits: rankChampion(bookTraits.map((t) => gd.resolvedBookTrait(npc.specChoices, t)), championRank(npc.tier, totals.WW)),
-    rolledTraits: rankChampion(npc.traits, championRank(npc.tier, totals.WW)),
+    creatureTraits: rankChampion(bookTraits.map((t) => gd.resolvedBookTrait(npc.specChoices, t))),
+    rolledTraits: rankChampion(npc.traits),
     abilities: creature?.abilities ?? [],
     wounds,
     movement: Math.max(0, movement),

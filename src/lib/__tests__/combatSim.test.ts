@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { fight, npcFighter, outnumberBonus } from "../combatSim";
 import { seedRng } from "../dice";
 import { generateNpc } from "../generator";
-import { championRank, computeNpc } from "../npc";
+import { computeNpc } from "../npc";
 import { CRIT_TABLE, critEntry } from "../criticals";
 import { loadTestGameData } from "./loadData";
 
@@ -70,18 +70,19 @@ describe("symulator starc", () => {
     expect(done).toBeGreaterThan(14);
   });
 
-  it("Czempion (X): 1 do Weterana, +1 za 2 poziomy i BWW 7+, najwyzej polowa BWW", () => {
-    expect(championRank("slaby", 60)).toBe(1);
-    expect(championRank("slaby", 70)).toBe(2);
-    expect(championRank("zaawansowany", 65)).toBe(1);
-    expect(championRank("zaawansowany", 75)).toBe(2);
-    expect(championRank("wybitny", 60)).toBe(2);
-    expect(championRank("mistrz", 65)).toBe(3);
-    expect(championRank("legendarny", 90)).toBe(4);
-    expect(championRank("legendarny", 39)).toBe(1);
+  it("[dom] Czempion bez stopni: kontra po wygranej obronie kosztuje 1 Przewage", () => {
     const w = generateNpc({ creature: "Wojownik Chaosu", noArchetype: true }, seedRng(1));
     const view = computeNpc(w);
-    expect(view.creatureTraits.some((t) => /^Czempion \(\d\)$/.test(t))).toBe(true);
-    expect(npcFighter(w, view).champion).toBeGreaterThanOrEqual(1);
+    expect(view.creatureTraits).toContain("Czempion");
+    expect(npcFighter(w, view).champion).toBe(1);
+    // Bez Przewagi Czempion nie kontruje: walka z pula 0 i bez wygranych atakow trwa jak bez cechy.
+    const f = npcFighter(w, view);
+    const plain = { ...f, champion: 0 };
+    let a = 0, b = 0;
+    for (let s = 0; s < 200; s++) {
+      a += fight([plain], [f], seedRng(s)).dealtByB;
+      b += fight([plain], [plain], seedRng(s)).dealtByB;
+    }
+    expect(a).toBeGreaterThanOrEqual(b);
   });
 });
