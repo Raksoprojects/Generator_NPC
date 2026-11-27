@@ -436,7 +436,7 @@
    "id": "kanaly",
    "name": "Kanały i nora skavenów",
    "group": "Legowiska",
-   "status": "srebro",
+   "status": "brąz",
    "description": "Śmieci, przemyt i to, co ciągną do nor skaveny.",
    "money": {
     "p": "50:1k100",
@@ -444,8 +444,8 @@
     "zk": "5:1k5"
    },
    "domestic": "10:1k5",
-   "gems": "10:1k2",
-   "art": null,
+   "gems": "25:1k2",
+   "art": "10:1",
    "cloth": "10:1",
    "scrolls": "2:1",
    "grimoire": null,
@@ -470,12 +470,12 @@
    "id": "leze_nekromanty",
    "name": "Leże nekromanty",
    "group": "Legowiska",
-   "status": "złoto",
+   "status": "srebro",
    "description": "Ukryta pracownia nekromanty: księgi zakazanej wiedzy, ingrediencje i łupy z rozkopanych grobów.",
    "money": {
     "p": "50:2k10",
     "s": "50:3k10",
-    "zk": "50:2k10"
+    "zk": "25:1k10"
    },
    "domestic": "25:1k5",
    "gems": "50:1k5",

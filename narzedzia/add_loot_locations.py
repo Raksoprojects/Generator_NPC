@@ -37,9 +37,9 @@ NEW = [
         ("25:1k10", "10:1k10", "5:1k5"), gems="50:1k5", cloth="5:1", magic="2:1",
         extra=(("narzedzia", "1k5"), ("pojemniki", "50:1k2"), ("rozne", "50:1k5"), ("bron", "15:1"), ("pancerz", "10:1"))),
     # Legowiska
-    loc("leze_nekromanty", "Leże nekromanty", "Legowiska", "złoto",
+    loc("leze_nekromanty", "Leże nekromanty", "Legowiska", "srebro",
         "Ukryta pracownia nekromanty: księgi zakazanej wiedzy, ingrediencje i łupy z rozkopanych grobów.",
-        ("50:2k10", "50:3k10", "50:2k10"), domestic="25:1k5", gems="50:1k5", art="25:1k2", cloth="10:1k2",
+        ("50:2k10", "50:3k10", "25:1k10"), domestic="25:1k5", gems="50:1k5", art="25:1k2", cloth="10:1k2",
         scrolls="75:1k5", grimoire="75:1", magic="50:1k2", extra=(("ksiazki", "1k5"), ("ziola", "1k5"), ("pojemniki", "50:1k2"), ("bron", "25:1k2"))),
     loc("leze_wampira", "Leże wampira", "Legowiska", "złoto",
         "Siedziba wampira: stare monety z dawnych wieków, wytworne stroje, dzieła sztuki i rodowe kosztowności.",
@@ -85,11 +85,17 @@ NEW = [
         extra=(("ziola", "1k10"), ("narzedzia", "1k5"), ("ksiazki", "50:1k2"), ("pojemniki", "1k5"))),
 ]
 
+# Poprawki MG (2026-11-27): skaveny to Braz, ale z szansa na cos lsniacego.
+PATCH = {
+    "kanaly": {"status": "brąz", "gems": "25:1k2", "art": "10:1"},
+}
 for l in L["locations"]:
     if l["id"] in REGROUP:
         l["group"] = REGROUP[l["id"]]
-have = {l["id"] for l in L["locations"]}
-L["locations"] += [n for n in NEW if n["id"] not in have]
+    l.update(PATCH.get(l["id"], {}))
+# Dodane tu miejsca zawsze nadpisywane aktualna wersja.
+new_ids = {n["id"] for n in NEW}
+L["locations"] = [l for l in L["locations"] if l["id"] not in new_ids] + NEW
 ORDER = ["Domostwa", "Świątynie", "Legowiska", "Ruiny i grobowce", "W drodze i obozy", "Skrzynie", "Ciała"]
 L["locations"].sort(key=lambda l: ORDER.index(l["group"]) if l["group"] in ORDER else 99)
 json.dump(L, open(F, "w", encoding="utf8"), ensure_ascii=False, indent=1)
