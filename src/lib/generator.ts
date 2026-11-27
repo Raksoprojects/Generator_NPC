@@ -926,10 +926,12 @@ function creationStart(dev: XpDeveloper, profession: string): void {
 
 /**
  * PD "zawarte" w przemianie wampira: przemiana sama robi z czlowieka-Nowicjusza wampira na minimalnym
- * poziomie stworzenia (Niezwykly), wiec budzet PD poziomu pomniejszamy o roznice poczatkow przedzialow.
+ * poziomie stworzenia, wiec budzet PD poziomu pomniejszamy o roznice poczatkow przedzialow - albo o
+ * turningXp z bestiariusza, gdy domyslny poziom wyznaczyl symulator (PD jak przy pomiarze groznosci).
  */
 export function turningXp(creature: CreatureDef | undefined): number {
   if (!creature) return 0;
+  if (creature.turningXp != null) return creature.turningXp;
   const start = (t: TierId) => gd.getTier(t)?.xp?.[0] ?? 0;
   return Math.max(0, start(creature.minTier ?? "slaby") - start("slaby"));
 }
@@ -1415,7 +1417,7 @@ export function generateNpc(spec: GenSpec = {}, rng: Rng = defaultRng): Npc {
     // Wampir: przemiana sama w sobie podnosi poziom (turningXp), PD to rozwoj ponad nia.
     const c = gd.getCreature(spec.creature);
     const beastLike = !!c && (!gd.isCivilized(c.name) || spec.noArchetype);
-    const shift = beastLike ? beastXpShift(c) : c && isVampire({ creature: c.name }) ? turningXp(c) : 0;
+    const shift = c && isVampire({ creature: c.name }) ? turningXp(c) : beastLike ? beastXpShift(c) : 0;
     spec = { ...spec, tier: tierForXp(spec.xp + shift) };
   }
   const creatureName = spec.creature ?? (spec.creatureGroup ? pickCreatureFromGroup(spec.creatureGroup, spec.tier, rng) : undefined);

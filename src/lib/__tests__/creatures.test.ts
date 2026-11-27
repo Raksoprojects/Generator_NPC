@@ -42,9 +42,11 @@ describe("stworzenia z bestiariusza", () => {
   });
 
   it("rozwoj bestii etapami: najpierw Cechy etapu po +5 za etap, potem Umiejetnosci", () => {
-    const troll = generateNpc({ creature: "Troll", tier: "doswiadczony", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
-    // Zaawansowany: 2 etapy (maxCareerLevel 2) - 4 Cechy po 10 rozwiniec.
-    expect(Object.values(troll.charAdvances).filter((v) => v >= 10).length).toBe(4);
+    // Troll domyslnie Zaawansowany; dwa poziomy wyzej (Wybitny): najpierw Cechy etapow (5 Cech po 10+),
+    // Umiejetnosci jeszcze bez rozwiniec ponad baze.
+    const troll = generateNpc({ creature: "Troll", tier: "wybitny", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
+    expect(Object.values(troll.charAdvances).filter((v) => v >= 10).length).toBe(5);
+    expect(troll.skills.find((s) => s.name === "Broń Biała (Bijatyka)")?.advances).toBe(15);
     const wolf = generateNpc({ creature: "Wilk", tier: "slaby", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1));
     // Za malo PD na caly 1. etap - rozwiniecia rozlozone rowno na 3 Cechy etapu.
     const adv = Object.values(wolf.charAdvances).filter((v) => v > 0);
@@ -214,32 +216,32 @@ describe("rozwoj bestii", () => {
 
   it("bestia ponizej minimum jest osłabiona (cechy negatywne), na minimum ma profil z ksiazki", () => {
     const negative = (n: Npc) => n.traits.filter((t) => gd.getCreatureTraits()[t]?.negative);
-    // Najwyzej dwa poziomy ponizej domyslnego (Niezwykly): Nowicjusz przycinany do Zwyklego.
+    // Najwyzej dwa poziomy ponizej domyslnego (Wybitny): Nowicjusz przycinany do Zaawansowanego.
     const weak = generateNpc({ creature: "Wojownik Chaosu", tier: "slaby" }, seedRng(1));
-    expect(weak.tier).toBe("sredni");
+    expect(weak.tier).toBe("doswiadczony");
     // Jedna cecha negatywna na poziom ponizej domyslnego.
     expect(negative(weak)).toHaveLength(2);
     // Poziom losowy (nie wybrany) - nie schodzi ponizej minimum.
     for (let seed = 1; seed <= 20; seed++) {
       const r = generateNpc({ creature: "Wojownik Chaosu" }, seedRng(seed));
-      expect(TIER_IDS.indexOf(r.tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));
+      expect(TIER_IDS.indexOf(r.tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("wybitny"));
     }
     // Ponizej minimum - bez PD (sam profil z ksiazki i cechy negatywne).
     expect(weak.xp?.budget).toBe(0);
     // Na domyslnym (Wybitny) baza stworzenia: rozwiniecia jak u Nowicjusza (100-450, srodek 275), nie caly przedzial Wybitnego.
-    const chosen = generateNpc({ creature: "Wybraniec Chaosu", tier: "wybitny", deterministic: true }, seedRng(1));
+    const chosen = generateNpc({ creature: "Wojownik Chaosu", tier: "wybitny", deterministic: true }, seedRng(1));
     expect(chosen.xp?.budget).toBe(275);
-    const lord = generateNpc({ creature: "Wybraniec Chaosu", tier: "mistrz", deterministic: true }, seedRng(1));
+    const lord = generateNpc({ creature: "Wojownik Chaosu", tier: "mistrz", deterministic: true }, seedRng(1));
     expect(lord.charAdvances.WW).toBeGreaterThan(chosen.charAdvances.WW);
-    // Powyzej przedzialu (domyslny +3) - przycinany: Wybraniec (Wybitny) najwyzej Arcymistrz.
-    expect(generateNpc({ creature: "Wybraniec Chaosu", tier: "heros" }, seedRng(1)).tier).toBe("arcymistrz");
+    // Powyzej przedzialu (domyslny +3) - przycinany: Wojownik Chaosu (Wybitny) najwyzej Arcymistrz.
+    expect(generateNpc({ creature: "Wojownik Chaosu", tier: "heros" }, seedRng(1)).tier).toBe("arcymistrz");
   });
 
   it("szkielet najwyzej Doswiadczony, czempion na profilu szkieletu z Suchymi Kosciami", () => {
     const skel = generateNpc({ creature: "Szkielet", tier: "heros" }, seedRng(1));
     expect(skel.tier).toBe("obyty");
     expect(gd.getCreature("Szkielet")!.traits).toContain("Suche Kości (1)");
-    const champ = generateNpc({ creature: "Szkieletowy czempion", tier: "zaawansowany", deterministic: true }, seedRng(1));
+    const champ = generateNpc({ creature: "Szkieletowy czempion", tier: "weteran", deterministic: true }, seedRng(1));
     // Czempion: Suche Kosci co najmniej 3, wyzej szansa na 4 (limit cechy).
     expect(champ.traits).toContain("Suche Kości (3)");
     // Redukcja w nawiasie: +2 za poziom przeciw broni nieobuchowej.
@@ -250,13 +252,13 @@ describe("rozwoj bestii", () => {
     expect(armourLine(view)).toMatch(/^Głowa \d+ \(\d+\)/);
     // Pancerz 4 na domyslnym poziomie, wyzej szansa na 5-6.
     expect(champ.traits.filter((t) => t.startsWith("Pancerz"))).toEqual(["Pancerz (4)"]);
-    // PD od poczatku Nowicjusza minus przemiana: (2000 - 100 - 500).
+    // PD od poczatku Nowicjusza minus przemiana: (5200 - 100 - 3700) - jak przy pomiarze groznosci.
     expect(champ.xp?.budget).toBe(1400);
     const armours = new Set<string>();
     const bones = new Set<string>();
     for (let seed = 1; seed <= 30; seed++) {
       const top = generateNpc({ creature: "Szkieletowy czempion", tier: "heros" }, seedRng(seed));
-      expect(top.tier).toBe("wybitny");
+      expect(top.tier).toBe("mistrz");
       armours.add(top.traits.find((t) => t.startsWith("Pancerz"))!);
       bones.add(top.traits.find((t) => t.startsWith("Suche"))!);
     }
@@ -264,14 +266,14 @@ describe("rozwoj bestii", () => {
     expect([...bones].sort()).toEqual(["Suche Kości (3)", "Suche Kości (4)"]);
     // Bez wybranego poziomu - domyslny albo wyzszy, nigdy nizszy.
     for (let seed = 1; seed <= 10; seed++) {
-      expect(TIER_IDS.indexOf(generateNpc({ creature: "Szkieletowy czempion" }, seedRng(seed)).tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("zaawansowany"));
+      expect(TIER_IDS.indexOf(generateNpc({ creature: "Szkieletowy czempion" }, seedRng(seed)).tier)).toBeGreaterThanOrEqual(TIER_IDS.indexOf("weteran"));
     }
   });
 
   it("stworzenie z profesja bez gornej granicy poziomu, bestia w przedziale", () => {
-    // Ork: domyslnie Zwykly; z profesja dowolnie wysoko, bez profesji najwyzej domyslny +3.
+    // Ork: domyslnie Doswiadczony; z profesja dowolnie wysoko, bez profesji najwyzej domyslny +3.
     expect(generateNpc({ creature: "Ork", archetype: "Wojownik", tier: "heros" }, seedRng(1)).tier).toBe("heros");
-    expect(generateNpc({ creature: "Ork", noArchetype: true, tier: "heros" }, seedRng(1)).tier).toBe("doswiadczony");
+    expect(generateNpc({ creature: "Ork", noArchetype: true, tier: "heros" }, seedRng(1)).tier).toBe("weteran");
   });
 
   it("poziom i PD losowane z przedzialu od-do", () => {
@@ -314,7 +316,7 @@ describe("rozwoj bestii", () => {
     };
     expect(gifts("Kultysta", "slaby")).toBe(0);
     expect(gifts("Wojownik Chaosu z Pustkowi", "zaawansowany")).toBeGreaterThan(gifts("Kultysta", "zaawansowany"));
-    expect(gifts("Wybraniec Chaosu", "heroiczny")).toBeGreaterThan(gifts("Wybraniec Chaosu", "doswiadczony"));
+    expect(gifts("Wybraniec Chaosu", "heros")).toBeGreaterThan(gifts("Wybraniec Chaosu", "heroiczny"));
     const npc = bookNpc(gd.getCreature("Wybraniec Chaosu")!);
     const before = computeNpc(npc);
     npc.mutations = [{ kind: "gift", name: "Żelazna skóra" }];
@@ -350,7 +352,7 @@ describe("rozwoj bestii", () => {
     const adv = (v: ReturnType<typeof generateNpc>, name: string) => v.skills.find((s) => s.name === name)?.advances ?? 0;
     for (let seed = 1; seed <= 40; seed++) {
       for (const line of ["Nekrarcha", "Lahmianin", "Krwawy Smok", "Strigoi"]) {
-        for (const tier of ["zaawansowany", "doswiadczony", "heroiczny"] as const) {
+        for (const tier of ["weteran", "wybitny", "arcymistrz"] as const) {
           const v = generateNpc({ creature: "Wampir", tier, bloodline: line }, seedRng(seed));
           const def = gd.getVampires()!.bloodlines.find((b) => b.name === line)!;
           // Obecna profesja z tabeli Preferowanych Profesji linii (Wampirzy X = zwykla profesja X), archetyp ja ma.
@@ -387,12 +389,12 @@ describe("rozwoj bestii", () => {
         }
       }
     }
-    expect(casters["Nekrarcha|zaawansowany"]).toBe(40);
-    expect(casters["Lahmianin|doswiadczony"]).toBeGreaterThan(10);
-    expect(casters["Lahmianin|doswiadczony"]).toBeLessThan(40);
-    expect(casters["Krwawy Smok|doswiadczony"]).toBeUndefined();
-    expect(casters["Krwawy Smok|heroiczny"]).toBeGreaterThan(0);
-    expect(casters["Strigoi|zaawansowany"]).toBeUndefined();
+    expect(casters["Nekrarcha|weteran"]).toBe(40);
+    expect(casters["Lahmianin|wybitny"]).toBeGreaterThan(10);
+    expect(casters["Lahmianin|wybitny"]).toBeLessThan(40);
+    expect(casters["Krwawy Smok|wybitny"]).toBeUndefined();
+    expect(casters["Krwawy Smok|arcymistrz"]).toBeGreaterThan(0);
+    expect(casters["Strigoi|weteran"]).toBeUndefined();
   });
 
   it("przemiana czlowieka: cechy czlowieka + premie Linii Krwi, Umiejetnosci i Talenty linii", () => {
@@ -451,10 +453,10 @@ describe("rozwoj bestii", () => {
   });
 
   it("Strigoi: Regeneracja; Duzy od domyslnego poziomu, oslabiony Sredni", () => {
-    const strong = generateNpc({ creature: "Wampir", tier: "zaawansowany", bloodline: "Strigoi", deterministic: true }, seedRng(1));
+    const strong = generateNpc({ creature: "Wampir", tier: "weteran", bloodline: "Strigoi", deterministic: true }, seedRng(1));
     expect(strong.traits).toContain("Regeneracja");
     expect(strong.traits).toContain("Rozmiar (Duży)");
-    const weak = generateNpc({ creature: "Wampir", tier: "obyty", bloodline: "Strigoi", deterministic: true }, seedRng(1));
+    const weak = generateNpc({ creature: "Wampir", tier: "doswiadczony", bloodline: "Strigoi", deterministic: true }, seedRng(1));
     expect(weak.traits).toContain("Regeneracja");
     expect(weak.traits.some((t) => t.startsWith("Rozmiar"))).toBe(false);
     // Duzy ma wiecej Zywotnosci (mnoznik Rozmiaru).
@@ -487,9 +489,9 @@ describe("rozwoj bestii", () => {
     }
   });
 
-  it("wampir: od zaawansowanego (oslabiony, swiezo przemieniony - poziom nizej), z wybrana Linia Krwi", () => {
+  it("wampir: od Weterana (oslabiony, swiezo przemieniony - poziom nizej), z wybrana Linia Krwi", () => {
     const weak = generateNpc({ creature: "Wampir", tier: "slaby" }, seedRng(4));
-    expect(weak.tier).toBe("obyty");
+    expect(weak.tier).toBe("doswiadczony");
     for (const line of gd.getVampires()!.bloodlines) {
       const v = generateNpc({ creature: "Wampir", tier: "doswiadczony", bloodline: line.name }, seedRng(7));
       expect(v.mutations.find((m) => m.kind === "bloodline")?.name).toBe(line.name);
@@ -514,7 +516,7 @@ describe("rozwoj bestii", () => {
     expect(kinds("bloodline")).toHaveLength(1);
     expect(kinds("weakness")).toHaveLength(6);
     expect(kinds("blood")).toHaveLength(gd.getVampires()!.giftsPerTier.heroiczny);
-    expect(v.traits).toContain("Wiek (5)");
+    expect(v.traits).toContain(`Wiek (${gd.getVampires()!.ageByTier.heroiczny})`);
     expect(v.spells.some((s) => gd.getSpell(s)?.lore === "Nekromancji")).toBe(true);
     const line = gd.getVampires()!.bloodlines.find((b) => b.name === kinds("bloodline")[0].name)!;
     expect(kinds("weakness").map((m) => m.name).sort()).toEqual([...line.weaknesses].sort());

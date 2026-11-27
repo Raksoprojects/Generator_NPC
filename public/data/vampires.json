@@ -5,28 +5,28 @@
  ],
  "giftsPerTier": {
   "slaby": 3,
-  "sredni": 4,
-  "obyty": 4,
-  "zaawansowany": 5,
-  "doswiadczony": 6,
-  "weteran": 7,
-  "wybitny": 7,
-  "heroiczny": 8,
-  "mistrz": 9,
-  "arcymistrz": 9,
+  "sredni": 3,
+  "obyty": 3,
+  "zaawansowany": 4,
+  "doswiadczony": 4,
+  "weteran": 5,
+  "wybitny": 6,
+  "heroiczny": 7,
+  "mistrz": 7,
+  "arcymistrz": 8,
   "legendarny": 10,
   "heros": 12
  },
  "bloodlineGiftWeight": 4,
  "ageByTier": {
   "slaby": 1,
-  "sredni": 2,
-  "obyty": 2,
-  "zaawansowany": 3,
-  "doswiadczony": 4,
-  "weteran": 4,
-  "wybitny": 5,
-  "heroiczny": 5,
+  "sredni": 1,
+  "obyty": 1,
+  "zaawansowany": 2,
+  "doswiadczony": 2,
+  "weteran": 3,
+  "wybitny": 4,
+  "heroiczny": 4,
   "mistrz": 5,
   "arcymistrz": 5,
   "legendarny": 5,
@@ -71,9 +71,7 @@
    "magic": 0.5,
    "casting": {
     "chance": {
-     "heroiczny": 0.35,
-     "mistrz": 0.4,
-     "arcymistrz": 0.45,
+     "arcymistrz": 0.35,
      "legendarny": 0.5,
      "heros": 0.65
     },
@@ -168,13 +166,11 @@
    "magic": 2,
    "casting": {
     "chance": {
-     "zaawansowany": 0.5,
-     "doswiadczony": 0.6,
-     "weteran": 0.633,
-     "wybitny": 0.667,
-     "heroiczny": 0.7,
-     "mistrz": 0.733,
-     "arcymistrz": 0.767,
+     "weteran": 0.5,
+     "wybitny": 0.6,
+     "heroiczny": 0.633,
+     "mistrz": 0.667,
+     "arcymistrz": 0.7,
      "legendarny": 0.8,
      "heros": 0.9
     },
@@ -269,8 +265,6 @@
    "magic": 3,
    "casting": {
     "chance": {
-     "zaawansowany": 1,
-     "doswiadczony": 1,
      "weteran": 1,
      "wybitny": 1,
      "heroiczny": 1,
@@ -371,12 +365,10 @@
    "magic": 0.5,
    "casting": {
     "chance": {
-     "doswiadczony": 0.1,
-     "weteran": 0.117,
-     "wybitny": 0.133,
-     "heroiczny": 0.15,
-     "mistrz": 0.183,
-     "arcymistrz": 0.217,
+     "wybitny": 0.1,
+     "heroiczny": 0.117,
+     "mistrz": 0.133,
+     "arcymistrz": 0.15,
      "legendarny": 0.25,
      "heros": 0.35
     },
@@ -404,7 +396,9 @@
     "Nocny Łupieżca"
    ],
    "noArmour": true,
-   "traits": ["Regeneracja"],
+   "traits": [
+    "Regeneracja"
+   ],
    "size": "Duży",
    "turning": {
     "modifiers": {
@@ -491,13 +485,11 @@
    "magic": 2,
    "casting": {
     "chance": {
-     "zaawansowany": 0.5,
-     "doswiadczony": 0.6,
-     "weteran": 0.633,
-     "wybitny": 0.667,
-     "heroiczny": 0.7,
-     "mistrz": 0.733,
-     "arcymistrz": 0.767,
+     "weteran": 0.5,
+     "wybitny": 0.6,
+     "heroiczny": 0.633,
+     "mistrz": 0.667,
+     "arcymistrz": 0.7,
      "legendarny": 0.8,
      "heros": 0.9
     },
@@ -597,13 +589,11 @@
    "magic": 1.5,
    "casting": {
     "chance": {
-     "zaawansowany": 0.3,
-     "doswiadczony": 0.4,
-     "weteran": 0.433,
-     "wybitny": 0.467,
-     "heroiczny": 0.5,
-     "mistrz": 0.533,
-     "arcymistrz": 0.567,
+     "weteran": 0.3,
+     "wybitny": 0.4,
+     "heroiczny": 0.433,
+     "mistrz": 0.467,
+     "arcymistrz": 0.5,
      "legendarny": 0.6,
      "heros": 0.7
     },
@@ -1493,15 +1483,15 @@
  ],
  "magicAdvances": {
   "slaby": 4,
-  "sredni": 6,
-  "obyty": 8,
-  "zaawansowany": 10,
-  "doswiadczony": 15,
-  "weteran": 18,
-  "wybitny": 22,
-  "heroiczny": 25,
-  "mistrz": 30,
-  "arcymistrz": 35,
+  "sredni": 4,
+  "obyty": 4,
+  "zaawansowany": 6,
+  "doswiadczony": 8,
+  "weteran": 10,
+  "wybitny": 15,
+  "heroiczny": 18,
+  "mistrz": 22,
+  "arcymistrz": 25,
   "legendarny": 40,
   "heros": 55
  },
