@@ -162,7 +162,7 @@ export function naturalAttacks(creature: CreatureDef): NaturalAttack[] {
     else if ((m = /^Ugryzienie(?: \(([^)]+)\))? \+(\d+)/.exec(t))) out.push({ name: m[1] ? `Ugryzienie (${m[1]})` : "Ugryzienie", base: +m[2] - sb, addsSb: true, trait: t });
     else if ((m = /^(?:Atak Ogonem|Ogon) \+(\d+)/.exec(t))) out.push({ name: "Ogon", base: +m[1] - sb, addsSb: true, trait: t });
     else if ((m = /^Rogi(?: \(([^)]+)\))? \+(\d+)/.exec(t))) out.push({ name: m[1] ? `Rogi (${m[1]})` : "Rogi", base: +m[2] - sb, addsSb: true, trait: t });
-    else if ((m = /^(?:(\d+)× )?Macki \+(\d+)/.exec(t))) out.push({ name: "Macki", base: +m[2] - sb, addsSb: true, count: m[1] ? +m[1] : 1, trait: t });
+    else if ((m = /^(?:(\d+)× )?Macki(?: \(([^)]+)\))? \+(\d+)/.exec(t))) out.push({ name: m[2] ? `Macki (${m[2]})` : "Macki", base: +m[3] - sb, addsSb: true, count: m[1] ? +m[1] : 1, trait: t });
     else if ((m = /^Atak Językiem \+(\d+) \((\d+)\)/.exec(t))) out.push({ name: "Język", base: +m[1], addsSb: false, range: m[2], trait: t });
     else if ((m = /^Strzelanie(?: \(([^)]+)\))? \+(\d+) \((\d+)\)/.exec(t))) out.push({ name: m[1] ?? "Strzelanie", base: +m[2], addsSb: false, range: m[3], trait: t });
     else if ((m = /^Zionięcie(?: \(([^)]+)\))? \+(\d+)(?: \(([^)]+)\))?/.exec(t))) out.push({ name: `Zionięcie (${m[1] ?? m[3] ?? "różne"})`, base: +m[2], addsSb: false, range: "20 + BWt", trait: t });

@@ -3,7 +3,7 @@ import { creatureBase, creatureTierRange, naturalAttacks, naturalWeaponGroup } f
 import { findMagicItem } from "../magicItems";
 import { seedRng } from "../dice";
 import * as gd from "../gameData";
-import { generateNpc, isBeast } from "../generator";
+import { generateNpc, isBeast, resolveSpecName } from "../generator";
 import { isDirectSpell } from "../magic";
 import { armourLine, computeNpc } from "../npc";
 import { ATTRIBUTES, type Attribute } from "../rules";
@@ -132,6 +132,12 @@ describe("stworzenia z bestiariusza", () => {
 });
 
 describe("bron naturalna i Latanie", () => {
+  it("Macki ze specyfikacja (trąba Mamuta) to atak; wybor 'X albo Y' w profesji rozstrzygniety", () => {
+    const mammoth = computeNpc(generateNpc({ creature: "Mamut", noArchetype: true, deterministic: true }, seedRng(1)));
+    expect(mammoth.weapons.map((w) => w.name)).toContain("Macki (Trąba)");
+    expect(resolveSpecName("Targowanie albo Hazard", {}, undefined, seedRng(1), true)).toBe("Targowanie");
+  });
+
   it("grupa broni z nazwy: topor dwureczny - Dwuręczna, pazury jak kosy - Bijatyka, Zionięcie poza walka wrecz", () => {
     expect(naturalWeaponGroup("Topór dwuręczny")).toBe("Dwuręczna");
     expect(naturalWeaponGroup("Włócznia")).toBe("Drzewcowa");

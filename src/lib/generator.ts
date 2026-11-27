@@ -455,6 +455,13 @@ export function resolveSpecName(
   rng: Rng,
   deterministic = false
 ): string {
+  // Wybor calej pozycji ("Targowanie albo Hazard") - raz na BN, zapamietany.
+  const whole = name.split(/\s+(?:albo|lub)\s+(?![^(]*\))/);
+  if (whole.length > 1) {
+    const key = `alt|${name}`;
+    if (!whole.includes(choices[key])) choices[key] = deterministic ? whole[0] : (pick(whole, rng) ?? whole[0]);
+    return resolveSpecName(choices[key], choices, arch, rng, deterministic);
+  }
   const { base, spec } = gd.splitSpec(name);
   if (spec === null) return name;
 
