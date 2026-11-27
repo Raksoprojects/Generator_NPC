@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { creatureBase, creatureTierRange, naturalAttacks } from "../creatures";
+import { creatureBase, creatureTierRange, naturalAttacks, naturalWeaponGroup } from "../creatures";
 import { findMagicItem } from "../magicItems";
 import { seedRng } from "../dice";
 import * as gd from "../gameData";
@@ -126,6 +126,29 @@ describe("stworzenia z bestiariusza", () => {
     const v = computeNpc({ ...bookNpc(orc), armour: [] });
     expect(v.armour.korpus.total).toBe(3 + 4);
     expect(v.armour.głowa.total).toBe(7);
+  });
+});
+
+describe("bron naturalna i Latanie", () => {
+  it("grupa broni z nazwy: topor dwureczny - Dwuręczna, pazury jak kosy - Bijatyka, Zionięcie poza walka wrecz", () => {
+    expect(naturalWeaponGroup("Topór dwuręczny")).toBe("Dwuręczna");
+    expect(naturalWeaponGroup("Włócznia")).toBe("Drzewcowa");
+    expect(naturalWeaponGroup("Pazury jak kosy")).toBe("Bijatyka");
+    expect(naturalWeaponGroup("Rogi (Szable)")).toBe("Bijatyka");
+    expect(naturalWeaponGroup("Broń")).toBeNull();
+    const ogre = computeNpc(generateNpc({ creature: "Smoczy Ogr", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1)));
+    expect(ogre.weapons.find((w) => w.name === "Topór dwuręczny")?.skillName).toBe("Broń Biała (Dwuręczna)");
+    const dragon = computeNpc(generateNpc({ creature: "Smok", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1)));
+    const breath = dragon.weapons.find((w) => w.name.startsWith("Zionięcie"));
+    expect(breath?.ranged).toBe(true);
+    expect(breath?.skillName).toBe("US");
+  });
+
+  it("[dom] cecha Latanie daje Umiejetnosc Latanie (Zw)", () => {
+    const v = computeNpc(generateNpc({ creature: "Gryf", noArchetype: true, deterministic: true, randomTraits: false, noHeroRoll: true }, seedRng(1)));
+    const fly = v.skills.find((s) => s.name === "Latanie");
+    expect(fly?.attr).toBe("Zw");
+    expect(fly!.total).toBeGreaterThanOrEqual(v.chars.Zw.total);
   });
 });
 

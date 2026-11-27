@@ -165,10 +165,62 @@ export function naturalAttacks(creature: CreatureDef): NaturalAttack[] {
     else if ((m = /^(?:(\d+)× )?Macki \+(\d+)/.exec(t))) out.push({ name: "Macki", base: +m[2] - sb, addsSb: true, count: m[1] ? +m[1] : 1, trait: t });
     else if ((m = /^Atak Językiem \+(\d+) \((\d+)\)/.exec(t))) out.push({ name: "Język", base: +m[1], addsSb: false, range: m[2], trait: t });
     else if ((m = /^Strzelanie(?: \(([^)]+)\))? \+(\d+) \((\d+)\)/.exec(t))) out.push({ name: m[1] ?? "Strzelanie", base: +m[2], addsSb: false, range: m[3], trait: t });
-    else if ((m = /^Zionięcie(?: \(([^)]+)\))? \+(\d+)(?: \(([^)]+)\))?/.exec(t))) out.push({ name: `Zionięcie (${m[1] ?? m[3] ?? "różne"})`, base: +m[2], addsSb: false, trait: t });
+    else if ((m = /^Zionięcie(?: \(([^)]+)\))? \+(\d+)(?: \(([^)]+)\))?/.exec(t))) out.push({ name: `Zionięcie (${m[1] ?? m[3] ?? "różne"})`, base: +m[2], addsSb: false, range: "20 + BWt", trait: t });
     else if ((m = /^Wymiot \+(\d+)/.exec(t))) out.push({ name: "Wymiot", base: +m[1], addsSb: false, trait: t });
   }
   return out;
+}
+
+/** Ataki specjalne (Zionięcie, Wymiot): Test Umiejetnosci Strzeleckich przeciw Unikowi, poza walka wrecz. */
+export const SPECIAL_ATTACK = /^(Zionięcie|Wymiot)/;
+
+/** Czesci ciala - Bijatyka (PG s. 338: ataki naturalne). */
+const BODY_PART =
+  /ugryz|kły|kieł|zęb|paszcz|dziób|dzioby|żuwacz|pazur|szpon|kopyt|stop[ay]|odnóż|ogon|rogi|róg|poroż|mack|kleszcz|splot|nibynóż|masa|pięś|kolce|kończyn|język|łap[ay]/i;
+const GROUP_RULES: [RegExp, string][] = [
+  [/dwuręczn|wielki (topór|miecz|młot)|młot bojowy|flamberg|półtorak/i, "Dwuręczna"],
+  [/włóczni|glewi|halabard|\bpik[ai]?\b|\bkos[ay]?\b|trójz|drzewc|widł|\bkij|kostur/i, "Drzewcowa"],
+  [/kopi[ae]|lanc|szabl|młot kawaleryjski/i, "Kawaleryjska"],
+  [/korbacz|\bcep|kiście/i, "Korbacz"],
+  [/rapier|szpad|floret/i, "Szermiercza"],
+  [/lewak|łamacz/i, "Parująca"]
+];
+
+/**
+ * Grupa umiejetnosci Broń Biała dla broni naturalnej stworzenia: z weapons.json, z nazwy
+ * ("Topór dwuręczny" - Dwuręczna, "Włócznia" - Drzewcowa), czesci ciala - Bijatyka, reszta - Podstawowa.
+ * null dla ogolnego "Broń" (bron bez nazwy) - wtedy najlepsza Broń Biała z profilu.
+ */
+export function naturalWeaponGroup(name: string): string | null {
+  const w = gd.getWeapons();
+  const def = w.melee[name] ?? w.melee[w.legacy?.[name] ?? ""];
+  if (def) return def.group;
+  if (/^Broń( Chaosu)?$/.test(name)) return null;
+  // Cechy Ugryzienie, Rogi, Ogon, Macki - zawsze cialo, nawet "Rogi (Szable)".
+  if (/^(Ugryzienie|Rogi|Ogon|Macki|Język)/.test(name)) return "Bijatyka";
+  // Najpierw cialo ("Pazury jak kosy" to pazury), potem slowa broni.
+  if (BODY_PART.test(name)) return "Bijatyka";
+  for (const [re, g] of GROUP_RULES) if (re.test(name)) return g;
+  return "Podstawowa";
+}
+
+/**
+ * Umiejetnosci rodziny dla stworzenia: gdy ksiazka nie podaje zadnej Broni Bialej, umiejetnosc walki rodziny
+ * dostaje tez kazda grupa uzywanej broni (Smoczy Ogr: Bijatyka i Dwuręczna dla topora dwurecznego).
+ */
+export function familySkillsFor(creature: CreatureDef): Record<string, number> {
+  const base = { ...(gd.getCreatureFamilies().families[creature.family]?.skills ?? {}) };
+  // [dom] Latajace stworzenie rozwija Latanie (Zw) jak Atletyke.
+  if (creature.traits.some((t) => /^Latanie/.test(t)) && !("Latanie" in base)) base["Latanie"] = Math.max(20, base["Atletyka"] ?? 0);
+  if (creature.skills.some((s) => s.name.startsWith("Broń Biała"))) return base;
+  const fit = Math.max(0, ...Object.entries(base).filter(([n]) => n.startsWith("Broń Biała")).map(([, f]) => f));
+  if (!fit) return base;
+  for (const a of naturalAttacks(creature)) {
+    if (a.range || SPECIAL_ATTACK.test(a.name)) continue;
+    const g = naturalWeaponGroup(a.name);
+    if (g && !(`Broń Biała (${g})` in base)) base[`Broń Biała (${g})`] = fit;
+  }
+  return base;
 }
 
 /** Punkty Pancerza z cechy "Pancerz (N)". */
@@ -289,11 +341,10 @@ export function tierTraitsFor(npc: Pick<Npc, "tier">, creature: CreatureDef, rng
 export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, rng: Rng, deterministic = false): number {
   const fam = gd.getCreatureFamilies();
   const cfg = fam.settings.xpDevelopment!;
-  const family = fam.families[creature.family];
   const prioOf = (fit: number) => cfg.fitPriority.find(([min]) => fit >= min)?.[1] ?? 1;
   const skills = new Map<string, number>();
   for (const s of npc.skills) skills.set(s.name, 1);
-  for (const [name, fit] of Object.entries(family?.skills ?? {})) skills.set(name, prioOf(fit));
+  for (const [name, fit] of Object.entries(familySkillsFor(creature))) skills.set(name, prioOf(fit));
   for (const [name, p] of Object.entries(cfg.extraSkills)) {
     const attr = gd.skillAttr(name) as Attribute | undefined;
     if (!attr || creature.stats[attr] != null) skills.set(name, Math.max(skills.get(name) ?? 0, p));
@@ -372,12 +423,11 @@ export function beastXpDevelop(npc: Npc, creature: CreatureDef, budget: number, 
 
 export function beastSkills(npc: Npc, creature: CreatureDef): void {
   const fam = gd.getCreatureFamilies();
-  const family = fam.families[creature.family];
   // Rozwoj za PD: umiejetnosci rodziny jak u typowego osobnika, reszta z PD (beastXpDevelop).
   const tier = fam.settings.xpDevelopment ? "slaby" : beastTier(npc, creature);
   const factor = fam.settings.tierFactor[tier] ?? 0;
   if (factor > 0) {
-    for (const [skill, fit] of Object.entries(family?.skills ?? {})) {
+    for (const [skill, fit] of Object.entries(familySkillsFor(creature))) {
       const bonus = Math.max(5, Math.round((fit * factor) / 5) * 5);
       const owned = npc.skills.find((s) => s.name === skill);
       if (owned) owned.advances = Math.max(owned.advances, bonus);

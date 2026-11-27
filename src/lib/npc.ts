@@ -7,7 +7,7 @@
  *   + talenty dajace +5 + wylosowane Cechy Stworzen + mutacje.
  */
 
-import { creatureArmour, creatureBase, creatureWounds, naturalAttacks, SWARM_GRADES, swarmGradeOf } from "./creatures";
+import { creatureArmour, creatureBase, creatureWounds, naturalAttacks, naturalWeaponGroup, SPECIAL_ATTACK, SWARM_GRADES, swarmGradeOf } from "./creatures";
 import { armourPoints, getArmourDef, getWeaponDef, LOCATIONS, pieceLocations, type Location } from "./equipment";
 import * as gd from "./gameData";
 import { castingSummary, type CastingView } from "./magicItems";
@@ -261,6 +261,8 @@ export function computeNpc(input: Npc): NpcView {
   const human = npc.turned ? gd.getRace("Człowiek") : undefined;
   const bookProfile = creature && !npc.turned ? creature : undefined;
   let movement = bookProfile ? (bookProfile.stats.Sz ?? 4) : ((human ?? race)?.movement ?? 4);
+  // Bardzo Szybki: Szybkosc +1 (w bloku stworzenia juz wliczona).
+  if (!bookTalents.has(gd.normalize("Bardzo Szybki"))) movement += Math.min(1, talentRank("Bardzo Szybki"));
   let extraAp = 0;
   let headAp = 0;
   /** Zrodla modyfikatorow kazdej cechy - zeby na karcie bylo widac, skad np. −20 do Ogłady. */
@@ -341,6 +343,10 @@ export function computeNpc(input: Npc): NpcView {
     const bonus = traitSkills[s.name] ?? traitSkills[gd.splitSpec(s.name).base] ?? 0;
     return { name: s.name, attr, advances: s.advances, traitBonus: bonus, total: (totals[attr as Attribute] ?? 0) + s.advances + bonus };
   });
+  // [dom] Cecha Latanie daje Umiejetnosc Latanie (Zw), choćby bez rozwinięć.
+  if ([...bookTraits, ...npc.traits].some((t) => /^Latanie/.test(t)) && !skills.some((s) => s.name === "Latanie")) {
+    skills.push({ name: "Latanie", attr: "Zw", advances: 0, traitBonus: 0, total: totals.Zw ?? 0 });
+  }
   for (const [skill, bonus] of Object.entries(traitSkills)) {
     if (skills.some((s) => s.name === skill || gd.splitSpec(s.name).base === skill)) continue;
     const attr = gd.skillAttr(skill) ?? "I";
@@ -403,25 +409,33 @@ export function computeNpc(input: Npc): NpcView {
     const hasCareerWeapon = npc.weapons.length > 0;
     for (const a of naturalAttacks(creature)) {
       if (hasCareerWeapon && a.name === "Broń") continue;
-      const ranged = !!a.range && a.name !== "Język";
+      // Zionięcie i Wymiot: Test Umiejetnosci Strzeleckich przeciw Unikowi (PG s. 340), nie walka wrecz.
+      const special = SPECIAL_ATTACK.test(a.name);
+      const ranged = special || (!!a.range && a.name !== "Język");
       // Zaklety naturalny oręż (np. goblin z zaklętą bronią zamiast cechy Broń).
       const m = magic.weapon[a.name];
-      const skill = ranged
+      const skill = special
+        ? { value: totals.US, name: "US" }
+        : ranged
         ? weaponSkill(skills, chars, true, a.name)
         : (() => {
-            // Wlasna grupa, Bijatyka, a dla broni ("Broń", "Broń Chaosu i tarcza") najlepsza Broń Biała.
-            // Przy rownej wartosci - Podstawowa (najczestsza grupa broni z ksiazki: "Broń Chaosu", "Topór").
+            // Umiejetnosc o nazwie broni z ksiazki, potem grupa broni (naturalWeaponGroup: Topór dwuręczny - Dwuręczna,
+            // czesci ciala - Bijatyka); ogolne "Broń" i profil z ksiazki bez tej grupy - najlepsza Broń Biała
+            // (przy remisie Podstawowa); czesc ciala bez Bijatyki - WW.
             const melee = skills
               .filter((s) => s.name.startsWith("Broń Biała"))
               .sort((x, y) => y.total - x.total || Number(y.name === "Broń Biała (Podstawowa)") - Number(x.name === "Broń Biała (Podstawowa)"));
-            const bodyPart = /^(Ugryzienie|Ogon|Rogi|Macki|Pazury|Zmutowany|Kły|Szpony)/.test(a.name);
-            // Bron z weapons.json (Miecz dwuręczny, Korbacz, Rapier) - umiejetnosc jej grupy.
-            const group = getWeaponDef(a.name)?.def.group;
+            const group = naturalWeaponGroup(a.name);
+            const STANDARD = /\((Podstawowa|Dwuręczna|Drzewcowa|Szermiercza|Bijatyka|Kawaleryjska|Korbacz|Parująca)\)$/;
+            // Wlasna umiejetnosc z ksiazki po rdzeniu slowa ("Pokryte gromrilem pazury" - "Zakończone Gromrilem Pazury").
+            const stems = a.name.toLowerCase().split(/[^\p{L}]+/u).filter((w) => w.length >= 5).map((w) => w.slice(0, 5));
+            const custom = melee.find((s) => !STANDARD.test(s.name) && stems.some((st) => s.name.toLowerCase().includes(st)));
             const own =
-              skills.find((s) => s.name === `Broń Biała (${a.name})`) ??
+              skills.find((s) => s.name.toLowerCase() === `broń biała (${a.name.toLowerCase()})`) ??
+              custom ??
               (group ? skills.find((s) => s.name === `Broń Biała (${group})`) : undefined) ??
-              (bodyPart ? skills.find((s) => s.name === "Broń Biała (Bijatyka)") : melee[0]) ??
-              skills.find((s) => s.name === "Broń Biała (Bijatyka)");
+              // Czesc ciala: wlasna umiejetnosc z ksiazki ("Zakończone Gromrilem Pazury"), bez niej - WW.
+              (group === "Bijatyka" ? melee.find((s) => !STANDARD.test(s.name)) : melee[0]);
             return own ? { value: own.total, name: own.name } : { value: totals.WW, name: "WW" };
           })();
       const dmg = a.base + (a.addsSb ? sb : 0) + heroWeapon + (m?.damage ?? 0) + talentDamage(ranged, skill.name);

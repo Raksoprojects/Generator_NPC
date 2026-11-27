@@ -11,7 +11,7 @@
  * Pomija: ruch i dystans, talenty bez liczb.
  */
 import { randInt, type Rng } from "./dice";
-import { sizeOf } from "./creatures";
+import { sizeOf, SPECIAL_ATTACK } from "./creatures";
 import { critEntry, critLocation, type CritLoc } from "./criticals";
 import { computeNpc, type NpcView } from "./npc";
 import { characteristicBonus } from "./rules";
@@ -252,7 +252,8 @@ function rangeOf(text: string | undefined, sb: number): number {
 
 /** Najlepsza bron zasiegowa BN (wartosc testu + 3 x Obrazenia). */
 function bestShot(view: NpcView, s: number): Fighter["shot"] {
-  const w = view.weapons.filter((x) => x.ranged && x.damage != null).sort((a, b) => b.skill + 3 * (b.damage ?? 0) - (a.skill + 3 * (a.damage ?? 0)))[0];
+  // Zionięcie i Wymiot osobno (breathOf), nie jako zwykly strzal.
+  const w = view.weapons.filter((x) => x.ranged && x.damage != null && !SPECIAL_ATTACK.test(x.name)).sort((a, b) => b.skill + 3 * (b.damage ?? 0) - (a.skill + 3 * (a.damage ?? 0)))[0];
   if (!w) return undefined;
   return { skill: w.skill, damage: w.damage!, magical: !!w.magicItem, range: rangeOf(w.range, characteristicBonus(s)) };
 }
