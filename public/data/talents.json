@@ -1786,7 +1786,8 @@
     "max_raw": "1",
     "tests": null,
     "description": "Zyskujesz premię +5 do początkowej wartości Siły Woli, co nie wlicza się do sumy Rozwinięć.",
-    "source": "Podręcznik podstawowy"
+    "source": "Podręcznik podstawowy",
+    "adds_characteristic": "SW"
   },
   "Złota Rączka": {
     "max": {
