@@ -26,6 +26,13 @@
   /** Filtry listy stworzen: Rozmiar ("duze" = Duzy i wiekszy) i Cecha Stworzenia z ksiazki. */
   let sizeFilter = $state("");
   let traitFilter = $state("");
+  /** Filtr bazowego poziomu stworzenia (minTier z danych; brak = Nowicjusz). */
+  let tierFilter = $state("");
+  const baseTierOf = (c: { minTier?: TierId }) => c.minTier ?? "slaby";
+  const baseTierLabel = (name: string) => {
+    const c = gd.getCreature(name);
+    return c ? gd.getTier(baseTierOf(c)).label : "";
+  };
   const SIZE_NAMES = ["Drobny", "Niewielki", "Mały", "Średni", "Duży", "Wielki", "Monstrualny"];
   /** Nazwa cechy do filtra: klucz z listy cech bez "(wartość)", a spoza listy - sam rdzen nazwy. */
   const traitLabel = (t: string) =>
@@ -33,13 +40,14 @@
   const traitOptions = [...new Set(gd.bestiaryCreatures().filter((c) => !c.unique).flatMap((c) => c.traits.map(traitLabel)))]
     .filter((t) => t && !t.startsWith("Rozmiar"))
     .sort((a, b) => a.localeCompare(b, "pl"));
-  function passesFilters(c: { traits: string[] }): boolean {
+  function passesFilters(c: { traits: string[]; minTier?: TierId }): boolean {
+    if (tierFilter && baseTierOf(c) !== tierFilter) return false;
     const size = sizeOf(c.traits);
     if (sizeFilter === "duze" && SIZE_NAMES.indexOf(size) < SIZE_NAMES.indexOf("Duży")) return false;
     if (sizeFilter && sizeFilter !== "duze" && size !== sizeFilter) return false;
     return !traitFilter || c.traits.some((t) => traitLabel(t) === traitFilter);
   }
-  let filtersOn = $derived(!!sizeFilter || !!traitFilter);
+  let filtersOn = $derived(!!sizeFilter || !!traitFilter || !!tierFilter);
 
   /** Stworzenia wybranej grupy, pogrupowane wg podgrup (w kolejnosci drzewa grup). */
   let creatureGroups = $derived.by(() => {
@@ -287,7 +295,7 @@
   }
 
   function resetForm() {
-    archetype = tier = tierTo = race = sex = creature = creatureGroup = bloodline = sizeFilter = traitFilter = "";
+    archetype = tier = tierTo = race = sex = creature = creatureGroup = bloodline = sizeFilter = traitFilter = tierFilter = "";
     name = "";
     xpToValue = null;
     path = [{ profession: "", level: null }];
@@ -374,12 +382,18 @@
             {#each traitOptions as t (t)}<option value={t}>{t}</option>{/each}
           </select>
         </label>
+        <label>Poziom bazowy
+          <select use:searchable bind:value={tierFilter}>
+            <option value="">— każdy —</option>
+            {#each TIER_IDS as t (t)}<option value={t}>{gd.getTier(t).label}</option>{/each}
+          </select>
+        </label>
         <label>Stworzenie
           <select use:searchable bind:value={creature}>
             {#if mode === "polLosowy"}<option value="">{creatureGroup ? "— losowo z grupy —" : "— losowo —"}</option>{/if}
             {#each Object.entries(creatureGroups) as [group, names] (group)}
               <optgroup label={group}>
-                {#each names as c (c)}<option value={c}>{c}</option>{/each}
+                {#each names as c (c)}<option value={c}>{c} ({baseTierLabel(c)})</option>{/each}
               </optgroup>
             {/each}
           </select>

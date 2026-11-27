@@ -1,7 +1,6 @@
 <script lang="ts">
   import { searchable } from "../lib/searchable";
   import NpcCard from "./NpcCard.svelte";
-  import Autocomplete from "./Autocomplete.svelte";
   import PathEditor from "./PathEditor.svelte";
   import { app } from "../lib/app.svelte";
   import { copyText, downloadText, pickFile } from "../lib/files";
@@ -75,14 +74,6 @@
     }
   }
 
-  /** Wyszukiwanie w wierszu: archetyp, grupa albo stworzenie z podpowiedziami. */
-  let queries = $state<Record<number, string>>({});
-  const SEARCH: Record<string, string> = {};
-  for (const a of gd.allArchetypeNames()) SEARCH[`Archetyp: ${a}`] = `a:${a}`;
-  for (const g of Object.keys(creatureGroups)) SEARCH[`Grupa: ${g}`] = `g:${g}`;
-  for (const t of gd.creatureGroupTree().filter((x) => x.subgroups.length)) SEARCH[`Grupa: ${t.group} (wszystkie)`] = `g:${t.group}`;
-  for (const names of Object.values(creatureGroups)) for (const c of names) SEARCH[c] = `c:${c}`;
-  const searchOptions = Object.keys(SEARCH);
 
   function addRow() {
     rows.push({ count: 1, archetype: gd.allArchetypeNames()[0], tier: "slaby" });
@@ -283,9 +274,6 @@
           <div class="row-main">
           <input class="count" type="number" min="1" max="30" bind:value={row.count} aria-label="Liczba" />
           <span class="x">×</span>
-          <div class="who-search">
-            <Autocomplete bind:value={() => queries[i] ?? "", (v) => (queries[i] = v)} options={searchOptions} placeholder="szukaj…" onpick={(v) => { setWho(row, SEARCH[v]); queries[i] = ""; }} />
-          </div>
           <select use:searchable value={whoOf(row)} onchange={(e) => setWho(row, (e.currentTarget as HTMLSelectElement).value)} aria-label="Archetyp albo stworzenie">
             <optgroup label="Archetypy">
               {#each gd.allArchetypeNames() as a (a)}<option value={`a:${a}`}>{a}</option>{/each}
@@ -298,7 +286,7 @@
             </optgroup>
             {#each Object.entries(creatureGroups) as [group, names] (group)}
               <optgroup label={`Stworzenia: ${group}`}>
-                {#each names as c (c)}<option value={`c:${c}`}>{c}</option>{/each}
+                {#each names as c (c)}<option value={`c:${c}`}>{c} ({gd.getTier(gd.getCreature(c)?.minTier ?? "slaby").label})</option>{/each}
               </optgroup>
             {/each}
           </select>
@@ -524,11 +512,6 @@
 
   .xp-row input {
     width: calc(90px * var(--ui-scale));
-  }
-
-  .who-search {
-    display: flex;
-    width: calc(150px * var(--ui-scale));
   }
 
   .src {
