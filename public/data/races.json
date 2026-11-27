@@ -30,7 +30,7 @@
     { "min": 86, "max": 88, "name": "Wyczucie Kierunku" },
     { "min": 89, "max": 91, "name": "Wyczulony Zmysł (Dowolny)" },
     { "min": 92, "max": 94, "name": "Wytwórca (Dowolny)" },
-    { "min": 95, "max": 97, "name": "Zimna Krew" },
+    { "min": 95, "max": 97, "name": "Zimna krew" },
     { "min": 98, "max": 100, "name": "Zręczny" }
   ],
   "races": {
@@ -161,7 +161,7 @@
         "Żeglarstwo"
       ],
       "talents": [
-        { "type": "choice", "options": ["Błyskotliwość", "Zimna Krew"] },
+        { "type": "choice", "options": ["Błyskotliwość", "Zimna krew"] },
         { "type": "fixed", "name": "Czytanie/Pisanie" },
         { "type": "fixed", "name": "Wyczulony Zmysł (Wzrok)" },
         { "type": "fixed", "name": "Widzenie w Ciemności" },
